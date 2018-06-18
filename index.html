@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en" ng-app="App">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+   <title>TileBoard</title>
+
+
+   <link rel="stylesheet" href="styles/main.css"/>
+   <link rel="stylesheet" href="styles/weather-icons.css"/>
+
+   <style>
+      [ng-cloak] { display: none; }
+   </style>
+
+   <script src="scripts/vendors/angular.min.js"></script>
+   <script src="scripts/vendors/angular-long-press.js"></script>
+
+   <script src="scripts/api.js"></script>
+
+   <script src="sensors.js"></script><!-- used in development only -->
+
+   <script src="scripts/app.js"></script>
+
+   <script src="config.js"></script>
+   <script src="override_config.js"></script><!-- used in production -->
+
+   <script src="scripts/init.js"></script>
+   <script src="scripts/main-controller.js"></script>
+   <script src="scripts/directives.js"></script>
+
+</head>
+
+<body ng-controller="Main" ng-class="getBodyClass()">
+
+<div ng-if="!ready">
+   <div ng-if="errors.length" class="alert -error">
+      <div ng-bind="errors[0]"></div>
+   </div>
+</div>
+
+<div ng-if="ready" class="page-container">
+   <div class="camera-popup"
+        ng-if="activeCamera && (entity = getItemEntity(activeCamera))">
+
+      <div class="camera-popup-container">
+         <div class="camera-popup--list">
+            <div class="camera-popup--list-item"
+                 ng-click="openCamera(item)"
+                 ng-class="{'-active': activeCamera === item}"
+                 ng-repeat="item in getCameraList() track by $index">
+               <span ng-show="entity = getItemEntity(item)">
+                  <span ng-bind="item.title || entity.attributes.friendly_name"></span>
+               </span>
+            </div>
+         </div>
+
+         <div class="camera-popup--camera">
+            <div ng-if="activeCamera.fullscreen.type === TYPES.CAMERA">
+               <camera item="activeCamera.fullscreen" entity="entity"
+                       freezed="false"></camera>
+            </div>
+
+            <div ng-if="activeCamera.fullscreen.type === TYPES.CAMERA_THUMBNAIL">
+               <camera-thumbnail item="activeCamera.fullscreen" entity="entity"
+                                 freezed="false"></camera-thumbnail>
+            </div>
+         </div>
+
+         <div class="camera-popup--close" ng-click="closeCamera()">
+            <i class="mdi mdi-close"></i>
+         </div>
+      </div>
+   </div>
+
+   <div class="door-entry-popup"
+        ng-if="activeDoorEntry && (page = activeDoorEntry.layout.page)
+            && (cameraEntity = getEntryCameraEntity(activeDoorEntry))">
+
+      <div class="door-entry-popup-container">
+         <div class="door-entry-popup--camera">
+            <div ng-if="activeDoorEntry.layout.camera.type === TYPES.CAMERA">
+               <camera item="activeDoorEntry.layout.camera" entity="cameraEntity"
+                       freezed="false"></camera>
+            </div>
+
+            <div ng-if="activeDoorEntry.layout.camera.type === TYPES.CAMERA_THUMBNAIL">
+               <camera-thumbnail item="activeDoorEntry.layout.camera" entity="cameraEntity"
+                                 freezed="false"></camera-thumbnail>
+            </div>
+         </div>
+
+         <div class="door-entry-popup--tiles">
+            <div tile ng-repeat="item in activeDoorEntry.layout.tiles track by $index"></div>
+         </div>
+
+         <div class="door-entry-popup--close" ng-click="closeDoorEntry()">
+            <i class="mdi mdi-close"></i>
+         </div>
+      </div>
+   </div>
+
+   <div class="pages-menu">
+      <div class="pages-menu--items"
+           ng-style="pagesMenuStyles(pages)">
+
+         <div ng-repeat="page in pages track by $index"
+              class="pages-menu--item" ng-click="openPage(page)"
+              ng-class="{'-active': isPageActive(page)}">
+
+            <i class="mdi" ng-class="page.icon"></i>
+         </div>
+      </div>
+   </div>
+
+   <div class="pages" id="pages">
+      <div class="page-overlay" ng-if="activeSelect"
+           ng-click="closeActiveSelect()"></div>
+
+      <div ng-repeat="page in pages track by $index"
+           ng-class="{'-active': isPageActive(page)}"
+           ng-if="shouldDrawPage(page)"
+           ng-style="pageStyles(page)" class="page">
+
+         <div class="page-head" ng-if="page.head" ng-include="page.head"></div>
+
+         <div class="page-align"></div>
+
+         <div ng-repeat="group in page.groups track by $index"
+              ng-style="groupStyles(group, page)" class="group">
+            <div ng-bind="group.title" class="group-title"></div>
+            <div tile ng-repeat="item in group.items track by $index"></div>
+         </div>
+      </div>
+   </div>
+
+   <div ng-if="errors.length" class="errors-container">
+      <div ng-repeat="error in errors track by $index" class="alert -error">
+         <div ng-bind="error"></div>
+      </div>
+   </div>
+</div>
+
+
+<link rel="stylesheet" async
+      href="http://cdn.materialdesignicons.com/2.4.85/css/materialdesignicons.min.css">
+</body>
+</html>
