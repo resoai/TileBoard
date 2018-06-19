@@ -1,6 +1,7 @@
 Real life examples of Tiles.<br>
 
 #### DEVICE_TRACKER
+![DEVICE_TRACKER](images/tile-screenshots/DEVICE_TRACKER.png)
 
 ```js 
 {
@@ -18,7 +19,8 @@ Real life examples of Tiles.<br>
 ```
 
 #### TEXT_LIST
-Used for lists with some data
+Used for lists with some data<br>
+![TEXT_LIST](images/tile-screenshots/TEXT_LIST.png)
 ```js 
 {
    position: [0, 1],
@@ -49,6 +51,7 @@ Used for lists with some data
 ```
 
 #### WEATHER
+![WEATHER](images/tile-screenshots/WEATHER.png)<br>
 ```js 
 {
    position: [2, 1],
@@ -94,7 +97,8 @@ Used for lists with some data
 ```
 
 #### SCRIPT
-Call script on click/tap
+Call script on click/tap<br>
+![SCRIPT](images/tile-screenshots/SCRIPT.png)
 
 ```js 
 {
@@ -110,7 +114,8 @@ Call script on click/tap
 ```
 
 #### SWITCH
-Toggle switch on tap. Also shows icon depends on state
+Toggle switch on tap. Also shows icon depends on state<br>
+![SWITCH](images/tile-screenshots/SWITCH.png)
 ```js 
 {
    position: [0, 1],
@@ -130,7 +135,9 @@ Toggle switch on tap. Also shows icon depends on state
 ```
 
 #### LIGHT
-Light switcher. Sliders are shows after long tap on tile.
+Light switcher. Sliders are shows after long tap on tile.<br>
+![LIGHT](images/tile-screenshots/LIGHT.png)
+![LIGHT](images/tile-screenshots/LIGHT_2.png)
 ```js 
 {
    position: [0, 2],
@@ -179,7 +186,7 @@ Light switcher. Sliders are shows after long tap on tile.
 ```
 
 #### SCENE
-Doing the same as SCRIPT. Activates scene in tap.
+Doing the same as SCRIPT. Activates scene in tap.<br>
 ```js 
 {
    position: [1, 2],
@@ -191,6 +198,7 @@ Doing the same as SCRIPT. Activates scene in tap.
 ```
 
 #### MEDIA_PLAYER
+![MEDIA_PLAYER](images/tile-screenshots/MEDIA_PLAYER.png)
 ```js 
 {
    position: [0, 3],
@@ -203,7 +211,8 @@ Doing the same as SCRIPT. Activates scene in tap.
 ```
 
 #### SENSOR
-Show state of sensor
+Show state of sensor<br>
+![SENSOR](images/tile-screenshots/SENSOR.png)
 ```js 
 {
    position: [0, 0],
@@ -220,7 +229,8 @@ Show state of sensor
 ```
 
 #### INPUT_SELECT
-Select control
+Select control<br>
+![INPUT_SELECT](images/tile-screenshots/INPUT_SELECT.png)
 ```js 
 {
    position: [0, 1],
@@ -231,7 +241,8 @@ Select control
 ```
 
 #### SENSOR_ICON
-Similar to sensor, but with icon.
+Similar to sensor, but with icon.<br>
+![SENSOR_ICON](images/tile-screenshots/SENSOR_ICON.png)
 ```js 
 {
    position: [1, 1],
@@ -250,6 +261,7 @@ Similar to sensor, but with icon.
 ```
 
 #### SLIDER
+![SLIDER](images/tile-screenshots/SLIDER.png)
 ```js 
 {
    position: [6, 1],
@@ -313,6 +325,7 @@ Similar to sensor, but with icon.
 ```
 
 #### CLIMATE
+![CLIMATE](images/tile-screenshots/CLIMATE.png)
 ```js 
 {
    position: [0, 2],
