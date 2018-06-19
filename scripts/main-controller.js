@@ -821,6 +821,30 @@ function MainController ($scope) {
       });
    };
 
+   $scope.setMediaPlayerSource = function (item, option) {
+     if(item.loading) return;
+
+     var data = {
+        type: "call_service",
+        domain: "media_player",
+        service: "select_source",
+        service_data: {
+           entity_id: item.id,
+           source: option
+        }
+     };
+
+     item.loading = true;
+
+     api.send(data, function (res) {
+        item.loading = false;
+
+        updateView();
+     });
+  };
+
+
+
    $scope.setSelectOption = function ($event, item, entity, option) {
       $event.preventDefault();
       $event.stopPropagation();
@@ -835,6 +859,21 @@ function MainController ($scope) {
 
       return false;
    };
+
+   $scope.setSourcePlayer = function ($event, item, entity, option) {
+     $event.preventDefault();
+     $event.stopPropagation();
+
+     $scope.setMediaPlayerSource(item, option);
+
+     if(CONFIG.debug) {
+        entity.attributes.source = option;
+     }
+
+     $scope.closeActiveSelect();
+
+     return false;
+  };
 
    $scope.setClimateOption = function ($event, item, entity, option) {
       $event.preventDefault();
