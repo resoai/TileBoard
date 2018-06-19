@@ -6,6 +6,9 @@
 
    <div class="item-clickable"></div>
 
+   <div ng-if="item.bg || item.bgSuffix"  class="item-background"
+        ng-style="itemBgStyles(item, page)"></div>
+
    <div class="item-title"
         ng-bind="item.title || entity.attributes.friendly_name"></div>
 

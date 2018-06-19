@@ -193,7 +193,19 @@ function MainController ($scope) {
             top: pos[1] * tileSize + (tileMargin * pos[1]) + 'px',
          };
 
-         var bg;
+         item.styles = styles;
+      }
+
+      return item.styles;
+   };
+
+   $scope.itemBgStyles = function (item, page) {
+      if(!item.bgStyles) {
+         var bg, styles = {};
+
+         if('bgOpacity' in item) {
+            styles.opacity = item.bgOpacity;
+         }
 
          if(item.bg) {
             bg = item.bg;
@@ -214,10 +226,10 @@ function MainController ($scope) {
             styles.backgroundImage = 'url(' + CONFIG.serverUrl + bg + ')';
          }
 
-         item.styles = styles;
+         item.bgStyles = styles;
       }
 
-      return item.styles;
+      return item.bgStyles;
    };
 
    $scope.itemClasses = function (item) {
@@ -330,6 +342,10 @@ function MainController ($scope) {
          item.slidesStyles = {
             'animation-delay': ((item.slidesDelay || $index* 0.8)) + 's'
          };
+
+         if('bgOpacity' in item) {
+            item.slidesStyles.opacity = item.bgOpacity;
+         }
       }
 
       return item.slidesStyles;

@@ -560,6 +560,15 @@ body {
   background-size: cover;
   background-position: center;
 }
+.item-background {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-size: cover;
+  background-position: center;
+}
 .item-list {
   text-align: left;
   margin: 8px 0;
@@ -1064,4 +1073,4 @@ input[type=range]::-moz-range-thumb {
     opacity: 0;
   }
 }
-(node:7446) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+(node:3436) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.

@@ -88,6 +88,7 @@ Tile Object. [Click here for some feal life examples](TILE_EXAMPLES.md)
    icons: {on: "mdi-volume-high", off: "mdi-volume-off"}, // same as states but used for tiles with icons. You can use any of the material design icons from https://materialdesignicons.com/ 
    bg: '@attributes.entity_picture', // link to the background image (available @/& prefixes, read about it below)
    bgSuffix: '@attributes.entity_picture', // same as bg, but link appends to the serverUrl
+   bgOpacity: 0.5, // bg image opacity 0..1 
    theme: TYPES.SWITCH, // overrides tile theme
    classes: ["-big-entity"], // appends class name to the tile element, useful for custom CSS styles
    slides: [{}, {bg: 'images/slide.jpg'}], // slides in the background (atm up to 3 slides)
