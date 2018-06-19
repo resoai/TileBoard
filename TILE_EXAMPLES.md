@@ -1,4 +1,4 @@
-Real life examples of Tiles.<br>
+Here are some real life examples of Tiles.<br>
 
 #### DEVICE_TRACKER
 
@@ -13,19 +13,19 @@ Real life examples of Tiles.<br>
       not_home: "Away",
       office: "Office",
    },
-   slidesDelay: 2,
+   slidesDelay: 2
 }
 ```
 
 #### TEXT_LIST
-Used for lists with some data
+This is a custom tile which can be used for displaying valued from different sensors in a list.
 ```js 
 {
    position: [0, 1],
    width: 2,
    height: 1,
    title: 'Travel',
-   id: {}, // here no exact id, so we use empty object
+   id: {}, // since we are binding each list item to different sensor, so we simply use an empty object
    type: TYPES.TEXT_LIST,
    state: false,
    list: [
@@ -53,11 +53,11 @@ Used for lists with some data
 {
    position: [2, 1],
    height: 2,
-   //classes: ['-compact'], // if you want tile with height 1
+   //classes: ['-compact'], // enable this if you want a little square tile (1x1)
    type: TYPES.WEATHER,
    id: 'group.weather',
    state: false,
-   sub: '&sensor.dark_sky_summary.state', // showing label with weather description (e.g. Sunny)
+   sub: '&sensor.dark_sky_summary.state', // label with weather summary (e.g. Sunny)
    fields: { // most of that fields are optional
       icon: '&sensor.dark_sky_icon.state',
       iconMap: {
@@ -86,7 +86,7 @@ Used for lists with some data
       windSpeedUnit: '&sensor.dark_sky_wind_speed.attributes.unit_of_measurement',
       humidity: '&sensor.dark_sky_humidity.state',
       humidityUnit: '&sensor.dark_sky_humidity.attributes.unit_of_measurement',
-      pollen: '&sensor.pollen_count.state',
+      pollen: '&sensor.pollen_count.state', // this is a value from a custom REST sensor
       pressure: '&sensor.dark_sky_pressure.state',
       pressureUnit: '', //'&sensor.dark_sky_pressure.attributes.unit_of_measurement',
    }
@@ -110,7 +110,7 @@ Call script on click/tap
 ```
 
 #### SWITCH
-Toggle switch on tap. Also shows icon depends on state
+Toggle switch on tap. Also shows icon depending on the state
 ```js 
 {
    position: [0, 1],
@@ -130,7 +130,7 @@ Toggle switch on tap. Also shows icon depends on state
 ```
 
 #### LIGHT
-Light switcher. Sliders are shows after long tap on tile.
+Light switch. You can optionally define sliders to control colour temperature or in fact anything else. Sliders will show up after long press on the tile.
 ```js 
 {
    position: [0, 2],
@@ -179,7 +179,7 @@ Light switcher. Sliders are shows after long tap on tile.
 ```
 
 #### SCENE
-Doing the same as SCRIPT. Activates scene in tap.
+Works almost identical to the SCRIPT. Activates scene in a tap.
 ```js 
 {
    position: [1, 2],
@@ -198,12 +198,11 @@ Doing the same as SCRIPT. Activates scene in tap.
    id: 'media_player.volumio',
    type: TYPES.MEDIA_PLAYER,
    sub: '@attributes.media_title',
-   bgSuffix: '@attributes.entity_picture', // show player picture on bg
+   bgSuffix: '@attributes.entity_picture', // show picture of current media as a background
 },
 ```
 
 #### SENSOR
-Show state of sensor
 ```js 
 {
    position: [0, 0],
@@ -220,7 +219,6 @@ Show state of sensor
 ```
 
 #### INPUT_SELECT
-Select control
 ```js 
 {
    position: [0, 1],
@@ -231,7 +229,7 @@ Select control
 ```
 
 #### SENSOR_ICON
-Similar to sensor, but with icon.
+Similar to sensor, but with an icon.
 ```js 
 {
    position: [1, 1],
@@ -257,7 +255,7 @@ Similar to sensor, but with icon.
    type: TYPES.SLIDER,
    unit: '%',
    state: false,
-   //bottom: true, // put slider on bottom
+   //bottom: true, // puts slider on bottom
    slider: {
       //max: 100,
       //min: 0,
@@ -306,7 +304,7 @@ Similar to sensor, but with icon.
       refresh: 1500, // can be number in milliseconds
       bgSize: 'contain'
    },
-   refresh: function () { // can be function
+   refresh: function () { // can also be a function
       return 3000 + Math.random() * 1000
    }
 }
