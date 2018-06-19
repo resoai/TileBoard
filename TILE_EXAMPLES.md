@@ -1,0 +1,328 @@
+Real life examples of Tiles.<br>
+
+#### DEVICE_TRACKER
+
+```js 
+{
+   position: [0, 0],
+   type: TYPES.DEVICE_TRACKER,
+   id: 'device_tracker.google_maps_9000',
+   map: 'yandex',
+   states: {
+      home: "Home",
+      not_home: "Away",
+      office: "Office",
+   },
+   slidesDelay: 2,
+}
+```
+
+#### TEXT_LIST
+Used for lists with some data
+```js 
+{
+   position: [0, 1],
+   width: 2,
+   height: 1,
+   title: 'Travel',
+   id: {}, // here no exact id, so we use empty object
+   type: TYPES.TEXT_LIST,
+   state: false,
+   list: [
+      {
+         title: 'Time to office',
+         icon: 'mdi-office-building',
+         value: '&sensor.home_to_office.attributes.duration'
+      },
+      {
+         title: 'Time to home',
+         icon: 'mdi-home',
+         value: '&sensor.office_to_home.attributes.duration'
+      },
+      {
+         title: 'Northern',
+         icon: 'mdi-subway',
+         value: '&sensor.northern.state'
+      }
+   ]
+}
+```
+
+#### WEATHER
+```js 
+{
+   position: [2, 1],
+   height: 2,
+   //classes: ['-compact'], // if you want tile with height 1
+   type: TYPES.WEATHER,
+   id: 'group.weather',
+   state: false,
+   sub: '&sensor.dark_sky_summary.state', // showing label with weather description (e.g. Sunny)
+   fields: { // most of that fields are optional
+      icon: '&sensor.dark_sky_icon.state',
+      iconMap: {
+         'clear-day': 'clear',
+         'clear-night': 'nt-clear',
+         'cloudy': 'cloudy',
+         'rain': 'rain',
+         'sleet': 'sleet',
+         'snow': 'snow',
+         'wind': 'hazy',
+         'fog': 'fog',
+         'partly-cloudy-day': 'partlycloudy',
+         'partly-cloudy-night': 'nt-partlycloudy'
+      },
+      summary: '&sensor.dark_sky_summary.state',
+      apparentTemperature: '&sensor.dark_sky_apparent_temperature.state',
+      apparentTemperatureUnit: '&sensor.dark_sky_apparent_temperature.attributes.unit_of_measurement',
+      temperature: '&sensor.dark_sky_temperature.state',
+      temperatureUnit: '&sensor.dark_sky_temperature.attributes.unit_of_measurement',
+      precip: '&sensor.dark_sky_precip.state',
+      precipIntensity: '&sensor.dark_sky_precip_intensity.state',
+      precipIntensityUnit: '&sensor.dark_sky_precip_intensity.attributes.unit_of_measurement',
+      precipProbability: '&sensor.dark_sky_precip_probability.state',
+      precipProbabilityUnit: '&sensor.dark_sky_precip_probability.attributes.unit_of_measurement',
+      windSpeed: '&sensor.dark_sky_wind_speed.state',
+      windSpeedUnit: '&sensor.dark_sky_wind_speed.attributes.unit_of_measurement',
+      humidity: '&sensor.dark_sky_humidity.state',
+      humidityUnit: '&sensor.dark_sky_humidity.attributes.unit_of_measurement',
+      pollen: '&sensor.pollen_count.state',
+      pressure: '&sensor.dark_sky_pressure.state',
+      pressureUnit: '', //'&sensor.dark_sky_pressure.attributes.unit_of_measurement',
+   }
+}
+```
+
+#### SCRIPT
+Call script on click/tap
+
+```js 
+{
+   position: [0, 0],
+   type: TYPES.SCRIPT,
+   id: 'script.front_gate_open',
+   icons: {
+      on: "mdi-gate",
+      off: "mdi-gate"
+   },
+   state: false
+}
+```
+
+#### SWITCH
+Toggle switch on tap. Also shows icon depends on state
+```js 
+{
+   position: [0, 1],
+   type: TYPES.SWITCH,
+   id: 'switch.kitchen_spotlights',
+   title: 'Spotlights',
+   subtitle: 'Kitchen',
+   states: {
+      on: "On",
+      off: "Off"
+   },
+   icons: {
+      on: "mdi-lightbulb-on",
+      off: "mdi-lightbulb",
+   }
+}
+```
+
+#### LIGHT
+Light switcher. Sliders are shows after long tap on tile.
+```js 
+{
+   position: [0, 2],
+   title: 'Floor lamp',
+   subtitle: 'Lounge',
+   id: 'light.lounge_floor_lamp',
+   type: TYPES.LIGHT,
+   states: {
+      on: "On",
+      off: "Off"
+   },
+   icons: {
+      on: "mdi-lightbulb-on",
+      off: "mdi-lightbulb",
+   },
+   sub: '@attributes.brightness',
+   sliders: [
+      {
+         title: 'Brightness',
+         field: 'brightness',
+         max: 255,
+         min: 0,
+         step: 5,
+         request: {
+            type: "call_service",
+            domain: "light",
+            service: "turn_on",
+            field: "brightness"
+         }
+      },
+      {
+         title: 'Color temp',
+         field: 'color_temp',
+         max: 588,
+         min: 153,
+         step: 15,
+         request: {
+            type: "call_service",
+            domain: "light",
+            service: "turn_on",
+            field: "color_temp"
+         }
+      }
+   ]
+}
+```
+
+#### SCENE
+Doing the same as SCRIPT. Activates scene in tap.
+```js 
+{
+   position: [1, 2],
+   id: 'scene.movie_time',
+   type: TYPES.SCENE,
+   state: false,
+   icon: 'mdi-movie-roll',
+},
+```
+
+#### MEDIA_PLAYER
+```js 
+{
+   position: [0, 3],
+   width: 2,
+   id: 'media_player.volumio',
+   type: TYPES.MEDIA_PLAYER,
+   sub: '@attributes.media_title',
+   bgSuffix: '@attributes.entity_picture', // show player picture on bg
+},
+```
+
+#### SENSOR
+Show state of sensor
+```js 
+{
+   position: [0, 0],
+   type: TYPES.SENSOR,
+   title: 'Outdoor',
+   id: 'sensor.outdoor_temperature',
+   unit: 'C', // override default entity unit
+   state: false, // hidding state
+   filter: function (value) { // optional
+      var num = parseFloat(value);
+      return num && !isNaN(num) ? num.toFixed(1) : value;
+   }
+}
+```
+
+#### INPUT_SELECT
+Select control
+```js 
+{
+   position: [0, 1],
+   type: TYPES.INPUT_SELECT,
+   id: 'input_select.climate_mode',
+   state: false
+}
+```
+
+#### SENSOR_ICON
+Similar to sensor, but with icon.
+```js 
+{
+   position: [1, 1],
+   type: TYPES.SENSOR_ICON,
+   title: 'Hot water',
+   id: 'sensor.hot_water',
+   states: {
+      on: "On",
+      off: "Off"
+   },
+   icons: {
+      on: 'mdi-hot-tub',
+      off: 'mdi-hot-tub'
+   },
+}
+```
+
+#### SLIDER
+```js 
+{
+   position: [6, 1],
+   id: 'input_number.casatunes_volume_6',
+   type: TYPES.SLIDER,
+   unit: '%',
+   state: false,
+   //bottom: true, // put slider on bottom
+   slider: {
+      //max: 100,
+      //min: 0,
+      //step: 2,
+      request: {
+         type: "call_service",
+         domain: "input_number",
+         service: "set_value",
+         field: "value"
+      }
+   }
+}
+```
+
+#### INPUT_BOOLEAN
+```js 
+{
+   position: [1, 2],
+   width: 1,
+   title: 'Radio',
+   classes: [CLASS_BIG],
+   type: TYPES.INPUT_BOOLEAN,
+   id: 'input_boolean.play_radio',
+   icons: {
+      on: 'mdi-stop',
+      off: 'mdi-play'
+   },
+   states: {
+      on: "Playing",
+      off: "Stopped"
+   }
+}
+```
+
+#### CAMERA_THUMBNAIL and CAMERA
+```js 
+{
+   position: [0, 0],
+   id: 'camera.front_gate',
+   type: TYPES.CAMERA_THUMBNAIL,
+   bgSize: 'cover',
+   width: 2,
+   state: false,
+   fullscreen: {
+      type: TYPES.CAMERA,
+      refresh: 1500, // can be number in milliseconds
+      bgSize: 'contain'
+   },
+   refresh: function () { // can be function
+      return 3000 + Math.random() * 1000
+   }
+}
+```
+
+#### CLIMATE
+```js 
+{
+   position: [0, 2],
+   id: "climate.kitchen",
+   type: TYPES.CLIMATE,
+   unit: 'C',
+   sub: function (item, entity) {
+      return 'Current '
+         + entity.attributes.current_temperature
+         + entity.attributes.unit_of_measurement;
+   }
+}
+```
