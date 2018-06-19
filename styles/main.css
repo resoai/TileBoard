@@ -876,7 +876,7 @@ camera-thumbnail div {
 .media-player--main-button {
   position: absolute;
   left: 5px;
-  top: 25px;
+  top: 15px;
 }
 .media-player--main-button span {
   display: inline-block;
@@ -894,7 +894,7 @@ camera-thumbnail div {
   position: absolute;
   right: 5px;
   top: 25px;
-  width: 85px;
+  width: 120px;
   white-space: normal;
   text-align: right;
 }
@@ -912,7 +912,7 @@ camera-thumbnail div {
   background: rgba(0, 0, 0, 0.3);
 }
 .media-player--volume {
-  margin-top: 85px;
+  margin-top: 65px;
 }
 .media-player--source {
   padding: 5px 8px 5px 5px;
