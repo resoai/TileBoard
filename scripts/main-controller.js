@@ -822,28 +822,26 @@ function MainController ($scope) {
    };
 
    $scope.setMediaPlayerSource = function (item, option) {
-     if(item.loading) return;
+      if(item.loading) return;
 
-     var data = {
-        type: "call_service",
-        domain: "media_player",
-        service: "select_source",
-        service_data: {
-           entity_id: item.id,
-           source: option
-        }
-     };
+      var data = {
+         type: "call_service",
+         domain: "media_player",
+         service: "select_source",
+         service_data: {
+            entity_id: item.id,
+            source: option
+         }
+      };
 
-     item.loading = true;
+      item.loading = true;
 
-     api.send(data, function (res) {
-        item.loading = false;
+      api.send(data, function (res) {
+         item.loading = false;
 
-        updateView();
-     });
-  };
-
-
+         updateView();
+      });
+   };
 
    $scope.setSelectOption = function ($event, item, entity, option) {
       $event.preventDefault();
@@ -861,42 +859,20 @@ function MainController ($scope) {
    };
 
    $scope.setSourcePlayer = function ($event, item, entity, option) {
-     $event.preventDefault();
-     $event.stopPropagation();
+      $event.preventDefault();
+      $event.stopPropagation();
 
-     $scope.setMediaPlayerSource(item, option);
+      $scope.setMediaPlayerSource(item, option);
 
-     if(CONFIG.debug) {
-        entity.attributes.source = option;
-     }
-
-     $scope.closeActiveSelect();
-
-     return false;
-  };
-
-$scope.setClimateOption = function ($event, item, entity, option) {
-   $event.preventDefault();
-   $event.stopPropagation();
-
-   sendItemData(item, {
-      type: "call_service",
-      domain: "climate",
-      service: "set_operation_mode",
-      service_data: {
-         entity_id: item.id,
-         operation_mode: option
+      if(CONFIG.debug) {
+         entity.attributes.source = option;
       }
-   });
 
-   if(CONFIG.debug) {
-      entity.attributes.operation_mode = option;
-   }
+      $scope.closeActiveSelect();
 
-   $scope.closeActiveSelect();
+      return false;
+   };
 
-   return false;
-};
 
    $scope.setClimateOption = function ($event, item, entity, option) {
       $event.preventDefault();
