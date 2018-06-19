@@ -875,29 +875,6 @@ function MainController ($scope) {
      return false;
   };
 
-$scope.setClimateOption = function ($event, item, entity, option) {
-   $event.preventDefault();
-   $event.stopPropagation();
-
-   sendItemData(item, {
-      type: "call_service",
-      domain: "climate",
-      service: "set_operation_mode",
-      service_data: {
-         entity_id: item.id,
-         operation_mode: option
-      }
-   });
-
-   if(CONFIG.debug) {
-      entity.attributes.operation_mode = option;
-   }
-
-   $scope.closeActiveSelect();
-
-   return false;
-};
-
    $scope.setClimateOption = function ($event, item, entity, option) {
       $event.preventDefault();
       $event.stopPropagation();
