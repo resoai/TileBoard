@@ -69,7 +69,7 @@ We divide tiles (cells) into groups on every page. Group object can have followi
 
 ### Tiles
 
-Tile Object
+Tile Object. [Real life examples](TILE_EXAMPLES.md)
 
 ```js
 {
