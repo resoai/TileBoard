@@ -876,13 +876,13 @@ camera-thumbnail div {
 .media-player--main-button {
   position: absolute;
   left: 5px;
-  top: 25px;
+  top: 20px;
 }
 .media-player--main-button span {
   display: inline-block;
-  width: 60px;
-  height: 60px;
-  line-height: 60px;
+  width: 65px;
+  height: 65px;
+  line-height: 65px;
   text-align: center;
   font-size: 50px;
   cursor: pointer;
@@ -894,16 +894,16 @@ camera-thumbnail div {
   position: absolute;
   right: 5px;
   top: 25px;
-  width: 85px;
+  width: 240px;
   white-space: normal;
   text-align: right;
 }
 .media-player--buttons .media-player--button {
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   margin: 3px;
-  font-size: 24px;
-  line-height: 30px;
+  font-size: 26px;
+  line-height: 34px;
   text-align: center;
   display: inline-block;
   cursor: pointer;
@@ -912,11 +912,14 @@ camera-thumbnail div {
   background: rgba(0, 0, 0, 0.3);
 }
 .media-player--volume {
-  margin-top: 85px;
+  margin-top: 90px;
 }
 .media-player--source {
+  position: absolute;
   padding: 5px 8px 5px 5px;
   cursor: pointer;
+  right: 5px;
+  top: 68px;
 }
 .media-player--source:active {
   background: rgba(0, 0, 0, 0.3);
@@ -1073,4 +1076,4 @@ input[type=range]::-moz-range-thumb {
     opacity: 0;
   }
 }
-(node:3436) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+(node:20915) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
