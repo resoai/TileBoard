@@ -51,7 +51,8 @@ This is a custom tile which can be used for displaying valued from different sen
 ```
 
 #### WEATHER
-![WEATHER](images/tile-screenshots/WEATHER.png)<br>
+![WEATHER](images/tile-screenshots/WEATHER.png)
+![WEATHER](images/tile-screenshots/WEATHER_2.png)<br>
 ```js 
 {
    position: [2, 1],
