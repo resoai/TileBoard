@@ -69,12 +69,12 @@ We divide tiles (cells) into groups on every page. Group object can have followi
 
 ### Tiles
 
-Tile Object. [Real life examples](TILE_EXAMPLES.md)
+Tile Object. [Click here for some feal life examples](TILE_EXAMPLES.md)
 
 ```js
 {
    position: [1, 0], // [x, y] position inside group
-   type: TYPES.DEVICE_TRACKER, // type of a Tile, please see the list of available types below
+   type: TYPES.DEVICE_TRACKER, // type of a tile, please see the list of available types below
    id: 'device_tracker.google_maps_228', // id of HA entity for the tile (e.g. switch.xyz)
    
    // OPTIONAL
