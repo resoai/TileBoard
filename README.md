@@ -19,7 +19,7 @@ Should you have any ideas or questions please post them on home-assistant forum 
 * Pull/download repository
 * Change `config.js`
 * Open index.html directly in a web browser or move all of the files into www directory in HA's config path. Please note that dashboard was designed for local installations and you should never store dashboard files in www directory of HA if you are exposing it to the outside world since this would reveal content of `config.js` along with the password. As an alternative please consider serving files via Nginx where BasicAuth can be implemented.
-* Note: If you are opening index.html file localy in Google Chrome than you will face an issue of tiles not being displayed and 
+* Note: If you are opening index.html file locally in Google Chrome than you will face an issue of tiles not being displayed and 
 see an error about cross origin requests not being supported in `file://` protocol. in browser's console. You can overcome the problem by starting Chrome with `--allow-file-access-from-files` switch or simply open the page in Firefox.
 
 ## Configure
