@@ -60,8 +60,7 @@ This is a custom tile which can be used for displaying valued from different sen
    //classes: ['-compact'], // enable this if you want a little square tile (1x1)
    type: TYPES.WEATHER,
    id: 'group.weather',
-   state: false,
-   sub: '&sensor.dark_sky_summary.state', // label with weather summary (e.g. Sunny)
+   state: '&sensor.dark_sky_summary.state', // label with weather summary (e.g. Sunny)
    fields: { // most of that fields are optional
       icon: '&sensor.dark_sky_icon.state',
       iconMap: {
@@ -154,7 +153,6 @@ Light switch. You can optionally define sliders to control colour temperature or
       on: "mdi-lightbulb-on",
       off: "mdi-lightbulb",
    },
-   sub: '@attributes.brightness',
    sliders: [
       {
          title: 'Brightness',
@@ -206,7 +204,7 @@ Works almost identical to the SCRIPT. Activates scene in a tap.
    width: 2,
    id: 'media_player.volumio',
    type: TYPES.MEDIA_PLAYER,
-   sub: '@attributes.media_title',
+   state: '@attributes.media_title',
    bgSuffix: '@attributes.entity_picture', // show picture of current media as a background
 },
 ```
@@ -331,7 +329,7 @@ Similar to sensor, but with an icon.<br>
    id: "climate.kitchen",
    type: TYPES.CLIMATE,
    unit: 'C',
-   sub: function (item, entity) {
+   state: function (item, entity) {
       return 'Current '
          + entity.attributes.current_temperature
          + entity.attributes.unit_of_measurement;
