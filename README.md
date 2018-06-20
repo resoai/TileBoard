@@ -32,6 +32,7 @@ var CONFIG = {
       transition: 'animated' || 'animated_gpu' || 'simple', // transition between pages
       tileSize: Number, // size of tile
       tileMargin: Number, // margin between tiles
+      timeFormat: Number, // 12 for AM/PM marker, 24 for 24 hour time (default)
       groupMarginCss: '20px 40px', //override default margin of groups (globally)
       serverUrl: 'http://localhost:8123', // or custom
       wsUrl: 'ws://localhost:8123/api/websocket',
