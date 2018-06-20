@@ -87,9 +87,13 @@ Tile Object. [Click here for some feal life examples](TILE_EXAMPLES.md)
    width: 2, // overrides basic Tile size (1)
    height: 2, //
    states: {on: 'Enabled', off: 'Disabled'}, // object of states map, used for mapping of states
-   //state: false, // disables state in the Tile
-   //sub: String || Function, // custom state of Tile
-   icons: {on: "mdi-volume-high", off: "mdi-volume-off"}, // same as states but used for tiles with icons. You can use any of the material design icons from https://materialdesignicons.com/ 
+   //states: function (item, entity) {return entity.state}, // ot use function for getting state
+   //state: String || Function, // custom state of Tile
+   //state: false, // or disable state completely
+   icons: {on: "mdi-volume-high", off: "mdi-volume-off"}, // same as states but used for tiles with icons. 
+                                                          // You can use any of the material design icons from https://materialdesignicons.com/ 
+   //icons: function (item, entity) {return entity.state}, // or use function for getting icon
+   //icon: 'mdi-phone' || Function, // use static icon if needed (or Function as alias for 'icons')
    bg: '@attributes.entity_picture', // link to the background image (available @/& prefixes, read about it below)
    bgSuffix: '@attributes.entity_picture', // same as bg, but link appends to the serverUrl
    bgOpacity: 0.5, // bg image opacity 0..1 

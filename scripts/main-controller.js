@@ -259,7 +259,9 @@ function MainController ($scope) {
       if(item.theme) item._classes.push('-th-' + item.theme);
       else item._classes.push('-th-' + item.type);
 
-      if(item.classes) item.classes.forEach(function (c) { item._classes.push(c); });
+      if(item.classes) item.classes.forEach(function (c) {
+         item._classes.push(c);
+      });
 
       if(item.loading) item._classes.push('-loading');
       if($scope.selectOpened(item)) item._classes.push('-top-entity');
@@ -267,20 +269,83 @@ function MainController ($scope) {
       return item._classes;
    };
 
-   $scope.entityState = function (item, state) {
-      if(item.state === false) return null;
 
-      if(!item.states) return state;
+   $scope.entityState = function (item, entity) {
+      // @DEPRECATED item.sub
+      if(item.state === false && !item.sub) return null;
 
-      return item.states[state] || state;
+      if(item.states) {
+         if(typeof item.states === "function") {
+            return item.states(item, entity);
+         }
+         if(typeof item.states === "object") {
+            return item.states[entity.state] || entity.state;
+         }
+      }
+
+      var stateField = item.state || item.sub;
+
+      if(!stateField) return entity.state;
+
+      if(typeof stateField === "function") {
+         return stateField(item, entity);
+      }
+
+      if(stateField[0] === "@") {
+         return getObjectAttr(entity, stateField.slice(1));
+      }
+
+      if(stateField[0] === "&") {
+         return getEntityAttr(stateField.slice(1));
+      }
+
+      return stateField;
    };
 
-   $scope.entityIcon = function (item, state) {
-      if(item.icon) return item.icon;
+   $scope.entityIcon = function (item, entity) {
+      var state = entity.state;
+
+      if(item.icon) {
+         if(typeof item.icon === "function") {
+            return item.icon(item, entity);
+         }
+
+         return item.icon;
+      }
 
       if(!item.icons) return state;
 
+      if(typeof item.icons === "function") {
+         return item.icons(item, entity);
+      }
+
       return item.icons[state] || state;
+   };
+
+   $scope.entityTitle = function (item, entity) {
+      var title = item.title;
+
+      if(!title) {
+         return entity.attributes.friendly_name || null;
+      }
+
+      if(typeof title === "function") return title(item, entity);
+      if(title[0] === "@") return getObjectAttr(entity, title.slice(1));
+      if(title[0] === "&") return getEntityAttr(title.slice(1));
+
+      return title;
+   };
+
+   $scope.entitySubtitle = function (item, entity) {
+      var subtitle = item.subtitle;
+
+      if(!subtitle) return null;
+
+      if(typeof subtitle === "function") return subtitle(item, entity);
+      if(subtitle[0] === "@") return getObjectAttr(entity, subtitle.slice(1));
+      if(subtitle[0] === "&") return getEntityAttr(subtitle.slice(1));
+
+      return subtitle;
    };
 
    $scope.entityValue = function (item, entity) {
@@ -311,17 +376,6 @@ function MainController ($scope) {
       if(item.filter) return item.filter(value, field);
 
       return value;
-   };
-
-   $scope.entitySub = function (item, entity) {
-      if(!item.sub) return entity.state;
-
-      if(typeof item.sub === "function") return item.sub(item, entity);
-
-      if(item.sub[0] === "@") return getObjectAttr(entity, item.sub.slice(1));
-      if(item.sub[0] === "&") return getEntityAttr(item.sub.slice(1));
-
-      return item.value;
    };
 
    $scope.getWeatherField = function (field, item, entity) {

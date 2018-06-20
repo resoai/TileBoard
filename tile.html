@@ -9,16 +9,14 @@
    <div ng-if="item.bg || item.bgSuffix"  class="item-background"
         ng-style="itemBgStyles(item, page)"></div>
 
-   <div class="item-title"
-        ng-bind="item.title || entity.attributes.friendly_name"></div>
+   <div class="item-title" ng-bind="_title"
+        ng-if="(_title = entityTitle(item, entity))"></div>
 
-   <div class="item-subtitle" ng-bind="item.subtitle"></div>
+   <div class="item-subtitle" ng-bind="_subtitle"
+        ng-if="(_subtitle = entitySubtitle(item, entity))"></div>
 
-   <div class="item-state" ng-if="item.sub"
-        ng-bind="entitySub(item, entity)"></div>
-
-   <div class="item-state" ng-if="!item.sub && item.state !== false"
-        ng-bind="entityState(item, entity.state)"></div>
+   <div class="item-state" ng-bind="_state"
+        ng-if="(_state = entityState(item, entity))"></div>
 
    <div class="item-slides-container" ng-if="item.slides.length">
       <div class="item-slides" ng-class="'-c' + item.slides.length"
@@ -59,7 +57,7 @@
 
       <div class="item-entity">
          <span class="item-entity--icon mdi"
-               ng-class="entityIcon(item, entity.state)"></span>
+               ng-class="entityIcon(item, entity)"></span>
       </div>
    </div>
 
@@ -68,7 +66,7 @@
 
       <div class="item-entity">
          <span class="item-entity--icon mdi"
-               ng-class="entityIcon(item, entity.state)"></span>
+               ng-class="entityIcon(item, entity)"></span>
       </div>
    </div>
 
@@ -76,7 +74,7 @@
         class="item-entity-container">
       <div class="item-entity">
          <span class="item-entity--icon mdi"
-               ng-class="entityIcon(item, entity.state)"></span>
+               ng-class="entityIcon(item, entity)"></span>
       </div>
    </div>
 
@@ -84,7 +82,7 @@
         class="item-entity-container">
       <div class="item-entity">
          <span class="item-entity--icon mdi"
-               ng-class="entityIcon(item, entity.state)"></span>
+               ng-class="entityIcon(item, entity)"></span>
       </div>
    </div>
 
@@ -93,7 +91,7 @@
 
       <div class="item-entity">
          <span class="item-entity--icon mdi"
-               ng-class="entityIcon(item, entity.state)"></span>
+               ng-class="entityIcon(item, entity)"></span>
       </div>
    </div>
 
@@ -113,7 +111,7 @@
          </div>
          <div class="item-entity">
             <span class="item-entity--icon mdi"
-                  ng-class="entityIcon(item, entity.state)"></span>
+                  ng-class="entityIcon(item, entity)"></span>
          </div>
       </div>
       <div ng-if="item.controlsEnabled" class="item-entity-sliders"
@@ -224,7 +222,7 @@
 
       <div class="item-entity">
          <span class="item-entity--icon mdi"
-               ng-class="entityIcon(item, entity.state)"></span>
+               ng-class="entityIcon(item, entity)"></span>
       </div>
    </div>
 
@@ -259,7 +257,7 @@
 
       <div class="item-entity">
          <span class="item-entity--icon mdi"
-               ng-class="entityIcon(item, entity.state)"></span>
+               ng-class="entityIcon(item, entity)"></span>
       </div>
    </div>
 

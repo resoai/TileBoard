@@ -363,7 +363,6 @@ Essentially a door entry tile is a pop-up with a fullscreen camera and a set of 
         camera: {
             type: TYPES.CAMERA,
             id: 'camera.front_gate',
-            filter: cameraUrlGenerator(false),
             refresh: 1500,
             bgSize: 'cover'
         },

@@ -50,7 +50,7 @@ var CONFIG = {
                      width: 1,
                      type: TYPES.SENSOR,
                      id: 'updater.updater',
-                     sub: '@attributes.release_notes' // custom state
+                     state: '@attributes.release_notes' // custom state
                   }
                ]
             },
@@ -108,8 +108,7 @@ var CONFIG = {
                      //classes: ['-compact'],
                      type: TYPES.WEATHER,
                      id: {},
-                     state: false,
-                     sub: function () {return 'Sunny'},
+                     state: function () {return 'Sunny'},
                      fields: {
                         icon: 'clear-day',
                         iconMap: { 'clear-day': 'clear'},
