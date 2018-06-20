@@ -326,7 +326,7 @@ function MainController ($scope) {
       var title = item.title;
 
       if(!title) {
-         return entity.attributes.friendly_name || null;
+         return entity.attributes ? entity.attributes.friendly_name : null;
       }
 
       if(typeof title === "function") return title(item, entity);

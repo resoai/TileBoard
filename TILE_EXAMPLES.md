@@ -344,6 +344,7 @@ Similar to sensor, but with an icon.<br>
       id: {},
       width: 3,
       height: 2,
+      refresh: 10000, // 10 seconds
       url: 'https://www.youtube.com/embed/_qNhxxo9rVU?autoplay=1'
 }
 ```

@@ -210,3 +210,36 @@ App.directive('clock', ['$interval', function ($interval) {
       }
    }
 }]);
+
+
+App.directive('iframeTile', ['$interval', function ($interval) {
+   return {
+      restrict: 'A',
+      replace: false,
+      scope: {
+         item: '=iframeTile',
+      },
+      link: function ($scope, $el, attrs) {
+         var iframe = $el[0];
+
+         var updateIframe = function () {
+            iframe.src = iframe.src;
+         };
+
+         if($scope.item.refresh) {
+            var time = $scope.item.refresh;
+
+            if(typeof time === "function") time = time();
+
+            time = Math.max(1000, time);
+
+            var interval = setInterval(updateIframe, time);
+
+            $scope.$on('$destroy', function() {
+               clearInterval(interval);
+            });
+         }
+
+      }
+   }
+}]);
