@@ -12,7 +12,8 @@
    <div class="item-title"
         ng-bind="item.title || entity.attributes.friendly_name"></div>
 
-   <div class="item-subtitle" ng-bind="item.subtitle"></div>
+   <div class="item-subtitle" ng-if="item.subtitle"
+        ng-bind="entitySubtitle(item, entity)"></div>
 
    <div class="item-state" ng-if="item.sub"
         ng-bind="entitySub(item, entity)"></div>
