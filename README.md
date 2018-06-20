@@ -188,6 +188,7 @@ Supported weather fields
 {
    icon: '&sensor.dark_sky_icon.state',
    iconMap: {'clear-day': 'clear', ...}, // statusKey: iconName (from images/weather-icons)
+   //iconMap: function (icon, item, entity) {return icon}, // or use function
    summary: '&sensor.dark_sky_summary.state',
    apparentTemperature: '&sensor.dark_sky_apparent_temperature.state',
    apparentTemperatureUnit: '&sensor.dark_sky_apparent_temperature.attributes.unit_of_measurement',

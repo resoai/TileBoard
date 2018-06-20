@@ -412,6 +412,8 @@ function MainController ($scope) {
 
       var map = item.fields.iconMap;
 
+      if(typeof map === "function") return map(icon, item, entity);
+
       if(!map) return icon;
 
       return map[icon] || icon;
