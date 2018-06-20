@@ -169,10 +169,22 @@ function MainController ($scope) {
          var tileSize = page.tileSize || CONFIG.tileSize;
          var tileMargin = page.tileMargin || CONFIG.tileMargin;
 
-         group.styles = {
+         var styles = {
             width: tileSize * group.width + tileMargin * (group.width - 1) + 'px',
             height: tileSize * group.height + tileMargin * (group.height - 1) + 'px',
          };
+
+         if(page.groupMarginCss) {
+            styles.margin = page.groupMarginCss;
+         }
+         else if(group.groupMarginCss) {
+            styles.margin = group.groupMarginCss;
+         }
+         else if(CONFIG.groupMarginCss) {
+            styles.margin = CONFIG.groupMarginCss;
+         }
+
+         group.styles = styles;
       }
 
       return group.styles;
@@ -529,26 +541,18 @@ function MainController ($scope) {
 
       serviceData[conf.field] = value.value;
 
-      var data = {
+      sendItemData(item, {
          type: conf.type,
          domain: conf.domain,
          service: conf.service,
          service_data: serviceData
-      };
+      });
 
       if(setState) {
          // @TODO REMOVE (or not)
          entity.state = value.value;
          updateView();
       }
-
-      item.loading = true;
-
-      api.send(data, function (res) {
-         item.loading = false;
-
-         updateView();
-      });
    }
 
    $scope.sliderChanged = function (item, entity, value) {
@@ -598,24 +602,14 @@ function MainController ($scope) {
          else if(entity.state === "on") entity.state = "off";
       }
 
-      var data = {
+      sendItemData(item, {
          type: "call_service",
          domain: domain,
          service: service,
          service_data: {
             entity_id: item.id
          }
-      };
-
-      item.loading = true;
-
-      api.send(data, function (res) {
-         item.loading = false;
-
-         updateView();
-
-         if(callback) callback();
-      });
+      }, callback);
    };
 
    $scope.sendPlayer = function (service, item, entity) {
@@ -646,40 +640,24 @@ function MainController ($scope) {
    };
 
    $scope.callScript = function (item, entity) {
-      var data = {
+      sendItemData(item, {
          type: "call_service",
          domain: "homeassistant",
          service: "turn_on",
          service_data: {
             entity_id: item.id
          }
-      };
-
-      item.loading = true;
-
-      api.send(data, function (res) {
-         item.loading = false;
-
-         updateView();
       });
    };
 
    $scope.callScene = function (item, entity) {
-      var data = {
+      sendItemData(item, {
          type: "call_service",
          domain: "scene",
          service: "turn_on",
          service_data: {
             entity_id: item.id
          }
-      };
-
-      item.loading = true;
-
-      api.send(data, function (res) {
-         item.loading = false;
-
-         updateView();
       });
    };
 
@@ -758,7 +736,7 @@ function MainController ($scope) {
    $scope.setLightBrightness = function (item, brightness) {
       if(item.loading) return;
 
-      var data = {
+      sendItemData(item, {
          type: "call_service",
          domain: "light",
          service: "turn_on",
@@ -766,21 +744,13 @@ function MainController ($scope) {
             entity_id: item.id,
             brightness_pct: Math.round(brightness / 255 * 100 / 10) * 10
          }
-      };
-
-      item.loading = true;
-
-      api.send(data, function (res) {
-         item.loading = false;
-
-         updateView();
       });
    };
 
    $scope.setInputNumber = function (item, value) {
       if(item.loading) return;
 
-      var data = {
+      sendItemData(item, {
          type: "call_service",
          domain: "input_number",
          service: "set_value",
@@ -788,21 +758,13 @@ function MainController ($scope) {
             entity_id: item.id,
             value: value
          }
-      };
-
-      item.loading = true;
-
-      api.send(data, function (res) {
-         item.loading = false;
-
-         updateView();
       });
    };
 
    $scope.setInputSelect = function (item, option) {
       if(item.loading) return;
 
-      var data = {
+      sendItemData(item, {
          type: "call_service",
          domain: "input_select",
          service: "select_option",
@@ -810,14 +772,6 @@ function MainController ($scope) {
             entity_id: item.id,
             option: option
          }
-      };
-
-      item.loading = true;
-
-      api.send(data, function (res) {
-         item.loading = false;
-
-         updateView();
       });
    };
 

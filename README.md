@@ -30,6 +30,7 @@ var CONFIG = {
       transition: 'animated' || 'animated_gpu' || 'simple', // transition between pages
       tileSize: Number, // size of tile
       tileMargin: Number, // margin between tiles
+      groupMarginCss: '20px 40px', //override default margin of groups (globally)
       serverUrl: 'http://localhost:8123', // or custom
       wsUrl: 'ws://localhost:8123/api/websocket',
       password: null, //HA's password (if set)
@@ -50,6 +51,7 @@ Page object can have following fields:
    icon: 'mdi-home-outline', // icon of page (for the side menu)
    head: 'head.html', // used for importing template as a header of the page (we currently use it to show time)
    tileSize: Number, // optional field to override global value of tile size for current page
+   //groupMarginCss: '20px 40px', //override default margin of page groups
    groups: [] // list of tile groups
 }
 ```
@@ -63,6 +65,7 @@ We divide tiles (cells) into groups on every page. Group object can have followi
    title: 'Group title',
    width: 3, // Number of tiles (horizontally)
    height: 4, // same but verticaly
+   //groupMarginCss: '20px 40px', //override default margin of current group
    items: [], // list of Tile objects 
 }
 
