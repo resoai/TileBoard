@@ -91,7 +91,7 @@ Tile Object. [Click here for some feal life examples](TILE_EXAMPLES.md)
    //state: String || Function, // custom state of Tile
    //state: false, // or disable state completely
    icons: {on: "mdi-volume-high", off: "mdi-volume-off"}, // same as states but used for tiles with icons. 
-                                                          // You can use any of the material design icons from https://materialdesignicons.com/ 
+   // You can use any of the material design icons from https://materialdesignicons.com/ 
    //icons: function (item, entity) {return entity.state}, // or use function for getting icon
    //icon: 'mdi-phone' || Function, // use static icon if needed (or Function as alias for 'icons')
    bg: '@attributes.entity_picture', // link to the background image (available @/& prefixes, read about it below)
