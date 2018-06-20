@@ -338,3 +338,14 @@ Similar to sensor, but with an icon.<br>
    }
 }
 ```
+#### IFRAME
+```js
+{
+      position: [0, 3],
+      type: TYPES.IFRAME,
+      id: {},
+      width: 3,
+      height: 2,
+      url: 'https://www.youtube.com/embed/_qNhxxo9rVU?autoplay=1'
+}
+```
