@@ -75,6 +75,8 @@ function switchPercents (field, max, round) {
          if(item.states && value in item.states) {
             return item.states[value];
          }
+
+         return value;
       }
 
       value = Math.round((value / max * 100));
