@@ -81,6 +81,13 @@ function MainController ($scope) {
       return showedPages.indexOf(page) !== -1;
    };
 
+
+   $scope.hasTrackerCoords = function (entity) {
+      if(!entity.attributes) return false;
+
+      return entity.attributes.longitude || entity.attributes.latitude;
+   };
+
    $scope.slideMapStyles = function (item, page, obj, zoom, state) {
       var key = 'mapStyles' + zoom + (item.width || '1') + (item.height || '1');
 
@@ -88,6 +95,8 @@ function MainController ($scope) {
          var width = item.width || 1, height = item.height || 1;
          var tileSize = page.tileSize || CONFIG.tileSize;
          var name = obj.friendly_name || ' ';
+
+         if(!obj.longitude && !obj.latitude) return null;
 
          var coords = obj.longitude + ',' + obj.latitude;
          // +80 - hack to hide logo

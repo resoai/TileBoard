@@ -6,7 +6,7 @@
 
    <div class="item-clickable"></div>
 
-   <div ng-if="item.bg || item.bgSuffix"  class="item-background"
+   <div ng-if="item.bg || item.bgSuffix" class="item-background"
         ng-style="itemBgStyles(item, page)"></div>
 
    <div class="item-title" ng-bind="_title"
@@ -28,7 +28,8 @@
 
    <div ng-if="item.type === TYPES.DEVICE_TRACKER"
         class="item-entity-container -below">
-      <div class="item-slides-container">
+
+      <div class="item-slides-container" ng-if="hasTrackerCoords(entity)">
          <div class="item-slides -c3" ng-style="slidesStyles(item, $index)">
             <div class="item-slide -bg"
                  ng-style="trackerBg(entity)"></div>
@@ -40,6 +41,9 @@
                  ng-style="slideMapStyles(item, page, entity.attributes, 13, entity.state)"></div>
          </div>
       </div>
+
+      <div ng-if="!hasTrackerCoords(entity) && entity.attributes.entity_picture"
+           class="item-background" ng-style="trackerBg(entity)"></div>
    </div>
 
    <div ng-if="item.type === TYPES.SENSOR"
