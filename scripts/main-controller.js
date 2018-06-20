@@ -312,6 +312,17 @@ function MainController ($scope) {
       return item.value;
    };
 
+   $scope.entitySubtitle = function (item, entity) {
+      if(!item.subtitle) return null;
+
+      if(typeof item.subtitle === "function") return item.subtitle(item, entity);
+
+      if(item.subtitle[0] === "@") return getObjectAttr(entity, item.subtitle.slice(1));
+      if(item.subtitle[0] === "&") return getEntityAttr(item.subtitle.slice(1));
+
+      return item.subtitle;
+   };   
+   
    $scope.getWeatherField = function (field, item, entity) {
       var fields = item.fields;
 
