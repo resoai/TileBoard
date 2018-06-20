@@ -184,21 +184,41 @@ App.directive('clock', ['$interval', function ($interval) {
          var m = document.createElement('div');
          var h = document.createElement('div');
          var colon = document.createElement('colon');
+         var ampm = document.createElement("div");
 
          m.classList.add('clock--m');
          h.classList.add('clock--h');
          colon.classList.add('clock--colon');
          colon.textContent = ":";
+         ampm.classList.add('clock--timeFormat');
 
          var updateTime = function () {
             var d = new Date();
-            m.textContent = leadZero(d.getMinutes());
-            h.textContent = leadZero(d.getHours());
+            if(CONFIG.timeFormat === 12){
+                if(d.getHours() === 12){
+                    h.textContent = d.getHours();
+                    m.textContent = leadZero(d.getMinutes());
+                    ampm.textContent = 'PM';
+                } else if(d.getHours() > 11){
+                    h.textContent = d.getHours() - 12;
+                    m.textContent = leadZero(d.getMinutes());
+                    ampm.textContent = 'PM';
+                } else {
+                    h.textContent = d.getHours();
+                    m.textContent = leadZero(d.getMinutes());
+                    ampm.textContent = 'AM';
+                }
+            } else {
+                h.textContent = leadZero(d.getHours());
+                m.textContent = leadZero(d.getMinutes());
+                ampm.textContent = '';
+            }
          };
 
          $el[0].appendChild(h);
          $el[0].appendChild(colon);
          $el[0].appendChild(m);
+         $el[0].appendChild(ampm);
 
          updateTime();
 
