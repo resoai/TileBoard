@@ -69,7 +69,7 @@ function switchPercents (field, max, round) {
 
       value = parseFloat(value);
 
-      if(!value || isNaN(value)) {
+      if(isNaN(value)) {
          value = entity.state;
 
          if(item.states && value in item.states) {
