@@ -65,7 +65,7 @@ function switchPercents (field, max, round) {
    max = max || 100;
 
    return function (item, entity) {
-      var value = entity.attributes[field] || null;
+      var value = field in entity.attributes ? entity.attributes[field] : null;
 
       value = parseFloat(value);
 
