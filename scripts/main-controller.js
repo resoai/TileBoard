@@ -274,30 +274,35 @@ function MainController ($scope) {
       // @DEPRECATED item.sub
       if(item.state === false && !item.sub) return null;
 
+      var stateField = item.state || item.sub;
+      var res;
+
+      if(stateField) {
+         if(typeof stateField === "function") {
+            res = stateField(item, entity);
+         }
+         else if(stateField[0] === "@") {
+            res = getObjectAttr(entity, stateField.slice(1));
+         }
+         else if(stateField[0] === "&") {
+            res = getEntityAttr(stateField.slice(1));
+         }
+
+         if(res) return res;
+      }
+
       if(item.states) {
          if(typeof item.states === "function") {
-            return item.states(item, entity);
+            res = item.states(item, entity);
          }
-         if(typeof item.states === "object") {
-            return item.states[entity.state] || entity.state;
+         else if(typeof item.states === "object") {
+            res = item.states[entity.state] || entity.state;
          }
-      }
 
-      var stateField = item.state || item.sub;
+         if(res) return res;
+      }
 
       if(!stateField) return entity.state;
-
-      if(typeof stateField === "function") {
-         return stateField(item, entity);
-      }
-
-      if(stateField[0] === "@") {
-         return getObjectAttr(entity, stateField.slice(1));
-      }
-
-      if(stateField[0] === "&") {
-         return getEntityAttr(stateField.slice(1));
-      }
 
       return stateField;
    };
