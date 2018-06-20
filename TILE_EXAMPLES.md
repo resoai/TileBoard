@@ -349,3 +349,66 @@ Similar to sensor, but with an icon.<br>
       url: 'https://www.youtube.com/embed/_qNhxxo9rVU?autoplay=1'
 }
 ```
+#### DOOR_ENTRY
+Essentially a door entry tile is a pop-up with a fullscreen camera and a set of tiles on the left.
+```js
+{
+    position: [0, 3],
+    type: TYPES.DOOR_ENTRY,
+    id: {},
+    icon: 'mdi-phone',
+    title: 'Door entry',
+    state: false,
+    layout: {
+        camera: {
+            type: TYPES.CAMERA,
+            id: 'camera.front_gate',
+            filter: cameraUrlGenerator(false),
+            refresh: 1500,
+            bgSize: 'cover'
+        },
+        page: {},
+        tiles: [{
+                position: [0, 0],
+                theme: ITEM_TRANSPARENT,
+                type: TYPES.SWITCH,
+                id: 'switch.intercom',
+                icons: {
+                    on: 'mdi-phone-in-talk',
+                    off: 'mdi-phone'
+                },
+                states: {
+                    on: "Active",
+                    off: "Idle"
+                }
+            },
+            {
+                position: [0, 1],
+                theme: ITEM_TRANSPARENT,
+                type: TYPES.SCRIPT,
+                id: 'script.front_gate_open',
+                icons: {
+                    on: "mdi-gate",
+                    off: "mdi-gate"
+                },
+                state: false
+            },
+            {
+                position: [0, 2],
+                theme: ITEM_TRANSPARENT,
+                id: 'switch.outdoor_lights',
+                type: TYPES.SWITCH,
+                title: 'Lights',
+                states: {
+                    on: "On",
+                    off: "Off"
+                },
+                icons: {
+                    on: "mdi-lightbulb-on",
+                    off: "mdi-lightbulb",
+                }
+            }
+        ]
+    }
+}
+```
