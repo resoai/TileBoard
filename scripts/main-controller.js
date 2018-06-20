@@ -288,7 +288,7 @@ function MainController ($scope) {
 
       if(stateField) {
          if(typeof stateField === "function") {
-            res = stateField(item, entity);
+            res = callFunction(stateField, [item, entity]);
          }
          else if(stateField[0] === "@") {
             res = getObjectAttr(entity, stateField.slice(1));
@@ -302,7 +302,7 @@ function MainController ($scope) {
 
       if(item.states) {
          if(typeof item.states === "function") {
-            res = item.states(item, entity);
+            res = callFunction(item.states, [item, entity]);
          }
          else if(typeof item.states === "object") {
             res = item.states[entity.state] || entity.state;
@@ -321,7 +321,7 @@ function MainController ($scope) {
 
       if(item.icon) {
          if(typeof item.icon === "function") {
-            return item.icon(item, entity);
+            return callFunction(item.icon, [item, entity]);
          }
 
          return item.icon;
@@ -330,7 +330,7 @@ function MainController ($scope) {
       if(!item.icons) return state;
 
       if(typeof item.icons === "function") {
-         return item.icons(item, entity);
+         return callFunction(item.icons, [item, entity]);
       }
 
       return item.icons[state] || state;
@@ -343,7 +343,7 @@ function MainController ($scope) {
          return entity.attributes ? entity.attributes.friendly_name : null;
       }
 
-      if(typeof title === "function") return title(item, entity);
+      if(typeof title === "function") return callFunction(title, [item, entity]);
       if(title[0] === "@") return getObjectAttr(entity, title.slice(1));
       if(title[0] === "&") return getEntityAttr(title.slice(1));
 
@@ -355,7 +355,7 @@ function MainController ($scope) {
 
       if(!subtitle) return null;
 
-      if(typeof subtitle === "function") return subtitle(item, entity);
+      if(typeof subtitle === "function") return callFunction(subtitle, [item, entity]);
       if(subtitle[0] === "@") return getObjectAttr(entity, subtitle.slice(1));
       if(subtitle[0] === "&") return getEntityAttr(subtitle.slice(1));
 
@@ -397,7 +397,7 @@ function MainController ($scope) {
 
       if(!fields[field]) return null;
 
-      if(typeof fields[field] === "function") return fields[field](item, entity);
+      if(typeof fields[field] === "function") return callFunction(fields[field], [item, entity]);
 
       if(fields[field][0] === "@") return getObjectAttr(entity, fields[field].slice(1));
       if(fields[field][0] === "&") return getEntityAttr(fields[field].slice(1));
@@ -412,7 +412,7 @@ function MainController ($scope) {
 
       var map = item.fields.iconMap;
 
-      if(typeof map === "function") return map(icon, item, entity);
+      if(typeof map === "function") return callFunction(map, [icon, item, entity]);
 
       if(!map) return icon;
 
@@ -1159,6 +1159,19 @@ function MainController ($scope) {
       // we received some message
       handleMessage(data);
    });
+
+   function getContext () {
+      return {
+         states: $scope.states,
+         $scope: $scope
+      };
+   }
+
+   function callFunction (func, args) {
+      if(typeof func !== "function") return func;
+
+      return func.apply(getContext(), args || []);
+   }
 
    function sendItemData (item, data, callback) {
       if(item.loading) return;

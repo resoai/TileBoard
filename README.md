@@ -137,6 +137,7 @@ Tile Object. [Click here for some feal life examples](TILE_EXAMPLES.md)
 }
 ```
 
+Every anonymous function will call with context `{states: {}, $scope: {}}`
 
 At the moment following entity types have been implemented:
 
