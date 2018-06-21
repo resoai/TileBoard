@@ -468,12 +468,14 @@ function MainController ($scope) {
    };
 
    $scope.getSliderConf = function (item, entity) {
-      if(item._c) return item._c;
+      var key = "_c";
+
+      if(entity.attributes[key]) return entity.attributes[key];
 
       var def = item.slider || {};
       var attrs = entity.attributes || {};
 
-      item._c = {
+      entity.attributes[key] = {
          max: attrs.max || def.max || 100,
          min: attrs.min || def.min || 0,
          step: attrs.step || def.step || 1,
@@ -490,7 +492,7 @@ function MainController ($scope) {
          item._sliderInited = true;
       }, 50);
 
-      return item._c;
+      return entity.attributes[key];
    };
 
    $scope.getLightSliderConf = function (slider, entity) {
