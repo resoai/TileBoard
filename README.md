@@ -59,7 +59,9 @@ var CONFIG = {
       /* password: Your HomeAssistant api_password
        * NOTE: If TileBoard is accessible to the outside world, people can
        * read this file and retrieve your password. TileBoard should be placed behind
-       * another form of authentication if it is publically accessible
+       * another form of authentication if it is publically accessible. 
+       * As another alternative you could prompt for a password 
+       * when the page loads: `password: prompt('Enter password')`
        */
       password: null,
 
