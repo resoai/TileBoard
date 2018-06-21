@@ -3,11 +3,11 @@
 @pageMenuIconSize: 70px;
 @groupMargin: 35px 50px 35px 15px;
 
-@itemSize: 155px;
-@tileSize: 80px;
-@tileIconSize: 52px;
-@tileFontSize: 34px;
-@tileSelectFontSize: 21px;
+@tileSize: 155px;
+@entitySize: 80px;
+@entityIconSize: 52px;
+@entityFontSize: 34px;
+@entitySelectFontSize: 21px;
 
 @opacity: 1;
 
@@ -479,7 +479,7 @@ body {
    color: rgba(255,255,255,1);
    border-radius: 1px;
    z-index: 2;
-   max-width: @itemSize - 24px;
+   max-width: @tileSize - 24px;
    text-overflow: ellipsis;
    white-space: nowrap;
    overflow: hidden;
@@ -487,9 +487,9 @@ body {
 
 .item-entity {
    position: absolute;
-   height: @tileSize;
-   line-height: @tileSize;
-   top: (@itemSize - @tileSize) / 2 - 5px;
+   height: @entitySize;
+   line-height: @entitySize;
+   top: (@tileSize - @entitySize) / 2 - 5px;
    left: 0;
    right: 0;
    z-index: 2;
@@ -503,18 +503,18 @@ body {
 
    &--unit {
       vertical-align: top;
-      line-height: @tileSize - 20px;
+      line-height: @entitySize - 20px;
       margin-right: -8px;
    }
 
    &--icon {
-      font-size: @tileIconSize;
-      line-height: @tileSize;
+      font-size: @entityIconSize;
+      line-height: @entitySize;
    }
 
    &--value {
       vertical-align: top;
-      font-size: @tileFontSize;
+      font-size: @entityFontSize;
       display: inline-block;
       max-width: 70%;
       overflow: hidden;
@@ -522,30 +522,30 @@ body {
 
    &.-select .item-entity--value {
       vertical-align: top;
-      font-size: @tileSelectFontSize;
+      font-size: @entitySelectFontSize;
       max-width: 100%;
       padding: 0 7px;
       white-space: normal;
-      line-height: @tileSize / 3;
+      line-height: @entitySize / 3;
       text-align: left;
    }
 }
 
 .-big-entity {
    .item-entity--icon {
-      font-size: @tileIconSize * 1.3;
+      font-size: @entityIconSize * 1.3;
    }
    .item-entity--value {
-      font-size: @tileFontSize * 1.3;
+      font-size: @entityFontSize * 1.3;
    }
 }
 
 .-small-entity {
    .item-entity--icon {
-      font-size: @tileIconSize * 0.8;
+      font-size: @entityIconSize * 0.8;
    }
    .item-entity--value {
-      font-size: @tileFontSize * 0.8;
+      font-size: @entityFontSize * 0.8;
    }
 }
 
@@ -995,7 +995,7 @@ camera-thumbnail {
       position: absolute;
       right: 5px;
       top: 25px;
-      width: (@itemSize * 2) - 70px;
+      width: (@tileSize * 2) - 70px;
       white-space: normal;
       text-align: right;
 
@@ -1016,7 +1016,7 @@ camera-thumbnail {
    }
 
    &--volume {
-      margin-top: @itemSize - 65px;
+      margin-top: @tileSize - 65px;
    }
 
    &--source {

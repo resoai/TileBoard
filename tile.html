@@ -1,4 +1,4 @@
-<div ng-style="itemStyles(item, page)" class="item"
+<div ng-style="itemStyles(item, entity)" class="item"
      ng-click="entityClick(page, item, entity)"
      on-long-press="entryLongClick($event, page, item, entity)"
      ng-if="entity = getItemEntity(item)"
@@ -7,7 +7,7 @@
    <div class="item-clickable"></div>
 
    <div ng-if="item.bg || item.bgSuffix" class="item-background"
-        ng-style="itemBgStyles(item, page)"></div>
+        ng-style="itemBgStyles(item, entity)"></div>
 
    <div class="item-title" ng-bind="_title"
         ng-if="(_title = entityTitle(item, entity))"></div>
@@ -407,7 +407,7 @@
 
          <div class="media-player--source" ng-click="openSelect(item)"
               ng-if="entity.attributes.source && item.showSource">
-            <span ng-bind="entity.attributes.source"></span>
+            <span ng-bind="entity.attributes.source || 'Source'"></span>
          </div>
       </div>
 

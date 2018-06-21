@@ -220,8 +220,10 @@ function MainController ($scope) {
       return item.styles;
    };
 
-   $scope.itemBgStyles = function (item, page) {
-      if(!item.bgStyles) {
+   $scope.itemBgStyles = function (item, entity) {
+      var obj = entity.attributes || entity;
+
+      if(!obj.bgStyles) {
          var bg, styles = {};
 
          if('bgOpacity' in item) {
@@ -247,10 +249,10 @@ function MainController ($scope) {
             styles.backgroundImage = 'url(' + CONFIG.serverUrl + bg + ')';
          }
 
-         item.bgStyles = styles;
+         obj.bgStyles = styles;
       }
 
-      return item.bgStyles;
+      return obj.bgStyles;
    };
 
    $scope.itemClasses = function (item) {
