@@ -358,8 +358,11 @@
 
       <div class="media-player">
          <div class="media-player--main-button" ng-if="entity.state !== 'off'">
-            <span class="mdi mdi-pause" ng-if="entity.state === 'playing'"
+            <span class="mdi mdi-pause" ng-if="supportsFeature(FEATURES.PAUSE, entity) && entity.state === 'playing'"
                   ng-click="sendPlayer('media_pause', item, entity)"></span>
+
+            <span class="mdi mdi-stop" ng-if="!supportsFeature(FEATURES.PAUSE, entity) && entity.state === 'playing'"
+                  ng-click="sendPlayer('media_stop', item, entity)"></span>
 
             <span class="mdi mdi-play" ng-if="entity.state === 'stopped'"
                   ng-click="sendPlayer('media_play', item, entity)"></span>
