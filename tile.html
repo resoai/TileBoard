@@ -121,7 +121,7 @@
       <div ng-if="item.controlsEnabled" class="item-entity-sliders"
            ng-click="preventClick($event)">
          <div ng-repeat="slider in item.sliders track by $index"
-              ng-if="_c = getLightSliderConf(slider, entity)"
+              ng-if="(_c = getLightSliderConf(slider, entity))"
               class="item-slider-container">
 
             <div class="item-slider-title" ng-if="slider.title">
@@ -240,7 +240,7 @@
                ng-bind="item.unit || entity.attributes.unit_of_measurement"></span>
       </div>
 
-      <div class="item-slider" ng-show="_c = getSliderConf(item, entity)">
+      <div class="item-slider" ng-if="(_c = getSliderConf(item, entity))">
          <input type="range" ng-model="_c.value"
                 ng-change="sliderChanged(item, entity, _c)"
                 step="{{ _c.step }}" min="{{ _c.min }}" max="{{ _c.max }}">
@@ -414,7 +414,7 @@
 
          </div>
 
-         <div class="media-player--volume" ng-show="(_c = getVolumeConf(item, entity))">
+         <div class="media-player--volume" ng-if="(_c = getVolumeConf(item, entity))">
             <input type="range" ng-model="_c.value"
                    ng-change="volumeChanged(item, entity, _c)"
                    step="{{ _c.step }}" min="{{ _c.min }}" max="{{ _c.max }}">
