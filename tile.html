@@ -361,7 +361,7 @@
             <span class="mdi mdi-pause" ng-if="entity.state === 'playing'"
                   ng-click="sendPlayer('media_pause', item, entity)"></span>
 
-            <span class="mdi mdi-play" ng-if="entity.state === 'stop'"
+            <span class="mdi mdi-play" ng-if="entity.state === 'stopped'"
                   ng-click="sendPlayer('media_play', item, entity)"></span>
 
             <span class="mdi mdi-play" ng-if="entity.state === 'paused'"
@@ -370,8 +370,6 @@
             <span class="mdi mdi-play" ng-if="entity.state === 'idle'"
                   ng-click="sendPlayer('media_play', item, entity)"></span>
 
-            <span class="mdi mdi-play" ng-if="entity.state === 'off'"
-                  ng-click="sendPlayer('media_play', item, entity)"></span>
          </div>
 
          <div class="media-player--buttons">
