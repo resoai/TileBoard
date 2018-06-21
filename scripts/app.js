@@ -40,6 +40,19 @@ var TYPES = {
    MEDIA_PLAYER: 'media_player',
 };
 
+var FEATURES = {
+   PAUSE: 1,
+   SEEK: 2,
+   VOLUME_SET: 4,
+   VOLUME_MUTE: 8,
+   PREVIOUS_TRACK: 16,
+   NEXT_TRACK: 32,
+   YOUTUBE: 64,
+   TURN_ON: 128,
+   TURN_OFF: 256,
+   STOP: 4096
+}
+
 function mergeObjects (a, b) {
    return angular.merge(a, b);
 }

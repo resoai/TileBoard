@@ -376,37 +376,37 @@
 
          <div class="media-player--buttons">
             <div class="media-player--button -prev"
-                 ng-if="entity.state !== 'off'"            
+                 ng-if="supportsFeature(FEATURES.PREVIOUS_TRACK, entity) && entity.state !== 'off'"
                  ng-click="sendPlayer('media_previous_track', item, entity)">
                <i class="mdi mdi-skip-previous"></i>
             </div>
 
             <div class="media-player--button -next"
-                 ng-if="entity.state !== 'off'"            
+                 ng-if="supportsFeature(FEATURES.NEXT_TRACK, entity) && entity.state !== 'off'"
                  ng-click="sendPlayer('media_next_track', item, entity)">
                <i class="mdi mdi-skip-next"></i>
             </div>
 
             <div class="media-player--button -mute"
-                 ng-if="entity.state !== 'off' && entity.attributes.is_volume_muted"
+                 ng-if="supportsFeature(FEATURES.VOLUME_MUTE, entity) && entity.state !== 'off' && entity.attributes.is_volume_muted"
                  ng-click="mutePlayer(false, item, entity)">
                <i class="mdi mdi-volume-mute"></i>
             </div>
 
             <div class="media-player--button -mute"
-                 ng-if="entity.state !== 'off' && !entity.attributes.is_volume_muted"
+                 ng-if="supportsFeature(FEATURES.VOLUME_MUTE, entity) && entity.state !== 'off' && !entity.attributes.is_volume_muted"
                  ng-click="mutePlayer(true, item, entity)">
                <i class="mdi mdi-volume-high"></i>
             </div>
 
             <div class="media-player--button -power"
-                 ng-if="entity.state === 'off'"
+                 ng-if="supportsFeature(FEATURES.TURN_ON, entity) && entity.state === 'off'"
                  ng-click="sendPlayer('turn_on', item, entity)">
                <i class="mdi mdi-power"></i>
             </div>
 
             <div class="media-player--button -power"
-                 ng-if="entity.state === 'on'"
+                 ng-if="supportsFeature(FEATURES.TURN_OFF, entity) && entity.state !== 'off'"
                  ng-click="sendPlayer('turn_off', item, entity)">
                <i class="mdi mdi-power"></i>
             </div>

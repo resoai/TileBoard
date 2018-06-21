@@ -3,6 +3,7 @@ App.controller('Main', ['$scope', MainController]);
 function MainController ($scope) {
    $scope.pages = CONFIG.pages;
    $scope.TYPES = TYPES;
+   $scope.FEATURES = FEATURES;
 
    $scope.activeSelect = null;
    $scope.ready = false; // ready state
@@ -901,6 +902,12 @@ function MainController ($scope) {
       return false;
    };
 
+   $scope.supportsFeature = function (feature, entity) {
+      if(!('supported_features' in entity.attributes)) {
+         return false;
+      }
+      return (entity.attributes.supported_features | feature) === entity.attributes.supported_features;
+   };
 
    $scope.setClimateOption = function ($event, item, entity, option) {
       $event.preventDefault();
