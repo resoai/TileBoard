@@ -181,24 +181,40 @@ App.directive('clock', ['$interval', function ($interval) {
       restrict: 'AE',
       replace: true,
       link: function ($scope, $el, attrs) {
-         var m = document.createElement('div');
-         var h = document.createElement('div');
-         var colon = document.createElement('colon');
+         var $m = document.createElement('div');
+         var $h = document.createElement('div');
+         var $colon = document.createElement('div');
+         var $postfix = document.createElement('div');
 
-         m.classList.add('clock--m');
-         h.classList.add('clock--h');
-         colon.classList.add('clock--colon');
-         colon.textContent = ":";
+         $m.classList.add('clock--m');
+         $h.classList.add('clock--h');
+
+         $postfix.classList.add('clock--postfix');
+
+         $colon.classList.add('clock--colon');
+         $colon.textContent = ":";
 
          var updateTime = function () {
             var d = new Date();
-            m.textContent = leadZero(d.getMinutes());
-            h.textContent = leadZero(d.getHours());
+            var h = d.getHours();
+            var m = d.getMinutes();
+            var postfix = '';
+
+            if(CONFIG.timeFormat !== 12) {
+               postfix = h >= 12 ? 'PM' : 'AM';
+
+               h = h % 12 || 12;
+            }
+
+            $h.textContent = leadZero(h);
+            $m.textContent = leadZero(m);
+            $postfix.textContent = postfix;
          };
 
-         $el[0].appendChild(h);
-         $el[0].appendChild(colon);
-         $el[0].appendChild(m);
+         $el[0].appendChild($h);
+         $el[0].appendChild($colon);
+         $el[0].appendChild($m);
+         $el[0].appendChild($postfix);
 
          updateTime();
 

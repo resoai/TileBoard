@@ -66,6 +66,9 @@ var CONFIG = {
       /* debug: Used for development */
       debug: false,
 
+      /* timeFormat: 12 for AM/PM marker, 24 for 24 hour time (default) */
+      timeFormat: Number,
+      
       /* pages: A list of page objects. See documentation on Pages below */
       pages: [],
 

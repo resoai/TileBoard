@@ -10,6 +10,7 @@ var CONFIG = {
    transition: TRANSITIONS.ANIMATED_GPU,
    tileSize: 150,
    tileMargin: 6,
+   timeFormat: 24,
    serverUrl: "http://localhost:8123",
    wsUrl: "ws://localhost:8123/api/websocket",
    password: null,
