@@ -20,7 +20,7 @@ var CONFIG = {
          title: 'Main page',
          bg: 'images/bg1.jpeg',
          icon: 'mdi-home-outline', // home icon
-         head: 'head.html', // clock
+         head: 'head.html', // you might need to comment this out if you have a small screen and header overlaps the tiles
          groups: [
             {
                title: 'First group',
