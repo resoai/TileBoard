@@ -51,7 +51,7 @@ var FEATURES = {
    TURN_ON: 128,
    TURN_OFF: 256,
    STOP: 4096
-}
+};
 
 function mergeObjects (a, b) {
    return angular.merge(a, b);

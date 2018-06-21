@@ -471,6 +471,8 @@ function MainController ($scope) {
    $scope.getSliderConf = function (item, entity) {
       var key = "_c";
 
+      if(!entity.attributes) entity.attributes = {};
+
       if(entity.attributes[key]) return entity.attributes[key];
 
       var def = item.slider || {};
