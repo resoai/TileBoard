@@ -471,6 +471,7 @@ function MainController ($scope) {
    $scope.getSliderConf = function (item, entity) {
       var key = "_c";
 
+      if(!entity.attributes) entity.attributes = {};
       if(entity.attributes[key]) return entity.attributes[key];
 
       var def = item.slider || {};
@@ -499,6 +500,7 @@ function MainController ($scope) {
    $scope.getLightSliderConf = function (slider, entity) {
       var key = "_c_" + slider.field;
 
+      if(!entity.attributes) entity.attributes = {};
       if(entity.attributes[key]) return entity.attributes[key];
 
 
@@ -532,6 +534,7 @@ function MainController ($scope) {
    };
 
    $scope.getVolumeConf = function (item, entity) {
+      if(!entity.attributes) entity.attributes = {};
       if(entity.attributes._c) return entity.attributes._c;
 
       var def = {max: 100, min: 0, step: 2};

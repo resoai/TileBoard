@@ -40,9 +40,9 @@ var CONFIG = {
                            value: '&sun.sun.state'
                         },
                         {
-                           title: 'persistent_notification',
+                           title: 'Custom',
                            icon: 'mdi-clock-outline',
-                           value: '&persistent_notification.notification.state'
+                           value: 'value'
                         }
                      ]
                   },
