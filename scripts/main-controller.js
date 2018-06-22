@@ -455,8 +455,7 @@ function MainController ($scope) {
          var styles = {};
 
          if(items) {
-            // @TODO fix item going out of screen for long lists
-            styles.marginTop = (-Math.min(items.length, 11) * 17) + 'px';
+            styles.marginTop = (-Math.min(items.length * 17, 180)) + 'px';
          }
 
          entity.itemSelectStyles = styles;
