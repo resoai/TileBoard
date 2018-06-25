@@ -25,7 +25,7 @@ body {
 .alert.-error {
   border-color: darkred;
   background: tomato;
-  color: #ffffff;
+  color: #fff;
 }
 .page-container {
   height: 100%;
@@ -194,6 +194,15 @@ body {
 .item.-th-switch.-on {
   background-color: #be4475;
 }
+.item.-th-lock {
+  background-color: #00796b;
+}
+.item.-th-lock.-loading {
+  background-color: #00787b;
+}
+.item.-th-lock.-locked {
+  background-color: #00897b;
+}
 .item.-th-generic_icon {
   background-color: #5954a0;
 }
@@ -255,6 +264,13 @@ body {
 .item.-switch.-on {
   transition: none;
 }
+.item.-lock {
+  transition: 0.2s ease background-color;
+}
+.item.-lock.-loading,
+.item.-lock.-locked {
+  transition: none;
+}
 .item.-script,
 .item.-scene {
   transition: 0.5s ease background-color;
@@ -273,21 +289,28 @@ body {
 }
 .item.-off.-switch .item-entity--icon,
 .item.-disarmed.-switch .item-entity--icon,
+.item.-unlocked.-switch .item-entity--icon,
 .item.-off.-generic_icon .item-entity--icon,
 .item.-disarmed.-generic_icon .item-entity--icon,
+.item.-unlocked.-generic_icon .item-entity--icon,
 .item.-off.-input_boolean .item-entity--icon,
 .item.-disarmed.-input_boolean .item-entity--icon,
+.item.-unlocked.-input_boolean .item-entity--icon,
 .item.-off.-light .item-entity--icon,
 .item.-disarmed.-light .item-entity--icon,
+.item.-unlocked.-light .item-entity--icon,
 .item.-off.-sensor_icon .item-entity--icon,
-.item.-disarmed.-sensor_icon .item-entity--icon {
+.item.-disarmed.-sensor_icon .item-entity--icon,
+.item.-unlocked.-sensor_icon .item-entity--icon {
   opacity: 0.65;
 }
 .item.-off .item-state,
-.item.-disarmed .item-state {
+.item.-disarmed .item-state,
+.item.-unlocked .item-state {
   opacity: 0.75;
 }
 .item.-switch,
+.item.-lock,
 .item.-light,
 .item.-script,
 .item.-input_boolean,
@@ -299,6 +322,7 @@ body {
   cursor: pointer;
 }
 .item.-switch:nonhover,
+.item.-lock:nonhover,
 .item.-light:nonhover,
 .item.-script:nonhover,
 .item.-input_boolean:nonhover,
@@ -312,6 +336,7 @@ body {
   border: 2px solid rgba(200, 200, 200, 0.6);
 }
 .item.-switch:active,
+.item.-lock:active,
 .item.-light:active,
 .item.-script:active,
 .item.-input_boolean:active,
@@ -325,6 +350,7 @@ body {
   border: 2px solid rgba(200, 200, 200, 0.9);
 }
 .item.-switch .item-clickable,
+.item.-lock .item-clickable,
 .item.-light .item-clickable,
 .item.-script .item-clickable,
 .item.-input_boolean .item-clickable,
@@ -352,7 +378,7 @@ body {
 .item.-device_tracker .item-title,
 .item.-camera .item-title,
 .item.-camera_thumbnail .item-title {
-  text-shadow: /*1px 1px 1px rgba(0,0,0,.2),*/ 1px 1px 0 rgba(0, 0, 0, 0.2);
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
   background: rgba(0, 0, 0, 0.15);
   right: auto;
   line-height: 22px;
@@ -1021,7 +1047,7 @@ input[type=range]::-moz-range-thumb {
   border-top-color: #eeeeee;
   border-left-color: #eee;
   margin: -1px;
-  box-shadow: 1px 1px 0 #000000, -1px -1px 0 #f5f5f5;
+  box-shadow: 1px 1px 0 #000, -1px -1px 0 #f5f5f5;
   border-radius: 1px;
 }
 .-theme-win95 .item-select {
@@ -1083,4 +1109,4 @@ input[type=range]::-moz-range-thumb {
     opacity: 0;
   }
 }
-(node:637) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+/*# sourceMappingURL=main.css.map */

@@ -23,6 +23,9 @@
 @SWITCH: rgba(122, 78, 127, @opacity);
 @SWITCH_L: rgba(164, 84, 160, @opacity);
 @SWITCH_ON: rgba(190, 68, 117, @opacity);
+@LOCK: rgb(0,121,107, @opacity);
+@LOCK_L: rgb(0,120,123, @opacity);
+@LOCK_LOCKED: rgb(0,137,123, @opacity);
 @GENERIC_ICON: rgba(89, 84, 160, @opacity);
 @INPUT_BOOLEAN: rgba(40, 155, 97, @opacity);
 @INPUT_BOOLEAN_L: rgba(18, 176, 77, @opacity);
@@ -243,6 +246,9 @@ body {
    &.-th-switch {background-color: @SWITCH;}
    &.-th-switch.-loading {background-color: @SWITCH_L;}
    &.-th-switch.-on {background-color: @SWITCH_ON;}
+   &.-th-lock {background-color: @LOCK;}
+   &.-th-lock.-loading {background-color: @LOCK_L;}
+   &.-th-lock.-locked {background-color: @LOCK_LOCKED;}
    &.-th-generic_icon {background-color: @GENERIC_ICON;}
    &.-th-input_boolean {background-color: @INPUT_BOOLEAN;}
    &.-th-input_boolean.-loading {background-color: @INPUT_BOOLEAN_L;}
@@ -277,6 +283,14 @@ body {
       }
    }
 
+   &.-lock {
+      transition: 0.2s ease background-color;
+
+      &.-loading, &.-locked {
+         transition: none;
+      }
+   }
+
    &.-script, &.-scene {
       transition: 0.5s ease background-color;
       transition-delay: 0.2s;
@@ -297,7 +311,7 @@ body {
 
 
 
-   &.-off, &.-disarmed {
+   &.-off, &.-disarmed, &.-unlocked {
       &.-switch,
       &.-generic_icon,
       &.-input_boolean,
@@ -314,6 +328,7 @@ body {
    }
 
    &.-switch,
+   &.-lock,
    &.-light,
    &.-script,
    &.-input_boolean,

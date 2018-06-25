@@ -134,6 +134,26 @@ Toggle switch on tap. Also shows icon depending on the state<br>
 }
 ```
 
+#### LOCK
+Locks and unlocks the lock on tap. Also shows icon depending on the state<br>
+![LOCK](images/tile-screenshots/LOCK.png)
+```js
+{
+   position: [0, 1],
+   type: TYPES.LOCK,
+   id: 'lock.front_door',
+   title: 'Front door',
+   states: {
+      locked: "Locked",
+      unlcoked: "Unlocked"
+   },
+   icons: {
+      locked: "mdi-lock",
+      unlocked: "mdi-lock-open",
+   }
+}
+```
+
 #### LIGHT
 Light switch. You can optionally define sliders to control colour temperature or in fact anything else. Sliders will show up after long press on the tile.<br>
 ![LIGHT](images/tile-screenshots/LIGHT.png)

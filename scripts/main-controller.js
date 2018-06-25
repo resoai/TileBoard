@@ -28,6 +28,8 @@ function MainController ($scope) {
          case TYPES.LIGHT:
          case TYPES.INPUT_BOOLEAN: return $scope.toggleSwitch(item, entity);
 
+         case TYPES.LOCK: return $scope.toggleLock(item, entity);
+
          case TYPES.SCRIPT: return $scope.callScript(item, entity);
 
          case TYPES.INPUT_SELECT: return $scope.toggleSelect(item, entity);
@@ -688,6 +690,20 @@ function MainController ($scope) {
             entity_id: item.id
          }
       }, callback);
+   };
+
+   $scope.toggleLock = function (item, entity) {
+      if(entity.state === "locked") service = "unlock";
+      else if(entity.state === "unlocked") service = "lock";
+
+      sendItemData(item, {
+         type: "call_service",
+         domain: "lock",
+         service: service,
+         service_data: {
+            entity_id: item.id
+         }
+      });
    };
 
    $scope.sendPlayer = function (service, item, entity) {
