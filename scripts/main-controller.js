@@ -127,6 +127,9 @@ function MainController ($scope) {
 
             url = "https://maps.googleapis.com/maps/api/staticmap?center="
                + coords + "&zoom="+zoom+"&size="+sizes+"x&maptype=roadmap&markers=" + marker;
+            if(CONFIG.googleApiKey) {
+               url += "&key=" + CONFIG.googleApiKey;
+            }
          }
 
          obj[key] = {backgroundImage: 'url(' + url + ')'};
