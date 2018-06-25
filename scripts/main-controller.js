@@ -1007,6 +1007,18 @@ function MainController ($scope) {
    };
 
 
+   $scope.sendCover = function (service, item, entity) {
+      sendItemData(item, {
+         type: "call_service",
+         domain: "cover",
+         service: service,
+         service_data: {
+            entity_id: item.id
+         }
+      });
+   };
+
+
    // UI
 
    $scope.openPage = function (page) {

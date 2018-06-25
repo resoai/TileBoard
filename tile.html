@@ -74,6 +74,24 @@
       </div>
    </div>
 
+   <div ng-if="item.type === TYPES.COVER"
+        class="item-entity-container">
+      <div class="item-cover">
+         <div class="item-cover--button -open"
+              ng-click="sendCover('cover_open', item, entity)">
+            <i class="mdi mdi-arrow-up"></i>
+         </div>
+         <div class="item-cover--button -stop"
+              ng-click="sendCover('cover_stop', item, entity)">
+            <i class="mdi mdi-stop"></i>
+         </div>
+         <div class="item-cover--button -close"
+              ng-click="sendCover('cover_close', item, entity)">
+            <i class="mdi mdi-arrow-down"></i>
+         </div>
+      </div>
+   </div>
+
    <div ng-if="item.type === TYPES.SCRIPT"
         class="item-entity-container">
 
