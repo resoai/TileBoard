@@ -1025,6 +1025,12 @@ function MainController ($scope) {
       });
    };
 
+   $scope.openFanSpeedSelect = function ($event, item) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $scope.openSelect(item);
+   }
+
    $scope.setFanSpeed = function ($event, item, entity, option) {
       $event.preventDefault();
       $event.stopPropagation();

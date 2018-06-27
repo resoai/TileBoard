@@ -102,7 +102,7 @@
                ng-class="entityIcon(item, entity)"></span>
       </div>
       <div class="item-fan">
-         <div class="item-fan--speed" ng-click="openSelect(item)"
+         <div class="item-fan--speed" ng-click="openFanSpeedSelect($event, item)"
               ng-if="entity.attributes.speed_list">
             <span ng-bind="entity.attributes.speed"></span>
          </div>
