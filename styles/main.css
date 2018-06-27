@@ -254,6 +254,9 @@ body {
 .item.-th-iframe {
   background-color: #24282c;
 }
+.item.-th-custom {
+  background-color: #259eb0;
+}
 .item.-input_boolean {
   transition: 0.2s ease background-color;
 }
@@ -314,6 +317,7 @@ body {
 }
 .item.-switch,
 .item.-lock,
+.item.-custom,
 .item.-light,
 .item.-script,
 .item.-input_boolean,
@@ -326,6 +330,7 @@ body {
 }
 .item.-switch:nonhover,
 .item.-lock:nonhover,
+.item.-custom:nonhover,
 .item.-light:nonhover,
 .item.-script:nonhover,
 .item.-input_boolean:nonhover,
@@ -340,6 +345,7 @@ body {
 }
 .item.-switch:active,
 .item.-lock:active,
+.item.-custom:active,
 .item.-light:active,
 .item.-script:active,
 .item.-input_boolean:active,
@@ -354,6 +360,7 @@ body {
 }
 .item.-switch .item-clickable,
 .item.-lock .item-clickable,
+.item.-custom .item-clickable,
 .item.-light .item-clickable,
 .item.-script .item-clickable,
 .item.-input_boolean .item-clickable,

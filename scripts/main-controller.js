@@ -40,6 +40,8 @@ function MainController ($scope) {
          case TYPES.SCENE: return $scope.callScene(item, entity);
 
          case TYPES.DOOR_ENTRY: return $scope.openDoorEntry(item, entity);
+
+         case TYPES.CUSTOM: return $scope.customTileAction(item, entity);
       }
    };
 
@@ -707,6 +709,12 @@ function MainController ($scope) {
             entity_id: item.id
          }
       });
+   };
+
+   $scope.customTileAction = function (item, entity) {
+      if(item.action && typeof item.action === "function") {
+         callFunction(item.action, [item, entity]);
+      }
    };
 
    $scope.sendPlayer = function (service, item, entity) {
