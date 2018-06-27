@@ -1035,7 +1035,7 @@ function MainController ($scope) {
          service: "set_speed",
          service_data: {
             entity_id: item.id,
-            operation_mode: option
+            speed: option
          }
       });
 
