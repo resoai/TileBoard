@@ -572,7 +572,7 @@ function MainController ($scope) {
          return $scope.toggleSwitch(item, entity, function () {
             setTimeout(function () {
                if(entity.state === "on") {
-                  $scope.toggleLightSliders(item, entity);
+                  $scope.openLightSliders(item, entity);
                   updateView();
                }
             }, 0);
