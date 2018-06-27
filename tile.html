@@ -96,10 +96,27 @@
 
    <div ng-if="item.type === TYPES.FAN"
         class="item-entity-container">
-
-      <div class="item-entity">
+      <div class="item-entity"
+           ng-if="!entity.attributes.speed_list">
          <span class="item-entity--icon mdi"
                ng-class="entityIcon(item, entity)"></span>
+      </div>
+      <div class="item-fan">
+         <div class="item-fan--speed" ng-click="openSelect(item)"
+              ng-if="entity.attributes.speed_list">
+            <span ng-bind="entity.attributes.speed"></span>
+         </div>
+      </div>
+
+      <div ng-if="selectOpened(item)" class="item-select"
+           ng-style="itemSelectStyles(entity, entity.attributes.speed_list)">
+
+         <div class="item-select--option"
+              ng-repeat="option in entity.attributes.speed_list track by $index"
+              ng-class="{'-active': option === entity.attributes.speed_list}"
+              ng-click="setFanSpeed($event, item, entity, option)">
+            <span ng-bind="option"></span>
+         </div>
       </div>
    </div>
 

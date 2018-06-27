@@ -444,6 +444,23 @@ body {
   line-height: 15px;
   margin-right: -8px;
 }
+.item-fan {
+  text-align: left;
+  padding: 30px 3px 0;
+}
+.item-fan--speed {
+  font-size: 21px;
+  line-height: 25px;
+  cursor: pointer;
+  white-space: normal;
+  overflow: hidden;
+  padding: 5px 3px;
+  opacity: 0.9;
+}
+.item-fan--speed:active {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.1);
+}
 .item-button {
   position: absolute;
   padding: 7px 10px;

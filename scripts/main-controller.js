@@ -1025,6 +1025,25 @@ function MainController ($scope) {
       });
    };
 
+   $scope.setFanSpeed = function ($event, item, entity, option) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      sendItemData(item, {
+         type: "call_service",
+         domain: "fan",
+         service: "set_speed",
+         service_data: {
+            entity_id: item.id,
+            operation_mode: option
+         }
+      });
+
+      $scope.closeActiveSelect();
+
+      return false;
+   };
+
 
    // UI
 
