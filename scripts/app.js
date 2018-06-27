@@ -25,6 +25,7 @@ var TYPES = {
    SWITCH: 'switch',
    LOCK: 'lock',
    COVER: 'cover',
+   FAN: 'fan',
    GENERIC_ICON: 'generic_icon',
    INPUT_BOOLEAN: 'input_boolean',
    LIGHT: 'light',

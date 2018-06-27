@@ -24,6 +24,9 @@
 @SWITCH: rgba(122, 78, 127, @opacity);
 @SWITCH_L: rgba(164, 84, 160, @opacity);
 @SWITCH_ON: rgba(190, 68, 117, @opacity);
+@FAN: rgba(122, 78, 127, @opacity);
+@FAN_L: rgba(164, 84, 160, @opacity);
+@FAN_ON: rgba(190, 68, 117, @opacity);
 @LOCK: rgb(0,121,107, @opacity);
 @LOCK_L: rgb(0,120,123, @opacity);
 @LOCK_LOCKED: rgb(0,137,123, @opacity);
@@ -249,6 +252,9 @@ body {
    &.-th-switch {background-color: @SWITCH;}
    &.-th-switch.-loading {background-color: @SWITCH_L;}
    &.-th-switch.-on {background-color: @SWITCH_ON;}
+   &.-th-fan {background-color: @FAN;}
+   &.-th-fan.-loading {background-color: @FAN_L;}
+   &.-th-fan.-on {background-color: @FAN_ON;}
    &.-th-lock {background-color: @LOCK;}
    &.-th-lock.-loading {background-color: @LOCK_L;}
    &.-th-lock.-locked {background-color: @LOCK_LOCKED;}
@@ -333,6 +339,7 @@ body {
 
    &.-switch,
    &.-lock,
+   &.-fan,
    &.-custom,
    &.-light,
    &.-script,

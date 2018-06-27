@@ -197,6 +197,15 @@ body {
 .item.-th-switch.-on {
   background-color: #be4475;
 }
+.item.-th-fan {
+  background-color: #7a4e7f;
+}
+.item.-th-fan.-loading {
+  background-color: #a454a0;
+}
+.item.-th-fan.-on {
+  background-color: #be4475;
+}
 .item.-th-lock {
   background-color: #00796b;
 }
@@ -317,6 +326,7 @@ body {
 }
 .item.-switch,
 .item.-lock,
+.item.-fan,
 .item.-custom,
 .item.-light,
 .item.-script,
@@ -330,6 +340,7 @@ body {
 }
 .item.-switch:nonhover,
 .item.-lock:nonhover,
+.item.-fan:nonhover,
 .item.-custom:nonhover,
 .item.-light:nonhover,
 .item.-script:nonhover,
@@ -345,6 +356,7 @@ body {
 }
 .item.-switch:active,
 .item.-lock:active,
+.item.-fan:active,
 .item.-custom:active,
 .item.-light:active,
 .item.-script:active,
@@ -360,6 +372,7 @@ body {
 }
 .item.-switch .item-clickable,
 .item.-lock .item-clickable,
+.item.-fan .item-clickable,
 .item.-custom .item-clickable,
 .item.-light .item-clickable,
 .item.-script .item-clickable,

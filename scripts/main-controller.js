@@ -26,6 +26,7 @@ function MainController ($scope) {
       switch (item.type) {
          case TYPES.SWITCH:
          case TYPES.LIGHT:
+         case TYPES.FAN:
          case TYPES.INPUT_BOOLEAN: return $scope.toggleSwitch(item, entity);
 
          case TYPES.LOCK: return $scope.toggleLock(item, entity);
@@ -670,8 +671,7 @@ function MainController ($scope) {
       var domain = "homeassistant";
       var group = item.id.split('.')[0];
 
-      if(group === "switch") domain = "switch";
-      if(group === "light") domain = "light";
+      if(['switch', 'light', 'fan'].includes(group)) domain = group;
 
       var service = "toggle";
 
