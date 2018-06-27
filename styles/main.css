@@ -1003,6 +1003,10 @@ camera-thumbnail div {
 .item-cover--button:active {
   background: rgba(0, 0, 0, 0.3);
 }
+.item-cover--button.-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
 input[type=range] {
   -webkit-appearance: none;
   width: 100%;

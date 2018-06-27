@@ -78,6 +78,7 @@
         class="item-entity-container">
       <div class="item-cover">
          <div class="item-cover--button -open"
+              ng-class="{'-disabled': entity.state === 'open'}"
               ng-click="sendCover('open_cover', item, entity)">
             <i class="mdi mdi-arrow-up"></i>
          </div>
@@ -86,6 +87,7 @@
             <i class="mdi mdi-stop"></i>
          </div>
          <div class="item-cover--button -close"
+              ng-class="{'-disabled': entity.state === 'closed'}"
               ng-click="sendCover('close_cover', item, entity)">
             <i class="mdi mdi-arrow-down"></i>
          </div>
