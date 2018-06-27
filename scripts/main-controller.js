@@ -46,12 +46,12 @@ function MainController ($scope) {
       }
    };
 
-   $scope.entryLongClick = function ($event, page, item, entity) {
+   $scope.entityLongClick = function ($event, page, item, entity) {
       $event.preventDefault();
       $event.stopPropagation();
 
       switch (item.type) {
-         case TYPES.LIGHT: return $scope.toggleLightSliders(item, entity);
+         case TYPES.LIGHT: return $scope.openLightSliders(item, entity);
       }
 
       return false;
@@ -567,7 +567,7 @@ function MainController ($scope) {
       return conf.value;
    };
 
-   $scope.toggleLightSliders = function (item, entity) {
+   $scope.openLightSliders = function (item, entity) {
       if(entity.state !== "on") {
          return $scope.toggleSwitch(item, entity, function () {
             setTimeout(function () {
@@ -732,7 +732,7 @@ function MainController ($scope) {
       sendItemData(item, {
          type: "call_service",
          domain: "media_player",
-         service: 'volume_mute',
+         service: "volume_mute",
          service_data: {
             entity_id: item.id,
             is_volume_muted: muteState
