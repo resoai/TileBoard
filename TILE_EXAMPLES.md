@@ -145,7 +145,7 @@ Locks and unlocks the lock on tap. Also shows icon depending on the state<br>
    title: 'Front door',
    states: {
       locked: "Locked",
-      unlcoked: "Unlocked"
+      unlocked: "Unlocked"
    },
    icons: {
       locked: "mdi-lock",
