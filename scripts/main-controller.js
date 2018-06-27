@@ -290,24 +290,21 @@ function MainController ($scope) {
 
 
    $scope.entityState = function (item, entity) {
-      // @DEPRECATED item.sub
-      if(item.state === false && !item.sub) return null;
+      if(item.state === false) return null;
 
-      var stateField = item.state || item.sub;
       var res;
 
-      if(stateField) {
-         if(typeof stateField === "function") {
-            res = callFunction(stateField, [item, entity]);
+      if(item.state) {
+         if(item.state[0] === "@") {
+            return getObjectAttr(entity, item.state.slice(1));
          }
-         else if(stateField[0] === "@") {
-            res = getObjectAttr(entity, stateField.slice(1));
+         else if(item.state[0] === "&") {
+            return getEntityAttr(item.state.slice(1));
          }
-         else if(stateField[0] === "&") {
-            res = getEntityAttr(stateField.slice(1));
+         else if(typeof item.state === "function") {
+            res = callFunction(item.state, [item, entity]);
+            if(res) return res;
          }
-
-         if(res) return res;
       }
 
       if(item.states) {
@@ -320,10 +317,9 @@ function MainController ($scope) {
 
          if(res) return res;
       }
+      if(!item.state) return entity.state;
 
-      if(!stateField) return entity.state;
-
-      return stateField;
+      return item.state;
    };
 
    $scope.entityIcon = function (item, entity) {
