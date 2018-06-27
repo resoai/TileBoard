@@ -51,7 +51,7 @@
       <div class="item-entity">
          <span ng-bind="entityValue(item, entity)"
                class="item-entity--value"></span>
-         <span ng-if="item.unit || entity.attributes.unit_of_measurement" class="item-entity--unit"
+         <span ng-if="item.unit !== false" class="item-entity--unit"
                ng-bind="item.unit || entity.attributes.unit_of_measurement"></span>
       </div>
    </div>
