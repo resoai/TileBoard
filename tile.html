@@ -113,7 +113,7 @@
 
          <div class="item-select--option"
               ng-repeat="option in entity.attributes.speed_list track by $index"
-              ng-class="{'-active': option === entity.attributes.speed_list}"
+              ng-class="{'-active': option === entity.attributes.speed}"
               ng-click="setFanSpeed($event, item, entity, option)">
             <span ng-bind="option"></span>
          </div>
