@@ -313,6 +313,7 @@ var TYPES = {
    SENSOR: 'sensor',
    SENSOR_ICON: 'sensor_icon',
    SWITCH: 'switch',
+   LOCK: 'lock',
    GENERIC_ICON: 'generic_icon',
    INPUT_BOOLEAN: 'input_boolean',
    LIGHT: 'light',

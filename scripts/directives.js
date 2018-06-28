@@ -200,7 +200,7 @@ App.directive('clock', ['$interval', function ($interval) {
             var m = d.getMinutes();
             var postfix = '';
 
-            if(CONFIG.timeFormat !== 12) {
+            if(CONFIG.timeFormat === 12) {
                postfix = h >= 12 ? 'PM' : 'AM';
 
                h = h % 12 || 12;

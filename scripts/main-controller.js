@@ -3,6 +3,7 @@ App.controller('Main', ['$scope', MainController]);
 function MainController ($scope) {
    $scope.pages = CONFIG.pages;
    $scope.TYPES = TYPES;
+   $scope.FEATURES = FEATURES;
 
    $scope.activeSelect = null;
    $scope.ready = false; // ready state
@@ -25,7 +26,10 @@ function MainController ($scope) {
       switch (item.type) {
          case TYPES.SWITCH:
          case TYPES.LIGHT:
+         case TYPES.FAN:
          case TYPES.INPUT_BOOLEAN: return $scope.toggleSwitch(item, entity);
+
+         case TYPES.LOCK: return $scope.toggleLock(item, entity);
 
          case TYPES.SCRIPT: return $scope.callScript(item, entity);
 
@@ -37,15 +41,17 @@ function MainController ($scope) {
          case TYPES.SCENE: return $scope.callScene(item, entity);
 
          case TYPES.DOOR_ENTRY: return $scope.openDoorEntry(item, entity);
+
+         case TYPES.CUSTOM: return $scope.customTileAction(item, entity);
       }
    };
 
-   $scope.entryLongClick = function ($event, page, item, entity) {
+   $scope.entityLongClick = function ($event, page, item, entity) {
       $event.preventDefault();
       $event.stopPropagation();
 
       switch (item.type) {
-         case TYPES.LIGHT: return $scope.toggleLightSliders(item, entity);
+         case TYPES.LIGHT: return $scope.openLightSliders(item, entity);
       }
 
       return false;
@@ -124,6 +130,9 @@ function MainController ($scope) {
 
             url = "https://maps.googleapis.com/maps/api/staticmap?center="
                + coords + "&zoom="+zoom+"&size="+sizes+"x&maptype=roadmap&markers=" + marker;
+            if(CONFIG.googleApiKey) {
+               url += "&key=" + CONFIG.googleApiKey;
+            }
          }
 
          obj[key] = {backgroundImage: 'url(' + url + ')'};
@@ -214,6 +223,10 @@ function MainController ($scope) {
             top: pos[1] * tileSize + (tileMargin * pos[1]) + 'px',
          };
 
+         if(item.customCss && typeof item.customCss === 'object') {
+            styles = angular.merge(styles, item.customCss);
+         }
+
          item.styles = styles;
       }
 
@@ -282,24 +295,21 @@ function MainController ($scope) {
 
 
    $scope.entityState = function (item, entity) {
-      // @DEPRECATED item.sub
-      if(item.state === false && !item.sub) return null;
+      if(item.state === false) return null;
 
-      var stateField = item.state || item.sub;
       var res;
 
-      if(stateField) {
-         if(typeof stateField === "function") {
-            res = callFunction(stateField, [item, entity]);
+      if(item.state) {
+         if(item.state[0] === "@") {
+            return getObjectAttr(entity, item.state.slice(1));
          }
-         else if(stateField[0] === "@") {
-            res = getObjectAttr(entity, stateField.slice(1));
+         else if(item.state[0] === "&") {
+            return getEntityAttr(item.state.slice(1));
          }
-         else if(stateField[0] === "&") {
-            res = getEntityAttr(stateField.slice(1));
+         else if(typeof item.state === "function") {
+            res = callFunction(item.state, [item, entity]);
+            if(res) return res;
          }
-
-         if(res) return res;
       }
 
       if(item.states) {
@@ -312,10 +322,9 @@ function MainController ($scope) {
 
          if(res) return res;
       }
+      if(!item.state) return entity.state;
 
-      if(!stateField) return entity.state;
-
-      return stateField;
+      return item.state;
    };
 
    $scope.entityIcon = function (item, entity) {
@@ -454,7 +463,7 @@ function MainController ($scope) {
          var styles = {};
 
          if(items) {
-            styles.marginTop = (-items.length * 17) + 'px';
+            styles.marginTop = (-Math.min(items.length * 17, 180)) + 'px';
          }
 
          entity.itemSelectStyles = styles;
@@ -470,6 +479,7 @@ function MainController ($scope) {
    $scope.getSliderConf = function (item, entity) {
       var key = "_c";
 
+      if(!entity.attributes) entity.attributes = {};
       if(entity.attributes[key]) return entity.attributes[key];
 
       var def = item.slider || {};
@@ -498,6 +508,7 @@ function MainController ($scope) {
    $scope.getLightSliderConf = function (slider, entity) {
       var key = "_c_" + slider.field;
 
+      if(!entity.attributes) entity.attributes = {};
       if(entity.attributes[key]) return entity.attributes[key];
 
 
@@ -531,6 +542,7 @@ function MainController ($scope) {
    };
 
    $scope.getVolumeConf = function (item, entity) {
+      if(!entity.attributes) entity.attributes = {};
       if(entity.attributes._c) return entity.attributes._c;
 
       var def = {max: 100, min: 0, step: 2};
@@ -559,12 +571,12 @@ function MainController ($scope) {
       return conf.value;
    };
 
-   $scope.toggleLightSliders = function (item, entity) {
+   $scope.openLightSliders = function (item, entity) {
       if(entity.state !== "on") {
          return $scope.toggleSwitch(item, entity, function () {
             setTimeout(function () {
                if(entity.state === "on") {
-                  $scope.toggleLightSliders(item, entity);
+                  $scope.openLightSliders(item, entity);
                   updateView();
                }
             }, 0);
@@ -663,8 +675,7 @@ function MainController ($scope) {
       var domain = "homeassistant";
       var group = item.id.split('.')[0];
 
-      if(group === "switch") domain = "switch";
-      if(group === "light") domain = "light";
+      if(['switch', 'light', 'fan'].includes(group)) domain = group;
 
       var service = "toggle";
 
@@ -686,6 +697,26 @@ function MainController ($scope) {
       }, callback);
    };
 
+   $scope.toggleLock = function (item, entity) {
+      if(entity.state === "locked") service = "unlock";
+      else if(entity.state === "unlocked") service = "lock";
+
+      sendItemData(item, {
+         type: "call_service",
+         domain: "lock",
+         service: service,
+         service_data: {
+            entity_id: item.id
+         }
+      });
+   };
+
+   $scope.customTileAction = function (item, entity) {
+      if(item.action && typeof item.action === "function") {
+         callFunction(item.action, [item, entity]);
+      }
+   };
+
    $scope.sendPlayer = function (service, item, entity) {
       sendItemData(item, {
          type: "call_service",
@@ -705,7 +736,7 @@ function MainController ($scope) {
       sendItemData(item, {
          type: "call_service",
          domain: "media_player",
-         service: 'volume_mute',
+         service: "volume_mute",
          service_data: {
             entity_id: item.id,
             is_volume_muted: muteState
@@ -901,6 +932,12 @@ function MainController ($scope) {
       return false;
    };
 
+   $scope.supportsFeature = function (feature, entity) {
+      if(!('supported_features' in entity.attributes)) {
+         return false;
+      }
+      return (entity.attributes.supported_features | feature) === entity.attributes.supported_features;
+   };
 
    $scope.setClimateOption = function ($event, item, entity, option) {
       $event.preventDefault();
@@ -978,6 +1015,43 @@ function MainController ($scope) {
             temperature: value
          }
       });
+   };
+
+
+   $scope.sendCover = function (service, item, entity) {
+      sendItemData(item, {
+         type: "call_service",
+         domain: "cover",
+         service: service,
+         service_data: {
+            entity_id: item.id
+         }
+      });
+   };
+
+   $scope.openFanSpeedSelect = function ($event, item) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $scope.openSelect(item);
+   }
+
+   $scope.setFanSpeed = function ($event, item, entity, option) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      sendItemData(item, {
+         type: "call_service",
+         domain: "fan",
+         service: "set_speed",
+         service_data: {
+            entity_id: item.id,
+            speed: option
+         }
+      });
+
+      $scope.closeActiveSelect();
+
+      return false;
    };
 
 

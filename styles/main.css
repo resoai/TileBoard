@@ -25,7 +25,7 @@ body {
 .alert.-error {
   border-color: darkred;
   background: tomato;
-  color: #ffffff;
+  color: #fff;
 }
 .page-container {
   height: 100%;
@@ -167,6 +167,9 @@ body {
 .item.-th-media_player {
   background-color: #349c14;
 }
+.item.-th-cover {
+  background-color: #1565c0;
+}
 .item.-th-device_tracker {
   background-color: #7c81ce;
 }
@@ -193,6 +196,24 @@ body {
 }
 .item.-th-switch.-on {
   background-color: #be4475;
+}
+.item.-th-fan {
+  background-color: #7a4e7f;
+}
+.item.-th-fan.-loading {
+  background-color: #a454a0;
+}
+.item.-th-fan.-on {
+  background-color: #be4475;
+}
+.item.-th-lock {
+  background-color: #00796b;
+}
+.item.-th-lock.-loading {
+  background-color: #00787b;
+}
+.item.-th-lock.-locked {
+  background-color: #00897b;
 }
 .item.-th-generic_icon {
   background-color: #5954a0;
@@ -242,6 +263,9 @@ body {
 .item.-th-iframe {
   background-color: #24282c;
 }
+.item.-th-custom {
+  background-color: #259eb0;
+}
 .item.-input_boolean {
   transition: 0.2s ease background-color;
 }
@@ -253,6 +277,13 @@ body {
 }
 .item.-switch.-loading,
 .item.-switch.-on {
+  transition: none;
+}
+.item.-lock {
+  transition: 0.2s ease background-color;
+}
+.item.-lock.-loading,
+.item.-lock.-locked {
   transition: none;
 }
 .item.-script,
@@ -273,21 +304,30 @@ body {
 }
 .item.-off.-switch .item-entity--icon,
 .item.-disarmed.-switch .item-entity--icon,
+.item.-unlocked.-switch .item-entity--icon,
 .item.-off.-generic_icon .item-entity--icon,
 .item.-disarmed.-generic_icon .item-entity--icon,
+.item.-unlocked.-generic_icon .item-entity--icon,
 .item.-off.-input_boolean .item-entity--icon,
 .item.-disarmed.-input_boolean .item-entity--icon,
+.item.-unlocked.-input_boolean .item-entity--icon,
 .item.-off.-light .item-entity--icon,
 .item.-disarmed.-light .item-entity--icon,
+.item.-unlocked.-light .item-entity--icon,
 .item.-off.-sensor_icon .item-entity--icon,
-.item.-disarmed.-sensor_icon .item-entity--icon {
+.item.-disarmed.-sensor_icon .item-entity--icon,
+.item.-unlocked.-sensor_icon .item-entity--icon {
   opacity: 0.65;
 }
 .item.-off .item-state,
-.item.-disarmed .item-state {
+.item.-disarmed .item-state,
+.item.-unlocked .item-state {
   opacity: 0.75;
 }
 .item.-switch,
+.item.-lock,
+.item.-fan,
+.item.-custom,
 .item.-light,
 .item.-script,
 .item.-input_boolean,
@@ -299,6 +339,9 @@ body {
   cursor: pointer;
 }
 .item.-switch:nonhover,
+.item.-lock:nonhover,
+.item.-fan:nonhover,
+.item.-custom:nonhover,
 .item.-light:nonhover,
 .item.-script:nonhover,
 .item.-input_boolean:nonhover,
@@ -312,6 +355,9 @@ body {
   border: 2px solid rgba(200, 200, 200, 0.6);
 }
 .item.-switch:active,
+.item.-lock:active,
+.item.-fan:active,
+.item.-custom:active,
 .item.-light:active,
 .item.-script:active,
 .item.-input_boolean:active,
@@ -325,6 +371,9 @@ body {
   border: 2px solid rgba(200, 200, 200, 0.9);
 }
 .item.-switch .item-clickable,
+.item.-lock .item-clickable,
+.item.-fan .item-clickable,
+.item.-custom .item-clickable,
 .item.-light .item-clickable,
 .item.-script .item-clickable,
 .item.-input_boolean .item-clickable,
@@ -394,6 +443,23 @@ body {
   font-size: 15px;
   line-height: 15px;
   margin-right: -8px;
+}
+.item-fan {
+  text-align: left;
+  padding: 30px 3px 0;
+}
+.item-fan--speed {
+  font-size: 21px;
+  line-height: 25px;
+  cursor: pointer;
+  white-space: normal;
+  overflow: hidden;
+  padding: 5px 3px;
+  opacity: 0.9;
+}
+.item-fan--speed:active {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.1);
 }
 .item-button {
   position: absolute;
@@ -931,6 +997,33 @@ camera-thumbnail div {
 .media-player--source:active {
   background: rgba(0, 0, 0, 0.3);
 }
+.item-cover {
+  position: absolute;
+  height: 80px;
+  line-height: 80px;
+  top: 37.5px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  overflow: hidden;
+}
+.item-cover--button {
+  width: 34px;
+  height: 34px;
+  margin: 3px;
+  font-size: 26px;
+  line-height: 34px;
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+}
+.item-cover--button:active {
+  background: rgba(0, 0, 0, 0.3);
+}
+.item-cover--button.-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
 input[type=range] {
   -webkit-appearance: none;
   width: 100%;
@@ -1083,4 +1176,4 @@ input[type=range]::-moz-range-thumb {
     opacity: 0;
   }
 }
-(node:971) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+(node:22524) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.

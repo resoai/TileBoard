@@ -14,13 +14,14 @@ var CONFIG = {
    serverUrl: "http://localhost:8123",
    wsUrl: "ws://localhost:8123/api/websocket",
    password: null,
+   //googleApiKey: "XXXXXXXXXX", // Required if you are using Google Maps for device tracker
    events: [],
    pages: [
       {
          title: 'Main page',
          bg: 'images/bg1.jpeg',
          icon: 'mdi-home-outline', // home icon
-         head: 'head.html', // clock
+         head: 'head.html', // you might need to comment this out if you have a small screen and header overlaps the tiles
          groups: [
             {
                title: 'First group',
@@ -40,9 +41,9 @@ var CONFIG = {
                            value: '&sun.sun.state'
                         },
                         {
-                           title: 'persistent_notification',
+                           title: 'Custom',
                            icon: 'mdi-clock-outline',
-                           value: '&persistent_notification.notification.state'
+                           value: 'value'
                         }
                      ]
                   },

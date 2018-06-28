@@ -3,3 +3,5 @@
 /override_config.js
 .idea/*
 .idea
+*.map
+images/slides/london.png
