@@ -141,7 +141,535 @@
 </div>
 
 
+<!-- HEAD TEMPLATE -->
+
+<script type="text/ng-template" id="head.html">
+   <div class="page-head-content">
+      <div class="page-head--left">
+         <div class="page-head--time" ng-style="clockStyles()">
+            <clock></clock>
+         </div>
+      </div>
+      <div class="page-head--right">
+      </div>
+   </div>
+</script>
+
+
+
+<!-- TILE TEMPLATE -->
+
+<script type="text/ng-template" id="tile.html">
+   <div ng-style="itemStyles(item, entity)" class="item"
+        ng-click="entityClick(page, item, entity)"
+        on-long-press="entityLongClick($event, page, item, entity)"
+        ng-if="entity = getItemEntity(item)"
+        ng-class="itemClasses(item)">
+
+      <div class="item-clickable"></div>
+
+      <div ng-if="item.bg || item.bgSuffix" class="item-background"
+           ng-style="itemBgStyles(item, entity)"></div>
+
+      <div class="item-title" ng-bind="_title"
+           ng-if="(_title = entityTitle(item, entity))"></div>
+
+      <div class="item-subtitle" ng-bind="_subtitle"
+           ng-if="(_subtitle = entitySubtitle(item, entity))"></div>
+
+      <div class="item-state" ng-bind="_state"
+           ng-if="(_state = entityState(item, entity))"></div>
+
+      <div class="item-slides-container" ng-if="item.slides.length">
+         <div class="item-slides" ng-class="'-c' + item.slides.length"
+              ng-if="item.slides.length" ng-style="slidesStyles(item, $index)">
+            <div class="item-slide" ng-repeat="slide in item.slides track by $index"
+                 ng-style="slideStyles(slide)"></div>
+         </div>
+      </div>
+
+      <div ng-if="item.type === TYPES.DEVICE_TRACKER"
+           class="item-entity-container -below">
+
+         <div class="item-slides-container" ng-if="hasTrackerCoords(entity)">
+            <div class="item-slides -c3" ng-style="slidesStyles(item, $index)">
+               <div class="item-slide -bg"
+                    ng-style="trackerBg(entity)"></div>
+
+               <div class="item-slide -map"
+                    ng-style="slideMapStyles(item, page, entity.attributes, 9, entity.state)"></div>
+
+               <div class="item-slide -map"
+                    ng-style="slideMapStyles(item, page, entity.attributes, 13, entity.state)"></div>
+            </div>
+         </div>
+
+         <div ng-if="!hasTrackerCoords(entity) && entity.attributes.entity_picture"
+              class="item-background" ng-style="trackerBg(entity)"></div>
+      </div>
+
+      <div ng-if="item.type === TYPES.SENSOR"
+           class="item-entity-container">
+         <div class="item-entity">
+            <span ng-bind="entityValue(item, entity)"
+                  class="item-entity--value"></span>
+            <span ng-if="item.unit !== false" class="item-entity--unit"
+                  ng-bind="item.unit || entity.attributes.unit_of_measurement"></span>
+         </div>
+      </div>
+
+      <div ng-if="item.type === TYPES.SWITCH"
+           class="item-entity-container">
+
+         <div class="item-entity">
+            <span class="item-entity--icon mdi"
+                  ng-class="entityIcon(item, entity)"></span>
+         </div>
+      </div>
+
+      <div ng-if="item.type === TYPES.LOCK"
+           class="item-entity-container">
+
+         <div class="item-entity">
+            <span class="item-entity--icon mdi"
+                  ng-class="entityIcon(item, entity)"></span>
+         </div>
+      </div>
+
+      <div ng-if="item.type === TYPES.COVER"
+           class="item-entity-container">
+         <div class="item-cover">
+            <div class="item-cover--button -open"
+                 ng-class="{'-disabled': entity.state === 'open'}"
+                 ng-click="sendCover('open_cover', item, entity)">
+               <i class="mdi mdi-arrow-up"></i>
+            </div>
+            <div class="item-cover--button -stop"
+                 ng-click="sendCover('stop_cover', item, entity)">
+               <i class="mdi mdi-stop"></i>
+            </div>
+            <div class="item-cover--button -close"
+                 ng-class="{'-disabled': entity.state === 'closed'}"
+                 ng-click="sendCover('close_cover', item, entity)">
+               <i class="mdi mdi-arrow-down"></i>
+            </div>
+         </div>
+      </div>
+
+      <div ng-if="item.type === TYPES.FAN"
+           class="item-entity-container">
+         <div class="item-entity"
+              ng-if="!entity.attributes.speed_list">
+            <span class="item-entity--icon mdi"
+                  ng-class="entityIcon(item, entity)"></span>
+         </div>
+         <div class="item-fan">
+            <div class="item-fan--speed" ng-click="openFanSpeedSelect($event, item)"
+                 ng-if="entity.attributes.speed_list">
+               <span ng-bind="entity.attributes.speed"></span>
+            </div>
+         </div>
+
+         <div ng-if="selectOpened(item)" class="item-select"
+              ng-style="itemSelectStyles(entity, entity.attributes.speed_list)">
+
+            <div class="item-select--option"
+                 ng-repeat="option in entity.attributes.speed_list track by $index"
+                 ng-class="{'-active': option === entity.attributes.speed}"
+                 ng-click="setFanSpeed($event, item, entity, option)">
+               <span ng-bind="option"></span>
+            </div>
+         </div>
+      </div>
+
+      <div ng-if="item.type === TYPES.CUSTOM"
+           class="item-entity-container">
+
+         <div class="item-entity">
+            <span class="item-entity--icon mdi"
+                  ng-class="entityIcon(item, entity)"></span>
+         </div>
+      </div>
+
+      <div ng-if="item.type === TYPES.SCRIPT"
+           class="item-entity-container">
+
+         <div class="item-entity">
+            <span class="item-entity--icon mdi"
+                  ng-class="entityIcon(item, entity)"></span>
+         </div>
+      </div>
+
+      <div ng-if="item.type === TYPES.GENERIC_ICON"
+           class="item-entity-container">
+         <div class="item-entity">
+            <span class="item-entity--icon mdi"
+                  ng-class="entityIcon(item, entity)"></span>
+         </div>
+      </div>
+
+      <div ng-if="item.type === TYPES.SENSOR_ICON"
+           class="item-entity-container">
+         <div class="item-entity">
+            <span class="item-entity--icon mdi"
+                  ng-class="entityIcon(item, entity)"></span>
+         </div>
+      </div>
+
+      <div ng-if="item.type === TYPES.INPUT_BOOLEAN"
+           class="item-entity-container">
+
+         <div class="item-entity">
+            <span class="item-entity--icon mdi"
+                  ng-class="entityIcon(item, entity)"></span>
+         </div>
+      </div>
+
+      <div ng-if="item.type === TYPES.LIGHT"
+           class="item-entity-container">
+
+         <div ng-if="!item.controlsEnabled">
+            <div ng-if="entity.state !== 'off'">
+               <div class="item-button -center-right"
+                    ng-click="increaseBrightness($event, item, entity)">
+                  <i class="mdi mdi-plus"></i>
+               </div>
+               <div class="item-button -bottom-right"
+                    ng-click="decreaseBrightness($event, item, entity)">
+                  <i class="mdi mdi-minus"></i>
+               </div>
+            </div>
+            <div class="item-entity">
+               <span class="item-entity--icon mdi"
+                     ng-class="entityIcon(item, entity)"></span>
+            </div>
+         </div>
+         <div ng-if="item.controlsEnabled" class="item-entity-sliders"
+              ng-click="preventClick($event)">
+            <div ng-repeat="slider in item.sliders track by $index"
+                 ng-if="(_c = getLightSliderConf(slider, entity))"
+                 class="item-slider-container">
+
+               <div class="item-slider-title" ng-if="slider.title">
+                  <span ng-bind="slider.title"></span>:
+                  <span ng-bind="getLightSliderValue(slider, _c)"></span>
+               </div>
+
+               <div class="item-slider">
+                  <input type="range" ng-model="_c.value" value="{{ _c.value }}"
+                         ng-change="lightSliderChanged(slider, item, entity, _c)"
+                         step="{{ _c.step }}" min="{{ _c.min }}" max="{{ _c.max }}">
+               </div>
+            </div>
+
+            <div class="item-entity--back-button"
+                 ng-click="closeLightSliders($event, item, entity)">
+               <i class="mdi mdi-chevron-left"></i> Back
+            </div>
+         </div>
+      </div>
+
+      <div ng-if="item.type === TYPES.TEXT_LIST"
+           class="item-entity-container">
+         <div class="item-list">
+            <div class="item-list--item"
+                 ng-repeat="line in item.list track by $index">
+               <div class="item-list--name">
+                  <i class="mdi" ng-class="line.icon" ng-if="line.icon"></i>
+                  <span ng-bind="listField('title', item, line)"></span>
+               </div>
+               <div class="item-list--value">
+                  <span ng-bind="listField('value', item, line)"></span><!--
+            --><span ng-bind="listField('unit', item, line)"></span>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div ng-if="item.type === TYPES.INPUT_NUMBER"
+           class="item-entity-container">
+         <div>
+            <div class="item-button -center-right"
+                 ng-click="increaseNumber($event, item, entity)">
+               <i class="mdi mdi-plus"></i>
+            </div>
+            <div class="item-button -bottom-right"
+                 ng-click="decreaseNumber($event, item, entity)">
+               <i class="mdi mdi-minus"></i>
+            </div>
+         </div>
+
+         <div class="item-entity">
+            <span ng-bind="entityValue(item, entity)"
+                  class="item-entity--value"></span>
+            <span ng-if="item.unit" class="item-entity--unit"
+                  ng-bind="item.unit || entity.attributes.unit_of_measurement"></span>
+         </div>
+      </div>
+
+
+      <div ng-if="item.type === TYPES.INPUT_SELECT"
+           class="item-entity-container">
+         <div ng-if="selectOpened(item)" class="item-select"
+              ng-style="itemSelectStyles(entity, entity.attributes.options)">
+            <div class="item-select--option"
+                 ng-repeat="option in entity.attributes.options track by $index"
+                 ng-class="{'-active': option === entity.state}"
+                 ng-click="setSelectOption($event, item, entity, option)">
+               <span ng-bind="option"></span>
+            </div>
+         </div>
+         <div class="item-triangle"></div>
+         <div class="item-entity -select">
+            <span class="item-entity--value">
+               <span ng-bind="entityValue(item, entity)"></span>
+            </span>
+            <span ng-if="item.unit" class="item-entity--unit"
+                  ng-bind="item.unit || entity.attributes.unit_of_measurement"></span>
+         </div>
+      </div>
+
+
+      <div ng-if="item.type === TYPES.CAMERA"
+           class="item-entity-container -below">
+         <div class="item-camera">
+            <camera item="item" entity="entity"
+                    freezed="!isPageActive(page) || activeCamera"></camera>
+         </div>
+      </div>
+
+
+      <div ng-if="item.type === TYPES.CAMERA_THUMBNAIL"
+           class="item-entity-container -below">
+         <div class="item-camera">
+            <camera-thumbnail freezed="!isPageActive(page) || activeCamera"
+                              item="item" entity="entity"></camera-thumbnail>
+         </div>
+      </div>
+
+      <div ng-if="item.type === TYPES.SCENE"
+           class="item-entity-container">
+
+         <div class="item-entity">
+            <span class="item-entity--icon mdi"
+                  ng-class="entityIcon(item, entity)"></span>
+         </div>
+      </div>
+
+      <div ng-if="item.type === TYPES.SLIDER"
+           class="item-entity-container" ng-class="{'-slider-bottom': item.bottom}">
+
+         <div class="item-entity">
+            <span ng-bind="entityValue(item, entity)"
+                  class="item-entity--value"></span>
+            <span ng-if="item.unit" class="item-entity--unit"
+                  ng-bind="item.unit || entity.attributes.unit_of_measurement"></span>
+         </div>
+
+         <div class="item-slider" ng-if="(_c = getSliderConf(item, entity))">
+            <input type="range" ng-model="_c.value"
+                   ng-change="sliderChanged(item, entity, _c)"
+                   step="{{ _c.step }}" min="{{ _c.min }}" max="{{ _c.max }}">
+         </div>
+      </div>
+
+      <div ng-if="item.type === TYPES.IFRAME"
+           class="item-entity-container">
+
+         <div class="item-iframe">
+            <iframe ng-src="{{ item.url }}" iframe-tile="item" frameborder="0"></iframe>
+         </div>
+      </div>
+
+
+      <div ng-if="item.type === TYPES.DOOR_ENTRY"
+           class="item-entity-container">
+
+         <div class="item-entity">
+            <span class="item-entity--icon mdi"
+                  ng-class="entityIcon(item, entity)"></span>
+         </div>
+      </div>
+
+
+      <div ng-if="item.type === TYPES.WEATHER"
+           class="item-entity-container">
+         <div class="weather">
+            <div class="weather-icon-container" ng-if="getWeatherIcon(item, entity)">
+               <div class="weather-icon">
+                  <div class="wu " ng-class="'wu-' + getWeatherIcon(item, entity)"></div>
+               </div>
+            </div>
+            <div class="weather-temperature" ng-if="item.fields.temperature">
+               <span ng-bind="getWeatherField('temperature', item, entity)"></span>
+               <span ng-bind="getWeatherField('temperatureUnit', item, entity)"></span>
+            </div>
+
+            <div class="weather-line -items">
+               <span ng-if="item.fields.humidity" class="weather-item">
+                  <i class="mdi mdi-water"></i>
+                  <span ng-bind="getWeatherField('humidity', item, entity)"></span><!--
+            --><span ng-bind="getWeatherField('humidityUnit', item, entity)"></span>
+               </span>
+
+               <span ng-if="item.fields.windSpeed" class="weather-item">
+                  <i class="mdi mdi-weather-windy"></i>
+                  <span ng-bind="getWeatherField('windSpeed', item, entity)"></span><!--
+            --><span ng-bind="getWeatherField('windSpeedUnit', item, entity)"></span>
+               </span>
+            </div>
+            <div class="weather-line" ng-if="item.fields.apparentTemperature">
+               Feels like
+               <span ng-bind="getWeatherField('apparentTemperature', item, entity)"></span>
+               <span ng-bind="getWeatherField('apparentTemperatureUnit', item, entity)"></span>
+            </div>
+
+            <div class="weather-line" ng-if="item.fields.pressure">
+               Pressure
+               <span ng-bind="getWeatherField('pressure', item, entity)"></span>
+               <span ng-bind="getWeatherField('pressureUnit', item, entity)"></span>
+            </div>
+            <div class="weather-line" ng-if="item.fields.pollen">
+               Pollen
+               <span ng-bind="getWeatherField('pollen', item, entity)"></span>
+            </div>
+            <div class="weather-line" ng-if="item.fields.precipProbability">
+               <span ng-bind="getWeatherField('precipProbability', item, entity)"></span><!--
+         --><span ng-bind="getWeatherField('precipProbabilityUnit', item, entity)"></span>
+               chance of rain
+            </div>
+         </div>
+      </div>
+
+      <div ng-if="item.type === TYPES.CLIMATE"
+           class="item-entity-container">
+         <div>
+            <div class="item-button -center-right"
+                 ng-click="increaseClimateTemp($event, item, entity)">
+               <i class="mdi mdi-plus"></i>
+            </div>
+            <div class="item-button -bottom-right"
+                 ng-click="decreaseClimateTemp($event, item, entity)">
+               <i class="mdi mdi-minus"></i>
+            </div>
+         </div>
+
+         <div class="item-climate">
+            <div class="item-climate--target">
+               <span ng-bind="climateTarget(item, entity)"></span>
+               <span class="item-climate--target--unit"
+                     ng-bind="item.unit || entity.attributes.unit_of_measurement"></span>
+            </div>
+            <div class="item-climate--mode" ng-if="entity.attributes.operation_mode"
+                 ng-click="openSelect(item)">
+               <span ng-bind="entity.attributes.operation_mode"></span>
+            </div>
+         </div>
+
+         <div ng-if="selectOpened(item)" class="item-select"
+              ng-style="itemSelectStyles(entity, entity.attributes.operation_list)">
+
+            <div class="item-select--option"
+                 ng-repeat="option in entity.attributes.operation_list track by $index"
+                 ng-class="{'-active': option === entity.state}"
+                 ng-click="setClimateOption($event, item, entity, option)">
+               <span ng-bind="option"></span>
+            </div>
+         </div>
+      </div>
+
+
+      <div ng-if="item.type === TYPES.MEDIA_PLAYER"
+           class="item-entity-container">
+
+         <div class="media-player">
+            <div class="media-player--main-button" ng-if="entity.state !== 'off'">
+               <span class="mdi mdi-pause" ng-if="supportsFeature(FEATURES.PAUSE, entity) && entity.state === 'playing'"
+                     ng-click="sendPlayer('media_pause', item, entity)"></span>
+
+               <span class="mdi mdi-stop" ng-if="!supportsFeature(FEATURES.PAUSE, entity) && entity.state === 'playing'"
+                     ng-click="sendPlayer('media_stop', item, entity)"></span>
+
+               <span class="mdi mdi-play" ng-if="entity.state === 'stopped'"
+                     ng-click="sendPlayer('media_play', item, entity)"></span>
+
+               <span class="mdi mdi-play" ng-if="entity.state === 'paused'"
+                     ng-click="sendPlayer('media_play', item, entity)"></span>
+
+               <span class="mdi mdi-play" ng-if="entity.state === 'idle'"
+                     ng-click="sendPlayer('media_play', item, entity)"></span>
+
+            </div>
+
+            <div class="media-player--buttons">
+               <div class="media-player--button -prev"
+                    ng-if="supportsFeature(FEATURES.PREVIOUS_TRACK, entity) && entity.state !== 'off'"
+                    ng-click="sendPlayer('media_previous_track', item, entity)">
+                  <i class="mdi mdi-skip-previous"></i>
+               </div>
+
+               <div class="media-player--button -next"
+                    ng-if="supportsFeature(FEATURES.NEXT_TRACK, entity) && entity.state !== 'off'"
+                    ng-click="sendPlayer('media_next_track', item, entity)">
+                  <i class="mdi mdi-skip-next"></i>
+               </div>
+
+               <div class="media-player--button -mute"
+                    ng-if="supportsFeature(FEATURES.VOLUME_MUTE, entity) && entity.state !== 'off' && entity.attributes.is_volume_muted"
+                    ng-click="mutePlayer(false, item, entity)">
+                  <i class="mdi mdi-volume-mute"></i>
+               </div>
+
+               <div class="media-player--button -mute"
+                    ng-if="supportsFeature(FEATURES.VOLUME_MUTE, entity) && entity.state !== 'off' && !entity.attributes.is_volume_muted"
+                    ng-click="mutePlayer(true, item, entity)">
+                  <i class="mdi mdi-volume-high"></i>
+               </div>
+
+               <div class="media-player--button -power"
+                    ng-if="supportsFeature(FEATURES.TURN_ON, entity) && entity.state === 'off'"
+                    ng-click="sendPlayer('turn_on', item, entity)">
+                  <i class="mdi mdi-power"></i>
+               </div>
+
+               <div class="media-player--button -power"
+                    ng-if="supportsFeature(FEATURES.TURN_OFF, entity) && entity.state !== 'off'"
+                    ng-click="sendPlayer('turn_off', item, entity)">
+                  <i class="mdi mdi-power"></i>
+               </div>
+
+            </div>
+
+            <div class="media-player--volume" ng-if="(_c = getVolumeConf(item, entity))">
+               <input type="range" ng-model="_c.value"
+                      ng-change="volumeChanged(item, entity, _c)"
+                      step="{{ _c.step }}" min="{{ _c.min }}" max="{{ _c.max }}">
+            </div>
+
+            <div class="media-player--source" ng-click="openSelect(item)"
+                 ng-if="entity.attributes.source_list && item.showSource">
+               <span ng-bind="entity.attributes.source || 'Source'"></span>
+            </div>
+         </div>
+
+         <div ng-if="selectOpened(item)" class="item-select"
+              ng-style="itemSelectStyles(entity, entity.attributes.source_list)">
+
+            <div class="item-select--option"
+                 ng-repeat="option in entity.attributes.source_list track by $index"
+                 ng-class="{'-active': option === entity.attributes.source}"
+                 ng-click="setSourcePlayer($event, item, entity, option)">
+               <span ng-bind="option"></span>
+            </div>
+         </div>
+      </div>
+   </div>
+</script>
+
+
+
 <link rel="stylesheet" async
       href="https://cdn.materialdesignicons.com/2.4.85/css/materialdesignicons.min.css">
+
 </body>
 </html>
