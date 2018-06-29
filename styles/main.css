@@ -107,10 +107,10 @@ body {
   margin: 5px auto;
   vertical-align: middle;
   cursor: pointer;
-}
-.pages-menu--item:nonhover {
-  background-color: rgba(0, 0, 0, 0.2);
-  opacity: 0.8;
+  /*&:hover {
+         background-color: rgba(0,0,0,.2);
+         opacity: 0.8;
+      }*/
 }
 .pages-menu--item:active {
   background-color: rgba(0, 0, 0, 0.3);
@@ -337,22 +337,11 @@ body {
 .item.-door_entry,
 .item.-scene {
   cursor: pointer;
-}
-.item.-switch:nonhover,
-.item.-lock:nonhover,
-.item.-fan:nonhover,
-.item.-custom:nonhover,
-.item.-light:nonhover,
-.item.-script:nonhover,
-.item.-input_boolean:nonhover,
-.item.-input_select:nonhover,
-.item.-camera:nonhover,
-.item.-camera_thumbnail:nonhover,
-.item.-door_entry:nonhover,
-.item.-scene:nonhover {
-  margin-top: -2px;
-  margin-left: -2px;
-  border: 2px solid rgba(200, 200, 200, 0.6);
+  /*&:hover {
+         margin-top: -2px;
+         margin-left: -2px;
+         border: 2px solid rgba(200,200,200,.6);
+      }*/
 }
 .item.-switch:active,
 .item.-lock:active,
@@ -468,9 +457,9 @@ body {
   z-index: 4;
   cursor: pointer;
   font-weight: bold;
-}
-.item-button:nonhover {
-  background: rgba(0, 0, 0, 0.2);
+  /*&:hover {
+      background: rgba(0,0,0,.2);
+   }*/
 }
 .item-button:active {
   background: rgba(0, 0, 0, 0.4);
@@ -681,9 +670,9 @@ body {
   min-width: 120px;
   white-space: nowrap;
   text-align: left;
-}
-.item-select--option:nonhover {
-  background: #444;
+  /*&:hover {
+         background: #444;
+      }*/
 }
 .item-select--option:active,
 .item-select--option.-active {
@@ -770,10 +759,9 @@ camera-thumbnail div {
   overflow: hidden;
   color: #bbb;
   cursor: pointer;
-}
-.camera-popup--list-item:nonhover,
-.door-entry-popup--list-item:nonhover {
-  background: #222;
+  /*&:hover {
+         background: #222;
+      }*/
 }
 .camera-popup--list-item.-active,
 .door-entry-popup--list-item.-active {
@@ -1176,4 +1164,4 @@ input[type=range]::-moz-range-thumb {
     opacity: 0;
   }
 }
-(node:22524) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+(node:18645) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
