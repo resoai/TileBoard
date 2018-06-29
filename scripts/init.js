@@ -14,8 +14,6 @@ else if(CONFIG.passwordType === PASSWORD_TYPES.PROMPT_SAVING) {
    apiPassword = askPassword(true);
 }
 
-console.log('apiPassword', apiPassword);
-
 var api = new Api(CONFIG.wsUrl, apiPassword);
 
 var App = angular.module('App', ['pr.longpress']);
