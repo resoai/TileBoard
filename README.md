@@ -57,7 +57,7 @@ var CONFIG = {
       /* passwordType: 
        * MANUAL - allows you to put the password directly to the config file, as it's shown below
        * PROMPT - will ask your password every time you open TileBoard in the browser.
-       * PROMPT_SAVING - save as PROMPT but with saving the password after first connection
+       * PROMPT_SAVING - same as PROMPT but with saving the password after first connection
        * Note: if you used PROMPT_SAVING and changed your password, you will be needed to clear your localStorage
        */
       passwordType: PASSWORD_TYPES.MANUAL, 
