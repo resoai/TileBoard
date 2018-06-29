@@ -141,6 +141,10 @@ function MainController ($scope) {
       return obj[key];
    };
 
+   $scope.clockStyles = function () {
+      return CONFIG.clockStyles;
+   };
+
    $scope.pageStyles = function (page) {
       if(!page.styles) {
          var styles = {};
@@ -223,8 +227,8 @@ function MainController ($scope) {
             top: pos[1] * tileSize + (tileMargin * pos[1]) + 'px',
          };
 
-         if(item.customCss && typeof item.customCss === 'object') {
-            styles = angular.merge(styles, item.customCss);
+         if(item.styles && typeof item.styles === 'object') {
+            styles = angular.merge(styles, item.styles);
          }
 
          item.styles = styles;

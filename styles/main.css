@@ -58,7 +58,7 @@ body {
 .page-head {
   position: absolute;
   z-index: 2;
-  top: 40px;
+  top: 0;
   left: 130px;
   right: 130px;
   color: #fff;
