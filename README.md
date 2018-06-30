@@ -17,7 +17,7 @@ Should you have any ideas or questions please post them on home-assistant forum 
 
 ## How to use
 * Pull/download repository
-* Change `config.js`
+* Copy `config.example.js` to `config.js` and edit it for your needs
 * Open index.html directly in a web browser or move all of the files into www directory in HA's config path. Please note that dashboard was designed for local installations and you should never store dashboard files in www directory of HA if you are exposing it to the outside world since this would reveal content of `config.js` along with the password. As an alternative please consider serving files via Nginx where BasicAuth can be implemented.
 
 ## Configure
@@ -54,18 +54,18 @@ var CONFIG = {
        */
       wsUrl: 'ws://localhost:8123/api/websocket',
 
-      /* passwordType: 
+      /* passwordType:
        * MANUAL - allows you to put the password directly to the config file, as it's shown below
        * PROMPT - will ask your password every time you open TileBoard in the browser.
        * PROMPT_SAVING - same as PROMPT but with saving the password after first connection
        * Note: if you used PROMPT_SAVING and changed your password, you will be needed to clear your localStorage
        */
-      passwordType: PASSWORD_TYPES.MANUAL, 
-      
+      passwordType: PASSWORD_TYPES.MANUAL,
+
       /* password: Your HomeAssistant api_password
        * NOTE: If TileBoard is accessible to the outside world, people can
        * read this file and retrieve your password. TileBoard should be placed behind
-       * another form of authentication if it is publically accessible. 
+       * another form of authentication if it is publically accessible.
        * Necessary only with MANUAL password type
        */
       password: null,
@@ -75,7 +75,7 @@ var CONFIG = {
 
       /* timeFormat: 12 for AM/PM marker, 24 for 24 hour time (default) */
       timeFormat: Number,
-      
+
       /* pages: A list of page objects. See documentation on Pages below */
       pages: [],
 
