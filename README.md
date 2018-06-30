@@ -19,8 +19,6 @@ Should you have any ideas or questions please post them on home-assistant forum 
 * Pull/download repository
 * Change `config.js`
 * Open index.html directly in a web browser or move all of the files into www directory in HA's config path. Please note that dashboard was designed for local installations and you should never store dashboard files in www directory of HA if you are exposing it to the outside world since this would reveal content of `config.js` along with the password. As an alternative please consider serving files via Nginx where BasicAuth can be implemented.
-* Note: If you are opening index.html file locally in Google Chrome than you will face an issue of tiles not being displayed and
-see an error about cross origin requests not being supported in `file://` protocol. in browser's console. You can overcome the problem by starting Chrome with `--allow-file-access-from-files` switch or simply open the page in Firefox.
 
 ## Configure
 
@@ -56,12 +54,19 @@ var CONFIG = {
        */
       wsUrl: 'ws://localhost:8123/api/websocket',
 
+      /* passwordType:
+       * MANUAL - allows you to put the password directly to the config file, as it's shown below
+       * PROMPT - will ask your password every time you open TileBoard in the browser.
+       * PROMPT_SAVING - same as PROMPT but with saving the password after first connection
+       * Note: if you used PROMPT_SAVING and changed your password, you will be needed to clear your localStorage
+       */
+      passwordType: PASSWORD_TYPES.MANUAL,
+
       /* password: Your HomeAssistant api_password
        * NOTE: If TileBoard is accessible to the outside world, people can
        * read this file and retrieve your password. TileBoard should be placed behind
        * another form of authentication if it is publically accessible.
-       * As another alternative you could prompt for a password
-       * when the page loads: `password: prompt('Enter password')`
+       * Necessary only with MANUAL password type
        */
       password: null,
 

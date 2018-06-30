@@ -13,6 +13,7 @@ var CONFIG = {
    timeFormat: 24,
    serverUrl: "http://localhost:8123",
    wsUrl: "ws://localhost:8123/api/websocket",
+   passwordType: PASSWORD_TYPES.MANUAL,
    password: null,
    //googleApiKey: "XXXXXXXXXX", // Required if you are using Google Maps for device tracker
    events: [],

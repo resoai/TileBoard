@@ -17,6 +17,12 @@ var CUSTOM_THEMES = {
    WIN95: "win95",
 };
 
+var PASSWORD_TYPES = {
+   MANUAL: 'manual', // default
+   PROMPT: 'prompt',
+   PROMPT_SAVING: 'prompt_saving'
+};
+
 var TYPES = {
    DEVICE_TRACKER: 'device_tracker',
    SCRIPT: 'script',
@@ -56,6 +62,9 @@ var FEATURES = {
    TURN_OFF: 256,
    STOP: 4096
 };
+
+var PWD_CACHE_KEY = "_pwd1";
+
 
 function mergeObjects (a, b) {
    return angular.merge(a, b);
@@ -117,4 +126,20 @@ function debounce(func, wait, immediate) {
       timeout = setTimeout(later, wait);
       if (callNow) func.apply(context, args);
    };
+}
+
+function askPassword (fromCache) {
+   fromCache = fromCache || false;
+
+   var res = null;
+
+   if(fromCache) res = localStorage.getItem(PWD_CACHE_KEY);
+
+   if(!res) res = prompt("Enter your password");
+
+   return res;
+}
+
+function savePassword (password) {
+   localStorage.setItem(PWD_CACHE_KEY, password);
 }
