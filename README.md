@@ -59,8 +59,8 @@ var CONFIG = {
       /* password: Your HomeAssistant api_password
        * NOTE: If TileBoard is accessible to the outside world, people can
        * read this file and retrieve your password. TileBoard should be placed behind
-       * another form of authentication if it is publically accessible. 
-       * As another alternative you could prompt for a password 
+       * another form of authentication if it is publically accessible.
+       * As another alternative you could prompt for a password
        * when the page loads: `password: prompt('Enter password')`
        */
       password: null,
@@ -70,7 +70,7 @@ var CONFIG = {
 
       /* timeFormat: 12 for AM/PM marker, 24 for 24 hour time (default) */
       timeFormat: Number,
-      
+
       /* pages: A list of page objects. See documentation on Pages below */
       pages: [],
 
@@ -361,6 +361,10 @@ Supported weather fields
    apparentTemperatureUnit: '&sensor.dark_sky_apparent_temperature.attributes.unit_of_measurement',
    temperature: '&sensor.dark_sky_temperature.state',
    temperatureUnit: '&sensor.dark_sky_temperature.attributes.unit_of_measurement',
+   highTemperature: '&sensor.dark_sky_daytime_high_temperature.state',
+   highTemperatureUnit: '&sensor.dark_sky_daytime_high_temperature.attributes.unit_of_measurement',
+   lowTemperature: '&sensor.dark_sky_overnight_low_temperature.state',
+   lowTemperatureUnit: '&sensor.dark_sky_overnight_low_temperature.attributes.unit_of_measurement',
    precip: '&sensor.dark_sky_precip.state',
    precipIntensity: '&sensor.dark_sky_precip_intensity.state',
    precipIntensityUnit: '&sensor.dark_sky_precip_intensity.attributes.unit_of_measurement',
