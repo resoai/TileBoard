@@ -1,6 +1,6 @@
 
 /sensors.js
-/override_config.js
+/config.js
 .idea/*
 .idea
 *.map
