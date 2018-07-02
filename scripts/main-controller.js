@@ -227,8 +227,8 @@ function MainController ($scope) {
             top: pos[1] * tileSize + (tileMargin * pos[1]) + 'px',
          };
 
-         if(item.styles && typeof item.styles === 'object') {
-            styles = angular.merge(styles, item.styles);
+         if(item.customStyles && typeof item.customStyles === 'object') {
+            styles = angular.merge(styles, item.customStyles);
          }
 
          item.styles = styles;
