@@ -286,7 +286,10 @@
       <div ng-if="item.type === TYPES.CUSTOM"
            class="item-entity-container">
 
-         <div class="item-entity">
+          <div ng-if="item.customHtml"
+               ng-bind-html="item.customHtml"></div>
+
+         <div ng-if="!item.customHtml" class="item-entity">
             <span class="item-entity--icon mdi"
                   ng-class="entityIcon(item, entity)"></span>
          </div>
