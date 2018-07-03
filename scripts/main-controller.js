@@ -214,7 +214,7 @@ function MainController ($scope) {
       return group.styles;
    };
 
-   $scope.itemStyles = function (item, page) {
+   $scope.itemStyles = function (page, item, entity) {
       if(!item.styles) {
          var width = item.width || 1;
          var height = item.height || 1;
@@ -229,8 +229,14 @@ function MainController ($scope) {
             top: pos[1] * tileSize + (tileMargin * pos[1]) + 'px',
          };
 
-         if(item.customStyles && typeof item.customStyles === 'object') {
-            styles = angular.merge(styles, item.customStyles);
+         if(item.customStyles) {
+            if(typeof item.customStyles === "function") {
+               res = callFunction(item.customStyles, [item, entity]);
+            }
+            else if(typeof item.customStyles === "object") {
+               res = item.customStyles;
+            }
+            if(res) styles = angular.merge(styles, res);
          }
 
          item.styles = styles;

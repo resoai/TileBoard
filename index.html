@@ -161,7 +161,7 @@
 <!-- TILE TEMPLATE -->
 
 <script type="text/ng-template" id="tile.html">
-   <div ng-style="itemStyles(item, entity)" class="item"
+   <div ng-style="itemStyles(page, item, entity)" class="item"
         ng-click="entityClick(page, item, entity)"
         on-long-press="entityLongClick($event, page, item, entity)"
         ng-if="entity = getItemEntity(item)"
