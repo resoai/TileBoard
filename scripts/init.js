@@ -8,10 +8,10 @@ if(!CONFIG.passwordType || CONFIG.passwordType === PASSWORD_TYPES.MANUAL) {
    apiPassword = CONFIG.password;
 }
 else if(CONFIG.passwordType === PASSWORD_TYPES.PROMPT) {
-   apiPassword = askPassword(false);
+   apiPassword = passwordPrompt(false);
 }
-else if(CONFIG.passwordType === PASSWORD_TYPES.PROMPT_SAVING) {
-   apiPassword = askPassword(true);
+else if(CONFIG.passwordType === PASSWORD_TYPES.PROMPT_AND_SAVE) {
+   apiPassword = passwordPrompt(true);
 }
 
 var api = new Api(CONFIG.wsUrl, apiPassword);
@@ -22,7 +22,7 @@ App.config(function($sceProvider) {
    $sceProvider.enabled(false);
 });
 
-if(CONFIG.passwordType === PASSWORD_TYPES.PROMPT_SAVING) {
+if(CONFIG.passwordType === PASSWORD_TYPES.PROMPT_AND_SAVE) {
    api.onReady(function () {
       savePassword(apiPassword);
    });

@@ -20,7 +20,7 @@ var CUSTOM_THEMES = {
 var PASSWORD_TYPES = {
    MANUAL: 'manual', // default
    PROMPT: 'prompt',
-   PROMPT_SAVING: 'prompt_saving'
+   PROMPT_AND_SAVE: 'prompt_and_save'
 };
 
 var TYPES = {
@@ -129,7 +129,7 @@ function debounce(func, wait, immediate) {
    };
 }
 
-function askPassword (fromCache) {
+function passwordPrompt (fromCache) {
    fromCache = fromCache || false;
 
    var res = null;
