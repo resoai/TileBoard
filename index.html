@@ -301,6 +301,15 @@
          </div>
       </div>
 
+       <div ng-if="item.type === TYPES.AUTOMATION"
+            class="item-entity-container">
+
+           <div class="item-entity">
+            <span class="item-entity--icon mdi"
+                  ng-class="entityIcon(item, entity)"></span>
+           </div>
+       </div>
+
       <div ng-if="item.type === TYPES.GENERIC_ICON"
            class="item-entity-container">
          <div class="item-entity">
