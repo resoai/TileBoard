@@ -18,7 +18,7 @@ var CUSTOM_THEMES = {
 };
 
 var PASSWORD_TYPES = {
-   MANUAL: 'manual', // default
+   MANUAL: 'manual',
    PROMPT: 'prompt',
    PROMPT_AND_SAVE: 'prompt_and_save'
 };
