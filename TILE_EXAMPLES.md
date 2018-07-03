@@ -1,5 +1,20 @@
 Here are some real life examples of Tiles.<br>
 
+#### AUTOMATION
+Manually trigger an automation
+
+![AUTOMATION](images/tile-screenshots/AUTOMATION.png)
+
+```js
+{
+    position: [0,2],
+    type: TYPES.AUTOMATION,
+    title: 'Sunrise Actions',
+    subtitle: 'Trigger Automation',
+    id: 'automation.sunrise_actions',
+    icon: 'mdi-weather-sunny'
+}
+```
 #### DEVICE_TRACKER
 ![DEVICE_TRACKER](images/tile-screenshots/DEVICE_TRACKER.png)
 
