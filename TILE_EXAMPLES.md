@@ -19,7 +19,7 @@ Here are some real life examples of Tiles.<br>
 ```
 
 #### TEXT_LIST
-This is a custom tile which can be used for displaying valued from different sensors in a list.<br>
+This is a custom tile which can be used for displaying values from different sensors in a list.<br>
 ![TEXT_LIST](images/tile-screenshots/TEXT_LIST.png)
 ```js
 {
@@ -382,6 +382,23 @@ Similar to sensor, but with an icon.<br>
 			title: 'Ceiling fan',
 			id: 'fan.living_room_fan',
 }
+```
+
+#### CUSTOM
+The custom tile type allows you to fire javascript commands on click.
+![CUSTOM](images/tile-screenshots/CUSTOM.png)
+
+```js
+{
+    	position: [0, 0],
+    	type: TYPES.CUSTOM,
+    	title: 'Screen Off',
+    	id: { },
+    	icon: 'mdi-monitor',
+    	action: function(item, entity) {
+    		  fully.startScreensaver();
+    	}
+},
 ```
 
 #### DOOR_ENTRY
