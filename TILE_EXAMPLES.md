@@ -3,7 +3,7 @@ Here are some real life examples of Tiles.<br>
 #### DEVICE_TRACKER
 ![DEVICE_TRACKER](images/tile-screenshots/DEVICE_TRACKER.png)
 
-```js 
+```js
 {
    position: [0, 0],
    type: TYPES.DEVICE_TRACKER,
@@ -21,7 +21,7 @@ Here are some real life examples of Tiles.<br>
 #### TEXT_LIST
 This is a custom tile which can be used for displaying valued from different sensors in a list.<br>
 ![TEXT_LIST](images/tile-screenshots/TEXT_LIST.png)
-```js 
+```js
 {
    position: [0, 1],
    width: 2,
@@ -53,7 +53,7 @@ This is a custom tile which can be used for displaying valued from different sen
 #### WEATHER
 ![WEATHER](images/tile-screenshots/WEATHER.png)
 ![WEATHER](images/tile-screenshots/WEATHER_2.png)<br>
-```js 
+```js
 {
    position: [2, 1],
    height: 2,
@@ -80,6 +80,10 @@ This is a custom tile which can be used for displaying valued from different sen
       apparentTemperatureUnit: '&sensor.dark_sky_apparent_temperature.attributes.unit_of_measurement',
       temperature: '&sensor.dark_sky_temperature.state',
       temperatureUnit: '&sensor.dark_sky_temperature.attributes.unit_of_measurement',
+      highTemperature: '&sensor.dark_sky_daytime_high_temperature.state',
+      highTemperatureUnit: '&sensor.dark_sky_daytime_high_temperature.attributes.unit_of_measurement',
+      lowTemperature: '&sensor.dark_sky_overnight_low_temperature.state',
+      lowTemperatureUnit: '&sensor.dark_sky_overnight_low_temperature.attributes.unit_of_measurement',
       precip: '&sensor.dark_sky_precip.state',
       precipIntensity: '&sensor.dark_sky_precip_intensity.state',
       precipIntensityUnit: '&sensor.dark_sky_precip_intensity.attributes.unit_of_measurement',
@@ -100,7 +104,7 @@ This is a custom tile which can be used for displaying valued from different sen
 Call script on click/tap<br>
 ![SCRIPT](images/tile-screenshots/SCRIPT.png)
 
-```js 
+```js
 {
    position: [0, 0],
    type: TYPES.SCRIPT,
@@ -116,7 +120,7 @@ Call script on click/tap<br>
 #### SWITCH
 Toggle switch on tap. Also shows icon depending on the state<br>
 ![SWITCH](images/tile-screenshots/SWITCH.png)
-```js 
+```js
 {
    position: [0, 1],
    type: TYPES.SWITCH,
@@ -158,7 +162,7 @@ Locks and unlocks the lock on tap. Also shows icon depending on the state<br>
 Light switch. You can optionally define sliders to control colour temperature or in fact anything else. Sliders will show up after long press on the tile.<br>
 ![LIGHT](images/tile-screenshots/LIGHT.png)
 ![LIGHT](images/tile-screenshots/LIGHT_2.png)
-```js 
+```js
 {
    position: [0, 2],
    title: 'Floor lamp',
@@ -206,7 +210,7 @@ Light switch. You can optionally define sliders to control colour temperature or
 
 #### SCENE
 Works almost identical to the SCRIPT. Activates scene in a tap.
-```js 
+```js
 {
    position: [1, 2],
    id: 'scene.movie_time',
@@ -218,7 +222,7 @@ Works almost identical to the SCRIPT. Activates scene in a tap.
 
 #### MEDIA_PLAYER
 ![MEDIA_PLAYER](images/tile-screenshots/MEDIA_PLAYER.png)
-```js 
+```js
 {
    position: [0, 3],
    width: 2,
@@ -231,7 +235,7 @@ Works almost identical to the SCRIPT. Activates scene in a tap.
 
 #### SENSOR
 ![SENSOR](images/tile-screenshots/SENSOR.png)
-```js 
+```js
 {
    position: [0, 0],
    type: TYPES.SENSOR,
@@ -248,7 +252,7 @@ Works almost identical to the SCRIPT. Activates scene in a tap.
 
 #### INPUT_SELECT
 ![INPUT_SELECT](images/tile-screenshots/INPUT_SELECT.png)
-```js 
+```js
 {
    position: [0, 1],
    type: TYPES.INPUT_SELECT,
@@ -260,7 +264,7 @@ Works almost identical to the SCRIPT. Activates scene in a tap.
 #### SENSOR_ICON
 Similar to sensor, but with an icon.<br>
 ![SENSOR_ICON](images/tile-screenshots/SENSOR_ICON.png)
-```js 
+```js
 {
    position: [1, 1],
    type: TYPES.SENSOR_ICON,
@@ -279,7 +283,7 @@ Similar to sensor, but with an icon.<br>
 
 #### SLIDER
 ![SLIDER](images/tile-screenshots/SLIDER.png)
-```js 
+```js
 {
    position: [6, 1],
    id: 'input_number.casatunes_volume_6',
@@ -302,7 +306,7 @@ Similar to sensor, but with an icon.<br>
 ```
 
 #### INPUT_BOOLEAN
-```js 
+```js
 {
    position: [1, 2],
    width: 1,
@@ -322,7 +326,7 @@ Similar to sensor, but with an icon.<br>
 ```
 
 #### CAMERA_THUMBNAIL and CAMERA
-```js 
+```js
 {
    position: [0, 0],
    id: 'camera.front_gate',
@@ -343,7 +347,7 @@ Similar to sensor, but with an icon.<br>
 
 #### CLIMATE
 ![CLIMATE](images/tile-screenshots/CLIMATE.png)
-```js 
+```js
 {
    position: [0, 2],
    id: "climate.kitchen",
@@ -385,8 +389,8 @@ Essentially a door entry tile is a pop-up with a fullscreen camera and a set of 
             refresh: 1500,
             bgSize: 'cover',
             filter: function (item, entity) {
-                  return CONFIG.serverUrl 
-                    + entity.attributes.entity_picture 
+                  return CONFIG.serverUrl
+                    + entity.attributes.entity_picture
                     + (CONFIG.password ? '&api_password=' + encodeURIComponent(CONFIG.password) : '');
             },
         },

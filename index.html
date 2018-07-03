@@ -514,6 +514,14 @@
                <span ng-bind="getWeatherField('temperature', item, entity)"></span>
                <span ng-bind="getWeatherField('temperatureUnit', item, entity)"></span>
             </div>
+            <div class="weather-temperature-high" ng-if="item.fields.highTemperature">
+               <span ng-bind="getWeatherField('highTemperature', item, entity)"></span>
+               <span ng-bind="getWeatherField('highTemperatureUnit', item, entity)"></span>
+            </div>
+            <div class="weather-temperature-low" ng-if="item.fields.lowTemperature">
+               <span ng-bind="getWeatherField('lowTemperature', item, entity)"></span>
+               <span ng-bind="getWeatherField('lowTemperatureUnit', item, entity)"></span>
+            </div>
 
             <div class="weather-line -items">
                <span ng-if="item.fields.humidity" class="weather-item">

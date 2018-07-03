@@ -901,6 +901,16 @@ camera-thumbnail div {
   font-size: 30px;
   margin-bottom: 10px;
 }
+.weather-temperature-high::before {
+  content: "High";
+  font-size: 0.8em;
+  color: #eee;
+}
+.weather-temperature-low::before {
+  content: "Low";
+  font-size: 0.8em;
+  color: #eee;
+}
 .weather-line {
   white-space: nowrap;
   overflow: hidden;
