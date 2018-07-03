@@ -7,6 +7,7 @@ Should you have any ideas or questions please post them on home-assistant forum 
 
 * https://community.home-assistant.io/t/new-dashboard-for-ha/57173
 * https://youtu.be/L8JwzWNAPr8
+* https://t.me/joinchat/CFM1kQ1ZSNL0T9RB9VwK5w
 
 
 ## Screenshots
@@ -69,9 +70,6 @@ var CONFIG = {
        * Necessary only with MANUAL password type
        */
       password: null,
-
-      /* debug: Used for development */
-      debug: false,
 
       /* timeFormat: 12 for AM/PM marker, 24 for 24 hour time (default) */
       timeFormat: Number,
@@ -196,6 +194,7 @@ Tile Object. [Click here for some real life examples](TILE_EXAMPLES.md)
 
   /* icons: Set the icon for a tile
    * You can use any of the material design icons from https://materialdesignicons.com/
+   * as long as they have been published in the [latest npm package](https://github.com/templarian/materialdesign-svg).
    * Use an object or function to map states to icons
    */
   icons: {on: "mdi-volume-high", off: "mdi-volume-off"}, // Object example
@@ -203,6 +202,7 @@ Tile Object. [Click here for some real life examples](TILE_EXAMPLES.md)
 
   /* icon: Set a static icon for a tile
    * You can use any of the material design icons from https://materialdesignicons.com/
+   * as long as they have been published in the [latest npm package](https://github.com/templarian/materialdesign-svg).
    */
   icon: 'mdi-phone'
 
@@ -413,6 +413,9 @@ Useful for Door-entry systems etc.
    }
 ]
 ```
+
+## Custom CSS Styles
+A number of classes are added to each tile depending on the type of tile and state. Custom CSS styles can be applied by creating a `custom.css` file in the `styles` directory.
 
 ## TODO
 Where do I even begin?

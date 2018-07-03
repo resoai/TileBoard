@@ -182,6 +182,12 @@ body {
 .item.-th-script.-loading {
   background-color: #10cee4;
 }
+.item.-th-automation {
+  background-color: #259eb0;
+}
+.item.-th-automation.-loading {
+  background-color: #10cee4;
+}
 .item.-th-sensor {
   background-color: #35a3ef;
 }
@@ -287,11 +293,13 @@ body {
   transition: none;
 }
 .item.-script,
+.item.-automation,
 .item.-scene {
   transition: 0.5s ease background-color;
   transition-delay: 0.2s;
 }
 .item.-script.-loading,
+.item.-automation.-loading,
 .item.-scene.-loading {
   transition: none;
 }
@@ -330,6 +338,7 @@ body {
 .item.-custom,
 .item.-light,
 .item.-script,
+.item.-automation,
 .item.-input_boolean,
 .item.-input_select,
 .item.-camera,
@@ -349,6 +358,7 @@ body {
 .item.-custom:active,
 .item.-light:active,
 .item.-script:active,
+.item.-automation:active,
 .item.-input_boolean:active,
 .item.-input_select:active,
 .item.-camera:active,
@@ -365,6 +375,7 @@ body {
 .item.-custom .item-clickable,
 .item.-light .item-clickable,
 .item.-script .item-clickable,
+.item.-automation .item-clickable,
 .item.-input_boolean .item-clickable,
 .item.-input_select .item-clickable,
 .item.-camera .item-clickable,
@@ -1174,3 +1185,4 @@ input[type=range]::-moz-range-thumb {
     opacity: 0;
   }
 }
+/*# sourceMappingURL=main.css.map */

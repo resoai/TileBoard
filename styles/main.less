@@ -18,6 +18,8 @@
 @DEVICE_TRACKER: rgba(124, 129, 206, @opacity);
 @SCRIPT: rgba(37, 158, 176, @opacity);
 @SCRIPT_L: rgba(16, 206, 228, @opacity);
+@AUTOMATION: rgba(37, 158, 176, @opacity);
+@AUTOMATION_L: rgba(16, 206, 228, @opacity);
 @DOOR_ENTRY: rgba(37, 158, 176, @opacity);
 @SENSOR: rgba(53, 163, 239, @opacity);
 @SENSOR_ICON: rgba(41, 108, 202, @opacity);
@@ -247,6 +249,8 @@ body {
    &.-th-door_entry {background-color: @DOOR_ENTRY;}
    &.-th-script {background-color: @SCRIPT;}
    &.-th-script.-loading {background-color: @SCRIPT_L;}
+   &.-th-automation {background-color: @AUTOMATION;}
+   &.-th-automation.-loading {background-color: @AUTOMATION_L;}
    &.-th-sensor {background-color: @SENSOR;}
    &.-th-sensor_icon {background-color: @SENSOR_ICON;}
    &.-th-switch {background-color: @SWITCH;}
@@ -301,7 +305,7 @@ body {
       }
    }
 
-   &.-script, &.-scene {
+   &.-script, &.-automation, &.-scene {
       transition: 0.5s ease background-color;
       transition-delay: 0.2s;
 
@@ -343,6 +347,7 @@ body {
    &.-custom,
    &.-light,
    &.-script,
+   &.-automation,
    &.-input_boolean,
    &.-input_select,
    &.-camera,

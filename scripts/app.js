@@ -26,6 +26,7 @@ var PASSWORD_TYPES = {
 var TYPES = {
    DEVICE_TRACKER: 'device_tracker',
    SCRIPT: 'script',
+   AUTOMATION: 'automation',
    SENSOR: 'sensor',
    SENSOR_ICON: 'sensor_icon',
    SWITCH: 'switch',
