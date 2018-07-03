@@ -388,7 +388,10 @@ function MainController ($scope) {
    };
 
    $scope.climateTarget = function (item, entity) {
-      var value = entity.attributes.temperature;
+      var value = entity.attributes.temperature || [
+         entity.attributes.target_temp_low,
+         entity.attributes.target_temp_high
+      ].join(" - ");
 
       if(item.filter) return item.filter(value);
 

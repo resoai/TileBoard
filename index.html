@@ -563,10 +563,12 @@
            class="item-entity-container">
          <div>
             <div class="item-button -center-right"
+                 ng-if="entity.attributes.temperature"
                  ng-click="increaseClimateTemp($event, item, entity)">
                <i class="mdi mdi-plus"></i>
             </div>
             <div class="item-button -bottom-right"
+                 ng-if="entity.attributes.temperature"
                  ng-click="decreaseClimateTemp($event, item, entity)">
                <i class="mdi mdi-minus"></i>
             </div>
