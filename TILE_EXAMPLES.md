@@ -372,6 +372,18 @@ Similar to sensor, but with an icon.<br>
       url: 'https://www.youtube.com/embed/_qNhxxo9rVU?autoplay=1'
 }
 ```
+
+#### FAN
+![FAN](images/tile-screenshots/FAN.png)
+```js
+{
+			position: [0, 2],
+			type: TYPES.FAN,
+			title: 'Ceiling fan',
+			id: 'fan.living_room_fan',
+}
+```
+
 #### DOOR_ENTRY
 Essentially a door entry tile is a pop-up with a fullscreen camera and a set of tiles on the left.
 ```js
