@@ -410,6 +410,9 @@ Useful for Door-entry systems etc.
 ]
 ```
 
+## Custom CSS Styles
+A number of classes are added to each tile depending on the type of tile and state. Custom CSS styles can be applied by creating a `custom.css` file in the `styles` directory.
+
 ## TODO
 Where do I even begin?
 
