@@ -140,25 +140,16 @@ App.directive('cameraThumbnail', function () {
 
             lastUpdate = Date.now();
 
-            // @TODO remove if
-            if(!CONFIG.debug) {
-               api.send({
-                  type: "camera_thumbnail",
-                  entity_id: $scope.entity.entity_id
+            api.send({
+               type: "camera_thumbnail",
+               entity_id: $scope.entity.entity_id
                }, function (res) {
                   if(!res.result) return;
 
                   var url = 'data:'+res.result.content_type+';base64,' + res.result.content;
 
                   appendImage(url);
-               });
-            }
-            else {
-               var url = Math.random() > 0.5
-                  ? 'images/camera.jpg' : 'images/camera2.jpg';
-
-               appendImage(url);
-            }
+            });
          };
 
          $scope.$watch('item', reloadImage);
