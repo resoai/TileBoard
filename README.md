@@ -18,7 +18,7 @@ Should you have any ideas or questions please post them on home-assistant forum 
 
 ## How to use
 * Pull/download repository
-* Change `config.js`
+* Copy `config.example.js` to `config.js` and edit it for your needs
 * Open index.html directly in a web browser or move all of the files into www directory in HA's config path. Please note that dashboard was designed for local installations and you should never store dashboard files in www directory of HA if you are exposing it to the outside world since this would reveal content of `config.js` along with the password. As an alternative please consider serving files via Nginx where BasicAuth can be implemented.
 
 ## Configure

@@ -1,8 +1,9 @@
-// This is just an example of config
-// most of ids here are replaced with empty objects {}
-// please make sure you use real string ids from your HA entities
-// you may also rename this file to "override_config.js"
-// doing so will not overwrite your config with the new one after updates
+/*
+This is an example configuration file. To make your own, copy or rename this
+file to config.js. That file will not be overwritten as you pull in new updates.
+
+Make sure you use real IDs from your HA entities.
+*/
 
 
 var CONFIG = {
