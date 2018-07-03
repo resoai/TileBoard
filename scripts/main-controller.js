@@ -679,7 +679,8 @@ function MainController ($scope) {
       var domain = "homeassistant";
       var group = item.id.split('.')[0];
 
-      if(['switch', 'light', 'fan'].includes(group)) domain = group;
+      //if(['switch', 'light', 'fan'].includes(group)) domain = group;
+      if(['switch', 'light', 'fan'].indexOf(group)>=0) domain = group;
 
       var service = "toggle";
 
