@@ -7,6 +7,7 @@ Should you have any ideas or questions please post them on home-assistant forum 
 
 * https://community.home-assistant.io/t/new-dashboard-for-ha/57173
 * https://youtu.be/L8JwzWNAPr8
+* https://t.me/joinchat/CFM1kQ1ZSNL0T9RB9VwK5w
 
 
 ## Screenshots
@@ -69,9 +70,6 @@ var CONFIG = {
        * Necessary only with MANUAL password type
        */
       password: null,
-
-      /* debug: Used for development */
-      debug: false,
 
       /* timeFormat: 12 for AM/PM marker, 24 for 24 hour time (default) */
       timeFormat: Number,

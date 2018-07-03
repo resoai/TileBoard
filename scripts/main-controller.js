@@ -6,10 +6,10 @@ function MainController ($scope) {
    $scope.FEATURES = FEATURES;
 
    $scope.activeSelect = null;
-   $scope.ready = false; // ready state
+   $scope.ready = false;
 
-   $scope.errors = []; // list of errors
-   $scope.states = {}; // dict of entities key => entity
+   $scope.errors = [];
+   $scope.states = {};
 
    $scope.activeCamera = null;
    $scope.activeDoorEntry = null;
@@ -618,15 +618,22 @@ function MainController ($scope) {
       return false;
    };
 
+   $scope.supportsFeature = function (feature, entity) {
+      if(!('supported_features' in entity.attributes)) {
+         return false;
+      }
+      return (entity.attributes.supported_features | feature) === entity.attributes.supported_features;
+   };
 
-   // actions
+
+   // Actions
 
    var setSliderValue = debounce(setSliderValueFn, 250);
 
-   function setSliderValueFn (item, entity, value, setState) {
+   function setSliderValueFn (item, entity, value) {
       if(!value.request) return;
 
-      console.log('SET SLIDER', value.request.field, value.value)
+      console.log('SET SLIDER', value.request.field, value.value);
 
       var conf = value.request;
       var serviceData = {entity_id: item.id};
@@ -639,12 +646,6 @@ function MainController ($scope) {
          service: conf.service,
          service_data: serviceData
       });
-
-      if(setState) {
-         // @TODO REMOVE (or not)
-         entity.state = value.value;
-         updateView();
-      }
    }
 
    $scope.sliderChanged = function (item, entity, value) {
@@ -681,17 +682,12 @@ function MainController ($scope) {
       var domain = "homeassistant";
       var group = item.id.split('.')[0];
 
-      if(['switch', 'light', 'fan'].indexOf(group)>=0) domain = group;
+      if(['switch', 'light', 'fan'].indexOf(group) !== -1) domain = group;
 
       var service = "toggle";
 
       if(entity.state === "off") service = "turn_on";
       else if(entity.state === "on") service = "turn_off";
-
-      if(CONFIG.debug) {
-         if(entity.state === "off") entity.state = "on";
-         else if(entity.state === "on") entity.state = "off";
-      }
 
       sendItemData(item, {
          type: "call_service",
@@ -746,10 +742,6 @@ function MainController ($scope) {
    };
 
    $scope.mutePlayer = function (muteState, item, entity) {
-      if(CONFIG.debug) {
-         entity.attributes.is_volume_muted = muteState;
-      }
-
       sendItemData(item, {
          type: "call_service",
          domain: "media_player",
@@ -790,7 +782,7 @@ function MainController ($scope) {
       if(entity.state === "off") return false;
 
       if(!('brightness' in entity.attributes)) {
-         return addError("No brightness field in object")
+         return addError("No brightness field in object");
       }
 
       var brightness = +entity.attributes.brightness + 25.5;
@@ -809,7 +801,7 @@ function MainController ($scope) {
       if(entity.state === "off") return false;
 
       if(!('brightness' in entity.attributes)) {
-         return addError("No brightness field in object")
+         return addError("No brightness field in object");
       }
 
       var brightness = +entity.attributes.brightness - 25.5;
@@ -924,11 +916,6 @@ function MainController ($scope) {
       $event.stopPropagation();
 
       $scope.setInputSelect(item, option);
-
-      if(CONFIG.debug) {
-         entity.state = option;
-      }
-
       $scope.closeActiveSelect();
 
       return false;
@@ -939,21 +926,9 @@ function MainController ($scope) {
       $event.stopPropagation();
 
       $scope.setMediaPlayerSource(item, option);
-
-      if(CONFIG.debug) {
-         entity.attributes.source = option;
-      }
-
       $scope.closeActiveSelect();
 
       return false;
-   };
-
-   $scope.supportsFeature = function (feature, entity) {
-      if(!('supported_features' in entity.attributes)) {
-         return false;
-      }
-      return (entity.attributes.supported_features | feature) === entity.attributes.supported_features;
    };
 
    $scope.setClimateOption = function ($event, item, entity, option) {
@@ -969,10 +944,6 @@ function MainController ($scope) {
             operation_mode: option
          }
       });
-
-      if(CONFIG.debug) {
-         entity.attributes.operation_mode = option;
-      }
 
       $scope.closeActiveSelect();
 
@@ -992,10 +963,6 @@ function MainController ($scope) {
          value = Math.min(value, entity.attributes.max_temp);
       }
 
-      if(CONFIG.debug) {
-         entity.attributes.temperature = value;
-      }
-
       $scope.setClimateTemp(item, value);
 
       return false;
@@ -1011,10 +978,6 @@ function MainController ($scope) {
 
       if(entity.attributes.min_temp) {
          value = Math.max(value, entity.attributes.min_temp);
-      }
-
-      if(CONFIG.debug) {
-         entity.attributes.temperature = value;
       }
 
       $scope.setClimateTemp(item, value);
@@ -1218,21 +1181,14 @@ function MainController ($scope) {
    });
 
    api.onReady(function () {
-      // null mean all events, also available array and string
-      // callback isn't necessary, result can be handled via events
       api.subscribeEvents("state_changed", function (res) {
          console.log('subscribed', res);
       });
 
-      api.getStates(function (res) { // getting initialize states
+      api.getStates(function (res) {
          if(res.success) {
             console.log(res.result);
-
-            // @TODO leave only res.result
-            if(!CONFIG.debug || !window.DEBUG_SENSORS) {
-               setStates(res.result);
-            }
-            else setStates(DEBUG_SENSORS);
+            setStates(res.result);
          }
 
          $scope.ready = true;
@@ -1240,18 +1196,15 @@ function MainController ($scope) {
 
          updateView();
       });
-
-      //updateView(); // trigger updates checker
    });
 
-   api.onUnready(function () { // mean connection terminated
+   api.onUnready(function () {
       $scope.ready = false;
 
       updateView();
    });
 
    api.onMessage(function (data) {
-      // we received some message
       handleMessage(data);
    });
 
@@ -1304,7 +1257,7 @@ function MainController ($scope) {
       return getObjectAttr(entity, path.slice(2).join('.'));
    }
 
-   function getItemAttr (item, path) { // getting entity attribute
+   function getItemAttr (item, path) {
       var entity = $scope.getItemEntity(item);
 
       if(!entity) return null;
@@ -1323,7 +1276,6 @@ function MainController ($scope) {
    }
 
    function setStates (states) {
-      // we put entities in entities' object on init
       states.forEach(function (state) {
          $scope.states[state.entity_id] = state;
       });
@@ -1332,7 +1284,6 @@ function MainController ($scope) {
    function setNewState (key, state) {
       if(!$scope.states[key]) $scope.states[key] = state;
 
-      // update every field of object to new state
       for(var k in state) $scope.states[key][k] = state[k];
    }
 
@@ -1348,11 +1299,8 @@ function MainController ($scope) {
       });
    }
 
-   function handleMessage (data) { // main handle function
-      //console.log(data);
-
+   function handleMessage (data) {
       if(data.type === "event") handleEvent(data.event);
-      //else if(data.type === "result") console.log('command finished');
    }
 
    function handleEvent (event) {
@@ -1370,7 +1318,7 @@ function MainController ($scope) {
    function addError (error) {
       $scope.errors.push(error);
 
-      setTimeout(function () { // remove error from stack after 10s
+      setTimeout(function () {
          $scope.errors.shift();
          updateView();
       }, 10000);
@@ -1378,7 +1326,7 @@ function MainController ($scope) {
       updateView();
    }
 
-   function updateView () { // help angular notice async update
+   function updateView () {
       if(!$scope.$$phase) $scope.$digest();
    }
 }
