@@ -1,5 +1,32 @@
 Here are some real life examples of Tiles.<br>
 
+#### ALARM
+
+![ALARM](images/tile-screenshots/ALARM.png)
+
+```js
+{
+ position: [0, 3],
+ type: TYPES.ALARM,
+ title: 'Alarm',
+ id: 'alarm_control_panel.home_alarm',
+ icons: {
+    disarmed: 'mdi-bell-off',
+    pending: 'mdi-bell',
+    armed_home: 'mdi-bell-plus',
+    armed_away: 'mdi-bell',
+    triggered: 'mdi-bell-ring'
+ },
+ states: {
+    disarmed: 'Disarmed',
+    pending: 'Pending',
+    armed_home: 'Armed home',
+    armed_away: 'Armed away',
+    triggered: 'Triggered'
+ }
+}
+```
+
 #### AUTOMATION
 Manually trigger an automation
 

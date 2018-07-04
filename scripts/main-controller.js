@@ -1053,10 +1053,8 @@ function MainController ($scope) {
             entity_id: item.id,
             code: code
          }
-      }, function (res) {
-         //$scope.closeAlarm();
-         //updateView();
       });
+      $scope.alarmCode = null;
    };
 
 

@@ -103,15 +103,17 @@ var CONFIG = {
                      title: 'Home Alarm',
                      icons: {
                         disarmed: 'mdi-bell-off',
-                        pending: 'mdi-bell-outline',
+                        pending: 'mdi-bell',
                         armed_home: 'mdi-bell-plus',
-                        armed_away: 'mdi-bell'
+                        armed_away: 'mdi-bell',
+                        triggered: 'mdi-bell-ring'
                      },
                      states: {
                         disarmed: 'Disarmed',
                         pending: 'Pending',
                         armed_home: 'Armed home',
-                        armed_away: 'Armed away'
+                        armed_away: 'Armed away',
+                        triggered: 'Triggered'
                      }
                   }
 
