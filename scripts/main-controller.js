@@ -1044,15 +1044,17 @@ function MainController ($scope) {
 
    $scope.actionAlarm = function (action, item, entity) {
       var code = $scope.alarmCode;
-
+      var data = {
+         entity_id: item.id
+      };
+      if (code) {
+         data.code = code;
+      }
       sendItemData(item, {
          type: "call_service",
          domain: "alarm_control_panel",
          service: action,
-         service_data: {
-            entity_id: item.id,
-            code: code
-         }
+         service_data: data
       });
       $scope.alarmCode = null;
    };
