@@ -1358,7 +1358,7 @@ function MainController ($scope) {
          if (eventData.command !== event.command) return;
 
          if (typeof event.action === "function") {
-            callFunction(event.action, eventData);
+            callFunction(event.action, [eventData]);
          }
       });
    }
