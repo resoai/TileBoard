@@ -114,6 +114,12 @@ function switchPercents (field, max, round) {
    }
 }
 
+function playSound(sound) {
+   var audio = new Audio(sound);
+   audio.loop = false;
+   audio.play();
+}
+
 function debounce(func, wait, immediate) {
    var timeout;
    return function() {

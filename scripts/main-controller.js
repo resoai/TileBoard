@@ -1167,7 +1167,11 @@ function MainController ($scope) {
 
    api.onReady(function () {
       api.subscribeEvents("state_changed", function (res) {
-         console.log('subscribed', res);
+         console.log('subscribed to state_changed', res);
+      });
+
+      api.subscribeEvents("tileboard", function (res) {
+         console.log('subscribed to tileboard', res);
       });
 
       api.getStates(function (res) {
@@ -1288,15 +1292,15 @@ function MainController ($scope) {
       for(var k in state) $scope.states[key][k] = state[k];
    }
 
-   function triggerEvents (key, state) {
+   function triggerEvents (eventData) {
       if(!CONFIG.events) return;
 
       CONFIG.events.forEach(function (event) {
-         if(event.trigger !== state.entity_id) return;
+         if (eventData.command !== event.command) return;
 
-         if(event.state !== state.state) return;
-
-         $scope.entityClick({}, event.tile, $scope.getItemEntity(event.tile));
+         if (typeof event.action === "function") {
+            callFunction(event.action, eventData);
+         }
       });
    }
 
@@ -1305,15 +1309,18 @@ function MainController ($scope) {
    }
 
    function handleEvent (event) {
-      if(event.event_type === "state_changed") {
-         try {
+      try {
+         if (event.event_type === "state_changed") {
             console.log('state change', event.data.entity_id, event.data.new_state);
             setNewState(event.data.entity_id, event.data.new_state);
-            triggerEvents(event.data.entity_id, event.data.new_state);
          }
-         catch (e) {console.error(e);}
-         updateView();
+         else if (event.event_type === "tileboard") {
+            console.log('tileboard', event.data);
+            triggerEvents(event.data);
+         }
       }
+      catch (e) {console.error(e);}
+      updateView();
    }
 
    function addError (error) {
