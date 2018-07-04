@@ -137,37 +137,30 @@ function timeAgo (time) {
       [4838400, 'a month ago', 'Next month'],
       [29030400, 'months', 2419200],
       [58060800, 'a year ago', 'Next year'],
-      [2903040000, 'years', 29030400],
-      [5806080000, 'Last century', 'Next century'],
-      [58060800000, 'centuries', 2903040000]
+      [2903040000, 'years', 29030400]
    ];
 
    var seconds = (+new Date() - time) / 1000,
       token = 'ago',
-      list_choice = 1;
+      listChoice = 1;
 
-   if (seconds < 10) {
-      return 'just now'
-   }
-
-   if (seconds < 60) {
-      return 'less than a minute ago'
-   }
 
    if (seconds < 0) {
       seconds = Math.abs(seconds);
       token = 'from now';
-      list_choice = 2;
+      listChoice = 2;
    }
 
    var i = 0, format;
 
    while (format = timeFormats[i++]) {
       if (seconds < format[0]) {
-         if (typeof format[2] == 'string')
-            return format[list_choice];
-         else
+         if (typeof format[2] === 'string') {
+            return format[listChoice];
+         }
+         else {
             return Math.floor(seconds / format[2]) + ' ' + format[1] + ' ' + token;
+         }
       }
    }
 
