@@ -101,13 +101,17 @@ var CONFIG = {
                      //id: "alarm_control_panel.home_alarm",
                      id: { state: 'disarmed' }, // replace it with real string id
                      title: 'Home Alarm',
-                     states: {
-                        armed: 'Armed',
-                        disarmed: 'Disarmed'
-                     },
                      icons: {
-                        armed: 'mdi-bell',
-                        disarmed: 'mdi-bell-off'
+                        disarmed: 'mdi-bell-off',
+                        pending: 'mdi-bell-outline',
+                        armed_home: 'mdi-bell-plus',
+                        armed_away: 'mdi-bell'
+                     },
+                     states: {
+                        disarmed: 'Disarmed',
+                        pending: 'Pending',
+                        armed_home: 'Armed home',
+                        armed_away: 'Armed away'
                      }
                   }
 

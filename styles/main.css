@@ -410,7 +410,7 @@ body {
 .item.-device_tracker .item-title,
 .item.-camera .item-title,
 .item.-camera_thumbnail .item-title {
-  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+  text-shadow: /*1px 1px 1px rgba(0,0,0,.2),*/ 1px 1px 0 rgba(0, 0, 0, 0.2);
   background: rgba(0, 0, 0, 0.15);
   right: auto;
   line-height: 22px;
@@ -868,6 +868,9 @@ camera-thumbnail div {
   box-sizing: border-box;
   padding: 10px;
 }
+.alarm-popup-container.-no-code {
+  margin-top: -80px;
+}
 .alarm-popup-state {
   height: 40px;
   color: #fff;
@@ -1266,7 +1269,7 @@ input[type=range]::-moz-range-thumb {
   border-top-color: #eeeeee;
   border-left-color: #eee;
   margin: -1px;
-  box-shadow: 1px 1px 0 #000, -1px -1px 0 #f5f5f5;
+  box-shadow: 1px 1px 0 #000000, -1px -1px 0 #f5f5f5;
   border-radius: 1px;
 }
 .-theme-win95 .item-select {
@@ -1328,4 +1331,4 @@ input[type=range]::-moz-range-thumb {
     opacity: 0;
   }
 }
-/*# sourceMappingURL=main.css.map */
+(node:8622) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.

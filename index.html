@@ -105,7 +105,9 @@
 
       <div class="alarm-popup-overlay" ng-click="closeAlarm()"></div>
 
-      <div class="alarm-popup-container">
+      <div class="alarm-popup-container"
+           ng-class="{'-no-code': !alarmEntity.attributes.code_format}">
+
          <div class="alarm-popup--close" ng-click="closeAlarm()">
             <i class="mdi mdi-close"></i>
          </div>
@@ -114,7 +116,8 @@
             <span ng-bind="entityState(activeAlarm, alarmEntity)"></span>
          </div>
 
-         <div class="alarm-popup-input-container">
+         <div class="alarm-popup-input-container"
+              ng-if="alarmEntity.attributes.code_format">
             <div class="alarm-popup-input">
                <div class="alarm-popup-input-code" ng-if="alarmCode">
                   <span ng-repeat="dot in alarmCode track by $index">•</span>
@@ -125,16 +128,19 @@
          </div>
 
          <div class="alarm-popup-buttons">
-            <div class="alarm-popup-buttons-line" ng-repeat="line in [6, 3, 0] track by $index">
-               <div class="alarm-popup-button" ng-bind="button + line"
-                    ng-click="inputAlarm(button + line)"
-                    ng-repeat="button in [1, 2, 3] track by $index"></div>
-            </div>
+            <div ng-if="alarmEntity.attributes.code_format">
+               <div class="alarm-popup-buttons-line"
+                    ng-repeat="line in [6, 3, 0] track by $index">
+                  <div class="alarm-popup-button" ng-bind="button + line"
+                       ng-click="inputAlarm(button + line)"
+                       ng-repeat="button in [1, 2, 3] track by $index"></div>
+               </div>
 
-            <div class="alarm-popup-buttons-line">
-               <div class="alarm-popup-button -l2" ng-click="inputAlarm(0)">0</div>
-               <div class="alarm-popup-button -warning" ng-click="clearAlarm()">
-                  <div class="mdi mdi-close"></div>
+               <div class="alarm-popup-buttons-line">
+                  <div class="alarm-popup-button -l2" ng-click="inputAlarm(0)">0</div>
+                  <div class="alarm-popup-button -warning" ng-click="clearAlarm()">
+                     <div class="mdi mdi-close"></div>
+                  </div>
                </div>
             </div>
 

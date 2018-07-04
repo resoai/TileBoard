@@ -1288,7 +1288,7 @@ function MainController ($scope) {
 
          updateView();
 
-         if(callback) callback();
+         if(callback) callback(res);
       });
    }
 
