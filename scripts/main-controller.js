@@ -1043,14 +1043,15 @@ function MainController ($scope) {
    };
 
    $scope.actionAlarm = function (action, item, entity) {
-      var password = $scope.alarmCode;
+      var code = $scope.alarmCode;
 
       sendItemData(item, {
-         type: "",
-         domain: "",
-         service: "",
+         type: "call_service",
+         domain: "alarm_control_panel",
+         service: action,
          service_data: {
             entity_id: item.id,
+            code: code
          }
       }, function (res) {
          //$scope.closeAlarm();
