@@ -151,6 +151,10 @@ function timeAgo (time) {
       listChoice = 2;
    }
 
+   if (seconds >= 0 && seconds < 5) {
+      return 'just now';
+   }
+
    var i = 0, format;
 
    while (format = timeFormats[i++]) {
