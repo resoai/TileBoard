@@ -100,6 +100,21 @@
       </div>
    </div>
 
+   <div class="alarm-popup"
+        ng-if="activeAlarm && (alarmEntity = getItemEntity(activeAlarm))">
+
+      <div class="alarm-popup-container">
+         <div class="alarm-popup-state">
+            <span ng-bind="entityState(activeAlarm, alarmEntity)"></span>
+         </div>
+
+         <div class="alarm-popup-input-container">
+            <div class="alarm-popup-input" ng-bind="alarmPassword"></div>
+         </div>
+         <div class="alarm-popup-buttons"></div>
+      </div>
+   </div>
+
    <div class="pages-menu">
       <div class="pages-menu--items"
            ng-style="pagesMenuStyles(pages)">
@@ -193,15 +208,13 @@
            class="item-entity-container -below">
 
          <div class="item-slides-container" ng-if="hasTrackerCoords(entity)">
-            <div class="item-slides -c3" ng-style="slidesStyles(item, $index)">
-               <div class="item-slide -bg"
-                    ng-style="trackerBg(entity)"></div>
+            <div class="item-slides" ng-class="trackerSlidesClass(item, entity)"
+                 ng-style="slidesStyles(item, $index)">
+               <div class="item-slide -bg" ng-style="trackerBg(entity)"></div>
 
                <div class="item-slide -map"
-                    ng-style="slideMapStyles(item, page, entity.attributes, 9, entity.state)"></div>
-
-               <div class="item-slide -map"
-                    ng-style="slideMapStyles(item, page, entity.attributes, 13, entity.state)"></div>
+                    ng-repeat="zoom in trackerZoomLevels(item, entity)"
+                    ng-style="slideMapStyles(item, page, entity.attributes, zoom, entity.state)"></div>
             </div>
          </div>
 
@@ -502,6 +515,16 @@
 
 
       <div ng-if="item.type === TYPES.DOOR_ENTRY"
+           class="item-entity-container">
+
+         <div class="item-entity">
+            <span class="item-entity--icon mdi"
+                  ng-class="entityIcon(item, entity)"></span>
+         </div>
+      </div>
+
+
+      <div ng-if="item.type === TYPES.ALARM"
            class="item-entity-container">
 
          <div class="item-entity">

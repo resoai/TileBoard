@@ -84,6 +84,7 @@ The custom tile type allows you to fire javascript commands on click/tap.
       not_home: "Away",
       office: "Office",
    },
+   zoomLevels: [9, 13], // or [9] for only one map slide
    slidesDelay: 2
 }
 ```

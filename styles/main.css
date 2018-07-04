@@ -1,3 +1,123 @@
+.item.-th-transparent {
+  background-color: rgba(84, 92, 102, 0.6);
+}
+.item.-th-weather {
+  background-color: #415473;
+}
+.item.-th-media_player {
+  background-color: #349c14;
+}
+.item.-th-cover {
+  background-color: #1565c0;
+}
+.item.-th-device_tracker {
+  background-color: #7c81ce;
+}
+.item.-th-door_entry {
+  background-color: #259eb0;
+}
+.item.-th-script {
+  background-color: #259eb0;
+}
+.item.-th-script.-loading {
+  background-color: #10cee4;
+}
+.item.-th-automation {
+  background-color: #259eb0;
+}
+.item.-th-automation.-loading {
+  background-color: #10cee4;
+}
+.item.-th-sensor {
+  background-color: #35a3ef;
+}
+.item.-th-sensor_icon {
+  background-color: #296cca;
+}
+.item.-th-switch {
+  background-color: #7a4e7f;
+}
+.item.-th-switch.-loading {
+  background-color: #a454a0;
+}
+.item.-th-switch.-on {
+  background-color: #be4475;
+}
+.item.-th-fan {
+  background-color: #7a4e7f;
+}
+.item.-th-fan.-loading {
+  background-color: #a454a0;
+}
+.item.-th-fan.-on {
+  background-color: #be4475;
+}
+.item.-th-lock {
+  background-color: #00796b;
+}
+.item.-th-lock.-loading {
+  background-color: #00787b;
+}
+.item.-th-lock.-locked {
+  background-color: #00897b;
+}
+.item.-th-generic_icon {
+  background-color: #5954a0;
+}
+.item.-th-input_boolean {
+  background-color: #289b61;
+}
+.item.-th-input_boolean.-loading {
+  background-color: #12b04d;
+}
+.item.-th-light {
+  background-color: #913e65;
+}
+.item.-th-light.-loading {
+  background-color: #b24478;
+}
+.item.-th-light.-on {
+  background-color: #dd4c49;
+}
+.item.-th-text_list {
+  background-color: #2a7e9f;
+}
+.item.-th-input_number {
+  background-color: #05a48c;
+}
+.item.-th-climate {
+  background-color: #275462;
+}
+.item.-th-input_select {
+  background-color: #f28747;
+}
+.item.-th-camera {
+  background-color: #35909d;
+}
+.item.-th-camera_thumbnail {
+  background-color: #35909d;
+}
+.item.-th-scene {
+  background-color: #485569;
+}
+.item.-th-scene.-loading {
+  background-color: #627188;
+}
+.item.-th-slider {
+  background-color: #595a8b;
+}
+.item.-th-iframe {
+  background-color: #24282c;
+}
+.item.-th-alarm {
+  background-color: #c23847;
+}
+.item.-th-alarm.-armed {
+  background-color: #c23847;
+}
+.item.-th-custom {
+  background-color: #259eb0;
+}
 html,
 body {
   font-size: 14px;
@@ -158,120 +278,6 @@ body {
 .item-entity-container.-below {
   z-index: 1;
 }
-.item.-th-transparent {
-  background-color: rgba(84, 92, 102, 0.6);
-}
-.item.-th-weather {
-  background-color: #415473;
-}
-.item.-th-media_player {
-  background-color: #349c14;
-}
-.item.-th-cover {
-  background-color: #1565c0;
-}
-.item.-th-device_tracker {
-  background-color: #7c81ce;
-}
-.item.-th-door_entry {
-  background-color: #259eb0;
-}
-.item.-th-script {
-  background-color: #259eb0;
-}
-.item.-th-script.-loading {
-  background-color: #10cee4;
-}
-.item.-th-automation {
-  background-color: #259eb0;
-}
-.item.-th-automation.-loading {
-  background-color: #10cee4;
-}
-.item.-th-sensor {
-  background-color: #35a3ef;
-}
-.item.-th-sensor_icon {
-  background-color: #296cca;
-}
-.item.-th-switch {
-  background-color: #7a4e7f;
-}
-.item.-th-switch.-loading {
-  background-color: #a454a0;
-}
-.item.-th-switch.-on {
-  background-color: #be4475;
-}
-.item.-th-fan {
-  background-color: #7a4e7f;
-}
-.item.-th-fan.-loading {
-  background-color: #a454a0;
-}
-.item.-th-fan.-on {
-  background-color: #be4475;
-}
-.item.-th-lock {
-  background-color: #00796b;
-}
-.item.-th-lock.-loading {
-  background-color: #00787b;
-}
-.item.-th-lock.-locked {
-  background-color: #00897b;
-}
-.item.-th-generic_icon {
-  background-color: #5954a0;
-}
-.item.-th-input_boolean {
-  background-color: #289b61;
-}
-.item.-th-input_boolean.-loading {
-  background-color: #12b04d;
-}
-.item.-th-light {
-  background-color: #913e65;
-}
-.item.-th-light.-loading {
-  background-color: #b24478;
-}
-.item.-th-light.-on {
-  background-color: #dd4c49;
-}
-.item.-th-text_list {
-  background-color: #2a7e9f;
-}
-.item.-th-input_number {
-  background-color: #05a48c;
-}
-.item.-th-climate {
-  background-color: #275462;
-}
-.item.-th-input_select {
-  background-color: #f28747;
-}
-.item.-th-camera {
-  background-color: #35909d;
-}
-.item.-th-camera_thumbnail {
-  background-color: #35909d;
-}
-.item.-th-scene {
-  background-color: #485569;
-}
-.item.-th-scene.-loading {
-  background-color: #627188;
-}
-.item.-th-slider {
-  background-color: #595a8b;
-}
-.item.-th-iframe {
-  background-color: #24282c;
-}
-.item.-th-custom {
-  background-color: #259eb0;
-}
 .item.-input_boolean {
   transition: 0.2s ease background-color;
 }
@@ -343,6 +349,7 @@ body {
 .item.-input_select,
 .item.-camera,
 .item.-camera_thumbnail,
+.item.-alarm,
 .item.-door_entry,
 .item.-scene {
   cursor: pointer;
@@ -363,6 +370,7 @@ body {
 .item.-input_select:active,
 .item.-camera:active,
 .item.-camera_thumbnail:active,
+.item.-alarm:active,
 .item.-door_entry:active,
 .item.-scene:active {
   margin-top: -2px;
@@ -380,6 +388,7 @@ body {
 .item.-input_select .item-clickable,
 .item.-camera .item-clickable,
 .item.-camera_thumbnail .item-clickable,
+.item.-alarm .item-clickable,
 .item.-door_entry .item-clickable,
 .item.-scene .item-clickable {
   left: 5px;
@@ -1185,4 +1194,4 @@ input[type=range]::-moz-range-thumb {
     opacity: 0;
   }
 }
-(node:8158) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+(node:17897) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.

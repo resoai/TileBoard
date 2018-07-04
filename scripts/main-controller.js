@@ -177,6 +177,24 @@ function MainController ($scope) {
       return pages.styles;
    };
 
+   $scope.trackerZoomLevels = function (item, entity) {
+      if(!entity.zoomLevels) {
+         entity.zoomLevels = [9, 13];
+
+         if(item.zoomLevels) {
+            entity.zoomLevels = item.zoomLevels;
+         }
+      }
+
+      return entity.zoomLevels;
+   };
+
+   $scope.trackerSlidesClass = function (item, entity) {
+      var maps = $scope.trackerZoomLevels(item, entity);
+
+      return '-c' + (1 + maps.length);
+   };
+
    $scope.trackerBg = function (entity) {
       if(!entity.trackerBg) {
          var styles = {};

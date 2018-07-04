@@ -12,43 +12,90 @@
 @opacity: 1;
 
 @TRANSPARENT: rgba(84, 92, 102, 0.6);
-@WEATHER: rgba(65, 84, 115, @opacity);
-@MEDIA_PLAYER: rgba(52, 156, 20, @opacity);
-@COVER: rgba(21,101,192, @opacity);
-@DEVICE_TRACKER: rgba(124, 129, 206, @opacity);
-@SCRIPT: rgba(37, 158, 176, @opacity);
-@SCRIPT_L: rgba(16, 206, 228, @opacity);
-@AUTOMATION: rgba(37, 158, 176, @opacity);
-@AUTOMATION_L: rgba(16, 206, 228, @opacity);
-@DOOR_ENTRY: rgba(37, 158, 176, @opacity);
-@SENSOR: rgba(53, 163, 239, @opacity);
-@SENSOR_ICON: rgba(41, 108, 202, @opacity);
-@SWITCH: rgba(122, 78, 127, @opacity);
-@SWITCH_L: rgba(164, 84, 160, @opacity);
-@SWITCH_ON: rgba(190, 68, 117, @opacity);
-@FAN: rgba(122, 78, 127, @opacity);
-@FAN_L: rgba(164, 84, 160, @opacity);
-@FAN_ON: rgba(190, 68, 117, @opacity);
-@LOCK: rgb(0,121,107, @opacity);
-@LOCK_L: rgb(0,120,123, @opacity);
-@LOCK_LOCKED: rgb(0,137,123, @opacity);
-@GENERIC_ICON: rgba(89, 84, 160, @opacity);
-@INPUT_BOOLEAN: rgba(40, 155, 97, @opacity);
-@INPUT_BOOLEAN_L: rgba(18, 176, 77, @opacity);
-@LIGHT: rgba(145, 62, 101, @opacity);
-@LIGHT_L: rgba(178, 68, 120, @opacity);
-@LIGHT_ON:  rgba(221, 76, 73, @opacity);
-@TEXT_LIST: rgba(42, 126, 159, @opacity);
-@INPUT_NUMBER: rgba(5, 164, 140, @opacity);
-@INPUT_SELECT: rgba(242, 135, 71, @opacity);
-@CLIMATE: rgba(39, 84, 98, @opacity);
-@CAMERA: rgba(53, 144, 157, @opacity);
-@CAMERA_THUMBNAIL: rgba(53, 144, 157, @opacity);
-@SCENE: rgba(72, 85, 105, @opacity);
-@SCENE_L: rgba(98, 113, 136, @opacity);
-@SLIDER: rgba(89, 90, 139, @opacity);
-@IFRAME: rgba(36, 40, 44, @opacity);
-@CUSTOM: rgba(37, 158, 176, @opacity);
+@WEATHER: rgb(65, 84, 115);
+@MEDIA_PLAYER: rgb(52, 156, 20);
+@COVER: rgb(21,101,192);
+@DEVICE_TRACKER: rgb(124, 129, 206);
+@SCRIPT: rgb(37, 158, 176);
+@SCRIPT_L: rgb(16, 206, 228);
+@AUTOMATION: rgb(37, 158, 176);
+@AUTOMATION_L: rgb(16, 206, 228);
+@DOOR_ENTRY: rgb(37, 158, 176);
+@SENSOR: rgb(53, 163, 239);
+@SENSOR_ICON: rgb(41, 108, 202);
+@SWITCH: rgb(122, 78, 127);
+@SWITCH_L: rgb(164, 84, 160);
+@SWITCH_ON: rgb(190, 68, 117);
+@FAN: rgb(122, 78, 127);
+@FAN_L: rgb(164, 84, 160);
+@FAN_ON: rgb(190, 68, 117);
+@LOCK: rgb(0,121,107);
+@LOCK_L: rgb(0,120,123);
+@LOCK_LOCKED: rgb(0,137,123);
+@GENERIC_ICON: rgb(89, 84, 160);
+@INPUT_BOOLEAN: rgb(40, 155, 97);
+@INPUT_BOOLEAN_L: rgb(18, 176, 77);
+@LIGHT: rgb(145, 62, 101);
+@LIGHT_L: rgb(178, 68, 120);
+@LIGHT_ON:  rgb(221, 76, 73);
+@TEXT_LIST: rgb(42, 126, 159);
+@INPUT_NUMBER: rgb(5, 164, 140);
+@INPUT_SELECT: rgb(242, 135, 71);
+@CLIMATE: rgb(39, 84, 98);
+@CAMERA: rgb(53, 144, 157);
+@CAMERA_THUMBNAIL: rgb(53, 144, 157);
+@SCENE: rgb(72, 85, 105);
+@SCENE_L: rgb(98, 113, 136);
+@SLIDER: rgb(89, 90, 139);
+@IFRAME: rgb(36, 40, 44);
+@ALARM: rgb(194, 56, 71);
+@ALARM_A: rgb(208, 11, 49);
+@CUSTOM: rgb(37, 158, 176);
+
+
+.item {
+   &.-th-transparent {background-color: @TRANSPARENT;}
+   &.-th-weather {background-color: @WEATHER;}
+   &.-th-media_player {background-color: @MEDIA_PLAYER;}
+   &.-th-cover {background-color: @COVER;}
+   &.-th-device_tracker {background-color: @DEVICE_TRACKER;}
+   &.-th-door_entry {background-color: @DOOR_ENTRY;}
+   &.-th-script {background-color: @SCRIPT;}
+   &.-th-script.-loading {background-color: @SCRIPT_L;}
+   &.-th-automation {background-color: @AUTOMATION;}
+   &.-th-automation.-loading {background-color: @AUTOMATION_L;}
+   &.-th-sensor {background-color: @SENSOR;}
+   &.-th-sensor_icon {background-color: @SENSOR_ICON;}
+   &.-th-switch {background-color: @SWITCH;}
+   &.-th-switch.-loading {background-color: @SWITCH_L;}
+   &.-th-switch.-on {background-color: @SWITCH_ON;}
+   &.-th-fan {background-color: @FAN;}
+   &.-th-fan.-loading {background-color: @FAN_L;}
+   &.-th-fan.-on {background-color: @FAN_ON;}
+   &.-th-lock {background-color: @LOCK;}
+   &.-th-lock.-loading {background-color: @LOCK_L;}
+   &.-th-lock.-locked {background-color: @LOCK_LOCKED;}
+   &.-th-generic_icon {background-color: @GENERIC_ICON;}
+   &.-th-input_boolean {background-color: @INPUT_BOOLEAN;}
+   &.-th-input_boolean.-loading {background-color: @INPUT_BOOLEAN_L;}
+   &.-th-light {background-color: @LIGHT;}
+   &.-th-light.-loading {background-color: @LIGHT_L;}
+   &.-th-light.-on {background-color: @LIGHT_ON;}
+   &.-th-text_list {background-color: @TEXT_LIST;}
+   &.-th-input_number {background-color: @INPUT_NUMBER;}
+   &.-th-climate {background-color: @CLIMATE;}
+   &.-th-input_select {background-color: @INPUT_SELECT;}
+   &.-th-camera {background-color: @CAMERA;}
+   &.-th-camera_thumbnail {background-color: @CAMERA_THUMBNAIL;}
+   &.-th-scene {background-color: @SCENE;}
+   &.-th-scene.-loading {background-color: @SCENE_L;}
+   &.-th-slider {background-color: @SLIDER;}
+   &.-th-iframe {background-color: @IFRAME;}
+   &.-th-alarm {background-color: @ALARM;}
+   &.-th-alarm.-armed {background-color: @ALARM;}
+   &.-th-custom {background-color: @CUSTOM;}
+}
+
 
 html, body {
    font-size: 14px;
@@ -241,46 +288,6 @@ body {
       }
    }
 
-   &.-th-transparent {background-color: @TRANSPARENT;}
-   &.-th-weather {background-color: @WEATHER;}
-   &.-th-media_player {background-color: @MEDIA_PLAYER;}
-   &.-th-cover {background-color: @COVER;}
-   &.-th-device_tracker {background-color: @DEVICE_TRACKER;}
-   &.-th-door_entry {background-color: @DOOR_ENTRY;}
-   &.-th-script {background-color: @SCRIPT;}
-   &.-th-script.-loading {background-color: @SCRIPT_L;}
-   &.-th-automation {background-color: @AUTOMATION;}
-   &.-th-automation.-loading {background-color: @AUTOMATION_L;}
-   &.-th-sensor {background-color: @SENSOR;}
-   &.-th-sensor_icon {background-color: @SENSOR_ICON;}
-   &.-th-switch {background-color: @SWITCH;}
-   &.-th-switch.-loading {background-color: @SWITCH_L;}
-   &.-th-switch.-on {background-color: @SWITCH_ON;}
-   &.-th-fan {background-color: @FAN;}
-   &.-th-fan.-loading {background-color: @FAN_L;}
-   &.-th-fan.-on {background-color: @FAN_ON;}
-   &.-th-lock {background-color: @LOCK;}
-   &.-th-lock.-loading {background-color: @LOCK_L;}
-   &.-th-lock.-locked {background-color: @LOCK_LOCKED;}
-   &.-th-generic_icon {background-color: @GENERIC_ICON;}
-   &.-th-input_boolean {background-color: @INPUT_BOOLEAN;}
-   &.-th-input_boolean.-loading {background-color: @INPUT_BOOLEAN_L;}
-   &.-th-light {background-color: @LIGHT;}
-   &.-th-light.-loading {background-color: @LIGHT_L;}
-   &.-th-light.-on {background-color: @LIGHT_ON;}
-   &.-th-text_list {background-color: @TEXT_LIST;}
-   &.-th-input_number {background-color: @INPUT_NUMBER;}
-   &.-th-climate {background-color: @CLIMATE;}
-   &.-th-input_select {background-color: @INPUT_SELECT;}
-   &.-th-camera {background-color: @CAMERA;}
-   &.-th-camera_thumbnail {background-color: @CAMERA_THUMBNAIL;}
-   &.-th-scene {background-color: @SCENE;}
-   &.-th-scene.-loading {background-color: @SCENE_L;}
-   &.-th-slider {background-color: @SLIDER;}
-   &.-th-iframe {background-color: @IFRAME;}
-   &.-th-custom {background-color: @CUSTOM;}
-
-
    &.-input_boolean {
       transition: 0.2s ease background-color;
 
@@ -352,6 +359,7 @@ body {
    &.-input_select,
    &.-camera,
    &.-camera_thumbnail,
+   &.-alarm,
    &.-door_entry,
    &.-scene {
       cursor: pointer;

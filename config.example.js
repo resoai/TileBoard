@@ -95,6 +95,24 @@ var CONFIG = {
                      title: 'Custom switch',
                      icons: {'off': 'mdi-volume-off', 'on': 'mdi-volume-high'}
                   },
+                  {
+                     position: [0, 1],
+                     type: TYPES.ALARM,
+                     //id: "alarm_control_panel.home_alarm",
+                     id: { state: 'disarmed' }, // replace it with real string id
+                     title: 'Home Alarm',
+                     states: {
+                        armed: 'Armed',
+                        disarmed: 'Disarmed'
+                     },
+                     icons: {
+                        armed: 'mdi-bell',
+                        disarmed: 'mdi-bell-off'
+                     },
+                     alarm: {
+
+                     }
+                  }
 
                ]
             },
