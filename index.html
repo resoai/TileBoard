@@ -50,7 +50,7 @@
                  ng-class="{'-active': activeCamera === item}"
                  ng-repeat="item in getCameraList() track by $index">
                <span ng-show="entity = getItemEntity(item)">
-                  <span ng-bind="item.title || entity.attributes.friendly_name"></span>
+                  <span ng-bind="entityTitle(item, entity)"></span>
                </span>
             </div>
          </div>
@@ -185,7 +185,7 @@
          <div class="item-slides" ng-class="'-c' + item.slides.length"
               ng-if="item.slides.length" ng-style="slidesStyles(item, $index)">
             <div class="item-slide" ng-repeat="slide in item.slides track by $index"
-                 ng-style="slideStyles(slide)"></div>
+                 ng-style="slideStyles(slide, item, entity)"></div>
          </div>
       </div>
 
@@ -214,8 +214,9 @@
          <div class="item-entity">
             <span ng-bind="entityValue(item, entity)"
                   class="item-entity--value"></span>
-            <span ng-if="item.unit !== false" class="item-entity--unit"
-                  ng-bind="item.unit || entity.attributes.unit_of_measurement"></span>
+
+            <span ng-if="(_unit = entityUnit(item, entity))"
+                  class="item-entity--unit" ng-bind="_unit"></span>
          </div>
       </div>
 
@@ -239,16 +240,19 @@
 
       <div ng-if="item.type === TYPES.COVER"
            class="item-entity-container">
+
          <div class="item-cover">
             <div class="item-cover--button -open"
                  ng-class="{'-disabled': entity.state === 'open'}"
                  ng-click="sendCover('open_cover', item, entity)">
                <i class="mdi mdi-arrow-up"></i>
             </div>
+
             <div class="item-cover--button -stop"
                  ng-click="sendCover('stop_cover', item, entity)">
                <i class="mdi mdi-stop"></i>
             </div>
+
             <div class="item-cover--button -close"
                  ng-class="{'-disabled': entity.state === 'closed'}"
                  ng-click="sendCover('close_cover', item, entity)">
@@ -259,14 +263,16 @@
 
       <div ng-if="item.type === TYPES.FAN"
            class="item-entity-container">
+
          <div class="item-entity"
               ng-if="!entity.attributes.speed_list">
             <span class="item-entity--icon mdi"
                   ng-class="entityIcon(item, entity)"></span>
          </div>
+
          <div class="item-fan">
-            <div class="item-fan--speed" ng-click="openFanSpeedSelect($event, item)"
-                 ng-if="entity.attributes.speed_list">
+            <div class="item-fan--speed" ng-if="entity.attributes.speed_list"
+                 ng-click="openFanSpeedSelect($event, item)">
                <span ng-bind="entity.attributes.speed"></span>
             </div>
          </div>
@@ -415,8 +421,8 @@
          <div class="item-entity">
             <span ng-bind="entityValue(item, entity)"
                   class="item-entity--value"></span>
-            <span ng-if="item.unit" class="item-entity--unit"
-                  ng-bind="item.unit || entity.attributes.unit_of_measurement"></span>
+            <span ng-if="(_unit = entityUnit(item, entity))"
+                  class="item-entity--unit" ng-bind="_unit"></span>
          </div>
       </div>
 
@@ -437,8 +443,8 @@
             <span class="item-entity--value">
                <span ng-bind="entityValue(item, entity)"></span>
             </span>
-            <span ng-if="item.unit" class="item-entity--unit"
-                  ng-bind="item.unit || entity.attributes.unit_of_measurement"></span>
+            <span ng-if="(_unit = entityUnit(item, entity))"
+                  class="item-entity--unit" ng-bind="_unit"></span>
          </div>
       </div>
 
@@ -475,8 +481,8 @@
          <div class="item-entity">
             <span ng-bind="entityValue(item, entity)"
                   class="item-entity--value"></span>
-            <span ng-if="item.unit" class="item-entity--unit"
-                  ng-bind="item.unit || entity.attributes.unit_of_measurement"></span>
+            <span ng-if="(_unit = entityUnit(item, entity))"
+                  class="item-entity--unit" ng-bind="_unit"></span>
          </div>
 
          <div class="item-slider" ng-if="(_c = getSliderConf(item, entity))">
@@ -580,8 +586,8 @@
          <div class="item-climate">
             <div class="item-climate--target">
                <span ng-bind="climateTarget(item, entity)"></span>
-               <span class="item-climate--target--unit"
-                     ng-bind="item.unit || entity.attributes.unit_of_measurement"></span>
+               <span ng-if="(_unit = entityUnit(item, entity))"
+                     class="item-climate--target--unit" ng-bind="_unit"></span>
             </div>
             <div class="item-climate--mode" ng-if="entity.attributes.operation_mode"
                  ng-click="openSelect(item)">

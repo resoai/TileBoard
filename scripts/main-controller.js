@@ -132,6 +132,7 @@ function MainController ($scope) {
 
             url = "https://maps.googleapis.com/maps/api/staticmap?center="
                + coords + "&zoom="+zoom+"&size="+sizes+"x&maptype=roadmap&markers=" + marker;
+
             if(CONFIG.googleApiKey) {
                url += "&key=" + CONFIG.googleApiKey;
             }
@@ -152,10 +153,14 @@ function MainController ($scope) {
          var styles = {};
 
          if(page.bg) {
-            styles.backgroundImage = 'url(' + page.bg + ')';
+            var bg = parseFieldValue(page.bg, page, {});
+
+            if(bg) styles.backgroundImage = 'url(' + bg + ')';
          }
          else if(page.bgSuffix) {
-            styles.backgroundImage = 'url(' + CONFIG.serverUrl + page.bgSuffix + ')';
+            var sbg = parseFieldValue(page.bgSuffix, page, {});
+
+            if(sbg) styles.backgroundImage = 'url(' + CONFIG.serverUrl + sbg + ')';
          }
 
          page.styles = styles;
@@ -166,9 +171,7 @@ function MainController ($scope) {
 
    $scope.pagesMenuStyles = function (pages) {
       if(!pages.styles) {
-         pages.styles = {
-            marginTop: -(pages.length * 40) + 'px'
-         };
+         pages.styles = { marginTop: -(pages.length * 40) + 'px' };
       }
 
       return pages.styles;
@@ -230,12 +233,15 @@ function MainController ($scope) {
          };
 
          if(item.customStyles) {
+            var res;
+
             if(typeof item.customStyles === "function") {
                res = callFunction(item.customStyles, [item, entity]);
             }
             else if(typeof item.customStyles === "object") {
                res = item.customStyles;
             }
+
             if(res) styles = angular.merge(styles, res);
          }
 
@@ -252,26 +258,18 @@ function MainController ($scope) {
          var bg, styles = {};
 
          if('bgOpacity' in item) {
-            styles.opacity = item.bgOpacity;
+            styles.opacity = parseFieldValue(item.bgOpacity, item, entity);
          }
 
          if(item.bg) {
-            bg = item.bg;
-
-            if(item.bg[0] === '@') {
-               bg = getItemAttr(item, item.bg.slice(1));
-            }
+            bg = parseFieldValue(item.bg, item, entity);
 
             if(bg) styles.backgroundImage = 'url(' + bg + ')';
          }
          else if(item.bgSuffix) {
-            bg = item.bgSuffix;
+            bg = parseFieldValue(item.bgSuffix, item, entity);
 
-            if(item.bgSuffix[0] === '@') {
-               bg = getItemAttr(item, item.bgSuffix.slice(1));
-            }
-
-            styles.backgroundImage = 'url(' + CONFIG.serverUrl + bg + ')';
+            if(bg) styles.backgroundImage = 'url(' + CONFIG.serverUrl + bg + ')';
          }
 
          obj.bgStyles = styles;
@@ -306,6 +304,7 @@ function MainController ($scope) {
    };
 
 
+   // ah Ludka, what the shit is going on
    $scope.entityState = function (item, entity) {
       if(item.state === false) return null;
 
@@ -360,35 +359,35 @@ function MainController ($scope) {
    };
 
    $scope.entityTitle = function (item, entity) {
-      var title = item.title;
-
-      if(!title) {
+      if(!('title' in item)) {
          return entity.attributes ? entity.attributes.friendly_name : null;
       }
 
-      if(typeof title === "function") return callFunction(title, [item, entity]);
-      if(title[0] === "@") return getObjectAttr(entity, title.slice(1));
-      if(title[0] === "&") return getEntityAttr(title.slice(1));
+      return getItemFieldValue('title', item, entity);
+   };
 
-      return title;
+   $scope.entityUnit = function (item, entity) {
+      if(!('unit' in item)) {
+         return entity.attributes ? entity.attributes.unit_of_measurement : null;
+      }
+
+      return getItemFieldValue('unit', item, entity);
    };
 
    $scope.entitySubtitle = function (item, entity) {
-      var subtitle = item.subtitle;
-
-      if(!subtitle) return null;
-
-      if(typeof subtitle === "function") return callFunction(subtitle, [item, entity]);
-      if(subtitle[0] === "@") return getObjectAttr(entity, subtitle.slice(1));
-      if(subtitle[0] === "&") return getEntityAttr(subtitle.slice(1));
-
-      return subtitle;
+      return getItemFieldValue('subtitle', item, entity);
    };
 
    $scope.entityValue = function (item, entity) {
-      var value = getEntityValue(item, entity);
+      var value = entity.state;
 
-      if(item.filter) return item.filter(value);
+      if(item.value) {
+         value = getItemFieldValue('value', item, entity);
+      }
+
+      if(typeof item.filter === "function") {
+         return callFunction(item.filter, [value, item, entity]);
+      }
 
       return value;
    };
@@ -405,15 +404,11 @@ function MainController ($scope) {
    };
 
    $scope.listField = function (field, item, list) {
-      if(!list[field]) return "";
+      var value = parseFieldValue(list[field], item, list);
 
-      var value = list[field];
-
-      if(value[0] === "&") value = getEntityAttr(value.slice(1));
-
-      if(!value) value = list[field];
-
-      if(item.filter) return item.filter(value, field);
+      if(typeof item.filter === "function") {
+         return callFunction(item.filter, [value, field, item]);
+      }
 
       return value;
    };
@@ -421,14 +416,9 @@ function MainController ($scope) {
    $scope.getWeatherField = function (field, item, entity) {
       var fields = item.fields;
 
-      if(!fields[field]) return null;
+      if(!fields || !fields[field]) return null;
 
-      if(typeof fields[field] === "function") return callFunction(fields[field], [item, entity]);
-
-      if(fields[field][0] === "@") return getObjectAttr(entity, fields[field].slice(1));
-      if(fields[field][0] === "&") return getEntityAttr(fields[field].slice(1));
-
-      return fields[field];
+      return parseFieldValue(fields[field], item, entity);
    };
 
    $scope.getWeatherIcon = function (item, entity) {
@@ -459,12 +449,14 @@ function MainController ($scope) {
       return item.slidesStyles;
    };
 
-   $scope.slideStyles = function (slide) {
+   $scope.slideStyles = function (slide, item, entity) {
       if(!slide.slideStyles) {
          var styles = {};
 
          if(slide.bg) {
-            styles.backgroundImage = 'url(' + slide.bg + ')';
+            var bg = parseFieldValue(slide.bg, item, entity);
+
+            if(bg) styles.backgroundImage = 'url(' + bg + ')';
          }
 
          slide.slideStyles = styles;
@@ -478,6 +470,7 @@ function MainController ($scope) {
          var styles = {};
 
          if(items) {
+            // magic numbers
             styles.marginTop = (-Math.min(items.length * 17, 180)) + 'px';
          }
 
@@ -631,7 +624,10 @@ function MainController ($scope) {
       if(!('supported_features' in entity.attributes)) {
          return false;
       }
-      return (entity.attributes.supported_features | feature) === entity.attributes.supported_features;
+
+      var features = entity.attributes.supported_features;
+
+      return (features | feature) === features;
    };
 
 
@@ -641,8 +637,6 @@ function MainController ($scope) {
 
    function setSliderValueFn (item, entity, value) {
       if(!value.request) return;
-
-      console.log('SET SLIDER', value.request.field, value.value);
 
       var conf = value.request;
       var serviceData = {entity_id: item.id};
@@ -884,8 +878,9 @@ function MainController ($scope) {
       });
    };
 
-   $scope.setInputSelect = function (item, option) {
-      if(item.loading) return;
+   $scope.setSelectOption = function ($event, item, entity, option) {
+      $event.preventDefault();
+      $event.stopPropagation();
 
       sendItemData(item, {
          type: "call_service",
@@ -896,35 +891,7 @@ function MainController ($scope) {
             option: option
          }
       });
-   };
 
-   $scope.setMediaPlayerSource = function (item, option) {
-      if(item.loading) return;
-
-      var data = {
-         type: "call_service",
-         domain: "media_player",
-         service: "select_source",
-         service_data: {
-            entity_id: item.id,
-            source: option
-         }
-      };
-
-      item.loading = true;
-
-      api.send(data, function (res) {
-         item.loading = false;
-
-         updateView();
-      });
-   };
-
-   $scope.setSelectOption = function ($event, item, entity, option) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope.setInputSelect(item, option);
       $scope.closeActiveSelect();
 
       return false;
@@ -934,7 +901,16 @@ function MainController ($scope) {
       $event.preventDefault();
       $event.stopPropagation();
 
-      $scope.setMediaPlayerSource(item, option);
+      sendItemData(item, {
+         type: "call_service",
+         domain: "media_player",
+         service: "select_source",
+         service_data: {
+            entity_id: item.id,
+            source: option
+         }
+      });
+
       $scope.closeActiveSelect();
 
       return false;
@@ -1022,7 +998,7 @@ function MainController ($scope) {
       $event.preventDefault();
       $event.stopPropagation();
       $scope.openSelect(item);
-   }
+   };
 
    $scope.setFanSpeed = function ($event, item, entity, option) {
       $event.preventDefault();
@@ -1197,10 +1173,18 @@ function MainController ($scope) {
       api.getStates(function (res) {
          if(res.success) {
             console.log(res.result);
-            setStates(res.result);
+
+            // in case of development, when sensors are predefined
+            if(window.DEBUG_SENSORS) {
+               setStates(DEBUG_SENSORS);
+            }
+            else {
+               setStates(res.result);
+            }
          }
 
          $scope.ready = true;
+
          $scope.openPage($scope.pages[0]);
 
          updateView();
@@ -1244,14 +1228,22 @@ function MainController ($scope) {
       });
    }
 
-   function getEntityValue (item, entity) {
-      if(!item.value) return entity.state;
+   function getItemFieldValue (field, item, entity) {
+      var value = item[field];
 
-      if(item.value[0] === "@") return getObjectAttr(entity, item.value.slice(1));
-      if(item.value[0] === "&") return getEntityAttr(item.value.slice(1));
-
-      return item.value;
+      return parseFieldValue(value, item, entity);
    }
+
+   function parseFieldValue (value, item, entity) {
+      if(!value) return null;
+
+      if(typeof value === "function") return callFunction(value, [item, entity]);
+      if(value[0] === "@") return getObjectAttr(entity, value.slice(1));
+      if(value[0] === "&") return getEntityAttr(value.slice(1));
+
+      return value;
+   }
+
 
    function escapeClass (text) {
       return text && typeof text === "string"
