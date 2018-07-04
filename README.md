@@ -396,26 +396,64 @@ As you may notice that we use @/& prefixes to get a value inside objects (entiti
 
 ### Events
 
-Events are fired when dashboard receives new state of the entity.
-Firing event will cause the same action as the clicking on tile.
-Useful for Door-entry systems etc.
+Events can be fired from Home Assistant to control TileBoard. Useful for automations to do things like opening a camera view if it detects motion, or turning the screen off on a tablet at night or when everyone leaves.
+
+Events in HomeAssistant must be fired with `tileboard` as the event type, and a `command` included in the event data.
 
 ```js
-[
-   {
-      trigger: 'script.front_gate_bell_trigger',
-      state: 'off',
-      tile: { // invisible
-         type: TYPES.DOOR_ENTRY,
-         id: 'camera.front_door',
-         layout: {
-            camera: {...}, // camera layout
-            page: {},
-            tiles: []
-         }
+events: [
+    /* Example: Start the screensaver on a tablet with Fully Kiosk Browser */
+    {
+      /* command: The command sent from Home Assistant */
+      command: 'screen_off',
+
+      /* action: Function to execute when the command is received
+       * The variable e contains the full event_data from HomeAssistant
+       */
+      action: function(e) {
+        if (typeof fully !== undefined) {
+            fully.startScreensaver();
+        }
+      },
+    },
+
+    /* Example: End the screensaver and make sure Fully Kiosk Browser is in
+     * the foreground.
+     */
+    {
+      command: 'screen_on',
+      action: function(e) {
+        if (typeof fully !== undefined) {
+          fully.stopScreensaver();
+          fully.bringToForeground();
+        }
+      },
+    },
+
+    /* Example: Play a sound file
+     * Include sound_url in the event_data from Home Assistant
+     */
+    {
+      command: 'play_sound',
+      action: function(e) {
+        playSound(e.sound_url);
       }
-   }
-]
+    },
+		
+    /* Example: Open a specific TileBoard page
+     * Include a page field in the event_data from Home Assistant
+     * that matches the id: of a page in the TileBoard CONFIG
+     */
+    {
+      command: 'open_page',
+      action: function(e) {
+        var page = CONFIG.pages.filter(function(obj) {
+          return obj.id == e.page;
+        });
+        this.$scope.openPage(page[0]);
+      }
+    }
+  ],
 ```
 
 ## Custom CSS Styles
