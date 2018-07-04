@@ -103,15 +103,56 @@
    <div class="alarm-popup"
         ng-if="activeAlarm && (alarmEntity = getItemEntity(activeAlarm))">
 
+      <div class="alarm-popup-overlay" ng-click="closeAlarm()"></div>
+
       <div class="alarm-popup-container">
+         <div class="alarm-popup--close" ng-click="closeDoorEntry()">
+            <i class="mdi mdi-close"></i>
+         </div>
+
          <div class="alarm-popup-state">
             <span ng-bind="entityState(activeAlarm, alarmEntity)"></span>
          </div>
 
          <div class="alarm-popup-input-container">
-            <div class="alarm-popup-input" ng-bind="alarmPassword"></div>
+            <div class="alarm-popup-input">
+               <div class="alarm-popup-input-password" ng-if="alarmPassword">
+                  <span ng-repeat="dot in alarmPassword track by $index">•</span>
+               </div>
+               <div class="alarm-popup-input-placeholder"
+                    ng-if="!alarmPassword">Enter password</div>
+            </div>
          </div>
-         <div class="alarm-popup-buttons"></div>
+
+         <div class="alarm-popup-buttons">
+            <div class="alarm-popup-buttons-line" ng-repeat="line in [6, 3, 0] track by $index">
+               <div class="alarm-popup-button" ng-bind="button + line"
+                    ng-click="inputAlarm(button + line)"
+                    ng-repeat="button in [1, 2, 3] track by $index"></div>
+            </div>
+
+            <div class="alarm-popup-buttons-line">
+               <div class="alarm-popup-button -l2" ng-click="inputAlarm(0)">0</div>
+               <div class="alarm-popup-button -warning" ng-click="clearAlarm()">
+                  <div class="mdi mdi-close"></div>
+               </div>
+            </div>
+
+            <div class="alarm-popup-buttons-line">
+               <div class="alarm-popup-button -icon -home"
+                    ng-click="actionAlarm('armed_home', activeAlarm, alarmEntity)">
+                  <div class="mdi mdi-home"></div> Arm home
+               </div>
+               <div class="alarm-popup-button -icon -away"
+                    ng-click="actionAlarm('armed_away', activeAlarm, alarmEntity)">
+                  <div class="mdi mdi-bell"></div> Arm away
+               </div>
+               <div class="alarm-popup-button -icon -disarm"
+                    ng-click="actionAlarm('disarmed', activeAlarm, alarmEntity)">
+                  <div class="mdi mdi-bell-off"></div> Disarm
+               </div>
+            </div>
+         </div>
       </div>
    </div>
 
@@ -213,7 +254,7 @@
                <div class="item-slide -bg" ng-style="trackerBg(entity)"></div>
 
                <div class="item-slide -map"
-                    ng-repeat="zoom in trackerZoomLevels(item, entity)"
+                    ng-repeat="zoom in trackerZoomLevels(item, entity) track by $index"
                     ng-style="slideMapStyles(item, page, entity.attributes, zoom, entity.state)"></div>
             </div>
          </div>

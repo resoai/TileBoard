@@ -836,6 +836,140 @@ camera-thumbnail div {
   z-index: 1;
   width: 100%;
 }
+.alarm-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+}
+.alarm-popup-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  background: rgba(45, 49, 53, 0.8);
+  cursor: pointer;
+}
+.alarm-popup-container {
+  background: #111;
+  width: 280px;
+  overflow: hidden;
+  white-space: nowrap;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -140px;
+  margin-top: -211.5px;
+  z-index: 12;
+  box-sizing: border-box;
+  padding: 10px;
+}
+.alarm-popup-state {
+  height: 40px;
+  color: #fff;
+  font-size: 23px;
+  line-height: 30px;
+}
+.alarm-popup-input {
+  text-align: center;
+  color: #eee;
+  font-size: 18px;
+  height: 40px;
+  line-height: 40px;
+  margin: 5px 0 0;
+  border: 1px solid #444;
+  background: rgba(100, 100, 100, 0.1);
+  border-radius: 3px;
+}
+.alarm-popup-input-password {
+  font-size: 30px;
+}
+.alarm-popup-input-placeholder {
+  opacity: 0.3;
+}
+.alarm-popup-buttons {
+  font-size: 0;
+  margin: 10px -5px 0;
+  box-sizing: border-box;
+}
+.alarm-popup-button {
+  display: inline-block;
+  font-size: 20px;
+  box-sizing: border-box;
+  width: 29.3%;
+  margin: 5px 2%;
+  text-align: center;
+  height: 52px;
+  line-height: 52px;
+  background: #333;
+  color: #eee;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: clip;
+  white-space: nowrap;
+}
+.alarm-popup-button:active {
+  background: #222;
+}
+.alarm-popup-button.-l2 {
+  width: 62.6%;
+}
+.alarm-popup-button.-icon {
+  line-height: 13px;
+  font-size: 13px;
+  height: 60px;
+  margin-top: 10px;
+}
+.alarm-popup-button.-icon .mdi {
+  opacity: 0.5;
+  line-height: 40px;
+  font-size: 28px;
+}
+.alarm-popup-button.-warning {
+  background: #7e2e10;
+}
+.alarm-popup-button.-warning:active {
+  background: #63240d;
+}
+.alarm-popup-button.-home {
+  background: #6c2738;
+}
+.alarm-popup-button.-home:active {
+  background: #3f101b;
+}
+.alarm-popup-button.-away {
+  background: #6c2738;
+}
+.alarm-popup-button.-away:active {
+  background: #3f101b;
+}
+.alarm-popup-button.-disarm {
+  background: #124e2a;
+}
+.alarm-popup-button.-disarm:active {
+  background: #0f341a;
+}
+.alarm-popup--close {
+  position: absolute;
+  text-align: center;
+  right: 5px;
+  top: 5px;
+  color: rgba(255, 255, 255, 0.7);
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 30px;
+  z-index: 3;
+  cursor: pointer;
+}
+.alarm-popup--close:active {
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(0, 0, 0, 0.3);
+}
 .item-slider {
   position: absolute;
   top: 5px;
@@ -1194,4 +1328,4 @@ input[type=range]::-moz-range-thumb {
     opacity: 0;
   }
 }
-(node:17897) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+(node:26651) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.

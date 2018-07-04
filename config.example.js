@@ -108,9 +108,6 @@ var CONFIG = {
                      icons: {
                         armed: 'mdi-bell',
                         disarmed: 'mdi-bell-off'
-                     },
-                     alarm: {
-
                      }
                   }
 

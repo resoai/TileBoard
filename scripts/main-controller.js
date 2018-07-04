@@ -14,6 +14,9 @@ function MainController ($scope) {
    $scope.activeCamera = null;
    $scope.activeDoorEntry = null;
 
+   $scope.alarmPassword = null;
+   $scope.activeAlarm = null;
+
    var showedPages = [];
 
    var doorEntryTimeout = null;
@@ -43,6 +46,8 @@ function MainController ($scope) {
          case TYPES.SCENE: return $scope.callScene(item, entity);
 
          case TYPES.DOOR_ENTRY: return $scope.openDoorEntry(item, entity);
+
+         case TYPES.ALARM: return $scope.openAlarm(item, entity);
 
          case TYPES.CUSTOM: return $scope.customTileAction(item, entity);
       }
@@ -1037,6 +1042,22 @@ function MainController ($scope) {
       return false;
    };
 
+   $scope.actionAlarm = function (action, item, entity) {
+      var password = $scope.alarmPassword;
+
+      sendItemData(item, {
+         type: "",
+         domain: "",
+         service: "",
+         service_data: {
+            entity_id: item.id,
+         }
+      }, function (res) {
+         //$scope.closeAlarm();
+         //updateView();
+      });
+   };
+
 
    // UI
 
@@ -1085,6 +1106,16 @@ function MainController ($scope) {
             updateView();
          }, CONFIG.doorEntryTimeout * 1000);
       }
+   };
+
+   $scope.openAlarm = function (item) {
+      $scope.activeAlarm = item;
+      $scope.alarmPassword = null;
+   };
+
+   $scope.closeAlarm = function () {
+      $scope.activeAlarm = null;
+      $scope.alarmPassword = null;
    };
 
    $scope.getCameraList = function () {
@@ -1173,6 +1204,16 @@ function MainController ($scope) {
 
    $scope.selectOpened = function (item) {
       return $scope.activeSelect === item;
+   };
+
+   $scope.inputAlarm = function (num) {
+      $scope.alarmPassword = $scope.alarmPassword || "";
+
+      $scope.alarmPassword += num;
+   };
+
+   $scope.clearAlarm = function () {
+      $scope.alarmPassword = "";
    };
 
 
