@@ -116,11 +116,11 @@
 
          <div class="alarm-popup-input-container">
             <div class="alarm-popup-input">
-               <div class="alarm-popup-input-password" ng-if="alarmPassword">
-                  <span ng-repeat="dot in alarmPassword track by $index">•</span>
+               <div class="alarm-popup-input-code" ng-if="alarmCode">
+                  <span ng-repeat="dot in alarmCode track by $index">•</span>
                </div>
                <div class="alarm-popup-input-placeholder"
-                    ng-if="!alarmPassword">Enter password</div>
+                    ng-if="!alarmCode">Enter code</div>
             </div>
          </div>
 

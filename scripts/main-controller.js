@@ -14,7 +14,7 @@ function MainController ($scope) {
    $scope.activeCamera = null;
    $scope.activeDoorEntry = null;
 
-   $scope.alarmPassword = null;
+   $scope.alarmCode = null;
    $scope.activeAlarm = null;
 
    var showedPages = [];
@@ -1043,7 +1043,7 @@ function MainController ($scope) {
    };
 
    $scope.actionAlarm = function (action, item, entity) {
-      var password = $scope.alarmPassword;
+      var password = $scope.alarmCode;
 
       sendItemData(item, {
          type: "",
@@ -1110,12 +1110,12 @@ function MainController ($scope) {
 
    $scope.openAlarm = function (item) {
       $scope.activeAlarm = item;
-      $scope.alarmPassword = null;
+      $scope.alarmCode = null;
    };
 
    $scope.closeAlarm = function () {
       $scope.activeAlarm = null;
-      $scope.alarmPassword = null;
+      $scope.alarmCode = null;
    };
 
    $scope.getCameraList = function () {
@@ -1207,13 +1207,13 @@ function MainController ($scope) {
    };
 
    $scope.inputAlarm = function (num) {
-      $scope.alarmPassword = $scope.alarmPassword || "";
+      $scope.alarmCode = $scope.alarmCode || "";
 
-      $scope.alarmPassword += num;
+      $scope.alarmCode += num;
    };
 
    $scope.clearAlarm = function () {
-      $scope.alarmPassword = "";
+      $scope.alarmCode = "";
    };
 
 
