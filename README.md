@@ -337,7 +337,8 @@ var TYPES = {
    WEATHER: 'weather',
    CLIMATE: 'climate',
    MEDIA_PLAYER: 'media_player',
-   CUSTOM: 'custom'
+   CUSTOM: 'custom',
+   ALARM: 'alarm'
 };
 ```
 
