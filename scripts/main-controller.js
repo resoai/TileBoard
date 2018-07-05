@@ -1288,7 +1288,8 @@ function MainController ($scope) {
    function getContext () {
       return {
          states: $scope.states,
-         $scope: $scope
+         $scope: $scope,
+         parseFieldValue: parseFieldValue.bind(this)
       };
    }
 
