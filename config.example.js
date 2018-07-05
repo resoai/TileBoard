@@ -18,6 +18,7 @@ var CONFIG = {
    //password: null,
    //googleApiKey: "XXXXXXXXXX", // Required if you are using Google Maps for device tracker
    events: [],
+   menuPosition: MENU_POSITIONS.LEFT, // or BOTTOM
    pages: [
       {
          title: 'Main page',

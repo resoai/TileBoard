@@ -202,12 +202,25 @@ body {
 }
 .pages-menu {
   position: fixed;
+  text-align: center;
+  z-index: 2;
+}
+.pages-menu.-left {
+  width: 120px;
   left: 0;
   bottom: 0;
   top: 0;
-  width: 120px;
-  text-align: center;
-  z-index: 2;
+}
+.pages-menu.-bottom {
+  left: 0;
+  bottom: 30px;
+  right: 0;
+}
+.pages-menu.-bottom .pages-menu--item {
+  display: inline-block;
+}
+.pages-menu.-bottom .pages-menu--items {
+  margin-top: 0 !important;
 }
 .pages-menu--items {
   position: relative;
@@ -1330,4 +1343,4 @@ input[type=range]::-moz-range-thumb {
     opacity: 0;
   }
 }
-(node:25263) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+(node:5317) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.

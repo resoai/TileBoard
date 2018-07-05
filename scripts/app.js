@@ -65,6 +65,11 @@ var FEATURES = {
    STOP: 4096
 };
 
+var MENU_POSITIONS = {
+   LEFT: 'left',
+   BOTTOM: 'bottom'
+};
+
 var PWD_CACHE_KEY = "_pwd1";
 
 

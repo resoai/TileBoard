@@ -183,6 +183,18 @@ function MainController ($scope) {
       return pages.styles;
    };
 
+   $scope.showPagesMenu = function () {
+      return CONFIG.pages.length > 1;
+   };
+
+   $scope.pagesMenuClasses = function () {
+      var position = CONFIG.menuPosition;
+
+      if(!position) position = MENU_POSITIONS.LEFT;
+
+      return '-' + position;
+   };
+
    $scope.trackerZoomLevels = function (item, entity) {
       if(!entity.zoomLevels) {
          entity.zoomLevels = [9, 13];

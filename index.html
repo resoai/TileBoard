@@ -162,7 +162,9 @@
       </div>
    </div>
 
-   <div class="pages-menu">
+   <div class="pages-menu" ng-if="showPagesMenu()"
+        ng-class="pagesMenuClasses()">
+
       <div class="pages-menu--items"
            ng-style="pagesMenuStyles(pages)">
 

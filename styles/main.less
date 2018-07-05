@@ -199,12 +199,29 @@ body {
 
 .pages-menu {
    position: fixed;
-   left: 0;
-   bottom: 0;
-   top: 0;
-   width: @pageMenuWidth;
    text-align: center;
    z-index: 2;
+
+   &.-left {
+      width: @pageMenuWidth;
+      left: 0;
+      bottom: 0;
+      top: 0;
+   }
+
+   &.-bottom {
+      left: 0;
+      bottom: 30px;
+      right: 0;
+
+      .pages-menu--item {
+         display: inline-block;
+      }
+
+      .pages-menu--items {
+         margin-top: 0 !important;
+      }
+   }
 
    &--items {
       position: relative;
