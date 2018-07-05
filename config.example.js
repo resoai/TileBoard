@@ -19,6 +19,7 @@ var CONFIG = {
    //googleApiKey: "XXXXXXXXXX", // Required if you are using Google Maps for device tracker
    events: [],
    menuPosition: MENU_POSITIONS.LEFT, // or BOTTOM
+   hideScrollbar: false, // horizontal scrollbar
    pages: [
       {
          title: 'Main page',

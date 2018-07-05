@@ -76,6 +76,12 @@ var CONFIG = {
 
       /* pages: A list of page objects. See documentation on Pages below */
       pages: [],
+      
+      /* menuPosition: LEFT (default) or BOTTOM */
+      menuPosition: MENU_POSITIONS.LEFT,
+      
+      /* hideScrollbar: Hiding horizontal scrollbar */
+      hideScrollbar: false,
 
       /* events: A list of events. See documentation on Events below */
       events:  [],

@@ -178,6 +178,9 @@ body {
   white-space: nowrap;
   overflow-x: auto;
 }
+.-hide-scrollbar .page {
+  height: 102%;
+}
 .page-head {
   position: absolute;
   z-index: 2;
@@ -1350,4 +1353,4 @@ input[type=range]::-moz-range-thumb {
     opacity: 0;
   }
 }
-(node:6362) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+(node:9336) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.

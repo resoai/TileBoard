@@ -76,6 +76,10 @@ function MainController ($scope) {
          var menuPos = CONFIG.menuPosition || MENU_POSITIONS.LEFT;
 
          bodyClass.push('-menu-' + menuPos);
+
+         if(CONFIG.hideScrollbar) {
+            bodyClass.push('-hide-scrollbar');
+         }
       }
 
       return bodyClass;
