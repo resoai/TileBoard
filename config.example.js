@@ -21,6 +21,15 @@ var CONFIG = {
    events: [],
    menuPosition: MENU_POSITIONS.LEFT, // or BOTTOM
    hideScrollbar: false, // horizontal scrollbar
+   screensaver: { // optional
+      timeout: 300, // after 5 mins of inactive
+      slidesTimeout: 10, // 10s for one slide
+      slides: [
+         {bg: 'images/bg1.jpeg'},
+         {bg: 'images/bg2.png'},
+         {bg: 'images/bg3.jpg'},
+      ]
+   },
    pages: [
       {
          title: 'Main page',

@@ -1492,6 +1492,72 @@ camera-thumbnail {
    }
 }
 
+.screensaver {
+   position: fixed;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   top: 0;
+   z-index: 50;
+   background: #1a4957;
+   color: #fff;
+   text-shadow: 2px 2px 0 rgba(0,0,0,0.4);
+
+   &-slides {
+      z-index: 51;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+   }
+
+   &-slide {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      background-position: center;
+      background-size: cover;
+      z-index: 51;
+      opacity: 0;
+
+      &.-active {
+         opacity: 1;
+         z-index: 52;
+         transition: 0.5s ease opacity;
+      }
+
+      &.-prev {
+         opacity: 1;
+         z-index: 51;
+      }
+   }
+
+   &-content {
+      position: relative;
+      z-index: 52;
+      height: 100%;
+      width: 100%;
+   }
+
+   &-datetime {
+      position: absolute;
+      right: 60px;
+      bottom: 40px;
+      text-align: right;
+   }
+
+   &-date {
+      font-size: 50px;
+   }
+
+   &-time {
+      font-size: 80px;
+   }
+}
+
 
 @rangeBg: rgba(195, 214, 217, 0.3);
 @rangeHeight: 4px;

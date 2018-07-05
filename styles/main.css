@@ -1323,6 +1323,63 @@ camera-thumbnail div {
 .noty.-success {
   background: #0f9f3f;
 }
+.screensaver {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 50;
+  background: #1a4957;
+  color: #fff;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4);
+}
+.screensaver-slides {
+  z-index: 51;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+.screensaver-slide {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-position: center;
+  background-size: cover;
+  z-index: 51;
+  opacity: 0;
+}
+.screensaver-slide.-active {
+  opacity: 1;
+  z-index: 52;
+  transition: 0.5s ease opacity;
+}
+.screensaver-slide.-prev {
+  opacity: 1;
+  z-index: 51;
+}
+.screensaver-content {
+  position: relative;
+  z-index: 52;
+  height: 100%;
+  width: 100%;
+}
+.screensaver-datetime {
+  position: absolute;
+  right: 60px;
+  bottom: 40px;
+  text-align: right;
+}
+.screensaver-date {
+  font-size: 50px;
+}
+.screensaver-time {
+  font-size: 80px;
+}
 input[type=range] {
   -webkit-appearance: none;
   width: 100%;
@@ -1483,4 +1540,4 @@ input[type=range]::-moz-range-thumb {
     width: 0;
   }
 }
-(node:14897) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+(node:25099) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.

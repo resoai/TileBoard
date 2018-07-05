@@ -30,16 +30,11 @@
    <script src="scripts/init.js"></script>
    <script src="scripts/main-controller.js"></script>
    <script src="scripts/noty-controller.js"></script>
+   <script src="scripts/screensaver-controller.js"></script>
    <script src="scripts/directives.js"></script>
 </head>
 
 <body ng-controller="Main" ng-class="getBodyClass()">
-
-<div ng-if="!ready">
-   <div ng-if="errors.length" class="alert -error">
-      <div ng-bind="errors[0]"></div>
-   </div>
-</div>
 
 <div ng-if="ready" class="page-container">
    <div class="camera-popup"
@@ -196,6 +191,27 @@
               ng-style="groupStyles(group, page)" class="group">
             <div ng-bind="group.title" class="group-title"></div>
             <div tile ng-repeat="item in group.items track by $index"></div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="screensaver" ng-click="hideScreensaver()"
+     ng-show="isShowed" ng-controller="Screensaver">
+
+   <div class="screensaver-slides" ng-if="isShowed">
+      <div class="screensaver-slide" ng-style="getSlideStyle(slide)"
+           ng-class="getSlideClasses($index, slide)"
+           ng-repeat="slide in slides track by $index"></div>
+   </div>
+
+   <div class="screensaver-content" ng-if="isShowed">
+      <div class="screensaver-datetime">
+         <div class="screensaver-time">
+            <clock></clock>
+         </div>
+         <div class="screensaver-date">
+            <div ng-bind="now|date:'EEEE, LLLL dd'"></div>
          </div>
       </div>
    </div>
@@ -483,7 +499,7 @@
                </div>
                <div class="item-list--value">
                   <span ng-bind="listField('value', item, line)"></span><!--
-            --><span ng-bind="listField('unit', item, line)"></span>
+               --><span ng-bind="listField('unit', item, line)"></span>
                </div>
             </div>
          </div>
@@ -630,13 +646,13 @@
                <span ng-if="item.fields.humidity" class="weather-item">
                   <i class="mdi mdi-water"></i>
                   <span ng-bind="getWeatherField('humidity', item, entity)"></span><!--
-            --><span ng-bind="getWeatherField('humidityUnit', item, entity)"></span>
+               --><span ng-bind="getWeatherField('humidityUnit', item, entity)"></span>
                </span>
 
                <span ng-if="item.fields.windSpeed" class="weather-item">
                   <i class="mdi mdi-weather-windy"></i>
                   <span ng-bind="getWeatherField('windSpeed', item, entity)"></span><!--
-            --><span ng-bind="getWeatherField('windSpeedUnit', item, entity)"></span>
+               --><span ng-bind="getWeatherField('windSpeedUnit', item, entity)"></span>
                </span>
             </div>
             <div class="weather-line" ng-if="item.fields.apparentTemperature">
@@ -656,8 +672,8 @@
             </div>
             <div class="weather-line" ng-if="item.fields.precipProbability">
                <span ng-bind="getWeatherField('precipProbability', item, entity)"></span><!--
-         --><span ng-bind="getWeatherField('precipProbabilityUnit', item, entity)"></span>
-               chance of rain
+            --><span ng-bind="getWeatherField('precipProbabilityUnit', item, entity)"></span>
+                  chance of rain
             </div>
          </div>
       </div>
