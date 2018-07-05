@@ -5,9 +5,10 @@ Should you have any ideas or questions please post them on home-assistant forum 
 
 ## Links
 
-* https://community.home-assistant.io/t/new-dashboard-for-ha/57173
-* https://youtu.be/L8JwzWNAPr8
-* https://t.me/joinchat/CFM1kQ1ZSNL0T9RB9VwK5w
+* [TileBoard Chat on Telegram](https://t.me/joinchat/CFM1kQ1ZSNL0T9RB9VwK5w)
+* [Discussion on Home Assistant Community](https://community.home-assistant.io/t/new-dashboard-for-ha/57173)
+* [Demo Video](https://youtu.be/L8JwzWNAPr8)
+
 
 
 ## Screenshots
@@ -77,17 +78,36 @@ var CONFIG = {
       /* timeFormat: 12 for AM/PM marker, 24 for 24 hour time (default) */
       timeFormat: Number,
 
-      /* pages: A list of page objects. See documentation on Pages below */
-      pages: [],
-
       /* menuPosition: LEFT (default) or BOTTOM */
       menuPosition: MENU_POSITIONS.LEFT,
 
       /* hideScrollbar: Hiding horizontal scrollbar */
       hideScrollbar: false,
 
+      /* pages: A list of page objects. See documentation on Pages below */
+      pages: [],
+
       /* events: A list of events. See documentation on Events below */
       events:  [],
+
+      /* screensaver: A digital picture frame with a clock. Appears when    
+       * the dashboard has been idle
+       * (optional)
+       */
+      screensaver: {
+        /* timeout: Idle time (in seconds) before the screensaver will show */
+        timeout: 300,
+
+        /* slidesTimeout: Amount of time (in seconds) to show each slide */
+        slidesTimeout: 10,
+
+        /* slides: Array of paths to pictures. */
+        slides: [
+          {bg: 'images/bg1.jpeg'},
+          {bg: 'images/bg2.png'},
+          {bg: 'images/bg3.png'}
+        ]
+      }
    }
 ```
 
