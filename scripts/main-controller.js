@@ -73,6 +73,10 @@ function MainController ($scope) {
             bodyClass.push('-theme-' + CONFIG.customTheme);
          }
 
+         if(CONFIG.entitySize) {
+            bodyClass.push('-' + CONFIG.entitySize + '-entity');
+         }
+
          var menuPos = CONFIG.menuPosition || MENU_POSITIONS.LEFT;
 
          bodyClass.push('-menu-' + menuPos);

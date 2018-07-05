@@ -44,6 +44,9 @@ var CONFIG = {
       /* tileMargin: The default margin (in pixels) between tiles */
       tileMargin: Number,
 
+      /* entitySize: Enum size of tile's content (SMALL, NORMAL, BIG)*/
+      entitySize: ENTITY_SIZES.NORMAL,
+
       /* groupMarginCss: CSS margin statement to override the default margin for groups */
       groupMarginCss: '20px 40px',
 

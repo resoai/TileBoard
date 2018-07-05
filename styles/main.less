@@ -582,10 +582,12 @@ body {
 }
 
 .item-entity {
+   @entityTop: @entitySize / 2 + 5px;
    position: absolute;
    height: @entitySize;
    line-height: @entitySize;
-   top: (@tileSize - @entitySize) / 2 - 5px;
+   //top: (@tileSize - @entitySize) / 2 - 5px;
+   top: ~'calc(50% - @{entityTop})';
    left: 0;
    right: 0;
    z-index: 2;
@@ -637,11 +639,37 @@ body {
 }
 
 .-small-entity {
-   .item-entity--icon {
-      font-size: @entityIconSize * 0.8;
+   @smallEntitySize: 60px;
+
+   .item-entity {
+      @smallEntityTop: @smallEntitySize / 2 + 5px;
+      position: absolute;
+      height: @smallEntitySize;
+      line-height: @smallEntitySize;
+      top: ~'calc(50% - @{smallEntityTop})';
+
+      &--icon {
+         font-size: @entityIconSize * 0.8;
+         line-height: @smallEntitySize;
+      }
+
+      &--unit {
+         line-height: @smallEntitySize - 20px;
+      }
+
+      &--value {
+         font-size: @entityFontSize * 0.8;
+      }
    }
-   .item-entity--value {
-      font-size: @entityFontSize * 0.8;
+
+   .weather {
+      &-icon {
+         margin: 10px auto 5px;
+         > div {
+            width: 70px;
+            height: 70px;
+         }
+      }
    }
 }
 

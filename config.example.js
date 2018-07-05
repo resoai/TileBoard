@@ -9,6 +9,7 @@ Make sure you use real IDs from your HA entities.
 var CONFIG = {
    customTheme: null, //CUSTOM_THEMES.TRANSPARENT
    transition: TRANSITIONS.ANIMATED_GPU,
+   entitySize: ENTITY_SIZES.NORMAL, //SMALL, BIG are available
    tileSize: 150,
    tileMargin: 6,
    timeFormat: 24,

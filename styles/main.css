@@ -570,7 +570,7 @@ body {
   position: absolute;
   height: 80px;
   line-height: 80px;
-  top: 32.5px;
+  top: calc(50% - 45px);
   left: 0;
   right: 0;
   z-index: 2;
@@ -612,11 +612,28 @@ body {
 .-big-entity .item-entity--value {
   font-size: 44.2px;
 }
+.-small-entity .item-entity {
+  position: absolute;
+  height: 60px;
+  line-height: 60px;
+  top: calc(50% - 35px);
+}
 .-small-entity .item-entity--icon {
   font-size: 41.6px;
+  line-height: 60px;
+}
+.-small-entity .item-entity--unit {
+  line-height: 40px;
 }
 .-small-entity .item-entity--value {
   font-size: 27.2px;
+}
+.-small-entity .weather-icon {
+  margin: 10px auto 5px;
+}
+.-small-entity .weather-icon > div {
+  width: 70px;
+  height: 70px;
 }
 .item-triangle {
   position: absolute;
@@ -1466,4 +1483,4 @@ input[type=range]::-moz-range-thumb {
     width: 0;
   }
 }
-(node:1396) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+(node:14897) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.

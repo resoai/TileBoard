@@ -75,6 +75,12 @@ var NOTIES_POSITIONS = {
    RIGHT: 'right'
 };
 
+var ENTITY_SIZES = {
+   SMALL: 'small',
+   NORMAL: 'normal',
+   BIG: 'big'
+};
+
 var PWD_CACHE_KEY = "_pwd1";
 
 
