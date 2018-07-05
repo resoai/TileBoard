@@ -39,7 +39,7 @@ var Api = (function () {
       this._listeners[key].push(callback);
 
       return function () {
-         self._listeners = self._listeners.filter(function (a) {
+         self._listeners[key] = self._listeners[key].filter(function (a) {
             return a !== callback;
          });
       }

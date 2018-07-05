@@ -20,6 +20,7 @@
    <script src="scripts/vendors/angular-long-press.js"></script>
 
    <script src="scripts/api.js"></script>
+   <script src="scripts/noty.js"></script>
 
    <script src="scripts/app.js"></script>
 
@@ -28,6 +29,7 @@
 
    <script src="scripts/init.js"></script>
    <script src="scripts/main-controller.js"></script>
+   <script src="scripts/noty-controller.js"></script>
    <script src="scripts/directives.js"></script>
 </head>
 
@@ -197,11 +199,31 @@
          </div>
       </div>
    </div>
+</div>
 
-   <div ng-if="errors.length" class="errors-container">
-      <div ng-repeat="error in errors track by $index" class="alert -error">
-         <div ng-bind="error"></div>
+<div class="noties-container" ng-class="getNotiesClasses()" ng-controller="Noty">
+   <div class="noty" ng-class="noty.getClasses()"
+        ng-repeat="noty in getNoties() track by noty.id">
+      <div class="noty-header">
+         <div class="noty-title" ng-if="noty.title" ng-bind="noty.title"></div>
+         <div class="noty-close" ng-click="noty.remove()">
+            <i class="mdi mdi-close"></i>
+         </div>
       </div>
+      <div class="noty-content">
+         <div class="noty-icon" ng-if="noty.icon">
+            <i class="mdi" ng-class="noty.icon"></i>
+         </div>
+
+         <div class="noty-message" ng-bind="noty.message"></div>
+      </div>
+      <div class="noty-lifetime" ng-if="noty.lifetime">
+         <div class="noty-lifetime-line" ng-style="noty.getLifetimeStyles()"></div>
+      </div>
+   </div>
+
+   <div class="noties-button" ng-if="getNoties().length > 1" ng-click="clearAll()">
+      Clear all
    </div>
 </div>
 

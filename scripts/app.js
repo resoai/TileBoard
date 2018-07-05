@@ -70,6 +70,11 @@ var MENU_POSITIONS = {
    BOTTOM: 'bottom'
 };
 
+var NOTIES_POSITIONS = {
+   LEFT: 'left',
+   RIGHT: 'right'
+};
+
 var PWD_CACHE_KEY = "_pwd1";
 
 

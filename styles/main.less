@@ -1330,6 +1330,141 @@ camera-thumbnail {
 }
 
 
+@notyWidth: 290px;
+@notyIconSize: 33px;
+
+@notyError: rgb(247, 71, 50);
+@notyWarning: rgb(240, 119, 52);
+@notyInfo: rgb(16, 143, 237);
+@notySuccess: rgb(15, 159, 63);
+
+.noties-container {
+   position: fixed;
+   bottom: 30px;
+   z-index: 100;
+
+   &.-left {
+      left: 40px
+   }
+
+   &.-right {
+      right: 40px;
+   }
+
+   .noties-button {
+      width: @notyWidth;
+      padding: 10px;
+      box-sizing: border-box;
+      text-align: center;
+      color: rgba(255,255,255,.9);
+      border: 1px solid rgba(255,255,255,.5);
+      font-size: 1.1em;
+      margin: 15px 0;
+      background: rgba(30,30,30,.2);
+      cursor: pointer;
+   }
+}
+
+.noty {
+   width: @notyWidth;
+   //border: 1px solid;
+   margin: 15px 0;
+   color: #fff;
+   position: relative;
+   opacity: 0;
+
+   &.-showed {
+      opacity: 1;
+      transition: 0.2s ease-out opacity;
+   }
+
+   /*&:hover {
+      .noty-lifetime-line {
+         animation-play-state: paused;
+      }
+   }*/
+
+   &-header {
+      padding: 10px;
+      background: rgba(0,0,0,.11);
+      height: 19px;
+   }
+
+   &-title {
+      font-size: 1em;
+      font-weight: bold;
+      line-height: 19px;
+   }
+
+   &-content {
+      min-height: @notyIconSize + 5px;
+      padding: 10px;
+   }
+
+   &-icon {
+      font-size: @notyIconSize;
+      line-height: @notyIconSize;
+      height: @notyIconSize;
+      width: @notyIconSize;
+      margin: 0 15px 0 5px;
+      display: inline-block;
+      float: left;
+      vertical-align: middle;
+   }
+
+   &-message {
+      font-size: 1.05em;
+      line-height: 1.25em;
+      vertical-align: middle;
+   }
+
+   &-lifetime {
+      height: 3px;
+
+      &-line {
+         animation: notyLifetime linear;
+         height: 100%;
+         width: 0;
+         background: rgba(255, 255, 255, 0.73);
+      }
+   }
+
+   &-close {
+      position: absolute;
+      text-align: center;
+      right: -7px;
+      top: -6px;
+      color: rgba(255,255,255,.8);
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 30px;
+      z-index: 3;
+      cursor: pointer;
+
+      &:active {
+         color: rgba(255,255,255,1);
+      }
+   }
+
+   &.-error {
+      background: @notyError;
+   }
+
+   &.-warning {
+      background: @notyWarning;
+   }
+
+   &.-info {
+      background: @notyInfo;
+   }
+
+   &.-success {
+      background: @notySuccess;
+   }
+}
+
+
 @rangeBg: rgba(195, 214, 217, 0.3);
 @rangeHeight: 4px;
 
@@ -1471,5 +1606,10 @@ input[type=range]::-moz-range-thumb {
    0%   { opacity: 0; }
    50%   { opacity: 1; }
    100%   { opacity: 0; }
+}
+
+@keyframes notyLifetime {
+   0%   { width: 100%; }
+   100%   { width: 0; }
 }
 //*/ы

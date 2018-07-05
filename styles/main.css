@@ -1201,6 +1201,111 @@ camera-thumbnail div {
   opacity: 0.5;
   pointer-events: none;
 }
+.noties-container {
+  position: fixed;
+  bottom: 30px;
+  z-index: 100;
+}
+.noties-container.-left {
+  left: 40px;
+}
+.noties-container.-right {
+  right: 40px;
+}
+.noties-container .noties-button {
+  width: 290px;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  font-size: 1.1em;
+  margin: 15px 0;
+  background: rgba(30, 30, 30, 0.2);
+  cursor: pointer;
+}
+.noty {
+  width: 290px;
+  margin: 15px 0;
+  color: #fff;
+  position: relative;
+  opacity: 0;
+  /*&:hover {
+      .noty-lifetime-line {
+         animation-play-state: paused;
+      }
+   }*/
+}
+.noty.-showed {
+  opacity: 1;
+  transition: 0.2s ease-out opacity;
+}
+.noty-header {
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.11);
+  height: 19px;
+}
+.noty-title {
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 19px;
+}
+.noty-content {
+  min-height: 38px;
+  padding: 10px;
+}
+.noty-icon {
+  font-size: 33px;
+  line-height: 33px;
+  height: 33px;
+  width: 33px;
+  margin: 0 15px 0 5px;
+  display: inline-block;
+  float: left;
+  vertical-align: middle;
+}
+.noty-message {
+  font-size: 1.05em;
+  line-height: 1.25em;
+  vertical-align: middle;
+}
+.noty-lifetime {
+  height: 3px;
+}
+.noty-lifetime-line {
+  animation: notyLifetime linear;
+  height: 100%;
+  width: 0;
+  background: rgba(255, 255, 255, 0.73);
+}
+.noty-close {
+  position: absolute;
+  text-align: center;
+  right: -7px;
+  top: -6px;
+  color: rgba(255, 255, 255, 0.8);
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 30px;
+  z-index: 3;
+  cursor: pointer;
+}
+.noty-close:active {
+  color: #ffffff;
+}
+.noty.-error {
+  background: #f74732;
+}
+.noty.-warning {
+  background: #f07734;
+}
+.noty.-info {
+  background: #108fed;
+}
+.noty.-success {
+  background: #0f9f3f;
+}
 input[type=range] {
   -webkit-appearance: none;
   width: 100%;
@@ -1353,4 +1458,12 @@ input[type=range]::-moz-range-thumb {
     opacity: 0;
   }
 }
-(node:9336) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+@keyframes notyLifetime {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}
+(node:1396) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.

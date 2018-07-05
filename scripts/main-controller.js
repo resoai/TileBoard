@@ -1427,14 +1427,12 @@ function MainController ($scope) {
    }
 
    function addError (error) {
-      $scope.errors.push(error);
-
-      setTimeout(function () {
-         $scope.errors.shift();
-         updateView();
-      }, 10000);
-
-      updateView();
+      Noty.addObject({
+         type: Noty.ERROR,
+         title: 'Error',
+         message: error,
+         lifetime: 10
+      });
    }
 
    function updateView () {
