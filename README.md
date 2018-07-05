@@ -77,17 +77,36 @@ var CONFIG = {
       /* timeFormat: 12 for AM/PM marker, 24 for 24 hour time (default) */
       timeFormat: Number,
 
-      /* pages: A list of page objects. See documentation on Pages below */
-      pages: [],
-
       /* menuPosition: LEFT (default) or BOTTOM */
       menuPosition: MENU_POSITIONS.LEFT,
 
       /* hideScrollbar: Hiding horizontal scrollbar */
       hideScrollbar: false,
 
+      /* pages: A list of page objects. See documentation on Pages below */
+      pages: [],
+
       /* events: A list of events. See documentation on Events below */
       events:  [],
+
+      /* screensaver: A digital picture frame with a clock. Appears when    
+       * the dashboard has been idle
+       * (optional)
+       */
+      screensaver: {
+        /* timeout: Idle time (in seconds) before the screensaver will show */
+        timeout: 300,
+
+        /* slidesTimeout: Amount of time (in seconds) to show each slide */
+        slidesTimeout: 10,
+
+        /* slides: Array of paths to pictures. */
+        slides: [
+          'images/bg1.jpeg',
+          'images/bg2.png',
+          'images/bg3.png'
+        ]
+      }
    }
 ```
 
