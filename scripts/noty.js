@@ -149,7 +149,7 @@ var Noty = (function () {
    Noty.getById = function (id) {
       for(var i = 0; i < Noty.noties.length; i++) {
          if(Noty.noties[i].id === id) {
-            return Noty.noties[i].id;
+            return Noty.noties[i];
          }
       }
 
