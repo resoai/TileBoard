@@ -482,7 +482,7 @@ You can then fire a `tileboard` event in HomeAssistant with the following data:
     "icon": "mdi-car",
     "type": "info",
     "title": "Information",
-    "message": "Hello  world",
+    "message": "Hello world",
     "lifetime": 5,
 }
 ```
