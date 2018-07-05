@@ -102,9 +102,9 @@ var CONFIG = {
 
         /* slides: Array of paths to pictures. */
         slides: [
-          'images/bg1.jpeg',
-          'images/bg2.png',
-          'images/bg3.png'
+          {bg: 'images/bg1.jpeg'},
+          {bg: 'images/bg2.png'},
+          {bg: 'images/bg3.png'}
         ]
       }
    }
