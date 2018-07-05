@@ -144,6 +144,12 @@ body {
    margin-left: @pageMenuWidth;
 }
 
+.-menu-bottom {
+   .page-align {
+      margin-left: 0;
+   }
+}
+
 .pages {
    height: 100%;
    width: 100%;
@@ -188,6 +194,13 @@ body {
    }
 }
 
+.-menu-bottom {
+   .page-head {
+      left: 10px;
+      right: 10px;
+   }
+}
+
 .page-overlay {
    z-index: 5;
    position: fixed;
@@ -211,7 +224,7 @@ body {
 
    &.-bottom {
       left: 0;
-      bottom: 30px;
+      bottom: 25px;
       right: 0;
 
       .pages-menu--item {

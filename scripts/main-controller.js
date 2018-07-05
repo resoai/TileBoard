@@ -72,10 +72,15 @@ function MainController ($scope) {
          if(CONFIG.customTheme) {
             bodyClass.push('-theme-' + CONFIG.customTheme);
          }
+
+         var menuPos = CONFIG.menuPosition || MENU_POSITIONS.LEFT;
+
+         bodyClass.push('-menu-' + menuPos);
       }
 
       return bodyClass;
    };
+
 
    $scope.getItemEntity = function (item) {
       if(typeof item.id === "object") return item.id;
