@@ -456,7 +456,7 @@
             <div class="item-list--item"
                  ng-repeat="line in item.list track by $index">
                <div class="item-list--name">
-                  <i class="mdi" ng-class="line.icon" ng-if="line.icon"></i>
+                  <i class="mdi" ng-class="listField('icon', item, line)" ng-if="line.icon"></i>
                   <span ng-bind="listField('title', item, line)"></span>
                </div>
                <div class="item-list--value">
