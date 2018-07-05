@@ -468,10 +468,10 @@ TileBoard has built-in support for toast notification popups in the
 lower right corner. To set them up, add the following to `events` in `CONFIG`:
 ```js
 {
-	command: 'notify',
-	action: function(e) {
-		Noty.addObject(e);
-	}
+   command: 'notify',
+   action: function(e) {
+      Noty.addObject(e);
+   }
 }
 ```
 You can then fire a `tileboard` event in HomeAssistant with the following data:
