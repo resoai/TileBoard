@@ -19,6 +19,7 @@ function MainController ($scope) {
 
    var showedPages = [];
 
+   var latestAlarmActions = {};
    var doorEntryTimeout = null;
    var bodyClass = null;
    var mainStyles = {};
@@ -1044,18 +1045,20 @@ function MainController ($scope) {
 
    $scope.actionAlarm = function (action, item, entity) {
       var code = $scope.alarmCode;
-      var data = {
-         entity_id: item.id
-      };
-      if (code) {
-         data.code = code;
-      }
+
+      var data = {entity_id: item.id};
+
+      if (code) data.code = code;
+
+      latestAlarmActions[item.id] = Date.now();
+
       sendItemData(item, {
          type: "call_service",
          domain: "alarm_control_panel",
          service: action,
          service_data: data
       });
+
       $scope.alarmCode = null;
    };
 
@@ -1352,6 +1355,21 @@ function MainController ($scope) {
       for(var k in state) $scope.states[key][k] = state[k];
    }
 
+   function checkStatesTriggers (key, state) {
+      checkAlarmState(key, state);
+   }
+
+   function checkAlarmState (key, state) {
+      if(key in latestAlarmActions) {
+         var ts = latestAlarmActions[key];
+
+         if(Date.now() - ts < 3000) {
+            $scope.closeAlarm();
+            updateView();
+         }
+      }
+   }
+
    function triggerEvents (eventData) {
       if(!CONFIG.events) return;
 
@@ -1372,10 +1390,13 @@ function MainController ($scope) {
       try {
          if (event.event_type === "state_changed") {
             console.log('state change', event.data.entity_id, event.data.new_state);
+
             setNewState(event.data.entity_id, event.data.new_state);
+            checkStatesTriggers(event.data.entity_id, event.data.new_state);
          }
          else if (event.event_type === "tileboard") {
             console.log('tileboard', event.data);
+
             triggerEvents(event.data);
          }
       }

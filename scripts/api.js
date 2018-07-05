@@ -9,6 +9,8 @@ var Api = (function () {
    var STATUS_ERROR = 4;
    var STATUS_CLOSED = 5;
 
+   var reconnectTimeout = null;
+
    function $Api (url, password) {
       this._id = 1;
 
@@ -29,6 +31,11 @@ var Api = (function () {
 
    $Api.prototype.on = function (key, callback) {
       var self = this;
+
+      if(this._listeners[key].indexOf(callback) !== -1) {
+         return function () {}
+      }
+
       this._listeners[key].push(callback);
 
       return function () {
@@ -102,6 +109,8 @@ var Api = (function () {
    $Api.prototype._connect = function () {
       var self = this;
 
+      if(this.socket && this.socket.readyState < 2) return; // opened or connecting
+
       this.status = STATUS_LOADING;
       this.socket = new WebSocket(this._url);
 
@@ -130,7 +139,9 @@ var Api = (function () {
    $Api.prototype._reconnect = function () {
       this._fire('unready', {status: this.status});
 
-      setTimeout(this._connect.bind(this), 2000);
+      if(reconnectTimeout) clearTimeout(reconnectTimeout);
+
+      reconnectTimeout = setTimeout(this._connect.bind(this), 2000);
    };
 
    $Api.prototype._fire = function (key, data) {
