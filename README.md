@@ -79,10 +79,10 @@ var CONFIG = {
 
       /* pages: A list of page objects. See documentation on Pages below */
       pages: [],
-      
+
       /* menuPosition: LEFT (default) or BOTTOM */
       menuPosition: MENU_POSITIONS.LEFT,
-      
+
       /* hideScrollbar: Hiding horizontal scrollbar */
       hideScrollbar: false,
 
@@ -449,7 +449,7 @@ events: [
         playSound(e.sound_url);
       }
     },
-		
+
     /* Example: Open a specific TileBoard page
      * Include a page field in the event_data from Home Assistant
      * that matches the id: of a page in the TileBoard CONFIG
@@ -466,11 +466,38 @@ events: [
   ],
 ```
 
+## Notifications
+TileBoard has built-in support for toast notification popups in the
+lower right corner. To set them up, add the following to `events` in `CONFIG`:
+```js
+{
+   command: 'notify',
+   action: function(e) {
+      Noty.addObject(e);
+   }
+}
+```
+You can then fire a `tileboard` event in HomeAssistant with the following data:
+```json
+{
+    "command": "notify",
+    "id": "hello",
+    "icon": "mdi-car",
+    "type": "info",
+    "title": "Information",
+    "message": "Hello world",
+    "lifetime": 5,
+}
+```
+`id`: Notification ID. Sending multiple notifications with the same `id` will overwrite each other.
+
+`type`: Type of notification (for style purposes). Valid types are `error`, `info`, `success`, `warning`
+
+`lifetime`: Length of time (in seconds) for the notification to persist before automatically dismissing. Leave lifetime out of the event_data for persistent messages.
+
 ## Custom CSS Styles
 A number of classes are added to each tile depending on the type of tile and state. Custom CSS styles can be applied by creating a `custom.css` file in the `styles` directory.
 
-## TODO
-Where do I even begin?
 
 ## Contribution
 Please feel free to post an issue or pull request and we will sort it out
