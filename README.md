@@ -5,9 +5,10 @@ Should you have any ideas or questions please post them on home-assistant forum 
 
 ## Links
 
-* https://community.home-assistant.io/t/new-dashboard-for-ha/57173
-* https://youtu.be/L8JwzWNAPr8
-* https://t.me/joinchat/CFM1kQ1ZSNL0T9RB9VwK5w
+* [TileBoard Chat on Telegram](https://t.me/joinchat/CFM1kQ1ZSNL0T9RB9VwK5w)
+* [Discussion on Home Assistant Community](https://community.home-assistant.io/t/new-dashboard-for-ha/57173)
+* [Demo Video](https://youtu.be/L8JwzWNAPr8)
+
 
 
 ## Screenshots
