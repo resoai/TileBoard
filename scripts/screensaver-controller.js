@@ -75,6 +75,22 @@ function ScreensaverController ($scope) {
       }
    }, slidesTimeout * 1000);
 
+   window.showScreensaver = function () {
+      setTimeout(function () {
+         lastActivity = 0;
+         $scope.isShowed = true;
+         if(!$scope.$$phase) $scope.$digest();
+      }, 100);
+   };
+
+   window.hideScreensaver = function () {
+      setTimeout(function () {
+         lastActivity = Date.now();
+         $scope.isShowed = false;
+         if(!$scope.$$phase) $scope.$digest();
+      }, 100);
+   };
+
    $window.bind('click keypress touchstart focus', function () {
       lastActivity = Date.now();
    });
