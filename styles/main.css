@@ -1526,11 +1526,11 @@ input[type=range]::-moz-range-thumb {
 }
 .-theme-winphone .item {
   color: #f5efee;
-  background: rgba(39, 117, 244, 0.31) !important;
+  background: rgba(35, 127, 216, 0.25) !important;
   font-size: 13px;
 }
 .-theme-winphone .item:active {
-  background: rgba(39, 117, 244, 0.35) !important;
+  background: rgba(35, 127, 216, 0.3) !important;
 }
 .-theme-winphone .item-title,
 .-theme-winphone .item-subtitle {
@@ -1622,4 +1622,4 @@ input[type=range]::-moz-range-thumb {
     width: 0;
   }
 }
-(node:31656) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+(node:32553) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
