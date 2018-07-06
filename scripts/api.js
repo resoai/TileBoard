@@ -52,6 +52,13 @@ var Api = (function () {
       return this.on('message', callback)
    };
    $Api.prototype.onReady = function (callback) {
+      if(this.status === STATUS_READY) {
+         try {
+            callback({status: STATUS_READY});
+         }
+         catch (e) {}
+      }
+
       return this.on('ready', callback)
    };
    $Api.prototype.onUnready = function (callback) {
@@ -60,7 +67,7 @@ var Api = (function () {
 
    $Api.prototype.send = function (data, callback, id) {
       id = id !== false;
-      
+
       if(!data.id && id) data.id = this._id++;
 
       var wsData = JSON.stringify(data);
