@@ -196,8 +196,11 @@ App.directive('clock', ['$interval', function ($interval) {
 
                h = h % 12 || 12;
             }
+            else {
+               h = leadZero(h);
+            }
 
-            $h.textContent = leadZero(h);
+            $h.textContent = h;
             $m.textContent = leadZero(m);
             $postfix.textContent = postfix;
          };
