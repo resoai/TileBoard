@@ -217,7 +217,8 @@
    </div>
 </div>
 
-<div class="noties-container" ng-class="getNotiesClasses()" ng-controller="Noty">
+<div class="noties-container" ng-class="getNotiesClasses()"
+     ng-controller="Noty" ng-cloak="">
    <div class="noty" ng-class="noty.getClasses()"
         ng-repeat="noty in getNoties() track by noty.id">
       <div class="noty-header">

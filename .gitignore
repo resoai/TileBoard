@@ -6,3 +6,5 @@
 *.map
 images/slides/london.png
 styles/custom.css
+/includes/
+/includes/*
