@@ -498,7 +498,9 @@ body {
 
 .item-fan {
    text-align: left;
-   padding: 30px 3px 0;
+   padding: 25px 3px 0;
+   position: relative;
+   z-index: 3;
 
    &--speed {
       font-size: 21px;
@@ -600,6 +602,14 @@ body {
       /*height: 90px;
       top: 20px;*/
       text-align: left;
+   }
+
+   &.-with-select {
+      margin-top: 15px;
+
+      .item-entity--icon {
+         font-size: @entityIconSize * 0.9;
+      }
    }
 
    &--unit {

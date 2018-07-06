@@ -479,7 +479,9 @@ body {
 }
 .item-fan {
   text-align: left;
-  padding: 30px 3px 0;
+  padding: 25px 3px 0;
+  position: relative;
+  z-index: 3;
 }
 .item-fan--speed {
   font-size: 21px;
@@ -583,6 +585,12 @@ body {
   /*height: 90px;
       top: 20px;*/
   text-align: left;
+}
+.item-entity.-with-select {
+  margin-top: 15px;
+}
+.item-entity.-with-select .item-entity--icon {
+  font-size: 46.8px;
 }
 .item-entity--unit {
   vertical-align: top;
@@ -1622,4 +1630,4 @@ input[type=range]::-moz-range-thumb {
     width: 0;
   }
 }
-(node:32553) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+(node:10427) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.

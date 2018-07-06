@@ -366,10 +366,9 @@
       <div ng-if="item.type === TYPES.FAN"
            class="item-entity-container">
 
-         <div class="item-entity"
-              ng-if="!entity.attributes.speed_list">
-            <span class="item-entity--icon mdi"
-                  ng-class="entityIcon(item, entity)"></span>
+         <div class="item-entity" ng-if="(_icon = entityIcon(item, entity))"
+              ng-class="{'-with-select': entity.attributes.speed_list}">
+            <span class="item-entity--icon mdi" ng-class="_icon"></span>
          </div>
 
          <div class="item-fan">
