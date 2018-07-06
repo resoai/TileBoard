@@ -177,6 +177,7 @@ body {
   background-position: center;
   white-space: nowrap;
   overflow-x: auto;
+  font-size: 0;
 }
 .-hide-scrollbar .page {
   height: 102%;
@@ -186,6 +187,7 @@ body {
   z-index: 2;
   left: 130px;
   right: 130px;
+  font-size: 14px;
   color: #fff;
 }
 .page-head--left {
@@ -537,6 +539,7 @@ body {
   font-weight: 500;
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.01);
   z-index: 2;
+  overflow: hidden;
 }
 .item-subtitle {
   position: absolute;
@@ -629,11 +632,48 @@ body {
   font-size: 27.2px;
 }
 .-small-entity .weather-icon {
-  margin: 10px auto 5px;
+  margin: 10px 0 0;
 }
 .-small-entity .weather-icon > div {
   width: 70px;
   height: 70px;
+}
+.-small-entity .weather-temperature {
+  font-size: 25px;
+  margin-bottom: 7px;
+}
+.-small-entity .weather-line {
+  line-height: 16px;
+  font-size: 0.95em;
+}
+.-small-entity .weather-line.-items {
+  margin-bottom: 5px;
+  opacity: 1;
+}
+.-small-entity .weather-item {
+  margin-right: 5px;
+}
+.-small-entity .weather-item .mdi {
+  margin: 0 -2px 0 -3px;
+}
+.-small-entity .item-list--item {
+  margin: 1px 8px;
+}
+.-micro-entity .item-entity {
+  position: absolute;
+  height: 40px;
+  line-height: 40px;
+  top: calc(50% - 20px);
+}
+.-micro-entity .item-entity--icon {
+  font-size: 36.4px;
+  line-height: 40px;
+}
+.-micro-entity .item-entity--unit {
+  line-height: 10px;
+}
+.-micro-entity .item-entity--value {
+  font-size: 27.2px;
 }
 .item-triangle {
   position: absolute;
@@ -1481,6 +1521,48 @@ input[type=range]::-moz-range-thumb {
 .-theme-win95 .item.-camera_thumbnail .item-title {
   color: #fff;
 }
+.-theme-winphone {
+  font-size: 13px;
+}
+.-theme-winphone .item {
+  color: #f5efee;
+  background: rgba(39, 117, 244, 0.31) !important;
+  font-size: 13px;
+}
+.-theme-winphone .item:active {
+  background: rgba(39, 117, 244, 0.35) !important;
+}
+.-theme-winphone .item-title,
+.-theme-winphone .item-subtitle {
+  padding-left: 5px;
+  padding-right: 5px;
+  font-weight: normal;
+  font-size: 12px;
+}
+.-theme-winphone .item-title {
+  height: 20px;
+}
+.-theme-winphone .item-subtitle {
+  bottom: 20px;
+}
+.-theme-winphone .item-state {
+  padding: 0px 4px 1px;
+  right: 4px;
+}
+.-theme-winphone .pages-menu.-bottom {
+  bottom: 0;
+  background: #282828;
+  padding: 3px;
+}
+.-theme-winphone .pages-menu.-bottom .pages-menu--item {
+  font-size: 24px;
+  line-height: 36px;
+  width: 38px;
+  height: 38px;
+  margin: 3px 5px;
+  border-radius: 100%;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+}
 @keyframes slides2 {
   0% {
     transform: translate(0, 0);
@@ -1540,4 +1622,4 @@ input[type=range]::-moz-range-thumb {
     width: 0;
   }
 }
-(node:25099) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+(node:31656) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.

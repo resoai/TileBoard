@@ -166,6 +166,7 @@ body {
    background-position: center;
    white-space: nowrap;
    overflow-x: auto;
+   font-size: 0;
 }
 
 .-hide-scrollbar {
@@ -179,6 +180,7 @@ body {
    z-index: 2;
    left: @pageMenuWidth + 10px;
    right: @pageMenuWidth + 10px;
+   font-size: 14px;
 
    color: #fff;
 
@@ -549,6 +551,7 @@ body {
    font-weight: 500;
    text-shadow: 1px 1px 0 rgba(0,0,0,.01);
    z-index: 2;
+   overflow: hidden;
 }
 
 .item-subtitle {
@@ -638,6 +641,7 @@ body {
    }
 }
 
+
 .-small-entity {
    @smallEntitySize: 60px;
 
@@ -664,14 +668,70 @@ body {
 
    .weather {
       &-icon {
-         margin: 10px auto 5px;
+         margin: 10px 0 0;
+
          > div {
             width: 70px;
             height: 70px;
          }
       }
+
+      &-temperature {
+         font-size: 25px;
+         margin-bottom: 7px;
+      }
+
+      &-line {
+         line-height: 16px;
+         font-size: 0.95em;
+
+         &.-items {
+            margin-bottom: 5px;
+            opacity: 1;
+         }
+      }
+
+      &-item {
+         margin-right: 5px;
+
+         .mdi {
+            margin: 0 -2px 0 -3px;
+         }
+      }
+   }
+
+   .item-list {
+      &--item {
+         margin: 1px 8px;
+      }
    }
 }
+
+.-micro-entity {
+   @smallEntitySize: 40px;
+
+   .item-entity {
+      @smallEntityTop: @smallEntitySize / 2 + 0px;
+      position: absolute;
+      height: @smallEntitySize;
+      line-height: @smallEntitySize;
+      top: ~'calc(50% - @{smallEntityTop})';
+
+      &--icon {
+         font-size: @entityIconSize * 0.7;
+         line-height: @smallEntitySize;
+      }
+
+      &--unit {
+         line-height: @smallEntitySize - 30px;
+      }
+
+      &--value {
+         font-size: @entityFontSize * 0.8;
+      }
+   }
+}
+
 
 
 .item-triangle {
@@ -1676,6 +1736,58 @@ input[type=range]::-moz-range-thumb {
       }
    }
 }
+
+.-theme-winphone {
+   font-size: 13px;
+
+   .item {
+      color: rgb(245, 239, 238);
+      background: rgba(39, 117, 244, 0.31) !important;
+      font-size: 13px;
+
+      &:active {
+         background: rgba(39, 117, 244, 0.35) !important;
+      }
+
+      &-title, &-subtitle {
+         padding-left: 5px;
+         padding-right: 5px;
+         font-weight: normal;
+         font-size: 12px;
+      }
+      &-title {
+         height: 20px;
+      }
+
+      &-subtitle {
+         bottom: 20px;
+      }
+
+      &-state {
+         padding: 0px 4px 1px;
+         right: 4px;
+      }
+   }
+
+   .pages-menu.-bottom {
+      bottom: 0;
+      background: rgb(40, 40, 40);
+      padding: 3px;
+
+      .pages-menu {
+         &--item {
+            font-size: 24px;
+            line-height: 36px;
+            width: 38px;
+            height: 38px;
+            margin: 3px 5px;
+            border-radius: 100%;
+            border: 3px solid rgba(255,255,255,.2);
+         }
+      }
+   }
+}
+
 
 
 @keyframes slides2 {

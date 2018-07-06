@@ -1,5 +1,6 @@
 var CLASS_BIG = "-big-entity";
 var CLASS_SMALL = "-small-entity";
+var CLASS_MICRO = "-micro-entity";
 
 var GOOGLE_MAP = "google";
 var YANDEX_MAP = "yandex";
@@ -15,6 +16,7 @@ var ITEM_TRANSPARENT = "transparent";
 var CUSTOM_THEMES = {
    TRANSPARENT: "transparent",
    WIN95: "win95",
+   WINPHONE: "winphone"
 };
 
 var PASSWORD_TYPES = {
