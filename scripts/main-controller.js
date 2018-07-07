@@ -190,7 +190,14 @@ function MainController ($scope) {
 
    $scope.pagesMenuStyles = function (pages) {
       if(!pages.styles) {
-         pages.styles = { marginTop: -(pages.length * 40) + 'px' };
+         var height = 40;
+
+         if(CONFIG.customTheme === CUSTOM_THEMES.MOBILE ||
+            CONFIG.customTheme === CUSTOM_THEMES.WINPHONE) {
+            height = 26;
+         }
+
+         pages.styles = { marginTop: -(pages.length * height) + 'px' };
       }
 
       return pages.styles;
