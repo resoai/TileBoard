@@ -728,7 +728,7 @@ body {
       top: ~'calc(50% - @{smallEntityTop})';
 
       &--icon {
-         font-size: @entityIconSize * 0.7;
+         font-size: @entityIconSize * 0.6;
          line-height: @smallEntitySize;
       }
 
@@ -1747,41 +1747,37 @@ input[type=range]::-moz-range-thumb {
    }
 }
 
-.-theme-winphone {
-   font-size: 13px;
+.-theme-winphone, .-theme-mobile {
+   font-size: 14px;
 
    .item {
-      color: rgb(245, 239, 238);
-      background: rgba(35, 127, 216, 0.25) !important;
-      font-size: 13px;
-
-      &:active {
-         background: rgba(35, 127, 216, 0.3) !important
-      }
+      font-size: 14px;
+      border-radius: 0;
 
       &-title, &-subtitle {
          padding-left: 5px;
          padding-right: 5px;
          font-weight: normal;
-         font-size: 12px;
+         font-size: 14px;
       }
+
       &-title {
          height: 20px;
       }
 
       &-subtitle {
-         bottom: 20px;
+         bottom: 22px;
       }
 
       &-state {
-         padding: 0px 4px 1px;
+         padding: 1px 4px 1px;
          right: 4px;
       }
    }
 
    .pages-menu.-bottom {
       bottom: 0;
-      background: rgb(40, 40, 40);
+      background: rgba(32, 35, 37, 0.35);
       padding: 3px;
 
       .pages-menu {
@@ -1791,6 +1787,32 @@ input[type=range]::-moz-range-thumb {
             width: 38px;
             height: 38px;
             margin: 3px 5px;
+         }
+      }
+   }
+}
+
+.-theme-winphone {
+   font-size: 13.5px;
+
+   .item {
+      color: rgb(245, 239, 238);
+      background: rgba(34, 102, 168, 0.3) !important;
+
+      &:active {
+         background: rgba(34, 102, 168, 0.4) !important;
+      }
+
+      &-state {
+         background: rgba(0, 0, 0, 0.15);
+      }
+   }
+
+   .pages-menu.-bottom {
+      background: rgb(40, 40, 40);
+
+      .pages-menu {
+         &--item {
             border-radius: 100%;
             border: 3px solid rgba(255,255,255,.2);
          }

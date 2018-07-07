@@ -16,7 +16,8 @@ var ITEM_TRANSPARENT = "transparent";
 var CUSTOM_THEMES = {
    TRANSPARENT: "transparent",
    WIN95: "win95",
-   WINPHONE: "winphone"
+   WINPHONE: "winphone",
+   MOBILE: "mobile",
 };
 
 var PASSWORD_TYPES = {
