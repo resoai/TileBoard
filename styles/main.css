@@ -667,6 +667,9 @@ body {
 .-small-entity .item-list--item {
   margin: 1px 8px;
 }
+.-small-entity .item-climate--mode {
+  font-size: 18px;
+}
 .-micro-entity .item-entity {
   position: absolute;
   height: 40px;
@@ -1653,4 +1656,4 @@ input[type=range]::-moz-range-thumb {
     width: 0;
   }
 }
-(node:32179) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+(node:32528) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
