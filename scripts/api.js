@@ -102,7 +102,7 @@ var Api = (function () {
    };
 
    $Api.prototype.getPanels = function (callback) {
-      return this.send({type: "get_states"}, callback);
+      return this.send({type: "get_panels"}, callback);
    };
 
    $Api.prototype.getConfig = function (callback) {

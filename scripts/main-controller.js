@@ -352,19 +352,14 @@ function MainController ($scope) {
       return item._classes;
    };
 
-
-   // ah Ludka, what the shit is going on
    $scope.entityState = function (item, entity) {
       if(item.state === false) return null;
 
       var res;
 
       if(item.state) {
-         if(item.state[0] === "@") {
-            return getObjectAttr(entity, item.state.slice(1));
-         }
-         else if(item.state[0] === "&") {
-            return getEntityAttr(item.state.slice(1));
+         if(typeof item.state === "string") {
+            return parseString(item.state, entity);
          }
          else if(typeof item.state === "function") {
             res = callFunction(item.state, [item, entity]);
@@ -1331,12 +1326,23 @@ function MainController ($scope) {
       if(!value) return null;
 
       if(typeof value === "function") return callFunction(value, [item, entity]);
+      if(typeof value === "string") return parseString(value, entity);
+
+      return value;
+   }
+
+   function parseVariable (value, entity) {
       if(value[0] === "@") return getObjectAttr(entity, value.slice(1));
       if(value[0] === "&") return getEntityAttr(value.slice(1));
 
       return value;
    }
 
+   function parseString (value, entity) {
+      return value.replace(/([&@][\w\d._]+)/gi, function (match, contents, offset) {
+         return parseVariable(match, entity);
+      });
+   }
 
    function escapeClass (text) {
       return text && typeof text === "string"
