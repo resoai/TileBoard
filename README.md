@@ -29,15 +29,15 @@ Should you have any ideas or questions please post them on home-assistant forum 
 ```js
 var CONFIG = {
       /* customTheme: specify a custom theme for your dashboard
-       * Valid options: null, 'transparent', 'win95', or a custom theme you have created
+       * Valid options: null, CUSTOM_THEMES.TRANSPARENT, CUSTOM_THEMES.MOBILE, CUSTOM_THEMES.WINPHONE or a custom theme you have created
        * Default: null
        */
       customTheme: null,
 
       /* transition: The transition effect used between Pages
-       * Valid options: 'animated', 'animated_gpu', 'simple'
+       * Valid options: TRANSITIONS.ANIMATED, TRANSITIONS.ANIMATED_GPU, TRANSITIONS.SIMPLE
        */
-      transition: 'animated',
+      transition: TRANSITIONS.ANIMATED,
 
       /* tileSize: The default size (in pixels) of a tile */
       tileSize: Number,
@@ -52,12 +52,12 @@ var CONFIG = {
       groupMarginCss: '20px 40px',
 
       /* serverUrl: The URL to your HomeAssistant server */
-      serverUrl: 'http://localhost:8123',
+      serverUrl: 'http://hassio.local:8123',
 
       /* wsUrl: The URL to your HomeAssistant Websocket connection.
        * If HomeAssistant is behind SSL, replace ws:// with wss://
        */
-      wsUrl: 'ws://localhost:8123/api/websocket',
+      wsUrl: 'ws://hassio.local:8123/api/websocket',
 
       /* passwordType:
        * MANUAL - allows you to put the password directly to the config file
@@ -88,7 +88,7 @@ var CONFIG = {
       pages: [],
 
       /* events: A list of events. See documentation on Events below */
-      events:  [],
+      events: [],
 
       /* screensaver: A digital picture frame with a clock. Appears when    
        * the dashboard has been idle
