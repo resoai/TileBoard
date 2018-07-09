@@ -434,7 +434,7 @@ body {
 .item.-device_tracker .item-title,
 .item.-camera .item-title,
 .item.-camera_thumbnail .item-title {
-  text-shadow: /*1px 1px 1px rgba(0,0,0,.2),*/ 1px 1px 0 rgba(0, 0, 0, 0.2);
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
   background: rgba(0, 0, 0, 0.15);
   right: auto;
   line-height: 22px;
@@ -1525,7 +1525,7 @@ input[type=range]::-moz-range-thumb {
   border-top-color: #eeeeee;
   border-left-color: #eee;
   margin: -1px;
-  box-shadow: 1px 1px 0 #000000, -1px -1px 0 #f5f5f5;
+  box-shadow: 1px 1px 0 #000, -1px -1px 0 #f5f5f5;
   border-radius: 1px;
 }
 .-theme-win95 .item-select {
@@ -1566,6 +1566,14 @@ input[type=range]::-moz-range-thumb {
 .-theme-mobile .item-state {
   padding: 1px 4px 1px;
   right: 4px;
+}
+.-theme-winphone .item-entity.-select .item-entity--value,
+.-theme-mobile .item-entity.-select .item-entity--value {
+  font-size: 16.8px;
+}
+.-theme-winphone .media-player--volume,
+.-theme-mobile .media-player--volume {
+  margin-top: 77px;
 }
 .-theme-winphone .pages-menu.-left,
 .-theme-mobile .pages-menu.-left {
@@ -1682,4 +1690,4 @@ input[type=range]::-moz-range-thumb {
     width: 0;
   }
 }
-(node:2643) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+/*# sourceMappingURL=main.css.map */
