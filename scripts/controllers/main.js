@@ -190,21 +190,6 @@ function MainController ($scope) {
       return page.styles;
    };
 
-   $scope.pagesMenuStyles = function (pages) {
-      if(!pages.styles) {
-         var height = 40;
-
-         if(CONFIG.customTheme === CUSTOM_THEMES.MOBILE ||
-            CONFIG.customTheme === CUSTOM_THEMES.WINPHONE) {
-            height = 26;
-         }
-
-         pages.styles = { marginTop: -(pages.length * height) + 'px' };
-      }
-
-      return pages.styles;
-   };
-
    $scope.showPagesMenu = function () {
       return CONFIG.pages.length > 1;
    };
