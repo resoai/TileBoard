@@ -4,6 +4,9 @@
 .item.-th-weather {
   background-color: #415473;
 }
+.item.-th-weather_list {
+  background-color: #415473;
+}
 .item.-th-media_player {
   background-color: #349c14;
 }
@@ -1146,16 +1149,6 @@ camera-thumbnail div {
   font-size: 30px;
   margin-bottom: 10px;
 }
-.weather-temperature-high::before {
-  content: "High";
-  font-size: 0.8em;
-  color: #eee;
-}
-.weather-temperature-low::before {
-  content: "Low";
-  font-size: 0.8em;
-  color: #eee;
-}
 .weather-line {
   white-space: nowrap;
   overflow: hidden;
@@ -1167,11 +1160,55 @@ camera-thumbnail div {
   margin-bottom: 10px;
   opacity: 1;
 }
+.weather-line--small-label {
+  font-size: 0.8em;
+  opacity: 0.8;
+}
 .weather-item {
   margin-right: 10px;
 }
 .weather-item .mdi {
   margin: 0 0px 0 -3px;
+}
+.weather-list table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.weather-list table td {
+  padding: 1px 0;
+}
+.weather-list table th {
+  padding: 4px 0;
+  font-weight: normal;
+}
+.weather-list table th:last-of-type,
+.weather-list table td:last-of-type {
+  padding-right: 7px;
+}
+.weather-list table th:first-of-type,
+.weather-list table td:first-of-type {
+  padding-left: 7px;
+}
+.weather-list table tr:nth-child(even) {
+  background: rgba(11, 11, 11, 0.11);
+}
+.weather-list-icon {
+  text-align: center;
+  font-size: 0;
+}
+.weather-list-icon > div {
+  width: 30px;
+  height: 30px;
+}
+.weather-list-suffix {
+  text-align: right;
+}
+.weather-list-header {
+  opacity: 0.5;
+}
+.weather-list-header-suffix {
+  text-align: right;
 }
 .-compact .weather {
   padding: 3px 7px;
@@ -1695,4 +1732,4 @@ input[type=range]::-moz-range-thumb {
     width: 0;
   }
 }
-(node:13244) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+(node:22599) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.

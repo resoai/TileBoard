@@ -404,6 +404,10 @@ function MainController ($scope) {
       return getItemFieldValue('title', item, entity);
    };
 
+   $scope.itemField = function (field, item, entity) {
+      return getItemFieldValue(field, item, entity);
+   };
+
    $scope.entityUnit = function (item, entity) {
       if(!('unit' in item)) {
          return entity.attributes ? entity.attributes.unit_of_measurement : null;
@@ -471,6 +475,26 @@ function MainController ($scope) {
       if(!map) return icon;
 
       return map[icon] || icon;
+   };
+
+   $scope.weatherListField = function (field, line, item, entity) {
+      if(!line || !line[field]) return null;
+
+      return parseFieldValue(line[field], item, entity);
+   };
+
+   $scope.weatherListIcon = function (line, item, entity) {
+      var icon = $scope.weatherListField('icon', line, item, entity);
+
+      if(!icon) return null;
+
+      if(typeof item.icons === "function") {
+         return callFunction(item.icons, [icon, item, entity]);
+      }
+
+      if(!item.icons) return icon;
+
+      return item.icons[icon] || icon;
    };
 
    $scope.slidesStyles = function (item, $index) {

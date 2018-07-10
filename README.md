@@ -367,7 +367,8 @@ var TYPES = {
    CLIMATE: 'climate',
    MEDIA_PLAYER: 'media_player',
    CUSTOM: 'custom',
-   ALARM: 'alarm'
+   ALARM: 'alarm',
+   WEATHER_LIST: 'weather_list',
 };
 ```
 

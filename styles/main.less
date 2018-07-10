@@ -13,6 +13,7 @@
 
 @TRANSPARENT: rgba(84, 92, 102, 0.6);
 @WEATHER: rgb(65, 84, 115);
+@WEATHER_LIST: @WEATHER;
 @MEDIA_PLAYER: rgb(52, 156, 20);
 @COVER: rgb(21,101,192);
 @DEVICE_TRACKER: rgb(124, 129, 206);
@@ -56,6 +57,7 @@
 .item {
    &.-th-transparent {background-color: @TRANSPARENT;}
    &.-th-weather {background-color: @WEATHER;}
+   &.-th-weather_list {background-color: @WEATHER_LIST;}
    &.-th-media_player {background-color: @MEDIA_PLAYER;}
    &.-th-cover {background-color: @COVER;}
    &.-th-device_tracker {background-color: @DEVICE_TRACKER;}
@@ -1282,18 +1284,6 @@ camera-thumbnail {
       margin-bottom: 10px;
    }
 
-   &-temperature-high::before {
-     content: "High";
-     font-size: 0.8em;
-     color: #eee;
-   }
-
-   &-temperature-low::before {
-     content: "Low";
-     font-size: 0.8em;
-     color: #eee;
-   }
-
    &-line {
       white-space: nowrap;
       overflow: hidden;
@@ -1305,6 +1295,11 @@ camera-thumbnail {
          margin-bottom: 10px;
          opacity: 1;
       }
+
+      &--small-label {
+         font-size: 0.8em;
+         opacity: 0.8;
+      }
    }
 
    &-item {
@@ -1314,6 +1309,58 @@ camera-thumbnail {
          margin: 0 0px 0 -3px;
       }
    }
+}
+
+.weather-list {
+   table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+
+      td {
+         padding: 1px 0;
+      }
+
+      th {
+         padding: 4px 0;
+         font-weight: normal;
+      }
+
+      th:last-of-type, td:last-of-type {
+         padding-right: 7px;
+      }
+
+      th:first-of-type, td:first-of-type {
+         padding-left: 7px;
+      }
+
+      tr:nth-child(even) {
+         background: rgba(11, 11, 11, 0.11);
+      }
+   }
+
+   &-icon {
+      text-align: center;
+      font-size: 0;
+
+      > div {
+         width: 30px;
+         height: 30px;
+      }
+   }
+
+   &-suffix {
+      text-align: right;
+   }
+
+   &-header {
+      opacity: 0.5;
+
+      &-suffix {
+         text-align: right;
+      }
+   }
+
 }
 
 .-compact {

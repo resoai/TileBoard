@@ -516,3 +516,36 @@ This is a custom tile which can be used for displaying values from different sen
    }
 }
 ```
+
+#### WEATHER_LIST
+![WEATHER_LIST](images/tile-screenshots/WEATHER_LIST.png)<br>
+```js
+{
+   position: [0, 1],
+   type: TYPES.WEATHER_LIST,
+   width: 2,
+   height: 2,
+   title: 'Forecast',
+   id: {},
+   icons: STATE_MAPS.WEATHER_ICONS,
+   suffixName: 'Wind',
+   list: [1,2,3,4,5].map(function (id) {
+      var d = new Date(Date.now() + id * 24 * 60 * 60 * 1000);
+      var date = d.toString().split(' ').slice(1,3).join(' ');
+
+      var forecast = "&sensor.dark_sky_overnight_low_temperature_" + id + ".state - ";
+      forecast += "&sensor.dark_sky_daytime_high_temperature_" + id + ".state";
+      forecast += "&sensor.dark_sky_daytime_high_temperature_" + id + ".attributes.unit_of_measurement";
+
+      var suffix = "&sensor.dark_sky_wind_speed_" + id + ".state";
+      suffix += " &sensor.dark_sky_wind_speed_" + id + ".attributes.unit_of_measurement";
+
+      return {
+         date: date,
+         icon: "&sensor.dark_sky_icon_" + id + ".state",
+         forecast: forecast,
+         suffix: suffix
+      }
+   })
+}
+```
