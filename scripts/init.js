@@ -6,7 +6,16 @@ App.config(function($sceProvider) {
 
 
 if(!window.CONFIG) {
-   alert('Your config is incorrect. Please make sure "config.js" is valid javascript');
+   var error = 'Please make sure you have "config.js" file and it\'s a valid javascript!\n' +
+      'If you running TileBoard for the first time, please rename "config.example.js" to "config.js"';
+
+   alert(error);
+
+   /*Noty.addObject({
+      type: Noty.ERROR,
+      title: 'CONFIG is missing',
+      message: error
+   })*/
 }
 
 

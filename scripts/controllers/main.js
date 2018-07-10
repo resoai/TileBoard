@@ -1,6 +1,8 @@
 App.controller('Main', ['$scope', MainController]);
 
 function MainController ($scope) {
+   if(!window.CONFIG) return;
+
    $scope.pages = CONFIG.pages;
    $scope.TYPES = TYPES;
    $scope.FEATURES = FEATURES;

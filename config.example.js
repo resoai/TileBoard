@@ -1,8 +1,9 @@
 /*
-This is an example configuration file. To make your own, copy or rename this
-file to config.js. That file will not be overwritten as you pull in new updates.
+ This is an example configuration file.
 
-Make sure you use real IDs from your HA entities.
+ COPY OR RENAME THIS FILE TO config.js.
+
+ Make sure you use real IDs from your HA entities.
 */
 
 

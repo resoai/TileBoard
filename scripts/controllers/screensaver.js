@@ -1,6 +1,8 @@
 App.controller('Screensaver', ['$scope', ScreensaverController]);
 
 function ScreensaverController ($scope) {
+   if(!window.CONFIG) return;
+
    var $window = angular.element(window);
    var lastActivity = Date.now();
    var conf = CONFIG.screensaver || null;

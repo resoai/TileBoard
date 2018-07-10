@@ -15,7 +15,11 @@ function NotyController ($scope) {
       if(!notiesClasses) {
          notiesClasses = [];
 
-         var position = CONFIG.notiesPosition || NOTIES_POSITIONS.RIGHT;
+         var position = NOTIES_POSITIONS.RIGHT;
+
+         if(window.CONFIG && CONFIG.notiesPosition) {
+            position = CONFIG.notiesPosition;
+         }
 
          notiesClasses.push('-' + position);
       }
