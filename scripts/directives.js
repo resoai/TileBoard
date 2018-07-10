@@ -29,9 +29,10 @@ App.directive('camera', function () {
          if(typeof refresh === "function") refresh = refresh();
 
          var appendImage = function (url) {
-             var el = document.createElement('div');
+            var el = document.createElement('div');
 
-            el.style.backgroundImage = 'url(' + url + ')';
+            if(url) el.style.backgroundImage = 'url(' + url + ')';
+
             el.style.backgroundSize = $scope.item.bgSize || 'cover';
 
             $el[0].appendChild(el);
@@ -118,7 +119,7 @@ App.directive('cameraThumbnail', function () {
          var appendImage = function (url) {
             var el = document.createElement('div');
 
-            el.style.backgroundImage = 'url(' + url + ')';
+            if(url) el.style.backgroundImage = 'url(' + url + ')';
             el.style.backgroundSize = $scope.item.bgSize || 'cover';
 
             $el[0].appendChild(el);
@@ -140,10 +141,13 @@ App.directive('cameraThumbnail', function () {
 
             lastUpdate = Date.now();
 
-            api.send({
-               type: "camera_thumbnail",
-               entity_id: $scope.entity.entity_id
-               }, function (res) {
+            if($scope.entity.state === "off") return;
+
+            Api.send({
+                  type: "camera_thumbnail",
+                  entity_id: $scope.entity.entity_id
+               },
+               function (res) {
                   if(!res.result) return;
 
                   var url = 'data:'+res.result.content_type+';base64,' + res.result.content;
