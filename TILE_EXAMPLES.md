@@ -479,7 +479,14 @@ This is a custom tile which can be used for displaying values from different sen
    id: 'group.weather',
    state: '&sensor.dark_sky_summary.state', // label with weather summary (e.g. Sunny)
    fields: { // most of that fields are optional
+      // For weather tile, value returned from icon or iconMap must match one of the
+      // classes defined in styles/weather-icons.css (minus the wu- prefix).
+      // Alternatively, if weather sensor provides absolute URL to an image,
+      // URL prefixed with url: (e.g. icon: 'url:&sensor.dark_sky_icon.attributes.entity_picture') can be returned.
       icon: '&sensor.dark_sky_icon.state',
+      // A map from sensor's state (key) to icon name (value).
+      // As with icon, icon name can be prefixed with url: in which case it
+      // will be treated as absolute URL to an image.
       iconMap: {
          'clear-day': 'clear',
          'clear-night': 'nt-clear',
