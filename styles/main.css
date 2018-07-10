@@ -235,8 +235,13 @@ body {
   margin-top: 0 !important;
 }
 .pages-menu--items {
-  position: relative;
-  top: 50%;
+  display: inline-block;
+  vertical-align: middle;
+}
+.pages-menu--aligner {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
 }
 .pages-menu--item {
   display: block;
@@ -1690,4 +1695,4 @@ input[type=range]::-moz-range-thumb {
     width: 0;
   }
 }
-(node:32562) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+(node:13244) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.

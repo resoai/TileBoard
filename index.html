@@ -163,9 +163,9 @@
    <div class="pages-menu" ng-if="showPagesMenu()"
         ng-class="pagesMenuClasses()">
 
-      <div class="pages-menu--items"
-           ng-style="pagesMenuStyles(pages)">
+      <div class="pages-menu--aligner"></div>
 
+      <div class="pages-menu--items">
          <div ng-repeat="page in pages track by $index"
               class="pages-menu--item" ng-click="openPage(page)"
               ng-class="{'-active': isPageActive(page)}">
