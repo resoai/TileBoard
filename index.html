@@ -20,8 +20,8 @@
    <script src="scripts/vendors/angular.min.js"></script>
    <script src="scripts/vendors/angular-long-press.js"></script>
 
-   <script src="scripts/api.js"></script>
-   <script src="scripts/noty.js"></script>
+   <script src="scripts/models/api.js"></script>
+   <script src="scripts/models/noty.js"></script>
 
    <script src="scripts/app.js"></script>
 
@@ -29,10 +29,10 @@
    <script src="config.js"></script><!-- used in production -->
 
    <script src="scripts/init.js"></script>
-   <script src="scripts/main-controller.js"></script>
-   <script src="scripts/noty-controller.js"></script>
-   <script src="scripts/screensaver-controller.js"></script>
    <script src="scripts/directives.js"></script>
+   <script src="scripts/controllers/main.js"></script>
+   <script src="scripts/controllers/noty.js"></script>
+   <script src="scripts/controllers/screensaver.js"></script>
 </head>
 
 <body ng-controller="Main" ng-class="getBodyClass()">
@@ -233,7 +233,7 @@
             <i class="mdi" ng-class="noty.icon"></i>
          </div>
 
-         <div class="noty-message" ng-bind="noty.message"></div>
+         <div class="noty-message" ng-bind-html="noty.message"></div>
       </div>
       <div class="noty-lifetime" ng-if="noty.lifetime">
          <div class="noty-lifetime-line" ng-style="noty.getLifetimeStyles()"></div>

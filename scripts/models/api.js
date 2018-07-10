@@ -1,8 +1,8 @@
 /**
- * @class Api $Api
+ * @class HApi $Api
  */
 
-var Api = (function () {
+var HApi = (function () {
    var STATUS_LOADING = 1;
    var STATUS_OPENED = 2;
    var STATUS_READY = 3;

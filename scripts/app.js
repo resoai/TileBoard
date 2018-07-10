@@ -86,6 +86,22 @@ var ENTITY_SIZES = {
 
 var PWD_CACHE_KEY = "_pwd1";
 
+window.onerror = function (error, file, line, char) {
+   var text = [
+      error,
+      'File: ' + file,
+      'Line: ' + line + ':' + char
+   ].join("<br>");
+
+   Noty.addObject({
+      type: Noty.ERROR,
+      title: "JS error",
+      message: text,
+      lifetime: 12,
+      id: error
+   });
+};
+
 
 function mergeObjects (a, b) {
    return angular.merge(a, b);

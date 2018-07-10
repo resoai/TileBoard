@@ -1250,21 +1250,21 @@ function MainController ($scope) {
 
    /// INIT
 
-   api.onError(function (data) {
+   Api.onError(function (data) {
       console.error(data);
       addError(data.message);
    });
 
-   api.onReady(function () {
-      api.subscribeEvents("state_changed", function (res) {
+   Api.onReady(function () {
+      Api.subscribeEvents("state_changed", function (res) {
          console.log('subscribed to state_changed', res);
       });
 
-      api.subscribeEvents("tileboard", function (res) {
+      Api.subscribeEvents("tileboard", function (res) {
          console.log('subscribed to tileboard', res);
       });
 
-      api.getStates(function (res) {
+      Api.getStates(function (res) {
          if(res.success) {
             console.log(res.result);
 
@@ -1285,13 +1285,13 @@ function MainController ($scope) {
       });
    });
 
-   api.onUnready(function () {
+   Api.onUnready(function () {
       $scope.ready = false;
 
       updateView();
    });
 
-   api.onMessage(function (data) {
+   Api.onMessage(function (data) {
       handleMessage(data);
    });
 
@@ -1314,7 +1314,7 @@ function MainController ($scope) {
 
       item.loading = true;
 
-      api.send(data, function (res) {
+      Api.send(data, function (res) {
          item.loading = false;
 
          updateView();
