@@ -528,7 +528,7 @@ This is a custom tile which can be used for displaying values from different sen
    title: 'Forecast',
    id: {},
    icons: STATE_MAPS.WEATHER_ICONS,
-   suffixName: 'Wind',
+   secondaryTitle: 'Wind',
    list: [1,2,3,4,5].map(function (id) {
       var d = new Date(Date.now() + id * 24 * 60 * 60 * 1000);
       var date = d.toString().split(' ').slice(1,3).join(' ');
@@ -537,14 +537,14 @@ This is a custom tile which can be used for displaying values from different sen
       forecast += "&sensor.dark_sky_daytime_high_temperature_" + id + ".state";
       forecast += "&sensor.dark_sky_daytime_high_temperature_" + id + ".attributes.unit_of_measurement";
 
-      var suffix = "&sensor.dark_sky_wind_speed_" + id + ".state";
-      suffix += " &sensor.dark_sky_wind_speed_" + id + ".attributes.unit_of_measurement";
+      var wind = "&sensor.dark_sky_wind_speed_" + id + ".state";
+      wind += " &sensor.dark_sky_wind_speed_" + id + ".attributes.unit_of_measurement";
 
       return {
          date: date,
          icon: "&sensor.dark_sky_icon_" + id + ".state",
-         forecast: forecast,
-         suffix: suffix
+         primary: forecast,
+         secondary: wind
       }
    })
 }

@@ -1201,13 +1201,13 @@ camera-thumbnail div {
   width: 30px;
   height: 30px;
 }
-.weather-list-suffix {
+.weather-list--secondary {
   text-align: right;
 }
 .weather-list-header {
   opacity: 0.5;
 }
-.weather-list-header-suffix {
+.weather-list-header--secondary {
   text-align: right;
 }
 .-compact .weather {
@@ -1732,4 +1732,4 @@ input[type=range]::-moz-range-thumb {
     width: 0;
   }
 }
-(node:22599) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+(node:12771) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.

@@ -691,9 +691,11 @@
                <tr class="weather-list-header" ng-hide="item.hideHeader">
                   <th>Date</th>
                   <th></th>
-                  <th>Forecast</th>
-                  <th class="weather-list-header-suffix">
-                     <span ng-bind="itemField('suffixName', item, entity)"></span>
+                  <th>
+                     <span ng-bind="itemField('primaryTitle', item, entity) || 'Forecast'"></span>
+                  </th>
+                  <th class="weather-list-header--secondary">
+                     <span ng-bind="itemField('secondaryTitle', item, entity)"></span>
                   </th>
                </tr>
                <tr ng-repeat="line in item.list track by $index">
@@ -703,11 +705,11 @@
                   <td class="weather-list-icon">
                      <div class="wu " ng-class="'wu-' + weatherListIcon(line, item, entity)"></div>
                   </td>
-                  <td class="weather-list-forecast">
-                     <div ng-bind="weatherListField('forecast', line, item, entity)"></div>
+                  <td class="weather-list--primary">
+                     <div ng-bind="weatherListField('primary', line, item, entity)"></div>
                   </td>
-                  <td class="weather-list-suffix">
-                     <div ng-bind="weatherListField('suffix', line, item, entity)"></div>
+                  <td class="weather-list--secondary">
+                     <div ng-bind="weatherListField('secondary', line, item, entity)"></div>
                   </td>
                </tr>
             </table>
