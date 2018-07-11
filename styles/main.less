@@ -42,6 +42,7 @@
 @TEXT_LIST: rgb(42, 126, 159);
 @INPUT_NUMBER: rgb(5, 164, 140);
 @INPUT_SELECT: rgb(242, 135, 71);
+@INPUT_DATETIME: rgb(242, 71, 84);
 @CLIMATE: rgb(39, 84, 98);
 @CAMERA: rgb(53, 144, 157);
 @CAMERA_THUMBNAIL: rgb(53, 144, 157);
@@ -87,6 +88,7 @@
    &.-th-input_number {background-color: @INPUT_NUMBER;}
    &.-th-climate {background-color: @CLIMATE;}
    &.-th-input_select {background-color: @INPUT_SELECT;}
+   &.-th-input_datetime {background-color: @INPUT_DATETIME;}
    &.-th-camera {background-color: @CAMERA;}
    &.-th-camera_thumbnail {background-color: @CAMERA_THUMBNAIL;}
    &.-th-scene {background-color: @SCENE;}
@@ -408,6 +410,7 @@ body {
    &.-camera_thumbnail,
    &.-alarm,
    &.-door_entry,
+   &.-input_datetime,
    &.-scene {
       cursor: pointer;
 
@@ -639,6 +642,16 @@ body {
       display: inline-block;
       max-width: 70%;
       overflow: hidden;
+
+      &.-datetime {
+         font-size: 24px;
+         line-height: 30px;
+         white-space: normal;
+         max-width: 100%;
+         width: 100%;
+         text-align: left;
+         padding-left: 5px;
+      }
    }
 
    &.-select .item-entity--value {
@@ -1045,7 +1058,7 @@ camera-thumbnail {
 
 @alarmHeight: 423px;
 @alarmWidth: 280px;
-.alarm-popup {
+.alarm-popup, .datetime-popup {
    position: fixed;
    top: 0;
    left: 0;
@@ -1084,6 +1097,10 @@ camera-thumbnail {
       }
    }
 
+   .datetime-popup-container {
+      margin-top: -180px;
+   }
+
    &-state {
       height: 40px;
       color: #fff;
@@ -1108,6 +1125,18 @@ camera-thumbnail {
 
       &-placeholder {
          opacity: 0.3;
+      }
+
+      &--filled {
+         opacity: 1;
+      }
+
+      &--placeholder {
+         opacity: 0.3;
+      }
+
+      &--filled, &--placeholder {
+         font-family: monospace;
       }
    }
 
@@ -1169,9 +1198,16 @@ camera-thumbnail {
          &:active {background: rgb(63, 16, 27);}
       }
 
-      &.-disarm {
+      &.-disarm, &.-success {
          background: rgb(18, 78, 42);
          &:active {background: rgb(15, 52, 26);}
+      }
+
+      &.-disabled {
+         background: #444;
+         color: #aaa;
+         cursor: not-allowed;
+         &:active {background: #444;}
       }
    }
 

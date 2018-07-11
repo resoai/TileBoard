@@ -160,6 +160,53 @@
       </div>
    </div>
 
+   <div class="datetime-popup"
+        ng-if="activeDatetime && (dtEntity = getItemEntity(activeDatetime))">
+
+      <div class="datetime-popup-overlay" ng-click="closeDatetime()"></div>
+
+      <div class="datetime-popup-container">
+         <div class="datetime-popup--close" ng-click="closeDatetime()">
+            <i class="mdi mdi-close"></i>
+         </div>
+
+         <div class="datetime-popup-state">
+            <span ng-bind="entityState(activeDatetime, dtEntity)"></span>
+         </div>
+
+         <div class="datetime-popup-input-container">
+            <div class="datetime-popup-input">
+               <span class="datetime-popup-input--filled"
+                     ng-bind="getActiveDatetimeInput()"></span><!--
+            --><span class="datetime-popup-input--placeholder"
+                     ng-bind="getActiveDatetimePlaceholder()"></span>
+            </div>
+         </div>
+
+         <div class="datetime-popup-buttons">
+            <div class="datetime-popup-buttons-line"
+                 ng-repeat="line in [6, 3, 0] track by $index">
+               <div class="datetime-popup-button" ng-bind="button + line"
+                    ng-click="inputDatetime(button + line)"
+                    ng-repeat="button in [1, 2, 3] track by $index"></div>
+            </div>
+
+            <div class="datetime-popup-buttons-line">
+               <div class="datetime-popup-button -warning" ng-click="clearCharDatetime()">
+                  <div class="mdi mdi-arrow-left"></div>
+               </div>
+               <div class="datetime-popup-button" ng-click="inputDatetime(0)">0</div>
+
+               <div class="datetime-popup-button -success"
+                    ng-class="{'-disabled': !activeDatetimeValid()}"
+                    ng-click="sendDatetime()">
+                  <div class="mdi mdi-check"></div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
    <div class="pages-menu" ng-if="showPagesMenu()"
         ng-class="pagesMenuClasses()">
 
@@ -546,6 +593,14 @@
             </span>
             <span ng-if="(_unit = entityUnit(item, entity))"
                   class="item-entity--unit" ng-bind="_unit"></span>
+         </div>
+      </div>
+
+      <div ng-if="item.type === TYPES.INPUT_DATETIME"
+           class="item-entity-container">
+         <div class="item-entity">
+            <span ng-bind="entityValue(item, entity)"
+                  class="item-entity--value -datetime"></span>
          </div>
       </div>
 

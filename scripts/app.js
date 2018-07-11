@@ -42,6 +42,7 @@ var TYPES = {
    TEXT_LIST: 'text_list',
    INPUT_NUMBER: 'input_number',
    INPUT_SELECT: 'input_select',
+   INPUT_DATETIME: 'input_datetime',
    CAMERA: 'camera',
    CAMERA_THUMBNAIL: 'camera_thumbnail',
    SCENE: 'scene',

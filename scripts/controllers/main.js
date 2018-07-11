@@ -13,6 +13,9 @@ function MainController ($scope) {
    $scope.errors = [];
    $scope.states = {};
 
+   $scope.activeDatetime = null;
+   $scope.datetimeString = null;
+
    $scope.activeCamera = null;
    $scope.activeDoorEntry = null;
 
@@ -53,6 +56,8 @@ function MainController ($scope) {
          case TYPES.ALARM: return $scope.openAlarm(item, entity);
 
          case TYPES.CUSTOM: return $scope.customTileAction(item, entity);
+
+         case TYPES.INPUT_DATETIME: return $scope.openDatetime(item, entity);
       }
    };
 
@@ -371,6 +376,7 @@ function MainController ($scope) {
 
          if(res) return res;
       }
+
       if(!item.state) return entity.state;
 
       return item.state;
@@ -1185,9 +1191,25 @@ function MainController ($scope) {
    $scope.openCamera = function (item) {
       $scope.activeCamera = item;
    };
-
    $scope.closeCamera = function () {
       $scope.activeCamera = null;
+   };
+
+   $scope.openDatetime = function (item, entity) {
+      $scope.activeDatetime = item;
+
+      if(entity.attributes && entity.attributes.has_date) {
+         var d = new Date();
+
+         $scope.datetimeString = d.getFullYear() + "";
+         $scope.datetimeString += leadZero(d.getMonth());
+         $scope.datetimeString += leadZero(d.getDate());
+      }
+   };
+
+   $scope.closeDatetime = function () {
+      $scope.activeDatetime = null;
+      $scope.datetimeString = null;
    };
 
    $scope.closeDoorEntry = function () {
@@ -1317,6 +1339,102 @@ function MainController ($scope) {
    $scope.clearAlarm = function () {
       $scope.alarmCode = "";
    };
+
+   $scope.sendDatetime = function () {
+      if(!$scope.activeDatetimeValid()) return;
+
+      var item = $scope.activeDatetime;
+      var entity = $scope.getItemEntity(item);
+
+      var str = $scope.getActiveDatetimeInput();
+      var dt = str.split(' ');
+
+      var data = {entity_id: item.id};
+
+      if(entity.attributes.has_date) data.date = dt[0];
+      if(entity.attributes.has_time) data.time = dt[1] || dt[0];
+
+      sendItemData(item, {
+         type: "call_service",
+         domain: "input_datetime",
+         service: "set_datetime",
+         service_data: data
+      });
+   };
+
+   $scope.inputDatetime = function (num) {
+      var entity = $scope.getItemEntity($scope.activeDatetime);
+
+      if(!entity) return;
+
+      var placeholder = getDatetimePlaceholder(entity);
+
+      placeholder = placeholder.replace(/\W/gi, "");
+
+      $scope.datetimeString = $scope.datetimeString || "";
+
+      if($scope.datetimeString.length >= placeholder.length) return;
+
+      $scope.datetimeString += num;
+   };
+
+   $scope.clearCharDatetime = function () {
+      if($scope.datetimeString) {
+         $scope.datetimeString = $scope.datetimeString
+            .slice(0, $scope.datetimeString.length - 1);
+      }
+   };
+
+   $scope.getActiveDatetimeInput = function () {
+      var entity = $scope.getItemEntity($scope.activeDatetime);
+      var placeholder = getDatetimePlaceholder(entity);
+
+      var res = $scope.datetimeString || "";
+
+      var i = 0;
+
+      return placeholder.replace(/\w|\W/gi, function (match, index) {
+         if(i >= res.length) return "";
+
+         if(/\W/.test(match)) return match;
+
+         return res[i++];
+      });
+   };
+
+   $scope.getActiveDatetimePlaceholder = function () {
+      var entity = $scope.getItemEntity($scope.activeDatetime);
+      var placeholder = getDatetimePlaceholder(entity);
+
+      var dt = $scope.getActiveDatetimeInput() || "";
+
+      return placeholder.slice(dt.length);
+   };
+
+   $scope.activeDatetimeValid = function () {
+      var entity = $scope.getItemEntity($scope.activeDatetime);
+
+      if(!entity) return false;
+
+      var placeholder = getDatetimePlaceholder(entity);
+
+      placeholder = placeholder.replace(/\W/gi, "");
+
+      $scope.datetimeString = $scope.datetimeString || "";
+
+      return $scope.datetimeString.length === placeholder.length
+   };
+
+   function getDatetimePlaceholder (entity) {
+      var res = [];
+
+      if(!entity || !entity.attributes) return null;
+
+      if(entity.attributes.has_date) res.push("YYYY-MM-DD");
+      if(entity.attributes.has_time) res.push("hh:mm");
+
+      return res.join(" ");
+   }
 
 
    /// INIT
