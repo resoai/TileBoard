@@ -2,6 +2,7 @@
 
 .wu {
    display: inline-block;
+   background-position: center center;
    background-repeat: no-repeat;
    padding: 0;
    margin: 0;
@@ -14,45 +15,45 @@
 .wu-128 { width: 128px; height: 128px; }
 .wu-256 { width: 256px; height: 256px; }
 
-.wu-chanceflurries { background: url(../images/weather-icons/chanceflurries.svg); }
-.wu-chancerain { background: url(../images/weather-icons/chancerain.svg); }
-.wu-chancesleet { background: url(../images/weather-icons/chancesleet.svg); }
-.wu-chancesnow { background: url(../images/weather-icons/chancesnow.svg); }
-.wu-chancetstorms { background: url(../images/weather-icons/chancetstorms.svg); }
-.wu-clear { background: url(../images/weather-icons/clear.svg); }
-.wu-cloudy { background: url(../images/weather-icons/cloudy.svg); }
-.wu-flurries { background: url(../images/weather-icons/flurries.svg); }
-.wu-fog { background: url(../images/weather-icons/fog.svg); }
-.wu-hazy { background: url(../images/weather-icons/hazy.svg); }
-.wu-mostlycloudy { background: url(../images/weather-icons/mostlycloudy.svg); }
-.wu-mostlysunny { background: url(../images/weather-icons/mostlysunny.svg); }
-.wu-partlycloudy { background: url(../images/weather-icons/partlycloudy.svg); }
-.wu-partlysunny { background: url(../images/weather-icons/partlysunny.svg); }
-.wu-rain { background: url(../images/weather-icons/rain.svg); }
-.wu-sleet { background: url(../images/weather-icons/sleet.svg); }
-.wu-snow { background: url(../images/weather-icons/snow.svg); }
-.wu-sunny { background: url(../images/weather-icons/sunny.svg); }
-.wu-tstorms { background: url(../images/weather-icons/tstorms.svg); }
-.wu-unknown { background: url(../images/weather-icons/unknown.svg); }
+.wu-chanceflurries { background-image: url(../images/weather-icons/chanceflurries.svg); }
+.wu-chancerain { background-image: url(../images/weather-icons/chancerain.svg); }
+.wu-chancesleet { background-image: url(../images/weather-icons/chancesleet.svg); }
+.wu-chancesnow { background-image: url(../images/weather-icons/chancesnow.svg); }
+.wu-chancetstorms { background-image: url(../images/weather-icons/chancetstorms.svg); }
+.wu-clear { background-image: url(../images/weather-icons/clear.svg); }
+.wu-cloudy { background-image: url(../images/weather-icons/cloudy.svg); }
+.wu-flurries { background-image: url(../images/weather-icons/flurries.svg); }
+.wu-fog { background-image: url(../images/weather-icons/fog.svg); }
+.wu-hazy { background-image: url(../images/weather-icons/hazy.svg); }
+.wu-mostlycloudy { background-image: url(../images/weather-icons/mostlycloudy.svg); }
+.wu-mostlysunny { background-image: url(../images/weather-icons/mostlysunny.svg); }
+.wu-partlycloudy { background-image: url(../images/weather-icons/partlycloudy.svg); }
+.wu-partlysunny { background-image: url(../images/weather-icons/partlysunny.svg); }
+.wu-rain { background-image: url(../images/weather-icons/rain.svg); }
+.wu-sleet { background-image: url(../images/weather-icons/sleet.svg); }
+.wu-snow { background-image: url(../images/weather-icons/snow.svg); }
+.wu-sunny { background-image: url(../images/weather-icons/sunny.svg); }
+.wu-tstorms { background-image: url(../images/weather-icons/tstorms.svg); }
+.wu-unknown { background-image: url(../images/weather-icons/unknown.svg); }
 
 
-.wu-nt-chanceflurries { background: url(../images/weather-icons/nt_chanceflurries.svg); }
-.wu-nt-chancerain { background: url(../images/weather-icons/nt_chancerain.svg); }
-.wu-nt-chancesleet { background: url(../images/weather-icons/nt_chancesleet.svg); }
-.wu-nt-chancesnow { background: url(../images/weather-icons/nt_chancesnow.svg); }
-.wu-nt-chancetstorms { background: url(../images/weather-icons/nt_chancetstorms.svg); }
-.wu-nt-clear { background: url(../images/weather-icons/nt_clear.svg); }
-.wu-nt-cloudy { background: url(../images/weather-icons/nt_cloudy.svg); }
-.wu-nt-flurries { background: url(../images/weather-icons/nt_flurries.svg); }
-.wu-nt-fog { background: url(../images/weather-icons/nt_fog.svg); }
-.wu-nt-hazy { background: url(../images/weather-icons/nt_hazy.svg); }
-.wu-nt-mostlycloudy { background: url(../images/weather-icons/nt_mostlycloudy.svg); }
-.wu-nt-mostlysunny { background: url(../images/weather-icons/nt_mostlysunny.svg); }
-.wu-nt-partlycloudy { background: url(../images/weather-icons/nt_partlycloudy.svg); }
-.wu-nt-partlysunny { background: url(../images/weather-icons/nt_partlysunny.svg); }
-.wu-nt-rain { background: url(../images/weather-icons/nt_rain.svg); }
-.wu-nt-sleet { background: url(../images/weather-icons/nt_sleet.svg); }
-.wu-nt-snow { background: url(../images/weather-icons/nt_snow.svg); }
-.wu-nt-sunny { background: url(../images/weather-icons/nt_sunny.svg); }
-.wu-nt-tstorms { background: url(../images/weather-icons/nt_tstorms.svg); }
-.wu-nt-unknown { background: url(../images/weather-icons/nt_unknown.svg); }
+.wu-nt-chanceflurries { background-image: url(../images/weather-icons/nt_chanceflurries.svg); }
+.wu-nt-chancerain { background-image: url(../images/weather-icons/nt_chancerain.svg); }
+.wu-nt-chancesleet { background-image: url(../images/weather-icons/nt_chancesleet.svg); }
+.wu-nt-chancesnow { background-image: url(../images/weather-icons/nt_chancesnow.svg); }
+.wu-nt-chancetstorms { background-image: url(../images/weather-icons/nt_chancetstorms.svg); }
+.wu-nt-clear { background-image: url(../images/weather-icons/nt_clear.svg); }
+.wu-nt-cloudy { background-image: url(../images/weather-icons/nt_cloudy.svg); }
+.wu-nt-flurries { background-image: url(../images/weather-icons/nt_flurries.svg); }
+.wu-nt-fog { background-image: url(../images/weather-icons/nt_fog.svg); }
+.wu-nt-hazy { background-image: url(../images/weather-icons/nt_hazy.svg); }
+.wu-nt-mostlycloudy { background-image: url(../images/weather-icons/nt_mostlycloudy.svg); }
+.wu-nt-mostlysunny { background-image: url(../images/weather-icons/nt_mostlysunny.svg); }
+.wu-nt-partlycloudy { background-image: url(../images/weather-icons/nt_partlycloudy.svg); }
+.wu-nt-partlysunny { background-image: url(../images/weather-icons/nt_partlysunny.svg); }
+.wu-nt-rain { background-image: url(../images/weather-icons/nt_rain.svg); }
+.wu-nt-sleet { background-image: url(../images/weather-icons/nt_sleet.svg); }
+.wu-nt-snow { background-image: url(../images/weather-icons/nt_snow.svg); }
+.wu-nt-sunny { background-image: url(../images/weather-icons/nt_sunny.svg); }
+.wu-nt-tstorms { background-image: url(../images/weather-icons/nt_tstorms.svg); }
+.wu-nt-unknown { background-image: url(../images/weather-icons/nt_unknown.svg); }

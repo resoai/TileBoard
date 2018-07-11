@@ -1,6 +1,7 @@
 
 /sensors.js
 /config.js
+.DS_Store
 .idea/*
 .idea
 *.map

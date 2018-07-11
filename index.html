@@ -625,11 +625,8 @@
       <div ng-if="item.type === TYPES.WEATHER"
            class="item-entity-container">
          <div class="weather">
-            <div class="weather-icon-container" ng-if="getWeatherIcon(item, entity)">
-               <div class="weather-icon">
-                  <div class="wu " ng-class="'wu-' + getWeatherIcon(item, entity)"></div>
-               </div>
-            </div>
+            <weather-icon data-item="item" data-entity="entity"
+                          data-get-weather-icon="getWeatherIcon(item, entity)"></weather-icon>
 
             <div class="weather-temperature" ng-if="item.fields.temperature">
                <span ng-bind="getWeatherField('temperature', item, entity)"></span>

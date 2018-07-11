@@ -257,3 +257,46 @@ App.directive('iframeTile', ['$interval', function ($interval) {
       }
    }
 }]);
+
+App.directive('weatherIcon', [function () {
+   return {
+      restrict: 'E',
+      scope: {
+         item: '=',
+         entity: '=',
+         getWeatherIcon: '&',
+      },
+      template: `
+         <div class="weather-icon-container" ng-if="iconClass || iconStyle">
+            <div class="weather-icon">
+               <div class="wu" ng-class="iconClass" ng-style="iconStyle"></div>
+            </div>
+         </div>
+      `,
+      link: function ($scope, $el, attrs) {
+         $scope.iconClass = '';
+         $scope.iconStyle = {};
+
+         var updateIcon = function () {
+            var iconValue = $scope.getWeatherIcon({
+               item: $scope.item,
+               entity: $scope.entity,
+            });
+
+            $scope.iconClass = '';
+            $scope.iconStyle = {};
+
+            if(iconValue && iconValue.slice(0, 4) === 'url:') {
+               $scope.iconStyle = {
+                  backgroundImage: 'url("' + iconValue.slice(4) + '")',
+               };
+            } else if(iconValue) {
+               $scope.iconClass = 'wu-' + iconValue;
+            }
+         };
+
+         $scope.$watchCollection('entity', updateIcon);
+         $scope.$watchCollection('item', updateIcon);
+      }
+   }
+}]);
