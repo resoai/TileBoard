@@ -250,10 +250,12 @@
    <div class="screensaver-slides" ng-if="isShowed">
       <div class="screensaver-slide" ng-style="getSlideStyle(slide)"
            ng-class="getSlideClasses($index, slide)"
-           ng-repeat="slide in slides track by $index"></div>
+           ng-repeat="slide in slides track by $index">
+           <div class="screensaver-html" ng-if="slide.html" ng-bind-html="slide.html"></div>
+      </div>
    </div>
 
-   <div class="screensaver-content" ng-if="isShowed">
+   <div class="screensaver-content" ng-if="isShowed && !hideOverlay">
       <div class="screensaver-datetime">
          <div class="screensaver-time">
             <clock></clock>
