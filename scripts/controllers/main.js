@@ -503,7 +503,7 @@ function MainController ($scope) {
       }
 
       if(item.icons && (iconImage in item.icons)) {
-         item.icons = item.icons[iconImage];
+         iconImage = item.icons[iconImage];
       }
 
       if(!iconImage) return null;
