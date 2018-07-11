@@ -286,10 +286,10 @@ Tile Object. [Click here for some real life examples](TILE_EXAMPLES.md)
   list: [{title: 'Kitchen temp', icon: 'mdi-home', value: '&sensor.kitchen_temp.state'}],
 
   /** type: MEDIA_PLAYER **/
-  /* showSource: Whether the source selector should be displayed
+  /* hideSource: Whether the source selector should be hidden
    * Value options: true, false
    */
-  showSource: false,
+  hideSource: false,
 
   /** type: SLIDER **/
   /* filter: Function for filtering/formatting the value */

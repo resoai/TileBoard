@@ -328,11 +328,14 @@ Locks and unlocks the lock on tap. Also shows icon depending on the state<br>
 ```js
 {
    position: [0, 3],
-   width: 2,
    id: 'media_player.volumio',
    type: TYPES.MEDIA_PLAYER,
-   state: '@attributes.media_title',
-   bgSuffix: '@attributes.entity_picture', // show picture of current media as a background
+   hideSource: false,
+   hideMuteButton: false,
+   state: false,
+   //state: '@attributes.media_title',
+   subtitle: '@attributes.media_title',
+   bgSuffix: '@attributes.entity_picture',
 },
 ```
 

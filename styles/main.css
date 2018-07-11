@@ -1321,19 +1321,11 @@ camera-thumbnail div {
 .-compact .weather-line.-items {
   margin-bottom: 5px;
 }
-.media-player {
-  padding: 15px 7px;
-}
-.media-player--main-button {
-  position: absolute;
-  left: 5px;
-  top: 20px;
-}
 .media-player--main-button span {
   display: inline-block;
-  width: 65px;
-  height: 65px;
-  line-height: 65px;
+  width: 55px;
+  height: 55px;
+  line-height: 55px;
   text-align: center;
   font-size: 50px;
   cursor: pointer;
@@ -1341,39 +1333,90 @@ camera-thumbnail div {
 .media-player--main-button span:active {
   background: rgba(0, 0, 0, 0.3);
 }
-.media-player--buttons {
-  position: absolute;
-  right: 5px;
-  top: 25px;
-  width: 240px;
-  white-space: normal;
-  text-align: right;
-}
-.media-player--buttons .media-player--button {
-  width: 34px;
-  height: 34px;
-  margin: 3px;
+.media-player--button {
+  width: 35px;
+  height: 35px;
+  margin: 0 2px 0 3px;
   font-size: 26px;
-  line-height: 34px;
+  line-height: 35px;
   text-align: center;
   display: inline-block;
   cursor: pointer;
 }
-.media-player--buttons .media-player--button:active {
+.media-player--button:active {
   background: rgba(0, 0, 0, 0.3);
-}
-.media-player--volume {
-  margin-top: 90px;
-}
-.media-player--source {
-  position: absolute;
-  padding: 5px 8px 5px 5px;
-  cursor: pointer;
-  right: 5px;
-  top: 68px;
 }
 .media-player--source:active {
   background: rgba(0, 0, 0, 0.3);
+}
+.media-player-table {
+  width: 100%;
+  height: 100%;
+}
+.media-player-table table {
+  width: 100%;
+  height: 100%;
+  border-collapse: separate !important;
+  border-spacing: 0;
+}
+.media-player-table table th,
+.media-player-table table td {
+  padding: 0;
+  border: 0;
+}
+.media-player-table--space {
+  height: 50%;
+}
+.media-player-table--td-mute {
+  height: 30px;
+  width: 34px;
+}
+.media-player-table--td-mute div {
+  margin-top: -4px;
+}
+.media-player-table--td-buttons {
+  text-align: right;
+}
+.media-player-table--td-source {
+  min-height: 30px;
+  max-height: 35px;
+}
+.media-player-table--td-source .media-player--source {
+  min-height: 30px;
+  max-height: 35px;
+  line-height: 30px;
+  text-align: right;
+  font-size: 16px;
+  padding-right: 6px;
+  font-weight: 500;
+}
+.media-player-table--td-main-button {
+  width: 50px;
+  height: 50px;
+}
+.media-player-table--td-main-button .media-player--main-button {
+  margin-bottom: -5px;
+}
+.media-player-table--td-volume {
+  min-height: 25px;
+  max-height: 35px;
+  padding: 0 5px !important;
+}
+.media-player-table--td-volume .media-player--volume {
+  margin: -3px 0 -2px;
+}
+.media-player-table.-has-state .media-player-table--td-main-button .media-player--main-button span {
+  height: 45px;
+  width: 45px;
+  font-size: 50px;
+  line-height: 45px;
+  margin-top: 20px;
+}
+.media-player-table.-has-state .media-player-table--td-buttons {
+  vertical-align: bottom;
+}
+.media-player-table.-has-subtitle .media-player-table--td-mute {
+  padding-top: 18px;
 }
 .item-cover {
   position: absolute;
@@ -1819,4 +1862,4 @@ input[type=range]::-moz-range-thumb {
     width: 0;
   }
 }
-(node:13820) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
+(node:25447) [DEP0026] DeprecationWarning: util.print is deprecated. Use console.log instead.
