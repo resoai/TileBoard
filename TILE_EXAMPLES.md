@@ -527,7 +527,18 @@ This is a custom tile which can be used for displaying values from different sen
    height: 2,
    title: 'Forecast',
    id: {},
-   icons: STATE_MAPS.WEATHER_ICONS,
+   icons: {
+      'clear-day': 'clear',
+      'clear-night': 'nt-clear',
+      'cloudy': 'cloudy',
+      'rain': 'rain',
+      'sleet': 'sleet',
+      'snow': 'snow',
+      'wind': 'hazy',
+      'fog': 'fog',
+      'partly-cloudy-day': 'partlycloudy',
+      'partly-cloudy-night': 'nt-partlycloudy'
+   },
    secondaryTitle: 'Wind',
    list: [1,2,3,4,5].map(function (id) {
       var d = new Date(Date.now() + id * 24 * 60 * 60 * 1000);
