@@ -241,6 +241,18 @@ Allows you to toggle a fan on and off, as well as set the speed.
 }
 ```
 
+
+#### INPUT_DATETIME
+![INPUT_DATETIME](images/tile-screenshots/INPUT_DATETIME.png)
+```js
+{
+   position: [0, 3],
+   type: TYPES.INPUT_DATETIME,
+   state: false,
+   id: "input_datetime.both_date_and_time",
+}
+```
+
 #### LIGHT
 Light switch. You can optionally define sliders to control colour temperature or in fact anything else. Sliders will show up after long press on the tile.<br>
 ![LIGHT](images/tile-screenshots/LIGHT.png)
