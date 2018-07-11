@@ -499,11 +499,11 @@ function MainController ($scope) {
       var iconImage = parseFieldValue(item.iconImage, item, entity);
 
       if(typeof item.icons === "function") {
-         return callFunction(item.icons, [iconImage, item, entity]);
+         iconImage = callFunction(item.icons, [iconImage, item, entity]);
       }
 
       if(item.icons && (iconImage in item.icons)) {
-         iconImage = item.icons[iconImage];
+         item.icons = item.icons[iconImage];
       }
 
       if(!iconImage) return null;
@@ -541,10 +541,12 @@ function MainController ($scope) {
       if(!iconImage) return null;
 
       if(typeof item.icons === "function") {
-         return callFunction(item.icons, [iconImage, item, entity]);
+         iconImage = callFunction(item.icons, [iconImage, item, entity]);
       }
 
-      if(item.icons && (iconImage in item.icons)) iconImage = item.icons[iconImage];
+      if(item.icons && (iconImage in item.icons)) {
+         iconImage = item.icons[iconImage];
+      }
 
       if(!iconImage) return null;
 
