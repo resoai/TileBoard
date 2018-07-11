@@ -498,11 +498,13 @@ function MainController ($scope) {
 
       var iconImage = parseFieldValue(item.iconImage, item, entity);
 
-      var map = item.icons;
+      if(typeof item.icons === "function") {
+         return callFunction(item.icons, [iconImage, item, entity]);
+      }
 
-      if(typeof map === "function") return callFunction(map, [iconImage, item, entity]);
-
-      if(iconImage in item.icons) iconImage = item.icons[iconImage];
+      if(item.icons && (iconImage in item.icons)) {
+         iconImage = item.icons[iconImage];
+      }
 
       if(!iconImage) return null;
 
