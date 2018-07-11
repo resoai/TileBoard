@@ -478,20 +478,21 @@ This is a custom tile which can be used for displaying values from different sen
    type: TYPES.WEATHER,
    id: 'group.weather',
    state: '&sensor.dark_sky_summary.state', // label with weather summary (e.g. Sunny)
+   icon: '&sensor.dark_sky_icon.state',
+   //iconImage: '&sensor.dark_sky_icon.state', // use this one if you want to replace icon with image
+   icons: {
+      'clear-day': 'clear',
+      'clear-night': 'nt-clear',
+      'cloudy': 'cloudy',
+      'rain': 'rain',
+      'sleet': 'sleet',
+      'snow': 'snow',
+      'wind': 'hazy',
+      'fog': 'fog',
+      'partly-cloudy-day': 'partlycloudy',
+      'partly-cloudy-night': 'nt-partlycloudy'
+   },
    fields: { // most of that fields are optional
-      icon: '&sensor.dark_sky_icon.state',
-      iconMap: {
-         'clear-day': 'clear',
-         'clear-night': 'nt-clear',
-         'cloudy': 'cloudy',
-         'rain': 'rain',
-         'sleet': 'sleet',
-         'snow': 'snow',
-         'wind': 'hazy',
-         'fog': 'fog',
-         'partly-cloudy-day': 'partlycloudy',
-         'partly-cloudy-night': 'nt-partlycloudy'
-      },
       summary: '&sensor.dark_sky_summary.state',
       apparentTemperature: '&sensor.dark_sky_apparent_temperature.state',
       apparentTemperatureUnit: '&sensor.dark_sky_apparent_temperature.attributes.unit_of_measurement',
@@ -539,6 +540,7 @@ This is a custom tile which can be used for displaying values from different sen
       'partly-cloudy-day': 'partlycloudy',
       'partly-cloudy-night': 'nt-partlycloudy'
    },
+   hideHeader: false,
    secondaryTitle: 'Wind',
    list: [1,2,3,4,5].map(function (id) {
       var d = new Date(Date.now() + id * 24 * 60 * 60 * 1000);
@@ -554,6 +556,7 @@ This is a custom tile which can be used for displaying values from different sen
       return {
          date: date,
          icon: "&sensor.dark_sky_icon_" + id + ".state",
+         //iconImage: null, replace icon with image
          primary: forecast,
          secondary: wind
       }

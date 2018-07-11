@@ -1266,16 +1266,26 @@ camera-thumbnail {
    padding: 3px 7px;
 
    &-icon {
-      display: inline-block;
-      margin: 20px auto 5px;
+      &, &-image {
+         display: inline-block;
+         margin: 20px auto 5px;
 
-      > div {
-         width: 90px;
-         height: 90px;
+         > div {
+            width: 90px;
+            height: 90px;
+         }
       }
 
       &-container {
          text-align: center;
+      }
+
+      &-image {
+         div {
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+         }
       }
    }
 
@@ -1339,13 +1349,21 @@ camera-thumbnail {
       }
    }
 
-   &-icon {
+   &-icon, &-icon-image {
       text-align: center;
       font-size: 0;
 
       > div {
          width: 30px;
          height: 30px;
+      }
+   }
+
+   &-icon-image {
+      div {
+         background-size: contain;
+         background-position: center;
+         background-repeat: no-repeat;
       }
    }
 
@@ -1369,12 +1387,14 @@ camera-thumbnail {
       text-align: left;
 
       &-icon {
-         display: inline-block;
-         margin: 15px 0 0;
+         &, &-image {
+            display: inline-block;
+            margin: 15px 0 0;
 
-         > div {
-            width: 55px;
-            height: 55px;
+            > div {
+               width: 55px;
+               height: 55px;
+            }
          }
 
          &-container {

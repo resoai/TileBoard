@@ -625,9 +625,14 @@
       <div ng-if="item.type === TYPES.WEATHER"
            class="item-entity-container">
          <div class="weather">
-            <div class="weather-icon-container" ng-if="getWeatherIcon(item, entity)">
-               <div class="weather-icon">
-                  <div class="wu " ng-class="'wu-' + getWeatherIcon(item, entity)"></div>
+            <div class="weather-icon-container">
+               <div class="weather-icon"
+                    ng-if="(_icon = getWeatherIcon(item, entity))">
+                  <div class="wu " ng-class="'wu-' + _icon"></div>
+               </div>
+               <div class="weather-icon-image"
+                    ng-if="(_imgStyles = getWeatherImageStyles(item, entity))">
+                  <div ng-style="_imgStyles"></div>
                </div>
             </div>
 
@@ -702,8 +707,15 @@
                   <td class="weather-list-date">
                      <div ng-bind="weatherListField('date', line, item, entity)"></div>
                   </td>
-                  <td class="weather-list-icon">
-                     <div class="wu " ng-class="'wu-' + weatherListIcon(line, item, entity)"></div>
+                  <td class="weather-list-icon-container">
+                     <div class="weather-list-icon"
+                          ng-if="(_icon = weatherListIcon(line, item, entity))">
+                        <div class="wu " ng-class="'wu-' + _icon"></div>
+                     </div>
+                     <div class="weather-list-icon-image"
+                          ng-if="(_imgStyles = weatherListImageStyles(line, item, entity))">
+                        <div ng-style="_imgStyles"></div>
+                     </div>
                   </td>
                   <td class="weather-list--primary">
                      <div ng-bind="weatherListField('primary', line, item, entity)"></div>

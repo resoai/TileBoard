@@ -380,11 +380,7 @@ function MainController ($scope) {
       var state = entity.state;
 
       if(item.icon) {
-         if(typeof item.icon === "function") {
-            return callFunction(item.icon, [item, entity]);
-         }
-
-         return item.icon;
+         state = parseFieldValue(item.icon, item, entity);
       }
 
       if(!item.icons) return state;
@@ -393,7 +389,7 @@ function MainController ($scope) {
          return callFunction(item.icons, [item, entity]);
       }
 
-      return item.icons[state] || state;
+      return item.icons[state] || null;
    };
 
    $scope.entityTitle = function (item, entity) {
@@ -464,17 +460,57 @@ function MainController ($scope) {
    };
 
    $scope.getWeatherIcon = function (item, entity) {
-      var icon = $scope.getWeatherField('icon', item, entity);
+      var icon;
+
+      if(item.icon || item.icons) {
+         icon = $scope.entityIcon(item, entity);
+      }
+
+      if(!icon) {
+         icon = $scope.getWeatherField('icon', item, entity);
+
+         if(icon) console.warn(
+            "`icon` field inside fields is deprecated for WEATHER tile, " +
+            "please move it to the tile object");
+      }
 
       if(!icon) return null;
 
-      var map = item.fields.iconMap;
+      var map = item.icons;
+
+      if(!map && item.fields.iconMap) {
+         map = item.fields.iconMap;
+
+         if(icon) console.warn(
+            "`iconMap` field inside fields is deprecated for WEATHER tile, " +
+            "please move it to the tile object as `icons`");
+      }
 
       if(typeof map === "function") return callFunction(map, [icon, item, entity]);
 
       if(!map) return icon;
 
       return map[icon] || icon;
+   };
+
+   $scope.getWeatherImageStyles = function (item, entity) {
+      if(!item.iconImage) return null;
+
+      var iconImage = parseFieldValue(item.iconImage, item, entity);
+
+      var map = item.icons;
+
+      if(typeof map === "function") return callFunction(map, [iconImage, item, entity]);
+
+      if(iconImage in item.icons) iconImage = item.icons[iconImage];
+
+      if(!iconImage) return null;
+
+      if(!item._imgStyles) item._imgStyles = {};
+
+      item._imgStyles['backgroundImage'] = 'url("' + iconImage + '")';
+
+      return item._imgStyles;
    };
 
    $scope.weatherListField = function (field, line, item, entity) {
@@ -495,6 +531,26 @@ function MainController ($scope) {
       if(!item.icons) return icon;
 
       return item.icons[icon] || icon;
+   };
+
+   $scope.weatherListImageStyles = function (line, item, entity) {
+      var iconImage = $scope.weatherListField('iconImage', line, item, entity);
+
+      if(!iconImage) return null;
+
+      if(typeof item.icons === "function") {
+         return callFunction(item.icons, [iconImage, item, entity]);
+      }
+
+      if(item.icons && (iconImage in item.icons)) iconImage = item.icons[iconImage];
+
+      if(!iconImage) return null;
+
+      if(!line._imgStyles) line._imgStyles = {};
+
+      line._imgStyles['backgroundImage'] = 'url("' + iconImage + '")';
+
+      return line._imgStyles;
    };
 
    $scope.slidesStyles = function (item, $index) {
