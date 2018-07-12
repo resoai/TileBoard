@@ -569,7 +569,6 @@ body {
   opacity: 0.9;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
   z-index: 2;
 }
 .item-state {
@@ -585,7 +584,6 @@ body {
   z-index: 2;
   max-width: 131px;
   text-overflow: ellipsis;
-  white-space: nowrap;
   overflow: hidden;
 }
 .item-entity {
