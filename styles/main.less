@@ -2025,7 +2025,7 @@ input[type=range]::-moz-range-thumb {
 
       &.-bottom {
          padding: 3px;
-         background: rgba(32, 35, 37, 0.35);
+         background: rgba(32, 35, 37, 0.4);
          bottom: 0;
       }
 
@@ -2036,6 +2036,12 @@ input[type=range]::-moz-range-thumb {
             width: 38px;
             height: 38px;
             margin: 3px 5px;
+            opacity: 0.6;
+
+            &.-active {
+               opacity: 1;
+               background: rgba(32, 35, 37, 0.4);
+            }
          }
       }
 

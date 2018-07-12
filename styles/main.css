@@ -1763,7 +1763,7 @@ input[type=range]::-moz-range-thumb {
 .-theme-winphone .pages-menu.-bottom,
 .-theme-mobile .pages-menu.-bottom {
   padding: 3px;
-  background: rgba(32, 35, 37, 0.35);
+  background: rgba(32, 35, 37, 0.4);
   bottom: 0;
 }
 .-theme-winphone .pages-menu .pages-menu--item,
@@ -1773,6 +1773,12 @@ input[type=range]::-moz-range-thumb {
   width: 38px;
   height: 38px;
   margin: 3px 5px;
+  opacity: 0.6;
+}
+.-theme-winphone .pages-menu .pages-menu--item.-active,
+.-theme-mobile .pages-menu .pages-menu--item.-active {
+  opacity: 1;
+  background: rgba(32, 35, 37, 0.4);
 }
 @media (min-width: 500px) {
   .-theme-winphone .pages-menu,
