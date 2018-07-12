@@ -1417,7 +1417,15 @@ camera-thumbnail div {
   vertical-align: bottom;
 }
 .media-player-table.-has-subtitle .media-player-table--td-mute {
-  padding-top: 18px;
+  padding-top: 21px;
+  width: 32px;
+  height: 32px;
+}
+.media-player-table.-has-subtitle .media-player-table--td-mute .media-player--button {
+  width: 32px;
+  height: 32px;
+  font-size: 24px;
+  line-height: 32px;
 }
 .item-cover {
   position: absolute;
