@@ -277,12 +277,18 @@ function MainController ($scope) {
    };
 
    $scope.itemStyles = function (page, item, entity) {
-      if(!item.styles) {
+      var prevSize = item._prevTileSize || page.tileSize || CONFIG.tileSize;
+      var currentSize = page.tileSize || CONFIG.tileSize;
+      var hasChanged = prevSize !== currentSize;
+
+      if(!item.styles || hasChanged) {
          var width = item.width || 1;
          var height = item.height || 1;
          var pos = item.position;
          var tileSize = page.tileSize || CONFIG.tileSize;
          var tileMargin = page.tileMargin || CONFIG.tileMargin;
+
+         item._prevTileSize = tileSize;
 
          var styles = {
             width: tileSize * width + tileMargin * (width - 1) + 'px',
@@ -1493,6 +1499,10 @@ function MainController ($scope) {
 
    Api.onMessage(function (data) {
       handleMessage(data);
+   });
+
+   angular.element(window).on('view:updated', function () {
+      updateView();
    });
 
    function getContext () {
