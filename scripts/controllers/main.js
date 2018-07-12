@@ -100,6 +100,17 @@ function MainController ($scope) {
    $scope.getItemEntity = function (item) {
       if(typeof item.id === "object") return item.id;
 
+      if(!(item.id in $scope.states)) {
+         Noty.addObject({
+            type: Noty.WARNING,
+            title: 'Entity not found',
+            message: 'Entity "' + item.id + '" not found',
+            id: item.id
+         });
+
+         return null;
+      }
+
       return $scope.states[item.id];
    };
 
