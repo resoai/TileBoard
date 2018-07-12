@@ -145,7 +145,7 @@ function MainController ($scope) {
 
          var coords = obj.longitude + ',' + obj.latitude;
          // +80 - hack to hide logo
-         var sizes = (tileSize * width) + ',' + ((tileSize * height) + 80);
+         var sizes = Math.ceil(tileSize * width) + ',' + Math.ceil((tileSize * height) + 80);
 
          var url;
 
