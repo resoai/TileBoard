@@ -885,7 +885,7 @@
                <tr class="media-player-table--source">
                   <td colspan="3" class="media-player-table--td-source">
                      <div class="media-player--source" ng-click="openSelect(item)"
-                          ng-if="entity.attributes.source_list && !item.hideSource">
+                          ng-if="entity.attributes.source_list.length && !item.hideSource">
                         <span ng-bind="entity.attributes.source || 'Source'"></span>
                      </div>
                   </td>
