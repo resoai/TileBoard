@@ -86,14 +86,14 @@ The custom tile type allows you to fire javascript commands on click/tap.
 
 ```js
 {
-    	position: [0, 0],
-    	type: TYPES.CUSTOM,
-    	title: 'Screen Off',
-    	id: { },
-    	icon: 'mdi-monitor',
-    	action: function(item, entity) {
-    		  fully.startScreensaver();
-    	}
+   position: [0, 0],
+   type: TYPES.CUSTOM,
+   title: 'Screen Off',
+   id: { },
+   icon: 'mdi-monitor',
+   action: function(item, entity) {
+        fully.startScreensaver();
+   }
 },
 ```
 
@@ -190,23 +190,23 @@ Allows you to toggle a fan on and off, as well as set the speed.
 ![FAN](images/tile-screenshots/FAN.png)
 ```js
 {
-			position: [0, 2],
-			type: TYPES.FAN,
-			title: 'Ceiling fan',
-			id: 'fan.living_room_fan',
+   position: [0, 2],
+   type: TYPES.FAN,
+   title: 'Ceiling fan',
+   id: 'fan.living_room_fan',
 }
 ```
 
 #### IFRAME
 ```js
 {
-      position: [0, 3],
-      type: TYPES.IFRAME,
-      id: {},
-      width: 3,
-      height: 2,
-      refresh: 10000, // 10 seconds
-      url: 'https://www.youtube.com/embed/_qNhxxo9rVU?autoplay=1'
+   position: [0, 3],
+   type: TYPES.IFRAME,
+   id: {},
+   width: 3,
+   height: 2,
+   refresh: 10000, // 10 seconds
+   url: 'https://www.youtube.com/embed/_qNhxxo9rVU?autoplay=1'
 }
 ```
 
