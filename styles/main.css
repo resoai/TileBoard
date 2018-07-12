@@ -1719,11 +1719,11 @@ input[type=range]::-moz-range-thumb {
 }
 .-theme-winphone,
 .-theme-mobile {
-  font-size: 14px;
+  font-size: 13.5px;
 }
 .-theme-winphone .item,
 .-theme-mobile .item {
-  font-size: 14px;
+  font-size: 13.5px;
   border-radius: 0;
 }
 .-theme-winphone .item-title,
@@ -1733,7 +1733,7 @@ input[type=range]::-moz-range-thumb {
   padding-left: 5px;
   padding-right: 5px;
   font-weight: normal;
-  font-size: 14px;
+  font-size: 13.5px;
 }
 .-theme-winphone .item-title,
 .-theme-mobile .item-title {
@@ -1741,7 +1741,7 @@ input[type=range]::-moz-range-thumb {
 }
 .-theme-winphone .item-subtitle,
 .-theme-mobile .item-subtitle {
-  bottom: 22px;
+  bottom: 20px;
 }
 .-theme-winphone .item-state,
 .-theme-mobile .item-state {
@@ -1791,6 +1791,12 @@ input[type=range]::-moz-range-thumb {
 .-theme-winphone.-menu-left .page-align,
 .-theme-mobile.-menu-left .page-align {
   margin-left: 70px;
+}
+.-theme-winphone .group-title,
+.-theme-mobile .group-title {
+  height: 40px;
+  top: -40px;
+  line-height: 40px;
 }
 .-theme-winphone {
   font-size: 13.5px;
