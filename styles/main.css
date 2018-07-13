@@ -1723,12 +1723,12 @@ input[type=range]::-moz-range-thumb {
 .-theme-winphone,
 .-theme-mobile,
 .-theme-compact {
-  font-size: 13.5px;
+  font-size: 14px;
 }
 .-theme-winphone .item,
 .-theme-mobile .item,
 .-theme-compact .item {
-  font-size: 13.5px;
+  font-size: 13.8px;
   border-radius: 0;
 }
 .-theme-winphone .item-title,
@@ -1740,12 +1740,13 @@ input[type=range]::-moz-range-thumb {
   padding-left: 5px;
   padding-right: 5px;
   font-weight: normal;
-  font-size: 13.5px;
+  font-size: 13px;
 }
 .-theme-winphone .item-title,
 .-theme-mobile .item-title,
 .-theme-compact .item-title {
   height: 20px;
+  font-size: 14px;
 }
 .-theme-winphone .item-subtitle,
 .-theme-mobile .item-subtitle,
