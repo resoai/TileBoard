@@ -424,6 +424,7 @@ Supported weather fields
 ### @/& Prefixes
 As you may notice that we use @/& prefixes to get a value inside objects (entities).
 @ is relative to the current entity (@attributes.friendly_name) and & is for global (&sensor.kitchen_temp.state). This may not work everywhere, but you may give it a go.
+REad more in our [wiki article](https://github.com/resoai/TileBoard/wiki/Templates). 
 
 ### Events
 
@@ -519,6 +520,9 @@ You can then fire a `tileboard` event in HomeAssistant with the following data:
 ## Custom CSS Styles
 A number of classes are added to each tile depending on the type of tile and state. Custom CSS styles can be applied by creating a `custom.css` file in the `styles` directory.
 
+## Tablet and mobile configuration
+For the tablet configuration use `COMPACT` custom theme and reduce padding. 
+For the mobiles check out [wiki article](https://github.com/resoai/TileBoard/wiki/Mobile-configuration). 
 
 ## Contribution
 Please feel free to post an issue or pull request and we will sort it out
