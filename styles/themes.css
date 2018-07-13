@@ -319,3 +319,11 @@
 .-theme-homekit .wu {
   opacity: 0.7;
 }
+.-theme-homekit .item-select {
+  background: #fff;
+  border: 1px solid #aaa;
+}
+.-theme-homekit .item-select--option:active,
+.-theme-homekit .item-select--option.-active {
+  background: #f1b3b5;
+}
