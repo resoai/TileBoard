@@ -424,7 +424,7 @@ Supported weather fields
 ### @/& Prefixes
 As you may notice that we use @/& prefixes to get a value inside objects (entities).
 @ is relative to the current entity (@attributes.friendly_name) and & is for global (&sensor.kitchen_temp.state). This may not work everywhere, but you may give it a go.
-REad more in our [wiki article](https://github.com/resoai/TileBoard/wiki/Templates). 
+Read more in our [wiki article](https://github.com/resoai/TileBoard/wiki/Templates). 
 
 ### Events
 
