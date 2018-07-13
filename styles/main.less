@@ -1977,7 +1977,7 @@ input[type=range]::-moz-range-thumb {
    }
 }
 
-.-theme-winphone, .-theme-mobile {
+.-theme-winphone, .-theme-mobile, .-theme-compact {
    font-size: 13.5px;
 
    .item {
@@ -2065,13 +2065,29 @@ input[type=range]::-moz-range-thumb {
          margin-left: 70px;
       }
    }
+}
 
+.-theme-mobile {
    .group-title {
       height: 40px;
       top: -40px;
       line-height: 40px;
    }
+
+   .page {
+      white-space: normal;
+
+      .group {
+         white-space: nowrap;
+      }
+   }
+
+   .page-align {
+      height: 0;
+      display: none;
+   }
 }
+
 
 .-theme-winphone {
    font-size: 13.5px;

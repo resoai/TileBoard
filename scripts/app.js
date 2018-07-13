@@ -18,6 +18,7 @@ var CUSTOM_THEMES = {
    WIN95: "win95",
    WINPHONE: "winphone",
    MOBILE: "mobile",
+   COMPACT: "compact",
 };
 
 var PASSWORD_TYPES = {
