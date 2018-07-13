@@ -224,7 +224,7 @@
 }
 .-theme-homekit {
   color: #fff;
-  background: #ce7e7e !important;
+  background: #eee !important;
 }
 .-theme-homekit .item {
   color: #363636;
@@ -234,11 +234,11 @@
 .-theme-homekit .item-state {
   background: transparent;
   font-weight: 500;
-  color: #c74c23;
+  color: #985b44;
   padding: 3px 5px 2px;
 }
 .-theme-homekit .item-entity {
-  color: #d95252;
+  color: #a46969;
 }
 .-theme-homekit .item-clickable {
   border: 0 !important;
@@ -247,7 +247,7 @@
   left: 7px !important;
   top: 7px !important;
   border-radius: 7px !important;
-  background: #ef1a49;
+  background: #ffa200;
 }
 .-theme-homekit .item-subtitle {
   font-size: 14px;
@@ -276,21 +276,20 @@
   color: #fff;
 }
 .-theme-homekit .item .item-entity--icon {
-  color: #ce7e7e;
+  color: #776c6d;
 }
 .-theme-homekit .item.-disarmed,
 .-theme-homekit .item.-off {
-  background: linear-gradient(to right bottom, #f8e5dd, #f7c5d1);
+  color: #544d4b;
+  background: linear-gradient(to right bottom, #fbfaf9, rgba(245, 245, 245, 0.86));
 }
-.-theme-homekit .item.-disarmed,
-.-theme-homekit .item.-off,
 .-theme-homekit .item.-disarmed .item-state,
 .-theme-homekit .item.-off .item-state {
-  color: #6e3232;
+  color: #544d4b;
 }
 .-theme-homekit .item.-disarmed .item-entity--icon,
 .-theme-homekit .item.-off .item-entity--icon {
-  color: rgba(182, 85, 83, 0.81);
+  color: rgba(100, 89, 89, 0.8);
 }
 .-theme-homekit .group-title {
   height: 40px;
@@ -301,7 +300,7 @@
   font-size: 17px;
 }
 .-theme-homekit .weather-list table tr:nth-child(2n) {
-  background: rgba(255, 112, 66, 0.11);
+  background: rgba(255, 112, 66, 0.05);
 }
 .-theme-homekit .pages-menu.-bottom {
   background: #fafafa;
@@ -325,28 +324,15 @@
 }
 .-theme-homekit .item-select--option:active,
 .-theme-homekit .item-select--option.-active {
-  background: #f1b3b5;
+  background: #eee;
 }
 .-theme-homekit .media-player--source {
-  color: #dc4646;
+  color: #555;
 }
 .-theme-homekit input[type=range]::-webkit-slider-runnable-track {
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0);
-  background: rgba(217, 112, 119, 0.3);
   border: 0px solid #000101;
-}
-.-theme-homekit input[type=range]::-webkit-slider-thumb {
-  background: #f08b7f;
-  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0);
-}
-.-theme-homekit input[type=range]:focus::-webkit-slider-runnable-track {
-  background: rgba(217, 112, 119, 0.3);
 }
 .-theme-homekit input[type=range]::-moz-range-track {
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0);
-  background: rgba(217, 112, 119, 0.3);
-}
-.-theme-homekit input[type=range]::-moz-range-thumb {
-  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0);
-  background: #f08b7f;
 }

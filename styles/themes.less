@@ -254,7 +254,7 @@
 
 .-theme-homekit {
    color: #fff;
-   background: rgb(206, 126, 126) !important;
+   background: #eee !important;
 
    .item {
       color: #363636;
@@ -265,12 +265,12 @@
       &-state {
          background: transparent;
          font-weight: 500;
-         color: rgb(199, 76, 35);
+         color: rgb(152, 91, 68);
          padding: 3px 5px 2px;
       }
 
       &-entity {
-         color: rgb(217, 82, 82);
+         color: rgb(164, 105, 105);
       }
 
       &-clickable {
@@ -280,7 +280,7 @@
          left: 7px !important;
          top: 7px !important;
          border-radius: 7px !important;
-         background: rgb(239, 26, 73);
+         background: rgb(255, 162, 0);
       }
 
       &-subtitle {
@@ -315,20 +315,22 @@
       }
 
       .item-entity--icon {
-         color: rgb(206, 126, 126);
+         color: rgb(119, 108, 109);
       }
 
       &.-disarmed, &.-off {
-         &, .item-state {
-            color: rgb(110, 50, 50);
+         color: rgb(84, 77, 75);
+
+         .item-state {
+            color: rgb(84, 77, 75);
          }
 
          .item-entity--icon {
-            color: rgba(182, 85, 83, 0.81);
+            color: rgba(100, 89, 89, 0.8);
          }
 
          background: linear-gradient(to right bottom,
-            rgb(248, 229, 221), rgb(247, 197, 209));
+         rgb(251, 250, 249), rgba(245, 245, 245, 0.86));
       }
    }
 
@@ -342,7 +344,7 @@
    }
 
    .weather-list table tr:nth-child(2n) {
-      background: rgba(255, 112, 66, 0.11);
+      background: rgba(255, 112, 66, 0.05);
    }
 
    .pages-menu.-bottom {
@@ -373,37 +375,21 @@
 
       &--option {
          &:active, &.-active {
-            background: rgb(241, 179, 181);
+            background: #eee;
 
          }
       }
    }
 
    .media-player--source {
-      color: rgb(220, 70, 70);
+      color: #555;
    }
-
-
-   @rangeBg: rgba(217, 112, 119, 0.3);
 
    input[type=range]::-webkit-slider-runnable-track {
       box-shadow: 0px 0px 1px rgba(0,0,0,0);
-      background: @rangeBg;
       border: 0px solid #000101;
-   }
-   input[type=range]::-webkit-slider-thumb {
-      background: rgb(240, 139, 127);
-      box-shadow: 1px 1px 0px rgba(0,0,0,0);
-   }
-   input[type=range]:focus::-webkit-slider-runnable-track {
-      background: @rangeBg;
    }
    input[type=range]::-moz-range-track {
       box-shadow:  0px 0px 1px rgba(0,0,0,0);
-      background: @rangeBg;
-   }
-   input[type=range]::-moz-range-thumb {
-      box-shadow: 1px 1px 0px rgba(0,0,0,0);
-      background: rgb(240, 139, 127);
    }
 }
