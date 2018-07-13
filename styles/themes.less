@@ -188,6 +188,10 @@
          background-color: rgba(87, 91, 131, 0.47);
       }
    }
+
+   &.-groups-align-vertically .page {
+      padding-left: 0;
+   }
 }
 
 
@@ -250,11 +254,12 @@
 
 .-theme-homekit {
    color: #fff;
+   background: rgb(206, 126, 126) !important;
 
    .item {
-      color: #333;
+      color: #363636;
       //background: rgba(132, 122, 116, 0.1) !important;
-      border-radius: 10px;
+      border-radius: 8px;
       background: rgba(255,255,255,1);
 
       &-state {
@@ -280,6 +285,17 @@
 
       &-subtitle {
          font-size: 14px;
+         bottom: 21px;
+      }
+
+      &-title {
+         height: 22px;
+         line-height: 22px;
+         padding-bottom: 1px;
+      }
+
+      &-title, &-subtitle {
+         padding-left: 7px;
       }
 
       &.-device_tracker {
@@ -311,8 +327,9 @@
             color: rgba(182, 85, 83, 0.81);
          }
 
+         @op: 0.95;
          background: linear-gradient(to right bottom,
-            rgba(251, 202, 182, 0.91), rgba(245, 167, 179, 0.92));
+            rgba(250, 207, 190, @op), rgba(255, 175, 193, @op));
       }
    }
 
@@ -323,5 +340,31 @@
       font-weight: bold;
       opacity: 1;
       font-size: 17px;
+   }
+
+   .weather-list table tr:nth-child(2n) {
+      background: rgba(255, 112, 66, 0.11);
+   }
+
+   .pages-menu.-bottom {
+      background: #fafafa;
+      border-top: 1px solid #d2d2d2;
+
+      .pages-menu {
+         &--item {
+            color: #777;
+            font-size: 26px;
+            margin: 5px 8px;
+
+            &.-active {
+               background: none;
+               color: rgb(243, 70, 70);
+            }
+         }
+      }
+   }
+
+   .wu {
+      opacity: 0.7;
    }
 }

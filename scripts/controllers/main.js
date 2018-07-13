@@ -77,7 +77,13 @@ function MainController ($scope) {
          bodyClass = [];
 
          if(CONFIG.customTheme) {
-            bodyClass.push('-theme-' + CONFIG.customTheme);
+            var themes = CONFIG.customTheme;
+
+            if(typeof themes === "string") themes = [themes];
+
+            themes.map(function (theme) {
+               bodyClass.push('-theme-' + theme);
+            });
          }
 
          if(CONFIG.entitySize) {

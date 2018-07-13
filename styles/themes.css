@@ -178,6 +178,10 @@
 .-theme-winphone .item.-th-transparent {
   background-color: rgba(87, 91, 131, 0.47);
 }
+.-theme-mobile.-groups-align-vertically .page,
+.-theme-winphone.-groups-align-vertically .page {
+  padding-left: 0;
+}
 .-theme-winphone {
   font-size: 13.5px;
 }
@@ -220,10 +224,11 @@
 }
 .-theme-homekit {
   color: #fff;
+  background: #ce7e7e !important;
 }
 .-theme-homekit .item {
-  color: #333;
-  border-radius: 10px;
+  color: #363636;
+  border-radius: 8px;
   background: #ffffff;
 }
 .-theme-homekit .item-state {
@@ -246,6 +251,16 @@
 }
 .-theme-homekit .item-subtitle {
   font-size: 14px;
+  bottom: 21px;
+}
+.-theme-homekit .item-title {
+  height: 22px;
+  line-height: 22px;
+  padding-bottom: 1px;
+}
+.-theme-homekit .item-title,
+.-theme-homekit .item-subtitle {
+  padding-left: 7px;
 }
 .-theme-homekit .item.-device_tracker {
   background: #222 !important;
@@ -265,7 +280,7 @@
 }
 .-theme-homekit .item.-disarmed,
 .-theme-homekit .item.-off {
-  background: linear-gradient(to right bottom, rgba(251, 202, 182, 0.91), rgba(245, 167, 179, 0.92));
+  background: linear-gradient(to right bottom, rgba(250, 207, 190, 0.95), rgba(255, 175, 193, 0.95));
 }
 .-theme-homekit .item.-disarmed,
 .-theme-homekit .item.-off,
@@ -284,4 +299,23 @@
   font-weight: bold;
   opacity: 1;
   font-size: 17px;
+}
+.-theme-homekit .weather-list table tr:nth-child(2n) {
+  background: rgba(255, 112, 66, 0.11);
+}
+.-theme-homekit .pages-menu.-bottom {
+  background: #fafafa;
+  border-top: 1px solid #d2d2d2;
+}
+.-theme-homekit .pages-menu.-bottom .pages-menu--item {
+  color: #777;
+  font-size: 26px;
+  margin: 5px 8px;
+}
+.-theme-homekit .pages-menu.-bottom .pages-menu--item.-active {
+  background: none;
+  color: #f34646;
+}
+.-theme-homekit .wu {
+  opacity: 0.7;
 }
