@@ -351,6 +351,9 @@ body {
 .item.-light.-on {
   transition: none;
 }
+.item.-weather_list {
+  overflow: hidden;
+}
 .item.-off.-switch .item-entity--icon,
 .item.-disarmed.-switch .item-entity--icon,
 .item.-unlocked.-switch .item-entity--icon,
@@ -1759,11 +1762,6 @@ input[type=range]::-moz-range-thumb {
 .-theme-mobile .item-entity.-select .item-entity--value,
 .-theme-compact .item-entity.-select .item-entity--value {
   font-size: 16.8px;
-}
-.-theme-winphone .media-player--volume,
-.-theme-mobile .media-player--volume,
-.-theme-compact .media-player--volume {
-  margin-top: 77px;
 }
 .-theme-winphone .pages-menu.-left,
 .-theme-mobile .pages-menu.-left,
