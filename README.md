@@ -14,8 +14,10 @@ Should you have any ideas or questions please post them on home-assistant forum 
 ## Screenshots
 
 ![screen](https://community-home-assistant-assets.s3-us-west-2.amazonaws.com/optimized/3X/b/b/bb15cc5c10e22940698bbb7058d6ed732bb0017a_1_690x388.png)
+
 ![screen2](https://community-home-assistant-assets.s3-us-west-2.amazonaws.com/optimized/3X/1/f/1f9a1d7962f0a1335a2d06f352cb329f9d9444a5_1_690x388.png)
 
+![screen3](https://community-home-assistant-assets.s3-us-west-2.amazonaws.com/optimized/3X/7/d/7d300e8e307047c58234967fcf613d3ed0247dc6_1_690x498.jpg)
 
 ## How to use
 * Pull/download repository
