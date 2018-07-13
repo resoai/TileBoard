@@ -234,11 +234,11 @@
 .-theme-homekit .item-state {
   background: transparent;
   font-weight: 500;
-  color: #985b44;
+  color: #686868;
   padding: 3px 5px 2px;
 }
 .-theme-homekit .item-entity {
-  color: #a46969;
+  color: #625f56;
 }
 .-theme-homekit .item-clickable {
   border: 0 !important;
@@ -276,12 +276,12 @@
   color: #fff;
 }
 .-theme-homekit .item .item-entity--icon {
-  color: #776c6d;
+  color: #908e96;
 }
 .-theme-homekit .item.-disarmed,
 .-theme-homekit .item.-off {
   color: #544d4b;
-  background: linear-gradient(to right bottom, #fbfaf9, rgba(245, 245, 245, 0.86));
+  background: linear-gradient(to right bottom, rgba(253, 251, 249, 0.95), rgba(245, 245, 245, 0.8));
 }
 .-theme-homekit .item.-disarmed .item-state,
 .-theme-homekit .item.-off .item-state {
@@ -289,7 +289,7 @@
 }
 .-theme-homekit .item.-disarmed .item-entity--icon,
 .-theme-homekit .item.-off .item-entity--icon {
-  color: rgba(100, 89, 89, 0.8);
+  color: rgba(159, 150, 140, 0.8);
 }
 .-theme-homekit .group-title {
   height: 40px;
@@ -300,7 +300,7 @@
   font-size: 17px;
 }
 .-theme-homekit .weather-list table tr:nth-child(2n) {
-  background: rgba(255, 112, 66, 0.05);
+  background: rgba(230, 202, 182, 0.1);
 }
 .-theme-homekit .pages-menu.-bottom {
   background: #fafafa;
@@ -313,7 +313,7 @@
 }
 .-theme-homekit .pages-menu.-bottom .pages-menu--item.-active {
   background: none;
-  color: #f34646;
+  color: #8e847c;
 }
 .-theme-homekit .wu {
   opacity: 0.7;
@@ -330,9 +330,18 @@
   color: #555;
 }
 .-theme-homekit input[type=range]::-webkit-slider-runnable-track {
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0);
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
   border: 0px solid #000101;
 }
 .-theme-homekit input[type=range]::-moz-range-track {
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0);
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
+}
+.-theme-homekit input[type=range]::-webkit-slider-thumb {
+  border-radius: 10px;
+}
+.-theme-homekit input[type=range]::-moz-range-thumb {
+  border-radius: 10px;
+}
+.-theme-homekit.-theme-mobile .item-state {
+  padding: 4px 5px 2px !important;
 }

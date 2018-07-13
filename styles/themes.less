@@ -265,12 +265,12 @@
       &-state {
          background: transparent;
          font-weight: 500;
-         color: rgb(152, 91, 68);
+         color: rgb(104, 104, 104);
          padding: 3px 5px 2px;
       }
 
       &-entity {
-         color: rgb(164, 105, 105);
+         color: rgb(98, 95, 86);
       }
 
       &-clickable {
@@ -315,7 +315,7 @@
       }
 
       .item-entity--icon {
-         color: rgb(119, 108, 109);
+         color: rgb(144, 142, 150);
       }
 
       &.-disarmed, &.-off {
@@ -326,11 +326,11 @@
          }
 
          .item-entity--icon {
-            color: rgba(100, 89, 89, 0.8);
+            color: rgba(159, 150, 140,0.8);
          }
 
          background: linear-gradient(to right bottom,
-         rgb(251, 250, 249), rgba(245, 245, 245, 0.86));
+         rgba(253, 251, 249, 0.95), rgba(245, 245, 245, 0.8));
       }
    }
 
@@ -344,7 +344,7 @@
    }
 
    .weather-list table tr:nth-child(2n) {
-      background: rgba(255, 112, 66, 0.05);
+      background: rgba(230, 202, 182, 0.1);
    }
 
    .pages-menu.-bottom {
@@ -359,7 +359,7 @@
 
             &.-active {
                background: none;
-               color: rgb(243, 70, 70);
+               color: rgb(142, 132, 124);
             }
          }
       }
@@ -386,10 +386,25 @@
    }
 
    input[type=range]::-webkit-slider-runnable-track {
-      box-shadow: 0px 0px 1px rgba(0,0,0,0);
+      box-shadow: 0px 0px 1px rgba(0,0,0,0.2);
       border: 0px solid #000101;
    }
    input[type=range]::-moz-range-track {
-      box-shadow:  0px 0px 1px rgba(0,0,0,0);
+      box-shadow:  0px 0px 1px rgba(0,0,0,0.3);
+   }
+   input[type=range]::-webkit-slider-thumb {
+      border-radius: 10px;
+   }
+   input[type=range]::-moz-range-thumb {
+      border-radius: 10px;
+   }
+
+
+   &.-theme-mobile {
+      .item {
+         &-state {
+            padding: 4px 5px 2px !important;
+         }
+      }
    }
 }
