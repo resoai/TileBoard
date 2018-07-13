@@ -2064,7 +2064,7 @@ input[type=range]::-moz-range-thumb {
    }
 }
 
-.-theme-mobile {
+.-theme-mobile, .-theme-winphone {
    .group-title {
       height: 40px;
       top: -40px;
@@ -2082,6 +2082,21 @@ input[type=range]::-moz-range-thumb {
    .page-align {
       height: 0;
       display: none;
+   }
+
+   .weather-list {
+      &-icon, &-icon-image {
+         > div {
+            width: 28px;
+            height: 28px;
+         }
+      }
+   }
+
+   .item {
+      &.-th-transparent {
+         background-color: rgba(87, 91, 131, 0.47);
+      }
    }
 }
 

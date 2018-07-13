@@ -1813,20 +1813,35 @@ input[type=range]::-moz-range-thumb {
 .-theme-compact.-menu-left .page-align {
   margin-left: 70px;
 }
-.-theme-mobile .group-title {
+.-theme-mobile .group-title,
+.-theme-winphone .group-title {
   height: 40px;
   top: -40px;
   line-height: 40px;
 }
-.-theme-mobile .page {
+.-theme-mobile .page,
+.-theme-winphone .page {
   white-space: normal;
 }
-.-theme-mobile .page .group {
+.-theme-mobile .page .group,
+.-theme-winphone .page .group {
   white-space: nowrap;
 }
-.-theme-mobile .page-align {
+.-theme-mobile .page-align,
+.-theme-winphone .page-align {
   height: 0;
   display: none;
+}
+.-theme-mobile .weather-list-icon > div,
+.-theme-winphone .weather-list-icon > div,
+.-theme-mobile .weather-list-icon-image > div,
+.-theme-winphone .weather-list-icon-image > div {
+  width: 28px;
+  height: 28px;
+}
+.-theme-mobile .item.-th-transparent,
+.-theme-winphone .item.-th-transparent {
+  background-color: rgba(87, 91, 131, 0.47);
 }
 .-theme-winphone {
   font-size: 13.5px;
