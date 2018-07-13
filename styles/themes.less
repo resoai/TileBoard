@@ -327,9 +327,8 @@
             color: rgba(182, 85, 83, 0.81);
          }
 
-         @op: 0.95;
          background: linear-gradient(to right bottom,
-            rgba(250, 207, 190, @op), rgba(255, 175, 193, @op));
+            rgb(248, 229, 221), rgb(247, 197, 209));
       }
    }
 
@@ -378,5 +377,33 @@
 
          }
       }
+   }
+
+   .media-player--source {
+      color: rgb(220, 70, 70);
+   }
+
+
+   @rangeBg: rgba(217, 112, 119, 0.3);
+
+   input[type=range]::-webkit-slider-runnable-track {
+      box-shadow: 0px 0px 1px rgba(0,0,0,0);
+      background: @rangeBg;
+      border: 0px solid #000101;
+   }
+   input[type=range]::-webkit-slider-thumb {
+      background: rgb(240, 139, 127);
+      box-shadow: 1px 1px 0px rgba(0,0,0,0);
+   }
+   input[type=range]:focus::-webkit-slider-runnable-track {
+      background: @rangeBg;
+   }
+   input[type=range]::-moz-range-track {
+      box-shadow:  0px 0px 1px rgba(0,0,0,0);
+      background: @rangeBg;
+   }
+   input[type=range]::-moz-range-thumb {
+      box-shadow: 1px 1px 0px rgba(0,0,0,0);
+      background: rgb(240, 139, 127);
    }
 }
