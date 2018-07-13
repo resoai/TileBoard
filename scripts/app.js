@@ -19,6 +19,7 @@ var CUSTOM_THEMES = {
    WINPHONE: "winphone",
    MOBILE: "mobile",
    COMPACT: "compact",
+   HOMEKIT: "homekit",
 };
 
 var PASSWORD_TYPES = {
@@ -74,6 +75,11 @@ var FEATURES = {
 var MENU_POSITIONS = {
    LEFT: 'left',
    BOTTOM: 'bottom'
+};
+
+var GROUP_ALIGNS = {
+   VERTICALLY: 'vertically',
+   HORIZONTALLY: 'horizontally'
 };
 
 var NOTIES_POSITIONS = {

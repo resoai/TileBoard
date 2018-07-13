@@ -9,19 +9,22 @@
 
 var CONFIG = {
    customTheme: null, //CUSTOM_THEMES.TRANSPARENT
-   transition: TRANSITIONS.ANIMATED_GPU,
+   transition: TRANSITIONS.ANIMATED_GPU, //ANIMATED or SIMPLE (better perfomance)
    entitySize: ENTITY_SIZES.NORMAL, //SMALL, BIG are available
    tileSize: 150,
    tileMargin: 6,
-   timeFormat: 24,
    serverUrl: "http://localhost:8123",
    wsUrl: "ws://localhost:8123/api/websocket",
    passwordType: PASSWORD_TYPES.PROMPT_AND_SAVE,
    //password: null,
    //googleApiKey: "XXXXXXXXXX", // Required if you are using Google Maps for device tracker
+
+   // next fields are optional
    events: [],
+   timeFormat: 24,
    menuPosition: MENU_POSITIONS.LEFT, // or BOTTOM
    hideScrollbar: false, // horizontal scrollbar
+   groupsAlign: GROUP_ALIGNS.HORIZONTALLY, // or VERTICALLY
    screensaver: { // optional
       timeout: 300, // after 5 mins of inactive
       slidesTimeout: 10, // 10s for one slide
@@ -31,6 +34,7 @@ var CONFIG = {
          {bg: 'images/bg3.jpg'},
       ]
    },
+
    pages: [
       {
          title: 'Main page',

@@ -83,6 +83,9 @@ var CONFIG = {
 
       /* hideScrollbar: Hiding horizontal scrollbar */
       hideScrollbar: false,
+      
+      /* groupsAlign: Align groups HORIZONTALLY (default) or VERTICALLY */
+      groupsAlign: GROUP_ALIGNS.HORIZONTALLY,
 
       /* pages: A list of page objects. See documentation on Pages below */
       pages: [],
@@ -155,10 +158,14 @@ We divide tiles (cells) into groups on every page. Group object can have followi
   /* title: Title to display above the group */
   title: 'Group title',
 
-  /* width: Number of tiles horizontally */
+  /* width: Number of tiles horizontally 
+   * (optional) Can be calculated automatically 
+   */
   width: 3,
 
-  /* height: Number of tiles vertically */
+  /* height: Number of tiles vertically 
+   * (optional) Can be calculated automatically 
+   */
   height: 4,
 
   /* groupMarginCss: Override default margin of tiles for the current group

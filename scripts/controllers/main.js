@@ -85,8 +85,10 @@ function MainController ($scope) {
          }
 
          var menuPos = CONFIG.menuPosition || MENU_POSITIONS.LEFT;
+         var groupsAlign = CONFIG.groupsAlign || GROUP_ALIGNS.HORIZONTALLY;
 
          bodyClass.push('-menu-' + menuPos);
+         bodyClass.push('-groups-align-' + groupsAlign);
 
          if(CONFIG.hideScrollbar) {
             bodyClass.push('-hide-scrollbar');
@@ -254,6 +256,13 @@ function MainController ($scope) {
       if(!group.styles) {
          var tileSize = page.tileSize || CONFIG.tileSize;
          var tileMargin = page.tileMargin || CONFIG.tileMargin;
+
+         if(!('width' in group) || !('height' in group)) {
+            var sizes = calcGroupSizes(group);
+
+            if(!group.width) group.width = sizes.width;
+            if(!group.height) group.height = sizes.height;
+         }
 
          var styles = {
             width: tileSize * group.width + tileMargin * (group.width - 1) + 'px',
@@ -1504,6 +1513,23 @@ function MainController ($scope) {
    angular.element(window).on('view:updated', function () {
       updateView();
    });
+
+   function calcGroupSizes (group) {
+      var maxWidth = 0;
+      var maxHeight = 0;
+
+      for (var i = 0; i < (group.items || []).length; i++) {
+         var item = group.items[i];
+
+         maxHeight = Math.max(maxHeight, item.position[1] + (item.height || 1));
+         maxWidth = Math.max(maxWidth, item.position[0] + (item.width || 1));
+      }
+
+      return {
+         width: maxWidth,
+         height: maxHeight
+      }
+   }
 
    function getContext () {
       return {
