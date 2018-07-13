@@ -64,7 +64,9 @@ App.directive('camera', function () {
 
             if($i > 1 && $scope.freezed) return;
 
-            var url = photoUrl + '&_i=' + $i++;
+            var url = photoUrl;
+
+            url += (url.indexOf('?') === -1 ? '?' : '&') + ('_i=' + $i++);
 
             appendImage(url)
          };
