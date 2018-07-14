@@ -1589,7 +1589,15 @@ function MainController ($scope) {
 
    function parseString (value, entity) {
       return value.replace(/([&@][\w\d._]+)/gi, function (match, contents, offset) {
-         return parseVariable(match, entity);
+         if(match[0] === "&" && match.split('.').length < 3) return match;
+
+         var res = parseVariable(match, entity);
+
+         if(typeof res === "undefined") return match;
+
+         if(res === null) return "";
+
+         return res;
       });
    }
 
@@ -1598,27 +1606,21 @@ function MainController ($scope) {
          ? text.replace(/[^a-z0-9]/gi, '_').toLowerCase() : 'non';
    }
 
-   function getEntityAttr (path) {
-      path = path.split('.');
+   function getEntityAttr (str) {
+      var path = str.split('.');
+
+      if(path.length < 3) return;
 
       var entity = $scope.states[path.slice(0, 2).join('.')] || null;
 
       return getObjectAttr(entity, path.slice(2).join('.'));
    }
 
-   function getItemAttr (item, path) {
-      var entity = $scope.getItemEntity(item);
-
-      if(!entity) return null;
-
-      return getObjectAttr(entity, path);
-   }
-
    function getObjectAttr (obj, path) {
       var res = obj;
 
       path.split('.').forEach(function (key) {
-         res = typeof res === 'object' && res ? res[key] : null;
+         res = typeof res === 'object' && res ? res[key] : undefined;
       });
 
       return res;
