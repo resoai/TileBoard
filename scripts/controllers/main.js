@@ -1593,7 +1593,11 @@ function MainController ($scope) {
 
          var res = parseVariable(match, entity);
 
-         if(typeof res === "undefined") return match;
+         if(typeof res === "undefined") {
+            if(match === value) return "";
+
+            return match;
+         }
 
          if(res === null) return "";
 
