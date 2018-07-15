@@ -22,6 +22,8 @@ function MainController ($scope) {
    $scope.alarmCode = null;
    $scope.activeAlarm = null;
 
+   $scope.now = new Date();
+
    var showedPages = [];
 
    var latestAlarmActions = {};
@@ -191,6 +193,10 @@ function MainController ($scope) {
 
    $scope.clockStyles = function () {
       return CONFIG.clockStyles;
+   };
+
+   $scope.showDate = function () {
+     return CONFIG.showDate;
    };
 
    $scope.pageStyles = function (page) {

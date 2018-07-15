@@ -206,6 +206,10 @@ body {
   font-size: 64px;
   margin-left: 15px;
 }
+.page-head--date {
+  font-size: 42px;
+  margin-left: 15px;
+}
 .-menu-bottom .page-head {
   left: 10px;
   right: 10px;

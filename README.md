@@ -86,12 +86,15 @@ var CONFIG = {
       /* timeFormat: 12 for AM/PM marker, 24 for 24 hour time (default) */
       timeFormat: Number,
 
+      /* showDate: true shows the date in the header, false hides it (default) */
+      showDate: Boolean,
+
       /* menuPosition: LEFT (default) or BOTTOM */
       menuPosition: MENU_POSITIONS.LEFT,
 
       /* hideScrollbar: Hiding horizontal scrollbar */
       hideScrollbar: false,
-      
+
       /* groupsAlign: Align groups HORIZONTALLY (default) or VERTICALLY */
       groupsAlign: GROUP_ALIGNS.HORIZONTALLY,
 
@@ -166,13 +169,13 @@ We divide tiles (cells) into groups on every page. Group object can have followi
   /* title: Title to display above the group */
   title: 'Group title',
 
-  /* width: Number of tiles horizontally 
-   * (optional) Can be calculated automatically 
+  /* width: Number of tiles horizontally
+   * (optional) Can be calculated automatically
    */
   width: 3,
 
-  /* height: Number of tiles vertically 
-   * (optional) Can be calculated automatically 
+  /* height: Number of tiles vertically
+   * (optional) Can be calculated automatically
    */
   height: 4,
 
@@ -439,7 +442,7 @@ Supported weather fields
 ### @/& Prefixes
 As you may notice that we use @/& prefixes to get a value inside objects (entities).
 @ is relative to the current entity (@attributes.friendly_name) and & is for global (&sensor.kitchen_temp.state). This may not work everywhere, but you may give it a go.
-Read more in our [wiki article](https://github.com/resoai/TileBoard/wiki/Templates). 
+Read more in our [wiki article](https://github.com/resoai/TileBoard/wiki/Templates).
 
 ### Events
 
@@ -536,8 +539,8 @@ You can then fire a `tileboard` event in HomeAssistant with the following data:
 A number of classes are added to each tile depending on the type of tile and state. Custom CSS styles can be applied by creating a `custom.css` file in the `styles` directory.
 
 ## Tablet and mobile configuration
-For the tablet configuration use `COMPACT` custom theme and reduce padding. 
-For the mobiles check out [wiki article](https://github.com/resoai/TileBoard/wiki/Mobile-configuration). 
+For the tablet configuration use `COMPACT` custom theme and reduce padding.
+For the mobiles check out [wiki article](https://github.com/resoai/TileBoard/wiki/Mobile-configuration).
 
 ## Contribution
 Please feel free to post an issue or pull request and we will sort it out

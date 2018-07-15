@@ -302,6 +302,9 @@
          <div class="page-head--time" ng-style="clockStyles()">
             <clock></clock>
          </div>
+         <div class="page-head--date" ng-if="showDate()">
+            <div ng-bind="now|date:'EEEE, LLLL dd'"></div>
+         </div>
       </div>
       <div class="page-head--right">
       </div>
@@ -878,11 +881,11 @@
                      </div>
                   </td>
                </tr>
-               
+
                <tr class="media-player-table--space">
                   <td colspan="3"></td>
                </tr>
-               
+
                <tr class="media-player-table--source">
                   <td colspan="3" class="media-player-table--td-source">
                      <div class="media-player--source" ng-click="openSelect(item)"
@@ -891,7 +894,7 @@
                      </div>
                   </td>
                </tr>
-               
+
                <tr ng-if="(_c = getVolumeConf(item, entity))">
                   <td colspan="3" class="media-player-table--td-volume">
                      <div class="media-player--volume">
