@@ -30,90 +30,95 @@ Should you have any ideas or questions please post them on home-assistant forum 
 
 ```js
 var CONFIG = {
-      /* customTheme: specify a custom theme for your dashboard
-       * Valid options: null, CUSTOM_THEMES.TRANSPARENT, CUSTOM_THEMES.MOBILE, CUSTOM_THEMES.WINPHONE or a custom theme you have created
-       * Default: null. Array supported
-       */
-      customTheme: null,
+   /* customTheme: specify a custom theme for your dashboard
+    * Valid options: null, CUSTOM_THEMES.TRANSPARENT, CUSTOM_THEMES.MOBILE, CUSTOM_THEMES.WINPHONE or a custom theme you have created
+    * Default: null. Array supported
+    */
+   customTheme: null,
 
-      /* transition: The transition effect used between Pages
-       * Valid options: TRANSITIONS.ANIMATED, TRANSITIONS.ANIMATED_GPU, TRANSITIONS.SIMPLE
-       */
-      transition: TRANSITIONS.ANIMATED,
+   /* transition: The transition effect used between Pages
+    * Valid options: TRANSITIONS.ANIMATED, TRANSITIONS.ANIMATED_GPU, TRANSITIONS.SIMPLE
+    */
+   transition: TRANSITIONS.ANIMATED,
 
-      /* tileSize: The default size (in pixels) of a tile */
-      tileSize: Number,
+   /* tileSize: The default size (in pixels) of a tile */
+   tileSize: Number,
 
-      /* tileMargin: The default margin (in pixels) between tiles */
-      tileMargin: Number,
+   /* tileMargin: The default margin (in pixels) between tiles */
+   tileMargin: Number,
 
-      /* entitySize: Enum size of tile's content (SMALL, NORMAL, BIG)*/
-      entitySize: ENTITY_SIZES.NORMAL,
+   /* entitySize: Enum size of tile's content (SMALL, NORMAL, BIG)*/
+   entitySize: ENTITY_SIZES.NORMAL,
 
-      /* groupMarginCss: CSS margin statement to override the default margin for groups */
-      groupMarginCss: '20px 40px',
+   /* groupMarginCss: CSS margin statement to override the default margin for groups */
+   groupMarginCss: '20px 40px',
 
-      /* serverUrl: The URL to your HomeAssistant server */
-      serverUrl: 'http://hassio.local:8123',
+   /* serverUrl: The URL to your HomeAssistant server */
+   serverUrl: 'http://hassio.local:8123',
 
-      /* wsUrl: The URL to your HomeAssistant Websocket connection.
-       * If HomeAssistant is behind SSL, replace ws:// with wss://
-       */
-      wsUrl: 'ws://hassio.local:8123/api/websocket',
+   /* wsUrl: The URL to your HomeAssistant Websocket connection.
+    * If HomeAssistant is behind SSL, replace ws:// with wss://
+    */
+   wsUrl: 'ws://hassio.local:8123/api/websocket',
 
-      /* passwordType:
-       * MANUAL - allows you to put the password directly to the config file
-       * PROMPT - will ask your password every time you open TileBoard in the browser.
-       * PROMPT_AND_SAVE - same as PROMPT but with saving the password after first connection
-       * Note: if you used PROMPT_AND_SAVE and changed your password, you will be needed to clear your localStorage
-       */
-      passwordType: PASSWORD_TYPES.PROMPT_AND_SAVE,
+   /* passwordType:
+    * MANUAL - allows you to put the password directly to the config file
+    * PROMPT - will ask your password every time you open TileBoard in the browser.
+    * PROMPT_AND_SAVE - same as PROMPT but with saving the password after first connection
+    * Note: if you used PROMPT_AND_SAVE and changed your password, you will be needed to clear your localStorage
+    */
+   passwordType: PASSWORD_TYPES.PROMPT_AND_SAVE,
 
-      /* password: Your HomeAssistant api_password
-       * NOTE: If TileBoard is accessible to the outside world, people can
-       * read this file and retrieve your password. TileBoard should be placed behind
-       * another form of authentication if it is publically accessible.
-       * Necessary only with MANUAL password type
-       */
-      password: null,
+   /* password: Your HomeAssistant api_password
+    * NOTE: If TileBoard is accessible to the outside world, people can
+    * read this file and retrieve your password. TileBoard should be placed behind
+    * another form of authentication if it is publically accessible.
+    * Necessary only with MANUAL password type
+    */
+   password: null,
 
-      /* timeFormat: 12 for AM/PM marker, 24 for 24 hour time (default) */
-      timeFormat: Number,
+   /* timeFormat: 12 for AM/PM marker, 24 for 24 hour time (default) */
+   timeFormat: Number,
 
-      /* menuPosition: LEFT (default) or BOTTOM */
-      menuPosition: MENU_POSITIONS.LEFT,
+   /* menuPosition: LEFT (default) or BOTTOM */
+   menuPosition: MENU_POSITIONS.LEFT,
 
-      /* hideScrollbar: Hiding horizontal scrollbar */
-      hideScrollbar: false,
-      
-      /* groupsAlign: Align groups HORIZONTALLY (default) or VERTICALLY */
-      groupsAlign: GROUP_ALIGNS.HORIZONTALLY,
+   /* hideScrollbar: Hiding horizontal scrollbar */
+   hideScrollbar: false,
+   
+   /* groupsAlign: Align groups HORIZONTALLY (default) or VERTICALLY */
+   groupsAlign: GROUP_ALIGNS.HORIZONTALLY,
 
-      /* pages: A list of page objects. See documentation on Pages below */
-      pages: [],
+   /* pages: A list of page objects. See documentation on Pages below */
+   pages: [],
 
-      /* events: A list of events. See documentation on Events below */
-      events: [],
+   /* events: A list of events. See documentation on Events below */
+   events: [],
 
-      /* screensaver: A digital picture frame with a clock. Appears when    
-       * the dashboard has been idle
-       * (optional)
-       */
-      screensaver: {
-        /* timeout: Idle time (in seconds) before the screensaver will show */
-        timeout: 300,
+   /* screensaver: A digital picture frame with a clock. Appears when    
+    * the dashboard has been idle
+    * (optional)
+    */
+   screensaver: {
+     /* timeout: Idle time (in seconds) before the screensaver will show */
+     timeout: 300,
 
-        /* slidesTimeout: Amount of time (in seconds) to show each slide */
-        slidesTimeout: 10,
+     /* slidesTimeout: Amount of time (in seconds) to show each slide */
+     slidesTimeout: 10,
 
-        /* slides: Array of paths to pictures. */
-        slides: [
-          {bg: 'images/bg1.jpeg'},
-          {bg: 'images/bg2.png'},
-          {bg: 'images/bg3.png'}
-        ]
-      }
-   }
+     /* slides: Array of paths to pictures. */
+     slides: [
+       {bg: 'images/bg1.jpeg'},
+       {bg: 'images/bg2.png'},
+       {bg: 'images/bg3.png'}
+     ]
+   },
+   
+   /* header: object of header. Will be applied globally
+    * (optional)
+    */
+   header: DEFAULT_HEADER,
+}
 ```
 
 ### Pages
@@ -131,10 +136,10 @@ Page object can have following fields:
   /* icon: Page icon for the side menu */
   icon: 'mdi-home-outline', // icon of page (for the side menu)
 
-  /* head: import a page template as a header
-   * (used to show the clock in the example configuration)
+  /* header: object of header for current page
+   * 
    */
-  head: 'head.html',
+  header: DEFAULT_HEADER,
 
   /* tileSize: Override the global tileSize value for the current page
      (optional)

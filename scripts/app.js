@@ -59,6 +59,14 @@ var TYPES = {
    WEATHER_LIST: 'weather_list',
 };
 
+var HEADER_ITEMS = {
+   TIME: 'time',
+   DATE: 'date',
+   DATETIME: 'datetime',
+   WEATHER: 'weather',
+   CUSTOM_HTML: 'custom_html'
+};
+
 var FEATURES = {
    PAUSE: 1,
    SEEK: 2,
@@ -94,6 +102,55 @@ var ENTITY_SIZES = {
 };
 
 var PWD_CACHE_KEY = "_pwd1";
+
+var DEFAULT_HEADER = {
+   styles: {
+      padding: '30px 130px 0',
+      fontSize: '28px'
+   },
+   left: [
+      {
+         type: HEADER_ITEMS.DATETIME,
+         dateFormat: 'EEEE, LLLL dd', //https://docs.angularjs.org/api/ng/filter/date
+         styles: {
+            margin: '0'
+         }
+      }
+   ],
+   right: [
+      {
+         type: HEADER_ITEMS.CUSTOM_HTML,
+         html: 'Welcome to the <b>TileBoard</b>',
+         styles: {
+            margin: '40px 0 0'
+         }
+      },
+      /*{
+         type: HEADER_ITEMS.WEATHER,
+         styles: {
+            margin: '0 0 0'
+         },
+         icon: '&sensor.dark_sky_icon.state',
+         icons: {
+            'clear-day': 'clear',
+            'clear-night': 'nt-clear',
+            'cloudy': 'cloudy',
+            'rain': 'rain',
+            'sleet': 'sleet',
+            'snow': 'snow',
+            'wind': 'hazy',
+            'fog': 'fog',
+            'partly-cloudy-day': 'partlycloudy',
+            'partly-cloudy-night': 'nt-partlycloudy'
+         },
+         fields: {
+            summary: '&sensor.dark_sky_summary.state',
+            temperature: '&sensor.dark_sky_temperature.state',
+            temperatureUnit: '&sensor.dark_sky_temperature.attributes.unit_of_measurement',
+         }
+      }*/
+   ]
+};
 
 window.onerror = function (error, file, line, char) {
    var text = [

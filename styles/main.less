@@ -206,6 +206,77 @@ body {
    }
 }
 
+
+.header {
+   position: absolute;
+   z-index: 2;
+   left: 0;
+   right: 0;
+   top: 0;
+   font-size: 20px;
+   color: #fff;
+
+   &-content {
+
+      &:after {
+         content: " ";
+         display: table;
+         clear: both;
+      }
+
+   }
+
+   &--left {
+      float: left;
+   }
+
+   &--right {
+      float: right;
+   }
+
+   clock {
+      font-size: 1.5em;
+   }
+
+   &-weather {
+      &--icon {
+         &, &-image {
+            > div {
+               width: 2em;
+               height: 2em;
+               margin: -0.2em 0;
+            }
+         }
+
+         &-container {
+            vertical-align: middle;
+            display: inline-block;
+            text-align: center;
+         }
+
+         &--image {
+            div {
+               background-size: contain;
+               background-position: center;
+               background-repeat: no-repeat;
+            }
+         }
+      }
+
+      &--temperature {
+         display: inline-block;
+         vertical-align: middle;
+         font-size: 1.2em;
+      }
+
+      &--summary {
+         margin-top: 0.1em;
+         font-size: 1em;
+
+      }
+   }
+}
+
 .-menu-bottom {
    .page-head {
       left: 10px;

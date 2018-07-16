@@ -6,6 +6,7 @@ function MainController ($scope) {
    $scope.pages = CONFIG.pages;
    $scope.TYPES = TYPES;
    $scope.FEATURES = FEATURES;
+   $scope.HEADER_ITEMS = HEADER_ITEMS;
 
    $scope.activeSelect = null;
    $scope.ready = false;
@@ -642,6 +643,12 @@ function MainController ($scope) {
 
    $scope.getMainStyles = function () {
       return mainStyles;
+   };
+
+   $scope.getHeader = function (page) {
+      if(!page) return CONFIG.header;
+
+      return page.header;
    };
 
    $scope.getSliderConf = function (item, entity) {

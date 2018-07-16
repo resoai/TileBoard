@@ -223,6 +223,9 @@
       </div>
    </div>
 
+   <div class="header" ng-if="header = getHeader()"
+        ng-include="'header.html'"></div>
+
    <div class="pages" id="pages">
       <div class="page-overlay" ng-if="activeSelect"
            ng-click="closeActiveSelect()"></div>
@@ -232,7 +235,11 @@
            ng-if="shouldDrawPage(page)"
            ng-style="pageStyles(page)" class="page">
 
+         <-- legacy -->
          <div class="page-head" ng-if="page.head" ng-include="page.head"></div>
+
+         <div class="header" ng-if="header = getHeader(page)"
+              ng-include="'header.html'"></div>
 
          <div class="page-align"></div>
 
@@ -304,6 +311,59 @@
          </div>
       </div>
       <div class="page-head--right">
+      </div>
+   </div>
+</script>
+
+<script type="text/ng-template" id="header.html">
+   <div class="header-content" ng-style="header.styles">
+      <div class="header--left">
+         <div header-item ng-repeat="item in header.left track by $index"></div>
+      </div>
+      <div class="header--right">
+         <div header-item ng-repeat="item in header.right track by $index"></div>
+      </div>
+   </div>
+</script>
+
+
+<!-- HEADER ITEMS TEMPLATE -->
+
+<script type="text/ng-template" id="header-items.html">
+   <div class="header-item" ng-class="'-' + item.type" ng-style="item.styles">
+      <div ng-if="item.type === HEADER_ITEMS.TIME">
+         <clock></clock>
+      </div>
+      <div ng-if="item.type === HEADER_ITEMS.DATE">
+         <date format="item.format"></date>
+      </div>
+      <div ng-if="item.type === HEADER_ITEMS.DATETIME">
+         <clock></clock>
+         <date format="item.dateFormat"></date>
+      </div>
+      <div ng-if="item.type === HEADER_ITEMS.CUSTOM_HTML">
+         <div ng-bind-html="item.html"></div>
+      </div>
+      <div ng-if="item.type === HEADER_ITEMS.WEATHER">
+         <div class="header-weather--icon-container">
+            <div class="header-weather--icon"
+                 ng-if="(_icon = getWeatherIcon(item, {}))">
+               <div class="wu " ng-class="'wu-' + _icon"></div>
+            </div>
+            <div class="header-weather--icon-image"
+                 ng-if="(_imgStyles = getWeatherImageStyles(item, {}))">
+               <div ng-style="_imgStyles"></div>
+            </div>
+         </div>
+
+         <div class="header-weather--temperature" ng-if="item.fields.temperature">
+            <span ng-bind="getWeatherField('temperature', item, {})"></span>
+            <span ng-bind="getWeatherField('temperatureUnit', item, {})"></span>
+         </div>
+
+         <div class="header-weather--summary" ng-if="item.fields.summary">
+            <span ng-bind="getWeatherField('summary', item, {})"></span>
+         </div>
       </div>
    </div>
 </script>
