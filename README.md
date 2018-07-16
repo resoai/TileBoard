@@ -79,6 +79,11 @@ var CONFIG = {
 
    /* timeFormat: 12 for AM/PM marker, 24 for 24 hour time (default) */
    timeFormat: Number,
+   
+   /* Google API key is required if you are using device tarcker tiles along with Google Maps.
+    * More info here: https://developers.google.com/maps/documentation/maps-static/usage-and-billing
+    */
+   googleApiKey: null,
 
    /* menuPosition: LEFT (default) or BOTTOM */
    menuPosition: MENU_POSITIONS.LEFT,
