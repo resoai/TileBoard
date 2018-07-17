@@ -14,6 +14,7 @@ function ScreensaverController ($scope) {
 
    $scope.now = new Date();
    $scope.isShowed = false;
+   $scope.hideOverlay = false;
    $scope.slides = conf.slides;
 
    $scope.getSlideClasses = function (index, slide) {
@@ -69,7 +70,8 @@ function ScreensaverController ($scope) {
       if(activeSlide >= $scope.slides.length) {
          activeSlide = 0;
       }
-
+	  
+      $scope.hideOverlay = $scope.slides[activeSlide].hideOverlay;
       if($scope.isShowed) {
          $scope.now = new Date();
 
@@ -81,6 +83,7 @@ function ScreensaverController ($scope) {
       setTimeout(function () {
          lastActivity = 0;
          $scope.isShowed = true;
+         $scope.hideOverlay = $scope.slides[activeSlide].hideOverlay;
          if(!$scope.$$phase) $scope.$digest();
       }, 100);
    };
