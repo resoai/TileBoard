@@ -112,7 +112,8 @@ The custom tile type allows you to fire javascript commands on click/tap.
       office: "Office",
    },
    zoomLevels: [9, 13], // or [9] for only one map slide
-   slidesDelay: 2
+   hideEntityPicture: false, //hide entity pic, if you need only map
+   slidesDelay: 2 // delay before first slide animation
 }
 ```
 

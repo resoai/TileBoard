@@ -292,13 +292,23 @@ Tile Object. [Click here for some real life examples](TILE_EXAMPLES.md)
   filter: function (value) {return value},
 
   /** type: DEVICE_TRACKER **/
-  /* slidesDelay: Delay before slide animation starts */
+  /* slidesDelay: Delay before slide animation starts (optional) */
   slidesDelay: 2,
 
   /* map: Map provider for showing position inside tile
    * Valid options: 'google', 'yandex'
    */
   map: 'google',
+  
+  /* zoomLevels: zoom levels of map in slides
+   * left only one if you what one slide (e.g. [9])
+   * (optional)
+   */
+  zoomLevels: [9, 13], 
+  
+  /* hideEntityPicture: hide entity picture if you want only maps */
+  hideEntityPicture: false, 
+
 
   /** type: TEXT_LIST **/
   /* list: List of objects with a title, icon, and value */

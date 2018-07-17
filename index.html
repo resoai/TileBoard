@@ -410,7 +410,8 @@
          <div class="item-slides-container" ng-if="hasTrackerCoords(entity)">
             <div class="item-slides" ng-class="trackerSlidesClass(item, entity)"
                  ng-style="slidesStyles(item, $index)">
-               <div class="item-slide -bg" ng-style="trackerBg(entity)"></div>
+               <div class="item-slide -bg" ng-style="trackerBg(entity)"
+                    ng-if="showTrackerBg(item, entity)"></div>
 
                <div class="item-slide -map"
                     ng-repeat="zoom in trackerZoomLevels(item, entity) track by $index"

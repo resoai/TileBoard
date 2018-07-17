@@ -242,7 +242,11 @@ function MainController ($scope) {
    $scope.trackerSlidesClass = function (item, entity) {
       var maps = $scope.trackerZoomLevels(item, entity);
 
-      return '-c' + (1 + maps.length);
+      var c = maps.length;
+
+      if($scope.showTrackerBg(item, entity)) c++;
+
+      return '-c' + c;
    };
 
    $scope.trackerBg = function (entity) {
@@ -257,6 +261,14 @@ function MainController ($scope) {
       }
 
       return entity.trackerBg;
+   };
+
+   $scope.showTrackerBg = function (item, entity) {
+      if(!entity.attributes.entity_picture) {
+         return false;
+      }
+
+      return !item.hideEntityPicture;
    };
 
    $scope.groupStyles = function (group, page) {
