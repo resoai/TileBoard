@@ -1922,6 +1922,7 @@ camera-thumbnail {
       background-size: cover;
       z-index: 51;
       opacity: 0;
+      font-size: 35px;
 
       &.-active {
          opacity: 1;
@@ -1940,6 +1941,18 @@ camera-thumbnail {
       z-index: 52;
       height: 100%;
       width: 100%;
+
+      &--right-bottom,
+      &--right-top,
+      &--left-bottom,
+      &--left-top {
+         position: absolute;
+      }
+
+      &--right-bottom {right: 40px; bottom: 40px}
+      &--right-top {right: 40px; top: 40px}
+      &--left-bottom {left: 40px; bottom: 40px}
+      &--left-top {left: 40px; top: 40px}
    }
 
    &-datetime {

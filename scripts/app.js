@@ -67,6 +67,8 @@ var HEADER_ITEMS = {
    CUSTOM_HTML: 'custom_html'
 };
 
+var SCREENSAVER_ITEMS = HEADER_ITEMS;
+
 var FEATURES = {
    PAUSE: 1,
    SEEK: 2,

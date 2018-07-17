@@ -14,6 +14,7 @@ function ScreensaverController ($scope) {
 
    $scope.now = new Date();
    $scope.isShowed = false;
+   $scope.conf = conf;
    $scope.slides = conf.slides;
 
    $scope.getSlideClasses = function (index, slide) {
@@ -46,6 +47,10 @@ function ScreensaverController ($scope) {
          slide._styles = {
             backgroundImage: 'url(' + slide.bg + ')'
          };
+
+         if(slide.styles) {
+            slide._styles = mergeObjects(slide._styles, slide.styles)
+         }
       }
 
       return slide._styles;

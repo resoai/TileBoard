@@ -1656,6 +1656,7 @@ camera-thumbnail div {
   background-size: cover;
   z-index: 51;
   opacity: 0;
+  font-size: 35px;
 }
 .screensaver-slide.-active {
   opacity: 1;
@@ -1671,6 +1672,28 @@ camera-thumbnail div {
   z-index: 52;
   height: 100%;
   width: 100%;
+}
+.screensaver-content--right-bottom,
+.screensaver-content--right-top,
+.screensaver-content--left-bottom,
+.screensaver-content--left-top {
+  position: absolute;
+}
+.screensaver-content--right-bottom {
+  right: 40px;
+  bottom: 40px;
+}
+.screensaver-content--right-top {
+  right: 40px;
+  top: 40px;
+}
+.screensaver-content--left-bottom {
+  left: 40px;
+  bottom: 40px;
+}
+.screensaver-content--left-top {
+  left: 40px;
+  top: 40px;
 }
 .screensaver-datetime {
   position: absolute;

@@ -102,6 +102,7 @@ var CONFIG = {
 
    /* screensaver: A digital picture frame with a clock. Appears when    
     * the dashboard has been idle
+    * https://github.com/resoai/TileBoard/wiki/Screensaver-configuration
     * (optional)
     */
    screensaver: {
@@ -110,6 +111,11 @@ var CONFIG = {
 
      /* slidesTimeout: Amount of time (in seconds) to show each slide */
      slidesTimeout: 10,
+     
+     styles: { fontSize: '40px' },
+     
+     /* read more in wiki */
+     leftBottom: [{ type: SCREENSAVER_ITEMS.DATETIME }],
 
      /* slides: Array of paths to pictures. */
      slides: [
