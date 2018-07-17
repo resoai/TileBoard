@@ -21,7 +21,7 @@ var CONFIG = {
 
    // next fields are optional
    events: [],
-   header: DEFAULT_HEADER,
+   header: DEFAULT_HEADER, // https://github.com/resoai/TileBoard/wiki/Header-configuration
    timeFormat: 24,
    menuPosition: MENU_POSITIONS.LEFT, // or BOTTOM
    hideScrollbar: false, // horizontal scrollbar
@@ -71,7 +71,7 @@ var CONFIG = {
                      width: 1,
                      type: TYPES.SENSOR,
                      id: 'updater.updater',
-                     state: '@attributes.release_notes' // custom state
+                     state: '@attributes.release_notes' // https://github.com/resoai/TileBoard/wiki/Templates
                   }
                ]
             },
@@ -150,7 +150,7 @@ var CONFIG = {
                      //classes: ['-compact'],
                      type: TYPES.WEATHER,
                      id: {},
-                     state: function () {return 'Sunny'},
+                     state: function () {return 'Sunny'}, // https://github.com/resoai/TileBoard/wiki/Anonymous-functions
                      fields: {
                         icon: 'clear-day',
                         iconMap: { 'clear-day': 'clear'},

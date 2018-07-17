@@ -120,6 +120,7 @@ var CONFIG = {
    },
    
    /* header: object of header. Will be applied globally
+    * https://github.com/resoai/TileBoard/wiki/Header-configuration
     * (optional)
     */
    header: DEFAULT_HEADER,
@@ -142,7 +143,7 @@ Page object can have following fields:
   icon: 'mdi-home-outline', // icon of page (for the side menu)
 
   /* header: object of header for current page
-   * 
+   * https://github.com/resoai/TileBoard/wiki/Header-configuration
    */
   header: DEFAULT_HEADER,
 
