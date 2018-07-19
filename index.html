@@ -221,7 +221,7 @@
       <div class="pages-menu--items">
          <div ng-repeat="page in pages track by $index"
               class="pages-menu--item" ng-click="openPage(page)"
-              ng-class="{'-active': isPageActive(page)}">
+              ng-if="!isHidden(page)" ng-class="{'-active': isPageActive(page)}">
 
             <i class="mdi" ng-class="page.icon"></i>
          </div>
@@ -237,11 +237,12 @@
 
       <div ng-repeat="page in pages track by $index"
            ng-class="{'-active': isPageActive(page)}"
-           ng-if="shouldDrawPage(page)"
+           ng-if="shouldDrawPage(page) && !isHidden(page)"
            ng-style="pageStyles(page)" class="page">
 
          <-- legacy -->
-         <div class="page-head" ng-if="page.head" ng-include="page.head"></div>
+         <div class="page-head" ng-if="page.head && headWarning()"
+              ng-include="page.head"></div>
 
          <div class="header" ng-if="header = getHeader(page)"
               ng-include="'header.html'"></div>
@@ -249,7 +250,8 @@
          <div class="page-align"></div>
 
          <div ng-repeat="group in page.groups track by $index"
-              ng-style="groupStyles(group, page)" class="group">
+              ng-if="!isHidden(group)" class="group"
+              ng-style="groupStyles(group, page)">
             <div ng-bind="group.title" class="group-title"></div>
             <div tile ng-repeat="item in group.items track by $index"></div>
          </div>
@@ -399,7 +401,7 @@
    <div ng-style="itemStyles(page, item, entity)" class="item"
         ng-click="entityClick(page, item, entity)"
         on-long-press="entityLongClick($event, page, item, entity)"
-        ng-if="entity = getItemEntity(item)"
+        ng-if="(entity = getItemEntity(item)) && !isHidden(item)"
         ng-class="itemClasses(item)">
 
       <div class="item-clickable"></div>

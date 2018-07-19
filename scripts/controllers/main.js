@@ -194,6 +194,20 @@ function MainController ($scope) {
       return CONFIG.clockStyles;
    };
 
+   $scope.headWarning = function () {
+      // @TODO remove
+      Noty.addObject({
+         id: 'header-deprecated',
+         type: Noty.WARNING,
+         title: 'Head deprecated',
+         message: 'Head is deprecated, please replace is with "header" object. ' +
+         '<br> More info <a href="https://github.com/resoai/TileBoard/wiki/Header-configuration">' +
+         'https://github.com/resoai/TileBoard/wiki/Header-configuration</a>'
+      });
+
+      return true;
+   };
+
    $scope.pageStyles = function (page) {
       if(!page.styles) {
          var styles = {};
@@ -1342,6 +1356,16 @@ function MainController ($scope) {
       }
 
       return true;
+   };
+
+   $scope.isHidden = function (object) {
+      if(!('hidden' in object)) return false;
+
+      if(typeof object.hidden === "function") {
+         return callFunction(object.hidden, object);
+      }
+
+      return object.hidden;
    };
 
    $scope.swipeUp = function () {

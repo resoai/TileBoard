@@ -162,6 +162,11 @@ Page object can have following fields:
    * (optional)
    */
   groupMarginCss: '20px 40px',
+  
+  /* hidden: hide page (optional)
+   * can be boolean or function that return boolean
+   */
+  hidden: Boolean | Function,
 
   /* groups: A list of tile groups. See documentation on Tile Groups below */
   groups: [] // list of tile groups
@@ -191,6 +196,11 @@ We divide tiles (cells) into groups on every page. Group object can have followi
    * (optional)
    */
   groupMarginCss: '20px 40px',
+  
+  /* hidden: hide group (optional)
+   * can be boolean or function that return boolean
+   */
+  hidden: Boolean | Function,
 
   /* items: A list of Tile objects. See documentation on Tiles below */
   items: [],
@@ -285,6 +295,11 @@ Tile Object. [Click here for some real life examples](TILE_EXAMPLES.md)
    * (optional)
    */
   slides: [{}, {bg: 'images/slide.jpg'}],
+  
+  /* hidden: hide tile (optional)
+   * can be boolean or function that return boolean
+   */
+  hidden: Boolean | Function,
 
   /*** TILE SPECIFIC SETTINGS ***/
 
