@@ -200,7 +200,7 @@ function MainController ($scope) {
          id: 'header-deprecated',
          type: Noty.WARNING,
          title: 'Head deprecated',
-         message: 'Head is deprecated, please replace is with "header" object. ' +
+         message: 'Head is deprecated, please replace it with "header" object. ' +
          '<br> More info <a href="https://github.com/resoai/TileBoard/wiki/Header-configuration">' +
          'https://github.com/resoai/TileBoard/wiki/Header-configuration</a>'
       });
