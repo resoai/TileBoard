@@ -1,3 +1,15 @@
+// Following variables are used by winphone, mobile and compact themes only even
+// thought that is not specified in the names to avoid long variable names.
+@pageMenuBottomPadding: 3px;
+@pageMenuIconSizeSmall: 38px;
+@pageMenuIconSizeBig: 46px;
+@pageMenuIconVerticalMarginSmall: 3px;
+@pageMenuIconVerticalMarginBig: 5px;
+
+@pageBottomPaddingSmall: 2 * @pageMenuBottomPadding + @pageMenuIconSizeSmall
+      + 2 * @pageMenuIconVerticalMarginSmall;
+@pageBottomPaddingBig: 2 * @pageMenuBottomPadding + @pageMenuIconSizeBig
+      + 2 * @pageMenuIconVerticalMarginBig;
 
 
 .-theme-transparent {
@@ -104,7 +116,7 @@
       }
 
       &.-bottom {
-         padding: 3px;
+         padding: @pageMenuBottomPadding;
          background: rgba(32, 35, 37, 0.4);
          bottom: 0;
       }
@@ -113,9 +125,9 @@
          &--item {
             font-size: 24px;
             line-height: 36px;
-            width: 38px;
-            height: 38px;
-            margin: 3px 5px;
+            width: @pageMenuIconSizeSmall;
+            height: @pageMenuIconSizeSmall;
+            margin: @pageMenuIconVerticalMarginSmall 5px;
             opacity: 0.6;
 
             &.-active {
@@ -132,9 +144,9 @@
             &--item {
                font-size: 30px;
                line-height: 44px;
-               width: 46px;
-               height: 46px;
-               margin: 5px 5px;
+               width: @pageMenuIconSizeBig;
+               height: @pageMenuIconSizeBig;
+               margin: @pageMenuIconVerticalMarginBig 5px;
             }
          }
       }
@@ -148,6 +160,18 @@
       &.-groups-align-vertically {
          .page {
             padding-left: 70px;
+         }
+      }
+   }
+
+   &.-menu-bottom {
+      .page {
+         padding-bottom: @pageBottomPaddingSmall;
+      }
+
+      @media (min-width: 500px) {
+         .page {
+            padding-bottom: @pageBottomPaddingBig;
          }
       }
    }
@@ -196,6 +220,8 @@
 
 
 .-theme-winphone {
+   @winphonePageMenuIconBorderSize: 3px;
+
    font-size: 13.5px;
 
    .item {
@@ -217,7 +243,19 @@
       .pages-menu {
          &--item {
             border-radius: 100%;
-            border: 3px solid rgba(255,255,255,.2);
+            border: @winphonePageMenuIconBorderSize solid rgba(255,255,255,.2);
+         }
+      }
+   }
+
+   &.-menu-bottom {
+      .page {
+         padding-bottom: @pageBottomPaddingSmall + 2 * @winphonePageMenuIconBorderSize;
+      }
+
+      @media (min-width: 500px) {
+         .page {
+            padding-bottom: @pageBottomPaddingBig + 2 * @winphonePageMenuIconBorderSize;
          }
       }
    }
@@ -226,6 +264,11 @@
 
 .-theme-homekit {
    @pageMenuBottomOffset: 0;
+   @pageMenuBottomTopBorderWidth: 1px;
+   @pageMenuIconSize: 70px;
+   @pageMenuIconVerticalMargin: 5px;
+   @pageBottomPadding: @pageMenuBottomOffset + @pageMenuBottomTopBorderWidth
+         + @pageMenuIconSize + 2 * @pageMenuIconVerticalMargin;;
 
    color: #fff;
    background: #eee !important;
@@ -323,7 +366,7 @@
 
    .pages-menu.-bottom {
       background: #fafafa;
-      border-top: 1px solid #d2d2d2;
+      border-top: @pageMenuBottomTopBorderWidth solid #d2d2d2;
       bottom: @pageMenuBottomOffset;
 
       .pages-menu {
@@ -374,6 +417,11 @@
       border-radius: 10px;
    }
 
+   &.-menu-bottom {
+      .page {
+         padding-bottom: @pageBottomPadding;
+      }
+   }
 
    &.-theme-mobile {
       .item {

@@ -2,7 +2,10 @@
 @pageMenuWidth: 120px;
 @pageMenuIconFont: 32px;
 @pageMenuIconSize: 70px;
+@pageMenuIconVerticalMargin: 5px;
 @groupMargin: 35px 50px 35px 15px;
+@pageBottomPadding: @pageMenuBottomOffset + @pageMenuIconSize
+      + 2 * @pageMenuIconVerticalMargin;
 
 @tileSize: 155px;
 @entitySize: 80px;
@@ -280,6 +283,10 @@ body {
 }
 
 .-menu-bottom {
+   .page {
+      padding-bottom: @pageBottomPadding;
+   }
+
    .page-head {
       left: 10px;
       right: 10px;
@@ -363,7 +370,7 @@ body {
       line-height: @pageMenuIconSize;
       text-align: center;
       opacity: 0.5;
-      margin: 5px auto;
+      margin: @pageMenuIconVerticalMargin auto;
       vertical-align: middle;
       cursor: pointer;
 
