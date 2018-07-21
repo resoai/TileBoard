@@ -225,6 +225,8 @@
 
 
 .-theme-homekit {
+   @pageMenuBottomOffset: 0;
+
    color: #fff;
    background: #eee !important;
 
@@ -322,6 +324,7 @@
    .pages-menu.-bottom {
       background: #fafafa;
       border-top: 1px solid #d2d2d2;
+      bottom: @pageMenuBottomOffset;
 
       .pages-menu {
          &--item {
