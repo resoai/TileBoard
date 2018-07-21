@@ -31,7 +31,7 @@ Should you have any ideas or questions please post them on home-assistant forum 
 ```js
 var CONFIG = {
    /* customTheme: specify a custom theme for your dashboard
-    * Valid options: null, CUSTOM_THEMES.TRANSPARENT, CUSTOM_THEMES.MOBILE, CUSTOM_THEMES.WINPHONE or a custom theme you have created
+    * Valid options: null, CUSTOM_THEMES.TRANSPARENT, CUSTOM_THEMES.MOBILE, CUSTOM_THEMES.COMPACT, CUSTOM_THEMES.HOMEKIT, CUSTOM_THEMES.WINPHONE, CUSTOM_THEMES.WIN95 or a custom theme you have created
     * Default: null. Array supported
     */
    customTheme: null,
