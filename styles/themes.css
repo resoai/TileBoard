@@ -147,6 +147,18 @@
 .-theme-compact.-menu-left.-groups-align-vertically .page {
   padding-left: 70px;
 }
+.-theme-winphone.-menu-bottom .page,
+.-theme-mobile.-menu-bottom .page,
+.-theme-compact.-menu-bottom .page {
+  padding-bottom: 50px;
+}
+@media (min-width: 500px) {
+  .-theme-winphone.-menu-bottom .page,
+  .-theme-mobile.-menu-bottom .page,
+  .-theme-compact.-menu-bottom .page {
+    padding-bottom: 62px;
+  }
+}
 .-theme-mobile .group-title,
 .-theme-winphone .group-title {
   height: 40px;
@@ -202,25 +214,13 @@
   border-radius: 100%;
   border: 3px solid rgba(255, 255, 255, 0.2);
 }
-.-theme-winphone {
-  font-size: 13.5px;
+.-theme-winphone.-menu-bottom .page {
+  padding-bottom: 56px;
 }
-.-theme-winphone .item {
-  color: #f5efee;
-  background: rgba(34, 102, 168, 0.3) !important;
-}
-.-theme-winphone .item:active {
-  background: rgba(34, 102, 168, 0.4) !important;
-}
-.-theme-winphone .item-state {
-  background: rgba(0, 0, 0, 0.15);
-}
-.-theme-winphone .pages-menu.-bottom {
-  background: #282828;
-}
-.-theme-winphone .pages-menu.-bottom .pages-menu--item {
-  border-radius: 100%;
-  border: 3px solid rgba(255, 255, 255, 0.2);
+@media (min-width: 500px) {
+  .-theme-winphone.-menu-bottom .page {
+    padding-bottom: 68px;
+  }
 }
 .-theme-homekit {
   color: #fff;
@@ -305,6 +305,7 @@
 .-theme-homekit .pages-menu.-bottom {
   background: #fafafa;
   border-top: 1px solid #d2d2d2;
+  bottom: 0;
 }
 .-theme-homekit .pages-menu.-bottom .pages-menu--item {
   color: #777;
@@ -341,6 +342,9 @@
 }
 .-theme-homekit input[type=range]::-moz-range-thumb {
   border-radius: 10px;
+}
+.-theme-homekit.-menu-bottom .page {
+  padding-bottom: 81px;
 }
 .-theme-homekit.-theme-mobile .item-state {
   padding: 4px 5px 2px !important;

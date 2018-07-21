@@ -255,6 +255,9 @@ body {
   margin-top: 0.1em;
   font-size: 1em;
 }
+.-menu-bottom .page {
+  padding-bottom: 105px;
+}
 .-menu-bottom .page-head {
   left: 10px;
   right: 10px;
