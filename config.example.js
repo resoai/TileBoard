@@ -21,7 +21,19 @@ var CONFIG = {
 
    // next fields are optional
    events: [],
-   header: DEFAULT_HEADER, // https://github.com/resoai/TileBoard/wiki/Header-configuration
+   header: { // https://github.com/resoai/TileBoard/wiki/Header-configuration
+      styles: {
+         padding: '30px 130px 0',
+         fontSize: '28px'
+      },
+      right: [],
+      left: [
+         {
+            type: HEADER_ITEMS.DATETIME,
+            dateFormat: 'EEEE, LLLL dd', //https://docs.angularjs.org/api/ng/filter/date
+         }
+      ]
+   },
    timeFormat: 24,
    menuPosition: MENU_POSITIONS.LEFT, // or BOTTOM
    hideScrollbar: false, // horizontal scrollbar
