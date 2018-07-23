@@ -21,6 +21,11 @@ var CONFIG = {
 
    // next fields are optional
    events: [],
+   timeFormat: 24,
+   menuPosition: MENU_POSITIONS.LEFT, // or BOTTOM
+   hideScrollbar: false, // horizontal scrollbar
+   groupsAlign: GROUP_ALIGNS.HORIZONTALLY, // or VERTICALLY
+
    header: { // https://github.com/resoai/TileBoard/wiki/Header-configuration
       styles: {
          padding: '30px 130px 0',
@@ -34,12 +39,8 @@ var CONFIG = {
          }
       ]
    },
-   timeFormat: 24,
-   menuPosition: MENU_POSITIONS.LEFT, // or BOTTOM
-   hideScrollbar: false, // horizontal scrollbar
-   groupsAlign: GROUP_ALIGNS.HORIZONTALLY, // or VERTICALLY
 
-   screensaver: {// optional. https://github.com/resoai/TileBoard/wiki/Screensaver-configuration
+   /*screensaver: {// optional. https://github.com/resoai/TileBoard/wiki/Screensaver-configuration
       timeout: 300, // after 5 mins of inactive
       slidesTimeout: 10, // 10s for one slide
       styles: { fontSize: '40px' },
@@ -58,7 +59,7 @@ var CONFIG = {
          },
          { bg: 'images/bg3.jpg' }
       ]
-   },
+   },*/
 
    pages: [
       {
