@@ -524,6 +524,12 @@ function MainController ($scope) {
       return parseFieldValue(fields[field], item, entity);
    };
 
+   $scope.getWeatherLine = function (line, item, entity) {
+      if(!line) return null;
+
+      return parseFieldValue(line, item, entity);
+   };
+
    $scope.getWeatherIcon = function (item, entity) {
       var icon;
 

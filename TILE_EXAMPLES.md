@@ -510,26 +510,29 @@ This is a custom tile which can be used for displaying values from different sen
    },
    fields: { // most of that fields are optional
       summary: '&sensor.dark_sky_summary.state',
-      apparentTemperature: '&sensor.dark_sky_apparent_temperature.state',
-      apparentTemperatureUnit: '&sensor.dark_sky_apparent_temperature.attributes.unit_of_measurement',
       temperature: '&sensor.dark_sky_temperature.state',
       temperatureUnit: '&sensor.dark_sky_temperature.attributes.unit_of_measurement',
-      highTemperature: '&sensor.dark_sky_daytime_high_temperature.state',
-      highTemperatureUnit: '&sensor.dark_sky_daytime_high_temperature.attributes.unit_of_measurement',
-      lowTemperature: '&sensor.dark_sky_overnight_low_temperature.state',
-      lowTemperatureUnit: '&sensor.dark_sky_overnight_low_temperature.attributes.unit_of_measurement',
-      precip: '&sensor.dark_sky_precip.state',
-      precipIntensity: '&sensor.dark_sky_precip_intensity.state',
-      precipIntensityUnit: '&sensor.dark_sky_precip_intensity.attributes.unit_of_measurement',
-      precipProbability: '&sensor.dark_sky_precip_probability.state',
-      precipProbabilityUnit: '&sensor.dark_sky_precip_probability.attributes.unit_of_measurement',
       windSpeed: '&sensor.dark_sky_wind_speed.state',
       windSpeedUnit: '&sensor.dark_sky_wind_speed.attributes.unit_of_measurement',
       humidity: '&sensor.dark_sky_humidity.state',
       humidityUnit: '&sensor.dark_sky_humidity.attributes.unit_of_measurement',
-      pollen: '&sensor.pollen_count.state', // this is a value from a custom REST sensor
-      pressure: '&sensor.dark_sky_pressure.state',
-      pressureUnit: '', //'&sensor.dark_sky_pressure.attributes.unit_of_measurement',
+
+      list: [
+         // custom line
+         'Feels like '
+            + '&sensor.dark_sky_apparent_temperature.state'
+            + '&sensor.dark_sky_apparent_temperature.attributes.unit_of_measurement',
+
+         // another custom line
+         'Pressure '
+            + '&sensor.dark_sky_pressure.state'
+            + '&sensor.dark_sky_pressure.attributes.unit_of_measurement',
+
+         // yet another custom line
+         '&sensor.dark_sky_precip_probability.state'
+            + '&sensor.dark_sky_precip_probability.attributes.unit_of_measurement'
+            + ' chance of rain'
+      ]
    }
 }
 ```

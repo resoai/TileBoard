@@ -784,13 +784,15 @@
             </div>
 
             <div class="weather-line" ng-if="item.fields.highTemperature">
-               <span class="weather-line--small-label">High</span>
+               <span class="weather-line--small-label"
+                     ng-bind="getWeatherField('highTemperatureLabel', item, entity) || 'High'"></span>
                <span ng-bind="getWeatherField('highTemperature', item, entity)"></span>
                <span ng-bind="getWeatherField('highTemperatureUnit', item, entity)"></span>
             </div>
 
             <div class=weather-line" ng-if="item.fields.lowTemperature">
-               <span class="weather-line--small-label">Low</span>
+               <span class="weather-line--small-label"
+                     ng-bind="getWeatherField('lowTemperatureLabel', item, entity) || 'Low'"></span>
                <span ng-bind="getWeatherField('lowTemperature', item, entity)"></span>
                <span ng-bind="getWeatherField('lowTemperatureUnit', item, entity)"></span>
             </div>
@@ -808,6 +810,12 @@
                --><span ng-bind="getWeatherField('windSpeedUnit', item, entity)"></span>
                </span>
             </div>
+
+            <div class="weather-line" ng-repeat="line in item.fields.list">
+               <span ng-bind="getWeatherLine(line, item. entity)"></span>
+            </div>
+
+            <!-- DEPRECATED -->
             <div class="weather-line" ng-if="item.fields.apparentTemperature">
                Feels like
                <span ng-bind="getWeatherField('apparentTemperature', item, entity)"></span>
@@ -819,15 +827,18 @@
                <span ng-bind="getWeatherField('pressure', item, entity)"></span>
                <span ng-bind="getWeatherField('pressureUnit', item, entity)"></span>
             </div>
+
             <div class="weather-line" ng-if="item.fields.pollen">
                Pollen
                <span ng-bind="getWeatherField('pollen', item, entity)"></span>
             </div>
+
             <div class="weather-line" ng-if="item.fields.precipProbability">
                <span ng-bind="getWeatherField('precipProbability', item, entity)"></span><!--
             --><span ng-bind="getWeatherField('precipProbabilityUnit', item, entity)"></span>
                chance of rain
             </div>
+            <!-- ///DEPRECATED -->
          </div>
       </div>
 
@@ -836,7 +847,9 @@
          <div class="weather-list">
             <table>
                <tr class="weather-list-header" ng-hide="item.hideHeader">
-                  <th>Date</th>
+                  <th>
+                     <span ng-bind="itemField('dateTitle', item, entity) || 'Date'"></span>
+                  </th>
                   <th></th>
                   <th>
                      <span ng-bind="itemField('primaryTitle', item, entity) || 'Forecast'"></span>

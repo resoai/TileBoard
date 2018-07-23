@@ -175,26 +175,32 @@ var CONFIG = {
                      type: TYPES.WEATHER,
                      id: {},
                      state: function () {return 'Sunny'}, // https://github.com/resoai/TileBoard/wiki/Anonymous-functions
+                     icon: 'clear-day',
+                     icons: { 'clear-day': 'clear'},
                      fields: {
-                        icon: 'clear-day',
-                        iconMap: { 'clear-day': 'clear'},
                         summary: 'Sunny',
-                        apparentTemperature: '15',
-                        apparentTemperatureUnit: 'C',
                         temperature: '18',
                         temperatureUnit: 'C',
-                        //precip: '&sensor.dark_sky_precip_1.state',
-                        //precipIntensity: '&sensor.dark_sky_precip_intensity_1.state',
-                        //precipIntensityUnit: '&sensor.dark_sky_precip_intensity_1.attributes.unit_of_measurement',
-                        precipProbability: '5',
-                        precipProbabilityUnit: '%',
                         windSpeed: '5',
                         windSpeedUnit: 'kmh',
                         humidity: '50',
                         humidityUnit: '%',
-                        //pollen: '&sensor.pollen_count_1.state',
-                        pressure: '1024',
-                        pressureUnit: '', //'&sensor.dark_sky_pressure_1.attributes.unit_of_measurement',
+                        list: [
+                           'Feels like 16 C'
+                           /*
+                           'Feels like '
+                              + '&sensor.dark_sky_apparent_temperature.state'
+                              + '&sensor.dark_sky_apparent_temperature.attributes.unit_of_measurement',
+
+                           'Pressure '
+                              + '&sensor.dark_sky_pressure.state'
+                              + '&sensor.dark_sky_pressure.attributes.unit_of_measurement',
+
+                           '&sensor.dark_sky_precip_probability.state'
+                              + '&sensor.dark_sky_precip_probability.attributes.unit_of_measurement'
+                              + ' chance of rain'
+                           */
+                        ]
                      }
                   }
 
