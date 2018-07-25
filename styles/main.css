@@ -256,7 +256,7 @@ body {
   font-size: 1em;
 }
 .-menu-bottom .page {
-  padding-bottom: 105px;
+  padding-bottom: 104px;
 }
 .-menu-bottom .page-head {
   left: 10px;
@@ -296,8 +296,9 @@ body {
 }
 .pages-menu.-bottom {
   left: 0;
-  bottom: 25px;
+  bottom: 0;
   right: 0;
+  padding: 12px 0;
 }
 .pages-menu.-bottom .pages-menu--item {
   display: inline-block;

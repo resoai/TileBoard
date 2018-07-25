@@ -305,7 +305,7 @@
 .-theme-homekit .pages-menu.-bottom {
   background: #fafafa;
   border-top: 1px solid #d2d2d2;
-  bottom: 0;
+  padding: 0;
 }
 .-theme-homekit .pages-menu.-bottom .pages-menu--item {
   color: #777;
