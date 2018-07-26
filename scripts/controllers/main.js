@@ -3,6 +3,8 @@ App.controller('Main', ['$scope', MainController]);
 function MainController ($scope) {
    if(!window.CONFIG) return;
 
+
+
    $scope.pages = CONFIG.pages;
    $scope.TYPES = TYPES;
    $scope.FEATURES = FEATURES;
@@ -1549,7 +1551,23 @@ function MainController ($scope) {
 
          $scope.ready = true;
 
-         $scope.openPage($scope.pages[0]);
+         var desiredPage;
+
+         if(window.location.search != '') {
+           var desiredPageName = window.location.search.substring(1);
+           var desiredPages = CONFIG.pages.filter(function(obj) {
+             return obj.id == desiredPageName;
+           });
+           if(desiredPages.length > 0) {
+             desiredPage = desiredPages[0];
+           }
+         }
+
+         if(desiredPage === undefined) {
+           desiredPage = $scope.pages[0];
+         }
+
+         $scope.openPage(desiredPage);
 
          updateView();
       });
