@@ -255,6 +255,12 @@ body {
   margin-top: 0.1em;
   font-size: 1em;
 }
+.-menu-left.-scrolled-horizontally .pages-menu--scroll-indicator {
+  opacity: 1;
+}
+.-menu-bottom.-scrolled-vertically .pages-menu--scroll-indicator {
+  opacity: 1;
+}
 .-menu-bottom .page {
   padding-bottom: 104px;
 }
@@ -294,17 +300,32 @@ body {
   bottom: 0;
   top: 0;
 }
+.pages-menu.-left .pages-menu--scroll-indicator {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.1) 98%, rgba(0, 0, 0, 0.3) 98%, rgba(0, 0, 0, 0));
+}
 .pages-menu.-bottom {
   left: 0;
   bottom: 0;
   right: 0;
   padding: 12px 0;
 }
+.pages-menu.-bottom .pages-menu--scroll-indicator {
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.1) 98%, rgba(0, 0, 0, 0.3) 98%, rgba(0, 0, 0, 0));
+}
 .pages-menu.-bottom .pages-menu--item {
   display: inline-block;
 }
 .pages-menu.-bottom .pages-menu--items {
   margin-top: 0 !important;
+}
+.pages-menu--scroll-indicator {
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transition: opacity 0.3s;
+  width: 100%;
 }
 .pages-menu--items {
   display: inline-block;

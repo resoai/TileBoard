@@ -295,3 +295,28 @@ App.directive('date', ['$interval', function ($interval) {
    }
 }]);
 
+
+App.directive('onScroll', [function () {
+   return {
+      restrict: 'A',
+      scope: {
+         onScrollModel: '=',
+      },
+      link: function ($scope, $el, attrs) {
+         var determineScroll = function () {
+            $scope.onScrollModel.scrolledHorizontally =
+               $el[0].scrollLeft !== 0;
+            $scope.onScrollModel.scrolledVertically =
+               $el[0].scrollTop !== 0;
+         };
+
+         determineScroll();
+
+         $el.on('scroll', function () {
+            determineScroll();
+            $scope.$apply();
+         });
+      },
+   }
+}]);
+

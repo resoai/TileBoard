@@ -105,6 +105,11 @@
   background: rgba(32, 35, 37, 0.4);
   bottom: 0;
 }
+.-theme-winphone .pages-menu.-bottom .pages-menu--scroll-indicator,
+.-theme-mobile .pages-menu.-bottom .pages-menu--scroll-indicator,
+.-theme-compact .pages-menu.-bottom .pages-menu--scroll-indicator {
+  display: none;
+}
 .-theme-winphone .pages-menu .pages-menu--item,
 .-theme-mobile .pages-menu .pages-menu--item,
 .-theme-compact .pages-menu .pages-menu--item {
@@ -306,6 +311,9 @@
   background: #fafafa;
   border-top: 1px solid #d2d2d2;
   padding: 0;
+}
+.-theme-homekit .pages-menu.-bottom .pages-menu--scroll-indicator {
+  display: none;
 }
 .-theme-homekit .pages-menu.-bottom .pages-menu--item {
   color: #777;

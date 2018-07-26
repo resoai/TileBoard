@@ -216,6 +216,8 @@
    <div class="pages-menu" ng-if="showPagesMenu()"
         ng-class="pagesMenuClasses()">
 
+      <div class="pages-menu--scroll-indicator"></div>
+
       <div class="pages-menu--aligner"></div>
 
       <div class="pages-menu--items">
@@ -238,7 +240,8 @@
       <div ng-repeat="page in pages track by $index"
            ng-class="{'-active': isPageActive(page)}"
            ng-if="shouldDrawPage(page) && !isHidden(page)"
-           ng-style="pageStyles(page)" class="page">
+           ng-style="pageStyles(page)" class="page"
+           on-scroll on-scroll-model="page">
 
          <-- legacy -->
          <div class="page-head" ng-if="page.head && headWarning()"

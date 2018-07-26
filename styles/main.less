@@ -282,7 +282,21 @@ body {
    }
 }
 
+.-menu-left {
+   &.-scrolled-horizontally {
+      .pages-menu--scroll-indicator {
+         opacity: 1;
+      }
+   }
+}
+
 .-menu-bottom {
+   &.-scrolled-vertically {
+      .pages-menu--scroll-indicator {
+         opacity: 1;
+      }
+   }
+
    .page {
       padding-bottom: @pageBottomPadding;
    }
@@ -331,6 +345,12 @@ body {
       left: 0;
       bottom: 0;
       top: 0;
+
+      .pages-menu--scroll-indicator {
+         background-image: linear-gradient(
+            to right,
+            rgba(0, 0, 0, .1) 98%, rgba(0, 0, 0, .3) 98%, rgba(0, 0, 0, 0));
+      }
    }
 
    &.-bottom {
@@ -339,6 +359,12 @@ body {
       right: 0;
       padding: @pageMenuVerticalPadding 0;
 
+      .pages-menu--scroll-indicator {
+         background-image: linear-gradient(
+            to top,
+            rgba(0, 0, 0, .1) 98%, rgba(0, 0, 0, .3) 98%, rgba(0, 0, 0, 0));
+      }
+
       .pages-menu--item {
          display: inline-block;
       }
@@ -346,6 +372,16 @@ body {
       .pages-menu--items {
          margin-top: 0 !important;
       }
+   }
+
+   &--scroll-indicator {
+      height: 100%;
+      left: 0;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      transition: opacity .3s;
+      width: 100%;
    }
 
    &--items {
