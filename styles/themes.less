@@ -263,11 +263,10 @@
 
 
 .-theme-homekit {
-   @pageMenuBottomOffset: 0;
    @pageMenuBottomTopBorderWidth: 1px;
    @pageMenuIconSize: 70px;
    @pageMenuIconVerticalMargin: 5px;
-   @pageBottomPadding: @pageMenuBottomOffset + @pageMenuBottomTopBorderWidth
+   @pageBottomPadding: @pageMenuBottomTopBorderWidth
          + @pageMenuIconSize + 2 * @pageMenuIconVerticalMargin;;
 
    color: #fff;
@@ -367,7 +366,7 @@
    .pages-menu.-bottom {
       background: #fafafa;
       border-top: @pageMenuBottomTopBorderWidth solid #d2d2d2;
-      bottom: @pageMenuBottomOffset;
+      padding: 0;
 
       .pages-menu {
          &--item {

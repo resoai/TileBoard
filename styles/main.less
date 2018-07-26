@@ -1,10 +1,10 @@
-@pageMenuBottomOffset: 25px;
+@pageMenuVerticalPadding: 12px;
 @pageMenuWidth: 120px;
 @pageMenuIconFont: 32px;
 @pageMenuIconSize: 70px;
 @pageMenuIconVerticalMargin: 5px;
 @groupMargin: 35px 50px 35px 15px;
-@pageBottomPadding: @pageMenuBottomOffset + @pageMenuIconSize
+@pageBottomPadding: 2 * @pageMenuVerticalPadding + @pageMenuIconSize
       + 2 * @pageMenuIconVerticalMargin;
 
 @tileSize: 155px;
@@ -335,8 +335,9 @@ body {
 
    &.-bottom {
       left: 0;
-      bottom: @pageMenuBottomOffset;
+      bottom: 0;
       right: 0;
+      padding: @pageMenuVerticalPadding 0;
 
       .pages-menu--item {
          display: inline-block;
