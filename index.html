@@ -401,7 +401,7 @@
    <div ng-style="itemStyles(page, item, entity)" class="item"
         ng-click="entityClick(page, item, entity)"
         on-long-press="entityLongClick($event, page, item, entity)"
-        ng-if="(entity = getItemEntity(item)) && !isHidden(item)"
+        ng-if="(entity = getItemEntity(item)) && !isHidden(item, entity)"
         ng-class="itemClasses(item)">
 
       <div class="item-clickable"></div>

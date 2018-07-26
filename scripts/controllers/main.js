@@ -1364,11 +1364,11 @@ function MainController ($scope) {
       return true;
    };
 
-   $scope.isHidden = function (object) {
+   $scope.isHidden = function (object, entity) {
       if(!('hidden' in object)) return false;
 
       if(typeof object.hidden === "function") {
-         return callFunction(object.hidden, object);
+         return callFunction(object.hidden, [object, entity]);
       }
 
       return object.hidden;

@@ -241,7 +241,7 @@ body {
   display: inline-block;
   text-align: center;
 }
-.header-weather--icon--image div {
+.header-weather--icon-image div {
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
