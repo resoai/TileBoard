@@ -303,18 +303,32 @@ App.directive('onScroll', [function () {
          onScrollModel: '=',
       },
       link: function ($scope, $el, attrs) {
+         var lastScrolledHorizontally = false;
+         var lastScrolledVertically = false;
+
          var determineScroll = function () {
-            $scope.onScrollModel.scrolledHorizontally =
-               $el[0].scrollLeft !== 0;
-            $scope.onScrollModel.scrolledVertically =
-               $el[0].scrollTop !== 0;
+            var scrolledHorizontally = $el[0].scrollLeft !== 0;
+            var scrolledVertically = $el[0].scrollTop !== 0;
+
+            if(lastScrolledVertically !== scrolledVertically ||
+               lastScrolledHorizontally !== scrolledHorizontally) {
+               $scope.onScrollModel.scrolledHorizontally =
+                  lastScrolledHorizontally = scrolledHorizontally;
+               $scope.onScrollModel.scrolledVertically =
+                  lastScrolledVertically = scrolledVertically;
+
+               return true;
+            }
+
+            return false;
          };
 
          determineScroll();
 
          $el.on('scroll', function () {
-            determineScroll();
-            $scope.$apply();
+            if(determineScroll()) {
+               $scope.$apply();
+            }
          });
       },
    }
