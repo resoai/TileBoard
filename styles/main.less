@@ -347,9 +347,7 @@ body {
       top: 0;
 
       .pages-menu--scroll-indicator {
-         background-image: linear-gradient(
-            to right,
-            rgba(0, 0, 0, .1) 98%, rgba(0, 0, 0, .3) 98%, rgba(0, 0, 0, 0));
+         box-shadow: 1px 0 5px rgba(0, 0, 0, .5);
       }
    }
 
@@ -360,9 +358,7 @@ body {
       padding: @pageMenuVerticalPadding 0;
 
       .pages-menu--scroll-indicator {
-         background-image: linear-gradient(
-            to top,
-            rgba(0, 0, 0, .1) 98%, rgba(0, 0, 0, .3) 98%, rgba(0, 0, 0, 0));
+         box-shadow: 0 1px 5px rgba(0, 0, 0, .5);
       }
 
       .pages-menu--item {
@@ -375,6 +371,7 @@ body {
    }
 
    &--scroll-indicator {
+      background-color: rgba(0, 0, 0, .1);
       height: 100%;
       left: 0;
       opacity: 0;

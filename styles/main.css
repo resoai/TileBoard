@@ -301,7 +301,7 @@ body {
   top: 0;
 }
 .pages-menu.-left .pages-menu--scroll-indicator {
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.1) 98%, rgba(0, 0, 0, 0.3) 98%, rgba(0, 0, 0, 0));
+  box-shadow: 1px 0 5px rgba(0, 0, 0, 0.5);
 }
 .pages-menu.-bottom {
   left: 0;
@@ -310,7 +310,7 @@ body {
   padding: 12px 0;
 }
 .pages-menu.-bottom .pages-menu--scroll-indicator {
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.1) 98%, rgba(0, 0, 0, 0.3) 98%, rgba(0, 0, 0, 0));
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
 }
 .pages-menu.-bottom .pages-menu--item {
   display: inline-block;
@@ -319,6 +319,7 @@ body {
   margin-top: 0 !important;
 }
 .pages-menu--scroll-indicator {
+  background-color: rgba(0, 0, 0, 0.1);
   height: 100%;
   left: 0;
   opacity: 0;
