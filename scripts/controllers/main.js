@@ -1552,9 +1552,19 @@ function MainController ($scope) {
          var desiredPage;
 
          if(window.location.search != '') {
-           var desiredPageName = window.location.search.substring(1);
-           var desiredPages = CONFIG.pages.filter(function(obj) {
-             return obj.id == desiredPageName;
+
+           var queryStringPairs = location.search.slice(1).split('&');
+
+           var queryStringParameters = {};
+           queryStringPairs.forEach(function(pair) {
+               pair = pair.split('=');
+               queryStringParameters[pair[0]] = decodeURIComponent(pair[1] || '');
+           });
+
+
+           var desiredPageID = queryStringParameters.pageid
+           var desiredPages = $scope.pages.filter(function(obj) {
+             return obj.id == desiredPageID;
            });
            if(desiredPages.length > 0) {
              desiredPage = desiredPages[0];
