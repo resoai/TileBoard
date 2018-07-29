@@ -102,7 +102,19 @@ function MainController ($scope) {
          }
       }
 
-      return bodyClass;
+      var scrollClasses = [];
+
+      if(activePage) {
+         if(activePage.scrolledHorizontally) {
+            scrollClasses.push('-scrolled-horizontally');
+         }
+
+         if(activePage.scrolledVertically) {
+            scrollClasses.push('-scrolled-vertically');
+         }
+      }
+
+      return bodyClass.concat(scrollClasses);
    };
 
 
@@ -1568,6 +1580,11 @@ function MainController ($scope) {
    angular.element(window).on('view:updated', function () {
       updateView();
    });
+
+   $scope.$watchGroup([
+     'activePage.scrolledVertically',
+     'activePage.scrolledHorizontally',
+   ], updateView);
 
    function calcGroupSizes (group) {
       var maxWidth = 0;
