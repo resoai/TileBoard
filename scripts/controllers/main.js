@@ -1561,7 +1561,33 @@ function MainController ($scope) {
 
          $scope.ready = true;
 
-         $scope.openPage($scope.pages[0]);
+         var desiredPage;
+
+         if(window.location.search != '') {
+
+           var queryStringPairs = location.search.slice(1).split('&');
+
+           var queryStringParameters = {};
+           queryStringPairs.forEach(function(pair) {
+               pair = pair.split('=');
+               queryStringParameters[pair[0]] = decodeURIComponent(pair[1] || '');
+           });
+
+
+           var desiredPageID = queryStringParameters.pageid
+           var desiredPages = $scope.pages.filter(function(obj) {
+             return obj.id == desiredPageID;
+           });
+           if(desiredPages.length > 0) {
+             desiredPage = desiredPages[0];
+           }
+         }
+
+         if(desiredPage === undefined) {
+           desiredPage = $scope.pages[0];
+         }
+
+         $scope.openPage(desiredPage);
 
          updateView();
       });
