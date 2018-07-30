@@ -531,10 +531,7 @@ events: [
     {
       command: 'open_page',
       action: function(e) {
-        var page = CONFIG.pages.filter(function(obj) {
-          return obj.id == e.page;
-        });
-        this.$scope.openPage(page[0]);
+        window.openPage(CONFIG.pages[e.page]);
       }
     }
   ],
