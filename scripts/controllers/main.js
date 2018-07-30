@@ -1769,4 +1769,9 @@ function MainController ($scope) {
    function updateView () {
       if(!$scope.$$phase) $scope.$digest();
    }
+
+   window.openPage = function (page) {
+      $scope.openPage(page);
+      updateView();
+   };
 }
