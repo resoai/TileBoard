@@ -1278,6 +1278,7 @@ function MainController ($scope, $location) {
    $scope.openCamera = function (item) {
       $scope.activeCamera = item;
    };
+   
    $scope.closeCamera = function () {
       $scope.activeCamera = null;
    };
@@ -1519,7 +1520,8 @@ function MainController ($scope, $location) {
 
       $scope.datetimeString = $scope.datetimeString || "";
 
-      return $scope.datetimeString.length === placeholder.length
+      return $scope.datetimeString.length === placeholder.length;
+   };
 
    function getDatetimePlaceholder (entity) {
       var res = [];
