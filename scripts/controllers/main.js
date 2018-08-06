@@ -1,6 +1,6 @@
-App.controller('Main', ['$scope', MainController]);
+App.controller('Main', ['$scope', '$location', MainController]);
 
-function MainController ($scope) {
+function MainController ($scope, $location) {
    if(!window.CONFIG) return;
 
    $scope.pages = CONFIG.pages;
@@ -1269,6 +1269,10 @@ function MainController ($scope) {
       else {
          setTimeout(scrollToActivePage, 40);
       }
+      if (CONFIG.rememberLastPage) {
+         var pageNum = $scope.pages.indexOf(page);
+         $location.hash(pageNum);
+      }
    };
 
    $scope.openCamera = function (item) {
@@ -1516,7 +1520,6 @@ function MainController ($scope) {
       $scope.datetimeString = $scope.datetimeString || "";
 
       return $scope.datetimeString.length === placeholder.length
-   };
 
    function getDatetimePlaceholder (entity) {
       var res = [];
@@ -1560,9 +1563,12 @@ function MainController ($scope) {
          }
 
          $scope.ready = true;
-
-         $scope.openPage($scope.pages[0]);
-
+         
+         var pageNum = $location.hash();
+         if (!CONFIG.rememberLastPage || !$scope.pages[pageNum]) {
+            pageNum = 0;
+         }
+         $scope.openPage($scope.pages[pageNum]);
          updateView();
       });
    });
