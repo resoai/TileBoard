@@ -77,6 +77,11 @@ var CONFIG = {
     */
    password: null,
 
+   /* debug: Toggle for extra debugging information.
+    * If enabled, will print info about state changes and entities to console.
+    */
+   debug: Boolean,
+
    /* timeFormat: 12 for AM/PM marker, 24 for 24 hour time (default) */
    timeFormat: Number,
    

@@ -1539,16 +1539,16 @@ function MainController ($scope) {
 
    Api.onReady(function () {
       Api.subscribeEvents("state_changed", function (res) {
-         console.log('subscribed to state_changed', res);
+         debugLog('subscribed to state_changed', res);
       });
 
       Api.subscribeEvents("tileboard", function (res) {
-         console.log('subscribed to tileboard', res);
+         debugLog('subscribed to tileboard', res);
       });
 
       Api.getStates(function (res) {
          if(res.success) {
-            console.log(res.result);
+            debugLog(res.result);
 
             // in case of development, when sensors are predefined
             if(window.DEBUG_SENSORS) {
@@ -1742,13 +1742,13 @@ function MainController ($scope) {
    function handleEvent (event) {
       try {
          if (event.event_type === "state_changed") {
-            console.log('state change', event.data.entity_id, event.data.new_state);
+            debugLog('state change', event.data.entity_id, event.data.new_state);
 
             setNewState(event.data.entity_id, event.data.new_state);
             checkStatesTriggers(event.data.entity_id, event.data.new_state);
          }
          else if (event.event_type === "tileboard") {
-            console.log('tileboard', event.data);
+            debugLog('tileboard', event.data);
 
             triggerEvents(event.data);
          }
@@ -1764,6 +1764,12 @@ function MainController ($scope) {
          message: error,
          lifetime: 10
       });
+   }
+
+   function debugLog () {
+      if(CONFIG.debug) {
+         console.log.apply(console, [].slice.call(arguments));
+      }
    }
 
    function updateView () {

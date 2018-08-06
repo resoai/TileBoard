@@ -18,6 +18,7 @@ var CONFIG = {
    passwordType: PASSWORD_TYPES.PROMPT_AND_SAVE,
    //password: null,
    //googleApiKey: "XXXXXXXXXX", // Required if you are using Google Maps for device tracker
+   debug: false, // Prints entities and state change info to the console.
 
    // next fields are optional
    events: [],
