@@ -1,6 +1,6 @@
-App.controller('Main', ['$scope', '$location', MainController]);
+App.controller('Main', ['$scope', MainController]);
 
-function MainController ($scope, $location) {
+function MainController ($scope) {
    if(!window.CONFIG) return;
 
    $scope.pages = CONFIG.pages;
@@ -1269,8 +1269,7 @@ function MainController ($scope, $location) {
          setTimeout(scrollToActivePage, 40);
       }
       if (CONFIG.rememberLastPage) {
-         var pageNum = $scope.pages.indexOf(page);
-         $location.hash(pageNum);
+         location.hash = $scope.pages.indexOf(page) + '';
       }
    };
 
@@ -1565,7 +1564,7 @@ function MainController ($scope, $location) {
 
          $scope.ready = true;
          
-         var pageNum = $location.hash();
+         var pageNum = location.hash.slice(1);
          if (!CONFIG.rememberLastPage || !$scope.pages[pageNum]) {
             pageNum = 0;
          }

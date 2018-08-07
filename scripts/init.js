@@ -4,6 +4,11 @@ App.config(function($sceProvider) {
    $sceProvider.enabled(false);
 });
 
+App.config(function($locationProvider) {
+   $locationProvider.html5Mode(true);
+   $locationProvider.hashPrefix('');
+});
+
 
 if(!window.CONFIG) {
    var error = 'Please make sure you have "config.js" file and it\'s a valid javascript!\n' +
