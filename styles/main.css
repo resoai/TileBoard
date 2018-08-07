@@ -325,7 +325,7 @@ body {
   opacity: 0;
   position: absolute;
   top: 0;
-  transition: opacity 0.3s;
+  transition: opacity .3s;
   width: 100%;
 }
 .pages-menu--items {
@@ -673,7 +673,7 @@ body {
   right: 6px;
   background: rgba(0, 0, 0, 0.2);
   padding: 1px 6px 2px;
-  font-size: 0.9em;
+  font-size: .9em;
   color: #ffffff;
   border-radius: 1px;
   z-index: 2;
@@ -1501,6 +1501,9 @@ camera-thumbnail div {
 .media-player-table--td-volume .media-player--volume {
   margin: -3px 0 -2px;
 }
+.media-player-table--td-volume-buttons {
+  text-align: left;
+}
 .media-player-table.-has-state .media-player-table--td-main-button .media-player--main-button span {
   height: 45px;
   width: 45px;
@@ -1834,3 +1837,4 @@ input[type=range]::-moz-range-thumb {
     width: 0;
   }
 }
+/*# sourceMappingURL=main.css.map */

@@ -1004,6 +1004,20 @@
                   </td>
                </tr>
 
+               <tr ng-if="!_c && supportsFeature(FEATURES.VOLUME_STEP, entity)">
+                  <td colspan="3" class="media-player-table--td-source">
+                     <div class="media-player--button -volume_up"
+                          ng-click="sendPlayer('volume_up', item, entity)">
+                        <i class="mdi mdi-volume-plus"></i>
+                     </div>
+
+                     <div class="media-player--button -volume_down"
+                          ng-click="sendPlayer('volume_down', item, entity)">
+                        <i class="mdi mdi-volume-minus"></i>
+                     </div>
+                  </td>
+               </tr>
+
                <tr>
                   <td colspan="2"></td>
                   <td class="media-player-table--td-mute">
