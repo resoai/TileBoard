@@ -994,7 +994,7 @@
                   </td>
                </tr>
 
-               <tr ng-if="(_c = getVolumeConf(item, entity))">
+               <tr ng-if="supportsFeature(FEATURES.VOLUME_SET, entity) && (_c = getVolumeConf(item, entity))">
                   <td colspan="3" class="media-player-table--td-volume">
                      <div class="media-player--volume">
                         <input type="range" ng-model="_c.value"
@@ -1004,13 +1004,13 @@
                   </td>
                </tr>
 
-               <tr ng-if="!_c && supportsFeature(FEATURES.VOLUME_STEP, entity) && entity.state !== 'off'">
+               <tr ng-if="!supportsFeature(FEATURES.VOLUME_SET, entity) && supportsFeature(FEATURES.VOLUME_STEP, entity) && entity.state !== 'off'">
                   <td colspan="3" class="media-player-table--td-volume-buttons">
                      <div class="media-player--button -volume_down"
                           ng-click="sendPlayer('volume_down', item, entity)">
                         <i class="mdi mdi-volume-minus"></i>
                      </div>
-                     
+
                      <div class="media-player--button -volume_up"
                           ng-click="sendPlayer('volume_up', item, entity)">
                         <i class="mdi mdi-volume-plus"></i>
