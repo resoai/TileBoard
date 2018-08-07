@@ -351,22 +351,21 @@ function MainController ($scope, $location) {
             top: pos[1] * tileSize + (tileMargin * pos[1]) + 'px',
          };
 
-         if(item.customStyles) {
-            var res;
-
-            if(typeof item.customStyles === "function") {
-               res = callFunction(item.customStyles, [item, entity]);
-            }
-            else if(typeof item.customStyles === "object") {
-               res = item.customStyles;
-            }
-
-            if(res) styles = angular.merge(styles, res);
-         }
-
          item.styles = styles;
       }
 
+      if(item.customStyles) {
+         var res;
+
+         if(typeof item.customStyles === "function") {
+            res = callFunction(item.customStyles, [item, entity]);
+         }
+         else if(typeof item.customStyles === "object") {
+            res = item.customStyles;
+         }
+         if(res) for(var k in res) item.styles[k] = res[k];
+      }
+      
       return item.styles;
    };
 
