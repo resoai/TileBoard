@@ -1251,7 +1251,8 @@ function MainController ($scope) {
 
    // UI
 
-   $scope.openPage = function (page) {
+   $scope.openPage = function (page, preventAnimation) {
+      preventAnimation = preventAnimation || false;
       showedPages = [];
 
       if(activePage) {
@@ -1266,7 +1267,9 @@ function MainController ($scope) {
 
       }
       else {
-         setTimeout(scrollToActivePage, 40);
+         setTimeout(function () {
+            scrollToActivePage(preventAnimation);
+         }, 20);
       }
       if (CONFIG.rememberLastPage) {
          location.hash = $scope.pages.indexOf(page) + '';
@@ -1349,7 +1352,7 @@ function MainController ($scope) {
       return res;
    };
 
-   function scrollToActivePage () {
+   function scrollToActivePage (preventAnimation) {
       var index = $scope.pages.indexOf(activePage);
       var translate = index * 100;
 
@@ -1365,6 +1368,14 @@ function MainController ($scope) {
       }
 
       $pages.style.transform = transform;
+
+      if(preventAnimation) {
+         $pages.style.transition = 'none';
+
+         setTimeout(function () {
+            $pages.style.transition = null;
+         }, 50);
+      }
    }
 
    $scope.isPageActive = function (page) {
@@ -1563,12 +1574,15 @@ function MainController ($scope) {
          }
 
          $scope.ready = true;
-         
+
          var pageNum = location.hash.slice(1);
+
          if (!CONFIG.rememberLastPage || !$scope.pages[pageNum]) {
             pageNum = 0;
          }
-         $scope.openPage($scope.pages[pageNum]);
+
+         $scope.openPage($scope.pages[pageNum], true);
+
          updateView();
       });
    });
