@@ -1,6 +1,6 @@
-App.controller('Main', ['$scope', MainController]);
+App.controller('Main', ['$scope', '$location', MainController]);
 
-function MainController ($scope) {
+function MainController ($scope, $location) {
    if(!window.CONFIG) return;
 
    $scope.pages = CONFIG.pages;
@@ -1272,7 +1272,7 @@ function MainController ($scope) {
          }, 20);
       }
       if (CONFIG.rememberLastPage) {
-         location.hash = $scope.pages.indexOf(page) + '';
+         $location.hash($scope.pages.indexOf(page));
       }
    };
 
@@ -1575,7 +1575,7 @@ function MainController ($scope) {
 
          $scope.ready = true;
 
-         var pageNum = location.hash.slice(1);
+         var pageNum = $location.hash();
 
          if (!CONFIG.rememberLastPage || !$scope.pages[pageNum]) {
             pageNum = 0;
