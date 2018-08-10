@@ -9,7 +9,6 @@ App.config(function($locationProvider) {
       enabled: true,
       requireBase: false
    });
-   $locationProvider.hashPrefix('');
 });
 
 
