@@ -1004,7 +1004,7 @@
                   </td>
                </tr>
 
-               <tr ng-if="!supportsFeature(FEATURES.VOLUME_SET, entity) && supportsFeature(FEATURES.VOLUME_STEP, entity) && entity.state !== 'off'">
+               <tr ng-if="!(supportsFeature(FEATURES.VOLUME_SET, entity) && (_c = getVolumeConf(item, entity))) && supportsFeature(FEATURES.VOLUME_STEP, entity) && entity.state !== 'off'">
                   <td colspan="3" class="media-player-table--td-volume-buttons">
                      <div class="media-player--button -volume_down"
                           ng-click="sendPlayer('volume_down', item, entity)">
