@@ -847,7 +847,7 @@ function MainController ($scope, $location) {
    };
 
    $scope.shouldShowVolumeButtons = function (entity) {
-      return !($scope.supportsFeature(FEATURES.VOLUME_SET, entity)
+      return (!$scope.supportsFeature(FEATURES.VOLUME_SET, entity)
           || !('volume_level' in entity.attributes))
           && $scope.supportsFeature(FEATURES.VOLUME_STEP, entity)
           && entity.state !== 'off';
