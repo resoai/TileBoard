@@ -1791,7 +1791,7 @@ function MainController ($scope, $location) {
    }
 
    function addError (error) {
-      Noty.addObject({
+       if(!CONFIG.ignoreApiErrors) Noty.addObject({
          type: Noty.ERROR,
          title: 'Error',
          message: error,
