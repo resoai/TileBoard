@@ -122,13 +122,7 @@ function MainController ($scope, $location) {
       if(typeof item.id === "object") return item.id;
 
       if(!(item.id in $scope.states)) {
-         Noty.addObject({
-            type: Noty.WARNING,
-            title: 'Entity not found',
-            message: 'Entity "' + item.id + '" not found',
-            id: item.id
-         });
-
+         warnUnknownItem(item);
          return null;
       }
 
@@ -1791,12 +1785,21 @@ function MainController ($scope, $location) {
    }
 
    function addError (error) {
-       if(!CONFIG.ignoreApiErrors) Noty.addObject({
+       if(!CONFIG.ignoreErrors) Noty.addObject({
          type: Noty.ERROR,
          title: 'Error',
          message: error,
          lifetime: 10
       });
+   }
+
+   function warnUnknownItem(item) {
+       if(!CONFIG.ignoreErrors) Noty.addObject({
+           type: Noty.WARNING,
+           title: 'Entity not found',
+           message: 'Entity "' + item.id + '" not found',
+           id: item.id
+       });
    }
 
    function debugLog () {
