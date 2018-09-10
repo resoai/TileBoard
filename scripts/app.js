@@ -25,7 +25,9 @@ var CUSTOM_THEMES = {
 var PASSWORD_TYPES = {
    MANUAL: 'manual',
    PROMPT: 'prompt',
-   PROMPT_AND_SAVE: 'prompt_and_save'
+   PROMPT_AND_SAVE: 'prompt_and_save',
+   OAUTH: 'oauth',
+   OAUTH_AND_SAVE: 'oauth_and_save'
 };
 
 var TYPES = {
@@ -105,6 +107,7 @@ var ENTITY_SIZES = {
 };
 
 var PWD_CACHE_KEY = "_pwd1";
+var TOKEN_CACHE_KEY = "_tkn1";
 
 var DEFAULT_HEADER = {
    styles: {
@@ -304,4 +307,86 @@ function passwordPrompt (fromCache) {
 
 function savePassword (password) {
    localStorage.setItem(PWD_CACHE_KEY, password);
+}
+
+function getLocationArgs() {
+  var qs = window.location.search.split('+').join(' '),
+      params = {},
+      tokens,
+      reg = /[?&]?([^=]+)=([^&]*)/g;
+
+  while (tokens = reg.exec(qs)) {
+     params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+  }
+
+  return params;
+}
+
+function saveToken(token) {
+   localStorage.setItem(TOKEN_CACHE_KEY, JSON.stringify(token));
+}
+
+function readToken() {
+   return JSON.parse(localStorage.getItem(TOKEN_CACHE_KEY));
+}
+
+function getOAuthClientId() {
+   return encodeURIComponent(window.location.origin);
+}
+
+function getOAuthRedirectUrl() {
+   return encodeURIComponent(window.location.origin + window.location.pathname + '?oauth=1');
+}
+
+function redirectOAuth() {
+   window.location.href = CONFIG.serverUrl + '/auth/authorize?client_id=' + getOAuthClientId() + '&redirect_uri=' + getOAuthRedirectUrl();
+}
+
+function passwordOAuth(fromCache) {
+   if (fromCache) {
+      var token = readToken();
+      if (token) {
+         return refreshAuthToken(token.refresh_token).then(function(data) {
+            data.refresh_token = token.refresh_token;
+            saveToken(data);
+            return data;
+         });
+      }
+   }
+
+   var locationParams = getLocationArgs();
+   if (locationParams.oauth && locationParams.code) {
+      return getAuthToken(locationParams.code).then(function(data) {
+         fromCache && saveToken(data);
+         return data;
+      });
+   }
+
+   redirectOAuth();
+}
+
+function tokenRequest(data) {
+   return new Promise(function(resolve, reject) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', CONFIG.serverUrl + '/auth/token');
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.send(data + '&client_id=' + getOAuthClientId());
+      xhr.onreadystatechange = function() {
+         if (xhr.status !== 200) {
+            redirectOAuth();
+            return reject();
+         }
+         if (xhr.readyState === 4) {
+            return resolve(JSON.parse(xhr.response));
+         }
+      };
+   });
+}
+
+function getAuthToken(code) {
+   return tokenRequest('grant_type=authorization_code&code=' + code);
+}
+
+function refreshAuthToken(token) {
+   return tokenRequest('grant_type=refresh_token&refresh_token=' + token);
 }

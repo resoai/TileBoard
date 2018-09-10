@@ -38,6 +38,12 @@ var Api = (function () {
    else if(CONFIG.passwordType === PASSWORD_TYPES.PROMPT_AND_SAVE) {
       apiPassword = passwordPrompt(true);
    }
+   else if(CONFIG.passwordType === PASSWORD_TYPES.OAUTH) {
+      apiPassword = passwordOAuth(false);
+   }
+   else if(CONFIG.passwordType === PASSWORD_TYPES.OAUTH_AND_SAVE) {
+      apiPassword = passwordOAuth(true);
+   }
 
    var Api = new HApi(CONFIG.wsUrl, apiPassword);
 

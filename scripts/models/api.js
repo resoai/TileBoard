@@ -15,7 +15,6 @@ var HApi = (function () {
       this._id = 1;
 
       this._url = url;
-      this._password = password;
 
       this._listeners = {
          error: [],
@@ -26,7 +25,15 @@ var HApi = (function () {
 
       this._callbacks = {};
 
-      this._connect();
+      if (password instanceof Promise) {
+         password.then(function(res) {
+            this._token = res.access_token;
+            this._connect();
+         }.bind(this));
+      } else {
+         this._password = password;
+         this._connect();
+      }
    }
 
    $Api.prototype.on = function (key, callback) {
@@ -190,10 +197,13 @@ var HApi = (function () {
    };
 
    $Api.prototype._authenticate = function () {
-      this.send({
-         type: "auth",
-         api_password: this._password
-      }, null, false)
+      var data = {type: "auth"};
+      if (this._password) {
+         data.api_password = this._password;
+      } else {
+         data.access_token = this._token;
+      }
+      this.send(data, null, false);
    };
 
    $Api.prototype._ready = function () {
