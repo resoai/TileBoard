@@ -328,7 +328,7 @@ body {
   opacity: 0;
   position: absolute;
   top: 0;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
   width: 100%;
 }
 .pages-menu--items {
@@ -566,7 +566,7 @@ body {
   padding: 30px 3px 0;
 }
 .item-climate--mode {
-  font-size: 21px;
+  font-size: 14px;
   line-height: 25px;
   cursor: pointer;
   white-space: normal;
@@ -676,7 +676,7 @@ body {
   right: 6px;
   background: rgba(0, 0, 0, 0.2);
   padding: 1px 6px 2px;
-  font-size: .9em;
+  font-size: 0.9em;
   color: #ffffff;
   border-radius: 1px;
   z-index: 2;

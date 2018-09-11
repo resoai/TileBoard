@@ -425,8 +425,7 @@ function MainController ($scope, $location) {
             return parseString(item.state, entity);
          }
          else if(typeof item.state === "function") {
-            res = callFunction(item.state, [item, entity]);
-            if(res) return res;
+            return callFunction(item.state, [item, entity]);
          }
       }
 
@@ -498,6 +497,16 @@ function MainController ($scope, $location) {
       }
 
       return value;
+   };
+
+   $scope.entityAttribute = function (item, entity, key) {
+      if (typeof item.attributes === "function") {
+         return callFunction(item.attributes, [item, entity, key]);
+      }
+      if (typeof item.attributes === "object") {
+         return item.attributes[key] || key;
+      }
+      return key;
    };
 
    $scope.climateTarget = function (item, entity) {
@@ -1125,6 +1134,24 @@ function MainController ($scope, $location) {
          service_data: {
             entity_id: item.id,
             source: option
+         }
+      });
+
+      $scope.closeActiveSelect();
+
+      return false;
+   };
+
+   $scope.toggleClimate = function ($event, item, entity) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      sendItemData(item, {
+         type: "call_service",
+         domain: "climate",
+         service: (entity.state === "off") ? "turn_on" : "turn_off",
+         service_data: {
+            entity_id: item.id
          }
       });
 

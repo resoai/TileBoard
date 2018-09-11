@@ -24,6 +24,7 @@
    </style>
 
    <script src="scripts/vendors/angular.min.js"></script>
+   <script src="scripts/vendors/angular-locale_ru-ru.js"></script>
    <script src="scripts/vendors/angular-long-press.js"></script>
 
    <script src="scripts/models/api.js"></script>
@@ -902,14 +903,14 @@
          </div>
 
          <div class="item-climate">
-            <div class="item-climate--target">
+            <div class="item-climate--target" ng-click="toggleClimate($event, item, entity)">
                <span ng-bind="climateTarget(item, entity)"></span>
                <span ng-if="(_unit = entityUnit(item, entity))"
                      class="item-climate--target--unit" ng-bind="_unit"></span>
             </div>
             <div class="item-climate--mode" ng-if="entity.attributes.operation_mode"
                  ng-click="openSelect(item)">
-               <span ng-bind="entity.attributes.operation_mode"></span>
+               <span ng-bind="entityAttribute(item, entity, entity.attributes.operation_mode)"></span>
             </div>
          </div>
 
@@ -920,7 +921,7 @@
                  ng-repeat="option in entity.attributes.operation_list track by $index"
                  ng-class="{'-active': option === entity.state}"
                  ng-click="setClimateOption($event, item, entity, option)">
-               <span ng-bind="option"></span>
+               <span ng-bind="entityAttribute(item, entity, option)"></span>
             </div>
          </div>
       </div>
