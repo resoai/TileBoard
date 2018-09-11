@@ -330,6 +330,10 @@ function readToken() {
    return JSON.parse(localStorage.getItem(TOKEN_CACHE_KEY));
 }
 
+function removeToken() {
+   localStorage.removeItem(TOKEN_CACHE_KEY);
+}
+
 function getOAuthClientId() {
    return encodeURIComponent(window.location.origin);
 }
@@ -339,6 +343,7 @@ function getOAuthRedirectUrl() {
 }
 
 function redirectOAuth() {
+   removeToken();
    window.location.href = CONFIG.serverUrl + '/auth/authorize?client_id=' + getOAuthClientId() + '&redirect_uri=' + getOAuthRedirectUrl();
 }
 
