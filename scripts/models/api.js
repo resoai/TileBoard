@@ -11,7 +11,7 @@ var HApi = (function () {
 
    var reconnectTimeout = null;
 
-   function $Api (url, password) {
+   function $Api (url) {
       this._id = 1;
 
       this._url = url;
@@ -24,17 +24,12 @@ var HApi = (function () {
       };
 
       this._callbacks = {};
-
-      if (password instanceof Promise) {
-         password.then(function(res) {
-            this._token = res.access_token;
-            this._connect();
-         }.bind(this));
-      } else {
-         this._password = password;
-         this._connect();
-      }
    }
+
+   $Api.prototype.init = function (token) {
+      this._token = token;
+      this._connect();
+   };
 
    $Api.prototype.on = function (key, callback) {
       var self = this;
@@ -197,12 +192,11 @@ var HApi = (function () {
    };
 
    $Api.prototype._authenticate = function () {
-      var data = {type: "auth"};
-      if (this._password) {
-         data.api_password = this._password;
-      } else {
-         data.access_token = this._token;
-      }
+      var data = {
+         type: "auth",
+         access_token: this._token
+      };
+
       this.send(data, null, false);
    };
 

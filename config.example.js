@@ -15,8 +15,6 @@ var CONFIG = {
    tileMargin: 6,
    serverUrl: "http://localhost:8123",
    wsUrl: "ws://localhost:8123/api/websocket",
-   passwordType: PASSWORD_TYPES.PROMPT_AND_SAVE,
-   //password: null,
    //googleApiKey: "XXXXXXXXXX", // Required if you are using Google Maps for device tracker
    debug: false, // Prints entities and state change info to the console.
 

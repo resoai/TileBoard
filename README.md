@@ -61,22 +61,6 @@ var CONFIG = {
     */
    wsUrl: 'ws://hassio.local:8123/api/websocket',
 
-   /* passwordType:
-    * MANUAL - allows you to put the password directly to the config file
-    * PROMPT - will ask your password every time you open TileBoard in the browser.
-    * PROMPT_AND_SAVE - same as PROMPT but with saving the password after first connection
-    * Note: if you used PROMPT_AND_SAVE and changed your password, you will be needed to clear your localStorage
-    */
-   passwordType: PASSWORD_TYPES.PROMPT_AND_SAVE,
-
-   /* password: Your HomeAssistant api_password
-    * NOTE: If TileBoard is accessible to the outside world, people can
-    * read this file and retrieve your password. TileBoard should be placed behind
-    * another form of authentication if it is publically accessible.
-    * Necessary only with MANUAL password type
-    */
-   password: null,
-
    /* debug: Toggle for extra debugging information.
     * If enabled, will print info about state changes and entities to console.
     */

@@ -22,13 +22,7 @@ var CUSTOM_THEMES = {
    HOMEKIT: "homekit",
 };
 
-var PASSWORD_TYPES = {
-   MANUAL: 'manual',
-   PROMPT: 'prompt',
-   PROMPT_AND_SAVE: 'prompt_and_save',
-   OAUTH: 'oauth',
-   OAUTH_AND_SAVE: 'oauth_and_save'
-};
+var PASSWORD_TYPES = {};
 
 var TYPES = {
    DEVICE_TRACKER: 'device_tracker',
@@ -106,7 +100,6 @@ var ENTITY_SIZES = {
    BIG: 'big'
 };
 
-var PWD_CACHE_KEY = "_pwd1";
 var TOKEN_CACHE_KEY = "_tkn1";
 
 var DEFAULT_HEADER = {
@@ -293,21 +286,6 @@ function debounce(func, wait, immediate) {
    };
 }
 
-function passwordPrompt (fromCache) {
-   fromCache = fromCache || false;
-
-   var res = null;
-
-   if(fromCache) res = localStorage.getItem(PWD_CACHE_KEY);
-
-   if(!res) res = prompt("Enter your password");
-
-   return res;
-}
-
-function savePassword (password) {
-   localStorage.setItem(PWD_CACHE_KEY, password);
-}
 
 function getLocationArgs() {
   var qs = window.location.search.split('+').join(' '),
@@ -344,54 +322,64 @@ function getOAuthRedirectUrl() {
 
 function redirectOAuth() {
    removeToken();
-   window.location.href = CONFIG.serverUrl + '/auth/authorize?client_id=' + getOAuthClientId() + '&redirect_uri=' + getOAuthRedirectUrl();
+
+   window.location.href = CONFIG.serverUrl
+      + '/auth/authorize?client_id=' + getOAuthClientId()
+      + '&redirect_uri=' + getOAuthRedirectUrl();
 }
 
-function passwordOAuth(fromCache) {
-   if (fromCache) {
-      var token = readToken();
-      if (token) {
-         return refreshAuthToken(token.refresh_token).then(function(data) {
-            data.refresh_token = token.refresh_token;
-            saveToken(data);
-            return data;
-         });
-      }
-   }
+
+function getAccessToken(callback) {
+   var token = readToken();
+
+   if (token) return refreshAuthToken(token.refresh_token, function (data) {
+      console.log(data);
+
+      data.refresh_token = token.refresh_token;
+
+      saveToken(data);
+
+      callback(data);
+   });
 
    var locationParams = getLocationArgs();
+
    if (locationParams.oauth && locationParams.code) {
-      return getAuthToken(locationParams.code).then(function(data) {
-         fromCache && saveToken(data);
-         return data;
+      return getAuthToken(locationParams.code, function(data) {
+         console.log(data);
+
+         saveToken(data);
+
+         callback(data);
       });
    }
 
    redirectOAuth();
 }
 
-function tokenRequest(data) {
-   return new Promise(function(resolve, reject) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', CONFIG.serverUrl + '/auth/token');
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      xhr.send(data + '&client_id=' + getOAuthClientId());
-      xhr.onreadystatechange = function() {
-         if (xhr.status !== 200) {
-            redirectOAuth();
-            return reject();
-         }
-         if (xhr.readyState === 4) {
-            return resolve(JSON.parse(xhr.response));
-         }
-      };
-   });
+function tokenRequest(data, callback) {
+   var xhr = new XMLHttpRequest();
+
+   xhr.open('POST', CONFIG.serverUrl + '/auth/token');
+   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+   xhr.send(data + '&client_id=' + getOAuthClientId());
+
+   xhr.onreadystatechange = function() {
+      if(xhr.status !== 200) {
+         redirectOAuth();
+         callback(null);
+      }
+
+      if(xhr.readyState === 4) {
+         callback(JSON.parse(xhr.response));
+      }
+   };
 }
 
-function getAuthToken(code) {
-   return tokenRequest('grant_type=authorization_code&code=' + code);
+function getAuthToken(code, callback) {
+   return tokenRequest('grant_type=authorization_code&code=' + code, callback);
 }
 
-function refreshAuthToken(token) {
-   return tokenRequest('grant_type=refresh_token&refresh_token=' + token);
+function refreshAuthToken(token, callback) {
+   return tokenRequest('grant_type=refresh_token&refresh_token=' + token, callback);
 }
