@@ -1,6 +1,6 @@
-App.controller('Main', ['$scope', MainController]);
+App.controller('Main', ['$scope', '$location', MainController]);
 
-function MainController ($scope) {
+function MainController ($scope, $location) {
    if(!window.CONFIG) return;
 
    $scope.pages = CONFIG.pages;
@@ -122,13 +122,7 @@ function MainController ($scope) {
       if(typeof item.id === "object") return item.id;
 
       if(!(item.id in $scope.states)) {
-         Noty.addObject({
-            type: Noty.WARNING,
-            title: 'Entity not found',
-            message: 'Entity "' + item.id + '" not found',
-            id: item.id
-         });
-
+         warnUnknownItem(item);
          return null;
       }
 
@@ -840,6 +834,19 @@ function MainController ($scope) {
       return (features | feature) === features;
    };
 
+   $scope.shouldShowVolumeSlider = function (entity) {
+      return $scope.supportsFeature(FEATURES.VOLUME_SET, entity)
+          && ('volume_level' in entity.attributes)
+          && entity.state !== 'off';
+   };
+
+   $scope.shouldShowVolumeButtons = function (entity) {
+      return (!$scope.supportsFeature(FEATURES.VOLUME_SET, entity)
+          || !('volume_level' in entity.attributes))
+          && $scope.supportsFeature(FEATURES.VOLUME_STEP, entity)
+          && entity.state !== 'off';
+   };
+
 
    // Actions
 
@@ -1272,7 +1279,7 @@ function MainController ($scope) {
          }, 20);
       }
       if (CONFIG.rememberLastPage) {
-         location.hash = $scope.pages.indexOf(page) + '';
+         $location.hash($scope.pages.indexOf(page));
       }
    };
 
@@ -1575,7 +1582,7 @@ function MainController ($scope) {
 
          $scope.ready = true;
 
-         var pageNum = location.hash.slice(1);
+         var pageNum = $location.hash();
 
          if (!CONFIG.rememberLastPage || !$scope.pages[pageNum]) {
             pageNum = 0;
@@ -1778,12 +1785,21 @@ function MainController ($scope) {
    }
 
    function addError (error) {
-      Noty.addObject({
+       if(!CONFIG.ignoreErrors) Noty.addObject({
          type: Noty.ERROR,
          title: 'Error',
          message: error,
          lifetime: 10
       });
+   }
+
+   function warnUnknownItem(item) {
+       if(!CONFIG.ignoreErrors) Noty.addObject({
+           type: Noty.WARNING,
+           title: 'Entity not found',
+           message: 'Entity "' + item.id + '" not found',
+           id: item.id
+       });
    }
 
    function debugLog () {

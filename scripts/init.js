@@ -9,7 +9,6 @@ App.config(function($locationProvider) {
       enabled: true,
       requireBase: false
    });
-   $locationProvider.hashPrefix('');
 });
 
 
@@ -18,35 +17,20 @@ if(!window.CONFIG) {
       'If you running TileBoard for the first time, please rename "config.example.js" to "config.js"';
 
    alert(error);
-
-   /*Noty.addObject({
-      type: Noty.ERROR,
-      title: 'CONFIG is missing',
-      message: error
-   })*/
 }
 
+var Api = new HApi(CONFIG.wsUrl);
 
-var Api = (function () {
-   var apiPassword;
-
-   if(!CONFIG.passwordType || CONFIG.passwordType === PASSWORD_TYPES.MANUAL) {
-      apiPassword = CONFIG.password;
+getAccessToken(function (token) {
+   if(token) {
+      Api.init(token.access_token);
    }
-   else if(CONFIG.passwordType === PASSWORD_TYPES.PROMPT) {
-      apiPassword = passwordPrompt(false);
-   }
-   else if(CONFIG.passwordType === PASSWORD_TYPES.PROMPT_AND_SAVE) {
-      apiPassword = passwordPrompt(true);
-   }
-
-   var Api = new HApi(CONFIG.wsUrl, apiPassword);
-
-   if(CONFIG.passwordType === PASSWORD_TYPES.PROMPT_AND_SAVE) {
-      Api.onReady(function () {
-         savePassword(apiPassword);
+   else {
+      Noty.addObject({
+         type: Noty.ERROR,
+         title: 'ACCESS TOKEN',
+         message: 'Error while receiving access token'
       });
    }
+});
 
-   return Api;
-}());

@@ -25,6 +25,9 @@
 .item.-th-script.-loading {
   background-color: #10cee4;
 }
+.item.-th-script.-on {
+  background-color: #10b4cd;
+}
 .item.-th-automation {
   background-color: #259eb0;
 }

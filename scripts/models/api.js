@@ -11,11 +11,10 @@ var HApi = (function () {
 
    var reconnectTimeout = null;
 
-   function $Api (url, password) {
+   function $Api (url) {
       this._id = 1;
 
       this._url = url;
-      this._password = password;
 
       this._listeners = {
          error: [],
@@ -25,9 +24,12 @@ var HApi = (function () {
       };
 
       this._callbacks = {};
-
-      this._connect();
    }
+
+   $Api.prototype.init = function (token) {
+      this._token = token;
+      this._connect();
+   };
 
    $Api.prototype.on = function (key, callback) {
       var self = this;
@@ -190,10 +192,12 @@ var HApi = (function () {
    };
 
    $Api.prototype._authenticate = function () {
-      this.send({
+      var data = {
          type: "auth",
-         api_password: this._password
-      }, null, false)
+         access_token: this._token
+      };
+
+      this.send(data, null, false);
    };
 
    $Api.prototype._ready = function () {
