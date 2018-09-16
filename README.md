@@ -374,6 +374,13 @@ Tile Object. [Click here for some real life examples](TILE_EXAMPLES.md)
     * (optional)
     */
    classes: ['-compact'],
+   
+   /* customStyles: Additional styles. Enables tile customisation based on state.
+    * (optional)
+    */
+   customStyles: function (item, entity) {
+     return { 'background-color': '#FF0000' }
+   }
 
 }
 ```
