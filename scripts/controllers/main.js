@@ -835,15 +835,15 @@ function MainController ($scope, $location) {
    };
 
    $scope.shouldShowVolumeSlider = function (entity) {
-      return $scope.supportsFeature(FEATURES.VOLUME_SET, entity)
+      return $scope.supportsFeature(FEATURES.MEDIA_PLAYER.VOLUME_SET, entity)
           && ('volume_level' in entity.attributes)
           && entity.state !== 'off';
    };
 
    $scope.shouldShowVolumeButtons = function (entity) {
-      return (!$scope.supportsFeature(FEATURES.VOLUME_SET, entity)
+      return (!$scope.supportsFeature(FEATURES.MEDIA_PLAYER.VOLUME_SET, entity)
           || !('volume_level' in entity.attributes))
-          && $scope.supportsFeature(FEATURES.VOLUME_STEP, entity)
+          && $scope.supportsFeature(FEATURES.MEDIA_PLAYER.VOLUME_STEP, entity)
           && entity.state !== 'off';
    };
 

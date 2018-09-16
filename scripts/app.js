@@ -52,7 +52,7 @@ var TYPES = {
    MEDIA_PLAYER: 'media_player',
    CUSTOM: 'custom',
    ALARM: 'alarm',
-   WEATHER_LIST: 'weather_list',
+   WEATHER_LIST: 'weather_list'
 };
 
 var HEADER_ITEMS = {
@@ -66,17 +66,35 @@ var HEADER_ITEMS = {
 var SCREENSAVER_ITEMS = HEADER_ITEMS;
 
 var FEATURES = {
-   PAUSE: 1,
-   SEEK: 2,
-   VOLUME_SET: 4,
-   VOLUME_STEP: 1024,
-   VOLUME_MUTE: 8,
-   PREVIOUS_TRACK: 16,
-   NEXT_TRACK: 32,
-   YOUTUBE: 64,
-   TURN_ON: 128,
-   TURN_OFF: 256,
-   STOP: 4096
+   MEDIA_PLAYER: {
+      PAUSE: 1,
+      SEEK: 2,
+      VOLUME_SET: 4,
+      VOLUME_STEP: 1024,
+      VOLUME_MUTE: 8,
+      PREVIOUS_TRACK: 16,
+      NEXT_TRACK: 32,
+      YOUTUBE: 64,
+      TURN_ON: 128,
+      TURN_OFF: 256,
+      STOP: 4096
+   },
+   VACUUM: {
+      TURN_ON: 1,
+      TURN_OFF: 2,
+      PAUSE: 4,
+      STOP: 8,
+      RETURN_HOME: 16,
+      FAN_SPEED: 32,
+      BATTERY: 64,
+      STATUS: 128,
+      SEND_COMMAND: 256,
+      LOCATE: 512,
+      CLEAN_SPOT: 1024,
+      MAP: 2048,
+      STATE: 4096,
+      START: 8192
+   }
 };
 
 var MENU_POSITIONS = {
