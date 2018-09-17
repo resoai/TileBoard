@@ -976,7 +976,7 @@ function MainController ($scope, $location) {
    $scope.callScript = function (item, entity) {
       sendItemData(item, {
          type: "call_service",
-         domain: "homeassistant",
+         domain: "script",
          service: "turn_on",
          service_data: {
             entity_id: item.id
