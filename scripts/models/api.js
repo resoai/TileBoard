@@ -24,11 +24,32 @@ var HApi = (function () {
       };
 
       this._callbacks = {};
+
+      this._init();
    }
 
-   $Api.prototype.init = function (token) {
-      this._token = token;
-      this._connect();
+   $Api.prototype._init = function () {
+      var self = this;
+
+      this._getToken(function (token) {
+         if(token) {
+            self._token = token.access_token;
+            self._connect.call(self);
+
+            if(token.expires_in) {
+               setTimeout(
+                  self._refreshToken.bind(self),
+                  token.expires_in * 900);
+            }
+         }
+         else {
+            Noty.addObject({
+               type: Noty.ERROR,
+               title: 'ACCESS TOKEN',
+               message: 'Error while receiving access token'
+            });
+         }
+      });
    };
 
    $Api.prototype.on = function (key, callback) {
@@ -181,6 +202,7 @@ var HApi = (function () {
    $Api.prototype._authInvalid = function (message) {
       this._setStatus(STATUS_ERROR);
       this._sendError(message);
+      this._refreshToken();
    };
 
    $Api.prototype._sendError = function (message, data) {
@@ -208,6 +230,125 @@ var HApi = (function () {
    $Api.prototype._setStatus = function (status) {
       this.status = status;
    };
+
+   $Api.prototype._request = function (url, callback) {
+      var xhr = new XMLHttpRequest();
+
+      xhr.open('POST', CONFIG.serverUrl + '/auth/token');
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.send(url + '&client_id=' + getOAuthClientId());
+
+      xhr.onreadystatechange = function() {
+         if(xhr.status !== 200) {
+            redirectOAuth();
+            callback(null);
+         }
+
+         if(xhr.readyState === 4) {
+            callback(JSON.parse(xhr.response));
+         }
+      };
+   };
+
+   $Api.prototype._refreshToken = function () {
+      var self = this;
+
+      this._getFreshToken(function (token) {
+         if(token) {
+            self._token = token.access_token;
+
+            if(token.expires_in) {
+               setTimeout(
+                  self._refreshToken.bind(self),
+                  token.expires_in * 900);
+            }
+         }
+      });
+   };
+
+   $Api.prototype._getFreshToken = function (callback) {
+      var token = readToken();
+
+      var url = 'grant_type=refresh_token&refresh_token=' + token.refresh_token;
+
+      this._request(url, function (data) {
+         data.refresh_token = token.refresh_token;
+
+         saveToken(data);
+
+         callback(data);
+      });
+   };
+
+   $Api.prototype._getTokenByCode = function (code, callback) {
+      var url = 'grant_type=authorization_code&code=' + code;
+
+      this._request(url, function (data) {
+         saveToken(data);
+
+         callback(data);
+      });
+   };
+
+   $Api.prototype._getToken = function (callback) {
+      var token = readToken();
+
+      if (token) {
+         return this._getFreshToken(callback);
+      }
+
+      var params = getLocationArgs();
+
+      if (params.oauth && params.code) {
+         return this._getTokenByCode(params.code, callback);
+      }
+
+      redirectOAuth();
+   };
+
+
+   function getLocationArgs() {
+      var qs = window.location.search.split('+').join(' '),
+         params = {},
+         tokens,
+         reg = /[?&]?([^=]+)=([^&]*)/g;
+
+      while (tokens = reg.exec(qs)) {
+         params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+      }
+
+      return params;
+   }
+
+   function saveToken(token) {
+      localStorage.setItem(TOKEN_CACHE_KEY, JSON.stringify(token));
+   }
+
+   function readToken() {
+      var token = localStorage.getItem(TOKEN_CACHE_KEY);
+
+      return token ? JSON.parse(token) : null;
+   }
+
+   function removeToken() {
+      localStorage.removeItem(TOKEN_CACHE_KEY);
+   }
+
+   function getOAuthClientId() {
+      return encodeURIComponent(window.location.origin);
+   }
+
+   function getOAuthRedirectUrl() {
+      return encodeURIComponent(window.location.origin + window.location.pathname + '?oauth=1');
+   }
+
+   function redirectOAuth() {
+      removeToken();
+
+      window.location.href = CONFIG.serverUrl
+         + '/auth/authorize?client_id=' + getOAuthClientId()
+         + '&redirect_uri=' + getOAuthRedirectUrl();
+   }
 
    return $Api;
 }());

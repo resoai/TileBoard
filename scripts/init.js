@@ -20,17 +20,3 @@ if(!window.CONFIG) {
 }
 
 var Api = new HApi(CONFIG.wsUrl);
-
-getAccessToken(function (token) {
-   if(token) {
-      Api.init(token.access_token);
-   }
-   else {
-      Noty.addObject({
-         type: Noty.ERROR,
-         title: 'ACCESS TOKEN',
-         message: 'Error while receiving access token'
-      });
-   }
-});
-
