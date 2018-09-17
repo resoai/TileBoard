@@ -20,9 +20,11 @@ Should you have any ideas or questions please post them on home-assistant forum 
 ![screen3](https://community-home-assistant-assets.s3-us-west-2.amazonaws.com/optimized/3X/7/d/7d300e8e307047c58234967fcf613d3ed0247dc6_1_690x498.jpg)
 
 ## How to use
+* Make sure that you have Home Assistant 0.77 or greater installed as only new authentication system is supported from now on
 * Pull/download repository
 * Copy `config.example.js` to `config.js` and edit it for your needs
-* Open index.html directly in a web browser or move all of the files into www directory in HA's config path. Please note that dashboard was designed for local installations and you should never store dashboard files in www directory of HA if you are exposing it to the outside world since this would reveal content of `config.js` along with the password. As an alternative please consider serving files via Nginx where BasicAuth can be implemented.
+* Create a directory called `tileboard` inside `www` directory in HA's config path and move all of the files there.
+* TileBoard will be available at `http://HASS_IP:8123/local/tileboard/index.html` and will prompt your for your logic credentials
 
 ## Configure
 
@@ -372,6 +374,13 @@ Tile Object. [Click here for some real life examples](TILE_EXAMPLES.md)
     * (optional)
     */
    classes: ['-compact'],
+   
+   /* customStyles: Additional styles. Enables tile customisation based on state.
+    * Can be used both as a object `{ 'background-color': '#FF0000' }` or, 
+    * as a function function (item, entity) { return { 'background-color': '#FF0000' } }
+    * (optional)
+    */
+   customStyles: Object || Function
 
 }
 ```
