@@ -899,7 +899,7 @@ function MainController ($scope, $location) {
    };
 
    $scope.toggleSwitch = function (item, entity, callback) {
-      var domain = "homeassistant";
+      var domain = "switch";
       var group = item.id.split('.')[0];
 
       if(['switch', 'light', 'fan'].indexOf(group) !== -1) domain = group;
@@ -976,7 +976,7 @@ function MainController ($scope, $location) {
    $scope.callScript = function (item, entity) {
       sendItemData(item, {
          type: "call_service",
-         domain: "homeassistant",
+         domain: "script",
          service: "turn_on",
          service_data: {
             entity_id: item.id
