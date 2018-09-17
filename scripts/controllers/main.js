@@ -899,7 +899,7 @@ function MainController ($scope, $location) {
    };
 
    $scope.toggleSwitch = function (item, entity, callback) {
-      var domain = "switch";
+      var domain = "homeassistant";
       var group = item.id.split('.')[0];
 
       if(['switch', 'light', 'fan'].indexOf(group) !== -1) domain = group;
