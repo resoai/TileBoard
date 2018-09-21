@@ -34,7 +34,6 @@ var TYPES = {
    LOCK: 'lock',
    COVER: 'cover',
    FAN: 'fan',
-   GENERIC_ICON: 'generic_icon',
    INPUT_BOOLEAN: 'input_boolean',
    LIGHT: 'light',
    TEXT_LIST: 'text_list',
@@ -52,7 +51,8 @@ var TYPES = {
    MEDIA_PLAYER: 'media_player',
    CUSTOM: 'custom',
    ALARM: 'alarm',
-   WEATHER_LIST: 'weather_list'
+   WEATHER_LIST: 'weather_list',
+   VACUUM: 'vacuum'
 };
 
 var HEADER_ITEMS = {

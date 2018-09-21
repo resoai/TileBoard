@@ -38,7 +38,6 @@
 @LOCK: rgb(0,121,107);
 @LOCK_L: rgb(0,120,123);
 @LOCK_LOCKED: rgb(0,137,123);
-@GENERIC_ICON: rgb(89, 84, 160);
 @INPUT_BOOLEAN: rgb(40, 155, 97);
 @INPUT_BOOLEAN_L: rgb(18, 176, 77);
 @LIGHT: rgb(145, 62, 101);
@@ -58,6 +57,7 @@
 @ALARM: rgb(194, 56, 71);
 @ALARM_A: rgb(208, 11, 49);
 @CUSTOM: rgb(37, 158, 176);
+@VACUUM: rgb(37, 158, 176);
 
 
 .item {
@@ -84,7 +84,6 @@
    &.-th-lock {background-color: @LOCK;}
    &.-th-lock.-loading {background-color: @LOCK_L;}
    &.-th-lock.-locked {background-color: @LOCK_LOCKED;}
-   &.-th-generic_icon {background-color: @GENERIC_ICON;}
    &.-th-input_boolean {background-color: @INPUT_BOOLEAN;}
    &.-th-input_boolean.-loading {background-color: @INPUT_BOOLEAN_L;}
    &.-th-light {background-color: @LIGHT;}
@@ -104,6 +103,7 @@
    &.-th-alarm {background-color: @ALARM;}
    &.-th-alarm.-armed {background-color: @ALARM;}
    &.-th-custom {background-color: @CUSTOM;}
+   &.-th-vacuum {background-color: @VACUUM;}
 }
 
 
@@ -521,7 +521,6 @@ body {
 
    &.-off, &.-disarmed, &.-unlocked {
       &.-switch,
-      &.-generic_icon,
       &.-input_boolean,
       &.-light,
       &.-sensor_icon {
