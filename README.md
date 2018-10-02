@@ -62,6 +62,10 @@ var CONFIG = {
     * If HomeAssistant is behind SSL, replace ws:// with wss://
     */
    wsUrl: 'ws://hassio.local:8123/api/websocket',
+   
+   /* authToken: Optional Long live token that you can create in your HomeAssistant
+    */
+   authToken: null,
 
    /* debug: Toggle for extra debugging information.
     * If enabled, will print info about state changes and entities to console.

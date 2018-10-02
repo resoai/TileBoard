@@ -19,4 +19,4 @@ if(!window.CONFIG) {
    alert(error);
 }
 
-var Api = new HApi(CONFIG.wsUrl);
+var Api = new HApi(CONFIG.wsUrl, CONFIG.authToken);

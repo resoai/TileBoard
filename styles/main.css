@@ -67,9 +67,6 @@
 .item.-th-lock.-locked {
   background-color: #00897b;
 }
-.item.-th-generic_icon {
-  background-color: #5954a0;
-}
 .item.-th-input_boolean {
   background-color: #289b61;
 }
@@ -125,6 +122,9 @@
   background-color: #c23847;
 }
 .item.-th-custom {
+  background-color: #259eb0;
+}
+.item.-th-vacuum {
   background-color: #259eb0;
 }
 html,
@@ -448,9 +448,6 @@ body {
 .item.-off.-switch .item-entity--icon,
 .item.-disarmed.-switch .item-entity--icon,
 .item.-unlocked.-switch .item-entity--icon,
-.item.-off.-generic_icon .item-entity--icon,
-.item.-disarmed.-generic_icon .item-entity--icon,
-.item.-unlocked.-generic_icon .item-entity--icon,
 .item.-off.-input_boolean .item-entity--icon,
 .item.-disarmed.-input_boolean .item-entity--icon,
 .item.-unlocked.-input_boolean .item-entity--icon,

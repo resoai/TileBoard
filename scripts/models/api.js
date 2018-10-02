@@ -11,7 +11,7 @@ var HApi = (function () {
 
    var reconnectTimeout = null;
 
-   function $Api (url) {
+   function $Api (url, token) {
       this._id = 1;
 
       this._url = url;
@@ -24,6 +24,10 @@ var HApi = (function () {
       };
 
       this._callbacks = {};
+
+      if(token) {
+         this._configToken = token;
+      }
 
       this._init();
    }
@@ -291,6 +295,10 @@ var HApi = (function () {
    };
 
    $Api.prototype._getToken = function (callback) {
+      if(this._configToken) {
+         return callback({access_token: this._configToken});
+      }
+
       var token = readToken();
 
       if (token) {
