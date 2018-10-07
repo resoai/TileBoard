@@ -1,3 +1,118 @@
+.-theme-material {
+  color: #06090A;
+  /* Special styling for WebKit/Blink */
+  /* All the same stuff for Firefox */
+  /* All the same stuff for IE */
+}
+.-theme-material input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 12px;
+  width: 12px;
+  border-radius: 3px;
+  background: #35a3ef;
+  cursor: pointer;
+  margin-top: -5px;
+  /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+.-theme-material input[type=range]::-moz-range-thumb {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  height: 12px;
+  width: 12px;
+  border-radius: 3px;
+  background: #35a3ef;
+  cursor: pointer;
+}
+.-theme-material input[type=range]::-ms-thumb {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  height: 12px;
+  width: 12px;
+  border-radius: 3px;
+  background: #35a3ef;
+  cursor: pointer;
+}
+.-theme-material .page {
+  background: #fffdfc !important;
+}
+.-theme-material .camera-popup-container,
+.-theme-material .door-entry-popup-container {
+  background-color: #35a3ef;
+}
+.-theme-material .camera-popup--list-item,
+.-theme-material .door-entry-popup--list-item {
+  color: #fffdfc;
+}
+.-theme-material .camera-popup--list-item.-active,
+.-theme-material .door-entry-popup--list-item.-active {
+  color: #fffdfc;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.-theme-material .noty {
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+.-theme-material .header {
+  color: #fffdfc;
+  background: #35a3ef;
+  font-weight: lighter;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+.-theme-material .group-title {
+  color: #06090A;
+  font-weight: 400;
+}
+.-theme-material .pages-menu--item {
+  color: #35a3ef;
+}
+.-theme-material .item {
+  color: #06090A;
+  background: #fffdfc;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 2px;
+}
+.-theme-material .item:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+.-theme-material .item-clickable {
+  border-left: 2px solid #35a3ef !important;
+  border-top: 2px solid #35a3ef !important;
+}
+.-theme-material .item-state {
+  background: #fffdfc;
+  font-weight: lighter;
+  color: #35a3ef;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+.-theme-material .item-entity {
+  font-weight: lighter;
+}
+.-theme-material .item-title {
+  font-weight: lighter;
+}
+.-theme-material .item.-device_tracker {
+  background: #222 !important;
+}
+.-theme-material .item.-device_tracker .item-slides-container {
+  opacity: 0.8;
+}
+.-theme-material .item.-device_tracker .item-title,
+.-theme-material .item.-camera .item-title,
+.-theme-material .item.-camera_thumbnail .item-title {
+  color: #fff;
+}
+.-theme-material .itemlight,
+.-theme-material .item.-on {
+  background-color: #fff;
+}
+.-theme-material .item-entity-sliders {
+  background-color: #fff;
+}
+.-theme-material .item.-armed .item-entity--icon,
+.-theme-material .item.-on .item-entity--icon,
+.-theme-material .item.-armed .item-state,
+.-theme-material .item.-on .item-state {
+  color: #4CB944;
+}
 .-theme-transparent {
   color: #eee;
 }

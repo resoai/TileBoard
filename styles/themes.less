@@ -11,6 +11,151 @@
 @pageBottomPaddingBig: 2 * @pageMenuBottomPadding + @pageMenuIconSizeBig
       + 2 * @pageMenuIconVerticalMarginBig;
 
+.-theme-material {
+
+   @background: #fffdfc;
+   @primary: #35a3ef;
+   @secondary: #4CB944;
+   @text: #06090A;
+
+   color: @text;
+
+   /* Special styling for WebKit/Blink */
+   input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 12px;
+      width: 12px;
+      border-radius: 3px;
+      background: @primary;
+      cursor: pointer;
+      margin-top: -5px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+   }
+
+   /* All the same stuff for Firefox */
+   input[type=range]::-moz-range-thumb {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      height: 12px;
+      width: 12px;
+      border-radius: 3px;
+      background: @primary;
+      cursor: pointer;
+   }
+
+   /* All the same stuff for IE */
+   input[type=range]::-ms-thumb {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      height: 12px;
+      width: 12px;
+      border-radius: 3px;
+      background: @primary;
+      cursor: pointer;
+   }
+
+   .page {
+      background: @background !important;
+   }
+
+   .camera-popup, .door-entry-popup {
+
+      &-container {
+         background-color: @primary;
+      }
+
+      &--list-item {
+         color: @background;
+
+         &.-active {
+            color: @background;
+            background-color: rgba(0, 0, 0, 10%);
+         }
+      }
+   }
+
+   .noty {
+      box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+   }
+
+   .header {
+      color: @background;
+      background: @primary;
+      font-weight: lighter;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+   }
+
+   .group-title {
+      color: @text;
+      font-weight: 400;
+   }
+
+   .pages-menu- {
+      &-item {
+         color: @primary;
+      }
+   }
+
+   .item {
+      color: @text;
+      background: @background;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+      border-radius: 2px;
+
+      &:hover {
+         box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+      }
+
+      &-clickable {
+         border-left: 2px solid @primary !important;
+         border-top: 2px solid @primary !important;
+      }
+
+      &-state {
+         background: @background;
+         font-weight: lighter;
+         color: @primary;
+         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      }
+
+      &-entity {
+         font-weight: lighter;
+      }
+
+      &-title {
+         font-weight: lighter;
+      }
+
+      &.-device_tracker {
+         background: #222 !important;
+
+         .item-slides-container {
+            opacity: 0.8;
+         }
+      }
+
+      &.-device_tracker,
+      &.-camera,
+      &.-camera_thumbnail {
+         .item-title {
+            color: #fff;
+         }
+      }
+
+      &light, &.-on {
+         background-color: #fff;
+      }
+
+      &-entity-sliders {
+         background-color: #fff;
+      }
+
+      &.-armed, &.-on {
+         .item-entity--icon, .item-state {
+            color: @secondary;
+         }
+      }
+   }
+}
 
 .-theme-transparent {
    color: #eee;
