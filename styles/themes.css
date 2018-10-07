@@ -31,6 +31,14 @@
   background: #35a3ef;
   cursor: pointer;
 }
+.-theme-material .item-select {
+  background: #fffdfc;
+  border: none;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+.-theme-material .item-select--option.-active {
+  background: rgba(0, 0, 0, 0.1);
+}
 .-theme-material .page {
   background: #fffdfc !important;
 }
