@@ -140,6 +140,10 @@ var HApi = (function () {
       return this.send({type: "get_services"}, callback);
    };
 
+   $Api.prototype.getUser = function (callback) {
+      return this.send({type: "auth/current_user"}, callback);
+   };
+
    $Api.prototype._connect = function () {
       var self = this;
 
