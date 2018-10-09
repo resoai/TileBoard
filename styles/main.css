@@ -469,6 +469,7 @@ body {
 }
 .item.-switch,
 .item.-lock,
+.item.-vacuum,
 .item.-fan,
 .item.-custom,
 .item.-light,
@@ -491,6 +492,7 @@ body {
 }
 .item.-switch:active,
 .item.-lock:active,
+.item.-vacuum:active,
 .item.-fan:active,
 .item.-custom:active,
 .item.-light:active,
@@ -510,6 +512,7 @@ body {
 }
 .item.-switch .item-clickable,
 .item.-lock .item-clickable,
+.item.-vacuum .item-clickable,
 .item.-fan .item-clickable,
 .item.-custom .item-clickable,
 .item.-light .item-clickable,

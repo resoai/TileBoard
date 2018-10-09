@@ -41,6 +41,8 @@ function MainController ($scope, $location) {
 
          case TYPES.LOCK: return $scope.toggleLock(item, entity);
 
+         case TYPES.VACUUM: return $scope.toggleVacuum(item, entity);
+
          case TYPES.AUTOMATION: return $scope.triggerAutomation(item, entity);
 
          case TYPES.SCRIPT: return $scope.callScript(item, entity);
@@ -926,6 +928,24 @@ function MainController ($scope, $location) {
       sendItemData(item, {
          type: "call_service",
          domain: "lock",
+         service: service,
+         service_data: {
+            entity_id: item.id
+         }
+      });
+   };
+
+   $scope.toggleVacuum = function (item, entity) {
+      if(entity.state === "off") service = "turn_on";
+      else if(entity.state === "on") service = "turn_off";
+      else if(['idle', 'docked', 'paused'].indexOf(entity.state) !== -1) {
+         service = "start";
+      }
+      else if(entity.state === "cleaning") service = "stop";
+
+      sendItemData(item, {
+         type: "call_service",
+         domain: "vacuum",
          service: service,
          service_data: {
             entity_id: item.id
