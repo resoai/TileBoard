@@ -1,125 +1,142 @@
 .-theme-material {
-  color: #06090A;
-  /* Special styling for WebKit/Blink */
-  /* All the same stuff for Firefox */
-  /* All the same stuff for IE */
-}
-.-theme-material input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 12px;
-  width: 12px;
-  border-radius: 3px;
-  background: #35a3ef;
-  cursor: pointer;
-  margin-top: -5px;
-  /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-}
-.-theme-material input[type=range]::-moz-range-thumb {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  height: 12px;
-  width: 12px;
-  border-radius: 3px;
-  background: #35a3ef;
-  cursor: pointer;
-}
-.-theme-material input[type=range]::-ms-thumb {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  height: 12px;
-  width: 12px;
-  border-radius: 3px;
-  background: #35a3ef;
-  cursor: pointer;
-}
-.-theme-material .item-select {
-  background: #fffdfc;
-  border: none;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-}
-.-theme-material .item-select--option.-active {
-  background: rgba(0, 0, 0, 0.1);
-}
-.-theme-material .page {
-  background: #fffdfc !important;
-}
-.-theme-material .camera-popup-container,
-.-theme-material .door-entry-popup-container {
-  background-color: #35a3ef;
-}
-.-theme-material .camera-popup--list-item,
-.-theme-material .door-entry-popup--list-item {
-  color: #fffdfc;
-}
-.-theme-material .camera-popup--list-item.-active,
-.-theme-material .door-entry-popup--list-item.-active {
-  color: #fffdfc;
-  background-color: rgba(0, 0, 0, 0.1);
-}
-.-theme-material .noty {
-  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  color: #3d3d3d;
+  background: #f8f8f8 !important;
 }
 .-theme-material .header {
-  color: #fffdfc;
-  background: #35a3ef;
+  color: #fff;
+  background: #3664d8;
   font-weight: lighter;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  padding-bottom: 10px;
 }
 .-theme-material .group-title {
-  color: #06090A;
+  color: #3d3d3d;
   font-weight: 400;
 }
 .-theme-material .pages-menu--item {
-  color: #35a3ef;
+  color: #545454;
+  opacity: 0.8;
+}
+.-theme-material .pages-menu--item.-active {
+  opacity: 1;
 }
 .-theme-material .item {
-  color: #06090A;
-  background: #fffdfc;
+  color: #06090a;
+  background: #ffffff !important;
+  border-radius: 3px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  border-radius: 2px;
 }
 .-theme-material .item:hover {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
-.-theme-material .item-clickable {
-  border-left: 2px solid #35a3ef !important;
-  border-top: 2px solid #35a3ef !important;
-}
 .-theme-material .item-state {
-  background: #fffdfc;
+  background: transparent;
   font-weight: lighter;
-  color: #06090A;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  color: #5e5e5e;
+  padding: 3px 5px 2px;
 }
 .-theme-material .item-entity {
-  font-weight: lighter;
+  color: #5f5c53;
+}
+.-theme-material .item-clickable {
+  border-left: 3px solid #3664d8 !important;
+  border-top: 3px solid #3664d8 !important;
+}
+.-theme-material .item-subtitle {
+  font-size: 14px;
+  bottom: 21px;
 }
 .-theme-material .item-title {
-  font-weight: lighter;
+  height: 22px;
+  line-height: 22px;
+  padding-bottom: 1px;
+}
+.-theme-material .item-title,
+.-theme-material .item-subtitle {
+  padding-left: 7px;
+  font-weight: normal;
 }
 .-theme-material .item.-device_tracker {
   background: #222 !important;
-}
-.-theme-material .item.-device_tracker .item-slides-container {
-  opacity: 0.8;
 }
 .-theme-material .item.-device_tracker .item-title,
 .-theme-material .item.-camera .item-title,
 .-theme-material .item.-camera_thumbnail .item-title {
   color: #fff;
 }
-.-theme-material .itemlight,
-.-theme-material .item.-on {
-  background-color: #fff;
+.-theme-material .item.-device_tracker .item-state,
+.-theme-material .item.-camera .item-state,
+.-theme-material .item.-camera_thumbnail .item-state {
+  color: #fff;
 }
-.-theme-material .item-entity-sliders {
-  background-color: #fff;
+.-theme-material .item .item-entity--icon {
+  color: #6a686f;
+}
+.-theme-material .item.-disarmed,
+.-theme-material .item.-off {
+  color: #75737a;
+}
+.-theme-material .item.-disarmed .item-state,
+.-theme-material .item.-off .item-state {
+  color: #58585d;
+}
+.-theme-material .item.-disarmed .item-entity--icon,
+.-theme-material .item.-off .item-entity--icon {
+  opacity: 0.8;
 }
 .-theme-material .item.-armed .item-entity--icon,
-.-theme-material .item.-on .item-entity--icon,
-.-theme-material .item.-armed .item-state,
-.-theme-material .item.-on .item-state {
-  color: #4CB944;
+.-theme-material .item.-on .item-entity--icon {
+  color: #369628;
+}
+.-theme-material .item-list--name {
+  color: #3d3d3d;
+}
+.-theme-material .item-list--name .mdi {
+  opacity: 0.6;
+}
+.-theme-material .wu {
+  opacity: 0.7;
+}
+.-theme-material .item-select {
+  background: #fff;
+  border: 1px solid #aaa;
+}
+.-theme-material .item-select--option:active,
+.-theme-material .item-select--option.-active {
+  background: #eee;
+}
+.-theme-material .media-player--source {
+  color: #555;
+}
+.-theme-material input[type=range]::-webkit-slider-runnable-track {
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+  border: 0px solid #000101;
+}
+.-theme-material input[type=range]::-moz-range-track {
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
+}
+.-theme-material input[type=range]::-webkit-slider-thumb {
+  background: #3664d8;
+  width: 24px;
+  height: 14px;
+  border-radius: 8px;
+}
+.-theme-material input[type=range]::-moz-range-thumb {
+  background: #3664d8;
+  width: 24px;
+  height: 14px;
+  border-radius: 8px;
+}
+.-theme-material input[type=range]::-ms-thumb {
+  background: #3664d8;
+  width: 24px;
+  height: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.-theme-material .noty {
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 .-theme-transparent {
   color: #eee;
@@ -480,3 +497,4 @@
 .-theme-homekit.-theme-mobile .item-state {
   padding: 4px 5px 2px !important;
 }
+/*# sourceMappingURL=themes.css.map */
