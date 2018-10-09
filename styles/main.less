@@ -822,9 +822,9 @@ body {
 
 .-small-entity {
    @smallEntitySize: 60px;
+   @smallEntityTop: @smallEntitySize / 2 + 5px;
 
    .item-entity {
-      @smallEntityTop: @smallEntitySize / 2 + 5px;
       position: absolute;
       height: @smallEntitySize;
       line-height: @smallEntitySize;
@@ -891,6 +891,21 @@ body {
    &.-select .item-entity--value {
       font-size: 16px;
       line-height: @smallEntitySize / 3;
+   }
+
+   .item-cover {
+      top: ~'calc(50% - @{smallEntityTop})';
+
+      &--button {
+         font-size: 24px;
+         line-height: 24px;
+         width: 24px;
+         height: 24px;
+
+         .mdi {
+            margin: 0 -2px 0 -2px;
+         }
+      }
    }
 
 }

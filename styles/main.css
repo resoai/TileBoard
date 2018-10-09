@@ -793,6 +793,18 @@ body {
   font-size: 16px;
   line-height: 20px;
 }
+.-small-entity .item-cover {
+  top: calc(50% - 35px);
+}
+.-small-entity .item-cover--button {
+  font-size: 24px;
+  line-height: 24px;
+  width: 24px;
+  height: 24px;
+}
+.-small-entity .item-cover--button .mdi {
+  margin: 0 -2px 0 -2px;
+}
 .-micro-entity .item-entity {
   position: absolute;
   height: 40px;
@@ -1837,3 +1849,4 @@ input[type=range]::-moz-range-thumb {
     width: 0;
   }
 }
+/*# sourceMappingURL=main.css.map */
