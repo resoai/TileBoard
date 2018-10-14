@@ -40,6 +40,7 @@ function MainController ($scope, $location) {
          case TYPES.INPUT_BOOLEAN: return $scope.toggleSwitch(item, entity);
 
          case TYPES.LOCK: return $scope.toggleLock(item, entity);
+         case TYPES.COVER_TOGGLE: return $scope.toggleCover(item, entity);
 
          case TYPES.VACUUM: return $scope.toggleVacuum(item, entity);
 
@@ -1219,7 +1220,6 @@ function MainController ($scope, $location) {
       });
    };
 
-
    $scope.sendCover = function (service, item, entity) {
       sendItemData(item, {
          type: "call_service",
@@ -1229,6 +1229,13 @@ function MainController ($scope, $location) {
             entity_id: item.id
          }
       });
+   };
+
+   $scope.toggleCover = function (item, entity) {
+      if(entity.state === "open") service = "close_cover";
+      else if(entity.state === "closed") service = "open_cover";
+
+      $scope.sendCover(service, item, entity);
    };
 
    $scope.openFanSpeedSelect = function ($event, item) {

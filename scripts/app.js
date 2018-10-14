@@ -34,6 +34,7 @@ var TYPES = {
    SWITCH: 'switch',
    LOCK: 'lock',
    COVER: 'cover',
+   COVER_TOGGLE: 'cover_toggle',
    FAN: 'fan',
    INPUT_BOOLEAN: 'input_boolean',
    LIGHT: 'light',

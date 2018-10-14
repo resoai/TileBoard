@@ -20,6 +20,7 @@
 @WEATHER_LIST: @WEATHER;
 @MEDIA_PLAYER: rgb(52, 156, 20);
 @COVER: rgb(21,101,192);
+@COVER_TOGGLE: rgb(21,101,192);
 @DEVICE_TRACKER: rgb(124, 129, 206);
 @SCRIPT: rgb(37, 158, 176);
 @SCRIPT_L: rgb(16, 206, 228);
@@ -66,6 +67,7 @@
    &.-th-weather_list {background-color: @WEATHER_LIST;}
    &.-th-media_player {background-color: @MEDIA_PLAYER;}
    &.-th-cover {background-color: @COVER;}
+   &.-th-cover_toggle {background-color: @COVER_TOGGLE;}
    &.-th-device_tracker {background-color: @DEVICE_TRACKER;}
    &.-th-door_entry {background-color: @DOOR_ENTRY;}
    &.-th-script {background-color: @SCRIPT;}
@@ -542,6 +544,7 @@ body {
 
    &.-switch,
    &.-lock,
+   &.-cover_toggle,
    &.-vacuum,
    &.-fan,
    &.-custom,

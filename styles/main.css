@@ -13,6 +13,9 @@
 .item.-th-cover {
   background-color: #1565c0;
 }
+.item.-th-cover_toggle {
+  background-color: #1565c0;
+}
 .item.-th-device_tracker {
   background-color: #7c81ce;
 }
@@ -469,6 +472,7 @@ body {
 }
 .item.-switch,
 .item.-lock,
+.item.-cover_toggle,
 .item.-vacuum,
 .item.-fan,
 .item.-custom,
@@ -492,6 +496,7 @@ body {
 }
 .item.-switch:active,
 .item.-lock:active,
+.item.-cover_toggle:active,
 .item.-vacuum:active,
 .item.-fan:active,
 .item.-custom:active,
@@ -512,6 +517,7 @@ body {
 }
 .item.-switch .item-clickable,
 .item.-lock .item-clickable,
+.item.-cover_toggle .item-clickable,
 .item.-vacuum .item-clickable,
 .item.-fan .item-clickable,
 .item.-custom .item-clickable,
