@@ -24,7 +24,7 @@ Should you have any ideas or questions please post them on home-assistant forum 
 * Pull/download repository
 * Copy `config.example.js` to `config.js` and edit it for your needs
 * Create a directory called `tileboard` inside `www` directory in HA's config path and move all of the files there.
-* TileBoard will be available at `http://HASS_IP:8123/local/tileboard/index.html` and will prompt your for your login credentials
+* TileBoard will be available at `http://HASS_IP:8123/local/tileboard/index.html` and will prompt your for your login credentials after restarting Home Assistant
 
 ## Configure
 
