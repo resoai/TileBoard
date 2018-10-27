@@ -942,7 +942,7 @@ function MainController ($scope, $location) {
       else if(['idle', 'docked', 'paused'].indexOf(entity.state) !== -1) {
          service = "start";
       }
-      else if(entity.state === "cleaning") service = "stop";
+      else if(entity.state === "cleaning") service = "return_to_base";
 
       sendItemData(item, {
          type: "call_service",
