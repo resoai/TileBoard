@@ -787,6 +787,8 @@ function MainController ($scope, $location) {
    };
 
    $scope.openLightSliders = function (item, entity) {
+      if(!item.sliders || !item.sliders.length) return;
+
       if(entity.state !== "on") {
          return $scope.toggleSwitch(item, entity, function () {
             setTimeout(function () {
