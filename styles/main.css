@@ -1363,7 +1363,7 @@ camera-thumbnail div {
   margin-right: 10px;
 }
 .weather-item .mdi {
-  margin: 0 0px 0 -3px;
+  margin: 0 0px 0 0px;
 }
 .weather-list table {
   width: 100%;
