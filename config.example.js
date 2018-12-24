@@ -32,6 +32,7 @@ var CONFIG = {
          fontSize: '28px'
       },
       right: [],
+      center: [],
       left: [
          {
             type: HEADER_ITEMS.DATETIME,

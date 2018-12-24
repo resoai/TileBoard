@@ -233,6 +233,11 @@ body {
 .header--right {
   float: right;
 }
+.header--center {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}
 .header clock {
   font-size: 1.5em;
 }
