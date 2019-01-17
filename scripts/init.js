@@ -19,4 +19,4 @@ if(!window.CONFIG) {
    alert(error);
 }
 
-var Api = new HApi(CONFIG.wsUrl, CONFIG.authToken);
+var Api = typeof HApi !== 'undefined' ? new HApi(CONFIG.wsUrl, CONFIG.authToken) : new IoBApi();

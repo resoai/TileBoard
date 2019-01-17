@@ -125,8 +125,12 @@ function MainController ($scope, $location) {
       if(typeof item.id === "object") return item.id;
 
       if(!(item.id in $scope.states)) {
-         warnUnknownItem(item);
-         return null;
+          if (typeof Api.getState === 'function') {
+              Api.getState(item.id);
+          } else {
+              warnUnknownItem(item);
+          }
+          return null;
       }
 
       return $scope.states[item.id];
@@ -854,7 +858,7 @@ function MainController ($scope, $location) {
 
 
    // Actions
-
+   // Todo the debounce configurable, because 250ms can overload the end device with requests.
    var setSliderValue = debounce(setSliderValueFn, 250);
 
    function setSliderValueFn (item, entity, value) {
@@ -1761,8 +1765,20 @@ function MainController ($scope, $location) {
    function setNewState (key, state) {
       if(!$scope.states[key]) $scope.states[key] = state;
 
+      // Is it required? If $scope.states[key] just assigned in the previous line?
       for(var k in state) $scope.states[key][k] = state[k];
    }
+
+    // required for lazy load of the states, becasue every update of the single state cause the request of all states again.
+    // To avoid that all states must be updated at once and only then updateView should be called.
+    function setNewStates (states) {
+        states.forEach(function (state) {
+            if(!$scope.states[state.entity_id]) $scope.states[state.entity_id] = state.new_state;
+
+            // Is it required? If $scope.states[key] just assigned?
+            for(var k in state.new_state) $scope.states[state.entity_id][k] = state.new_state[k];
+        });
+    }
 
    function checkStatesTriggers (key, state) {
       checkAlarmState(key, state);
@@ -1800,8 +1816,15 @@ function MainController ($scope, $location) {
          if (event.event_type === "state_changed") {
             debugLog('state change', event.data.entity_id, event.data.new_state);
 
-            setNewState(event.data.entity_id, event.data.new_state);
-            checkStatesTriggers(event.data.entity_id, event.data.new_state);
+            if (event.data instanceof Array) {
+                setNewStates(event.data);
+                event.data.forEach(function (state) {
+                    checkStatesTriggers(state.entity_id, state.new_state);
+                });
+            } else {
+                setNewState(event.data.entity_id, event.data.new_state);
+                checkStatesTriggers(event.data.entity_id, event.data.new_state);
+            }
          }
          else if (event.event_type === "tileboard") {
             debugLog('tileboard', event.data);

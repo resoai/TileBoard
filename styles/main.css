@@ -213,6 +213,11 @@ body {
   font-size: 64px;
   margin-left: 15px;
 }
+@media screen and (max-height: 770px) {
+  .header {
+    display: none;
+  }
+}
 .header {
   position: absolute;
   z-index: 2;
