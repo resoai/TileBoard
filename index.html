@@ -358,7 +358,7 @@
 <!-- HEADER ITEMS TEMPLATE -->
 
 <script type="text/ng-template" id="header-items.html">
-   <div class="header-item" ng-class="'-' + item.type" ng-style="item.styles">
+   <div class="header-item" ng-class="'-' + item.type" ng-style="item.styles" ng-if="!isHidden(item,'null')">
       <div ng-if="item.type === HEADER_ITEMS.TIME">
          <clock></clock>
       </div>
