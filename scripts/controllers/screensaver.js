@@ -13,7 +13,7 @@ function ScreensaverController ($scope) {
    var slidesTimeout = conf.slidesTimeout || 1;
 
    $scope.now = new Date();
-   $scope.isShowed = false;
+   $scope.isShown = false;
    $scope.conf = conf;
    $scope.slides = conf.slides;
 
@@ -39,7 +39,7 @@ function ScreensaverController ($scope) {
    };
 
    $scope.hideScreensaver = function () {
-      $scope.isShowed = false;
+      $scope.isShown = false;
    };
 
    $scope.getSlideStyle = function (slide) {
@@ -61,9 +61,10 @@ function ScreensaverController ($scope) {
 
       var newState = conf.timeout < inactivity / 1000;
 
-      if(newState !== $scope.isShowed) {
-         $scope.isShowed = newState;
+      if(newState !== $scope.isShown) {
+         $scope.isShown = newState;
 
+         $window.trigger('screensaver:state', newState);
          if(!$scope.$$phase) $scope.$digest();
       }
    }, 1000);
@@ -75,7 +76,7 @@ function ScreensaverController ($scope) {
          activeSlide = 0;
       }
 
-      if($scope.isShowed) {
+      if($scope.isShown) {
          $scope.now = new Date();
 
          if(!$scope.$$phase) $scope.$digest();
@@ -85,7 +86,7 @@ function ScreensaverController ($scope) {
    window.showScreensaver = function () {
       setTimeout(function () {
          lastActivity = 0;
-         $scope.isShowed = true;
+         $scope.isShown = true;
          if(!$scope.$$phase) $scope.$digest();
       }, 100);
    };
@@ -93,7 +94,7 @@ function ScreensaverController ($scope) {
    window.hideScreensaver = function () {
       setTimeout(function () {
          lastActivity = Date.now();
-         $scope.isShowed = false;
+         $scope.isShown = false;
          if(!$scope.$$phase) $scope.$digest();
       }, 100);
    };

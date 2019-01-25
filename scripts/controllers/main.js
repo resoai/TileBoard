@@ -3,6 +3,8 @@ App.controller('Main', ['$scope', '$location', MainController]);
 function MainController ($scope, $location) {
    if(!window.CONFIG) return;
 
+   var $window = angular.element(window);
+   
    $scope.pages = CONFIG.pages;
    $scope.TYPES = TYPES;
    $scope.FEATURES = FEATURES;
@@ -1845,4 +1847,9 @@ function MainController ($scope, $location) {
       $scope.openPage(page);
       updateView();
    };
+
+   $window.on('screensaver:state', function (e, val) {
+      $scope.screensaverShown = val;
+      updateView();
+   });
 }

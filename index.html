@@ -709,7 +709,7 @@
            class="item-entity-container -below">
          <div class="item-camera">
             <camera item="item" entity="entity"
-                    freezed="!isPageActive(page) || activeCamera"></camera>
+                    freezed="!isPageActive(page) || activeCamera || screensaverShown"></camera>
          </div>
       </div>
 
@@ -717,7 +717,7 @@
       <div ng-if="item.type === TYPES.CAMERA_THUMBNAIL"
            class="item-entity-container -below">
          <div class="item-camera">
-            <camera-thumbnail freezed="!isPageActive(page) || activeCamera"
+            <camera-thumbnail freezed="!isPageActive(page) || activeCamera || screensaverShown"
                               item="item" entity="entity"></camera-thumbnail>
          </div>
       </div>
