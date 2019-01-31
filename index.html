@@ -263,9 +263,9 @@
 </div>
 
 <div class="screensaver" ng-click="hideScreensaver()"
-     ng-show="isShowed" ng-controller="Screensaver"  ng-style="conf.styles">
+     ng-show="isShown" ng-controller="Screensaver"  ng-style="conf.styles">
 
-   <div class="screensaver-slides" ng-if="isShowed">
+   <div class="screensaver-slides" ng-if="isShown">
       <div class="screensaver-slide" ng-style="getSlideStyle(slide)"
            ng-class="getSlideClasses($index, slide)"
            ng-repeat="slide in slides track by $index">
@@ -284,7 +284,7 @@
       </div>
    </div>
 
-   <div class="screensaver-content" ng-if="isShowed">
+   <div class="screensaver-content" ng-if="isShown">
       <div class="screensaver-content--right-bottom" ng-if="conf.rightBottom">
          <div header-item ng-repeat="item in conf.rightBottom track by $index"></div>
       </div>

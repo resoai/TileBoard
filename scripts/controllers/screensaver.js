@@ -64,7 +64,7 @@ function ScreensaverController ($scope) {
       if(newState !== $scope.isShown) {
          $scope.isShown = newState;
 
-         $window.trigger('screensaver:state', newState);
+         if(window.setScreensaverShown) setScreensaverShown(newState);
          if(!$scope.$$phase) $scope.$digest();
       }
    }, 1000);

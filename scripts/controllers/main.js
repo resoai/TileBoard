@@ -2,8 +2,6 @@ App.controller('Main', ['$scope', '$location', MainController]);
 
 function MainController ($scope, $location) {
    if(!window.CONFIG) return;
-
-   var $window = angular.element(window);
    
    $scope.pages = CONFIG.pages;
    $scope.TYPES = TYPES;
@@ -11,6 +9,7 @@ function MainController ($scope, $location) {
    $scope.HEADER_ITEMS = HEADER_ITEMS;
 
    $scope.activeSelect = null;
+   $scope.screensaverShown = false;
    $scope.ready = false;
 
    $scope.errors = [];
@@ -1848,8 +1847,8 @@ function MainController ($scope, $location) {
       updateView();
    };
 
-   $window.on('screensaver:state', function (e, val) {
-      $scope.screensaverShown = val;
+   window.setScreensaverShown = function (state) {
+      $scope.screensaverShown = state;
       updateView();
-   });
+   };
 }
