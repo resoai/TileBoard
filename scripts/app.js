@@ -21,6 +21,8 @@ var CUSTOM_THEMES = {
    MOBILE: "mobile",
    COMPACT: "compact",
    HOMEKIT: "homekit",
+   FRESH_AIR: "fresh-air",
+   WHITE_PAPER: "white-paper",
 };
 
 var PASSWORD_TYPES = {};

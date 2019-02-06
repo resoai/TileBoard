@@ -610,3 +610,150 @@
     }
   }
 }
+
+
+.-theme-fresh-air {
+   @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=cyrillic');
+
+   background: rgb(21, 89, 208);
+   color: #fff;
+   font-family: 'Roboto', sans-serif;
+
+   .header {
+      clock {
+         margin-bottom: 5px;
+      }
+   }
+
+   .group-title {
+      opacity: 1;
+      font-weight: 500;
+   }
+
+   .item {
+      color: #fff;
+      border: 2px solid rgba(226, 237, 255, 0.6);//rgba(255,255,255,0.99);
+      background: rgba(132, 122, 116, 0) !important;
+      box-shadow: none;
+      border-radius: 1px;
+
+      &-state {
+         background: rgba(0, 0, 0, 0.1);
+      }
+
+      &.-device_tracker {
+         background: #222 !important;
+      }
+
+      &.-device_tracker,
+      &.-camera,
+      &.-camera_thumbnail {
+         .item-title {
+            color: #fff;
+         }
+      }
+
+      &.-armed, &.-on {
+         border-color: rgb(255, 202, 171);
+         .item-entity--icon, .item-state {
+            color: rgb(253, 231, 228);
+         }
+      }
+   }
+}
+
+.-theme-white-paper {
+   @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=cyrillic');
+
+   background: #fff;
+   color: #444;
+   font-family: 'Roboto', sans-serif;
+
+   .header {
+      color: #444;
+
+      clock {
+         margin-bottom: 5px;
+      }
+   }
+
+   .group-title {
+      opacity: 1;
+      font-weight: 500;
+   }
+
+   .item-select {
+      color: #fff;
+   }
+
+   .pages-menu {
+      &--item {
+         color: #444;
+      }
+   }
+
+   .group-title {
+      color: #444;
+   }
+
+   input[type=range]::-webkit-slider-runnable-track {
+      background: #ddd;
+      box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+      border: 0px solid #000101;
+   }
+   input[type=range]::-moz-range-track {
+      background: #ddd;
+      box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
+   }
+   input[type=range]::-webkit-slider-thumb {
+      background: #555;
+      border-radius: 10px;
+   }
+   input[type=range]::-moz-range-thumb {
+      background: #555;
+      border-radius: 10px;
+   }
+   .item {
+      color: #444;
+      border: 2px solid rgb(133, 133, 133);
+      background: rgba(132, 122, 116, 0) !important;
+      box-shadow: none;
+      border-radius: 2px;
+
+      .item-entity--icon {
+         color: #555;
+      }
+
+      &-state {
+         background: transparent;
+         border-bottom: 1px solid rgba(129, 124, 124, 0.5);
+         padding: 2px 2px 0;
+         color: #444;
+         opacity: 1;
+      }
+
+      &.-device_tracker {
+         background: #222 !important;
+      }
+
+      &.-device_tracker,
+      &.-camera,
+      &.-camera_thumbnail {
+         .item-title {
+            color: #fff;
+         }
+      }
+
+      &.-armed, &.-on {
+         border-color: rgb(255, 134, 94);
+         .item-entity--icon, .item-state {
+            //color: rgb(228, 102, 43);
+            //border-color: rgba(194, 141, 130, 0.48);
+         }
+         .item-state {
+            color: rgb(228, 102, 43);
+            border-color: rgba(194, 141, 130, 0.48);
+         }
+      }
+   }
+}
