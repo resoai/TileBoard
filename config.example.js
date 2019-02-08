@@ -6,6 +6,14 @@
  Make sure you use real IDs from your HA entities.
 */
 
+if ("secrets" in window) {
+  // secrets.js was loaded and global variable is defined
+  var mysecrets = JSON.parse(window.secrets);
+} else {
+  // secrets.js couldn't be loaded and global variable is not defined
+  // load defaults
+  var mysecrets = JSON.parse('{"serverUrl" : "https://hassio.local:8123", "wsUrl" : "wss://hassio.local:8123/api/websocket", "authToken": null, "googleApiKey" : "XXXXXXXXX" }');
+}
 
 var CONFIG = {
    customTheme: null, // CUSTOM_THEMES.TRANSPARENT, CUSTOM_THEMES.MATERIAL, CUSTOM_THEMES.MOBILE, CUSTOM_THEMES.COMPACT, CUSTOM_THEMES.HOMEKIT, CUSTOM_THEMES.WINPHONE, CUSTOM_THEMES.WIN95
@@ -13,10 +21,10 @@ var CONFIG = {
    entitySize: ENTITY_SIZES.NORMAL, //SMALL, BIG are available
    tileSize: 150,
    tileMargin: 6,
-   serverUrl: "http://localhost:8123",
-   wsUrl: "ws://localhost:8123/api/websocket",
-   authToken: null, // optional long-lived token (CAUTION: only if TileBoard is not exposed to the internet)
-   //googleApiKey: "XXXXXXXXXX", // Required if you are using Google Maps for device tracker
+   serverUrl:      mysecrets.serverUrl,
+   wsUrl:          mysecrets.wsUrl,
+   authToken:      mysecrets.authToken,    // optional: make an long live token and put it here
+   //googleApiKey: mysecrets.googleApiKey, // Required if you are using Google Maps for device tracker
    debug: false, // Prints entities and state change info to the console.
 
    // next fields are optional
