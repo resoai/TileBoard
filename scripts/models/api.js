@@ -351,7 +351,16 @@ var HApi = (function () {
    }
 
    function getOAuthRedirectUrl() {
-      return encodeURIComponent(window.location.origin + window.location.pathname + '?oauth=1');
+      var url = window.location.origin + window.location.pathname;
+
+      if(window.location.search) {
+         url += window.location.search + '&oauth=1';
+      }
+      else {
+         url += '?oauth=1';
+      }
+
+      return encodeURIComponent(url);
    }
 
    function redirectOAuth() {
