@@ -20,6 +20,7 @@ function MainController ($scope, $location) {
 
    $scope.activeCamera = null;
    $scope.activeDoorEntry = null;
+   $scope.activeIframe = null;
 
    $scope.alarmCode = null;
    $scope.activeAlarm = null;
@@ -32,6 +33,7 @@ function MainController ($scope, $location) {
    var mainStyles = {};
    var activePage = null;
    var cameraList = null;
+   var popupIframeStyles = {};
 
    $scope.entityClick = function (page, item, entity) {
       switch (item.type) {
@@ -61,6 +63,8 @@ function MainController ($scope, $location) {
          case TYPES.ALARM: return $scope.openAlarm(item, entity);
 
          case TYPES.CUSTOM: return $scope.customTileAction(item, entity);
+
+         case TYPES.POPUP_IFRAME: return $scope.openPopupIframe(item, entity);
 
          case TYPES.INPUT_DATETIME: return $scope.openDatetime(item, entity);
       }
@@ -1338,10 +1342,27 @@ function MainController ($scope, $location) {
       $scope.datetimeString = null;
    };
 
-   $scope.closeDoorEntry = function () {
-      $scope.activeDoorEntry = null;
+   $scope.getPopupIframeStyles = function () {
+      if(!$scope.activeIframe || !$scope.activeIframe.iframeStyles) return null;
 
-      if(doorEntryTimeout) clearTimeout(doorEntryTimeout);
+      var entity = $scope.getItemEntity($scope.activeIframe);
+
+      var styles = $scope.itemField('iframeStyles', $scope.activeIframe, entity);
+
+      if(!styles) return null;
+
+      for (var k in popupIframeStyles) delete popupIframeStyles[k];
+      for (k in styles) popupIframeStyles[k] = styles[k];
+
+      return popupIframeStyles;
+   };
+
+   $scope.openPopupIframe = function (item, entity) {
+      $scope.activeIframe = item;
+   };
+
+   $scope.closePopupIframe = function () {
+      $scope.activeIframe = null;
    };
 
    $scope.openDoorEntry = function (item, entity) {
@@ -1356,6 +1377,12 @@ function MainController ($scope, $location) {
             updateView();
          }, CONFIG.doorEntryTimeout * 1000);
       }
+   };
+
+   $scope.closeDoorEntry = function () {
+      $scope.activeDoorEntry = null;
+
+      if(doorEntryTimeout) clearTimeout(doorEntryTimeout);
    };
 
    $scope.openAlarm = function (item) {

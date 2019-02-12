@@ -56,7 +56,8 @@ var TYPES = {
    CUSTOM: 'custom',
    ALARM: 'alarm',
    WEATHER_LIST: 'weather_list',
-   VACUUM: 'vacuum'
+   VACUUM: 'vacuum',
+   POPUP_IFRAME: 'popup_iframe',
 };
 
 var HEADER_ITEMS = {

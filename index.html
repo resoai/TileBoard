@@ -77,6 +77,20 @@
       </div>
    </div>
 
+   <div class="iframe-popup"
+        ng-if="activeIframe && (entity = getItemEntity(activeIframe))">
+      <div class="iframe-popup-container" ng-style="getPopupIframeStyles()">
+         <div class="iframe-popup--iframe">
+            <iframe ng-src="{{ itemField('url', activeIframe, entity) }}"
+                    iframe-tile="activeIframe" frameborder="0"></iframe>
+         </div>
+
+         <div class="iframe-popup--close" ng-click="closePopupIframe()">
+            <i class="mdi mdi-close"></i>
+         </div>
+      </div>
+   </div>
+
    <div class="door-entry-popup"
         ng-if="activeDoorEntry && (page = activeDoorEntry.layout.page)
             && (cameraEntity = getEntryCameraEntity(activeDoorEntry))">
@@ -548,6 +562,18 @@
          </div>
       </div>
 
+      <div ng-if="item.type === TYPES.POPUP_IFRAME"
+           class="item-entity-container">
+
+         <div ng-if="item.customHtml"
+              ng-bind-html="item.customHtml"></div>
+
+         <div ng-if="!item.customHtml" class="item-entity">
+            <span class="item-entity--icon mdi"
+                  ng-class="entityIcon(item, entity)"></span>
+         </div>
+      </div>
+
       <div ng-if="item.type === TYPES.SCRIPT"
            class="item-entity-container">
 
@@ -752,7 +778,8 @@
            class="item-entity-container">
 
          <div class="item-iframe">
-            <iframe ng-src="{{ item.url }}" iframe-tile="item" frameborder="0"></iframe>
+            <iframe ng-src="{{ itemField('url', item, entity) }}"
+                    iframe-tile="item" frameborder="0"></iframe>
          </div>
       </div>
 

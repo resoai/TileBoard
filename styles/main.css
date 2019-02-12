@@ -130,6 +130,9 @@
 .item.-th-vacuum {
   background-color: #259eb0;
 }
+.item.-th-popup_iframe {
+  background-color: #44749c;
+}
 html,
 body {
   font-size: 14px;
@@ -485,6 +488,7 @@ body {
 .item.-camera_thumbnail,
 .item.-alarm,
 .item.-door_entry,
+.item.-popup_iframe,
 .item.-input_datetime,
 .item.-scene {
   cursor: pointer;
@@ -509,6 +513,7 @@ body {
 .item.-camera_thumbnail:active,
 .item.-alarm:active,
 .item.-door_entry:active,
+.item.-popup_iframe:active,
 .item.-input_datetime:active,
 .item.-scene:active {
   margin-top: -2px;
@@ -530,6 +535,7 @@ body {
 .item.-camera_thumbnail .item-clickable,
 .item.-alarm .item-clickable,
 .item.-door_entry .item-clickable,
+.item.-popup_iframe .item-clickable,
 .item.-input_datetime .item-clickable,
 .item.-scene .item-clickable {
   display: block;
@@ -977,7 +983,8 @@ camera-thumbnail div {
   opacity: 0.01;
 }
 .camera-popup,
-.door-entry-popup {
+.door-entry-popup,
+.iframe-popup {
   position: fixed;
   top: 0;
   left: 0;
@@ -989,16 +996,19 @@ camera-thumbnail div {
   background: rgba(45, 49, 53, 0.78);
 }
 .camera-popup-container,
-.door-entry-popup-container {
+.door-entry-popup-container,
+.iframe-popup-container {
   background: #111;
   height: 100%;
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
   position: relative;
+  margin: auto;
 }
 .camera-popup--list,
-.door-entry-popup--list {
+.door-entry-popup--list,
+.iframe-popup--list {
   width: 200px;
   display: inline-block;
   vertical-align: top;
@@ -1006,7 +1016,8 @@ camera-thumbnail div {
   float: left;
 }
 .camera-popup--list-item,
-.door-entry-popup--list-item {
+.door-entry-popup--list-item,
+.iframe-popup--list-item {
   padding: 6px 10px;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -1018,12 +1029,14 @@ camera-thumbnail div {
       }*/
 }
 .camera-popup--list-item.-active,
-.door-entry-popup--list-item.-active {
+.door-entry-popup--list-item.-active,
+.iframe-popup--list-item.-active {
   color: #eee;
   background: #333;
 }
 .camera-popup--camera,
-.door-entry-popup--camera {
+.door-entry-popup--camera,
+.iframe-popup--camera {
   width: calc(100% - 220px);
   height: 100%;
   display: inline-block;
@@ -1031,12 +1044,29 @@ camera-thumbnail div {
   background: #222;
 }
 .camera-popup--camera > div,
-.door-entry-popup--camera > div {
+.door-entry-popup--camera > div,
+.iframe-popup--camera > div {
+  height: 100%;
+  width: 100%;
+}
+.camera-popup--iframe,
+.door-entry-popup--iframe,
+.iframe-popup--iframe {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+  background: #222;
+}
+.camera-popup--iframe > iframe,
+.door-entry-popup--iframe > iframe,
+.iframe-popup--iframe > iframe {
   height: 100%;
   width: 100%;
 }
 .camera-popup--close,
-.door-entry-popup--close {
+.door-entry-popup--close,
+.iframe-popup--close {
   position: absolute;
   text-align: center;
   right: 15px;
@@ -1051,7 +1081,8 @@ camera-thumbnail div {
   cursor: pointer;
 }
 .camera-popup--close:active,
-.door-entry-popup--close:active {
+.door-entry-popup--close:active,
+.iframe-popup--close:active {
   color: rgba(255, 255, 255, 0.8);
   background: rgba(0, 0, 0, 0.3);
 }
@@ -1363,7 +1394,7 @@ camera-thumbnail div {
   margin-right: 10px;
 }
 .weather-item .mdi {
-  margin: 0 0px 0 0px;
+  margin: 0 0px 0 -3px;
 }
 .weather-list table {
   width: 100%;

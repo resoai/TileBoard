@@ -368,6 +368,12 @@ Tile Object. [Click here for some real life examples](TILE_EXAMPLES.md)
    /* sliders: list of slider object. See slider documentation below */
    sliders: [{}],
 
+   /** type: POPUP_IFRAME **/
+   url: String || Function,
+   
+   /* optional */
+   iframeStyles: Object || Function,
+
    /** type: WEATHER **/
    /* fields: Object mapping available fields and their values.
     * Full documentation on fields is below
@@ -403,13 +409,14 @@ var TYPES = {
    SWITCH: 'switch',
    LOCK: 'lock',
    COVER: 'cover',
+   COVER_TOGGLE: 'cover_toggle',
    FAN: 'fan',
-   GENERIC_ICON: 'generic_icon',
    INPUT_BOOLEAN: 'input_boolean',
    LIGHT: 'light',
    TEXT_LIST: 'text_list',
    INPUT_NUMBER: 'input_number',
    INPUT_SELECT: 'input_select',
+   INPUT_DATETIME: 'input_datetime',
    CAMERA: 'camera',
    CAMERA_THUMBNAIL: 'camera_thumbnail',
    SCENE: 'scene',
@@ -422,6 +429,8 @@ var TYPES = {
    CUSTOM: 'custom',
    ALARM: 'alarm',
    WEATHER_LIST: 'weather_list',
+   VACUUM: 'vacuum',
+   POPUP_IFRAME: 'popup_iframe',
 };
 ```
 
