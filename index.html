@@ -78,6 +78,7 @@
    </div>
 
    <div class="iframe-popup"
+        ng-class="itemField('iframeClasses', activeIframe, entity)"
         ng-if="activeIframe && (entity = getItemEntity(activeIframe))">
       <div class="iframe-popup-container" ng-style="getPopupIframeStyles()">
          <div class="iframe-popup--iframe">
@@ -372,7 +373,8 @@
 <!-- HEADER ITEMS TEMPLATE -->
 
 <script type="text/ng-template" id="header-items.html">
-   <div class="header-item" ng-class="'-' + item.type" ng-style="item.styles" ng-if="!isHidden(item,{})">
+   <div class="header-item" ng-class="'-' + item.type"
+        ng-style="item.styles" ng-if="!isHidden(item,{})">
       <div ng-if="item.type === HEADER_ITEMS.TIME">
          <clock></clock>
       </div>
@@ -659,6 +661,25 @@
                  ng-click="closeLightSliders($event, item, entity)">
                <i class="mdi mdi-chevron-left"></i> Back
             </div>
+         </div>
+      </div>
+      <div ng-if="item.type === TYPES.DIMMER_SWITCH"
+           class="item-entity-container">
+
+         <div ng-if="entityState(item, entity) && entityState(item, entity) !== 'off'">
+            <div class="item-button -center-right"
+                 ng-click="dimmerAction('plus', $event, item, entity)">
+               <i class="mdi mdi-plus"></i>
+            </div>
+            <div class="item-button -bottom-right"
+                 ng-click="dimmerAction('minus', $event, item, entity)">
+               <i class="mdi mdi-minus"></i>
+            </div>
+         </div>
+
+         <div class="item-entity">
+            <span class="item-entity--icon mdi"
+                  ng-class="entityIcon(item, entity)"></span>
          </div>
       </div>
 

@@ -370,9 +370,17 @@ Tile Object. [Click here for some real life examples](TILE_EXAMPLES.md)
 
    /** type: POPUP_IFRAME **/
    url: String || Function,
-   
    /* optional */
    iframeStyles: Object || Function,
+   /* optional */
+   iframeClasses: Array || String || Function,
+
+   /** type: DIMMER_SWITCH **/
+   /* optional (main toggle function)*/
+   action: Function,
+   /* optional (function will be called with context)*/
+   actionPlus: Function,
+   actionMinus: Function,
 
    /** type: WEATHER **/
    /* fields: Object mapping available fields and their values.
@@ -395,7 +403,15 @@ Tile Object. [Click here for some real life examples](TILE_EXAMPLES.md)
 }
 ```
 
-Every anonymous function will call with context `{states: {}, $scope: {}}`
+Every anonymous function will call with context 
+```js
+{
+   states: {}, // list of current states
+   $scope: {}, // angular scope
+   parseFieldValue: Function, // parser function (for parsing HA states)
+   apiRequest: Function // parser function (args: data, callback=func)
+}
+```
 
 At the moment following entity types have been implemented:
 

@@ -58,6 +58,7 @@ var TYPES = {
    WEATHER_LIST: 'weather_list',
    VACUUM: 'vacuum',
    POPUP_IFRAME: 'popup_iframe',
+   DIMMER_SWITCH: 'dimmer_switch',
 };
 
 var HEADER_ITEMS = {

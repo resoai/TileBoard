@@ -63,6 +63,7 @@ function MainController ($scope, $location) {
          case TYPES.ALARM: return $scope.openAlarm(item, entity);
 
          case TYPES.CUSTOM: return $scope.customTileAction(item, entity);
+         case TYPES.DIMMER_SWITCH: return $scope.dimmerToggle(item, entity);
 
          case TYPES.POPUP_IFRAME: return $scope.openPopupIframe(item, entity);
 
@@ -455,7 +456,11 @@ function MainController ($scope, $location) {
    };
 
    $scope.entityIcon = function (item, entity) {
-      var state = entity.state;
+      var state = parseFieldValue(entity.state, item, entity);
+
+      if(!state && item.state) {
+         state = parseFieldValue(item.state, item, entity);
+      }
 
       if(item.icon) {
          state = parseFieldValue(item.icon, item, entity);
@@ -929,7 +934,29 @@ function MainController ($scope, $location) {
       }, callback);
    };
 
+   $scope.dimmerToggle = function (item, entity, callback) {
+      if(item.action) {
+         callFunction(item.action, [item, entity, callback]);
+      }
+      else if(angular.isString(item.id) && entity) {
+         $scope.toggleSwitch(item, entity, callback);
+      }
+   };
+
+   $scope.dimmerAction = function (action, $event, item, entity) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      var func = "action" + (action === "plus" ? "Plus" : "Minus");
+
+      if(item[func]) callFunction(item[func], [item, entity, $event]);
+
+      return false;
+   };
+
    $scope.toggleLock = function (item, entity) {
+      var service;
+
       if(entity.state === "locked") service = "unlock";
       else if(entity.state === "unlocked") service = "lock";
 
@@ -944,6 +971,7 @@ function MainController ($scope, $location) {
    };
 
    $scope.toggleVacuum = function (item, entity) {
+      var service;
       if(entity.state === "off") service = "turn_on";
       else if(entity.state === "on") service = "turn_off";
       else if(['idle', 'docked', 'paused'].indexOf(entity.state) !== -1) {
@@ -1691,7 +1719,8 @@ function MainController ($scope, $location) {
       return {
          states: $scope.states,
          $scope: $scope,
-         parseFieldValue: parseFieldValue.bind(this)
+         parseFieldValue: parseFieldValue.bind(this),
+         apiRequest: apiRequest.bind(this),
       };
    }
 
@@ -1699,6 +1728,14 @@ function MainController ($scope, $location) {
       if(typeof func !== "function") return func;
 
       return func.apply(getContext(), args || []);
+   }
+
+   function apiRequest (data, callback) {
+      Api.send(data, function (res) {
+         updateView();
+
+         if(callback) callback(res);
+      });
    }
 
    function sendItemData (item, data, callback) {

@@ -133,6 +133,9 @@
 .item.-th-popup_iframe {
   background-color: #44749c;
 }
+.item.-th-dimmer_switch {
+  background-color: #829c6c;
+}
 html,
 body {
   font-size: 14px;
@@ -490,6 +493,7 @@ body {
 .item.-door_entry,
 .item.-popup_iframe,
 .item.-input_datetime,
+.item.-dimmer_switch,
 .item.-scene {
   cursor: pointer;
   /*&:hover {
@@ -515,6 +519,7 @@ body {
 .item.-door_entry:active,
 .item.-popup_iframe:active,
 .item.-input_datetime:active,
+.item.-dimmer_switch:active,
 .item.-scene:active {
   margin-top: -2px;
   margin-left: -2px;
@@ -537,6 +542,7 @@ body {
 .item.-door_entry .item-clickable,
 .item.-popup_iframe .item-clickable,
 .item.-input_datetime .item-clickable,
+.item.-dimmer_switch .item-clickable,
 .item.-scene .item-clickable {
   display: block;
   left: 5px;
