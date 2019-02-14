@@ -174,6 +174,14 @@ var HApi = (function () {
       });
    };
 
+   $Api.prototype.forceReconnect = function () {
+      if(this.socket && this.socket.readyState < 2) {
+         this.socket.close();
+      }
+
+      this._reconnect();
+   };
+
    $Api.prototype._reconnect = function () {
       this._fire('unready', {status: this.status});
 

@@ -120,6 +120,11 @@ var CONFIG = {
      ]
    },
    
+   /**
+   * if you have troubles with reconnecting to api after uleaving screensaver
+   */
+   reconnectAfterScreensaver: false,
+   
    /* header: object of header. Will be applied globally
     * https://github.com/resoai/TileBoard/wiki/Header-configuration
     * (optional)

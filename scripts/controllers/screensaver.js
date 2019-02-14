@@ -38,8 +38,18 @@ function ScreensaverController ($scope) {
       return slide._classes;
    };
 
+   function setState (state) {
+      $scope.isShown = state;
+
+      if(window.setScreensaverShown) {
+         setScreensaverShown(state);
+      }
+
+      if(!$scope.$$phase) $scope.$digest();
+   }
+
    $scope.hideScreensaver = function () {
-      $scope.isShown = false;
+      setState(false);
    };
 
    $scope.getSlideStyle = function (slide) {
@@ -62,10 +72,7 @@ function ScreensaverController ($scope) {
       var newState = conf.timeout < inactivity / 1000;
 
       if(newState !== $scope.isShown) {
-         $scope.isShown = newState;
-
-         if(window.setScreensaverShown) setScreensaverShown(newState);
-         if(!$scope.$$phase) $scope.$digest();
+         setState(newState);
       }
    }, 1000);
 
@@ -86,16 +93,14 @@ function ScreensaverController ($scope) {
    window.showScreensaver = function () {
       setTimeout(function () {
          lastActivity = 0;
-         $scope.isShown = true;
-         if(!$scope.$$phase) $scope.$digest();
+         setState(true);
       }, 100);
    };
 
    window.hideScreensaver = function () {
       setTimeout(function () {
          lastActivity = Date.now();
-         $scope.isShown = false;
-         if(!$scope.$$phase) $scope.$digest();
+         setState(false);
       }, 100);
    };
 

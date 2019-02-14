@@ -1913,6 +1913,14 @@ function MainController ($scope, $location) {
 
    window.setScreensaverShown = function (state) {
       $scope.screensaverShown = state;
+
       updateView();
+
+      if(!state && CONFIG.reconnectAfterScreensaver) {
+         setTimeout(function () {
+            console.log('reconnect');
+            Api.forceReconnect();
+         }, 1000);
+      }
    };
 }
