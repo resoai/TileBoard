@@ -4,6 +4,11 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   <meta http-equiv="cache-control" content="max-age=0">
+   <meta http-equiv="cache-control" content="no-cache">
+   <meta http-equiv="expires" content="-1">
+   <meta http-equiv="expires" content="Tue, 01 Jan 1980 11:00:00 GMT">
+   <meta http-equiv="pragma" content="no-cache">
 
    <title>TileBoard</title>
 
@@ -14,31 +19,41 @@
 
    <link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" href="favicon.png">
 
-   <link rel="stylesheet" href="styles/main.css"/>
-   <link rel="stylesheet" href="styles/themes.css"/>
-   <link rel="stylesheet" href="styles/weather-icons.css"/>
-   <link rel="stylesheet" href="styles/custom.css"/>
-
    <style>
       [ng-cloak] { display: none; }
    </style>
 
-   <script src="scripts/vendors/angular.min.js"></script>
-   <script src="scripts/vendors/angular-long-press.js"></script>
+   <script type="text/javascript">
+      var suffix = location.protocol === "file:" ? "" : "?r=" + Math.random();
 
-   <script src="scripts/models/api.js"></script>
-   <script src="scripts/models/noty.js"></script>
+      [
+         'styles/main.css',
+         'styles/themes.css',
+         'styles/weather-icons.css',
+         'styles/custom.css'
+      ].map(function (value) {
+         document.write('<li'+'nk rel="stylesheet" href="'+value+suffix+'"/>');
+      });
 
-   <script src="scripts/app.js"></script>
+      [
+         'scripts/vendors/angular.min.js',
+         'scripts/vendors/angular-long-press.js',
 
-   <!--<script src="config.example.js"></script>-->
-   <script src="config.js"></script>
+         'scripts/models/api.js',
+         'scripts/models/noty.js',
+         'scripts/app.js',
 
-   <script src="scripts/init.js"></script>
-   <script src="scripts/directives.js"></script>
-   <script src="scripts/controllers/main.js"></script>
-   <script src="scripts/controllers/noty.js"></script>
-   <script src="scripts/controllers/screensaver.js"></script>
+         'config.js', // <----- NOT config.example.js !!
+
+         'scripts/init.js',
+         'scripts/directives.js',
+         'scripts/controllers/main.js',
+         'scripts/controllers/noty.js',
+         'scripts/controllers/screensaver.js'
+      ].map(function (value) {
+         document.write('<sc'+'ript src="'+value+suffix+'"></scr'+'ipt>');
+      });
+   </script>
 </head>
 
 <body ng-controller="Main" ng-class="getBodyClass()">
