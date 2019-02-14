@@ -681,7 +681,7 @@
       <div ng-if="item.type === TYPES.DIMMER_SWITCH"
            class="item-entity-container">
 
-         <div ng-if="entityState(item, entity) && entityState(item, entity) !== 'off'">
+         <div ng-if="entityState(item, entity) && entity.state !== 'off'">
             <div class="item-button -center-right"
                  ng-click="dimmerAction('plus', $event, item, entity)">
                <i class="mdi mdi-plus"></i>
