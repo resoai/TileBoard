@@ -1918,7 +1918,6 @@ function MainController ($scope, $location) {
 
       if(!state && CONFIG.reconnectAfterScreensaver) {
          setTimeout(function () {
-            console.log('reconnect');
             Api.forceReconnect();
          }, 1000);
       }
