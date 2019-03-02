@@ -164,7 +164,7 @@ var HApi = (function () {
       this.socket.addEventListener('error', function (e) {
          self._setStatus(STATUS_ERROR);
          self._sendError.call(self, "System error", e);
-         self._reconnect.call(self);
+         self._reconnect.call(self, 1000);
       });
 
       this.socket.addEventListener('message', function (e) {
@@ -178,16 +178,17 @@ var HApi = (function () {
       if(this.socket && this.socket.readyState < 2) {
          this.socket.close();
       }
-
-      this._reconnect();
+      else this._reconnect();
    };
 
-   $Api.prototype._reconnect = function () {
+   $Api.prototype._reconnect = function (delayBeforeConnect) {
+      delayBeforeConnect = delayBeforeConnect || 0;
+
       this._fire('unready', {status: this.status});
 
       if(reconnectTimeout) clearTimeout(reconnectTimeout);
 
-      reconnectTimeout = setTimeout(this._connect.bind(this), 2000);
+      reconnectTimeout = setTimeout(this._connect.bind(this), delayBeforeConnect);
    };
 
    $Api.prototype._fire = function (key, data) {

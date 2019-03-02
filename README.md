@@ -121,9 +121,13 @@ var CONFIG = {
    },
    
    /**
-   * if you have troubles with reconnecting to api after uleaving screensaver
+   * if you have troubles with reconnecting to api after resuming device
+   * set maximal timeout for waiting api response before force reconnect
+   * In milliseconds
+   * default is 3000 (3 seconds)
+   * use false to disable ping
    */
-   reconnectAfterScreensaver: false,
+   pingMaxTimeout: 3000,
    
    /* header: object of header. Will be applied globally
     * https://github.com/resoai/TileBoard/wiki/Header-configuration

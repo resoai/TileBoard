@@ -1638,6 +1638,8 @@ function MainController ($scope, $location) {
 
    /// INIT
 
+   var realReadyState = false;
+
    Api.onError(function (data) {
       console.error(data);
       addError(data.message);
@@ -1666,6 +1668,7 @@ function MainController ($scope, $location) {
          }
 
          $scope.ready = true;
+         realReadyState = true;
 
          var pageNum = $location.hash();
 
@@ -1680,9 +1683,19 @@ function MainController ($scope, $location) {
    });
 
    Api.onUnready(function () {
-      $scope.ready = false;
+      realReadyState = false;
 
-      updateView();
+      //$scope.ready = false;
+
+      //we give a timeout to prevent blinking (if reconnected)
+      setTimeout(function () {
+         if(realReadyState === false) {
+            $scope.ready = false;
+            updateView();
+         }
+      }, 1000);
+
+      //updateView();
    });
 
    Api.onMessage(function (data) {
@@ -1915,11 +1928,49 @@ function MainController ($scope, $location) {
       $scope.screensaverShown = state;
 
       updateView();
-
-      if(!state && CONFIG.reconnectAfterScreensaver) {
-         setTimeout(function () {
-            Api.forceReconnect();
-         }, 1000);
-      }
    };
+
+   function pingConnection () {
+      if(!$scope.ready) return; // no reason to ping if unready was fired
+      if(CONFIG.pingMaxTimeout === false) return;
+
+      var timeout = Math.max(CONFIG.pingMaxTimeout || 3000, 500);
+
+      var success = false;
+
+      Api.getUser(function (res) {
+         if('id' in res) success = true;
+      });
+
+      setTimeout(function () {
+         if(success) return;
+
+         var noty = Noty.addObject({
+            type: Noty.WARNING,
+            title: 'Ping unsuccessful',
+            message: 'Trying to reconnect',
+         });
+
+         Api.forceReconnect();
+
+         var destroy = Api.onReady(function () {
+            destroy();
+
+            if(noty) noty.remove();
+
+            Noty.addObject({
+               type: Noty.SUCCESS,
+               title: 'Reconnection',
+               message: 'Reconnection successful',
+               lifetime: 1,
+            });
+         });
+      }, timeout);
+   }
+
+   setInterval(pingConnection, 5000);
+
+   window.addEventListener("focus", function () {
+      pingConnection();
+   });
 }
