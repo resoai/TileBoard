@@ -1938,7 +1938,7 @@ function MainController ($scope, $location) {
 
       var success = false;
 
-      Api.getUser(function (res) {
+      Api.sendPing(function (res) {
          if('id' in res) success = true;
       });
 

@@ -144,6 +144,10 @@ var HApi = (function () {
       return this.send({type: "auth/current_user"}, callback);
    };
 
+   $Api.prototype.sendPing = function (callback) {
+      return this.send({type: "ping"}, callback);
+   };
+
    $Api.prototype._connect = function () {
       var self = this;
 
@@ -206,6 +210,14 @@ var HApi = (function () {
       if(data.error) return this._sendError(data.error.message, data);
 
       if(data.type === "result" && data.id) {
+         if(this._callbacks[data.id]) {
+            setTimeout(function () {
+               self._callbacks[data.id](data);
+            }, 0);
+         }
+      }
+
+      if(data.type === "pong" && data.id) {
          if(this._callbacks[data.id]) {
             setTimeout(function () {
                self._callbacks[data.id](data);
