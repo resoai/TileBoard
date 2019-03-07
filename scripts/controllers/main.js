@@ -1945,6 +1945,8 @@ function MainController ($scope, $location) {
       setTimeout(function () {
          if(success) return;
 
+         clearInterval(ping_interval);
+
          var noty = Noty.addObject({
             type: Noty.WARNING,
             title: 'Ping unsuccessful',
@@ -1964,11 +1966,14 @@ function MainController ($scope, $location) {
                message: 'Reconnection successful',
                lifetime: 1,
             });
-         });
+
+            var ping_interval = setInterval(pingConnection, 5000);
+
+         });  
       }, timeout);
    }
 
-   setInterval(pingConnection, 5000);
+   var ping_interval = setInterval(pingConnection, 5000);
 
    window.addEventListener("focus", function () {
       pingConnection();
