@@ -67,11 +67,11 @@ var CONFIG = {
     */
    authToken: null,
 
-   /* pingMaxTimeout: Uncomment the below line to disable pinging of the websocket connection
+   /* pingMaxTimeout: Set to false disable pinging of the websocket connection.
     * Otherwise, a ping will be sent every five seconds, and if a response is not received in 3 seconds,
-    * a reconnect will be attempted.
+    * a reconnect will be attempted. If not included in the config file, setting defaults to true.
     */
-   //pingMaxTimeout: false,
+   pingMaxTimeout: true,
 
    /* debug: Toggle for extra debugging information.
     * If enabled, will print info about state changes and entities to console.
