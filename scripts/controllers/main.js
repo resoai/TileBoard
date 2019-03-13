@@ -1932,9 +1932,8 @@ function MainController ($scope, $location) {
 
    function pingConnection () {
       if(!$scope.ready || realReadyState === false) return; // no reason to ping if unready was fired
-      //if(CONFIG.pingMaxTimeout === false) return;
 
-      var timeout = Math.max(CONFIG.pingMaxTimeout || 3000, 500);
+      var timeout = 3000; //hardcoding timeout to 3 seconds since ping happens every 5 seconds
 
       var success = false;
 
@@ -1972,7 +1971,7 @@ function MainController ($scope, $location) {
    }
 
    if(CONFIG.pingMaxTimeout != false){
-      var ping_interval = setInterval(pingConnection, 5000);
+      setInterval(pingConnection, 5000);
 
       window.addEventListener("focus", function () {
          pingConnection();
