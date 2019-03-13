@@ -1931,8 +1931,8 @@ function MainController ($scope, $location) {
    };
 
    function pingConnection () {
-      if(!$scope.ready) return; // no reason to ping if unready was fired
-      if(CONFIG.pingMaxTimeout === false) return;
+      if(!$scope.ready || realReadyState === false) return; // no reason to ping if unready was fired
+      //if(CONFIG.pingMaxTimeout === false) return;
 
       var timeout = Math.max(CONFIG.pingMaxTimeout || 3000, 500);
 
@@ -1945,7 +1945,7 @@ function MainController ($scope, $location) {
       setTimeout(function () {
          if(success) return;
 
-         clearInterval(ping_interval);
+         realReadyState = false;
 
          var noty = Noty.addObject({
             type: Noty.WARNING,
@@ -1967,15 +1967,15 @@ function MainController ($scope, $location) {
                lifetime: 1,
             });
 
-            var ping_interval = setInterval(pingConnection, 5000);
-
          });  
       }, timeout);
    }
 
-   var ping_interval = setInterval(pingConnection, 5000);
+   if(CONFIG.pingMaxTimeout != false){
+      var ping_interval = setInterval(pingConnection, 5000);
 
-   window.addEventListener("focus", function () {
-      pingConnection();
-   });
+      window.addEventListener("focus", function () {
+         pingConnection();
+      });
+   }
 }
