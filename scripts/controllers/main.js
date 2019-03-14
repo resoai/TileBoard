@@ -1970,7 +1970,7 @@ function MainController ($scope, $location) {
       }, timeout);
    }
 
-   if(CONFIG.pingMaxTimeout != false){
+   if(CONFIG.pingConnection != false){
       setInterval(pingConnection, 5000);
 
       window.addEventListener("focus", function () {
