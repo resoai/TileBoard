@@ -67,6 +67,12 @@ var CONFIG = {
     */
    authToken: null,
 
+   /* pingConnection: Set to false disable pinging of the websocket connection.
+    * Otherwise, a ping will be sent every five seconds, and if a response is not received in 3 seconds,
+    * a reconnect will be attempted. If not included in the config file, setting defaults to true.
+    */
+   pingConnection: true,
+
    /* debug: Toggle for extra debugging information.
     * If enabled, will print info about state changes and entities to console.
     */
@@ -119,15 +125,6 @@ var CONFIG = {
        {bg: 'images/bg3.png'}
      ]
    },
-   
-   /**
-   * if you have troubles with reconnecting to api after resuming device
-   * set maximal timeout for waiting api response before force reconnect
-   * In milliseconds
-   * default is 3000 (3 seconds)
-   * use false to disable ping
-   */
-   pingMaxTimeout: 3000,
    
    /* header: object of header. Will be applied globally
     * https://github.com/resoai/TileBoard/wiki/Header-configuration

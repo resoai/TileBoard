@@ -1931,19 +1931,20 @@ function MainController ($scope, $location) {
    };
 
    function pingConnection () {
-      if(!$scope.ready) return; // no reason to ping if unready was fired
-      if(CONFIG.pingMaxTimeout === false) return;
+      if(!$scope.ready || realReadyState === false) return; // no reason to ping if unready was fired
 
-      var timeout = Math.max(CONFIG.pingMaxTimeout || 3000, 500);
+      var timeout = 3000; //hardcoding timeout to 3 seconds since ping happens every 5 seconds
 
       var success = false;
 
-      Api.getUser(function (res) {
+      Api.sendPing(function (res) {
          if('id' in res) success = true;
       });
 
       setTimeout(function () {
          if(success) return;
+
+         realReadyState = false;
 
          var noty = Noty.addObject({
             type: Noty.WARNING,
@@ -1964,13 +1965,16 @@ function MainController ($scope, $location) {
                message: 'Reconnection successful',
                lifetime: 1,
             });
-         });
+
+         });  
       }, timeout);
    }
 
-   setInterval(pingConnection, 5000);
+   if(CONFIG.pingConnection != false){
+      setInterval(pingConnection, 5000);
 
-   window.addEventListener("focus", function () {
-      pingConnection();
-   });
+      window.addEventListener("focus", function () {
+         pingConnection();
+      });
+   }
 }
