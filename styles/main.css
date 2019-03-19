@@ -1266,12 +1266,6 @@ camera-thumbnail div {
 .datetime-popup-button.-away:active {
   background: #3f101b;
 }
-.alarm-popup-button.-night {
-  background: #6c2738;
-}
-.alarm-popup-button.-night:active {
-  background: #3f101b;
-}
 .alarm-popup-button.-disarm,
 .datetime-popup-button.-disarm,
 .alarm-popup-button.-success,
@@ -1283,6 +1277,14 @@ camera-thumbnail div {
 .alarm-popup-button.-success:active,
 .datetime-popup-button.-success:active {
   background: #0f341a;
+}
+.alarm-popup-button.-night,
+.datetime-popup-button.-night {
+  background: #6c2738;
+}
+.alarm-popup-button.-night:active,
+.datetime-popup-button.-night:active {
+  background: #3f101b;
 }
 .alarm-popup-button.-disabled,
 .datetime-popup-button.-disabled {
