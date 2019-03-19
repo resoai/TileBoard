@@ -1266,6 +1266,12 @@ camera-thumbnail div {
 .datetime-popup-button.-away:active {
   background: #3f101b;
 }
+.alarm-popup-button.-night {
+  background: #6c2738;
+}
+.alarm-popup-button.-night:active {
+  background: #3f101b;
+}
 .alarm-popup-button.-disarm,
 .datetime-popup-button.-disarm,
 .alarm-popup-button.-success,
