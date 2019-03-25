@@ -709,12 +709,13 @@ function MainController ($scope, $location) {
 
       var def = item.slider || {};
       var attrs = entity.attributes || {};
-
+      var value = +attrs[def.field] || 0;
+      
       entity.attributes[key] = {
          max: attrs.max || def.max || 100,
          min: attrs.min || def.min || 0,
          step: attrs.step || def.step || 1,
-         value: +entity.state || def.value || 0,
+         value: value || +entity.state || def.value || 0,
          request: def.request || {
             type: "call_service",
             domain: "input_number",
