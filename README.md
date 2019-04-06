@@ -566,7 +566,23 @@ events: [
     }
   ],
 ```
-
+Example to fire an event in a [Home Assistant automation](https://www.home-assistant.io/docs/automation/).
+This example will make 'TileBoard' return to page 0 when a specific `binary_sensor` state change from `off` to `on`.
+*Tip: The page number is determinate by the order of the pages in your TileBoard `CONFIG` file, the first one is `0`.*
+```yaml
+- alias: aquarium_ok
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.seneye_param_status
+    from: 'on'
+    to: 'off'
+  action:
+    - event: tileboard
+      event_data:
+        page: 0
+        command: 'open_page'
+```
 ## Notifications
 TileBoard has built-in support for toast notification popups in the
 lower right corner. To set them up, add the following to `events` in `CONFIG`:
@@ -578,17 +594,26 @@ lower right corner. To set them up, add the following to `events` in `CONFIG`:
    }
 }
 ```
-You can then fire a `tileboard` event in HomeAssistant with the following data:
-```json
-{
-    "command": "notify",
-    "id": "hello",
-    "icon": "mdi-car",
-    "type": "info",
-    "title": "Information",
-    "message": "Hello world",
-    "lifetime": 5,
-}
+Example to fire a notification in a [Home Assistant automation](https://www.home-assistant.io/docs/automation/).
+This example will fire a persistant red notification on TileBoard when a specific `binary_sensor` state change from `on` to `off`.
+*Tip : To remove the persistant notification, resend the same one (or another one) with the same `id:` with the `lifetime: 1` added at the end of the `event_data`.*
+```yaml
+- alias: PC2_offline
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.pc2
+    from: 'on'
+    to: 'off'
+  action:
+    - event: tileboard
+      event_data:
+        command: 'notify'
+        id: 'PC2'
+        icon: 'mdi-desktop-tower'
+        type: 'error'
+        title: 'Status - PC2'
+        message: 'PC2 is offline, restart the left computer (big one)'
 ```
 `id`: Notification ID. Sending multiple notifications with the same `id` will overwrite each other.
 
