@@ -283,7 +283,7 @@ function MainController ($scope, $location) {
          var styles = {};
 
          if(entity.attributes.entity_picture) {
-            styles.backgroundImage = 'url(' + entity.attributes.entity_picture + ')';
+            styles.backgroundImage = 'url(' + CONFIG.serverUrl + entity.attributes.entity_picture + ')';
          }
 
          entity.trackerBg = styles;
