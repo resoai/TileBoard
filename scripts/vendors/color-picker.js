@@ -350,33 +350,33 @@ colorPicker.directive('colorPicker', ['$document', '$compile', 'ColorHelper', fu
                         '   <div slider rg-x=1 rg-y=1 action="setSaturationAndBrightness(s, v, rgX, rgY)" class="saturation-lightness" ng-style="{\'background-color\':hueSliderColor}">' +
                         '       <div class="cursor-sv" ng-style="{\'top\':sAndLSlider.top, \'left\':sAndLSlider.left}"></div>' +
                         '   </div>' +
-                        '   <div slider rg-x=1 action="setHue(v, rg)" class="hue">' +
+                        '   <div slider rg-x=1 action="setHue(v, rg)" class="hue" style="top: 160px">' +
                         '       <div class="cursor" ng-style="{\'left\':hueSlider.left}"></div>' +
                         '   </div>' +
-                        '   <div slider rg-x=1 action="setAlpha(v, rg)" class="alpha" ng-style="{\'background-color\':alphaSliderColor}">' +
-                        '       <div class="cursor" ng-style="{\'left\':alphaSlider.left}"></div>' +
-                        '   </div>' +
+                        //'   <div slider rg-x=1 action="setAlpha(v, rg)" class="alpha" ng-style="{\'background-color\':alphaSliderColor}">' +
+                        //'       <div class="cursor" ng-style="{\'left\':alphaSlider.left}"></div>' +
+                        //'   </div>' +
                         '   <div class="selected-color-background"></div>' +
                         '   <div class="selected-color" ng-style="{\'background-color\':outputColor}"></div>' +
-                        '   <div ng-show="type==2" class="hsla-text">' +
-                        '       <input text type="number" pattern="[0-9]*" min="0" max="360" step="' + scope.hslaSteps.h + '" rg=360 action="setHue(v, rg)" ng-model="hslaText.h" spinner="' + attr.colorPickerShowInputSpinner + '" />' +
-                        '       <input text type="number" pattern="[0-9]*" min="0" max="100" step="' + scope.hslaSteps.s + '" rg=100 action="setSaturation(v, rg)" ng-model="hslaText.s" spinner="' + attr.colorPickerShowInputSpinner + '" />' +
-                        '       <input text type="number" pattern="[0-9]*" min="0" max="100" step="' + scope.hslaSteps.l + '" rg=100 action="setLightness(v, rg)" ng-model="hslaText.l" spinner="' + attr.colorPickerShowInputSpinner + '" />' +
-                        '       <input text type="number" pattern="[0-9]+([\.,][0-9]{1,2})?" min="0" max="1" step="' + scope.hslaSteps.a + '" rg=1 action="setAlpha(v, rg)" ng-model="hslaText.a" spinner="' + attr.colorPickerShowInputSpinner + '" />' +
-                        '       <div>H</div><div>S</div><div>L</div><div>A</div>' +
-                        '   </div>' +
-                        '   <div ng-show="type==1" class="rgba-text">' +
+                        //'   <div ng-show="type==2" class="hsla-text">' +
+                        //'       <input text type="number" pattern="[0-9]*" min="0" max="360" step="' + scope.hslaSteps.h + '" rg=360 action="setHue(v, rg)" ng-model="hslaText.h" spinner="' + attr.colorPickerShowInputSpinner + '" />' +
+                        //'       <input text type="number" pattern="[0-9]*" min="0" max="100" step="' + scope.hslaSteps.s + '" rg=100 action="setSaturation(v, rg)" ng-model="hslaText.s" spinner="' + attr.colorPickerShowInputSpinner + '" />' +
+                        //'       <input text type="number" pattern="[0-9]*" min="0" max="100" step="' + scope.hslaSteps.l + '" rg=100 action="setLightness(v, rg)" ng-model="hslaText.l" spinner="' + attr.colorPickerShowInputSpinner + '" />' +
+                        //'       <input text type="number" pattern="[0-9]+([\.,][0-9]{1,2})?" min="0" max="1" step="' + scope.hslaSteps.a + '" rg=1 action="setAlpha(v, rg)" ng-model="hslaText.a" spinner="' + attr.colorPickerShowInputSpinner + '" />' +
+                        //'       <div>H</div><div>S</div><div>L</div><div>A</div>' +
+                        //'   </div>' +
+                        '   <div ng-show="type==1" class="rgba-text" style="left: 40px; top: 210px">' +
                         '       <input text type="number" pattern="[0-9]*" min="0" max="255" step="' + scope.rbgaSteps.r + '" rg=255 action="setR(v, rg)" ng-model="rgbaText.r" spinner="' + attr.colorPickerShowInputSpinner + '" />' +
                         '       <input text type="number" pattern="[0-9]*" min="0" max="255" step="' + scope.rbgaSteps.g + '" rg=255 action="setG(v, rg)" ng-model="rgbaText.g" spinner="' + attr.colorPickerShowInputSpinner + '" />' +
                         '       <input text type="number" pattern="[0-9]*" min="0" max="255" step="' + scope.rbgaSteps.b + '" rg=255 action="setB(v, rg)" ng-model="rgbaText.b" spinner="' + attr.colorPickerShowInputSpinner + '" />' +
-                        '       <input text type="number" pattern="[0-9]+([\.,][0-9]{1,2})?" min="0" max="1" step="' + scope.rbgaSteps.a + '" rg=1 action="setAlpha(v, rg)" ng-model="rgbaText.a" spinner="' + attr.colorPickerShowInputSpinner + '" />' +
-                        '       <div>R</div><div>G</div><div>B</div><div>A</div>' +
+                        //'       <input text type="number" pattern="[0-9]+([\.,][0-9]{1,2})?" min="0" max="1" step="' + scope.rbgaSteps.a + '" rg=1 action="setAlpha(v, rg)" ng-model="rgbaText.a" spinner="' + attr.colorPickerShowInputSpinner + '" />' +
+                        '       <br /><div>R</div><div>G</div><div>B</div><!--div>A</div-->' +
                         '   </div>' +
-                        '   <div class="hex-text" ng-show="type==0">' +
-                        '       <input text type="text" action="setColorFromHex(string)" ng-model="hexText"/>' +
-                        '       <div>HEX</div>' +
-                        '   </div>' +
-                        '   <div ng-click="typePolicy()" class="type-policy"></div>' +
+                        //'   <div class="hex-text" ng-show="type==0">' +
+                        //'       <input text type="text" action="setColorFromHex(string)" ng-model="hexText"/>' +
+                        //'       <div>HEX</div>' +
+                        //'   </div>' +
+                        // '   <div ng-click="typePolicy()" class="type-policy"></div>' +
                         '   <button type="button" class="{{cancelButtonClass}}" ng-show="showCancelButton" ng-click="cancelColor()">Cancel</button>' +
                         '</div>');
 
@@ -434,7 +434,7 @@ colorPicker.directive('colorPicker', ['$document', '$compile', 'ColorHelper', fu
                     scope.$apply(function () {
                         scope.sAndLMax = {x: template[0].getElementsByClassName("saturation-lightness")[0].offsetWidth, y: template[0].getElementsByClassName("saturation-lightness")[0].offsetHeight};
                         scope.hueMax = {x: template[0].getElementsByClassName("hue")[0].offsetWidth};
-                        scope.alphaMax = {x: template[0].getElementsByClassName("alpha")[0].offsetWidth};
+                        // scope.alphaMax = {x: template[0].getElementsByClassName("alpha")[0].offsetWidth};
                         scope.update();
                     });
                     setDialogPosition();
