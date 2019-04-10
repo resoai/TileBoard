@@ -1,4 +1,4 @@
-var App = angular.module('App', ['pr.longpress']);
+var App = angular.module('App', ['pr.longpress', 'colorpicker']);
 
 App.config(function($sceProvider) {
    $sceProvider.enabled(false);
