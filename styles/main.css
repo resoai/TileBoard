@@ -1339,7 +1339,7 @@ camera-thumbnail div {
 .item-entity-colorpicker {
   text-align: left;
   font-size: 0.9em;
-  margin: 3px;
+  margin: 10px 5px 0;
 }
 .item-entity-colorpicker input {
   width: 20px;
