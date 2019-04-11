@@ -250,9 +250,10 @@ Allows you to toggle a fan on and off, as well as set the speed.
 ```
 
 #### LIGHT
-Light switch. You can optionally define sliders to control colour temperature or in fact anything else. Sliders will show up after long press on the tile.<br>
+Light switch. You can optionally define sliders to control colour temperature or in fact anything else. Sliders will show up after long press on the tile. Color Picker is also optionally displayed after long press on the tile. Color picker should only be used for lights with rgb_color attribute.<br>
 ![LIGHT](images/tile-screenshots/LIGHT.png)
 ![LIGHT](images/tile-screenshots/LIGHT_2.png)
+![LIGHT](images/tile-screenshots/LIGHT_3.png)
 ```js
 {
    position: [0, 2],
@@ -295,7 +296,8 @@ Light switch. You can optionally define sliders to control colour temperature or
             field: "color_temp"
          }
       }
-   ]
+   ],
+   colorpicker: true
 }
 ```
 
