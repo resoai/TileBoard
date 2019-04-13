@@ -1147,40 +1147,31 @@ function MainController ($scope, $location) {
    };
 
    $scope.getRGBStringFromArray = function( color ) {
-      if (! color ) {
-         return null;
-      }
+      if(!color) return null;
       return "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
    };
 
    $scope.getRGBArrayFromString = function( color ) {
-      if ( !color ) {
-         return null; 
+      if(!color || color.indexOf("rgb") !== 0) return null;
+
+      var colorValues;
+
+      if (color.indexOf("rgba") === 0) {
+         colorValues = color.substring(color.indexOf("(") + 1, color.lastIndexOf(",")).split(",");
+      }
+      else {
+         colorValues = color.substring(color.indexOf("(") + 1, color.indexOf(")")).split(",");
       }
 
-      if (color.indexOf( "rgb" )!=0){
-         return null;
-      }
-
-      let colorValues;
-      if ( color.startsWith( "rgba" ) ){
-         colorValues = color.substring( color.indexOf( "(") + 1, color.lastIndexOf( "," ) ).split( "," );
-      } else {
-         colorValues = color.substring( color.indexOf( "(") + 1, color.indexOf( ")" ) ).split( "," );
-      }
-      return [parseInt( colorValues[0] ), parseInt( colorValues[1] ), parseInt( colorValues[2] )];
+      return [parseInt(colorValues[0]), parseInt(colorValues[1]), parseInt(colorValues[2])];
    };
 
    $scope.setLightColor = function (item, color) {
       if(item.loading) return;
 
-      let colors = $scope.getRGBArrayFromString( color );
+      var colors = $scope.getRGBArrayFromString(color);
 
-      if ( !colors ) {
-         return;
-      }
-
-      sendItemData(item, {
+      if(colors) sendItemData(item, {
          type: "call_service",
          domain: "light",
          service: "turn_on",
@@ -1191,9 +1182,9 @@ function MainController ($scope, $location) {
       });
    };   
 
-   $scope.$on( 'colorpicker-colorupdated', ( event, data ) => {
-      $scope.setLightColor( data.item, data.color );
-   } );
+   $scope.$on('colorpicker-colorupdated', function (event, data) {
+      $scope.setLightColor(data.item, data.color);
+   });
 
    $scope.setInputNumber = function (item, value) {
       if(item.loading) return;
