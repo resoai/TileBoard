@@ -4,6 +4,7 @@ var CLASS_MICRO = "-micro-entity";
 
 var GOOGLE_MAP = "google";
 var YANDEX_MAP = "yandex";
+var MAPBOX_MAP = "mapbox";
 
 var TRANSITIONS = {
    ANIMATED: 'animated',

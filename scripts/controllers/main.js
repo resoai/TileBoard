@@ -184,6 +184,28 @@ function MainController ($scope, $location) {
             url = "https://static-maps.yandex.ru/1.x/?lang=en-US&ll="
                + coords + "&z=" + zoom + "&l=map&size=" + sizes + "&pt=" + pt;
          }
+         else if(item.map === MAPBOX_MAP) {
+            coords = obj.longitude + ',' + obj.latitude;
+            sizes = sizes.replace(',', 'x');
+
+            var label = name[0].toLowerCase();
+            var marker = "pin-s-" + label + "(" + obj.longitude + ',' + obj.latitude + ")";
+            var style = "mapbox/streets-v11";
+
+            if(CONFIG.mapboxStyle) {
+               var styleGroups = /^mapbox:\/\/styles\/(.+)$/.exec(CONFIG.mapboxStyle);
+               if (styleGroups.length > 1) {
+                  style = styleGroups[1];
+               }
+            }
+
+            url = "https://api.mapbox.com/styles/v1/" + style + "/static/"
+               + marker + "/" + coords + "," + zoom + ",0/" + sizes;
+
+            if(CONFIG.mapboxToken) {
+               url += "?access_token=" + CONFIG.mapboxToken;
+            }
+         }
          else {
             coords = obj.latitude + ',' + obj.longitude;
             sizes = sizes.replace(',', 'x');

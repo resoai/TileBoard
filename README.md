@@ -83,6 +83,17 @@ var CONFIG = {
     */
    googleApiKey: null,
 
+   /* A Mapbox token is required if you are using device tracker tiles along with Mapbox.
+    * More info here: https://www.mapbox.com/maps/
+    */
+   mapboxToken: null,
+
+   /* mapboxStyle: Enter a style URL to change the mapbox style for device tracker tiles.
+    * The format of the url is: mapbox://styles/username/style-id
+    * If no style URL is entered, the style will default to mapbox/streets-v11.
+    */
+   mapboxStyle: null,
+
    /* menuPosition: LEFT (default) or BOTTOM */
    menuPosition: MENU_POSITIONS.LEFT,
 
@@ -316,7 +327,7 @@ Tile Object. [Click here for some real life examples](TILE_EXAMPLES.md)
   slidesDelay: 2,
 
   /* map: Map provider for showing position inside tile
-   * Valid options: 'google', 'yandex'
+   * Valid options: 'google', 'mapbox', 'yandex'
    */
   map: 'google',
   
