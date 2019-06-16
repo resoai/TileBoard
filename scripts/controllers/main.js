@@ -192,14 +192,14 @@ function MainController ($scope, $location) {
             var marker = encodeURIComponent("color:gray|label:"+label+"|" + coords);
 
             url = "https://maps.googleapis.com/maps/api/staticmap?center="
-               + coords + "&zoom="+zoom+"&size="+sizes+"&scale=2&maptype=roadmap&markers=" + marker;
+               + coords + "&zoom=" + zoom + "&size=" + sizes + "&scale=2&maptype=roadmap&markers=" + marker;
 
             if(CONFIG.googleApiKey) {
                url += "&key=" + CONFIG.googleApiKey;
             }
          }
 
-         obj[key] = {backgroundImage: 'url(' + url + ')'};
+         obj[key] = {backgroundImage: "url('" + url + "')"};
       }
 
       return obj[key];
