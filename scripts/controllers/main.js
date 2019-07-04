@@ -72,14 +72,9 @@ function MainController ($scope, $location) {
    };
 
    $scope.entityLongClick = function ($event, page, item, entity) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
       switch (item.type) {
          case TYPES.LIGHT: return $scope.openLightSliders(item, entity);
       }
-
-      return false;
    };
 
    $scope.getBodyClass = function () {
@@ -245,7 +240,7 @@ function MainController ($scope, $location) {
       return true;
    };
 
-   $scope.pageStyles = function (page) {
+   $scope.pageStyles = function (page, index) {
       if(!page.styles) {
          var styles = {};
 
@@ -258,6 +253,13 @@ function MainController ($scope, $location) {
             var sbg = parseFieldValue(page.bgSuffix, page, {});
 
             if(sbg) styles.backgroundImage = 'url(' + CONFIG.serverUrl + sbg + ')';
+         }
+
+         if ((CONFIG.transition === TRANSITIONS.ANIMATED || CONFIG.transition === TRANSITIONS.ANIMATED_GPU)
+             && index > 0 && !$scope.isMenuOnTheLeft) {
+            styles.position = 'absolute';
+            styles.left = (index * 100) + '%';
+            styles.top = '0';
          }
 
          page.styles = styles;
@@ -1517,17 +1519,19 @@ function MainController ($scope, $location) {
 
    function scrollToActivePage (preventAnimation) {
       var index = $scope.pages.indexOf(activePage);
-      var translate = index * 100;
+      var translate = '-' + (index * 100) + '%';
 
       var $pages = document.getElementById("pages");
 
       var transform;
 
       if(CONFIG.transition === TRANSITIONS.ANIMATED_GPU) {
-         transform = 'translate3d(0, -' + translate + '%, 0)';
+         var params = $scope.isMenuOnTheLeft ? [0, translate, 0] : [translate, 0, 0];
+         transform = 'translate3d(' + params.join(',') + ')';
       }
       else if(CONFIG.transition === TRANSITIONS.ANIMATED) {
-         transform = 'translate(0, -' + translate + '%)';
+         var params = $scope.isMenuOnTheLeft ? [0, translate] : [translate, 0];
+         transform = 'translate(' + params.join(',') + ')';
       }
 
       $pages.style.transform = transform;
@@ -1562,6 +1566,21 @@ function MainController ($scope, $location) {
 
       return object.hidden;
    };
+
+   $scope.isMenuOnTheLeft = CONFIG.menuPosition === MENU_POSITIONS.LEFT;
+
+   $scope.onPageSwipe = function (event) {
+      switch (event.offsetDirection) {
+         case Hammer.DIRECTION_UP:
+         case Hammer.DIRECTION_LEFT:
+            $scope.swipeUp();
+            break;
+         case Hammer.DIRECTION_DOWN:
+         case Hammer.DIRECTION_RIGHT:
+            $scope.swipeDown();
+            break;
+      }
+   }
 
    $scope.swipeUp = function () {
       var index = $scope.pages.indexOf(activePage);
