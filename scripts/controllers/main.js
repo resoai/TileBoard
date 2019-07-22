@@ -184,6 +184,28 @@ function MainController ($scope, $location) {
             url = "https://static-maps.yandex.ru/1.x/?lang=en-US&ll="
                + coords + "&z=" + zoom + "&l=map&size=" + sizes + "&pt=" + pt;
          }
+         else if(item.map === MAPBOX_MAP) {
+            coords = obj.longitude + ',' + obj.latitude;
+            sizes = sizes.replace(',', 'x');
+
+            var label = name[0].toLowerCase();
+            var marker = "pin-s-" + label + "(" + obj.longitude + ',' + obj.latitude + ")";
+            var style = "mapbox/streets-v11";
+
+            if(CONFIG.mapboxStyle) {
+               var styleGroups = /^mapbox:\/\/styles\/(.+)$/.exec(CONFIG.mapboxStyle);
+               if (styleGroups.length > 1) {
+                  style = styleGroups[1];
+               }
+            }
+
+            url = "https://api.mapbox.com/styles/v1/" + style + "/static/"
+               + marker + "/" + coords + "," + zoom + ",0/" + sizes;
+
+            if(CONFIG.mapboxToken) {
+               url += "?access_token=" + CONFIG.mapboxToken;
+            }
+         }
          else {
             coords = obj.latitude + ',' + obj.longitude;
             sizes = sizes.replace(',', 'x');
@@ -192,14 +214,14 @@ function MainController ($scope, $location) {
             var marker = encodeURIComponent("color:gray|label:"+label+"|" + coords);
 
             url = "https://maps.googleapis.com/maps/api/staticmap?center="
-               + coords + "&zoom="+zoom+"&size="+sizes+"&scale=2&maptype=roadmap&markers=" + marker;
+               + coords + "&zoom=" + zoom + "&size=" + sizes + "&scale=2&maptype=roadmap&markers=" + marker;
 
             if(CONFIG.googleApiKey) {
                url += "&key=" + CONFIG.googleApiKey;
             }
          }
 
-         obj[key] = {backgroundImage: 'url(' + url + ')'};
+         obj[key] = {backgroundImage: "url('" + url + "')"};
       }
 
       return obj[key];
@@ -283,7 +305,7 @@ function MainController ($scope, $location) {
          var styles = {};
 
          if(entity.attributes.entity_picture) {
-            styles.backgroundImage = 'url(' + entity.attributes.entity_picture + ')';
+            styles.backgroundImage = 'url(' + CONFIG.serverUrl + entity.attributes.entity_picture + ')';
          }
 
          entity.trackerBg = styles;
@@ -798,7 +820,7 @@ function MainController ($scope, $location) {
    };
 
    $scope.openLightSliders = function (item, entity) {
-      if(!item.sliders || !item.sliders.length) return;
+      if((!item.sliders || !item.sliders.length) && !item.colorpicker) return;
 
       if(entity.state !== "on") {
          return $scope.toggleSwitch(item, entity, function () {
@@ -1145,6 +1167,46 @@ function MainController ($scope, $location) {
          }
       });
    };
+
+   $scope.getRGBStringFromArray = function( color ) {
+      if(!color) return null;
+      return "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
+   };
+
+   $scope.getRGBArrayFromString = function( color ) {
+      if(!color || color.indexOf("rgb") !== 0) return null;
+
+      var colorValues;
+
+      if (color.indexOf("rgba") === 0) {
+         colorValues = color.substring(color.indexOf("(") + 1, color.lastIndexOf(",")).split(",");
+      }
+      else {
+         colorValues = color.substring(color.indexOf("(") + 1, color.indexOf(")")).split(",");
+      }
+
+      return [parseInt(colorValues[0]), parseInt(colorValues[1]), parseInt(colorValues[2])];
+   };
+
+   $scope.setLightColor = function (item, color) {
+      if(item.loading) return;
+
+      var colors = $scope.getRGBArrayFromString(color);
+
+      if(colors) sendItemData(item, {
+         type: "call_service",
+         domain: "light",
+         service: "turn_on",
+         service_data: {
+            entity_id: item.id,
+            rgb_color: colors
+         }
+      });
+   };   
+
+   $scope.$on('colorpicker-colorupdated', function (event, data) {
+      $scope.setLightColor(data.item, data.color);
+   });
 
    $scope.setInputNumber = function (item, value) {
       if(item.loading) return;

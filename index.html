@@ -30,7 +30,8 @@
          'styles/main.css',
          'styles/themes.css',
          'styles/weather-icons.css',
-         'styles/custom.css'
+         'styles/color-picker.min.css',
+         'styles/custom.css',
       ].map(function (value) {
          document.write('<li'+'nk rel="stylesheet" href="'+value+suffix+'"/>');
       });
@@ -38,6 +39,7 @@
       [
          'scripts/vendors/angular.min.js',
          'scripts/vendors/angular-long-press.js',
+         'scripts/vendors/color-picker.js',
 
          'scripts/models/api.js',
          'scripts/models/noty.js',
@@ -678,6 +680,20 @@
                          ng-change="lightSliderChanged(slider, item, entity, _c)"
                          step="{{ _c.step }}" min="{{ _c.min }}" max="{{ _c.max }}">
                </div>
+            </div>
+          
+            <div ng-if="item.colorpicker" class="item-entity-colorpicker">
+               <span>Color:</span> 
+               <input color-picker 
+                  color-picker-model="getRGBStringFromArray(entity.attributes.rgb_color)"
+                  color-picker-show-value="false"
+                  color-picker-output-format="'rgba'"
+                  color-picker-position="bottom"
+                  color-picker-fixed-position="false"
+                  color-picker-show-input-spinner="false"
+                  color-picker-show-cancel-button="true"
+                  color-picker-item="item"
+                  ng-style="{background: getRGBStringFromArray(entity.attributes.rgb_color)}">
             </div>
 
             <div class="item-entity--back-button"

@@ -1336,6 +1336,18 @@ camera-thumbnail div {
   text-align: left;
   font-size: 0.9em;
 }
+.item-entity-colorpicker {
+  text-align: left;
+  font-size: 0.9em;
+  margin: 10px 5px 0;
+}
+.item-entity-colorpicker input {
+  width: 15px;
+  height: 15px;
+  box-sizing: border-box;
+  margin: 0;
+  cursor: pointer;
+}
 .item-entity-sliders {
   position: absolute;
   left: 0;
