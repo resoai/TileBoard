@@ -559,12 +559,12 @@ This is a custom tile which can be used for displaying values from different sen
    hideHeader: false,
    secondaryTitle: 'Wind',
    list: [1,2,3,4,5].map(function (id) {
-      var forecast = "&sensor.dark_sky_overnight_low_temperature_" + id + ".state - ";
-      forecast += "&sensor.dark_sky_daytime_high_temperature_" + id + ".state";
-      forecast += "&sensor.dark_sky_daytime_high_temperature_" + id + ".attributes.unit_of_measurement";
+      var forecast = "&sensor.dark_sky_overnight_low_temperature_" + id + "d.state - ";
+      forecast += "&sensor.dark_sky_daytime_high_temperature_" + id + "d.state";
+      forecast += "&sensor.dark_sky_daytime_high_temperature_" + id + "d.attributes.unit_of_measurement";
 
-      var wind = "&sensor.dark_sky_wind_speed_" + id + ".state";
-      wind += " &sensor.dark_sky_wind_speed_" + id + ".attributes.unit_of_measurement";
+      var wind = "&sensor.dark_sky_wind_speed_" + id + "d.state";
+      wind += " &sensor.dark_sky_wind_speed_" + id + "d.attributes.unit_of_measurement";
 
       return {
          date: function () {
