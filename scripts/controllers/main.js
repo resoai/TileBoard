@@ -1205,10 +1205,10 @@ function MainController ($scope, $location) {
       sendItemData(item, {
          type: "call_service",
          domain: "climate",
-         service: "set_operation_mode",
+         service: "set_preset_mode",
          service_data: {
             entity_id: item.id,
-            operation_mode: option
+            preset_mode: option
          }
       });
 

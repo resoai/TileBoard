@@ -990,9 +990,9 @@
                <span ng-if="(_unit = entityUnit(item, entity))"
                      class="item-climate--target--unit" ng-bind="_unit"></span>
             </div>
-            <div class="item-climate--mode" ng-if="entity.attributes.operation_mode"
+            <div class="item-climate--mode" ng-if="entity.attributes.preset_mode"
                  ng-click="openSelect(item)">
-               <span ng-bind="entity.attributes.operation_mode"></span>
+               <span ng-bind="entity.attributes.preset_mode"></span>
             </div>
          </div>
 
@@ -1000,7 +1000,7 @@
               ng-style="itemSelectStyles(entity, entity.attributes.operation_list)">
 
             <div class="item-select--option"
-                 ng-repeat="option in entity.attributes.operation_list track by $index"
+                 ng-repeat="option in entity.attributes.preset_modes track by $index"
                  ng-class="{'-active': option === entity.state}"
                  ng-click="setClimateOption($event, item, entity, option)">
                <span ng-bind="option"></span>
