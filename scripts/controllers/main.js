@@ -2006,7 +2006,7 @@ function MainController ($scope, $location) {
    }
 
    function updateView () {
-      if(!$scope.$$phase) $scope.$digest();
+      if(!$scope.$$phase) $scope.$apply();
    }
 
    window.openPage = function (page) {
