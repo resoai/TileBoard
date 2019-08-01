@@ -38,7 +38,8 @@
 
       [
          'scripts/vendors/angular.min.js',
-         'scripts/vendors/angular-long-press.js',
+         'scripts/vendors/hammer.js',
+         'scripts/vendors/angular.hammer.js',
          'scripts/vendors/color-picker.js',
 
          'scripts/models/api.js',
@@ -60,7 +61,10 @@
 
 <body ng-controller="Main" ng-class="getBodyClass()">
 
-<div ng-if="ready" class="page-container">
+<div ng-if="ready" class="page-container"
+     hm-swipe="onPageSwipe($event)"
+     hm-recognizer-options="{directions: isMenuOnTheLeft ? 'DIRECTION_VERTICAL' : 'DIRECTION_HORIZONTAL'}"
+>
    <div class="camera-popup"
         ng-if="activeCamera && (entity = getItemEntity(activeCamera))">
 
@@ -280,7 +284,7 @@
       <div ng-repeat="page in pages track by $index"
            ng-class="{'-active': isPageActive(page)}"
            ng-if="shouldDrawPage(page) && !isHidden(page)"
-           ng-style="pageStyles(page)" class="page"
+           ng-style="pageStyles(page, $index)" class="page"
            on-scroll on-scroll-model="page">
 
          <!-- legacy -->
@@ -444,7 +448,8 @@
 <script type="text/ng-template" id="tile.html">
    <div ng-style="itemStyles(page, item, entity)" class="item"
         ng-click="entityClick(page, item, entity)"
-        on-long-press="entityLongClick($event, page, item, entity)"
+        hm-press="entityLongClick($event, page, item, entity)"
+        hm-recognizer-options="{time: 600}"
         ng-if="(entity = getItemEntity(item)) && !isHidden(item, entity)"
         ng-class="itemClasses(item)">
 

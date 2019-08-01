@@ -1,4 +1,4 @@
-var App = angular.module('App', ['pr.longpress', 'colorpicker']);
+var App = angular.module('App', ['hmTouchEvents', 'colorpicker']);
 
 App.config(function($sceProvider) {
    $sceProvider.enabled(false);

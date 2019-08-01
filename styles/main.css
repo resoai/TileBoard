@@ -176,6 +176,7 @@ body {
   height: 100%;
   width: 100%;
   overflow-y: hidden;
+  touch-action: pan-x pan-y;
 }
 .page-align {
   height: 100%;
@@ -277,11 +278,18 @@ body {
 .-menu-left.-scrolled-horizontally .pages-menu--scroll-indicator {
   opacity: 1;
 }
+.-menu-left .page {
+  touch-action: pan-x;
+}
 .-menu-bottom.-scrolled-vertically .pages-menu--scroll-indicator {
   opacity: 1;
 }
+.-menu-bottom .page-container {
+  overflow-x: hidden;
+}
 .-menu-bottom .page {
   padding-bottom: 104px;
+  touch-action: pan-y;
 }
 .-menu-bottom .page-head {
   left: 10px;
