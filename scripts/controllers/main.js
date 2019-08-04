@@ -308,9 +308,9 @@ function MainController ($scope, $location) {
 
          if(entity.attributes.entity_picture) {
             var url = entity.attributes.entity_picture;
-             if (url.indexOf('http') !== 0) {
-                 url = CONFIG.serverUrl + entity.attributes.entity_picture;
-             }
+            if (url.indexOf('http') !== 0) {
+               url = CONFIG.serverUrl + entity.attributes.entity_picture;
+            }
             styles.backgroundImage = 'url(' + url + ')';
          }
 
