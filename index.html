@@ -482,7 +482,7 @@
 
          <div class="item-cover">
             <div class="item-cover--button -open"
-                 ng-class="{'-disabled': entity.state === 'open'}"
+                 ng-class="{'-disabled': entity.attributes.current_position === 100}"
                  ng-click="sendCover('open_cover', item, entity)">
                <i class="mdi mdi-arrow-up"></i>
             </div>
