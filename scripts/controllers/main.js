@@ -1273,10 +1273,10 @@ function MainController ($scope, $location) {
       sendItemData(item, {
          type: "call_service",
          domain: "climate",
-         service: "set_preset_mode",
+         service: "set_hvac_mode",
          service_data: {
             entity_id: item.id,
-            preset_mode: option
+            hvac_mode: option
          }
       });
 
