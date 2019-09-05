@@ -252,7 +252,14 @@ function MainController ($scope, $location) {
          else if(page.bgSuffix) {
             var sbg = parseFieldValue(page.bgSuffix, page, {});
 
-            if(sbg) styles.backgroundImage = 'url(' + CONFIG.serverUrl + sbg + ')';
+            if(sbg) 
+            {
+               if(sbg.toLowerCase().startsWith("http")) {
+                  styles.backgroundImage = 'url(' + sbg + ')';
+               } else {
+                  styles.backgroundImage = 'url(' + CONFIG.serverUrl + sbg + ')';
+               }
+            }
          }
 
          if ((CONFIG.transition === TRANSITIONS.ANIMATED || CONFIG.transition === TRANSITIONS.ANIMATED_GPU)
@@ -418,7 +425,14 @@ function MainController ($scope, $location) {
          else if(item.bgSuffix) {
             bg = parseFieldValue(item.bgSuffix, item, entity);
 
-            if(bg) styles.backgroundImage = 'url(' + CONFIG.serverUrl + bg + ')';
+            if(bg) 
+            {
+               if(bg.toLowerCase().startsWith("http")) {
+                  styles.backgroundImage = 'url(' + bg + ')';
+               } else {
+                  styles.backgroundImage = 'url(' + CONFIG.serverUrl + bg + ')';
+               }
+            }
          }
 
          obj.bgStyles = styles;
