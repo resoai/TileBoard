@@ -1270,15 +1270,27 @@ function MainController ($scope, $location) {
       $event.preventDefault();
       $event.stopPropagation();
 
-      sendItemData(item, {
-         type: "call_service",
-         domain: "climate",
-         service: "set_hvac_mode",
-         service_data: {
-            entity_id: item.id,
-            hvac_mode: option
-         }
-      });
+      if (entity.attributes.preset_mode){
+         sendItemData(item, {
+            type: "call_service",
+            domain: "climate",
+            service: "set_preset_mode",
+            service_data: {
+               entity_id: item.id,
+               preset_mode: option
+            }
+         });
+      } else {
+         sendItemData(item, {
+            type: "call_service",
+            domain: "climate",
+            service: "set_hvac_mode",
+            service_data: {
+               entity_id: item.id,
+               hvac_mode: option
+            }
+         });
+      }
 
       $scope.closeActiveSelect();
 

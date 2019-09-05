@@ -1011,13 +1011,28 @@
                <span ng-if="(_unit = entityUnit(item, entity))"
                      class="item-climate--target--unit" ng-bind="_unit"></span>
             </div>
-            <div class="item-climate--mode" ng-if="entity.attributes.hvac_modes"
-                 ng-click="openSelect(item)" ng-touch="openSelect(item)">
+            <div class="item-climate--mode" ng-if="entity.attributes.preset_mode"
+                 ng-click="openSelect(item)" >
+               <span ng-bind="entity.attributes.preset_mode"></span>
+            </div>
+            <div class="item-climate--mode" ng-if="entity.attributes.hvac_modes && !entity.attributes.preset_mode"
+                 ng-click="openSelect(item)" >
                <span ng-bind="entity.state"></span>
             </div>
          </div>
 
-         <div ng-if="selectOpened(item)" class="item-select"
+         <div ng-if="selectOpened(item) && entity.attributes.preset_mode" class="item-select"
+              ng-style="itemSelectStyles(entity, entity.attributes.operation_list)">
+
+            <div class="item-select--option"
+                 ng-repeat="option in entity.attributes.preset_modes track by $index"
+                 ng-class="{'-active': option === entity.state}"
+                 ng-click="setClimateOption($event, item, entity, option)">
+               <span ng-bind="option"></span>
+            </div>
+         </div>
+
+         <div ng-if="selectOpened(item) && !entity.attributes.preset_mode" class="item-select"
               ng-style="itemSelectStyles(entity, entity.attributes.hvac_modes)">
 
             <div class="item-select--option"
