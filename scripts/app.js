@@ -60,6 +60,7 @@ var TYPES = {
    VACUUM: 'vacuum',
    POPUP_IFRAME: 'popup_iframe',
    DIMMER_SWITCH: 'dimmer_switch',
+   GAUGE: 'gauge',
 };
 
 var HEADER_ITEMS = {

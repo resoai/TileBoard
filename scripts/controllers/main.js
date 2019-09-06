@@ -899,6 +899,32 @@ function MainController ($scope, $location) {
           && entity.state !== 'off';
    };
 
+   $scope.getGaugeField = function (field, item, entity) {
+
+      let def = { bg_color: 'rgba(0, 0, 0, 0.1)', 
+                  fg_color: 'rgba(0, 150, 136, 1)', 
+                  size: 200, 
+                  duration: 1500,
+                  thick: 6,
+                  type: 'full',
+                  min: 0,
+                  max: 100,
+                  cap: 'butt',
+               };
+
+      if(!item || (!item.settings[field] && !def[field])) return null;
+
+      if(typeof item.filter === "function") {
+         return callFunction(item.filter, [value, item, entity]);
+      }
+
+      if (!item.settings[field] && def[field]){
+         return parseFieldValue(def[field], item, entity);         
+      }
+
+      return parseFieldValue(item.settings[field], item, entity);
+   };
+
 
    // Actions
 

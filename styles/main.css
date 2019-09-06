@@ -1821,6 +1821,9 @@ camera-thumbnail div {
 .screensaver clock {
   font-size: 1.5em;
 }
+.gauge{
+  padding-top: 15px;
+}
 input[type=range] {
   -webkit-appearance: none;
   width: 100%;
