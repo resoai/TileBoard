@@ -900,8 +900,7 @@ function MainController ($scope, $location) {
    };
 
    $scope.getGaugeField = function (field, item, entity) {
-
-      let def = { bg_color: 'rgba(0, 0, 0, 0.1)', 
+      var gauge_defaults = { bg_color: 'rgba(0, 0, 0, 0.1)', 
                   fg_color: 'rgba(0, 150, 136, 1)', 
                   size: 200, 
                   duration: 1500,
@@ -911,18 +910,21 @@ function MainController ($scope, $location) {
                   max: 100,
                   cap: 'butt',
                };
-
-      if(!item || (!item.settings[field] && !def[field])) return null;
+               
+      if(!item || ((!item.settings || !field in item.settings) && !field in gauge_defaults)) return null;
 
       if(typeof item.filter === "function") {
          return callFunction(item.filter, [value, item, entity]);
       }
 
-      if (!item.settings[field] && def[field]){
-         return parseFieldValue(def[field], item, entity);         
+      if (item.settings && field in item.settings){
+         return parseFieldValue(item.settings[field], item, entity);
       }
 
-      return parseFieldValue(item.settings[field], item, entity);
+      if (field in gauge_defaults){
+         return parseFieldValue(gauge_defaults[field], item, entity);         
+      }
+      return null;
    };
 
 
