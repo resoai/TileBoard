@@ -1437,7 +1437,7 @@ function MainController ($scope, $location) {
          var d = new Date();
 
          $scope.datetimeString = d.getFullYear() + "";
-         $scope.datetimeString += leadZero(d.getMonth());
+         $scope.datetimeString += leadZero(d.getMonth() + 1);
          $scope.datetimeString += leadZero(d.getDate());
       }
    };
