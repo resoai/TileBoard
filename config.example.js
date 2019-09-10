@@ -258,8 +258,8 @@ var CONFIG = {
                         return entity.state;
                      },
                      settings: {
-                        size: 200, //Defaults to 200
-                        type: 'full', //Options are: 'full', 'semi', and 'arch'. Defaults to 'full'
+                        size: 200, //Defaults to 60% of either height or width, whichever is larger
+                        bar_type: 'full', //Options are: 'full', 'semi', and 'arch'. Defaults to 'full'
                         min: 0, //Defaults to 0
                         max: 25000, //Defaults to 100
                         cap: 'round', //Options are: 'round', 'butt'. Defaults to 'butt'

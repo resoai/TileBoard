@@ -1822,7 +1822,7 @@ camera-thumbnail div {
   font-size: 1.5em;
 }
 .gauge{
-  padding-top: 15px;
+  padding-top: 10px;
 }
 input[type=range] {
   -webkit-appearance: none;
