@@ -31,13 +31,9 @@ App.directive('camera', function () {
          var appendImage = function (url) {
             var el = document.createElement('div');
 
-            if(url) 
+            if(url)
             {
-               if(url.toLowerCase().startsWith("http")) {
-                  el.style.backgroundImage = 'url(' + url + ')';
-               } else {
-                  el.style.backgroundImage = 'url(' + CONFIG.serverUrl + url + ')';
-               }
+               el.style.backgroundImage = setBackgroundImage(url);
             }
 
             el.style.backgroundSize = $scope.item.bgSize || 'cover';

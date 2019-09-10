@@ -240,6 +240,14 @@ function MainController ($scope, $location) {
       return true;
    };
 
+   function setBackgroundImage(image){
+      if(image.toLowerCase().startsWith("http")) {
+         return 'url(' + image + ')';
+      } else {
+         return 'url(' + CONFIG.serverUrl + image + ')';
+      }
+   }
+
    $scope.pageStyles = function (page, index) {
       if(!page.styles) {
          var styles = {};
@@ -253,11 +261,7 @@ function MainController ($scope, $location) {
             var sbg = parseFieldValue(page.bgSuffix, page, {});
 
             if(sbg) {
-               if(sbg.toLowerCase().startsWith("http")) {
-                  styles.backgroundImage = 'url(' + sbg + ')';
-               } else {
-                  styles.backgroundImage = 'url(' + CONFIG.serverUrl + sbg + ')';
-               }
+               styles.backgroundImage = setBackgroundImage(sbg);
             }
          }
 
@@ -426,11 +430,7 @@ function MainController ($scope, $location) {
 
             if(bg) 
             {
-               if(bg.toLowerCase().startsWith("http")) {
-                  styles.backgroundImage = 'url(' + bg + ')';
-               } else {
-                  styles.backgroundImage = 'url(' + CONFIG.serverUrl + bg + ')';
-               }
+               styles.backgroundImage = setBackgroundImage(bg);
             }
          }
 
