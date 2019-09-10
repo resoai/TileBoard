@@ -252,8 +252,7 @@ function MainController ($scope, $location) {
          else if(page.bgSuffix) {
             var sbg = parseFieldValue(page.bgSuffix, page, {});
 
-            if(sbg) 
-            {
+            if(sbg) {
                if(sbg.toLowerCase().startsWith("http")) {
                   styles.backgroundImage = 'url(' + sbg + ')';
                } else {
