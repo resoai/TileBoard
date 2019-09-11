@@ -33,7 +33,7 @@ App.directive('camera', function () {
 
             if(url)
             {
-               el.style.backgroundImage = setBackgroundImage(url);
+               el.style.backgroundImage = toAbsoluteURL(url);
             }
 
             el.style.backgroundSize = $scope.item.bgSize || 'cover';

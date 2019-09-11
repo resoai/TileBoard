@@ -240,12 +240,12 @@ function MainController ($scope, $location) {
       return true;
    };
 
-   function setBackgroundImage(image){
-      if(image.toLowerCase().startsWith("http")) {
+   function toAbsoluteURL(image) {
+      if(image.indexOf('http') !== 0) {
          return 'url(' + image + ')';
-      } else {
-         return 'url(' + CONFIG.serverUrl + image + ')';
       }
+
+      return 'url(' + CONFIG.serverUrl + image + ')';
    }
 
    $scope.pageStyles = function (page, index) {
@@ -255,14 +255,12 @@ function MainController ($scope, $location) {
          if(page.bg) {
             var bg = parseFieldValue(page.bg, page, {});
 
-            if(bg) styles.backgroundImage = 'url(' + bg + ')';
+            if(bg) styles.backgroundImage = toAbsoluteURL(bg);
          }
          else if(page.bgSuffix) {
             var sbg = parseFieldValue(page.bgSuffix, page, {});
 
-            if(sbg) {
-               styles.backgroundImage = setBackgroundImage(sbg);
-            }
+            if(sbg) styles.backgroundImage = toAbsoluteURL(sbg);
          }
 
          if ((CONFIG.transition === TRANSITIONS.ANIMATED || CONFIG.transition === TRANSITIONS.ANIMATED_GPU)
@@ -317,11 +315,7 @@ function MainController ($scope, $location) {
          var styles = {};
 
          if(entity.attributes.entity_picture) {
-            var url = entity.attributes.entity_picture;
-            if (url.indexOf('http') !== 0) {
-               url = CONFIG.serverUrl + entity.attributes.entity_picture;
-            }
-            styles.backgroundImage = 'url(' + url + ')';
+            styles.backgroundImage = toAbsoluteURL(entity.attributes.entity_picture);
          }
 
          entity.trackerBg = styles;
@@ -430,7 +424,7 @@ function MainController ($scope, $location) {
 
             if(bg) 
             {
-               styles.backgroundImage = setBackgroundImage(bg);
+               styles.backgroundImage = toAbsoluteURL(bg);
             }
          }
 
