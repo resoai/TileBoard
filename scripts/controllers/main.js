@@ -912,19 +912,20 @@ function MainController ($scope, $location) {
          cap: 'butt',
       };
 
-      if (!item || ((!item.settings || !field in item.settings) && !field in gauge_defaults)) return null;
+      if(!item) return null;
 
-      if (typeof item.filter === "function") {
+      if(typeof item.filter === "function") {
          return callFunction(item.filter, [value, item, entity]);
       }
 
-      if (item.settings && field in item.settings) {
+      if(item.settings && field in item.settings) {
          return parseFieldValue(item.settings[field], item, entity);
       }
 
-      if (field in gauge_defaults) {
+      if(field in gauge_defaults) {
          return parseFieldValue(gauge_defaults[field], item, entity);
       }
+      
       return null;
    };
 
