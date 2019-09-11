@@ -900,29 +900,30 @@ function MainController ($scope, $location) {
    };
 
    $scope.getGaugeField = function (field, item, entity) {
-      var gauge_defaults = { bg_color: 'rgba(0, 0, 0, 0.1)', 
-                  fg_color: 'rgba(0, 150, 136, 1)', 
-                  size: function() { return .6 * (CONFIG.tileSize * (item.height > item.width ? item.height : item.width)); },
-                  duration: 1500,
-                  thick: 6,
-                  bar_type: 'full',
-                  min: 0,
-                  max: 100,
-                  cap: 'butt',
-               };
-               
-      if(!item || ((!item.settings || !field in item.settings) && !field in gauge_defaults)) return null;
+      var gauge_defaults = {
+         bg_color: 'rgba(0, 0, 0, 0.1)',
+         fg_color: 'rgba(0, 150, 136, 1)',
+         size: function () { return .5 * (CONFIG.tileSize * (item.height > item.width ? item.height : item.width)); },
+         duration: 1500,
+         thick: 6,
+         bar_type: 'full',
+         min: 0,
+         max: 100,
+         cap: 'butt',
+      };
 
-      if(typeof item.filter === "function") {
+      if (!item || ((!item.settings || !field in item.settings) && !field in gauge_defaults)) return null;
+
+      if (typeof item.filter === "function") {
          return callFunction(item.filter, [value, item, entity]);
       }
 
-      if (item.settings && field in item.settings){
+      if (item.settings && field in item.settings) {
          return parseFieldValue(item.settings[field], item, entity);
       }
 
-      if (field in gauge_defaults){
-         return parseFieldValue(gauge_defaults[field], item, entity);         
+      if (field in gauge_defaults) {
+         return parseFieldValue(gauge_defaults[field], item, entity);
       }
       return null;
    };
