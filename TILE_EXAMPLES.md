@@ -595,20 +595,20 @@ This is a custom tile which can be used for displaying values from different sen
       return entity.state;
    },
    settings: {
-      size: 200, //Defaults to 60% of either height or width, whichever is larger
-      bar_type: 'full', //Options are: 'full', 'semi', and 'arch'. Defaults to 'full'
-      min: 0, //Defaults to 0
-      max: 100, //Defaults to 100
-      cap: 'round', //Options are: 'round', 'butt'. Defaults to 'butt'
-      thick: 8, //Defaults to 6
-      label: 'My Gauge', //Defaults to undefined
-      append: '@attributes.unit_of_measurement', //Defaults to undefined                           
-      prepend: '$', //Defaults to undefined
-      duration: 1500, //Defaults to 1500ms
-      label_only: false, //Defaults to false
-      fg_color: 'rgba(0, 150, 136, 1)', //Defaults to rgba(0, 150, 136, 1)
-      bg_color: 'rgba(0, 0, 0, 0.1)', //Defaults to rgba(0, 0, 0, 0.1)
-      fraction_size: 0,//Number of decimal places to round the number to. Defaults to current locale formatting
+      size: 200, // Defaults to 50% of either height or width, whichever is smaller
+      type: 'full', // Options are: 'full', 'semi', and 'arch'. Defaults to 'full'
+      min: 0, // Defaults to 0
+      max: 100, // Defaults to 100
+      cap: 'round', // Options are: 'round', 'butt'. Defaults to 'butt'
+      thick: 6, // Defaults to 6
+      label: 'My Gauge', // Defaults to undefined
+      append: '@attributes.unit_of_measurement', // Defaults to undefined                           
+      prepend: '$', // Defaults to undefined
+      duration: 1500, // Defaults to 1500ms
+      label_only: false, // Defaults to false
+      foreground_color: 'rgba(0, 150, 136, 1)', // Defaults to rgba(0, 150, 136, 1)
+      background_color: 'rgba(0, 0, 0, 0.1)', // Defaults to rgba(0, 0, 0, 0.1)
+      fraction_size: 0,// Number of decimal places to round the number to. Defaults to current locale formatting
       },
 }
 ```

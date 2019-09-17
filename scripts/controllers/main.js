@@ -901,12 +901,12 @@ function MainController ($scope, $location) {
 
    $scope.getGaugeField = function (field, item, entity) {
       var gauge_defaults = {
-         bg_color: 'rgba(0, 0, 0, 0.1)',
-         fg_color: 'rgba(0, 150, 136, 1)',
+         background_color: 'rgba(0, 0, 0, 0.1)',
+         foreground_color: 'rgba(0, 150, 136, 1)',
          size: function () { return .5 * (CONFIG.tileSize * (item.height > item.width ? item.height : item.width)); },
          duration: 1500,
          thick: 6,
-         bar_type: 'full',
+         type: 'full',
          min: 0,
          max: 100,
          cap: 'butt',
