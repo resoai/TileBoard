@@ -310,3 +310,11 @@ function debounce(func, wait, immediate) {
       if (callNow) func.apply(context, args);
    };
 }
+
+function toAbsoluteURL(image) {
+   if(image.indexOf('http') !== 0) {
+      return 'url(' + image + ')';
+   }
+
+   return 'url(' + CONFIG.serverUrl + image + ')';
+}

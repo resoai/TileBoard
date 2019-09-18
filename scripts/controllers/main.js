@@ -240,14 +240,6 @@ function MainController ($scope, $location) {
       return true;
    };
 
-   function toAbsoluteURL(image) {
-      if(image.indexOf('http') !== 0) {
-         return 'url(' + image + ')';
-      }
-
-      return 'url(' + CONFIG.serverUrl + image + ')';
-   }
-
    $scope.pageStyles = function (page, index) {
       if(!page.styles) {
          var styles = {};
