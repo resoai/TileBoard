@@ -313,7 +313,7 @@ function debounce(func, wait, immediate) {
 
 function toAbsoluteServerURL(path) {
    var startsWithProtocol = path.indexOf('http') === 0;
-   var url = startsWithProtocol ? '' : CONFIG.serverUrl + '/'+ path;
+   var url = startsWithProtocol ? path : CONFIG.serverUrl + '/'+ path;
    // Replace extra forward slashes but not in protocol.
    return url.replace(/([^:])\/+/g, '$1/');
 }
