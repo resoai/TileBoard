@@ -41,6 +41,7 @@
          'scripts/vendors/hammer.js',
          'scripts/vendors/angular.hammer.js',
          'scripts/vendors/color-picker.js',
+         'scripts/vendors/angularjs-gauge.js',
 
          'scripts/models/api.js',
          'scripts/models/noty.js',
@@ -1154,6 +1155,28 @@
                  ng-click="setSourcePlayer($event, item, entity, option)">
                <span ng-bind="option"></span>
             </div>
+         </div>
+      </div>
+
+      <div ng-if="item.type === TYPES.GAUGE"
+         class="item-entity-container">         
+         <div class="item-gauge">
+            <ng-gauge size="getGaugeField('size', item, entity)" 
+                      type="getGaugeField('type', item, entity)" 
+                      thick="getGaugeField('thick', item, entity)" 
+                      min="getGaugeField('min', item, entity)" 
+                      max="getGaugeField('max', item, entity)" 
+                      value="entityValue(item, entity)" 
+                      cap="getGaugeField('cap', item, entity)" 
+                      label="getGaugeField('label', item, entity)" 
+                      prepend="getGaugeField('prepend', item, entity)"
+                      foreground-color="getGaugeField('foregroundColor', item, entity)" 
+                      background-color="getGaugeField('backgroundColor', item, entity)" 
+                      append="getGaugeField('append', item, entity)" 
+                      thresholds="getGaugeField('thresholds', item, entity)" 
+                      label-only="getGaugeField('labelOnly', item, entity)"
+                      duration="getGaugeField('duration', item, entity)" 
+                      fraction-size="getGaugeField('fractionSize', item, entity)"></ng-gauge>
          </div>
       </div>
    </div>

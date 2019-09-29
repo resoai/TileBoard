@@ -965,6 +965,9 @@ body {
   background-size: cover;
   background-position: center;
 }
+.item-gauge {
+  padding-top: 10px;
+}
 .clock div,
 clock div {
   display: inline-block;
