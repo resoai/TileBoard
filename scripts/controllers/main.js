@@ -899,19 +899,22 @@ function MainController ($scope, $location) {
           && entity.state !== 'off';
    };
 
-   $scope.getGaugeField = function (field, item, entity) {
-      var defaults = {
-         backgroundColor: 'rgba(0, 0, 0, 0.1)',
-         foregroundColor: 'rgba(0, 150, 136, 1)',
-         size: function () { return .8 * (CONFIG.tileSize * (item.height < item.width ? item.height : item.width)); },
-         duration: 1500,
-         thick: 6,
-         type: 'full',
-         min: 0,
-         max: 100,
-         cap: 'butt',
-      };
+   var GAUGE_DEFAULTS = {
+      backgroundColor: 'rgba(0, 0, 0, 0.1)',
+      foregroundColor: 'rgba(0, 150, 136, 1)',
+      size: function (item) {
+         return .8 * (CONFIG.tileSize * (item.height < item.width ? item.height : item.width));
+      },
+      duration: 1500,
+      thick: 6,
+      type: 'full',
+      min: 0,
+      max: 100,
+      cap: 'butt',
+      thresholds: {},
+   };
 
+   $scope.getGaugeField = function (field, item, entity) {
       if(!item) return null;
 
       if(typeof item.filter === "function") {
@@ -922,8 +925,8 @@ function MainController ($scope, $location) {
          return parseFieldValue(item.settings[field], item, entity);
       }
 
-      if(field in defaults) {
-         return parseFieldValue(defaults[field], item, entity);
+      if(field in GAUGE_DEFAULTS) {
+         return parseFieldValue(GAUGE_DEFAULTS[field], item, entity);
       }
       
       return null;

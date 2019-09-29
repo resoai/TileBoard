@@ -268,6 +268,7 @@ var CONFIG = {
                         append: '@attributes.unit_of_measurement', // Defaults to undefined
                         prepend: '$', // Defaults to undefined
                         duration: 1500, // Defaults to 1500ms
+                        thresholds: { 0: { color: 'green'}, 80: { color: 'red' } }, // Defaults to undefined
                         labelOnly: false, // Defaults to false
                         foregroundColor: 'rgba(0, 150, 136, 1)', // Defaults to rgba(0, 150, 136, 1)
                         backgroundColor: 'rgba(0, 0, 0, 0.1)', // Defaults to rgba(0, 0, 0, 0.1)
