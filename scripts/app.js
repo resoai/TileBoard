@@ -311,10 +311,9 @@ function debounce(func, wait, immediate) {
    };
 }
 
-function toAbsoluteURL(image) {
-   if(image.indexOf('http') !== 0) {
-      return 'url(' + image + ')';
-   }
-
-   return 'url(' + CONFIG.serverUrl + image + ')';
+function toAbsoluteServerURL(path) {
+   var startsWithProtocol = path.indexOf('http') === 0;
+   var url = startsWithProtocol ? '' : CONFIG.serverUrl + '/'+ path;
+   // Replace extra forward slashes but not in protocol.
+   return url.replace(/([^:])\/+/g, '$1/');
 }

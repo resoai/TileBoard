@@ -247,12 +247,12 @@ function MainController ($scope, $location) {
          if(page.bg) {
             var bg = parseFieldValue(page.bg, page, {});
 
-            if(bg) styles.backgroundImage = toAbsoluteURL(bg);
+            if(bg) styles.backgroundImage = '("' + bg + '")';
          }
          else if(page.bgSuffix) {
             var sbg = parseFieldValue(page.bgSuffix, page, {});
 
-            if(sbg) styles.backgroundImage = toAbsoluteURL(sbg);
+            if(sbg) styles.backgroundImage = '("' + toAbsoluteServerURL(sbg) + '")';
          }
 
          if ((CONFIG.transition === TRANSITIONS.ANIMATED || CONFIG.transition === TRANSITIONS.ANIMATED_GPU)
@@ -307,7 +307,7 @@ function MainController ($scope, $location) {
          var styles = {};
 
          if(entity.attributes.entity_picture) {
-            styles.backgroundImage = toAbsoluteURL(entity.attributes.entity_picture);
+            styles.backgroundImage = '("' + toAbsoluteServerURL(entity.attributes.entity_picture) + '")';
          }
 
          entity.trackerBg = styles;
@@ -414,10 +414,7 @@ function MainController ($scope, $location) {
          else if(item.bgSuffix) {
             bg = parseFieldValue(item.bgSuffix, item, entity);
 
-            if(bg) 
-            {
-               styles.backgroundImage = toAbsoluteURL(bg);
-            }
+            if(bg) styles.backgroundImage = '("' + toAbsoluteServerURL(bg) + '")';
          }
 
          obj.bgStyles = styles;
