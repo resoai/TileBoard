@@ -254,7 +254,7 @@ var CONFIG = {
                      subtitle: '',
                      type: TYPES.GAUGE,
                      id: 'sensor.my_sample_sensor', // Assign the sensor you want to display on the gauge
-                     value: function(item, entity){
+                     value: function(item, entity) {
                         return entity.state;
                      },
                      settings: {
@@ -265,13 +265,13 @@ var CONFIG = {
                         cap: 'round', // Options are: 'round', 'butt'. Defaults to 'butt'
                         thick: 8, // Defaults to 6
                         label: 'My Gauge', // Defaults to undefined
-                        append: '@attributes.unit_of_measurement', // Defaults to undefined                           
+                        append: '@attributes.unit_of_measurement', // Defaults to undefined
                         prepend: '$', // Defaults to undefined
                         duration: 1500, // Defaults to 1500ms
-                        label_only: false, // Defaults to false
-                        foreground_color: 'rgba(0, 150, 136, 1)', // Defaults to rgba(0, 150, 136, 1)
-                        background_color: 'rgba(0, 0, 0, 0.1)', // Defaults to rgba(0, 0, 0, 0.1)
-                        fraction_size: 0,// Number of decimal places to round the number to. Defaults to current locale formatting
+                        labelOnly: false, // Defaults to false
+                        foregroundColor: 'rgba(0, 150, 136, 1)', // Defaults to rgba(0, 150, 136, 1)
+                        backgroundColor: 'rgba(0, 0, 0, 0.1)', // Defaults to rgba(0, 0, 0, 0.1)
+                        fractionSize: 0, // Number of decimal places to round the number to. Defaults to current locale formatting
                      },
                   },
                ]

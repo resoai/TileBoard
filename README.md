@@ -409,7 +409,7 @@ Tile Object. [Click here for some real life examples](TILE_EXAMPLES.md)
    fields: {},
 
    /** type: GAUGE **/
-   /* settings: Object containing various gauge settings */
+   /* Object containing gauge settings. Refer to https://ashish-chopra.github.io/angular-gauge/#!#documentation */
    settings: {
       size: 200, // Defaults to 50% of either height or width, whichever is smaller
       type: 'full', // Options are: 'full', 'semi', and 'arch'. Defaults to 'full'
@@ -418,14 +418,14 @@ Tile Object. [Click here for some real life examples](TILE_EXAMPLES.md)
       cap: 'round', // Options are: 'round', 'butt'. Defaults to 'butt'
       thick: 8, // Defaults to 6
       label: 'My Gauge', // Defaults to undefined
-      append: '@attributes.unit_of_measurement', // Defaults to undefined                           
+      append: '@attributes.unit_of_measurement', // Defaults to undefined
       prepend: '$', // Defaults to undefined
       duration: 1500, // Defaults to 1500ms
-      label_only: false, // Defaults to false
-      foreground_color: 'rgba(0, 150, 136, 1)', // Defaults to rgba(0, 150, 136, 1)
-      background_color: 'rgba(0, 0, 0, 0.1)', // Defaults to rgba(0, 0, 0, 0.1)
-      fraction_size: 0 // Number of decimal places to round the number to. Defaults to current locale formatting
-    },
+      labelOnly: false, // Defaults to false
+      foregroundColor: 'rgba(0, 150, 136, 1)', // Defaults to rgba(0, 150, 136, 1)
+      backgroundColor: 'rgba(0, 0, 0, 0.1)', // Defaults to rgba(0, 0, 0, 0.1)
+      fractionSize: 0 // Number of decimal places to round the number to. Defaults to current locale formatting
+   },
   
    /* classes: Additional CSS classes. Use 'compact' for a compact (1x1) tile
     * (optional)

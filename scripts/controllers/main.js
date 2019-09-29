@@ -900,10 +900,10 @@ function MainController ($scope, $location) {
    };
 
    $scope.getGaugeField = function (field, item, entity) {
-      var gauge_defaults = {
-         background_color: 'rgba(0, 0, 0, 0.1)',
-         foreground_color: 'rgba(0, 150, 136, 1)',
-         size: function () { return .5 * (CONFIG.tileSize * (item.height > item.width ? item.height : item.width)); },
+      var defaults = {
+         backgroundColor: 'rgba(0, 0, 0, 0.1)',
+         foregroundColor: 'rgba(0, 150, 136, 1)',
+         size: function () { return .8 * (CONFIG.tileSize * (item.height < item.width ? item.height : item.width)); },
          duration: 1500,
          thick: 6,
          type: 'full',
@@ -922,8 +922,8 @@ function MainController ($scope, $location) {
          return parseFieldValue(item.settings[field], item, entity);
       }
 
-      if(field in gauge_defaults) {
-         return parseFieldValue(gauge_defaults[field], item, entity);
+      if(field in defaults) {
+         return parseFieldValue(defaults[field], item, entity);
       }
       
       return null;

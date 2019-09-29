@@ -602,13 +602,13 @@ This is a custom tile which can be used for displaying values from different sen
       cap: 'round', // Options are: 'round', 'butt'. Defaults to 'butt'
       thick: 6, // Defaults to 6
       label: 'My Gauge', // Defaults to undefined
-      append: '@attributes.unit_of_measurement', // Defaults to undefined                           
+      append: '@attributes.unit_of_measurement', // Defaults to undefined
       prepend: '$', // Defaults to undefined
       duration: 1500, // Defaults to 1500ms
-      label_only: false, // Defaults to false
-      foreground_color: 'rgba(0, 150, 136, 1)', // Defaults to rgba(0, 150, 136, 1)
-      background_color: 'rgba(0, 0, 0, 0.1)', // Defaults to rgba(0, 0, 0, 0.1)
-      fraction_size: 0,// Number of decimal places to round the number to. Defaults to current locale formatting
-      },
+      labelOnly: false, // Defaults to false
+      foregroundColor: 'rgba(0, 150, 136, 1)', // Defaults to rgba(0, 150, 136, 1)
+      backgroundColor: 'rgba(0, 0, 0, 0.1)', // Defaults to rgba(0, 0, 0, 0.1)
+      fractionSize: 0, // Number of decimal places to round the number to. Defaults to current locale formatting
+   },
 }
 ```
