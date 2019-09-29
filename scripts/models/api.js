@@ -263,7 +263,7 @@ var HApi = (function () {
    $Api.prototype._request = function (url, callback) {
       var xhr = new XMLHttpRequest();
 
-      xhr.open('POST', CONFIG.serverUrl + '/auth/token');
+      xhr.open('POST', toAbsoluteServerURL('/auth/token'));
       xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
       xhr.send(url + '&client_id=' + getOAuthClientId());
 
@@ -387,9 +387,10 @@ var HApi = (function () {
    function redirectOAuth() {
       removeToken();
 
-      window.location.href = CONFIG.serverUrl
-         + '/auth/authorize?client_id=' + getOAuthClientId()
-         + '&redirect_uri=' + getOAuthRedirectUrl();
+      window.location.href = toAbsoluteServerURL(
+         '/auth/authorize?client_id=' + getOAuthClientId()
+         + '&redirect_uri=' + getOAuthRedirectUrl()
+      );
    }
 
    return $Api;

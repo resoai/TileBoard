@@ -310,3 +310,10 @@ function debounce(func, wait, immediate) {
       if (callNow) func.apply(context, args);
    };
 }
+
+function toAbsoluteServerURL(path) {
+   var startsWithProtocol = path.indexOf('http') === 0;
+   var url = startsWithProtocol ? '' : CONFIG.serverUrl + '/'+ path;
+   // Replace extra forward slashes but not in protocol.
+   return url.replace(/([^:])\/+/g, '$1/');
+}
