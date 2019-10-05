@@ -74,6 +74,9 @@ var HEADER_ITEMS = {
 var SCREENSAVER_ITEMS = HEADER_ITEMS;
 
 var FEATURES = {
+   LIGHT: {
+      BRIGHTNESS: 1
+   },
    MEDIA_PLAYER: {
       PAUSE: 1,
       SEEK: 2,
