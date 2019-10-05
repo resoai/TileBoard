@@ -961,8 +961,10 @@
                   <th>
                      <span ng-bind="itemField('dateTitle', item, entity) || 'Date'"></span>
                   </th>
-                  <th></th>
-                  <th>
+                  <th class="weather-list-header--icon">
+                     <span ng-bind="itemField('iconTitle', item, entity)"></span>
+                  </th>
+                  <th class="weather-list-header--primary">
                      <span ng-bind="itemField('primaryTitle', item, entity) || 'Forecast'"></span>
                   </th>
                   <th class="weather-list-header--secondary">
