@@ -656,11 +656,13 @@
 
          <div ng-if="!item.controlsEnabled">
             <div ng-if="entity.state !== 'off'">
-               <div class="item-button -center-right"
+               <div ng-if="supportsFeature(FEATURES.LIGHT.BRIGHTNESS, entity)"
+                    class="item-button -center-right"
                     ng-click="increaseBrightness($event, item, entity)">
                   <i class="mdi mdi-plus"></i>
                </div>
-               <div class="item-button -bottom-right"
+               <div ng-if="supportsFeature(FEATURES.LIGHT.BRIGHTNESS, entity)"
+                    class="item-button -bottom-right"
                     ng-click="decreaseBrightness($event, item, entity)">
                   <i class="mdi mdi-minus"></i>
                </div>
