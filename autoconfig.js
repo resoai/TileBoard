@@ -7,11 +7,13 @@
  */
 function autoTile(id, position, args) {
    // Match the id against the templates (sorted to match most specific first)
-   var template = Object.keys(TEMPLATES.FILTERS).sort().reverse().find(
-      function(k) {
-         return id.match(k) !== null
-      }
-   );
+   var template;
+   if (typeof id != 'undefined')
+      template = Object.keys(TEMPLATES.FILTERS).sort().reverse().find(
+         function(k) {
+            return id.match(k) !== null
+         }
+      );
    // If none is found, use the default
    if (typeof template === 'undefined')
       template = 'default';

@@ -17,9 +17,9 @@ var TEMPLATES = {FILTERS: {}};
 // Simply apply the arguments and use the domain as type..
 TEMPLATES.DEFAULT = function(id, position, args){
    return angular.merge({
-      id: id,
+      id:   id ? id : {},
+      type: id ? TYPES[id.split('.', 1)[0].toUpperCase()] : {},
       position: position,
-      type: TYPES[id.split('.', 1)[0].toUpperCase()]
    }, args);
 };
 
@@ -63,6 +63,38 @@ TEMPLATES.MEDIA_PLAYER = function(id,position,args){
 },args);
 };
 TEMPLATES.FILTERS['media_player.'] = TEMPLATES.MEDIA_PLAYER;
+
+// INPUT_SELECT, SENSOR, SCENE: No state, because duplicated
+TEMPLATES.FILTERS['input_select.'] = function(id, position, args) {
+   return angular.merge(
+      TEMPLATES.DEFAULT(id, position, {
+         state: false,
+   }),args);
+};
+TEMPLATES.FILTERS['sensor.'] = TEMPLATES.FILTERS['input_select.'];
+TEMPLATES.FILTERS['scene.']  = TEMPLATES.FILTERS['input_select.'];
+
+// SCRIPT: Try to use icon
+TEMPLATES.FILTERS['script.'] = function(id, position, args) {
+   return angular.merge(
+      TEMPLATES.DEFAULT(id, position, {
+         icon: function (item, entity) {
+            return entity.attributes.icon.replace(':','-');
+         },
+   }),args);
+};
+
+// LIGHT/SWITCH: Have an icon to show on/off state
+TEMPLATES.FILTERS['light.'] = function(id, position, args) {
+   return angular.merge(
+      TEMPLATES.DEFAULT(id, position, {
+         icons: {
+            'on':  'mdi-lightbulb-on-outline',
+            'off': 'mdi-lightbulb-off-outline',
+         }
+   }),args);
+};
+TEMPLATES.FILTERS['switch.'] = TEMPLATES.FILTERS['light.'];
 
 // SNAPCLIENT: Use a switch/dimmer with plus/minus buttons for volume control
 // Note: Also the MEDIA_PLAYER does most of these things. And provides a slider!
