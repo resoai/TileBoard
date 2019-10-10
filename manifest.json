@@ -1,0 +1,13 @@
+{
+  "name": "TileBoard",
+  "short_name": "TileBoard",
+  "start_url": "./index.html",
+  "display": "fullscreen",
+  "background_color" : "#1a4957",
+  "description": "A simple yet highly customizable dashboard for Home Assistant",
+  "icons": [{
+    "src": "./favicon.png",
+    "sizes": "16x16 24x24 32x32 48x48 64x64",
+    "type": "image/png"
+  }]
+}
