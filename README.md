@@ -1,7 +1,6 @@
 # TileBoard
 
-This is a simple yet highly customizable dashboard for Home Assistant. The main goal of this project was to create simple dashboard with an easy way to edit and add functionality with minimum knowledge of javascript and html.
-Should you have any ideas or questions please post them on home-assistant forum or create an issue on github.
+This is a simple yet highly customizable dashboard for Home Assistant. The main goal of this project was to create a simple dashboard with an easy way to edit and add functionality with minimum knowledge of javascript and Html. Should you have any ideas or questions please post them on the home-assistant forum or create an issue on Github.
 
 ## Links
 
@@ -549,9 +548,10 @@ Read more in our [wiki article](https://github.com/resoai/TileBoard/wiki/Templat
 
 ### Events
 
-Events can be fired from Home Assistant to control TileBoard. Useful for automations to do things like opening a camera view if it detects motion, or turning the screen off on a tablet at night or when everyone leaves.
+Events can be fired from Home Assistant to control TileBoard. Useful for automation to do things like opening a camera view if it detects motion, or turning the screen off on a tablet at night or when everyone leaves.
 
-Events in HomeAssistant must be fired with `tileboard` as the event type, and a `command` included in the event data.
+Events in HomeAssistant must be fired with `tileboard` as the event type, and a `command` included in the event data
+
 
 ```js
 events: [
