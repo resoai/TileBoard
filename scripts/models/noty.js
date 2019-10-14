@@ -1,170 +1,171 @@
 var Noty = (function () {
-   var updatesListeners = [];
-   var updatesFired = false;
+    var updatesListeners = [];
+    var updatesFired = false;
 
-   var Noty = function (data) {
-      this.setData(data);
-   };
+    var Noty = function (data) {
+        this.setData(data);
+    };
 
-   Noty.prototype.setData = function (data) {
-      this.id = data.id || Math.random();
-      this.title = data.title;
-      this.message = data.message;
-      this.icon = data.icon;
-      this.lifetime = data.lifetime;
-      this.type = data.type || Noty.INFO;
+    Noty.prototype.setData = function (data) {
+        this.id = data.id || Math.random();
+        this.title = data.title;
+        this.message = data.message;
+        this.icon = data.icon;
+        this.lifetime = data.lifetime;
+        this.type = data.type || Noty.INFO;
 
-      this._timeout = null;
+        this._timeout = null;
 
-      this.resetTimeout();
+        this.resetTimeout();
 
-      var self = this;
+        var self = this;
 
-      setTimeout(function () {
-         self.showed = true;
+        setTimeout(function () {
+            self.showed = true;
 
-         Noty.fireUpdate();
-      }, 100);
-
-      Noty.fireUpdate();
-   };
-
-   Noty.prototype.resetTimeout = function () {
-      var self = this;
-
-      this.clearTimeout();
-
-      if(this.lifetime) {
-         this._timeout = setTimeout(function () {
-            Noty.remove(self);
             Noty.fireUpdate();
-         }, this.lifetime * 1000);
-      }
-   };
+        }, 100);
 
-   Noty.prototype.getClasses = function () {
-      if(!this._classes) {
-         this._classes = [];
-      }
+        Noty.fireUpdate();
+    };
 
-      this._classes.length = 0;
+    Noty.prototype.resetTimeout = function () {
+        var self = this;
 
-      this._classes.push('-' + this.type);
+        this.clearTimeout();
 
-      if(this.showed) this._classes.push('-showed');
+        if (this.lifetime) {
+            this._timeout = setTimeout(function () {
+                Noty.remove(self);
+                Noty.fireUpdate();
+            }, this.lifetime * 1000);
+        }
+    };
 
-      return this._classes;
-   };
+    Noty.prototype.getClasses = function () {
+        if (!this._classes) {
+            this._classes = [];
+        }
 
-   Noty.prototype.getLifetimeStyles = function () {
-      if(!this._lifetimeStyles) {
-         this._lifetimeStyles = {};
+        this._classes.length = 0;
 
-         if(this.lifetime) {
-            this._lifetimeStyles.animationDuration = this.lifetime + 's';
-         }
-      }
+        this._classes.push('-' + this.type);
 
-      return this._lifetimeStyles;
-   };
+        if (this.showed) this._classes.push('-showed');
 
-   Noty.prototype.clearTimeout = function () {
-      if(this._timeout) clearTimeout(this._timeout);
-   };
+        return this._classes;
+    };
 
-   Noty.prototype.remove = function () {
-      Noty.remove(this);
-   };
+    Noty.prototype.getLifetimeStyles = function () {
+        if (!this._lifetimeStyles) {
+            this._lifetimeStyles = {};
 
-   Noty.noties = [];
-   Noty.notiesHistory = [];
+            if (this.lifetime) {
+                this._lifetimeStyles.animationDuration = this.lifetime + 's';
+            }
+        }
 
-   Noty.INFO = 'info';
-   Noty.WARNING = 'warning';
-   Noty.ERROR = 'error';
-   Noty.SUCCESS = 'success';
+        return this._lifetimeStyles;
+    };
 
-   Noty.onUpdate = function (callback) {
-      if(updatesListeners.indexOf(callback) !== -1) {
-         return function () {}
-      }
+    Noty.prototype.clearTimeout = function () {
+        if (this._timeout) clearTimeout(this._timeout);
+    };
 
-      updatesListeners.push(callback);
+    Noty.prototype.remove = function () {
+        Noty.remove(this);
+    };
 
-      return function () {
-         updatesListeners = updatesListeners.filter(function (a) {
-            return a !== callback;
-         });
-      }
-   };
+    Noty.noties = [];
+    Noty.notiesHistory = [];
 
-   Noty.fireUpdate = function () {
-      if(updatesFired) return;
+    Noty.INFO = 'info';
+    Noty.WARNING = 'warning';
+    Noty.ERROR = 'error';
+    Noty.SUCCESS = 'success';
 
-      updatesFired = true;
+    Noty.onUpdate = function (callback) {
+        if (updatesListeners.indexOf(callback) !== -1) {
+            return function () {
+            }
+        }
 
-      updatesListeners.forEach(function (callback) {
-         try {
-            setTimeout(function () {
-               updatesFired = false;
-               callback();
-            }, 0);
-         }
-         catch (e) {}
-      });
+        updatesListeners.push(callback);
 
-      setTimeout(function () {
-         updatesFired = false;
-      }, 0);
-   };
+        return function () {
+            updatesListeners = updatesListeners.filter(function (a) {
+                return a !== callback;
+            });
+        }
+    };
 
-   Noty.add = function (type, title, message, icon, lifetime, id) {
-      return Noty.addObject({
-         type: type,
-         title: title,
-         message: message,
-         icon: icon,
-         lifetime: lifetime,
-         id: id
-      });
-   };
+    Noty.fireUpdate = function () {
+        if (updatesFired) return;
 
-   Noty.addObject = function (data) {
-      if(data.id && Noty.getById(data.id)) {
-         var oldNoty = Noty.getById(data.id);
+        updatesFired = true;
 
-         oldNoty.setData(data);
+        updatesListeners.forEach(function (callback) {
+            try {
+                setTimeout(function () {
+                    updatesFired = false;
+                    callback();
+                }, 0);
+            } catch (e) {
+            }
+        });
 
-         return oldNoty;
-      }
+        setTimeout(function () {
+            updatesFired = false;
+        }, 0);
+    };
 
-      var noty = new Noty(data);
+    Noty.add = function (type, title, message, icon, lifetime, id) {
+        return Noty.addObject({
+            type:     type,
+            title:    title,
+            message:  message,
+            icon:     icon,
+            lifetime: lifetime,
+            id:       id
+        });
+    };
 
-      Noty.noties.push(noty);
-      Noty.notiesHistory.push(noty);
+    Noty.addObject = function (data) {
+        if (data.id && Noty.getById(data.id)) {
+            var oldNoty = Noty.getById(data.id);
 
-      return noty;
-   };
+            oldNoty.setData(data);
 
-   Noty.getById = function (id) {
-      for(var i = 0; i < Noty.noties.length; i++) {
-         if(Noty.noties[i].id === id) {
-            return Noty.noties[i];
-         }
-      }
+            return oldNoty;
+        }
 
-      return null;
-   };
+        var noty = new Noty(data);
 
-   Noty.remove = function (noty) {
-      Noty.noties = Noty.noties.filter(function (n) {
-         return n !== noty;
-      });
-   };
+        Noty.noties.push(noty);
+        Noty.notiesHistory.push(noty);
 
-   Noty.removeAll = function () {
-      Noty.noties = [];
-   };
+        return noty;
+    };
 
-   return Noty;
+    Noty.getById = function (id) {
+        for (var i = 0; i < Noty.noties.length; i++) {
+            if (Noty.noties[i].id === id) {
+                return Noty.noties[i];
+            }
+        }
+
+        return null;
+    };
+
+    Noty.remove = function (noty) {
+        Noty.noties = Noty.noties.filter(function (n) {
+            return n !== noty;
+        });
+    };
+
+    Noty.removeAll = function () {
+        Noty.noties = [];
+    };
+
+    return Noty;
 }());

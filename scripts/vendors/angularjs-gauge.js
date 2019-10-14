@@ -6,20 +6,21 @@
         .provider('ngGauge', gaugeMeterProviderFn);
 
     gaugeMeterProviderFn.$inject = [];
+
     function gaugeMeterProviderFn() {
         var defaultOptions = {
-            size: 200,
-            value: undefined,
-            min: 0,
-            max: 100,
-            cap: 'butt',
-            thick: 6,
-            type: 'full',
+            size:            200,
+            value:           undefined,
+            min:             0,
+            max:             100,
+            cap:             'butt',
+            thick:           6,
+            type:            'full',
             foregroundColor: 'rgba(0, 150, 136, 1)',
             backgroundColor: 'rgba(0, 0, 0, 0.1)',
-            duration: 1500,
-            fractionSize: null,
-            labelOnly: false,
+            duration:        1500,
+            fractionSize:    null,
+            labelOnly:       false,
         };
 
         this.setOptions = function (customOptions) {
@@ -42,7 +43,6 @@
     gaugeMeterDirective.$inject = ['ngGauge'];
 
     function gaugeMeterDirective(ngGauge) {
-
 
         var tpl = '<div style="display:inline-block;text-align:center;position:relative;">' +
             '<span ng-show="{{!labelOnly}}"><u>{{prepend}}</u>' +
@@ -80,40 +80,40 @@
                     llh = this.options.size;
 
                 this.text.css({
-                    display: 'inline-block',
-                    fontWeight: 'normal',
-                    width: '100%',
-                    position: 'absolute',
-                    textAlign: 'center',
-                    overflow: 'hidden',
+                    display:      'inline-block',
+                    fontWeight:   'normal',
+                    width:        '100%',
+                    position:     'absolute',
+                    textAlign:    'center',
+                    overflow:     'hidden',
                     textOverflow: 'ellipsis',
-                    fontSize: lfs + 'px',
-                    lineHeight: llh + 'px'
+                    fontSize:     lfs + 'px',
+                    lineHeight:   llh + 'px'
                 });
 
                 this.unit.css({
                     textDecoration: 'none',
-                    fontSize: '0.6em',
-                    fontWeight: 200,
-                    opacity: 0.8
+                    fontSize:       '0.6em',
+                    fontWeight:     200,
+                    opacity:        0.8
                 });
 
                 var fs = this.options.labelOnly ? lfs * 0.8 : this.options.size / 13;
                 var lh = this.options.labelOnly ? llh : (5 * fs) + parseInt(this.options.size);
 
                 this.legend.css({
-                    display: 'inline-block',
-                    width: '100%',
-                    position: 'absolute',
-                    textAlign: 'center',
-                    overflow: 'hidden',
+                    display:      'inline-block',
+                    width:        '100%',
+                    position:     'absolute',
+                    textAlign:    'center',
+                    overflow:     'hidden',
                     textOverflow: 'ellipsis',
-                    fontWeight: 'normal',
-                    fontSize: fs + 'px',
-                    lineHeight: lh + 'px'
+                    fontWeight:   'normal',
+                    fontSize:     fs + 'px',
+                    lineHeight:   lh + 'px'
                 });
             },
-            create: function (nv, ov) {
+            create:      function (nv, ov) {
 
                 var self = this,
                     type = this.getType(),
@@ -191,7 +191,6 @@
                 middle = Math.max(middle, start); // never below 0%
                 middle = Math.min(middle, tail); // never exceed 100%
 
-
                 context.beginPath();
                 context.strokeStyle = backgroundColor;
                 context.arc(center.x, center.y, radius, middle, tail, false);
@@ -233,10 +232,10 @@
             getValue: function () {
                 return this.options.value;
             },
-            getMin: function () {
+            getMin:   function () {
                 return this.options.min;
             },
-            getMax: function () {
+            getMax:   function () {
                 return this.options.max;
             },
             getWidth: function () {
@@ -266,8 +265,12 @@
                 };
 
                 var match = Object.keys(this.options.thresholds)
-                    .filter(function (item) { return isNumber(item) && Number(item) <= value; })
-                    .sort(function(a,b) {return Number(a) > Number(b);}).reverse()[0];
+                    .filter(function (item) {
+                        return isNumber(item) && Number(item) <= value;
+                    })
+                    .sort(function (a, b) {
+                        return Number(a) > Number(b);
+                    }).reverse()[0];
 
                 return match !== undefined ? this.options.thresholds[match].color || this.getForegroundColor() : this.getForegroundColor();
             },
@@ -290,31 +293,30 @@
 
         };
 
-
         return {
             restrict: 'E',
-            replace: true,
+            replace:  true,
             template: tpl,
-            scope: {
-                append: '=?',
+            scope:    {
+                append:          '=?',
                 backgroundColor: '=?',
-                cap: '=?',
+                cap:             '=?',
                 foregroundColor: '=?',
-                label: '=?',
-                labelOnly: '=?',
-                prepend: '=?',
-                size: '=?',
-                thick: '=?',
-                type: '=?',
-                duration: '=?',
-                value: '=?',
-                min: '=?',
-                max: '=?',
-                thresholds: '=?',
-                fractionSize: '=?'
+                label:           '=?',
+                labelOnly:       '=?',
+                prepend:         '=?',
+                size:            '=?',
+                thick:           '=?',
+                type:            '=?',
+                duration:        '=?',
+                value:           '=?',
+                min:             '=?',
+                max:             '=?',
+                thresholds:      '=?',
+                fractionSize:    '=?'
 
             },
-            link: function (scope, element) {
+            link:     function (scope, element) {
                 var defaults = ngGauge.getOptions(); // fetching default settings from provider
                 scope.min = angular.isDefined(scope.min) ? scope.min : defaults.min;
                 scope.max = angular.isDefined(scope.max) ? scope.max : defaults.max;
@@ -345,8 +347,10 @@
                 scope.$watch('thresholds', watchOther, false);
                 scope.$watch('fractionSize', watchData, false);
 
-                scope.$on('$destroy', function () { });
-                scope.$on('$resize', function () { });
+                scope.$on('$destroy', function () {
+                });
+                scope.$on('$resize', function () {
+                });
 
                 function watchData(nv, ov) {
                     if (!gauge) return;
