@@ -1603,6 +1603,10 @@ function MainController ($scope, $location) {
    $scope.isMenuOnTheLeft = CONFIG.menuPosition === MENU_POSITIONS.LEFT;
 
    $scope.onPageSwipe = function (event) {
+      if(CONFIG.swipeEnabled != null  && !CONFIG.swipeEnabled) {
+         return;
+      }      
+      
       switch (event.offsetDirection) {
          case Hammer.DIRECTION_UP:
          case Hammer.DIRECTION_LEFT:
