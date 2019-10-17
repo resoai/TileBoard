@@ -27,6 +27,7 @@ var CONFIG = {
    menuPosition: MENU_POSITIONS.LEFT, // or BOTTOM
    hideScrollbar: false, // horizontal scrollbar
    groupsAlign: GROUP_ALIGNS.HORIZONTALLY, // or VERTICALLY
+   swipeEnabled: true, // enable swipe between Pages (default: true)
 
    header: { // https://github.com/resoai/TileBoard/wiki/Header-configuration
       styles: {
