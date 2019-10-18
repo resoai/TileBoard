@@ -1603,7 +1603,7 @@ function MainController ($scope, $location) {
    $scope.isMenuOnTheLeft = CONFIG.menuPosition === MENU_POSITIONS.LEFT;
 
    $scope.onPageSwipe = function (event) {
-      if(CONFIG.swipeEnabled != null  && !CONFIG.swipeEnabled) {
+      if(CONFIG.swipeEnabled === false) {
          return;
       }      
       
