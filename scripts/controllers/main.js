@@ -19,6 +19,7 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
    $scope.activeCamera = null;
    $scope.activeDoorEntry = null;
    $scope.activeIframe = null;
+   $scope.activeHistory = null;
 
    $scope.alarmCode = null;
    $scope.activeAlarm = null;
@@ -67,6 +68,7 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
          case TYPES.DIMMER_SWITCH: return $scope.dimmerToggle(item, entity);
 
          case TYPES.POPUP_IFRAME: return $scope.openPopupIframe(item, entity);
+         case TYPES.SENSOR: return $scope.openPopupHistory(item, entity);
 
          case TYPES.INPUT_DATETIME: return $scope.openDatetime(item, entity);
       }
@@ -1490,6 +1492,82 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
 
    $scope.closePopupIframe = function () {
       $scope.activeIframe = null;
+   };
+
+   $scope.getPopupHistoryStyles = function () {
+      if(!$scope.activeHistory || !$scope.activeHistory.historyStyles) return null;
+
+      var entity = $scope.getItemEntity($scope.activeHistory);
+
+      var styles = $scope.itemField('historyStyles', $scope.activeHistory, entity);
+
+      if(!styles) return null;
+
+      for (var k in popupHistoryStyles) delete popupHistoryStyles[k];
+      for (k in styles) popupHistoryStyles[k] = styles[k];
+
+      return popupHistoryStyles;
+   };
+
+   $scope.openPopupHistory = function (item, entity) {
+      $scope.activeHistory = item;
+
+      // Use REST API to get history
+      var xhttp = new XMLHttpRequest();
+      var startDate = new Date(Date.now()-24*60*60*1000).toISOString();
+      xhttp.open("GET", CONFIG.serverUrl+'/api/history/period/'+startDate+'?filter_entity_id='+entity.entity_id, false);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send();
+      var response = JSON.parse(xhttp.responseText);
+      // Parse history data for Chart.js
+      var historyData = {
+         data: [],
+         labels: [],
+         numbers: [],
+      };
+      response[0].forEach(function (stateInfo) {
+         historyData.data.push({
+            x: new Date(stateInfo.last_changed),
+            y: parseFloat(stateInfo.state)
+         });
+         historyData.labels.push(  new Date(stateInfo.last_changed));
+         historyData.numbers.push(parseFloat(stateInfo.state));
+      });
+      // Make sure to have canvas in place
+      updateView();
+      $scope.$$postDigest (function (data) {
+         // Draw chart
+         var ctx = document.getElementById('history-popup--canvas').getContext('2d')
+         var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+               labels: historyData.labels,
+               datasets: [{
+                  label: entity.attributes.friendly_name + ' /' + entity.attributes.unit_of_measurement,
+                  borderColor: 'rgb(255, 99, 132)',
+                  data: historyData.numbers,
+                  steppedLine: 'before',
+               }]
+            },
+            options: {
+               maintainAspectRatio: false, // to fit popup automatically
+               scales: {
+                  xAxes: [{
+                     type: 'time',
+                     time: {
+                        displayFormats: {
+                           hour: 'HH:mm', // 24-hour format
+                        },
+                     }
+                  }]
+               },
+            }
+         });
+      });
+   };
+
+   $scope.closePopupHistory = function () {
+      $scope.activeHistory = null;
    };
 
    $scope.openDoorEntry = function (item, entity) {

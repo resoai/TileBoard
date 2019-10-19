@@ -46,6 +46,8 @@
          'scripts/vendors/angular.hammer.js',
          'scripts/vendors/color-picker.js',
          'scripts/vendors/angularjs-gauge.js',
+         'scripts/vendors/moment.min.js', // Required by Chart.js for time axes
+         'scripts/vendors/Chart.min.js',  // Required for history charts
 
          'scripts/models/noty.js',
          'scripts/app.js',
@@ -113,6 +115,20 @@
          </div>
 
          <div class="iframe-popup--close" ng-click="closePopupIframe()">
+            <i class="mdi mdi-close"></i>
+         </div>
+      </div>
+   </div>
+
+   <div class="history-popup"
+        ng-class="itemField('historyClasses', activeHistory, entity)"
+        ng-if="activeHistory && (entity = getItemEntity(activeHistory))">
+      <div class="history-popup-container" ng-style="getPopupHistoryStyles()">
+         <div class="history-popup--canvas">
+            <canvas id="history-popup--canvas"></canvas>
+         </div>
+
+         <div class="history-popup--close" ng-click="closePopupHistory()">
             <i class="mdi mdi-close"></i>
          </div>
       </div>
