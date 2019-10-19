@@ -33,6 +33,7 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
    var activePage = null;
    var cameraList = null;
    var popupIframeStyles = {};
+   var popupHistoryStyles = {};
 
    $scope.entityClick = function (page, item, entity) {
       if(typeof item.action === "function") {
@@ -1538,7 +1539,7 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
       $scope.$$postDigest (function (data) {
          // Draw chart
          var ctx = document.getElementById('history-popup--canvas').getContext('2d')
-         var chart = new Chart(ctx, {
+         var chart = new Chart(ctx, angular.merge({
             type: 'line',
             data: {
                labels: historyData.labels,
@@ -1562,7 +1563,7 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
                   }]
                },
             }
-         });
+         }, $scope.itemField('historyChart', $scope.activeHistory, entity)));
       });
    };
 
