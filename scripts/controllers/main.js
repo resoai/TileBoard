@@ -1515,8 +1515,11 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
 
       // Use REST API to get history
       var xhttp = new XMLHttpRequest();
-      var startDate = new Date(Date.now()-24*60*60*1000).toISOString();
-      xhttp.open("GET", CONFIG.serverUrl+'/api/history/period/'+startDate+'?filter_entity_id='+entity.entity_id, false);
+      var startDate = new Date( Date.now()
+                              - ($scope.itemField('historyOffset', $scope.activeHistory, entity) || 24*60*60*1000)
+                              ).toISOString();
+      var entity_id = $scope.itemField('historyEntity', $scope.activeHistory, entity) || entity.entity_id;
+      xhttp.open("GET", CONFIG.serverUrl+'/api/history/period/'+startDate+'?filter_entity_id='+entity_id, false);
       xhttp.setRequestHeader("Content-type", "application/json");
       xhttp.send();
       var response = JSON.parse(xhttp.responseText);
@@ -1544,7 +1547,7 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
             data: {
                labels: historyData.labels,
                datasets: [{
-                  label: entity.attributes.friendly_name + ' /' + entity.attributes.unit_of_measurement,
+                  label: $scope.states[entity_id].attributes.friendly_name + ' /' + $scope.states[entity_id].attributes.unit_of_measurement,
                   borderColor: 'rgb(255, 99, 132)',
                   data: historyData.numbers,
                   steppedLine: 'before',
