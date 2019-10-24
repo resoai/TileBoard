@@ -451,7 +451,7 @@ function MainController ($scope, $location) {
    $scope.entityState = function (item, entity) {
       if(item.state === false) return null;
 
-      if(typeof item.state != 'undefined') {
+      if(typeof item.state !== 'undefined') {
          if(typeof item.state === "string") {
             return parseString(item.state, entity);
          }
@@ -463,16 +463,11 @@ function MainController ($scope, $location) {
          }
       }
 
-      if(typeof item.states != 'undefined') {
-         if(typeof item.states === "function") {
-            return callFunction(item.states, [item, entity]);
-         }
-         else if(typeof item.states === "object") {
-            return item.states[entity.state] || entity.state;
-         }
-         else {
-            return item.states;
-         }
+      if(typeof item.states === "function") {
+         return callFunction(item.states, [item, entity]);
+      }
+      else if(typeof item.states === "object") {
+         return item.states[entity.state] || entity.state;
       }
 
       return entity.state;
