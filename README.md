@@ -1,7 +1,7 @@
 # TileBoard
 
-This is a simple yet highly customizable dashboard for Home Assistant. The main goal of this project was to create simple dashboard with an easy way to edit and add functionality with minimum knowledge of javascript and html.
-Should you have any ideas or questions please post them on home-assistant forum or create an issue on github.
+This is a simple yet highly customizable dashboard for Home Assistant. The main goal of this project was to create a simple dashboard with an easy way to edit and add functionality with minimum knowledge of javascript and html.
+Should you have any ideas or questions please post them on the home-assistant forum or create an issue on github.
 
 ## Links
 
@@ -21,11 +21,11 @@ Should you have any ideas or questions please post them on home-assistant forum 
 * Pull/download repository
 * Copy `config.example.js` to `config.js` and edit it for your needs
 * Create a directory called `tileboard` inside `www` directory in HA's config path and move all of the files there.
-* TileBoard will be available at `http://HASS_IP:8123/local/tileboard/index.html` and will prompt your for your login credentials after restarting Home Assistant
+* TileBoard will be available at `http://HASS_IP:8123/local/tileboard/index.html` and will prompt you for your login credentials after restarting Home Assistant
 
 ## Configure
 
-`config.js` will initialize a global CONFIG object with following fields:
+`config.js` will initialize a global CONFIG object with the following fields:
 
 ```js
 var CONFIG = {
@@ -34,27 +34,20 @@ var CONFIG = {
     * Default: null. Array supported
     */
    customTheme: null,
-
    /* transition: The transition effect used between Pages
     * Valid options: TRANSITIONS.ANIMATED, TRANSITIONS.ANIMATED_GPU, TRANSITIONS.SIMPLE
     */
    transition: TRANSITIONS.ANIMATED,
-
    /* tileSize: The default size (in pixels) of a tile */
    tileSize: Number,
-
    /* tileMargin: The default margin (in pixels) between tiles */
    tileMargin: Number,
-
    /* entitySize: Enum size of tile's content (SMALL, NORMAL, BIG)*/
    entitySize: ENTITY_SIZES.NORMAL,
-
    /* groupMarginCss: CSS margin statement to override the default margin for groups */
    groupMarginCss: '20px 40px',
-
    /* serverUrl: The URL to your HomeAssistant server */
    serverUrl: 'http://hassio.local:8123',
-
    /* wsUrl: The URL to your HomeAssistant Websocket connection.
     * If HomeAssistant is behind SSL, replace ws:// with wss://
     */
@@ -63,18 +56,15 @@ var CONFIG = {
    /* authToken: Optional Long live token that you can create in your HomeAssistant
     */
    authToken: null,
-
    /* pingConnection: Set to false disable pinging of the websocket connection.
     * Otherwise, a ping will be sent every five seconds, and if a response is not received in 3 seconds,
     * a reconnect will be attempted. If not included in the config file, setting defaults to true.
     */
    pingConnection: true,
-
    /* debug: Toggle for extra debugging information.
     * If enabled, will print info about state changes and entities to console.
     */
    debug: Boolean,
-
    /* timeFormat: 12 for AM/PM marker, 24 for 24 hour time (default) */
    timeFormat: Number,
    
@@ -82,33 +72,26 @@ var CONFIG = {
     * More info here: https://developers.google.com/maps/documentation/maps-static/usage-and-billing
     */
    googleApiKey: null,
-
    /* A Mapbox token is required if you are using device tracker tiles along with Mapbox.
     * More info here: https://www.mapbox.com/maps/
     */
    mapboxToken: null,
-
    /* mapboxStyle: Enter a style URL to change the mapbox style for device tracker tiles.
     * The format of the url is: mapbox://styles/username/style-id
     * If no style URL is entered, the style will default to mapbox/streets-v11.
     */
    mapboxStyle: null,
-
    /* menuPosition: LEFT (default) or BOTTOM */
    menuPosition: MENU_POSITIONS.LEFT,
-
    /* hideScrollbar: Hiding horizontal scrollbar */
    hideScrollbar: false,
    
    /* groupsAlign: Align groups HORIZONTALLY (default) or VERTICALLY */
    groupsAlign: GROUP_ALIGNS.HORIZONTALLY,
-
    /* pages: A list of page objects. See documentation on Pages below */
    pages: [],
-
    /* events: A list of events. See documentation on Events below */
    events: [],
-
    /* screensaver: A digital picture frame with a clock. Appears when    
     * the dashboard has been idle
     * https://github.com/resoai/TileBoard/wiki/Screensaver-configuration
@@ -117,7 +100,6 @@ var CONFIG = {
    screensaver: {
      /* timeout: Idle time (in seconds) before the screensaver will show */
      timeout: 300,
-
      /* slidesTimeout: Amount of time (in seconds) to show each slide */
      slidesTimeout: 10,
      
@@ -125,7 +107,6 @@ var CONFIG = {
      
      /* read more in wiki */
      leftBottom: [{ type: SCREENSAVER_ITEMS.DATETIME }],
-
      /* slides: Array of paths to pictures. */
      slides: [
        {bg: 'images/bg1.jpeg'},
@@ -144,29 +125,24 @@ var CONFIG = {
 
 ### Pages
 
-Page object can have following fields:
+Page object can have the following fields:
 
 ```js
 {
   /* title: The page title (not currently used) */
   title: 'Page title',
-
   /* bg: Link to the background image */
   bg: 'images/bg1.jpg',
-
   /* icon: Page icon for the side menu */
   icon: 'mdi-home-outline', // icon of page (for the side menu)
-
   /* header: object of header for current page
    * https://github.com/resoai/TileBoard/wiki/Header-configuration
    */
   header: DEFAULT_HEADER,
-
   /* tileSize: Override the global tileSize value for the current page
      (optional)
    */
   tileSize: Number,
-
   /* groupMarginCss: Override global groupMarginCss for the current page
    * (optional)
    */
@@ -176,7 +152,6 @@ Page object can have following fields:
    * can be boolean or function that return boolean
    */
   hidden: Boolean | Function,
-
   /* groups: A list of tile groups. See documentation on Tile Groups below */
   groups: [] // list of tile groups
 }
@@ -184,23 +159,20 @@ Page object can have following fields:
 
 ### Tile Groups
 
-We divide tiles (cells) into groups on every page. Group object can have following fields:
+We divide tiles (cells) into groups on every page. Group object can have the following fields:
 
 ```js
 {
   /* title: Title to display above the group */
   title: 'Group title',
-
   /* width: Number of tiles horizontally 
    * (optional) Can be calculated automatically 
    */
   width: 3,
-
   /* height: Number of tiles vertically 
    * (optional) Can be calculated automatically 
    */
   height: 4,
-
   /* groupMarginCss: Override default margin of tiles for the current group
    * (optional)
    */
@@ -210,62 +182,51 @@ We divide tiles (cells) into groups on every page. Group object can have followi
    * can be boolean or function that return boolean
    */
   hidden: Boolean | Function,
-
   /* items: A list of Tile objects. See documentation on Tiles below */
   items: [],
 }
-
 ```
 
 ### Tiles
 
-Tile Object. [Click here for some real life examples](TILE_EXAMPLES.md)
+Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
 
 ```js
 {
   /* position: The x,y position of the tile inside the group */
   position: [1, 0],
-
   /* type: The type of a tile. Valid types are listed below */
   type: TYPES.DEVICE_TRACKER,
-
   /* id: The entity_id of the device from HomeAssistant (e.g. switch.xyz or light.family_room) */
   id: 'device_tracker.google_maps_228',
-
   // OPTIONAL
   /* title: Title for the entity. It will use the friendly_name from HomeAssistant if not specified
    * (optional)
    */
   title: 'Tile title',
-
   /* subtitle: A subtitle to display on the tile
    * (optional)
    */
   subtitle: 'Tile subtitle', // subtitle
-
   /* width: How many tiles wide this tile should be
    * (optional) (default=1)
    */
   width: 2,
-
   /* height: How many tiles tall this tile should be
    * (optional) (default=1)
    */
   height: 2,
-
   /* states: Map a state from HomeAssistant to a different value for TileBoard to display.
    * (optional)
    */
   states: {on: 'Enabled', off: 'Disabled'}, // Object example
   states: function (item, entity) {return entity.state}, // Function example
-
   /* state: Set a custom state for the tile.
    * (optional)
    */
   state: 'Working', // String example
   state: function (item, entity) {return entity.state}, // Function example
   state: false, // Set to false to disable state
-
   /* icons: Set the icon for a tile
    * You can use any of the material design icons from https://materialdesignicons.com/
    * as long as they have been published in the [latest npm package](https://github.com/templarian/materialdesign-svg).
@@ -273,32 +234,25 @@ Tile Object. [Click here for some real life examples](TILE_EXAMPLES.md)
    */
   icons: {on: "mdi-volume-high", off: "mdi-volume-off"}, // Object example
   icons: function (item, entity) {return entity.attributes.icon}, // Function example
-
   /* icon: Set a static icon for a tile
    * You can use any of the material design icons from https://materialdesignicons.com/
    * as long as they have been published in the [latest npm package](https://github.com/templarian/materialdesign-svg).
    */
   icon: 'mdi-phone'
-
   /* bg: Link to a background image for the tile
    * @ and & prefixes are explained below
    */
   bg: '@attributes.entity_picture',
-
   /* bgSuffix: Same as bg, but with the serverUrl included */
   bgSuffix: '@attributes.entity_picture',
-
   /* bgOpacity: A decimal between 0 and 1 for the background opacity */
   bgOpacity: 0.5,
-
   /* theme: Override default theme for the tile */
   theme: TYPES.SWITCH,
-
   /* classes: A list of classes to be appended to the tile element
    * Useful for custom CSS styles
    */
   classes: ["-big-entity"],
-
   /* slides: A list of slide images to use for the background
    * Currently a maximum of 3 slides are supported
    * (optional)
@@ -309,23 +263,17 @@ Tile Object. [Click here for some real life examples](TILE_EXAMPLES.md)
    * can be boolean or function that return boolean
    */
   hidden: Boolean | Function,
-
   /*** TILE SPECIFIC SETTINGS ***/
-
   /** type: SENSOR **/
   /* value: Override sensor value */
   value: '&sensor.bathroom_temp.state',
-
   /* unit: Override default unit of measurement */
   unit: 'kWh',
-
   /* filter: Function for filtering/formatting the entity value */
   filter: function (value) {return value},
-
   /** type: DEVICE_TRACKER **/
   /* slidesDelay: Delay before slide animation starts (optional) */
   slidesDelay: 2,
-
   /* map: Map provider for showing position inside tile
    * Valid options: 'google', 'mapbox', 'yandex'
    */
@@ -339,75 +287,60 @@ Tile Object. [Click here for some real life examples](TILE_EXAMPLES.md)
   
   /* hideEntityPicture: hide entity picture if you want only maps */
   hideEntityPicture: false, 
-
-
   /** type: TEXT_LIST **/
   /* list: List of objects with a title, icon, and value */
   list: [{title: 'Kitchen temp', icon: 'mdi-home', value: '&sensor.kitchen_temp.state'}],
-
   /** type: MEDIA_PLAYER **/
   /* hideSource: Whether the source selector should be hidden
    * Value options: true, false
    */
   hideSource: false,
-
   /** type: SLIDER **/
   /* filter: Function for filtering/formatting the value */
   filter: function (value) {return value},
-
   /* button: Puts slider at the bottom
    * Valid options: true, false
    */
   bottom: true,
-
   /* slider: Object with slider config. See slider documentation below */
   slider: {}
-
   /** type: CAMERA or CAMERA_THUMBNAIL **/
   /* bgSize: CSS background-size property */
    bgSize: 'cover',
-
    /* filter: Function for filtering/formatting the camera URL */
    filter: function (url) {return url},
-
    /* fullscreen: object of type CAMERA or CAMERA_THUMBNAIL to show it in fullscreen */
    fullscreen: {},
-
    /* refresh: Number in milliseconds (or function returning a time) to set the
     * interval for refreshing the camera image
     */
    refresh: Number || Function,
-
    /** type: LIGHT **/
    /* sliders: list of slider object. See slider documentation below */
    sliders: [{}],
    
    /* colorpicker: whether or not the color picker should be used. 
     * Only works with lights that have the rgb_color attribute 
-	* Valid options: true, false 
-	*/
+    * Valid options: true, false 
+    */
    colorpicker: true,
-
    /** type: POPUP_IFRAME **/
    url: String || Function,
    /* optional */
    iframeStyles: Object || Function,
    /* optional */
    iframeClasses: Array || String || Function,
-
    /** type: DIMMER_SWITCH **/
    /* optional (main toggle function)*/
    action: Function,
    /* optional (function will be called with context)*/
    actionPlus: Function,
    actionMinus: Function,
-
    /** type: WEATHER **/
    /* fields: Object mapping available fields and their values.
     * Full documentation on fields is below
     */
    fields: {},
-
    /** type: GAUGE **/
    /* Object containing gauge settings. Refer to https://ashish-chopra.github.io/angular-gauge/#!#documentation */
    settings: {
@@ -439,7 +372,6 @@ Tile Object. [Click here for some real life examples](TILE_EXAMPLES.md)
     * (optional)
     */
    customStyles: Object || Function
-
 }
 ```
 
@@ -532,14 +464,12 @@ Supported weather fields
       'Feels like '
          + '&sensor.dark_sky_apparent_temperature.state'
          + '&sensor.dark_sky_apparent_temperature.attributes.unit_of_measurement',
-
       // another custom line
       'Pressure '
          + '&sensor.dark_sky_pressure.state'
          + '&sensor.dark_sky_pressure.attributes.unit_of_measurement',
    ]
 }
-
 ```
 
 ### @/& Prefixes
@@ -549,7 +479,7 @@ Read more in our [wiki article](https://github.com/resoai/TileBoard/wiki/Templat
 
 ### Events
 
-Events can be fired from Home Assistant to control TileBoard. Useful for automations to do things like opening a camera view if it detects motion, or turning the screen off on a tablet at night or when everyone leaves.
+Events can be fired from Home Assistant to control TileBoard. Useful for automation to do things like opening a camera view if it detects motion, or turning the screen off on a tablet at night or when everyone leaves.
 
 Events in HomeAssistant must be fired with `tileboard` as the event type, and a `command` included in the event data.
 
@@ -559,7 +489,6 @@ events: [
     {
       /* command: The command sent from Home Assistant */
       command: 'screen_off',
-
       /* action: Function to execute when the command is received
        * The variable e contains the full event_data from HomeAssistant
        */
@@ -569,7 +498,6 @@ events: [
         }
       },
     },
-
     /* Example: End the screensaver and make sure Fully Kiosk Browser is in
      * the foreground.
      */
@@ -582,7 +510,6 @@ events: [
         }
       },
     },
-
     /* Example: Play a sound file
      * Include sound_url in the event_data from Home Assistant
      */
@@ -592,7 +519,6 @@ events: [
         playSound(e.sound_url);
       }
     },
-
     /* Example: Open a specific TileBoard page
      * Include a page field in the event_data from Home Assistant
      * that matches the id: of a page in the TileBoard CONFIG
@@ -634,8 +560,8 @@ lower right corner. To set them up, add the following to `events` in `CONFIG`:
 }
 ```
 Example to fire a notification in a [Home Assistant automation](https://www.home-assistant.io/docs/automation/).
-This example will fire a persistant red notification on TileBoard when a specific `binary_sensor` state change from `on` to `off`.
-*Tip : To remove the persistant notification, resend the same one (or another one) with the same `id:` with the `lifetime: 1` added at the end of the `event_data`.*
+This example will fire a persistent red notification on TileBoard when a specific `binary_sensor` state change from `on` to `off`.
+* Tip: To remove the persistent notification, resend the same one (or another one) with the same `id:` with the `lifetime: 1` added at the end of the `event_data`.*
 ```yaml
 - alias: PC2_offline
   initial_state: true
@@ -658,10 +584,10 @@ This example will fire a persistant red notification on TileBoard when a specifi
 
 `type`: Type of notification (for style purposes). Valid types are `error`, `info`, `success`, `warning`
 
-`lifetime`: Length of time (in seconds) for the notification to persist before automatically dismissing. Leave lifetime out of the event_data for persistent messages.
+`lifetime`: Length of time (in seconds) for the notification to persist before automatically dismissing. Leave a lifetime out of the event_data for persistent messages.
 
 ## Custom CSS Styles
-A number of classes are added to each tile depending on the type of tile and state. Custom CSS styles can be applied by creating a `custom.css` file in the `styles` directory.
+Several classes are added to each tile depending on the type of tile and state. Custom CSS styles can be applied by creating a `custom.css` file in the `styles` directory.
 
 ## Tablet and mobile configuration
 For the tablet configuration use `COMPACT` custom theme and reduce padding. 
