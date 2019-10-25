@@ -268,13 +268,18 @@ var HApi = (function () {
       xhr.send(url + '&client_id=' + getOAuthClientId());
 
       xhr.onreadystatechange = function() {
-         if(xhr.status !== 200) {
-            redirectOAuth();
-            callback(null);
-         }
+         if(xhr.readyState !== XMLHttpRequest.DONE) return;
 
-         if(xhr.readyState === 4) {
+         if(xhr.status === 200) {
             callback(JSON.parse(xhr.response));
+            return;
+         }
+         else if(xhr.status >= 400 && xhr.status < 500) {  // authentication error
+            redirectOAuth();
+            return;
+         }
+         else {
+            callback(null);
          }
       };
    };
@@ -301,6 +306,11 @@ var HApi = (function () {
       var url = 'grant_type=refresh_token&refresh_token=' + token.refresh_token;
 
       this._request(url, function (data) {
+         if(!data) {
+            callback(null);
+            return;
+         }
+
          data.refresh_token = token.refresh_token;
 
          saveToken(data);
@@ -313,6 +323,11 @@ var HApi = (function () {
       var url = 'grant_type=authorization_code&code=' + code;
 
       this._request(url, function (data) {
+         if(!data) {
+            callback(null);
+            return;
+         }
+
          saveToken(data);
 
          callback(data);
