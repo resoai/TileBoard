@@ -453,7 +453,7 @@
 <script type="text/ng-template" id="tile.html">
    <div ng-style="itemStyles(page, item, entity)" class="item"
         ng-click="entityClick(page, item, entity)"
-        hm-press="entityLongClick($event, page, item, entity)"
+        hm-press="entityLongPress($event, page, item, entity)"
         hm-recognizer-options="{time: 600}"
         ng-if="(entity = getItemEntity(item)) && !isHidden(item, entity)"
         ng-class="itemClasses(item)">

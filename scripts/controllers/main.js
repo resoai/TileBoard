@@ -74,7 +74,7 @@ function MainController ($scope, $location) {
       }
    };
 
-   $scope.entityLongClick = function ($event, page, item, entity) {
+   $scope.entityLongPress = function ($event, page, item, entity) {
       if(typeof item.longPressAction === "function") {
          return callFunction(item.longPressAction, [item, entity]);
       }
