@@ -280,6 +280,18 @@ Tile Object. [Click here for some real life examples](TILE_EXAMPLES.md)
    */
   icon: 'mdi-phone'
 
+  /* action: Define a custom action on click
+   * You can override the default action for any tile type.
+   * This function will be evaluated, when the user clicks the tile.
+   */
+  action: function(item, entity) {return this.$scope.openPopupIframe(item, entity);}
+
+  /* longPressAction: Define a custom action on long press
+   * You can override the default action for any tile type.
+   * This function will be evaluated, when the user long-presses the tile.
+   */
+  longPressAction: function(item, entity) {return this.$scope.openPopupIframe(item, entity);}
+
   /* bg: Link to a background image for the tile
    * @ and & prefixes are explained below
    */
