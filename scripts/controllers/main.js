@@ -458,32 +458,26 @@ function MainController ($scope, $location) {
    $scope.entityState = function (item, entity) {
       if(item.state === false) return null;
 
-      var res;
-
-      if(item.state) {
+      if(typeof item.state !== 'undefined') {
          if(typeof item.state === "string") {
             return parseString(item.state, entity);
          }
          else if(typeof item.state === "function") {
-            res = callFunction(item.state, [item, entity]);
-            if(res) return res;
+            return callFunction(item.state, [item, entity]);
+         }
+         else {
+            return item.state;
          }
       }
 
-      if(item.states) {
-         if(typeof item.states === "function") {
-            res = callFunction(item.states, [item, entity]);
-         }
-         else if(typeof item.states === "object") {
-            res = item.states[entity.state] || entity.state;
-         }
-
-         if(res) return res;
+      if(typeof item.states === "function") {
+         return callFunction(item.states, [item, entity]);
+      }
+      else if(typeof item.states === "object") {
+         return item.states[entity.state] || entity.state;
       }
 
-      if(!item.state) return entity.state;
-
-      return item.state;
+      return entity.state;
    };
 
    $scope.entityIcon = function (item, entity) {
