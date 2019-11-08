@@ -259,6 +259,17 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
    */
   slides: [{}, {bg: 'images/slide.jpg'}],
   
+  /* action: Define a custom action on click
+   * You can override the default action for any tile type.
+   * This function will be evaluated, when the user clicks the tile.
+   */
+  action: function(item, entity) {return this.$scope.openPopupIframe(item, entity);}
+  /* secondaryAction: Define a custom secondary action (on long press)
+   * You can override the default secondary action for any tile type.
+   * This function will be evaluated, when the user long-presses the tile.
+   */
+  secondaryAction: function(item, entity) {return this.$scope.openPopupIframe(item, entity);}
+
   /* hidden: hide tile (optional)
    * can be boolean or function that return boolean
    */

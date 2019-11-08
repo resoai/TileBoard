@@ -36,6 +36,10 @@ function MainController ($scope, $location) {
    var popupIframeStyles = {};
 
    $scope.entityClick = function (page, item, entity) {
+      if(typeof item.action === "function") {
+         return callFunction(item.action, [item, entity]);
+      }
+
       switch (item.type) {
          case TYPES.SWITCH:
          case TYPES.LIGHT:
@@ -62,7 +66,6 @@ function MainController ($scope, $location) {
 
          case TYPES.ALARM: return $scope.openAlarm(item, entity);
 
-         case TYPES.CUSTOM: return $scope.customTileAction(item, entity);
          case TYPES.DIMMER_SWITCH: return $scope.dimmerToggle(item, entity);
 
          case TYPES.POPUP_IFRAME: return $scope.openPopupIframe(item, entity);
@@ -71,7 +74,11 @@ function MainController ($scope, $location) {
       }
    };
 
-   $scope.entityLongClick = function ($event, page, item, entity) {
+   $scope.entityLongPress = function ($event, page, item, entity) {
+      if(typeof item.secondaryAction === "function") {
+         return callFunction(item.secondaryAction, [item, entity]);
+      }
+
       switch (item.type) {
          case TYPES.LIGHT: return $scope.openLightSliders(item, entity);
       }
@@ -1058,12 +1065,6 @@ function MainController ($scope, $location) {
             entity_id: item.id
          }
       });
-   };
-
-   $scope.customTileAction = function (item, entity) {
-      if(item.action && typeof item.action === "function") {
-         callFunction(item.action, [item, entity]);
-      }
    };
 
    $scope.sendPlayer = function (service, item, entity) {
