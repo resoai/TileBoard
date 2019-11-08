@@ -80,7 +80,7 @@ Manually trigger an automation
 ```
 
 #### CUSTOM
-The custom tile type allows you to fire javascript commands on click/tap.
+The custom tile type does not have handling for any specific entity types. It can be used to, for example, trigger custom actions on pressing.
 
 ![CUSTOM](images/tile-screenshots/CUSTOM.png)
 
@@ -93,6 +93,9 @@ The custom tile type allows you to fire javascript commands on click/tap.
    icon: 'mdi-monitor',
    action: function(item, entity) {
         fully.startScreensaver();
+   },
+   secondaryAction: function(item, entity) {
+      return this.$scope.openPopupIframe(item, entity);
    }
 },
 ```
