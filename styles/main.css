@@ -352,7 +352,7 @@ body {
   opacity: 0;
   position: absolute;
   top: 0;
-  transition: opacity 0.3s;
+  transition: opacity .3s;
   width: 100%;
 }
 .pages-menu--items {
@@ -507,7 +507,6 @@ body {
 .item.-alarm,
 .item.-door_entry,
 .item.-popup_iframe,
-.item.-popup_history,
 .item.-input_datetime,
 .item.-dimmer_switch,
 .item.-scene {
@@ -534,7 +533,6 @@ body {
 .item.-alarm:active,
 .item.-door_entry:active,
 .item.-popup_iframe:active,
-.item.-popup_history:active,
 .item.-input_datetime:active,
 .item.-dimmer_switch:active,
 .item.-scene:active {
@@ -558,7 +556,6 @@ body {
 .item.-alarm .item-clickable,
 .item.-door_entry .item-clickable,
 .item.-popup_iframe .item-clickable,
-.item.-popup_history .item-clickable,
 .item.-input_datetime .item-clickable,
 .item.-dimmer_switch .item-clickable,
 .item.-scene .item-clickable {
@@ -582,7 +579,7 @@ body {
 .item.-device_tracker .item-title,
 .item.-camera .item-title,
 .item.-camera_thumbnail .item-title {
-  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+  text-shadow: /*1px 1px 1px rgba(0,0,0,.2),*/ 1px 1px 0 rgba(0, 0, 0, 0.2);
   background: rgba(0, 0, 0, 0.15);
   right: auto;
   line-height: 22px;
@@ -712,7 +709,7 @@ body {
   right: 6px;
   background: rgba(0, 0, 0, 0.2);
   padding: 1px 6px 2px;
-  font-size: 0.9em;
+  font-size: .9em;
   color: #ffffff;
   border-radius: 1px;
   z-index: 2;
@@ -1027,7 +1024,7 @@ camera-thumbnail div {
 .door-entry-popup-container,
 .iframe-popup-container,
 .history-popup-container {
-  background: #111;border: 1px white;
+  background: #111;
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -1086,7 +1083,11 @@ camera-thumbnail div {
 .camera-popup--iframe,
 .door-entry-popup--iframe,
 .iframe-popup--iframe,
-.history-popup--canvas  {
+.history-popup--iframe,
+.camera-popup--canvas,
+.door-entry-popup--canvas,
+.iframe-popup--canvas,
+.history-popup--canvas {
   width: 100%;
   height: 100%;
   display: inline-block;
@@ -1096,6 +1097,10 @@ camera-thumbnail div {
 .camera-popup--iframe > iframe,
 .door-entry-popup--iframe > iframe,
 .iframe-popup--iframe > iframe,
+.history-popup--iframe > iframe,
+.camera-popup--canvas > canvas,
+.door-entry-popup--canvas > canvas,
+.iframe-popup--canvas > canvas,
 .history-popup--canvas > canvas {
   height: 100%;
   width: 100%;

@@ -1145,7 +1145,7 @@ camera-thumbnail {
    }
 }
 
-.camera-popup, .door-entry-popup, .iframe-popup {
+.camera-popup, .door-entry-popup, .iframe-popup, .history-popup {
    position: fixed;
    top: 0;
    left: 0;
@@ -1206,17 +1206,17 @@ camera-thumbnail {
    }
 
 
-   &--iframe {
+   &--iframe, &--canvas {
       width: 100%;
       height: 100%;
       display: inline-block;
       vertical-align: top;
       background: #222;
+   }
 
-      > iframe {
-         height: 100%;
-         width: 100%;
-      }
+   &--iframe > iframe, &--canvas > canvas {
+      height: 100%;
+      width: 100%;
    }
 
    &--close {
