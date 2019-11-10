@@ -1,4 +1,3 @@
-
 App.directive('tile', function () {
    return {
       restrict: 'AE',
@@ -99,7 +98,7 @@ App.directive('camera', function () {
    }
 });
 
-App.directive('cameraThumbnail', function () {
+App.directive('cameraThumbnail', ['Api', function (Api) {
    return {
       restrict: 'AE',
       replace: true,
@@ -170,7 +169,7 @@ App.directive('cameraThumbnail', function () {
          }
       }
    }
-});
+}]);
 
 
 App.directive('clock', ['$interval', function ($interval) {

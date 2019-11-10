@@ -1,6 +1,4 @@
-App.controller('Main', ['$scope', '$location', MainController]);
-
-function MainController ($scope, $location) {
+App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $location, Api) {
    if(!window.CONFIG) return;
    
    $scope.pages = CONFIG.pages;
@@ -2095,4 +2093,4 @@ function MainController ($scope, $location) {
          pingConnection();
       });
    }
-}
+}]);
