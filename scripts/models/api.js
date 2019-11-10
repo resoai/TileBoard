@@ -7,7 +7,7 @@ App.provider('Api', function () {
       authToken = options.authToken;
    };
 
-   this.$get = [function () {
+   this.$get = ['$http', function ($http) {
       var STATUS_LOADING = 1;
       var STATUS_OPENED = 2;
       var STATUS_READY = 3;
@@ -266,27 +266,26 @@ App.provider('Api', function () {
       };
 
       $Api.prototype._request = function (url, callback) {
-         var xhr = new XMLHttpRequest();
+         var request = {
+            method: 'POST',
+            url: toAbsoluteServerURL('/auth/token'),
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: url + '&client_id=' + getOAuthClientId()
+         }
 
-         xhr.open('POST', toAbsoluteServerURL('/auth/token'));
-         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-         xhr.send(url + '&client_id=' + getOAuthClientId());
-
-         xhr.onreadystatechange = function() {
-            if(xhr.readyState !== XMLHttpRequest.DONE) return;
-
-            if(xhr.status === 200) {
-               callback(JSON.parse(xhr.response));
-               return;
-            }
-            else if(xhr.status >= 400 && xhr.status < 500) {  // authentication error
-               redirectOAuth();
-               return;
-            }
-            else {
-               callback(null);
-            }
-         };
+         $http(request)
+            .then(function (response) {
+               callback(response.data);
+            })
+            .catch(function (response) {
+               if (response.status >= 400 && response.status <= 499) {  // authentication error
+                  redirectOAuth();
+               } else {
+                  callback(null);
+               }
+            });
       };
 
       $Api.prototype._refreshToken = function () {
