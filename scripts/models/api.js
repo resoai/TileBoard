@@ -7,7 +7,7 @@ App.provider('Api', function () {
       authToken = options.authToken;
    };
 
-   this.$get = ['$http', function ($http) {
+   this.$get = ['$http', '$q', function ($http, $q) {
       var STATUS_LOADING = 1;
       var STATUS_OPENED = 2;
       var STATUS_READY = 3;
@@ -40,7 +40,7 @@ App.provider('Api', function () {
       $Api.prototype._init = function () {
          var self = this;
 
-         this._getToken(function (token) {
+         this._getToken().then(function (token) {
             if(token) {
                self._token = token.access_token;
                self._connect.call(self);
@@ -265,7 +265,7 @@ App.provider('Api', function () {
          this.status = status;
       };
 
-      $Api.prototype._request = function (url, callback) {
+      $Api.prototype._request = function (url) {
          var request = {
             method: 'POST',
             url: toAbsoluteServerURL('/auth/token'),
@@ -275,15 +275,15 @@ App.provider('Api', function () {
             data: url + '&client_id=' + getOAuthClientId()
          }
 
-         $http(request)
+         return $http(request)
             .then(function (response) {
-               callback(response.data);
+               return response.data;
             })
             .catch(function (response) {
                if (response.status >= 400 && response.status <= 499) {  // authentication error
                   redirectOAuth();
                } else {
-                  callback(null);
+                  return null;
                }
             });
       };
@@ -291,7 +291,7 @@ App.provider('Api', function () {
       $Api.prototype._refreshToken = function () {
          var self = this;
 
-         this._getFreshToken(function (token) {
+         this._getFreshToken().then(function (token) {
             if(token) {
                self._token = token.access_token;
 
@@ -304,58 +304,59 @@ App.provider('Api', function () {
          });
       };
 
-      $Api.prototype._getFreshToken = function (callback) {
+      $Api.prototype._getFreshToken = function () {
          var token = readToken();
 
          var url = 'grant_type=refresh_token&refresh_token=' + token.refresh_token;
 
-         this._request(url, function (data) {
+         return this._request(url).then(function (data) {
             if(!data) {
-               callback(null);
-               return;
+               return null;
             }
 
             data.refresh_token = token.refresh_token;
 
             saveToken(data);
 
-            callback(data);
+            return data;
          });
       };
 
-      $Api.prototype._getTokenByCode = function (code, callback) {
+      $Api.prototype._getTokenByCode = function (code) {
          var url = 'grant_type=authorization_code&code=' + code;
 
-         this._request(url, function (data) {
+         return this._request(url).then(function (data) {
             if(!data) {
-               callback(null);
-               return;
+               return null;
             }
 
             saveToken(data);
 
-            callback(data);
+            return data;
          });
       };
 
-      $Api.prototype._getToken = function (callback) {
+      $Api.prototype._getToken = function () {
+         var deferred = $q.defer();
+
          if(this._configToken) {
-            return callback({access_token: this._configToken});
+            return deferred.resolve({access_token: this._configToken});
          }
 
          var token = readToken();
 
          if (token) {
-            return this._getFreshToken(callback);
+            return this._getFreshToken();
          }
 
          var params = getLocationArgs();
 
          if (params.oauth && params.code) {
-            return this._getTokenByCode(params.code, callback);
+            return this._getTokenByCode(params.code);
          }
 
          redirectOAuth();
+         return deferred.resolve(null);
       };
 
 
