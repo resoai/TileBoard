@@ -1,16 +1,18 @@
 var App = angular.module('App', ['hmTouchEvents', 'colorpicker', 'angularjs-gauge']);
 
-App.config(function($sceProvider) {
+App.config(function($sceProvider, $locationProvider, ApiProvider) {
    $sceProvider.enabled(false);
-});
 
-App.config(function($locationProvider) {
    $locationProvider.html5Mode({
       enabled: true,
       requireBase: false
    });
-});
 
+   ApiProvider.setInitOptions({
+      wsUrl: CONFIG.wsUrl,
+      authToken: CONFIG.authToken,
+   });
+});
 
 if(!window.CONFIG) {
    var error = 'Please make sure you have "config.js" file and it\'s a valid javascript!\n' +
@@ -18,5 +20,3 @@ if(!window.CONFIG) {
 
    alert(error);
 }
-
-var Api = new HApi(CONFIG.wsUrl, CONFIG.authToken);
