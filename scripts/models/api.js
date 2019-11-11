@@ -337,10 +337,8 @@ App.provider('Api', function () {
       };
 
       $Api.prototype._getToken = function () {
-         var deferred = $q.defer();
-
          if(this._configToken) {
-            return deferred.resolve({access_token: this._configToken});
+            return $q.resolve({access_token: this._configToken});
          }
 
          var token = readToken();
@@ -356,7 +354,7 @@ App.provider('Api', function () {
          }
 
          redirectOAuth();
-         return deferred.resolve(null);
+         return $q.resolve(null);
       };
 
 
