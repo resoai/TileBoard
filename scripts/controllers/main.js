@@ -1543,6 +1543,8 @@ App.controller('Main', ['$scope', '$location', 'Api', '$http', function ($scope,
             historyData.labels.push(  new Date(stateInfo.last_changed));
             historyData.numbers.push(stateInfo.state);
          });
+         historyData.labels.push(Date.now());
+         historyData.numbers.push($scope.states[entity_id].state);
          // Draw chart
          var ctx = document.getElementById('history-popup--canvas').getContext('2d')
          var chart = new Chart(ctx, angular.merge({
@@ -1568,7 +1570,7 @@ App.controller('Main', ['$scope', '$location', 'Api', '$http', function ($scope,
                         displayFormats: {
                            hour: 'HH:mm', // 24-hour format
                         },
-                     }
+                     },
                   }],
                   yAxes: [{
                      type: parseFloat(historyData.numbers[0]) ? 'linear' : 'category',
