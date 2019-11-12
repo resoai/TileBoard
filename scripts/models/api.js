@@ -7,7 +7,7 @@ App.provider('Api', function () {
       authToken = options.authToken;
    };
 
-   this.$get = ['$http', '$q', function ($http, $q) {
+   this.$get = ['$http', '$location', '$q', function ($http, $location, $q) {
       var STATUS_LOADING = 1;
       var STATUS_OPENED = 2;
       var STATUS_READY = 3;
@@ -265,14 +265,14 @@ App.provider('Api', function () {
          this.status = status;
       };
 
-      $Api.prototype._request = function (url) {
+      $Api.prototype._tokenRequest = function (data) {
          var request = {
             method: 'POST',
             url: toAbsoluteServerURL('/auth/token'),
             headers: {
                'Content-Type': 'application/x-www-form-urlencoded'
             },
-            data: url + '&client_id=' + getOAuthClientId()
+            data: data + '&client_id=' + getOAuthClientId()
          }
 
          return $http(request)
@@ -307,9 +307,9 @@ App.provider('Api', function () {
       $Api.prototype._getFreshToken = function () {
          var token = readToken();
 
-         var url = 'grant_type=refresh_token&refresh_token=' + token.refresh_token;
+         var data = 'grant_type=refresh_token&refresh_token=' + token.refresh_token;
 
-         return this._request(url).then(function (data) {
+         return this._tokenRequest(data).then(function (data) {
             if(!data) {
                return null;
             }
@@ -323,9 +323,9 @@ App.provider('Api', function () {
       };
 
       $Api.prototype._getTokenByCode = function (code) {
-         var url = 'grant_type=authorization_code&code=' + code;
+         var data = 'grant_type=authorization_code&code=' + code;
 
-         return this._request(url).then(function (data) {
+         return this._tokenRequest(data).then(function (data) {
             if(!data) {
                return null;
             }
@@ -347,29 +347,20 @@ App.provider('Api', function () {
             return this._getFreshToken();
          }
 
-         var params = getLocationArgs();
+         var params = $location.search();
 
          if (params.oauth && params.code) {
-            return this._getTokenByCode(params.code);
+            var code = params.code;
+
+            // Remove oauth params to clean up the URL.
+            $location.search('oauth', null).search('code', null);
+
+            return this._getTokenByCode(code);
          }
 
          redirectOAuth();
          return $q.resolve(null);
       };
-
-
-      function getLocationArgs() {
-         var qs = window.location.search.split('+').join(' '),
-            params = {},
-            tokens,
-            reg = /[?&]?([^=]+)=([^&]*)/g;
-
-         while (tokens = reg.exec(qs)) {
-            params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
-         }
-
-         return params;
-      }
 
       function saveToken(token) {
          localStorage.setItem(TOKEN_CACHE_KEY, JSON.stringify(token));
