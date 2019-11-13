@@ -352,7 +352,7 @@ body {
   opacity: 0;
   position: absolute;
   top: 0;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
   width: 100%;
 }
 .pages-menu--items {
@@ -579,7 +579,7 @@ body {
 .item.-device_tracker .item-title,
 .item.-camera .item-title,
 .item.-camera_thumbnail .item-title {
-  text-shadow: /*1px 1px 1px rgba(0,0,0,.2),*/ 1px 1px 0 rgba(0, 0, 0, 0.2);
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
   background: rgba(0, 0, 0, 0.15);
   right: auto;
   line-height: 22px;
@@ -709,7 +709,7 @@ body {
   right: 6px;
   background: rgba(0, 0, 0, 0.2);
   padding: 1px 6px 2px;
-  font-size: .9em;
+  font-size: 0.9em;
   color: #ffffff;
   border-radius: 1px;
   z-index: 2;
