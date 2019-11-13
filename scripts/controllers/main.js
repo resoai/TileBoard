@@ -1,4 +1,4 @@
-App.controller('Main', ['$scope', '$location', 'Api', '$http', function ($scope, $location, Api, $http) {
+App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $location, Api) {
    if(!window.CONFIG) return;
    
    $scope.pages = CONFIG.pages;
@@ -1519,13 +1519,11 @@ App.controller('Main', ['$scope', '$location', 'Api', '$http', function ($scope,
                               ).toISOString();
       var entity_id = $scope.itemField('historyEntity', $scope.activeHistory, entity) || entity.entity_id;
 
-      $http({
-         method: 'GET',
-         url: CONFIG.serverUrl+'/api/history/period/'+startDate+'?filter_entity_id='+entity_id,
-         headers: {
-            "Content-type": "application/json"
-         }
-      }).then(function successCallback(response) {
+      var request = {
+         startDate: startDate,
+         filterEntityId: entity_id,
+      };
+      Api.getHistory(request, function (response) {
          // this callback will be called asynchronously
          // when the response is available
 
@@ -1579,10 +1577,6 @@ App.controller('Main', ['$scope', '$location', 'Api', '$http', function ($scope,
             }
          }, $scope.itemField('historyChart', $scope.activeHistory, entity)));
 
-      }, function errorCallback(response) {
-         // called asynchronously if an error occurs
-         // or server returns response with an error status.
-         alert('Error fetching history data.');
       });
 
    };
