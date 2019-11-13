@@ -69,7 +69,6 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
          case TYPES.DIMMER_SWITCH: return $scope.dimmerToggle(item, entity);
 
          case TYPES.POPUP_IFRAME: return $scope.openPopupIframe(item, entity);
-         case TYPES.SENSOR: return $scope.openPopupHistory(item, entity);
 
          case TYPES.INPUT_DATETIME: return $scope.openDatetime(item, entity);
       }
@@ -80,8 +79,11 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
          return callFunction(item.secondaryAction, [item, entity]);
       }
 
+      if (item.history) return $scope.openPopupHistory(item, entity);
+
       switch (item.type) {
          case TYPES.LIGHT: return $scope.openLightSliders(item, entity);
+         case TYPES.SENSOR: return $scope.openPopupHistory(item, entity);
       }
    };
 
@@ -1496,11 +1498,11 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
    };
 
    $scope.getPopupHistoryStyles = function () {
-      if(!$scope.activeHistory || !$scope.activeHistory.historyStyles) return null;
+      if(!$scope.activeHistory || !$scope.activeHistory.history || !$scope.activeHistory.history.styles) return null;
 
       var entity = $scope.getItemEntity($scope.activeHistory);
 
-      var styles = $scope.itemField('historyStyles', $scope.activeHistory, entity);
+      var styles = $scope.itemField('history.styles', $scope.activeHistory, entity);
 
       if(!styles) return null;
 
@@ -1514,49 +1516,39 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
       $scope.activeHistory = item;
       updateView();
 
+      var entityId = $scope.itemField('history.entity', $scope.activeHistory, entity) || entity.entity_id;
       var startDate = new Date( Date.now()
-                              - ($scope.itemField('historyOffset', $scope.activeHistory, entity) || 24*60*60*1000)
+                              - ($scope.itemField('history.offset', $scope.activeHistory, entity) || 24*60*60*1000)
                               ).toISOString();
-      var entity_id = $scope.itemField('historyEntity', $scope.activeHistory, entity) || entity.entity_id;
 
-      var request = {
+      Api.getHistory({
          startDate: startDate,
-         filterEntityId: entity_id,
-      };
-      Api.getHistory(request, function (response) {
-         // this callback will be called asynchronously
-         // when the response is available
+         filterEntityId: entityId,
+      }, function (response) {
 
          // Parse history data for Chart.js
-         var historyData = {
-            data: [],
-            labels: [],
-            numbers: [],
-         };
+         var labels = [];
+         var numbers = [];
          response.data[0].forEach(function (stateInfo) {
-            historyData.data.push({
-               x: new Date(stateInfo.last_changed),
-               y: stateInfo.state
-            });
-            historyData.labels.push(  new Date(stateInfo.last_changed));
-            historyData.numbers.push(stateInfo.state);
+            labels.push(new Date(stateInfo.last_changed));
+            numbers.push(stateInfo.state);
          });
-         historyData.labels.push(Date.now());
-         historyData.numbers.push($scope.states[entity_id].state);
+         labels.push(Date.now());
+         numbers.push($scope.states[entityId].state);
+
          // Draw chart
          var ctx = document.getElementById('history-popup--canvas').getContext('2d')
          var chart = new Chart(ctx, angular.merge({
             type: 'line',
             data: {
-               labels: historyData.labels,
-               yLabels: historyData.numbers.filter(function(value, index, self) {return self.indexOf(value) === index;}).sort().reverse(),
+               labels: labels,
+               yLabels: numbers.filter(function(value, index, self) {return self.indexOf(value) === index;}).sort().reverse(),
                datasets: [{
-                  label: $scope.states[entity_id].attributes.unit_of_measurement ? ($scope.states[entity_id].attributes.friendly_name + ' /' + $scope.states[entity_id].attributes.unit_of_measurement) 
-                                                                                 :  $scope.states[entity_id].attributes.friendly_name,
-                  borderColor: 'rgb(255, 99, 132)',
-                  data: historyData.numbers,
-                  labels: historyData.numbers,
+                  label: $scope.states[entityId].attributes.unit_of_measurement ? ($scope.states[entityId].attributes.friendly_name + ' /' + $scope.states[entityId].attributes.unit_of_measurement) 
+                                                                                :  $scope.states[entityId].attributes.friendly_name,
+                  data: numbers,
                   steppedLine: 'before',
+                  borderColor: 'rgb(255, 99, 132)', // to not paint it black
                }]
             },
             options: {
@@ -1571,11 +1563,16 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
                      },
                   }],
                   yAxes: [{
-                     type: parseFloat(historyData.numbers[0]) ? 'linear' : 'category',
+                     type: parseFloat(numbers[0]) ? 'linear' : 'category', // for categorial or continuous data
                   }]
                },
+               elements: { 
+                  point: { 
+                     radius: 0, // to remove points
+                  }
+               }
             }
-         }, $scope.itemField('historyChart', $scope.activeHistory, entity)));
+         }, $scope.itemField('history.chart', $scope.activeHistory, entity)));
 
       });
 
@@ -1975,8 +1972,10 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
    }
 
    function getItemFieldValue (field, item, entity) {
-      var value = item[field];
-
+      var value = item;
+      field.split('.').forEach(function (f) {
+         value = (typeof value === 'object') ? value[f] : undefined;
+      });
       return parseFieldValue(value, item, entity);
    }
 
