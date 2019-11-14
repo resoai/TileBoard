@@ -111,12 +111,12 @@ App.provider('Api', function () {
          return this.socket.send(wsData);
       };
 
-      $Api.prototype.rest = function (request, callback) {
-         request.url = toAbsoluteServerURL(request.url);
-         request.headers = request.headers || {};
-         request.headers.Authorization = 'Bearer ' + this._token;
-         return $http(request)
-            .then( callback)
+      $Api.prototype.rest = function (request) {
+         var r = request;
+         r.url = toAbsoluteServerURL(r.url);
+         r.headers = r.headers || {};
+         r.headers.Authorization = 'Bearer ' + this._token;
+         return $http(r)
             .catch(function (response) {
                if (response.status >= 400 && response.status <= 499) {  // authentication error
                   redirectOAuth();
@@ -126,16 +126,14 @@ App.provider('Api', function () {
             });
       };
 
-      $Api.prototype.getHistory = function (request, callback) {
-         request.type = 'GET';
-         request.url  = '/api/history/period/';
-         if (request.startDate) {
-            request.url += request.startDate;
-         }
-         if (request.filterEntityId) {
-            request.url += '?filter_entity_id=' + request.filterEntityId;
-         }
-         return this.rest(request, callback);
+      $Api.prototype.getHistory = function (startDate, filterEntityId) {
+         var r = {
+            type: 'GET',
+            url: '/api/history/period/'
+         };
+         if (startDate) r.url += startDate;
+         if (filterEntityId) r.url += '?filter_entity_id=' + filterEntityId;
+         return this.rest(r);
       };
 
       $Api.prototype.subscribeEvents = function (events, callback) {

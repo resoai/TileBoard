@@ -1521,10 +1521,8 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
                               - ($scope.itemField('history.offset', $scope.activeHistory, entity) || 24*60*60*1000)
                               ).toISOString();
 
-      Api.getHistory({
-         startDate: startDate,
-         filterEntityId: entityId,
-      }, function (response) {
+      Api.getHistory(startDate, entityId)
+      .then( function (response) {
 
          // Parse history data for Chart.js
          var labels = [];
