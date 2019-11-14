@@ -1249,10 +1249,23 @@ camera-thumbnail {
 
 .history-popup {
 
+   &-container {
+      height: auto;
+      max-height: 100%;
+
+      &::before {
+         content: '';
+         display: block;
+         padding-bottom: 75%;
+      }
+   }
+
    &--canvas {
-      width: 100%;
-      height: 100%;
-      display: inline-block;
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      bottom: 0; 
+      right: 0; 
       vertical-align: top;
       background: #222;
 

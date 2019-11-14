@@ -1114,10 +1114,21 @@ camera-thumbnail div {
   height: 100%;
   width: 100%;
 }
+.history-popup-container {
+  height: auto;
+  max-height: 100%;
+}
+.history-popup-container::before {
+  content: '';
+  display: block;
+  padding-bottom: 75%;
+}
 .history-popup--canvas {
-  width: 100%;
-  height: 100%;
-  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   vertical-align: top;
   background: #222;
 }
