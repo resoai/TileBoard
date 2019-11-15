@@ -1537,32 +1537,15 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
             // Populate chart data
             $scope.activeHistory.labels = labels;
             $scope.activeHistory.data = [numbers];
-            $scope.activeHistory.datasetOverride = [{
-               steppedLine: 'before',
-            }];
             $scope.activeHistory.series = [$scope.states[entityId].attributes.unit_of_measurement ? ($scope.states[entityId].attributes.friendly_name + ' /' + $scope.states[entityId].attributes.unit_of_measurement) 
                                                                                                   :  $scope.states[entityId].attributes.friendly_name
             ];
             $scope.activeHistory.options = angular.merge({
-               maintainAspectRatio: false, // to fit popup automatically
                scales: {
-                  xAxes: [{
-                     type: 'time',
-                     time: {
-                        displayFormats: {
-                           hour: 'HH:mm', // 24-hour format
-                        },
-                     },
-                  }],
                   yAxes: [{
                      type: parseFloat(numbers[0]) ? 'linear' : 'category', // for categorial or continuous data
                      labels: numbers.filter(function(value, index, self) {return self.indexOf(value) === index;}).sort().reverse(),
                   }]
-               },
-               elements: { 
-                  point: { 
-                     radius: 0, // to remove points
-                  }
                }
             }, $scope.itemField('history.options', $scope.activeHistory, entity));
          });

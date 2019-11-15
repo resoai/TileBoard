@@ -1,6 +1,6 @@
 var App = angular.module('App', ['hmTouchEvents', 'colorpicker', 'angularjs-gauge', 'chart.js']);
 
-App.config(function($sceProvider, $locationProvider, ApiProvider) {
+App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvider) {
    $sceProvider.enabled(false);
 
    $locationProvider.html5Mode({
@@ -12,6 +12,29 @@ App.config(function($sceProvider, $locationProvider, ApiProvider) {
       wsUrl: CONFIG.wsUrl,
       authToken: CONFIG.authToken,
    });
+
+   ChartJsProvider.setOptions('line', {
+      maintainAspectRatio: false, // to fit popup automatically
+      scales: {
+         xAxes: [{
+            type: 'time',
+            time: {
+               displayFormats: {
+                  hour: 'HH:mm', // 24-hour format
+               },
+            },
+         }],
+      },
+      elements: { 
+         point: { 
+            radius: 0, // to remove points
+         },
+         line: {
+            stepped: true
+         }
+       }
+    });
+
 });
 
 if(!window.CONFIG) {
