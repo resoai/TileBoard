@@ -1,4 +1,4 @@
-var App = angular.module('App', ['hmTouchEvents', 'colorpicker', 'angularjs-gauge']);
+var App = angular.module('App', ['hmTouchEvents', 'colorpicker', 'angularjs-gauge', 'chart.js']);
 
 App.config(function($sceProvider, $locationProvider, ApiProvider) {
    $sceProvider.enabled(false);

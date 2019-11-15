@@ -1522,34 +1522,28 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
                               ).toISOString();
 
       Api.getHistory(startDate, entityId)
-      .then( function (response) {
+         .then( function (response) {
 
-         // Parse history data for Chart.js
-         var labels = [];
-         var numbers = [];
-         response.data[0].forEach(function (stateInfo) {
-            labels.push(new Date(stateInfo.last_changed));
-            numbers.push(stateInfo.state);
-         });
-         labels.push(Date.now());
-         numbers.push($scope.states[entityId].state);
+            // Parse history data for Chart.js
+            var labels = [];
+            var numbers = [];
+            response.data[0].forEach(function (stateInfo) {
+               labels.push(new Date(stateInfo.last_changed));
+               numbers.push(stateInfo.state);
+            });
+            labels.push(Date.now());
+            numbers.push($scope.states[entityId].state);
 
-         // Draw chart
-         var ctx = document.getElementById('history-popup--canvas').getContext('2d')
-         var chart = new Chart(ctx, angular.merge({
-            type: 'line',
-            data: {
-               labels: labels,
-               yLabels: numbers.filter(function(value, index, self) {return self.indexOf(value) === index;}).sort().reverse(),
-               datasets: [{
-                  label: $scope.states[entityId].attributes.unit_of_measurement ? ($scope.states[entityId].attributes.friendly_name + ' /' + $scope.states[entityId].attributes.unit_of_measurement) 
-                                                                                :  $scope.states[entityId].attributes.friendly_name,
-                  data: numbers,
-                  steppedLine: 'before',
-                  borderColor: 'rgb(255, 99, 132)', // to not paint it black
-               }]
-            },
-            options: {
+            // Populate chart data
+            $scope.activeHistory.labels = labels;
+            $scope.activeHistory.data = [numbers];
+            $scope.activeHistory.datasetOverride = [{
+               steppedLine: 'before',
+            }];
+            $scope.activeHistory.series = [$scope.states[entityId].attributes.unit_of_measurement ? ($scope.states[entityId].attributes.friendly_name + ' /' + $scope.states[entityId].attributes.unit_of_measurement) 
+                                                                                                  :  $scope.states[entityId].attributes.friendly_name
+            ];
+            $scope.activeHistory.options = angular.merge({
                maintainAspectRatio: false, // to fit popup automatically
                scales: {
                   xAxes: [{
@@ -1562,6 +1556,7 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
                   }],
                   yAxes: [{
                      type: parseFloat(numbers[0]) ? 'linear' : 'category', // for categorial or continuous data
+                     labels: numbers.filter(function(value, index, self) {return self.indexOf(value) === index;}).sort().reverse(),
                   }]
                },
                elements: { 
@@ -1569,10 +1564,8 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
                      radius: 0, // to remove points
                   }
                }
-            }
-         }, $scope.itemField('history.chart', $scope.activeHistory, entity)));
-
-      });
+            }, $scope.itemField('history.options', $scope.activeHistory, entity));
+         });
 
    };
 

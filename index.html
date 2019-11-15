@@ -48,6 +48,7 @@
          'scripts/vendors/angularjs-gauge.js',
          'scripts/vendors/moment.min.js', // Required by Chart.js for time axes
          'scripts/vendors/Chart.min.js',  // Required for history charts
+         'scripts/vendors/angular-chart.min.js',  // Required for linking charts to angular.js
 
          'scripts/models/noty.js',
          'scripts/app.js',
@@ -125,7 +126,13 @@
         ng-if="activeHistory && (entity = getItemEntity(activeHistory))">
       <div class="history-popup-container" ng-style="getPopupHistoryStyles()">
          <div class="history-popup--canvas">
-            <canvas id="history-popup--canvas"></canvas>
+            <canvas id="history-popup--canvas" 
+               class="chart chart-line"
+               chart-data="activeHistory.data"
+               chart-labels="activeHistory.labels"
+               chart-series="activeHistory.series"
+               chart-options="activeHistory.options"
+               chart-dataset-override="activeHistory.datasetOverride"></canvas>
          </div>
 
          <div class="history-popup--close" ng-click="closePopupHistory()">
