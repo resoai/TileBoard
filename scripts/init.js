@@ -32,8 +32,12 @@ App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvide
          line: {
             stepped: true
          }
-       }
-    });
+      },
+      tooltips: {
+         mode: 'index',
+         intersect: false
+      }
+   });
 
 });
 
