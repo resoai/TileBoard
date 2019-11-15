@@ -1131,6 +1131,7 @@ camera-thumbnail div {
   right: 0;
   vertical-align: top;
   background: #222;
+  padding: 6px;
 }
 .history-popup--canvas > canvas {
   height: 100%;

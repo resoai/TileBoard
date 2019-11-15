@@ -33,6 +33,9 @@ App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvide
             stepped: true
          }
       },
+      legend: {
+         display: true
+      },
       tooltips: {
          mode: 'index',
          intersect: false

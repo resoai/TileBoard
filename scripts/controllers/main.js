@@ -1522,12 +1522,12 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
                               ).toISOString();
 
       Api.getHistory(startDate, entityId)
-         .then( function (response) {
+         .then( function (data) {
 
             // Parse history data for Chart.js
             var labels = [];
             var numbers = [];
-            response.data[0].forEach(function (stateInfo) {
+            data[0].forEach(function (stateInfo) {
                labels.push(new Date(stateInfo.last_changed));
                numbers.push(stateInfo.state);
             });
@@ -1535,11 +1535,11 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
             numbers.push($scope.states[entityId].state);
 
             // Populate chart data
+            var seriesName = data[0][0].attributes.friendly_name;
+            var seriesUnit = data[0][0].attributes.unit_of_measurement;
             $scope.activeHistory.labels = labels;
             $scope.activeHistory.data = [numbers];
-            $scope.activeHistory.series = [$scope.states[entityId].attributes.unit_of_measurement ? ($scope.states[entityId].attributes.friendly_name + ' /' + $scope.states[entityId].attributes.unit_of_measurement) 
-                                                                                                  :  $scope.states[entityId].attributes.friendly_name
-            ];
+            $scope.activeHistory.series = [seriesUnit ? (seriesName + ' /' + seriesUnit) : seriesName ];
             $scope.activeHistory.options = angular.merge({
                scales: {
                   yAxes: [{
