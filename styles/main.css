@@ -1008,7 +1008,8 @@ camera-thumbnail div {
 }
 .camera-popup,
 .door-entry-popup,
-.iframe-popup {
+.iframe-popup,
+.history-popup {
   position: fixed;
   top: 0;
   left: 0;
@@ -1021,7 +1022,8 @@ camera-thumbnail div {
 }
 .camera-popup-container,
 .door-entry-popup-container,
-.iframe-popup-container {
+.iframe-popup-container,
+.history-popup-container {
   background: #111;
   height: 100%;
   width: 100%;
@@ -1029,6 +1031,30 @@ camera-thumbnail div {
   white-space: nowrap;
   position: relative;
   margin: auto;
+}
+.camera-popup--close,
+.door-entry-popup--close,
+.iframe-popup--close,
+.history-popup--close {
+  position: absolute;
+  text-align: center;
+  right: 15px;
+  top: 15px;
+  color: rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.2);
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  font-size: 50px;
+  z-index: 3;
+  cursor: pointer;
+}
+.camera-popup--close:active,
+.door-entry-popup--close:active,
+.iframe-popup--close:active,
+.history-popup--close:active {
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(0, 0, 0, 0.3);
 }
 .camera-popup--list,
 .door-entry-popup--list,
@@ -1088,27 +1114,28 @@ camera-thumbnail div {
   height: 100%;
   width: 100%;
 }
-.camera-popup--close,
-.door-entry-popup--close,
-.iframe-popup--close {
-  position: absolute;
-  text-align: center;
-  right: 15px;
-  top: 15px;
-  color: rgba(255, 255, 255, 0.6);
-  background: rgba(0, 0, 0, 0.2);
-  width: 70px;
-  height: 70px;
-  line-height: 70px;
-  font-size: 50px;
-  z-index: 3;
-  cursor: pointer;
+.history-popup-container {
+  height: auto;
+  max-height: 100%;
 }
-.camera-popup--close:active,
-.door-entry-popup--close:active,
-.iframe-popup--close:active {
-  color: rgba(255, 255, 255, 0.8);
-  background: rgba(0, 0, 0, 0.3);
+.history-popup-container::before {
+  content: '';
+  display: block;
+  padding-bottom: 75%;
+}
+.history-popup--canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  vertical-align: top;
+  background: #222;
+  padding: 6px;
+}
+.history-popup--canvas > canvas {
+  height: 100%;
+  width: 100%;
 }
 .door-entry-popup--tiles {
   position: absolute;
@@ -1483,12 +1510,6 @@ camera-thumbnail div {
 }
 .weather-list-header {
   opacity: 0.5;
-}
-.weather-list-header--icon {
-  text-align: center;
-}
-.weather-list-header--primary {
-  text-align: left;
 }
 .weather-list-header--secondary {
   text-align: right;

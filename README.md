@@ -383,6 +383,16 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
     * (optional)
     */
    customStyles: Object || Function
+
+   /* Object containing history settings */
+   history: { // If this is present in a tile, a history popup is created on secondary action
+      entity: 'sensor.temperatur_innen_gefiltert', // Entity ID to render history for. Default: entity id of the tile itself
+      offset: 24*3600*1000*5, // Start point of the history counting from now(). Default: one day
+      options: { elements: {point: {radius: 3}}}, // Chart options. Refer to https://www.chartjs.org/.
+      styles: { border: '1px solid red'}, // Styles to apply to the <div> containng the chart. Default according to main.css
+      classes: 'clock--colon', // Classes to apply to the history popup. Default according to main.css
+   },
+
 }
 ```
 

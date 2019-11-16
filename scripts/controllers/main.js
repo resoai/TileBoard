@@ -19,6 +19,7 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
    $scope.activeCamera = null;
    $scope.activeDoorEntry = null;
    $scope.activeIframe = null;
+   $scope.activeHistory = null;
 
    $scope.alarmCode = null;
    $scope.activeAlarm = null;
@@ -32,6 +33,7 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
    var activePage = null;
    var cameraList = null;
    var popupIframeStyles = {};
+   var popupHistoryStyles = {};
 
    $scope.entityClick = function (page, item, entity) {
       if(typeof item.action === "function") {
@@ -77,8 +79,11 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
          return callFunction(item.secondaryAction, [item, entity]);
       }
 
+      if (item.history) return $scope.openPopupHistory(item, entity);
+
       switch (item.type) {
          case TYPES.LIGHT: return $scope.openLightSliders(item, entity);
+         case TYPES.SENSOR: return $scope.openPopupHistory(item, entity);
       }
    };
 
@@ -1492,6 +1497,65 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
       $scope.activeIframe = null;
    };
 
+   $scope.getPopupHistoryStyles = function () {
+      if(!$scope.activeHistory || !$scope.activeHistory.history || !$scope.activeHistory.history.styles) return null;
+
+      var entity = $scope.getItemEntity($scope.activeHistory);
+
+      var styles = $scope.itemField('history.styles', $scope.activeHistory, entity);
+
+      if(!styles) return null;
+
+      for (var k in popupHistoryStyles) delete popupHistoryStyles[k];
+      for (k in styles) popupHistoryStyles[k] = styles[k];
+
+      return popupHistoryStyles;
+   };
+
+   $scope.openPopupHistory = function (item, entity) {
+      $scope.activeHistory = item;
+      updateView();
+
+      var entityId = $scope.itemField('history.entity', $scope.activeHistory, entity) || entity.entity_id;
+      var startDate = new Date( Date.now()
+                              - ($scope.itemField('history.offset', $scope.activeHistory, entity) || 24*60*60*1000)
+                              ).toISOString();
+
+      Api.getHistory(startDate, entityId)
+         .then( function (data) {
+
+            // Parse history data for Chart.js
+            var labels = [];
+            var numbers = [];
+            data[0].forEach(function (stateInfo) {
+               labels.push(new Date(stateInfo.last_changed));
+               numbers.push(stateInfo.state);
+            });
+            labels.push(Date.now());
+            numbers.push($scope.states[entityId].state);
+
+            // Populate chart data
+            var seriesName = data[0][0].attributes.friendly_name;
+            var seriesUnit = data[0][0].attributes.unit_of_measurement;
+            $scope.activeHistory.labels = labels;
+            $scope.activeHistory.data = [numbers];
+            $scope.activeHistory.series = [seriesUnit ? (seriesName + ' /' + seriesUnit) : seriesName ];
+            $scope.activeHistory.options = angular.merge({
+               scales: {
+                  yAxes: [{
+                     type: parseFloat(numbers[0]) ? 'linear' : 'category', // for categorial or continuous data
+                     labels: numbers.filter(function(value, index, self) {return self.indexOf(value) === index;}).sort().reverse(),
+                  }]
+               }
+            }, $scope.itemField('history.options', $scope.activeHistory, entity));
+         });
+
+   };
+
+   $scope.closePopupHistory = function () {
+      $scope.activeHistory = null;
+   };
+
    $scope.openDoorEntry = function (item, entity) {
       $scope.activeDoorEntry = item;
 
@@ -1882,8 +1946,10 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
    }
 
    function getItemFieldValue (field, item, entity) {
-      var value = item[field];
-
+      var value = item;
+      field.split('.').forEach(function (f) {
+         value = (typeof value === 'object') ? value[f] : undefined;
+      });
       return parseFieldValue(value, item, entity);
    }
 
