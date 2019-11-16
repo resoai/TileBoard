@@ -20,6 +20,8 @@ App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvide
       authToken: CONFIG.authToken,
    });
 
+   var clock24 = window.CONFIG.timeFormat === 24;
+
    ChartJsProvider.setOptions('line', {
       maintainAspectRatio: false, // to fit popup automatically
       scales: {
@@ -27,7 +29,11 @@ App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvide
             type: 'time',
             time: {
                displayFormats: {
-                  hour: window.CONFIG.timeFormat === 24 ? 'H:mm' : 'h:mmA',
+                  datetime: clock24 ? 'MMM D, YYYY, H:mm:ss' : 'MMM D, YYYY, h:mm:ss a',
+                  hour: clock24 ? 'H:mm' : 'h:mm a',
+                  millisecond: clock24 ? 'H:mm:ss.SSS' : 'h:mm:ss.SSS a',
+                  minute: clock24 ? 'H:mm' : 'h:mm a',
+                  second: clock24 ? 'H:mm:ss' : 'h:mm:ss a'
                },
             },
          }],
