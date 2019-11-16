@@ -1,6 +1,6 @@
 if(!window.CONFIG) {
-   var error = 'Please make sure you have "config.js" file and it\'s a valid javascript!\n' +
-      'If you running TileBoard for the first time, please rename "config.example.js" to "config.js"';
+   var error = 'Please make sure that you have "config.js" file and it is a valid javascript!\n' +
+      'If you are running TileBoard for the first time, please rename "config.example.js" to "config.js"';
 
    alert(error);
 }
