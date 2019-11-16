@@ -48,6 +48,7 @@ App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvide
          }
       },
       legend: {
+         align: 'start',
          display: true
       },
       tooltips: {
