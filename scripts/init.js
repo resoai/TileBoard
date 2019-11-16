@@ -1,3 +1,10 @@
+if(!window.CONFIG) {
+   var error = 'Please make sure you have "config.js" file and it\'s a valid javascript!\n' +
+      'If you running TileBoard for the first time, please rename "config.example.js" to "config.js"';
+
+   alert(error);
+}
+
 var App = angular.module('App', ['hmTouchEvents', 'colorpicker', 'angularjs-gauge', 'chart.js']);
 
 App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvider) {
@@ -20,7 +27,7 @@ App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvide
             type: 'time',
             time: {
                displayFormats: {
-                  hour: 'HH:mm', // 24-hour format
+                  hour: window.CONFIG.timeFormat === 24 ? 'H:mm' : 'h:mmA',
                },
             },
          }],
@@ -43,10 +50,3 @@ App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvide
    });
 
 });
-
-if(!window.CONFIG) {
-   var error = 'Please make sure you have "config.js" file and it\'s a valid javascript!\n' +
-      'If you running TileBoard for the first time, please rename "config.example.js" to "config.js"';
-
-   alert(error);
-}
