@@ -37,6 +37,7 @@ App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvide
             radius: 0, // to remove points
          },
          line: {
+            borderWidth: 1,
             stepped: true
          }
       },
