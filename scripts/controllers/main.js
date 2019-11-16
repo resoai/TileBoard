@@ -1498,11 +1498,11 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
    };
 
    $scope.getPopupHistoryStyles = function () {
-      if(!$scope.activeHistory || !$scope.activeHistory.history || !$scope.activeHistory.history.styles) return null;
+      if(!$scope.activeHistory || !$scope.activeHistory.item.history || !$scope.activeHistory.item.history.styles) return null;
 
-      var entity = $scope.getItemEntity($scope.activeHistory);
+      var entity = $scope.getItemEntity($scope.activeHistory.item);
 
-      var styles = $scope.itemField('history.styles', $scope.activeHistory, entity);
+      var styles = $scope.itemField('history.styles', $scope.activeHistory.item, entity);
 
       if(!styles) return null;
 
@@ -1513,16 +1513,30 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
    };
 
    $scope.openPopupHistory = function (item, entity) {
-      $scope.activeHistory = item;
-      updateView();
+      $scope.activeHistory = {
+         item: angular.copy(item),
+         isLoading: true,
+         errorText: null
+      };
 
-      var entityId = $scope.itemField('history.entity', $scope.activeHistory, entity) || entity.entity_id;
-      var startDate = new Date( Date.now()
-                              - ($scope.itemField('history.offset', $scope.activeHistory, entity) || 24*60*60*1000)
-                              ).toISOString();
+      var entityId = $scope.itemField('history.entity', item, entity) || entity.entity_id;
+
+      if(!entityId) {
+         $scope.activeHistory.errorText = 'No entity was specified';
+         return;
+      }
+
+      var day = 24 * 60 * 60 * 1000;
+      var startDate = new Date(Date.now() - ($scope.itemField('history.offset', item, entity) || day)).toISOString();
 
       Api.getHistory(startDate, entityId)
-         .then( function (data) {
+         .then(function (data) {
+            $scope.activeHistory.isLoading = false;
+
+            if(data.length === 0) {
+               $scope.activeHistory.errorText = 'No history data found';
+               return;
+            }
 
             // Parse history data for Chart.js
             var labels = [];
@@ -1547,9 +1561,8 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
                      labels: numbers.filter(function(value, index, self) {return self.indexOf(value) === index;}).sort().reverse(),
                   }]
                }
-            }, $scope.itemField('history.options', $scope.activeHistory, entity));
+            }, $scope.itemField('history.options', item, entity));
          });
-
    };
 
    $scope.closePopupHistory = function () {

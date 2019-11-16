@@ -123,10 +123,14 @@
 
    <div class="history-popup"
         ng-class="itemField('history.classes', activeHistory, entity)"
-        ng-if="activeHistory && (entity = getItemEntity(activeHistory))">
+        ng-if="activeHistory && (entity = getItemEntity(activeHistory.item))">
       <div class="history-popup-container" ng-style="getPopupHistoryStyles()">
          <div class="history-popup--canvas">
-            <canvas id="history-popup--canvas" 
+            <div class="history-popup--placeholder">
+               <span ng-if="activeHistory.isLoading && !activeHistory.errorText">Loading history data...</span>
+               <span ng-if="activeHistory.errorText">{{ activeHistory.errorText }}</span>
+            </div>
+            <canvas id="history-popup--canvas"
                class="chart chart-line"
                chart-data="activeHistory.data"
                chart-labels="activeHistory.labels"

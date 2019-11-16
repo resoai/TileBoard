@@ -1123,6 +1123,12 @@ camera-thumbnail div {
   display: block;
   padding-bottom: 75%;
 }
+.history-popup--placeholder {
+  position: absolute;
+  text-align: center;
+  top: calc(50% - 10px);
+  width: 100%;
+}
 .history-popup--canvas {
   position: absolute;
   top: 0;
