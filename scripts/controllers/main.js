@@ -1548,18 +1548,24 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
             labels.push(Date.now());
             numbers.push($scope.states[entityId].state);
 
-            var yAxisLabels = numbers.filter(function(value, index, self) {
-               return self.indexOf(value) === index;
-            }).sort().reverse();
-            // Special handling for labels when there is only one label present in history.
-            if(yAxisLabels.length === 1) {
-               // on/off - add the other state so that y axis positioning is consistent.
-               if(['on', 'off'].indexOf(yAxisLabels[0]) !== -1) {
-                  yAxisLabels = ['on', 'off'];
-               } else {
-                  // Add dummy states to vertically center the actual state.
-                  yAxisLabels.push('');
-                  yAxisLabels.unshift('');
+            // Either categorial or continuous data.
+            var yAxisType = parseFloat(numbers[0]) ? 'linear' : 'category';
+            var yAxisLabels = null;
+
+            if(yAxisType === 'category') {
+               yAxisLabels = numbers.filter(function(value, index, self) {
+                  return self.indexOf(value) === index;
+               }).sort().reverse();
+               // Special handling for labels when there is only one label present in history.
+               if(yAxisLabels.length === 1) {
+                  // on/off - add the other state so that y axis positioning is consistent.
+                  if(['on', 'off'].indexOf(yAxisLabels[0]) !== -1) {
+                     yAxisLabels = ['on', 'off'];
+                  } else {
+                     // Add dummy states to vertically center the actual state.
+                     yAxisLabels.push('');
+                     yAxisLabels.unshift('');
+                  }
                }
             }
 
@@ -1572,7 +1578,7 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
             $scope.activeHistory.options = angular.merge({
                scales: {
                   yAxes: [{
-                     type: parseFloat(numbers[0]) ? 'linear' : 'category', // for categorial or continuous data
+                     type: yAxisType,
                      labels: yAxisLabels,
                   }]
                }
