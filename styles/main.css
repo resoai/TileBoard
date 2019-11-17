@@ -1042,11 +1042,10 @@ camera-thumbnail div {
   top: 15px;
   color: rgba(255, 255, 255, 0.6);
   background: rgba(0, 0, 0, 0.2);
-  width: 70px;
-  height: 70px;
-  line-height: 70px;
-  font-size: 50px;
-  z-index: 3;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 40px;
   cursor: pointer;
 }
 .camera-popup--close:active,

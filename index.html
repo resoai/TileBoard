@@ -99,10 +99,10 @@
                                  freezed="false"></camera-thumbnail>
             </div>
          </div>
+      </div>
 
-         <div class="camera-popup--close" ng-click="closeCamera()">
-            <i class="mdi mdi-close"></i>
-         </div>
+      <div class="camera-popup--close" ng-click="closeCamera()">
+         <i class="mdi mdi-close"></i>
       </div>
    </div>
 
@@ -114,10 +114,10 @@
             <iframe ng-src="{{ itemField('url', activeIframe, entity) }}"
                     iframe-tile="activeIframe" frameborder="0"></iframe>
          </div>
+      </div>
 
-         <div class="iframe-popup--close" ng-click="closePopupIframe()">
-            <i class="mdi mdi-close"></i>
-         </div>
+      <div class="iframe-popup--close" ng-click="closePopupIframe()">
+         <i class="mdi mdi-close"></i>
       </div>
    </div>
 
@@ -137,10 +137,10 @@
                chart-series="activeHistory.series"
                chart-options="activeHistory.options"></canvas>
          </div>
+      </div>
 
-         <div class="history-popup--close" ng-click="closePopupHistory()">
-            <i class="mdi mdi-close"></i>
-         </div>
+      <div class="history-popup--close" ng-click="closePopupHistory()">
+         <i class="mdi mdi-close"></i>
       </div>
    </div>
 
@@ -164,10 +164,10 @@
          <div class="door-entry-popup--tiles">
             <div tile ng-repeat="item in activeDoorEntry.layout.tiles track by $index"></div>
          </div>
+      </div>
 
-         <div class="door-entry-popup--close" ng-click="closeDoorEntry()">
-            <i class="mdi mdi-close"></i>
-         </div>
+      <div class="door-entry-popup--close" ng-click="closeDoorEntry()">
+         <i class="mdi mdi-close"></i>
       </div>
    </div>
 
