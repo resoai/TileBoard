@@ -1548,15 +1548,20 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
             labels.push(Date.now());
             numbers.push($scope.states[entityId].state);
 
-            var yAxesLabels = numbers.filter(function(value, index, self) {
+            var yAxisLabels = numbers.filter(function(value, index, self) {
                return self.indexOf(value) === index;
-            });
-            // Special handling for on/off states when only one state is present in history.
-            // Add the other state so that y axis positioning of values is as with both present.
-            if(yAxesLabels.length === 1 && ['on', 'off'].indexOf(yAxesLabels[0]) !== -1) {
-               yAxesLabels.push(yAxesLabels[0] === 'on' ? 'off' : 'on');
+            }).sort().reverse();
+            // Special handling for labels when there is only one label present in history.
+            if(yAxisLabels.length === 1) {
+               // on/off - add the other state so that y axis positioning is consistent.
+               if(['on', 'off'].indexOf(yAxisLabels[0]) !== -1) {
+                  yAxisLabels = ['on', 'off'];
+               } else {
+                  // Add dummy states to vertically center the actual state.
+                  yAxisLabels.push('');
+                  yAxisLabels.unshift('');
+               }
             }
-            yAxesLabels.sort().reverse();
 
             // Populate chart data
             var seriesName = data[0][0].attributes.friendly_name;
@@ -1568,7 +1573,7 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
                scales: {
                   yAxes: [{
                      type: parseFloat(numbers[0]) ? 'linear' : 'category', // for categorial or continuous data
-                     labels: yAxesLabels,
+                     labels: yAxisLabels,
                   }]
                }
             }, $scope.itemField('history.options', item, entity));
