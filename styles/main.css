@@ -1032,14 +1032,25 @@ camera-thumbnail div {
   position: relative;
   margin: auto;
 }
+.camera-popup--title,
+.door-entry-popup--title,
+.iframe-popup--title,
+.history-popup--title {
+  background: #222;
+  font-size: 20px;
+  height: 50px;
+  line-height: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 10px;
+  white-space: nowrap;
+}
 .camera-popup--close,
 .door-entry-popup--close,
 .iframe-popup--close,
 .history-popup--close {
-  position: absolute;
+  float: right;
   text-align: center;
-  right: 15px;
-  top: 15px;
   color: rgba(255, 255, 255, 0.6);
   background: rgba(0, 0, 0, 0.2);
   width: 50px;
@@ -1117,7 +1128,11 @@ camera-thumbnail div {
   height: auto;
   max-height: 100%;
 }
-.history-popup-container::before {
+.history-popup--canvas-container {
+  height: auto;
+  max-height: 100%;
+}
+.history-popup--canvas-container::before {
   content: '';
   display: block;
   padding-bottom: 75%;

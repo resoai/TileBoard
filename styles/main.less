@@ -1169,11 +1169,20 @@ camera-thumbnail {
       margin: auto;
    }
 
+   &--title {
+      background: #222;
+      font-size: 20px;
+      height: 50px;
+      line-height: 50px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-left: 10px;
+      white-space: nowrap;
+   }
+
    &--close {
-      position: absolute;
+      float: right;
       text-align: center;
-      right: 15px;
-      top: 15px;
       color: rgba(255,255,255,.6);
       background: rgba(0,0,0,0.2);
       width: 50px;
@@ -1249,6 +1258,11 @@ camera-thumbnail {
 .history-popup {
 
    &-container {
+      height: auto;
+      max-height: 100%;
+   }
+
+   &--canvas-container {
       height: auto;
       max-height: 100%;
 
