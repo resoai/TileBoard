@@ -1,3 +1,10 @@
+if(!window.CONFIG) {
+   var error = 'Please make sure that you have "config.js" file and it is a valid javascript!\n' +
+      'If you are running TileBoard for the first time, please rename "config.example.js" to "config.js"';
+
+   alert(error);
+}
+
 var App = angular.module('App', ['hmTouchEvents', 'colorpicker', 'angularjs-gauge', 'chart.js']);
 
 App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvider) {
@@ -13,6 +20,8 @@ App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvide
       authToken: CONFIG.authToken,
    });
 
+   var clock24 = window.CONFIG.timeFormat === 24;
+
    ChartJsProvider.setOptions('line', {
       maintainAspectRatio: false, // to fit popup automatically
       scales: {
@@ -20,7 +29,11 @@ App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvide
             type: 'time',
             time: {
                displayFormats: {
-                  hour: 'HH:mm', // 24-hour format
+                  datetime: clock24 ? 'MMM D, YYYY, H:mm:ss' : 'MMM D, YYYY, h:mm:ss a',
+                  hour: clock24 ? 'H:mm' : 'h:mm a',
+                  millisecond: clock24 ? 'H:mm:ss.SSS' : 'h:mm:ss.SSS a',
+                  minute: clock24 ? 'H:mm' : 'h:mm a',
+                  second: clock24 ? 'H:mm:ss' : 'h:mm:ss a'
                },
             },
          }],
@@ -30,10 +43,12 @@ App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvide
             radius: 0, // to remove points
          },
          line: {
+            borderWidth: 1,
             stepped: true
          }
       },
       legend: {
+         align: 'start',
          display: true
       },
       tooltips: {
@@ -43,10 +58,3 @@ App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvide
    });
 
 });
-
-if(!window.CONFIG) {
-   var error = 'Please make sure you have "config.js" file and it\'s a valid javascript!\n' +
-      'If you running TileBoard for the first time, please rename "config.example.js" to "config.js"';
-
-   alert(error);
-}

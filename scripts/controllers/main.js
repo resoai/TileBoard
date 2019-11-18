@@ -1498,11 +1498,11 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
    };
 
    $scope.getPopupHistoryStyles = function () {
-      if(!$scope.activeHistory || !$scope.activeHistory.history || !$scope.activeHistory.history.styles) return null;
+      if(!$scope.activeHistory || !$scope.activeHistory.item.history || !$scope.activeHistory.item.history.styles) return null;
 
-      var entity = $scope.getItemEntity($scope.activeHistory);
+      var entity = $scope.getItemEntity($scope.activeHistory.item);
 
-      var styles = $scope.itemField('history.styles', $scope.activeHistory, entity);
+      var styles = $scope.itemField('history.styles', $scope.activeHistory.item, entity);
 
       if(!styles) return null;
 
@@ -1513,16 +1513,30 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
    };
 
    $scope.openPopupHistory = function (item, entity) {
-      $scope.activeHistory = item;
-      updateView();
+      $scope.activeHistory = {
+         item: angular.copy(item),
+         isLoading: true,
+         errorText: null
+      };
 
-      var entityId = $scope.itemField('history.entity', $scope.activeHistory, entity) || entity.entity_id;
-      var startDate = new Date( Date.now()
-                              - ($scope.itemField('history.offset', $scope.activeHistory, entity) || 24*60*60*1000)
-                              ).toISOString();
+      var entityId = $scope.itemField('history.entity', item, entity) || entity.entity_id;
+
+      if(!entityId) {
+         $scope.activeHistory.errorText = 'No entity was specified';
+         return;
+      }
+
+      var day = 24 * 60 * 60 * 1000;
+      var startDate = new Date(Date.now() - ($scope.itemField('history.offset', item, entity) || day)).toISOString();
 
       Api.getHistory(startDate, entityId)
-         .then( function (data) {
+         .then(function (data) {
+            $scope.activeHistory.isLoading = false;
+
+            if(data.length === 0) {
+               $scope.activeHistory.errorText = 'No history data found';
+               return;
+            }
 
             // Parse history data for Chart.js
             var labels = [];
@@ -1534,6 +1548,27 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
             labels.push(Date.now());
             numbers.push($scope.states[entityId].state);
 
+            // Either categorial or continuous data.
+            var yAxisType = parseFloat(numbers[0]) ? 'linear' : 'category';
+            var yAxisLabels = null;
+
+            if(yAxisType === 'category') {
+               yAxisLabels = numbers.filter(function(value, index, self) {
+                  return self.indexOf(value) === index;
+               }).sort().reverse();
+               // Special handling for labels when there is only one label present in history.
+               if(yAxisLabels.length === 1) {
+                  // on/off - add the other state so that y axis positioning is consistent.
+                  if(['on', 'off'].indexOf(yAxisLabels[0]) !== -1) {
+                     yAxisLabels = ['on', 'off'];
+                  } else {
+                     // Add dummy states to vertically center the actual state.
+                     yAxisLabels.push('');
+                     yAxisLabels.unshift('');
+                  }
+               }
+            }
+
             // Populate chart data
             var seriesName = data[0][0].attributes.friendly_name;
             var seriesUnit = data[0][0].attributes.unit_of_measurement;
@@ -1543,13 +1578,12 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
             $scope.activeHistory.options = angular.merge({
                scales: {
                   yAxes: [{
-                     type: parseFloat(numbers[0]) ? 'linear' : 'category', // for categorial or continuous data
-                     labels: numbers.filter(function(value, index, self) {return self.indexOf(value) === index;}).sort().reverse(),
+                     type: yAxisType,
+                     labels: yAxisLabels,
                   }]
                }
-            }, $scope.itemField('history.options', $scope.activeHistory, entity));
+            }, $scope.itemField('history.options', item, entity));
          });
-
    };
 
    $scope.closePopupHistory = function () {
