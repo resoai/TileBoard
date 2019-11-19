@@ -1129,14 +1129,15 @@ camera-thumbnail div {
   height: auto;
   max-height: 100%;
 }
-.history-popup-container--canvas {
-  height: auto;
-  max-height: 100%;
+@media (orientation: landscape) {
+  .history-popup-container {
+    height: 100%;
+  }
 }
 .history-popup-container--canvas::before {
   content: '';
   display: block;
-  padding-bottom: 75%;
+  padding-bottom: calc(75% - 50px);
 }
 .history-popup--placeholder {
   position: absolute;
@@ -1145,6 +1146,7 @@ camera-thumbnail div {
   width: 100%;
 }
 .history-popup--canvas {
+  box-sizing: border-box;
   position: absolute;
   top: 0;
   left: 0;
@@ -1154,9 +1156,10 @@ camera-thumbnail div {
   background: #222;
   padding: 6px;
 }
-.history-popup--canvas > canvas {
-  height: 100%;
-  width: 100%;
+@media (orientation: landscape) {
+  .history-popup--canvas {
+    height: calc(100% - 50px);
+  }
 }
 .door-entry-popup--tiles {
   position: absolute;

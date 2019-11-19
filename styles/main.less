@@ -1262,14 +1262,15 @@ camera-thumbnail {
       height: auto;
       max-height: 100%;
 
-      &--canvas {
-         height: auto;
-         max-height: 100%;
+      @media (orientation: landscape) {
+         height: 100%;
+      }
 
+      &--canvas {
          &::before {
             content: '';
             display: block;
-            padding-bottom: 75%;
+            padding-bottom: ~'calc(75% - 50px)';
          }
       }
    }
@@ -1282,6 +1283,7 @@ camera-thumbnail {
    }
 
    &--canvas {
+      box-sizing: border-box;
       position: absolute; 
       top: 0; 
       left: 0; 
@@ -1291,9 +1293,8 @@ camera-thumbnail {
       background: #222;
       padding: 6px;
 
-      > canvas {
-         height: 100%;
-         width: 100%;
+      @media (orientation: landscape) {
+         height: ~'calc(100% - 50px)';
       }
    }
 }
