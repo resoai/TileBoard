@@ -1043,21 +1043,21 @@ camera-thumbnail div {
   line-height: 50px;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding-left: 10px;
+  padding-right: 10px;
   white-space: nowrap;
 }
 .camera-popup-close,
 .door-entry-popup-close,
 .iframe-popup-close,
 .history-popup-close {
-  float: right;
+  float: left;
   text-align: center;
   color: rgba(255, 255, 255, 0.6);
-  background: rgba(0, 0, 0, 0.2);
   width: 50px;
   height: 50px;
   line-height: 50px;
-  font-size: 40px;
+  padding-left: 5px;
+  font-size: 25px;
   cursor: pointer;
 }
 .camera-popup-close:active,
