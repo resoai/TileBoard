@@ -1037,6 +1037,7 @@ camera-thumbnail div {
 .iframe-popup--title,
 .history-popup--title {
   background: #222;
+  color: rgba(255, 255, 255, 0.6);
   font-size: 20px;
   height: 50px;
   line-height: 50px;
