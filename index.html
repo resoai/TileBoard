@@ -77,6 +77,13 @@
         ng-if="activeCamera && (entity = getItemEntity(activeCamera))">
 
       <div class="camera-popup-container">
+         <div class="camera-popup-title">
+            <div class="camera-popup-close" ng-click="closeCamera()">
+               <i class="mdi mdi-close"></i>
+            </div>
+            {{ entityTitle(activeCamera, entity) }}
+         </div>
+
          <div class="camera-popup--list">
             <div class="camera-popup--list-item"
                  ng-click="openCamera(item)"
@@ -100,24 +107,22 @@
             </div>
          </div>
       </div>
-
-      <div class="camera-popup--close" ng-click="closeCamera()">
-         <i class="mdi mdi-close"></i>
-      </div>
    </div>
 
    <div class="iframe-popup"
         ng-class="itemField('iframeClasses', activeIframe, entity)"
         ng-if="activeIframe && (entity = getItemEntity(activeIframe))">
       <div class="iframe-popup-container" ng-style="getPopupIframeStyles()">
+         <div class="iframe-popup-title">
+            <div class="iframe-popup-close" ng-click="closePopupIframe()">
+               <i class="mdi mdi-close"></i>
+            </div>
+            {{ entityTitle(activeIframe, entity) }}
+         </div>
          <div class="iframe-popup--iframe">
             <iframe ng-src="{{ itemField('url', activeIframe, entity) }}"
                     iframe-tile="activeIframe" frameborder="0"></iframe>
          </div>
-      </div>
-
-      <div class="iframe-popup--close" ng-click="closePopupIframe()">
-         <i class="mdi mdi-close"></i>
       </div>
    </div>
 
@@ -125,22 +130,27 @@
         ng-class="itemField('history.classes', activeHistory, entity)"
         ng-if="activeHistory && (entity = getItemEntity(activeHistory.item))">
       <div class="history-popup-container" ng-style="getPopupHistoryStyles()">
-         <div class="history-popup--canvas">
-            <div class="history-popup--placeholder">
-               <span ng-if="activeHistory.isLoading && !activeHistory.errorText">Loading history data...</span>
-               <span ng-if="activeHistory.errorText">{{ activeHistory.errorText }}</span>
+         <div class="history-popup-title">
+            <div class="history-popup-close" ng-click="closePopupHistory()">
+               <i class="mdi mdi-close"></i>
             </div>
-            <canvas id="history-popup--canvas"
-               class="chart chart-line"
-               chart-data="activeHistory.data"
-               chart-labels="activeHistory.labels"
-               chart-series="activeHistory.series"
-               chart-options="activeHistory.options"></canvas>
+            {{ entityTitle(activeHistory.item, entity) }}
          </div>
-      </div>
 
-      <div class="history-popup--close" ng-click="closePopupHistory()">
-         <i class="mdi mdi-close"></i>
+         <div class="history-popup-container history-popup-container--canvas">
+            <div class="history-popup--canvas">
+               <div class="history-popup--placeholder">
+                  <span ng-if="activeHistory.isLoading && !activeHistory.errorText">Loading history data...</span>
+                  <span ng-if="activeHistory.errorText">{{ activeHistory.errorText }}</span>
+               </div>
+               <canvas id="history-popup--canvas"
+                  class="chart chart-line"
+                  chart-data="activeHistory.data"
+                  chart-labels="activeHistory.labels"
+                  chart-series="activeHistory.series"
+                  chart-options="activeHistory.options"></canvas>
+            </div>
+         </div>
       </div>
    </div>
 
@@ -149,25 +159,30 @@
             && (cameraEntity = getEntryCameraEntity(activeDoorEntry))">
 
       <div class="door-entry-popup-container">
-         <div class="door-entry-popup--camera">
-            <div ng-if="activeDoorEntry.layout.camera.type === TYPES.CAMERA">
-               <camera item="activeDoorEntry.layout.camera" entity="cameraEntity"
-                       freezed="false"></camera>
+         <div class="door-entry-popup-title">
+            <div class="door-entry-popup-close" ng-click="closeDoorEntry()">
+               <i class="mdi mdi-close"></i>
             </div>
-
-            <div ng-if="activeDoorEntry.layout.camera.type === TYPES.CAMERA_THUMBNAIL">
-               <camera-thumbnail item="activeDoorEntry.layout.camera" entity="cameraEntity"
-                                 freezed="false"></camera-thumbnail>
-            </div>
+            {{ entityTitle(activeDoorEntry, entity) }}
          </div>
 
-         <div class="door-entry-popup--tiles">
-            <div tile ng-repeat="item in activeDoorEntry.layout.tiles track by $index"></div>
-         </div>
-      </div>
+         <div class="door-entry-popup-container">
+            <div class="door-entry-popup--camera">
+               <div ng-if="activeDoorEntry.layout.camera.type === TYPES.CAMERA">
+                  <camera item="activeDoorEntry.layout.camera" entity="cameraEntity"
+                          freezed="false"></camera>
+               </div>
 
-      <div class="door-entry-popup--close" ng-click="closeDoorEntry()">
-         <i class="mdi mdi-close"></i>
+               <div ng-if="activeDoorEntry.layout.camera.type === TYPES.CAMERA_THUMBNAIL">
+                  <camera-thumbnail item="activeDoorEntry.layout.camera" entity="cameraEntity"
+                                    freezed="false"></camera-thumbnail>
+               </div>
+            </div>
+
+            <div class="door-entry-popup--tiles">
+               <div tile ng-repeat="item in activeDoorEntry.layout.tiles track by $index"></div>
+            </div>
+         </div>
       </div>
    </div>
 
@@ -179,7 +194,7 @@
       <div class="alarm-popup-container"
            ng-class="{'-no-code': !alarmEntity.attributes.code_format}">
 
-         <div class="alarm-popup--close" ng-click="closeAlarm()">
+         <div class="alarm-popup-close" ng-click="closeAlarm()">
             <i class="mdi mdi-close"></i>
          </div>
 
@@ -247,7 +262,7 @@
       <div class="datetime-popup-overlay" ng-click="closeDatetime()"></div>
 
       <div class="datetime-popup-container">
-         <div class="datetime-popup--close" ng-click="closeDatetime()">
+         <div class="datetime-popup-close" ng-click="closeDatetime()">
             <i class="mdi mdi-close"></i>
          </div>
 

@@ -1169,11 +1169,21 @@ camera-thumbnail {
       margin: auto;
    }
 
-   &--close {
-      position: absolute;
+   &-title {
+      background: #222;
+      color: rgba(255,255,255,.6);
+      font-size: 20px;
+      height: 50px;
+      line-height: 50px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-left: 10px;
+      white-space: nowrap;
+   }
+
+   &-close {
+      float: right;
       text-align: center;
-      right: 15px;
-      top: 15px;
       color: rgba(255,255,255,.6);
       background: rgba(0,0,0,0.2);
       width: 50px;
@@ -1252,10 +1262,15 @@ camera-thumbnail {
       height: auto;
       max-height: 100%;
 
-      &::before {
-         content: '';
-         display: block;
-         padding-bottom: 75%;
+      &--canvas {
+         height: auto;
+         max-height: 100%;
+
+         &::before {
+            content: '';
+            display: block;
+            padding-bottom: 75%;
+         }
       }
    }
 
@@ -1466,7 +1481,7 @@ camera-thumbnail {
       }
    }
 
-   &--close {
+   &-close {
       position: absolute;
       text-align: center;
       right: 5px;
