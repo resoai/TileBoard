@@ -77,8 +77,8 @@
         ng-if="activeCamera && (entity = getItemEntity(activeCamera))">
 
       <div class="camera-popup-container">
-         <div class="camera-popup--title">
-            <div class="camera-popup--close" ng-click="closeCamera()">
+         <div class="camera-popup-title">
+            <div class="camera-popup-close" ng-click="closeCamera()">
                <i class="mdi mdi-close"></i>
             </div>
             {{ entityTitle(activeCamera, entity) }}
@@ -113,8 +113,8 @@
         ng-class="itemField('iframeClasses', activeIframe, entity)"
         ng-if="activeIframe && (entity = getItemEntity(activeIframe))">
       <div class="iframe-popup-container" ng-style="getPopupIframeStyles()">
-         <div class="iframe-popup--title">
-            <div class="iframe-popup--close" ng-click="closePopupIframe()">
+         <div class="iframe-popup-title">
+            <div class="iframe-popup-close" ng-click="closePopupIframe()">
                <i class="mdi mdi-close"></i>
             </div>
             {{ entityTitle(activeIframe, entity) }}
@@ -130,14 +130,14 @@
         ng-class="itemField('history.classes', activeHistory, entity)"
         ng-if="activeHistory && (entity = getItemEntity(activeHistory.item))">
       <div class="history-popup-container" ng-style="getPopupHistoryStyles()">
-         <div class="history-popup--title">
-            <div class="history-popup--close" ng-click="closePopupHistory()">
+         <div class="history-popup-title">
+            <div class="history-popup-close" ng-click="closePopupHistory()">
                <i class="mdi mdi-close"></i>
             </div>
             {{ entityTitle(activeHistory.item, entity) }}
          </div>
 
-         <div class="history-popup-container history-popup--canvas-container">
+         <div class="history-popup-container history-popup-container--canvas">
             <div class="history-popup--canvas">
                <div class="history-popup--placeholder">
                   <span ng-if="activeHistory.isLoading && !activeHistory.errorText">Loading history data...</span>
@@ -159,8 +159,8 @@
             && (cameraEntity = getEntryCameraEntity(activeDoorEntry))">
 
       <div class="door-entry-popup-container">
-         <div class="door-entry-popup--title">
-            <div class="door-entry-popup--close" ng-click="closeDoorEntry()">
+         <div class="door-entry-popup-title">
+            <div class="door-entry-popup-close" ng-click="closeDoorEntry()">
                <i class="mdi mdi-close"></i>
             </div>
             {{ entityTitle(activeDoorEntry, entity) }}
@@ -194,7 +194,7 @@
       <div class="alarm-popup-container"
            ng-class="{'-no-code': !alarmEntity.attributes.code_format}">
 
-         <div class="alarm-popup--close" ng-click="closeAlarm()">
+         <div class="alarm-popup-close" ng-click="closeAlarm()">
             <i class="mdi mdi-close"></i>
          </div>
 
@@ -262,7 +262,7 @@
       <div class="datetime-popup-overlay" ng-click="closeDatetime()"></div>
 
       <div class="datetime-popup-container">
-         <div class="datetime-popup--close" ng-click="closeDatetime()">
+         <div class="datetime-popup-close" ng-click="closeDatetime()">
             <i class="mdi mdi-close"></i>
          </div>
 

@@ -1169,7 +1169,7 @@ camera-thumbnail {
       margin: auto;
    }
 
-   &--title {
+   &-title {
       background: #222;
       color: rgba(255,255,255,.6);
       font-size: 20px;
@@ -1181,7 +1181,7 @@ camera-thumbnail {
       white-space: nowrap;
    }
 
-   &--close {
+   &-close {
       float: right;
       text-align: center;
       color: rgba(255,255,255,.6);
@@ -1261,16 +1261,16 @@ camera-thumbnail {
    &-container {
       height: auto;
       max-height: 100%;
-   }
 
-   &--canvas-container {
-      height: auto;
-      max-height: 100%;
+      &--canvas {
+         height: auto;
+         max-height: 100%;
 
-      &::before {
-         content: '';
-         display: block;
-         padding-bottom: 75%;
+         &::before {
+            content: '';
+            display: block;
+            padding-bottom: 75%;
+         }
       }
    }
 
@@ -1481,7 +1481,7 @@ camera-thumbnail {
       }
    }
 
-   &--close {
+   &-close {
       position: absolute;
       text-align: center;
       right: 5px;
