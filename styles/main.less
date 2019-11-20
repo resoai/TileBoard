@@ -13,6 +13,8 @@
 @entityFontSize: 34px;
 @entitySelectFontSize: 21px;
 
+@popupTitleHeight: 50px;
+
 @opacity: 1;
 
 @TRANSPARENT: rgba(84, 92, 102, 0.6);
@@ -1173,8 +1175,8 @@ camera-thumbnail {
       background: #222;
       color: rgba(255,255,255,.6);
       font-size: 20px;
-      height: 50px;
-      line-height: 50px;
+      height: @popupTitleHeight;
+      line-height: @popupTitleHeight;
       overflow: hidden;
       text-overflow: ellipsis;
       padding-right: 10px;
@@ -1186,8 +1188,8 @@ camera-thumbnail {
       text-align: center;
       color: rgba(255,255,255,.6);
       width: 50px;
-      height: 50px;
-      line-height: 50px;
+      height: @popupTitleHeight;
+      line-height: @popupTitleHeight;
       padding-left: 5px;
       font-size: 25px;
       cursor: pointer;
