@@ -137,7 +137,10 @@ App.provider('Api', function () {
             url: '/api/history/period'
          };
          if (startDate) request.url += '/' + startDate;
-         if (filterEntityId) request.url += '?filter_entity_id=' + filterEntityId;
+         if (filterEntityId) {
+            var entityIds = filterEntityId instanceof Array ? filterEntityId.join(',') : filterEntityId;
+            request.url += '?filter_entity_id=' + entityIds;
+         }
          return this.rest(request);
       };
 

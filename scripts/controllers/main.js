@@ -1529,7 +1529,7 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
       var day = 24 * 60 * 60 * 1000;
       var startDate = new Date(Date.now() - ($scope.itemField('history.offset', item, entity) || day)).toISOString();
 
-      Api.getHistory(startDate, entityId)
+      return Api.getHistory(startDate, entityId)
          .then(function (data) {
             $scope.activeHistory.isLoading = false;
 
@@ -1538,49 +1538,93 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
                return;
             }
 
-            // Parse history data for Chart.js
-            var labels = [];
-            var numbers = [];
-            data[0].forEach(function (stateInfo) {
-               labels.push(new Date(stateInfo.last_changed));
-               numbers.push(stateInfo.state);
-            });
-            labels.push(Date.now());
-            numbers.push($scope.states[entityId].state);
+            var datasets = [];
+            var datasetOverride = [];
+            var yAxes = [];
+            var seenAxisIds = {};
 
-            // Either categorial or continuous data.
-            var yAxisType = parseFloat(numbers[0]) ? 'linear' : 'category';
-            var yAxisLabels = null;
+            data.forEach(function (states) {
+               var firstStateInfo = states[0];
 
-            if(yAxisType === 'category') {
-               yAxisLabels = numbers.filter(function(value, index, self) {
-                  return self.indexOf(value) === index;
-               }).sort().reverse();
-               // Special handling for labels when there is only one label present in history.
-               if(yAxisLabels.length === 1) {
-                  // on/off - add the other state so that y axis positioning is consistent.
-                  if(['on', 'off'].indexOf(yAxisLabels[0]) !== -1) {
-                     yAxisLabels = ['on', 'off'];
-                  } else {
-                     // Add dummy states to vertically center the actual state.
-                     yAxisLabels.push('');
-                     yAxisLabels.unshift('');
-                  }
+               var dataset = states.map(function (state) {
+                  return { x: state.last_changed, y: state.state };
+               });
+
+               // Create extra state with current value.
+               dataset.push({
+                  x: new Date().toISOString(),
+                  y: $scope.states[firstStateInfo.entity_id].state
+               });
+
+               datasets.push(dataset);
+
+               var seriesName = firstStateInfo.attributes.friendly_name;
+               var seriesUnit = firstStateInfo.attributes.unit_of_measurement;
+
+               // Either categorial or continuous data.
+               var yAxisType = Number.isNaN(parseFloat(dataset[0].y)) ? 'category' : 'linear';
+               var yAxisId = yAxisType + (seriesUnit ? '-' + seriesUnit : '');
+               var createYAxis = false;
+
+               // Create once and reuse same axis for multiple entities using same unit.
+               if(seriesUnit && !(seriesUnit in seenAxisIds)) {
+                  seenAxisIds[seriesUnit] = true;
+                  createYAxis = true;
+               } else if(!seriesUnit) {
+                  createYAxis = true;
                }
-            }
 
-            // Populate chart data
-            var seriesName = data[0][0].attributes.friendly_name;
-            var seriesUnit = data[0][0].attributes.unit_of_measurement;
-            $scope.activeHistory.labels = labels;
-            $scope.activeHistory.data = [numbers];
-            $scope.activeHistory.series = [seriesUnit ? (seriesName + ' /' + seriesUnit) : seriesName ];
+               if(createYAxis) {
+                  var yLabels = null;
+                  // Only non-continuous data needs explicit labels.
+                  if(yAxisType === 'category') {
+                     yLabels = [];
+                     dataset.forEach(function (value) {
+                        if(yLabels.indexOf(value.y) === -1) {
+                           yLabels.push(value.y);
+                        }
+                     });
+                     yLabels.sort().reverse();
+                     // Special handling for labels when there is only one label present in history.
+                     if(yLabels.length === 1) {
+                        // on/off - add the other state so that y axis positioning is consistent.
+                        if(['on', 'off'].indexOf(yLabels[0]) !== -1) {
+                           yLabels = ['on', 'off'];
+                        } else {
+                           // Add dummy states to vertically center the actual state.
+                           yLabels.push('');
+                           yLabels.unshift('');
+                        }
+                     }
+                  }
+
+                  yAxes.push({
+                     type: yAxisType,
+                     labels: yLabels,
+                     id: yAxisId,
+                  });
+               }
+
+               datasetOverride.push({
+                  label: seriesUnit ? (seriesName + ' / ' + seriesUnit) : seriesName,
+                  yAxisID: yAxisId,
+               });
+            });
+
+            // 'index' mode doesn't work well with multiple datasets - revert to default mode.
+            var interactionsMode = datasets.length > 1 ? 'nearest' : 'index';
+
+            $scope.activeHistory.data = datasets;
+            $scope.activeHistory.datasetOverride = datasetOverride;
             $scope.activeHistory.options = angular.merge({
                scales: {
-                  yAxes: [{
-                     type: yAxisType,
-                     labels: yAxisLabels,
-                  }]
+                  yAxes: yAxes
+               },
+               tooltips: {
+                  mode: interactionsMode
+               },
+               hover: {
+                 mode: interactionsMode
                }
             }, $scope.itemField('history.options', item, entity));
          });

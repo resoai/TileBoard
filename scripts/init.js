@@ -41,6 +41,7 @@ App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvide
       elements: { 
          point: { 
             radius: 0, // to remove points
+            hitRadius: 5
          },
          line: {
             borderWidth: 1,
@@ -52,11 +53,9 @@ App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvide
          display: true
       },
       tooltips: {
-         mode: 'index',
          intersect: false
       },
       hover: {
-        mode: 'index',
         intersect: false
       },
    });
