@@ -54,7 +54,10 @@ App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvide
       tooltips: {
          mode: 'index',
          intersect: false
-      }
+      },
+      hover: {
+        mode: 'index',
+        intersect: false
+      },
    });
-
 });
