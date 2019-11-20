@@ -13,6 +13,8 @@
 @entityFontSize: 34px;
 @entitySelectFontSize: 21px;
 
+@popupTitleHeight: 50px;
+
 @opacity: 1;
 
 @TRANSPARENT: rgba(84, 92, 102, 0.6);
@@ -1173,23 +1175,23 @@ camera-thumbnail {
       background: #222;
       color: rgba(255,255,255,.6);
       font-size: 20px;
-      height: 50px;
-      line-height: 50px;
+      height: @popupTitleHeight;
+      line-height: @popupTitleHeight;
       overflow: hidden;
       text-overflow: ellipsis;
-      padding-left: 10px;
+      padding-right: 10px;
       white-space: nowrap;
    }
 
    &-close {
-      float: right;
+      float: left;
       text-align: center;
       color: rgba(255,255,255,.6);
-      background: rgba(0,0,0,0.2);
       width: 50px;
-      height: 50px;
-      line-height: 50px;
-      font-size: 40px;
+      height: @popupTitleHeight;
+      line-height: @popupTitleHeight;
+      padding-left: 5px;
+      font-size: 25px;
       cursor: pointer;
 
       &:active {
@@ -1262,14 +1264,15 @@ camera-thumbnail {
       height: auto;
       max-height: 100%;
 
-      &--canvas {
-         height: auto;
-         max-height: 100%;
+      @media (orientation: landscape) {
+         height: 100%;
+      }
 
+      &--canvas {
          &::before {
             content: '';
             display: block;
-            padding-bottom: 75%;
+            padding-bottom: ~'calc(75% - 50px)';
          }
       }
    }
@@ -1282,6 +1285,7 @@ camera-thumbnail {
    }
 
    &--canvas {
+      box-sizing: border-box;
       position: absolute; 
       top: 0; 
       left: 0; 
@@ -1291,9 +1295,8 @@ camera-thumbnail {
       background: #222;
       padding: 6px;
 
-      > canvas {
-         height: 100%;
-         width: 100%;
+      @media (orientation: landscape) {
+         height: ~'calc(100% - 50px)';
       }
    }
 }
