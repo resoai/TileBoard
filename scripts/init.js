@@ -24,6 +24,13 @@ App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvide
 
    ChartJsProvider.setOptions('line', {
       maintainAspectRatio: false, // to fit popup automatically
+      layout: {
+         padding: {
+            bottom: 10,
+            left: 10,
+            right: 10
+         }
+      },
       scales: {
          xAxes: [{
             type: 'time',
@@ -59,4 +66,7 @@ App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvide
         intersect: false
       },
    });
+
+   // Workaround to add padding around legend.
+   Chart.Legend.prototype.afterFit = function() { this.height += 20; };
 });
