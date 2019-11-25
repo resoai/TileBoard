@@ -729,6 +729,9 @@
 
                <div class="item-slider">
                   <input type="range" ng-model="_c.value" value="{{ _c.value }}"
+                         ng-on-touchstart="$event.stopPropagation()"
+                         ng-on-touchmove="$event.stopPropagation()"
+                         ng-on-pointerdown="$event.stopPropagation()"
                          ng-change="lightSliderChanged(slider, item, entity, _c)"
                          step="{{ _c.step }}" min="{{ _c.min }}" max="{{ _c.max }}">
                </div>
@@ -882,6 +885,9 @@
          <div class="item-slider" ng-if="(_c = getSliderConf(item, entity))">
             <input type="range" ng-model="_c.value"
                    ng-change="sliderChanged(item, entity, _c)"
+                   ng-on-touchstart="$event.stopPropagation()"
+                   ng-on-touchmove="$event.stopPropagation()"
+                   ng-on-pointerdown="$event.stopPropagation()"
                    step="{{ _c.step }}" min="{{ _c.min }}" max="{{ _c.max }}">
          </div>
       </div>
@@ -1152,6 +1158,9 @@
                      <div class="media-player--volume">
                         <input type="range" ng-model="_c.value"
                                ng-change="volumeChanged(item, entity, _c)"
+                               ng-on-touchstart="$event.stopPropagation()"
+                               ng-on-touchmove="$event.stopPropagation()"
+                               ng-on-pointerdown="$event.stopPropagation()"
                                step="{{ _c.step }}" min="{{ _c.min }}" max="{{ _c.max }}">
                      </div>
                   </td>
