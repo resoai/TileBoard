@@ -322,7 +322,7 @@
    <div class="header" ng-if="header = getHeader()"
         ng-include="'header.html'"></div>
 
-   <div class="pages" id="pages">
+   <div class="pages" id="pages" ng-style="pagesContainerStyles">
       <div class="page-overlay" ng-if="activeSelect"
            ng-click="closeActiveSelect()"></div>
 

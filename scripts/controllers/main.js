@@ -2,6 +2,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    if(!window.CONFIG) return;
    
    $scope.pages = CONFIG.pages;
+   $scope.pagesContainerStyles = {};
    $scope.TYPES = TYPES;
    $scope.FEATURES = FEATURES;
    $scope.HEADER_ITEMS = HEADER_ITEMS;
@@ -1683,8 +1684,10 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    function scrollToActivePage (preventAnimation) {
       var index = $scope.pages.indexOf(activePage);
       var translate = '-' + (index * 100) + '%';
+      $scope.pagesContainerStyles.transform = getTransformCssValue(translate);
 
-      var $pages = document.getElementById("pages");
+      if(preventAnimation) {
+         $scope.pagesContainerStyles.transition = 'none';
 
          $timeout(function () {
             $scope.pagesContainerStyles.transition = null;
@@ -1692,23 +1695,15 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       }
    }
 
+   function getTransformCssValue(translateValue) {
       if(CONFIG.transition === TRANSITIONS.ANIMATED_GPU) {
-         var params = $scope.isMenuOnTheLeft ? [0, translate, 0] : [translate, 0, 0];
-         transform = 'translate3d(' + params.join(',') + ')';
-      }
-      else if(CONFIG.transition === TRANSITIONS.ANIMATED) {
-         var params = $scope.isMenuOnTheLeft ? [0, translate] : [translate, 0];
-         transform = 'translate(' + params.join(',') + ')';
+         var params = $scope.isMenuOnTheLeft ? [0, translateValue, 0] : [translateValue, 0, 0];
+         return 'translate3d(' + params.join(',') + ')';
       }
 
-      $pages.style.transform = transform;
-
-      if(preventAnimation) {
-         $pages.style.transition = 'none';
-
-         $interval(function () {
-            $pages.style.transition = null;
-         }, 50);
+      if(CONFIG.transition === TRANSITIONS.ANIMATED) {
+         var params = $scope.isMenuOnTheLeft ? [0, translateValue] : [translateValue, 0];
+         return 'translate(' + params.join(',') + ')';
       }
    }
 
