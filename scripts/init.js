@@ -44,9 +44,16 @@ App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvide
                },
             },
          }],
+         yAxes: [
+            {
+               ticks: {
+                  maxTicksLimit: 7,
+               },
+            },
+         ],
       },
-      elements: { 
-         point: { 
+      elements: {
+         point: {
             radius: 0, // to remove points
             hitRadius: 5
          },
