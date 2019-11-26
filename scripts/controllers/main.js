@@ -1547,12 +1547,12 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
                var firstStateInfo = states[0];
 
                var dataset = states.map(function (state) {
-                  return { x: state.last_changed, y: state.state };
+                  return { x: new Date(state.last_changed), y: state.state };
                });
 
                // Create extra state with current value.
                dataset.push({
-                  x: new Date().toISOString(),
+                  x: Date.now(),
                   y: $scope.states[firstStateInfo.entity_id].state
                });
 
