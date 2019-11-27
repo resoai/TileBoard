@@ -1,7 +1,8 @@
-App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $location, Api) {
+App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($scope, $timeout, $location, Api) {
    if(!window.CONFIG) return;
    
    $scope.pages = CONFIG.pages;
+   $scope.pagesContainerStyles = {};
    $scope.TYPES = TYPES;
    $scope.FEATURES = FEATURES;
    $scope.HEADER_ITEMS = HEADER_ITEMS;
@@ -752,7 +753,7 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
          }
       };
 
-      setTimeout(function () {
+      $timeout(function () {
          item._sliderInited = true;
       }, 50);
 
@@ -783,12 +784,12 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
          }
       };
 
-      setTimeout(function () {
+      $timeout(function () {
          entity.attributes._sliderInited = true;
          slider._sliderInited = true;
       }, 100);
 
-      setTimeout(function () {
+      $timeout(function () {
          entity.attributes._sliderInited = true;
       }, 0);
 
@@ -812,7 +813,7 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
          value: value || 0
       };
 
-      setTimeout(function () {
+      $timeout(function () {
          entity.attributes._sliderInited = true;
       }, 50);
 
@@ -830,10 +831,9 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
 
       if(entity.state !== "on") {
          return $scope.toggleSwitch(item, entity, function () {
-            setTimeout(function () {
+            $timeout(function () {
                if(entity.state === "on") {
                   $scope.openLightSliders(item, entity);
-                  updateView();
                }
             }, 0);
          })
@@ -842,11 +842,9 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
          if(!item.controlsEnabled) {
             item.controlsEnabled = true;
 
-            setTimeout(function () {
+            $timeout(function () {
                item._controlsInited = true;
             }, 50);
-
-            updateView();
          }
       }
    };
@@ -1440,7 +1438,7 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
 
       }
       else {
-         setTimeout(function () {
+         $timeout(function () {
             scrollToActivePage(preventAnimation);
          }, 20);
       }
@@ -1640,10 +1638,8 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
       if(doorEntryTimeout) clearTimeout(doorEntryTimeout);
 
       if(CONFIG.doorEntryTimeout) {
-         doorEntryTimeout = setTimeout(function () {
+         doorEntryTimeout = $timeout(function () {
             $scope.closeDoorEntry();
-
-            updateView();
          }, CONFIG.doorEntryTimeout * 1000);
       }
    };
@@ -1688,28 +1684,26 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
    function scrollToActivePage (preventAnimation) {
       var index = $scope.pages.indexOf(activePage);
       var translate = '-' + (index * 100) + '%';
-
-      var $pages = document.getElementById("pages");
-
-      var transform;
-
-      if(CONFIG.transition === TRANSITIONS.ANIMATED_GPU) {
-         var params = $scope.isMenuOnTheLeft ? [0, translate, 0] : [translate, 0, 0];
-         transform = 'translate3d(' + params.join(',') + ')';
-      }
-      else if(CONFIG.transition === TRANSITIONS.ANIMATED) {
-         var params = $scope.isMenuOnTheLeft ? [0, translate] : [translate, 0];
-         transform = 'translate(' + params.join(',') + ')';
-      }
-
-      $pages.style.transform = transform;
+      $scope.pagesContainerStyles.transform = getTransformCssValue(translate);
 
       if(preventAnimation) {
-         $pages.style.transition = 'none';
+         $scope.pagesContainerStyles.transition = 'none';
 
-         setTimeout(function () {
-            $pages.style.transition = null;
+         $timeout(function () {
+            $scope.pagesContainerStyles.transition = null;
          }, 50);
+      }
+   }
+
+   function getTransformCssValue(translateValue) {
+      if(CONFIG.transition === TRANSITIONS.ANIMATED_GPU) {
+         var params = $scope.isMenuOnTheLeft ? [0, translateValue, 0] : [translateValue, 0, 0];
+         return 'translate3d(' + params.join(',') + ')';
+      }
+
+      if(CONFIG.transition === TRANSITIONS.ANIMATED) {
+         var params = $scope.isMenuOnTheLeft ? [0, translateValue] : [translateValue, 0];
+         return 'translate(' + params.join(',') + ')';
       }
    }
 
@@ -1946,14 +1940,11 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
       //$scope.ready = false;
 
       //we give a timeout to prevent blinking (if reconnected)
-      setTimeout(function () {
+      $timeout(function () {
          if(realReadyState === false) {
             $scope.ready = false;
-            updateView();
          }
       }, 1000);
-
-      //updateView();
    });
 
    Api.onMessage(function (data) {
@@ -2201,7 +2192,7 @@ App.controller('Main', ['$scope', '$location', 'Api', function ($scope, $locatio
          if('id' in res) success = true;
       });
 
-      setTimeout(function () {
+      $timeout(function () {
          if(success) return;
 
          realReadyState = false;
