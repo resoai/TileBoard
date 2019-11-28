@@ -402,6 +402,7 @@ Every anonymous function will call with context
    states: {}, // list of current states
    $scope: {}, // angular scope
    parseFieldValue: Function, // parser function (for parsing HA states)
+   api: {}, // The Api service. Refer to Api.js for what it exposes.
    apiRequest: Function // parser function (args: data, callback=func)
 }
 ```

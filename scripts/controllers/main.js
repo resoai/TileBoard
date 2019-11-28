@@ -1982,6 +1982,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          states: $scope.states,
          $scope: $scope,
          parseFieldValue: parseFieldValue.bind(this),
+         api: Api,
          apiRequest: apiRequest.bind(this),
       };
    }
