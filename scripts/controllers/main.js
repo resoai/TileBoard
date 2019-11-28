@@ -1921,6 +1921,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
          $scope.ready = true;
          realReadyState = true;
+         callFunction(CONFIG.onReady);
 
          var pageNum = $location.hash();
 
@@ -1982,6 +1983,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          states: $scope.states,
          $scope: $scope,
          parseFieldValue: parseFieldValue.bind(this),
+         api: Api,
          apiRequest: apiRequest.bind(this),
       };
    }
