@@ -1921,6 +1921,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
          $scope.ready = true;
          realReadyState = true;
+         callFunction(CONFIG.onReady);
 
          var pageNum = $location.hash();
 

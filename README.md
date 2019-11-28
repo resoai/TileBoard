@@ -88,6 +88,12 @@ var CONFIG = {
    
    /* groupsAlign: Align groups HORIZONTALLY (default) or VERTICALLY */
    groupsAlign: GROUP_ALIGNS.HORIZONTALLY,
+
+   /* Called when connected to API and fetched the state.
+    * Can be called multiple times in case of reconnecting.
+    */
+   onReady: function () {},
+
    /* pages: A list of page objects. See documentation on Pages below */
    pages: [],
    /* events: A list of events. See documentation on Events below */
