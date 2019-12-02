@@ -717,7 +717,8 @@
             </div>
          </div>
          <div ng-if="item.controlsEnabled" class="item-entity-sliders"
-              ng-click="preventClick($event)">
+              ng-click="preventClick($event)"
+              ng-class="itemClasses(item)">
             <div ng-repeat="slider in item.sliders track by $index"
                  ng-if="(_c = getLightSliderConf(slider, entity))"
                  class="item-slider-container">

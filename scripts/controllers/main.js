@@ -829,7 +829,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.openLightSliders = function (item, entity) {
       if((!item.sliders || !item.sliders.length) && !item.colorpicker) return;
 
-      if(entity.state !== "on") {
+      if(false && entity.state !== "on") {
          return $scope.toggleSwitch(item, entity, function () {
             $timeout(function () {
                if(entity.state === "on") {
