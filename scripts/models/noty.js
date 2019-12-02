@@ -147,9 +147,9 @@ var Noty = (function () {
    };
 
    Noty.getById = function (id) {
-      for(var i = 0; i < Noty.noties.length; i++) {
-         if(Noty.noties[i].id === id) {
-            return Noty.noties[i];
+      for(var i = 0; i < Noty.notiesHistory.length; i++) {
+         if(Noty.notiesHistory[i].id === id) {
+            return Noty.notiesHistory[i];
          }
       }
 

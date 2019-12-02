@@ -2145,7 +2145,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    }
 
    function addError (error) {
-       if(!CONFIG.ignoreErrors) Noty.addObject({
+      if(!CONFIG.ignoreErrors) Noty.addObject({
          type: Noty.ERROR,
          title: 'Error',
          message: error,
@@ -2154,12 +2154,14 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    }
 
    function warnUnknownItem(item) {
-       if(!CONFIG.ignoreErrors) Noty.addObject({
-           type: Noty.WARNING,
-           title: 'Entity not found',
-           message: 'Entity "' + item.id + '" not found',
-           id: item.id
-       });
+      var notyId = item.id + '_not_found';
+      if(!CONFIG.ignoreErrors && !Noty.getById(notyId))
+         Noty.addObject({
+            type: Noty.WARNING,
+            title: 'Entity not found',
+            message: 'Entity "' + item.id + '" not found',
+            id: notyId
+         });
    }
 
    function debugLog () {
