@@ -147,13 +147,23 @@ var Noty = (function () {
    };
 
    Noty.getById = function (id) {
-      for(var i = 0; i < Noty.notiesHistory.length; i++) {
-         if(Noty.notiesHistory[i].id === id) {
-            return Noty.notiesHistory[i];
+      for(var i = 0; i < Noty.noties.length; i++) {
+         if(Noty.noties[i].id === id) {
+            return Noty.noties[i];
          }
       }
 
       return null;
+   };
+
+   Noty.getHistoryById = function (id) {
+      var history = [];
+      for(var i = 0; i < Noty.notiesHistory.length; i++) {
+         if(Noty.notiesHistory[i].id === id) {
+            history.push(Noty.notiesHistory[i]);
+         }
+      }
+      return history;
    };
 
    Noty.remove = function (noty) {

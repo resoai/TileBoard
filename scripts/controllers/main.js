@@ -2155,7 +2155,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    function warnUnknownItem(item) {
       var notyId = item.id + '_not_found';
-      if(!CONFIG.ignoreErrors && !Noty.getById(notyId))
+      if(!CONFIG.ignoreErrors && !Noty.getHistoryById(notyId).length)
          Noty.addObject({
             type: Noty.WARNING,
             title: 'Entity not found',
