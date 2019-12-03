@@ -156,6 +156,16 @@ var Noty = (function () {
       return null;
    };
 
+   Noty.hasSeenNoteId = function (id) {
+      for(var i = 0; i < Noty.notiesHistory.length; i++) {
+         if(Noty.notiesHistory[i].id === id) {
+            return true;
+         }
+      }
+
+      return false;
+   };
+
    Noty.remove = function (noty) {
       Noty.noties = Noty.noties.filter(function (n) {
          return n !== noty;
