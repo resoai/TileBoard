@@ -631,7 +631,7 @@
            class="item-entity-container">
 
          <div ng-if="item.customHtml"
-              ng-bind-html="item.customHtml"></div>
+              ng-bind-html="itemCustomHtml(item, entity)"></div>
 
          <div ng-if="!item.customHtml" class="item-entity">
             <span class="item-entity--icon mdi"
@@ -643,7 +643,7 @@
            class="item-entity-container">
 
          <div ng-if="item.customHtml"
-              ng-bind-html="item.customHtml"></div>
+              ng-bind-html="itemCustomHtml(item, entity)"></div>
 
          <div ng-if="!item.customHtml" class="item-entity">
             <span class="item-entity--icon mdi"

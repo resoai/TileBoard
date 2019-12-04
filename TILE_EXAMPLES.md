@@ -91,6 +91,7 @@ The custom tile type does not have handling for any specific entity types. It ca
    title: 'Screen Off',
    id: { },
    icon: 'mdi-monitor',
+   customHtml: '<b>Hi</b>',  // Can also be a function that will be passed item and entity.
    action: function(item, entity) {
         fully.startScreensaver();
    },
@@ -205,6 +206,22 @@ Allows you to toggle a fan on and off, as well as set the speed.
    width: 3,
    height: 2,
    refresh: 10000, // 10 seconds
+   url: 'https://www.youtube.com/embed/_qNhxxo9rVU?autoplay=1'
+}
+```
+
+#### POPUP_IFRAME
+Allows opening popup with iframe content opened from specified URL.
+Also alows showing custom HTML content in the tile.
+
+```js
+{
+   position: [0, 3],
+   type: TYPES.POPUP_IFRAME,
+   id: {},
+   width: 3,
+   height: 2,
+   customHtml: '<b>Hi</b>',  // Can also be a function that will be passed item and entity.
    url: 'https://www.youtube.com/embed/_qNhxxo9rVU?autoplay=1'
 }
 ```
