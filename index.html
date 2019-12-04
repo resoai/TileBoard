@@ -70,7 +70,7 @@
 <body ng-controller="Main" ng-class="getBodyClass()">
 
 <div ng-if="ready" class="page-container"
-     hm-swipe="onPageSwipe($event)"
+     hm-pan="onPagePan($event)"
      hm-recognizer-options="{directions: isMenuOnTheLeft ? 'DIRECTION_VERTICAL' : 'DIRECTION_HORIZONTAL'}"
 >
    <div class="camera-popup"

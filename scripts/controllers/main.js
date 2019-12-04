@@ -1731,34 +1731,64 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.isMenuOnTheLeft = CONFIG.menuPosition === MENU_POSITIONS.LEFT;
 
-   $scope.onPageSwipe = function (event) {
-      switch (event.offsetDirection) {
-         case Hammer.DIRECTION_UP:
-         case Hammer.DIRECTION_LEFT:
-            $scope.swipeUp();
-            break;
-         case Hammer.DIRECTION_DOWN:
-         case Hammer.DIRECTION_RIGHT:
-            $scope.swipeDown();
-            break;
+   $scope.onPagePan = function (event) {
+      if(hasOpenPopup()) {
+         return;
+      }
+
+      if(event.eventType & (Hammer.INPUT_END | Hammer.INPUT_CANCEL)) {
+         // Re-enable transitions.
+         $scope.pagesContainerStyles.transition = null;
+
+         if(event.eventType === Hammer.INPUT_CANCEL) {
+            // Reverts any partial scrolling.
+            scrollToActivePage();
+            return;
+         }
+      } else {
+         // Disable transitions.
+         $scope.pagesContainerStyles.transition = 'none';
+      }
+
+      var pageCount = $scope.pages.length;
+      var pageIndex = $scope.pages.indexOf(activePage);
+      var initialOffset = -pageIndex * 100;
+      var viewportDimension = $scope.isMenuOnTheLeft ? window.innerHeight : window.innerWidth;
+      var panDelta = $scope.isMenuOnTheLeft ? event.deltaY : event.deltaX;
+      var panPercentViewport = (panDelta / viewportDimension) * 100;
+      var newOffset = initialOffset + panPercentViewport;
+
+      // If gesture is finished, determine whether page should switch or be rolled back.
+      if(event.isFinal) {
+         var targetPageIndex = pageIndex;
+
+         // Switch to other page if:
+         // - panned 50% of new page onto screen
+         // or
+         // - the velocity of movement was above the threshold (and velocity direction matches delta direction)
+         var velocity = $scope.isMenuOnTheLeft ? event.velocityY : event.velocityX;
+         if(Math.abs(panPercentViewport) >= 50 || (Math.abs(velocity) > .5 && velocity < 0 === panDelta < 0)) {
+            var potentialTargetIndex = targetPageIndex + (newOffset < initialOffset ? 1 : -1);
+            // Set new page index if new index is within range.
+            if(potentialTargetIndex >= 0 && potentialTargetIndex < pageCount) {
+               targetPageIndex = potentialTargetIndex;
+            }
+         }
+
+         $scope.openPage($scope.pages[targetPageIndex]);
+         return;
+      }
+
+      // Check that new offset is within range of pages area.
+      if(newOffset <= 0 && newOffset >= ((pageCount - 1) * -100)) {
+         $scope.pagesContainerStyles.transform = getTransformCssValue(newOffset + '%');
       }
    }
 
-   $scope.swipeUp = function () {
-      var index = $scope.pages.indexOf(activePage);
-
-      if($scope.pages[index + 1]) {
-         $scope.openPage($scope.pages[index + 1]);
-      }
-   };
-
-   $scope.swipeDown = function () {
-      var index = $scope.pages.indexOf(activePage);
-
-      if($scope.pages[index - 1]) {
-         $scope.openPage($scope.pages[index - 1]);
-      }
-   };
+   function hasOpenPopup () {
+      return $scope.activeCamera || $scope.activeDoorEntry || $scope.activeIframe
+         || $scope.activeHistory;
+   }
 
    $scope.toggleSelect = function (item) {
       if($scope.selectOpened(item)) {
