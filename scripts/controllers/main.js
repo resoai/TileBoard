@@ -84,7 +84,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       switch (item.type) {
          case TYPES.LIGHT: return $scope.openLightSliders(item, entity);
-         default: return $scope.openPopupHistory(item, entity);
+         default: {
+            if (entity && entity.entity_id) {
+               return $scope.openPopupHistory(item, entity);
+            }
+         }
       }
    };
 
