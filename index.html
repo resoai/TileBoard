@@ -49,6 +49,7 @@
          'scripts/vendors/moment.min.js', // Required by Chart.js for time axes
          'scripts/vendors/Chart.min.js',  // Required for history charts
          'scripts/vendors/angular-chart.min.js',  // Required for linking charts to angular.js
+         'scripts/vendors/hls.js',
 
          'scripts/models/noty.js',
          'scripts/app.js',
@@ -104,6 +105,11 @@
             <div ng-if="activeCamera.fullscreen.type === TYPES.CAMERA_THUMBNAIL">
                <camera-thumbnail item="activeCamera.fullscreen" entity="entity"
                                  freezed="false"></camera-thumbnail>
+            </div>
+         
+            <div ng-if="activeCamera.fullscreen.type === TYPES.CAMERA_STREAM">
+               <camera-stream item="activeCamera.fullscreen" entity="entity"
+                                 freezed="false"></camera-stream>
             </div>
          </div>
       </div>

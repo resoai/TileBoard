@@ -171,6 +171,53 @@ App.directive('cameraThumbnail', ['Api', function (Api) {
    }
 }]);
 
+App.directive('cameraStream', ['Api', function (Api) {
+   return {
+      restrict: 'AE',
+      replace: true,
+      scope: {
+         item: '=item',
+         entity: '=entity',
+         freezed: '=freezed'
+      },
+      link: function ($scope, $el, attrs) {
+         var current = null;
+
+         var appendVideo = function (url) {
+            var el = document.createElement('video');
+            el.style.width = '100%';
+
+            var hls = new Hls();
+            hls.loadSource(url);
+            hls.attachMedia(el);
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+               el.play();
+            });
+            
+            if(current) $el[0].removeChild(current);
+            $el[0].appendChild(el);
+
+            current = el;
+         };
+
+         var requestStream = function () {
+            if($scope.entity.state === "off") return;
+
+            Api.send({
+                  type: "camera/stream",
+                  entity_id: $scope.entity.entity_id
+               },
+               function (res) {
+                  if(!res.result) return;
+
+                  appendVideo(res.result.url);
+               });
+         };
+         
+         $scope.$watch('entity', requestStream);
+      }
+   }
+}]);
 
 App.directive('clock', ['$interval', function ($interval) {
    return {
