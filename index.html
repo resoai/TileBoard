@@ -869,7 +869,8 @@
          </div>
       </div>
 
-      <div ng-if="item.type === TYPES.CAMERA_STREAM">
+      <div ng-if="item.type === TYPES.CAMERA_STREAM"
+           class="item-entity-container -below">
          <camera-stream item="activeCamera.fullscreen" entity="entity"
             freezed="false"></camera-stream>
       </div>
