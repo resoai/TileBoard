@@ -70,6 +70,12 @@
 
 <body ng-controller="Main" ng-class="getBodyClass()">
 
+<div ng-if="CONFIG.videoBackground !== ''">
+   <video loop muted autoplay class="video-background">
+      <source src="{{ CONFIG.videoBackground }}" type="video/mp4">
+   </video>
+</div>
+
 <div ng-if="ready" class="page-container"
      hm-pan="onPagePan($event)"
      hm-recognizer-options="{directions: isMenuOnTheLeft ? 'DIRECTION_VERTICAL' : 'DIRECTION_HORIZONTAL'}"
