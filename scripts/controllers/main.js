@@ -1744,7 +1744,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.isMenuOnTheLeft = CONFIG.menuPosition === MENU_POSITIONS.LEFT;
 
    $scope.onPagePan = function (event) {
-      if(hasOpenPopup()) {
+      if(hasOpenPopup() || $scope.isMenuOnTheLeft ? Math.abs(event.deltaY) < Math.abs(event.deltaX) : Math.abs(event.deltaX) < Math.abs(event.deltaY)) {
          return;
       }
 
