@@ -742,6 +742,10 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       return page.header;
    };
 
+   $scope.getVideoBackground = function () {
+      return CONFIG.videoBackground;
+   }
+
    $scope.getSliderConf = function (item, entity) {
       var key = "_c";
 

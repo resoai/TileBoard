@@ -959,6 +959,39 @@ body {
 .item-select--option.-active {
   background: #666;
 }
+.video-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: -100;
+}
+.video-background-media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+@media (min-aspect-ratio: 16/9) {
+  .video-background-media {
+    height: 300%;
+    top: -100%;
+  }
+}
+@media (max-aspect-ratio: 16/9) {
+  .video-background-media {
+    width: 300%;
+    left: -100%;
+  }
+}
+@media (max-width: 600px) {
+  .video-background-media {
+    display: none;
+  }
+}
 .item-camera {
   width: 100%;
   height: 100%;

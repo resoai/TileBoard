@@ -70,9 +70,9 @@
 
 <body ng-controller="Main" ng-class="getBodyClass()">
 
-<div ng-if="CONFIG.videoBackground !== ''">
-   <video loop muted autoplay class="video-background">
-      <source src="{{ CONFIG.videoBackground }}" type="video/mp4">
+<div ng-if="getVideoBackground()" class="video-background">
+   <video loop muted autoplay class="video-background-media">
+      <source src="{{getVideoBackground()}}" type="video/mp4">
    </video>
 </div>
 

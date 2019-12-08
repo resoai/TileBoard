@@ -14,6 +14,7 @@ var CONFIG = {
    tileSize: 150,
    tileMargin: 6,
    serverUrl: 'http://' + location.hostname + ':8123',
+   //videoBackground: 'images/christmas.mp4', // use a video as a background. A good place to get videos is https://coverr.co - do not use 'bg' image tag in your pages.
    wsUrl: 'ws://' + location.hostname + ':8123/api/websocket',
    authToken: null, // optional long-lived token (CAUTION: only if TileBoard is not exposed to the internet)
    //googleApiKey: "XXXXXXXXXX", // Required if you are using Google Maps for device tracker
