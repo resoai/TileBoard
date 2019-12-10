@@ -1743,11 +1743,34 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.isMenuOnTheLeft = CONFIG.menuPosition === MENU_POSITIONS.LEFT;
 
-   $scope.onPagePan = function (event) {
+   var hasScrolledDuringPan = false;
+
+   $scope.onPageScroll = function () {
+      // Will disable panning when page starts scrolling.
+      // Is reset from isPanEnabled function on starting to pan.
+      hasScrolledDuringPan = true;
+
+      return true;
+   };
+
+   $scope.isPanEnabled = function (recognizer, event) {
       if(hasOpenPopup()) {
          return;
       }
 
+      // Workaround for touch events - cancel recognition on scroll event.
+      if(event && event.pointerType === 'touch') {
+         if(event.isFirst) {
+            hasScrolledDuringPan = false;
+         }
+
+         return !hasScrolledDuringPan;
+      }
+
+      return true;
+   }
+
+   $scope.onPagePan = function (event) {
       if(event.eventType & (Hammer.INPUT_END | Hammer.INPUT_CANCEL)) {
          // Re-enable transitions.
          $scope.pagesContainerStyles.transition = null;
