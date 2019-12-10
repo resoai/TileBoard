@@ -866,7 +866,6 @@
          </div>
       </div>
 
-
       <div ng-if="item.type === TYPES.CAMERA_THUMBNAIL"
            class="item-entity-container -below">
          <div class="item-camera">
@@ -877,7 +876,7 @@
 
       <div ng-if="item.type === TYPES.CAMERA_STREAM"
            class="item-entity-container -below">
-         <camera-stream item="activeCamera.fullscreen" entity="entity"
+         <camera-stream item="item" entity="entity"
             freezed="false"></camera-stream>
       </div>
 
