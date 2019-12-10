@@ -72,7 +72,10 @@
 
 <div ng-if="ready" class="page-container"
      hm-pan="onPagePan($event)"
-     hm-recognizer-options="{directions: isMenuOnTheLeft ? 'DIRECTION_VERTICAL' : 'DIRECTION_HORIZONTAL'}"
+     hm-recognizer-options="{
+        enable: isPanEnabled,
+        directions: isMenuOnTheLeft ? 'DIRECTION_VERTICAL' : 'DIRECTION_HORIZONTAL'
+     }"
 >
    <div class="camera-popup"
         ng-if="activeCamera && (entity = getItemEntity(activeCamera))">
@@ -336,6 +339,7 @@
            ng-class="{'-active': isPageActive(page)}"
            ng-if="shouldDrawPage(page) && !isHidden(page)"
            ng-style="pageStyles(page, $index)" class="page"
+           ng-on-scroll="onPageScroll($event)"
            on-scroll on-scroll-model="page">
 
          <!-- legacy -->
