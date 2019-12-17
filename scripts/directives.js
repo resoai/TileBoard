@@ -185,7 +185,9 @@ App.directive('cameraStream', ['Api', function (Api) {
 
          var appendVideo = function (url) {
             var el = document.createElement('video');
+            el.style.objectFit = $scope.item.objFit || 'fill';
             el.style.width = '100%';
+            el.style.height = '100%';
             el.muted = 'muted';
 
             var hls = new Hls();
