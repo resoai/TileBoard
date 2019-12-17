@@ -47,6 +47,7 @@ var TYPES = {
    INPUT_DATETIME: 'input_datetime',
    CAMERA: 'camera',
    CAMERA_THUMBNAIL: 'camera_thumbnail',
+   CAMERA_STREAM: 'camera_stream',
    SCENE: 'scene',
    SLIDER: 'slider',
    IFRAME: 'iframe',
