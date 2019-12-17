@@ -112,7 +112,7 @@
          
             <div ng-if="activeCamera.fullscreen.type === TYPES.CAMERA_STREAM">
                <camera-stream item="activeCamera.fullscreen" entity="entity"
-                                 freezed="false"></camera-stream>
+                              freezed="false"></camera-stream>
             </div>
          </div>
       </div>
@@ -184,6 +184,11 @@
                <div ng-if="activeDoorEntry.layout.camera.type === TYPES.CAMERA_THUMBNAIL">
                   <camera-thumbnail item="activeDoorEntry.layout.camera" entity="cameraEntity"
                                     freezed="false"></camera-thumbnail>
+               </div>
+
+               <div ng-if="activeDoorEntry.layout.camera.type === TYPES.CAMERA_STREAM">
+                  <camera-stream item="activeDoorEntry.layout.camera" entity="cameraEntity"
+                                    freezed="false"></camera-stream>
                </div>
             </div>
 
@@ -868,8 +873,8 @@
       <div ng-if="item.type === TYPES.CAMERA_THUMBNAIL"
            class="item-entity-container -below">
          <div class="item-camera">
-            <camera-thumbnail freezed="!isPageActive(page) || activeCamera || screensaverShown"
-                              item="item" entity="entity"></camera-thumbnail>
+            <camera-thumbnail item="item" entity="entity"
+                              freezed="!isPageActive(page) || activeCamera || screensaverShown"></camera-thumbnail>
          </div>
       </div>
 
