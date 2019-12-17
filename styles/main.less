@@ -53,6 +53,7 @@
 @CLIMATE: rgb(39, 84, 98);
 @CAMERA: rgb(53, 144, 157);
 @CAMERA_THUMBNAIL: rgb(53, 144, 157);
+@CAMERA_STREAM: rgb(53, 144, 157);
 @SCENE: rgb(72, 85, 105);
 @SCENE_L: rgb(98, 113, 136);
 @SLIDER: rgb(89, 90, 139);
@@ -102,6 +103,7 @@
    &.-th-input_datetime {background-color: @INPUT_DATETIME;}
    &.-th-camera {background-color: @CAMERA;}
    &.-th-camera_thumbnail {background-color: @CAMERA_THUMBNAIL;}
+   &.-th-camera_stream {background-color: @CAMERA_STREAM;}
    &.-th-scene {background-color: @SCENE;}
    &.-th-scene.-loading {background-color: @SCENE_L;}
    &.-th-slider {background-color: @SLIDER;}
@@ -579,6 +581,7 @@ body {
    &.-input_select,
    &.-camera,
    &.-camera_thumbnail,
+   &.-camera_stream,
    &.-alarm,
    &.-door_entry,
    &.-popup_iframe,
@@ -624,10 +627,10 @@ body {
 
    &.-device_tracker,
    &.-camera,
-   &.-camera_thumbnail {
+   &.-camera_thumbnail,
+   &.-camera_stream {
       .item-title {
-         text-shadow: /*1px 1px 1px rgba(0,0,0,.2),*/
-                      1px 1px 0 rgba(0,0,0,.2);
+         text-shadow: 1px 1px 0 rgba(0,0,0,.2);
          background: rgba(0,0,0,0.15);
          right: auto;
          line-height: 22px;
@@ -1127,7 +1130,8 @@ body {
 }
 
 camera,
-camera-thumbnail {
+camera-thumbnail,
+camera_stream {
    width: 100%;
    height: 100%;
    display: block;
