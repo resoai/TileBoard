@@ -59,6 +59,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          case TYPES.INPUT_SELECT: return $scope.toggleSelect(item, entity);
 
          case TYPES.CAMERA:
+         case TYPES.CAMERA_STREAM:
          case TYPES.CAMERA_THUMBNAIL: return $scope.openCamera(item, entity);
 
          case TYPES.SCENE: return $scope.callScene(item, entity);
@@ -1680,7 +1681,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $scope.pages.forEach(function (page) {
          (page.groups || []).forEach(function (group) {
             (group.items || []).forEach(function (item) {
-               if([TYPES.CAMERA, TYPES.CAMERA_THUMBNAIL]
+               if([TYPES.CAMERA, TYPES.CAMERA_THUMBNAIL, TYPES.CAMERA_STREAM]
                      .indexOf(item.type) !== -1) {
                   res.push(item);
                }
