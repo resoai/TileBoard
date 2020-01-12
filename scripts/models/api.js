@@ -131,15 +131,20 @@ App.provider('Api', function () {
             });
       };
 
-      $Api.prototype.getHistory = function (startDate, filterEntityId) {
+      $Api.prototype.getHistory = function (startDate, filterEntityId, endDate) {
          var request = {
             type: 'GET',
             url: '/api/history/period'
          };
          if (startDate) request.url += '/' + startDate;
+         if (endDate) {
+            request.url += '?end_time=' + endDate;
+         } else {
+            request.url += '?end_time=' + new Date(Date.now()).toISOString();
+         }
          if (filterEntityId) {
             var entityIds = filterEntityId instanceof Array ? filterEntityId.join(',') : filterEntityId;
-            request.url += '?filter_entity_id=' + entityIds;
+            request.url += '&filter_entity_id=' + entityIds;
          }
          return this.rest(request);
       };
