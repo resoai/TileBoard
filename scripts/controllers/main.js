@@ -939,10 +939,17 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       if(field in GAUGE_DEFAULTS) {
          return parseFieldValue(GAUGE_DEFAULTS[field], item, entity);
       }
-      
+
       return null;
    };
 
+   $scope.itemURL = function (item, entity) {
+      if(typeof item.url === 'function') {
+         return callFunction(item.url, [item, entity]);
+      }
+
+      return item.url;
+   };
 
    // Actions
 

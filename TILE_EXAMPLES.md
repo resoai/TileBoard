@@ -649,3 +649,15 @@ This is a custom tile which can be used for displaying values from different sen
    },
 }
 ```
+
+
+#### IMAGE
+![IMAGE](images/tile-screenshots/IMAGE.png)<br>
+```js
+{
+   position: [0, 1],
+   type: TYPES.IMAGE,
+   id: {},
+   url: '../qrcode.png'
+}
+```

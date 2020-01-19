@@ -64,7 +64,7 @@
 @VACUUM: rgb(37, 158, 176);
 @POPUP_IFRAME: rgb(68, 116, 156);
 @DIMMER_SWITCH: rgb(130, 156, 108);
-
+@IMAGE: rgb(37, 158, 176);
 
 .item {
    &.-th-transparent {background-color: @TRANSPARENT;}
@@ -114,6 +114,7 @@
    &.-th-vacuum {background-color: @VACUUM;}
    &.-th-popup_iframe {background-color: @POPUP_IFRAME;}
    &.-th-dimmer_switch {background-color: @DIMMER_SWITCH;}
+   &.-th-image {background-color: @IMAGE;}    
 }
 
 
@@ -1094,7 +1095,7 @@ body {
    }
 }
 
-.item-camera {
+.item-camera, item-image {
    width: 100%;
    height: 100%;
    background-size: cover;

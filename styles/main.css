@@ -139,6 +139,9 @@
 .item.-th-dimmer_switch {
   background-color: #829c6c;
 }
+.item.-th-image {
+  background-color: #259eb0;
+}
 html,
 body {
   font-size: 14px;
@@ -355,7 +358,7 @@ body {
   opacity: 0;
   position: absolute;
   top: 0;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
   width: 100%;
 }
 .pages-menu--items {
@@ -716,7 +719,7 @@ body {
   right: 6px;
   background: rgba(0, 0, 0, 0.2);
   padding: 1px 6px 2px;
-  font-size: .9em;
+  font-size: 0.9em;
   color: #ffffff;
   border-radius: 1px;
   z-index: 2;
@@ -743,7 +746,7 @@ body {
   margin-top: 15px;
 }
 .item-entity.-with-select .item-entity--icon {
-  font-size: 46.800000000000004px;
+  font-size: 46.8px;
 }
 .item-entity--unit {
   vertical-align: top;
@@ -776,11 +779,11 @@ body {
   max-width: 100%;
   padding: 0 7px;
   white-space: normal;
-  line-height: 26.666666666666668px;
+  line-height: 26.66666667px;
   text-align: left;
 }
 .-big-entity .item-entity--icon {
-  font-size: 67.60000000000001px;
+  font-size: 67.6px;
 }
 .-big-entity .item-entity--value {
   font-size: 44.2px;
@@ -799,7 +802,7 @@ body {
   line-height: 40px;
 }
 .-small-entity .item-entity--value {
-  font-size: 27.200000000000003px;
+  font-size: 27.2px;
 }
 .-small-entity .weather-icon {
   margin: 10px 0 0;
@@ -862,7 +865,7 @@ body {
   line-height: 10px;
 }
 .-micro-entity .item-entity--value {
-  font-size: 27.200000000000003px;
+  font-size: 27.2px;
 }
 .item-triangle {
   position: absolute;
@@ -966,7 +969,8 @@ body {
 .item-select--option.-active {
   background: #666;
 }
-.item-camera {
+.item-camera,
+item-image {
   width: 100%;
   height: 100%;
   background-size: cover;
