@@ -1258,6 +1258,14 @@
                       fraction-size="getGaugeField('fractionSize', item, entity)"></ng-gauge>
          </div>
       </div>
+       
+      <div ng-if="item.type === TYPES.IMAGE"
+           class="item-entity-container">       
+            <div class="item-image" 
+                 ng-style="{'background-image':'url({{itemCustomURL(item, entity)}})'}"></div>
+      </div>
+       
+       
    </div>
 </script>
 
