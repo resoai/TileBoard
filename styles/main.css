@@ -139,6 +139,9 @@
 .item.-th-dimmer_switch {
   background-color: #829c6c;
 }
+.item.-th-image {
+  background-color: #259eb0;
+}
 html,
 body {
   font-size: 14px;
@@ -974,6 +977,12 @@ body {
 }
 .item-gauge {
   padding-top: 10px;
+}
+.item-image {
+    height: 100%;
+    width: 100%;
+    background-position: center center;
+    background-size: cover; 
 }
 .clock div,
 clock div {

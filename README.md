@@ -449,6 +449,7 @@ var TYPES = {
    POPUP_IFRAME: 'popup_iframe',
    DIMMER_SWITCH: 'dimmer_switch',
    GAUGE: 'gauge',
+   IMAGE: 'image',
 };
 ```
 
