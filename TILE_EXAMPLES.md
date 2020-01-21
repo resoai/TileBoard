@@ -71,6 +71,7 @@ Manually trigger an automation
    id: "climate.kitchen",
    type: TYPES.CLIMATE,
    unit: 'C',
+   mode: 'hvac_modes' //hvac_modes or preset_modes
    state: function (item, entity) {
       return 'Current '
          + entity.attributes.current_temperature
