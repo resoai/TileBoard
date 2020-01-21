@@ -536,6 +536,17 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       return getItemFieldValue('unit', item, entity);
    };
+    
+    
+   $scope.entityMode = function (item, entity) {
+      if (typeof item.mode === 'function') {
+         return callFunction(item.mode, [item, entity]);
+      }
+
+      return item.mode;
+   };
+    
+   
 
    $scope.entitySubtitle = function (item, entity) {
       return getItemFieldValue('subtitle', item, entity);
@@ -1313,7 +1324,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       return false;
    };
 
-   $scope.setClimateOption = function ($event, item, entity, option) {
+   $scope.setClimateOptionPreset = function ($event, item, entity, option) {
       $event.preventDefault();
       $event.stopPropagation();
 
@@ -1331,6 +1342,27 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       return false;
    };
+    
+    
+   $scope.setClimateOptionHVAC = function ($event, item, entity, option) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      sendItemData(item, {
+         type: "call_service",
+         domain: "climate",
+         service: "set_hvac_mode",
+         service_data: {
+            entity_id: item.id,
+            hvac_mode: option
+         }
+      });
+
+      $scope.closeActiveSelect();
+
+      return false;
+   };
+    
 
 
    $scope.increaseClimateTemp = function ($event, item, entity) {
