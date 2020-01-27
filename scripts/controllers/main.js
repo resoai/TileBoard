@@ -100,13 +100,19 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          if(CONFIG.customTheme) {
             var themes = CONFIG.customTheme;
 
-            if(typeof themes === "string") themes = [themes];
-
-            themes.map(function (theme) {
-               bodyClass.push('-theme-' + theme);
-            });
+            if(typeof themes === "string") themes = [themes];		
+            	if(CONFIG.darkmode){
+            		bodyClass.splice(0, 1,'-theme-dark');
+               	}
+            	else{
+            		themes.map(function (theme) {
+	            		bodyClass.push('-theme-' + theme);
+	            	});
+	        }
+         
          }
-
+          
+          
          if(CONFIG.entitySize) {
             bodyClass.push('-' + CONFIG.entitySize + '-entity');
          }
