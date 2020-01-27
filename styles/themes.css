@@ -1,3 +1,165 @@
+:root{ 
+  --text-color: #DADADB;                                                          
+  --text-medium-light-color: #A0A2A8;                       
+  --text-medium-color: #80828A;                                              
+  --text-dark-color: #6A6B74;                                                  
+  --main-accent-color: #2686c1;                                             
+  --accent-medium-color: #2686c1;     
+  --greyed-out-color: #6A6B74;                                         
+  --background-color: #121212;                                               
+  --background-color-2: #484E59;                                      
+  --background-card-color: #434952;                                             
+  --border-color: #383C46;
+}
+
+.-theme-dark  {
+  color: var(--text-color) !important;
+  background: var(--background-color) !important;
+}
+.-theme-dark .header {
+  color: var(--text-color);
+  background: rgba(35,35,35,100);
+  font-weight: lighter;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  padding-bottom: 10px;
+}
+.-theme-dark .group-title {
+  font-weight: 400;
+  opacity: 87%;
+}
+.-theme-dark .pages-menu--item {
+  color: #545454;
+  opacity: 0.8;
+}
+.-theme-dark .pages-menu--item.-active {
+  opacity: 1;
+}
+.-theme-dark .item {
+  background: #343434 !important;
+  border-radius: 3px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  color: var(--text-color);
+}
+.-theme-dark .item:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+.-theme-dark .item-state {
+  background: transparent;
+  font-weight: lighter;
+  color: var(--text-color);
+  opacity: 60%;
+  padding: 3px 5px 2px;
+}
+.-theme-dark .item-entity {
+  color: #ffffff;
+}
+.-theme-dark .item-clickable {
+  border-left: 3px solid var(--text-color) !important;
+  border-top: 3px solid var(--text-color)  !important;
+}
+.-theme-dark .item-subtitle {
+  font-size: 14px;
+  bottom: 21px;
+}
+.-theme-dark .item-title {
+  height: 22px;
+  line-height: 22px;
+  padding-bottom: 1px;
+}
+
+.-theme-dark .item-entity-sliders{
+	background: white !important;
+	opacity: 8%;
+}
+
+.-theme-dark .item-title,
+.-theme-dark .item-subtitle {
+  padding-left: 7px;
+  font-weight: normal;
+}
+.-theme-dark .item.-device_tracker {
+  background: #222 !important;
+}
+.-theme-dark .item.-device_tracker .item-title,
+.-theme-dark .item.-camera .item-title,
+.-theme-dark .item.-camera_thumbnail .item-title {
+  color: var(--text-color);
+}
+.-theme-dark .item.-device_tracker .item-state,
+.-theme-dark .item.-camera .item-state,
+.-theme-dark .item.-camera_thumbnail .item-state {
+  color: var(--text-color);
+}
+.-theme-dark .item .item-entity--icon {
+  color: var(--greyed-out-color);
+}
+.-theme-dark .item.-disarmed,
+.-theme-dark .item.-off {
+  color: var(--text-dark-color);
+}
+.-theme-dark .item.-disarmed .item-state,
+.-theme-dark .item.-off .item-state {
+  color: #A9A9A9;
+}
+.-theme-dark .item.-disarmed .item-entity--icon,
+.-theme-dark .item.-off .item-entity--icon {
+  opacity: 0.8;
+}
+.-theme-dark .item.-armed .item-entity--icon,
+.-theme-dark .item.-on .item-entity--icon {
+  color: var(--main-accent-color);
+}
+.-theme-dark .item-list--name {
+
+}
+.-theme-dark .item-list--name .mdi {
+  opacity: 0.6;
+}
+.-theme-dark .wu {
+  opacity: 0.7;
+}
+.-theme-dark .item-select {
+  background: #fff;
+  border: 1px solid #aaa;
+}
+.-theme-dark .item-select--option:active,
+.-theme-dark .item-select--option.-active {
+  background: #eee;
+}
+.-theme-dark .media-player--source {
+  color: #555;
+}
+.-theme-dark input[type=range]::-webkit-slider-runnable-track {
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+  border: 0px solid #000101;
+}
+.-theme-dark input[type=range]::-moz-range-track {
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
+}
+.-theme-dark input[type=range]::-webkit-slider-thumb {
+  background: #3664d8;
+  width: 24px;
+  height: 14px;
+  border-radius: 8px;
+}
+.-theme-dark input[type=range]::-moz-range-thumb {
+  background: #3664d8;
+  width: 24px;
+  height: 14px;
+  border-radius: 8px;
+}
+.-theme-dark input[type=range]::-ms-thumb {
+  background: #3664d8;
+  width: 24px;
+  height: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.-theme-dark .noty {
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
 .-theme-material {
   color: #3d3d3d;
   background: #f8f8f8 !important;
