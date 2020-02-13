@@ -257,6 +257,22 @@ Also alows showing custom HTML content in the tile.
 }
 ```
 
+![INPUT_SELECT](images/tile-screenshots/INPUT_SELECT_2.png)
+```js
+{
+   position: [0, 1],
+   type: TYPES.INPUT_SELECT,
+   id: 'input_select.house_mode',
+   title: 'House Mode',
+   icons: {
+      Normal: 'mdi-home',
+      Vacation: 'mdi-palm-tree',
+      Sick: 'mdi-medical-bag',
+      Travel: 'mdi-airplane'
+   }
+}
+```
+
 
 #### INPUT_DATETIME
 ![INPUT_DATETIME](images/tile-screenshots/INPUT_DATETIME.png)
