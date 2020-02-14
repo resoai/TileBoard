@@ -944,12 +944,12 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
     
     
-   $scope.itemCustomURL = function (item, entity){
-       if (typeof item.imageURL === 'function') {
-         return callFunction(item.imageURL, [item, entity]);
+   $scope.itemURL = function (item, entity){
+       if (typeof item.url === 'function') {
+         return callFunction(item.url, [item, entity]);
       }
 
-      return item.imageURL;
+      return item.url;
     };    
 
 
