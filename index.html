@@ -843,7 +843,11 @@
             </div>
          </div>
          <div class="item-triangle"></div>
-         <div class="item-entity -select">
+         <div ng-if="item.icons" class="item-entity">
+            <span class="item-entity--icon mdi"
+                  ng-class="entityIcon(item, entity)"></span>
+         </div>
+         <div ng-if="!item.icons" class="item-entity -select">
             <span class="item-entity--value">
                <span ng-bind="entityValue(item, entity)"></span>
             </span>
