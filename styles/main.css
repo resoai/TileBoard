@@ -387,6 +387,7 @@ body {
          background-color: rgba(0,0,0,.2);
          opacity: 0.8;
       }*/
+
 }
 .pages-menu--item:active {
   background-color: rgba(0, 0, 0, 0.3);
@@ -421,6 +422,7 @@ body {
   background-size: cover;
   background-position: center;
   /*overflow: hidden;*/
+
 }
 .item.-top-entity {
   z-index: 6;
@@ -523,6 +525,7 @@ body {
          margin-left: -2px;
          border: 2px solid rgba(200,200,200,.6);
       }*/
+
 }
 .item.-switch:active,
 .item.-lock:active,
@@ -661,6 +664,7 @@ body {
   /*&:hover {
       background: rgba(0,0,0,.2);
    }*/
+
 }
 .item-button:active {
   background: rgba(0, 0, 0, 0.4);
@@ -740,6 +744,7 @@ body {
 .item-entity.-select {
   /*height: 90px;
       top: 20px;*/
+
   text-align: left;
 }
 .item-entity.-with-select {
@@ -964,12 +969,14 @@ body {
   /*&:hover {
          background: #444;
       }*/
+
 }
 .item-select--option:active,
 .item-select--option.-active {
   background: #666;
 }
-.item-camera {
+.item-camera,
+item-image {
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -977,12 +984,6 @@ body {
 }
 .item-gauge {
   padding-top: 10px;
-}
-.item-image {
-    height: 100%;
-    width: 100%;
-    background-position: center center;
-    background-size: cover; 
 }
 .clock div,
 clock div {
@@ -1106,6 +1107,7 @@ camera_stream div {
   /*&:hover {
          background: #222;
       }*/
+
 }
 .camera-popup--list-item.-active,
 .door-entry-popup--list-item.-active,
@@ -1751,6 +1753,7 @@ camera_stream div {
          animation-play-state: paused;
       }
    }*/
+
 }
 .noty.-showed {
   opacity: 1;
