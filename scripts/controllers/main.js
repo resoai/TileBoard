@@ -149,6 +149,18 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       return $scope.states[item.id];
    };
 
+   $scope.getCameraEntityFullscreen = function (item) {
+      var entity_id = item.fullscreen.id;
+
+      if(typeof entity_id === "undefined") {
+         entity_id = item.id;
+      }
+
+      if(typeof entity_id === "object") return entity_id;
+
+      return $scope.states[entity_id];
+   };
+
    $scope.getEntryCameraEntity = function (itemEntry) {
       var item = itemEntry.layout.camera;
 

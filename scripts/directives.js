@@ -190,7 +190,14 @@ App.directive('cameraStream', ['Api', function (Api) {
             el.style.height = '100%';
             el.muted = 'muted';
 
-            var hls = new Hls();
+            var len = (typeof $scope.item.bufferLength !== "undefined") ? $scope.item.bufferLength : 5;
+
+            var config = {
+               maxBufferLength: len,
+               maxMaxBufferLength: len
+            };
+
+            var hls = new Hls(config);
             hls.loadSource(url);
             hls.attachMedia(el);
             hls.on(Hls.Events.MANIFEST_PARSED, function() {

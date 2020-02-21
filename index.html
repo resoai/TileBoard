@@ -78,7 +78,7 @@
      }"
 >
    <div class="camera-popup"
-        ng-if="activeCamera && (entity = getItemEntity(activeCamera))">
+        ng-if="activeCamera && (entity = getCameraEntityFullscreen(activeCamera))">
 
       <div class="camera-popup-container">
          <div class="camera-popup-title">
@@ -93,7 +93,7 @@
                  ng-click="openCamera(item)"
                  ng-class="{'-active': activeCamera === item}"
                  ng-repeat="item in getCameraList() track by $index">
-               <span ng-show="entity = getItemEntity(item)">
+               <span ng-show="entity = getCameraEntityFullscreen(item)">
                   <span ng-bind="entityTitle(item, entity)"></span>
                </span>
             </div>

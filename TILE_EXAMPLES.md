@@ -63,6 +63,31 @@ Manually trigger an automation
 }
 ```
 
+#### CAMERA_THUMBNAIL and CAMERA_STREAM
+Shows a camera feed on the tile and opens a fullscreen popup with an RTSP stream when pressed.
+Optionally, the fullscreen camera entity can be different from the thumbnail camera entity, for example to show a hires stream on the fullscreen popup only.
+
+```js
+{
+   position: [0, 0],
+   id: 'camera.front_gate',
+   type: TYPES.CAMERA_THUMBNAIL,
+   bgSize: 'cover',
+   width: 2,
+   state: false,
+   fullscreen: {
+      type: TYPES.CAMERA_STREAM,
+      objFit: 'contain',
+      id: 'camera.front_gate_highres',  // Optional: camera entity to use on fullscreen, defaults to the tile camera entity if omitted
+      bufferLength: 5  // Optional: buffer length in seconds for the HLS buffer, default is 5 seconds
+   },
+   refresh: function () { // can also be a function
+      return 3000 + Math.random() * 1000
+   }
+}
+```
+
+
 #### CLIMATE
 ![CLIMATE](images/tile-screenshots/CLIMATE.png)
 ```js
