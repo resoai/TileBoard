@@ -255,10 +255,6 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
   bgOpacity: 0.5,
   /* theme: Override default theme for the tile */
   theme: TYPES.SWITCH,
-  /* classes: A list of classes to be appended to the tile element
-   * Useful for custom CSS styles
-   */
-  classes: ["-big-entity"],
   /* slides: A list of slide images to use for the background
    * Currently a maximum of 3 slides are supported
    * (optional)
@@ -377,8 +373,10 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
       backgroundColor: 'rgba(0, 0, 0, 0.1)', // Defaults to rgba(0, 0, 0, 0.1)
       fractionSize: 0 // Number of decimal places to round the number to. Defaults to current locale formatting
    },
-  
-   /* classes: Additional CSS classes. Use 'compact' for a compact (1x1) tile
+
+   /* classes: A list of classes to be appended to the tile element
+    * Useful for custom CSS styles. 
+    * Use '-compact' for a compact (1x1) tile
     * (optional)
     */
    classes: ['-compact'],
