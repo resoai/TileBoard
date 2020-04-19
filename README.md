@@ -376,7 +376,8 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
 
    /* classes: A list of classes to be appended to the tile element
     * Useful for custom CSS styles. 
-    * Use '-compact' for a compact (1x1) tile
+    * Use CLASS_BIG, CLASS_SMALL or CLASS_MICRO to change the size of a tile.
+    * The TYPES.WEATHER tile supports '-compact' class for a compact (1x1) tile
     * (optional)
     */
    classes: ['-compact'],
