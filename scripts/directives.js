@@ -219,8 +219,7 @@ App.directive('cameraStream', ['Api', function (Api) {
                },
                function (res) {
                   if(!res.result) return;
-
-                  appendVideo(res.result.url);
+                  appendVideo(CONFIG.serverUrl + '/'+ res.result.url);
                });
          };
          
