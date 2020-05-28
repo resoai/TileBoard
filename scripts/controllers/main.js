@@ -1592,7 +1592,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                var seriesUnit = firstStateInfo.attributes.unit_of_measurement;
 
                // Either categorial or continuous data.
-               var yAxisType = Number.isNaN(parseFloat(dataset[0].y)) ? 'category' : 'linear';
+               var yAxisType = Number.isNaN(parseFloat(dataset[dataset.length - 1].y)) ? 'category' : 'linear';
                var yAxisId = yAxisType + (seriesUnit ? '-' + seriesUnit : '');
                var createYAxis = false;
 
