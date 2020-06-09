@@ -869,7 +869,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
             $timeout(function () {
                item._controlsInited = true;
-            }, 50);
+            }, 500);
          }
       }
    };

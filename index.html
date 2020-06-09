@@ -734,21 +734,21 @@
          <div ng-if="item.controlsEnabled" class="item-entity-sliders"
               ng-click="preventClick($event)">
             <div ng-repeat="slider in item.sliders track by $index"
-                 ng-if="(_c = getLightSliderConf(slider, entity))"
+                 ng-if="(_c_ = getLightSliderConf(slider, entity))"
                  class="item-slider-container">
 
                <div class="item-slider-title" ng-if="slider.title">
                   <span ng-bind="slider.title"></span>:
-                  <span ng-bind="getLightSliderValue(slider, _c)"></span>
+                  <span ng-bind="getLightSliderValue(slider, _c_)"></span>
                </div>
 
                <div class="item-slider">
-                  <input type="range" ng-model="_c.value" value="{{ _c.value }}"
+                  <input type="range" ng-model="_c_.value" value="{{ _c_.value }}"
                          ng-on-touchstart="$event.stopPropagation()"
                          ng-on-touchmove="$event.stopPropagation()"
                          ng-on-pointerdown="$event.stopPropagation()"
-                         ng-change="lightSliderChanged(slider, item, entity, _c)"
-                         step="{{ _c.step }}" min="{{ _c.min }}" max="{{ _c.max }}">
+						 step="{{ _c_.step }}" min="{{ _c_.min }}" max="{{ _c_.max }}"
+                         ng-change="lightSliderChanged(slider, item, entity, _c_)">
                </div>
             </div>
           
