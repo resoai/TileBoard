@@ -92,7 +92,30 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          }
       }
    };
-
+   
+   $scope.getCardinal = function degToCompass(num) {
+       var val = Math.floor((num / 22.5) + 0.5);
+       var arr = [
+          {cardinal: "N", pointer:"↑"}, 
+          {cardinal: "NNE", pointer:"↗"}, 
+          {cardinal: "NE", pointer:"↗"}, 
+          {cardinal: "ENE", pointer:"↗"}, 
+          {cardinal: "E", pointer:"→"}, 
+          {cardinal: "ESE", pointer:"↘"}, 
+          {cardinal: "SE", pointer:"↘"}, 
+          {cardinal: "SSE", pointer:"↘"}, 
+          {cardinal: "S", pointer:"↓"}, 
+          {cardinal: "SSW", pointer:"↙"}, 
+          {cardinal: "SW", pointer:"↙"}, 
+          {cardinal: "WSW", pointer:"↙"}, 
+          {cardinal: "W", pointer:"←"}, 
+          {cardinal: "WNW", pointer:"↖"}, 
+          {cardinal: "NW", pointer:"↖"}, 
+          {cardinal: "NNW", pointer:"↖"}
+       ];
+       return arr[(val % 16)];
+   }
+   
    $scope.getBodyClass = function () {
       if(!bodyClass) {
          bodyClass = [];
@@ -664,7 +687,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.weatherListField = function (field, line, item, entity) {
       if(!line || !line[field]) return null;
 
-      return parseFieldValue(line[field], item, entity);
+      var retF = parseFieldValue(line[field], item, entity);
+      return (field == "cardinal") ? $scope.getCardinal(retF) : retF;
    };
 
    $scope.weatherListIcon = function (line, item, entity) {
