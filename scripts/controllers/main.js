@@ -631,7 +631,10 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       if(typeof map === "function") return callFunction(map, [icon, item, entity]);
 
-      if(!map) return icon;
+      if(!map){
+         var night = $scope.getItemEntity({id: "sun.sun"}).state == "below_horizon" ? "nt-" : "";
+         return night + icon;
+      }
 
       return map[icon] || icon;
    };
