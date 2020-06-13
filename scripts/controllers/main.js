@@ -93,7 +93,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       }
    };
    
-   $scope.getCardinal = function degToCompass(num) {
+   $scope.getCardinal = function(num) {
        var val = Math.floor((num / 22.5) + 0.5);
        var arr = [
           {cardinal: "N", pointer:"↑"}, 
