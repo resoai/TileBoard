@@ -93,27 +93,27 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       }
    };
    
-   $scope.getCardinal = function(num) {
-       var val = Math.floor((num / 22.5) + 0.5);
-       var arr = [
-          {cardinal: "N", pointer:"↑"}, 
-          {cardinal: "NNE", pointer:"↗"}, 
-          {cardinal: "NE", pointer:"↗"}, 
-          {cardinal: "ENE", pointer:"↗"}, 
-          {cardinal: "E", pointer:"→"}, 
-          {cardinal: "ESE", pointer:"↘"}, 
-          {cardinal: "SE", pointer:"↘"}, 
-          {cardinal: "SSE", pointer:"↘"}, 
-          {cardinal: "S", pointer:"↓"}, 
-          {cardinal: "SSW", pointer:"↙"}, 
-          {cardinal: "SW", pointer:"↙"}, 
-          {cardinal: "WSW", pointer:"↙"}, 
-          {cardinal: "W", pointer:"←"}, 
-          {cardinal: "WNW", pointer:"↖"}, 
-          {cardinal: "NW", pointer:"↖"}, 
-          {cardinal: "NNW", pointer:"↖"}
+   var getWindDirection = function (degreeDirection) {
+       var value = Math.floor((degreeDirection / 22.5) + 0.5);
+       var direction = [
+          {windDirection: "N", pointer:"↑"}, 
+          {windDirection: "NNE", pointer:"↗"}, 
+          {windDirection: "NE", pointer:"↗"}, 
+          {windDirection: "ENE", pointer:"↗"}, 
+          {windDirection: "E", pointer:"→"}, 
+          {windDirection: "ESE", pointer:"↘"}, 
+          {windDirection: "SE", pointer:"↘"}, 
+          {windDirection: "SSE", pointer:"↘"}, 
+          {windDirection: "S", pointer:"↓"}, 
+          {windDirection: "SSW", pointer:"↙"}, 
+          {windDirection: "SW", pointer:"↙"}, 
+          {windDirection: "WSW", pointer:"↙"}, 
+          {windDirection: "W", pointer:"←"}, 
+          {windDirection: "WNW", pointer:"↖"}, 
+          {windDirection: "NW", pointer:"↖"}, 
+          {windDirection: "NNW", pointer:"↖"}
        ];
-       return arr[(val % 16)];
+       return direction[(value % 16)];
    }
    
    $scope.getBodyClass = function () {
@@ -656,7 +656,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       if(!map){
          return (item.sun ? 
-                        $scope.getItemEntity({id: item.sun.id}).state == item.sun.night ? "nt-" : ""
+                        $scope.getItemEntity({id: item.sun.id}).state === item.sun.night ? "nt-" : ""
                         : "") + icon;
       }
 
@@ -688,8 +688,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.weatherListField = function (field, line, item, entity) {
       if(!line || !line[field]) return null;
 
-      var retF = parseFieldValue(line[field], item, entity);
-      return (field == "cardinal") ? $scope.getCardinal(retF) : retF;
+      var returnField = parseFieldValue(line[field], item, entity);
+      return (field === "windDirection") ? getWindDirection(returnField) : returnField;
    };
 
    $scope.weatherListIcon = function (line, item, entity) {
