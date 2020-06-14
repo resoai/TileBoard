@@ -554,6 +554,10 @@ This is a custom tile which can be used for displaying values from different sen
    state: '&sensor.dark_sky_summary.state', // label with weather summary (e.g. Sunny)
    icon: '&sensor.dark_sky_icon.state',
    //iconImage: '&sensor.dark_sky_icon.state', // use this one if you want to replace icon with image
+   sun: { // You can use sun instead of creating a list for your night icons.
+      id: 'sun.sun', // entity that defines when it is night or day
+      night: 'below_horizon' // state that specifies when it is night 
+   },
    icons: {
       'clear-day': 'clear',
       'clear-night': 'nt-clear',
