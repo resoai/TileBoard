@@ -75,6 +75,29 @@ var HEADER_ITEMS = {
 
 var SCREENSAVER_ITEMS = HEADER_ITEMS;
 
+var WEATHER_TEXT = {
+      chanceflurries: 'Chance of Flurries',
+      chancerain: 'Chance of Rain',
+      chancesleet: 'Chance of Sleet',
+      chancesnow: 'Chance of Snow',
+      chancetstorms: 'Chancet of Storms',
+      clear: 'Clear',
+      cloudy: 'Cloudy',
+      flurries: 'Flurries',
+      fog: 'Fog',
+      hazy: 'Hazy',
+      mostlycloudy: 'Mostly Cloudy',
+      mostlysunny: 'Mostly Sunny',
+      partlycloudy: 'Partly Cloudy',
+      partlysunny: 'Partly Sunny',
+      rain: 'Rain',
+      rainy: 'Rainy',
+      sleet: 'Sleet',
+      snow: 'Snow',
+      sunny: 'Sunny',
+      tstorms: 'T-Storms',
+}
+
 var FEATURES = {
    LIGHT: {
       BRIGHTNESS: 1
