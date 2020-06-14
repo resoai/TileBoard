@@ -616,7 +616,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       if(!fields || !fields[field]) return null;
 
-      return parseFieldValue(fields[field], item, entity);
+       return field === 'summary' ? WEATHER_TEXT[getEntityAttr(fields[field].slice(1))] : parseFieldValue(fields[field], item, entity);
    };
 
    $scope.getWeatherLine = function (line, item, entity) {
