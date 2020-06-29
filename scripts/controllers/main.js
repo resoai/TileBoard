@@ -1323,18 +1323,34 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       return false;
    };
 
+   $scope.getClimateOptions = function (item, entity) {
+      return item.useHvacMode ? entity.attributes.hvac_modes : entity.attributes.preset_modes; 
+   };
+
+   $scope.getClimateCurrentOption = function (item, entity) {
+      return item.useHvacMode ? entity.attributes.hvac_mode : entity.attributes.preset_mode; 
+   };
+
    $scope.setClimateOption = function ($event, item, entity, option) {
       $event.preventDefault();
       $event.stopPropagation();
 
+      var data = {entity_id: item.id};
+
+      if(item.useHvacMode) {
+         var service = "set_hvac_mode";
+         data.hvac_mode = option; 
+      }
+      else {
+         var service = "set_preset_mode"; 
+         data.preset_mode = option; 
+      }
+
       sendItemData(item, {
          type: "call_service",
          domain: "climate",
-         service: "set_preset_mode",
-         service_data: {
-            entity_id: item.id,
-            preset_mode: option
-         }
+         service: service,
+         service_data: data
       });
 
       $scope.closeActiveSelect();
