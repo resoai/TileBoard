@@ -96,6 +96,7 @@ Optionally, the fullscreen camera entity can be different from the thumbnail cam
    id: "climate.kitchen",
    type: TYPES.CLIMATE,
    unit: 'C',
+   useHvacMode: false,  // Optional: enables HVAC mode (by default uses PRESET mode)
    state: function (item, entity) {
       return 'Current '
          + entity.attributes.current_temperature
