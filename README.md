@@ -328,6 +328,8 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
     * interval for refreshing the camera image
     */
    refresh: Number || Function,
+    /* hideFromList: hide camera from the list in the popup, defaults to false */
+   hideFromList: true,
    /** type: LIGHT **/
    /* sliders: list of slider object. See slider documentation below */
    sliders: [{}],

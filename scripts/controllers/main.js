@@ -1703,7 +1703,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          (page.groups || []).forEach(function (group) {
             (group.items || []).forEach(function (item) {
                if([TYPES.CAMERA, TYPES.CAMERA_THUMBNAIL, TYPES.CAMERA_STREAM]
-                     .indexOf(item.type) !== -1) {
+                     .indexOf(item.type) !== -1 && !item.hideFromList) {
                   res.push(item);
                }
             })
