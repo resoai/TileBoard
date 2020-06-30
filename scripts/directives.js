@@ -182,6 +182,7 @@ App.directive('cameraStream', ['Api', function (Api) {
       },
       link: function ($scope, $el, attrs) {
          var current = null;
+         var hls = null;
 
          var appendVideo = function (url) {
             var el = document.createElement('video');
@@ -196,8 +197,9 @@ App.directive('cameraStream', ['Api', function (Api) {
                maxBufferLength: len,
                maxMaxBufferLength: len
             };
-
-            var hls = new Hls(config);
+            
+            hls && hls.destroy();
+            hls = new Hls(config);
             hls.loadSource(url);
             hls.attachMedia(el);
             hls.on(Hls.Events.MANIFEST_PARSED, function() {
@@ -224,6 +226,10 @@ App.directive('cameraStream', ['Api', function (Api) {
          };
          
          $scope.$watch('entity', requestStream);
+
+         $scope.$on('$destroy', function() {
+            hls && hls.destroy();
+         });
       }
    }
 }]);
