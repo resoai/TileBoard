@@ -1996,7 +1996,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       Api.getStates(function (res) {
          if(res.success) {
             debugLog(res.result);
-            
+
             setStates(res.result);
          }
 

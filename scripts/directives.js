@@ -20,7 +20,7 @@ App.directive('camera', function () {
       },
       link: function ($scope, $el, attrs) {
          var $i = 0;
-         var photoUrl = null;
+         var imageUrl = null;
          var refresh = $scope.item.refresh || false;
          var current = null;
          var prev = null;
@@ -46,7 +46,7 @@ App.directive('camera', function () {
             current = el;
          };
 
-         var getPhotoUrl = function () {
+         var getImageUrl = function () {
             if($scope.item.filter) {
                return $scope.item.filter($scope.item, $scope.entity)
             }
@@ -59,33 +59,35 @@ App.directive('camera', function () {
          };
 
          var reloadImage = function () {
-            if(!photoUrl) return;
+            if(!imageUrl) return;
 
             if($i > 1 && $scope.freezed) return;
 
-            var url = photoUrl;
+            var url = imageUrl;
 
             url += (url.indexOf('?') === -1 ? '?' : '&') + ('_i=' + $i++);
 
-            appendImage(url)
+            appendImage(url);
          };
 
-         var setPhoto = function (url) {
-            photoUrl = url;
+         var setImage = function (url) {
+            imageUrl = url;
 
-            if(!photoUrl) return;
+            if(!imageUrl) return;
 
             reloadImage();
          };
 
-         var updatePhoto = function () {
-            var newUrl = getPhotoUrl();
+         var updateImage = function () {
+            var newUrl = getImageUrl();
 
-            if(photoUrl !== newUrl) setPhoto(newUrl);
+            if(imageUrl !== newUrl) setImage(newUrl);
          };
-
-         $scope.$watch('item', updatePhoto);
-         $scope.$watch('entity', updatePhoto);
+         $scope.$watchGroup([
+            'item', 
+            'entity', 
+            'entity.attributes.entity_picture'
+         ], updateImage);
 
          if(refresh) {
             var interval = setInterval(reloadImage, refresh);
@@ -157,8 +159,10 @@ App.directive('cameraThumbnail', ['Api', function (Api) {
             });
          };
 
-         $scope.$watch('item', reloadImage);
-         $scope.$watch('entity', reloadImage);
+         $scope.$watchGroup([
+            'item', 
+            'entity', 
+         ], reloadImage);
 
          if(refresh) {
             var interval = setInterval(reloadImage, refresh);
