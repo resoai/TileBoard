@@ -190,7 +190,7 @@ App.directive('cameraStream', ['Api', function (Api) {
             el.style.height = '100%';
             el.muted = 'muted';
 
-            var len = (typeof $scope.item.bufferLength !== "undefined") ? $scope.item.bufferLength : 5;
+            var len = $scope.item.bufferLength || 5;
 
             var config = {
                maxBufferLength: len,

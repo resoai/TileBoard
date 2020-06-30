@@ -347,10 +347,6 @@
            ng-on-scroll="onPageScroll($event)"
            on-scroll on-scroll-model="page">
 
-         <!-- legacy -->
-         <div class="page-head" ng-if="page.head && headWarning()"
-              ng-include="page.head"></div>
-
          <div class="header" ng-if="header = getHeader(page)"
               ng-include="'header.html'"></div>
 

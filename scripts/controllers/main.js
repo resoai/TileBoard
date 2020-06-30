@@ -254,20 +254,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       return CONFIG.clockStyles;
    };
 
-   $scope.headWarning = function () {
-      // @TODO remove
-      Noty.addObject({
-         id: 'header-deprecated',
-         type: Noty.WARNING,
-         title: 'Head deprecated',
-         message: 'Head is deprecated, please replace it with "header" object. ' +
-         '<br> More info <a href="https://github.com/resoai/TileBoard/wiki/Header-configuration">' +
-         'https://github.com/resoai/TileBoard/wiki/Header-configuration</a>'
-      });
-
-      return true;
-   };
-
    $scope.pageStyles = function (page, index) {
       if(!page.styles) {
          var styles = {};
@@ -2010,14 +1996,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       Api.getStates(function (res) {
          if(res.success) {
             debugLog(res.result);
-
-            // in case of development, when sensors are predefined
-            if(window.DEBUG_SENSORS) {
-               setStates(DEBUG_SENSORS);
-            }
-            else {
-               setStates(res.result);
-            }
+            
+            setStates(res.result);
          }
 
          $scope.ready = true;
