@@ -71,7 +71,7 @@ function ScreensaverController ($scope) {
 
       var newState = conf.timeout < inactivity / 1000;
 
-      if(newState !== $scope.isShown) {
+      if(newState !== $scope.isShown && !$scope.activeCamera) {
          setState(newState);
       }
    }, 1000);
