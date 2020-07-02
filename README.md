@@ -21,7 +21,10 @@ Should you have any ideas or questions please post them on the home-assistant fo
 * Pull/download repository
 * Copy `config.example.js` to `config.js` and edit it for your needs
 * Create a directory called `tileboard` inside `www` directory in HA's config path and move all of the files there.
-* TileBoard will be available at `http://HASS_IP:8123/local/tileboard/index.html` and will prompt you for your login credentials after restarting Home Assistant
+* TileBoard will be available at `http://HASS_IP:8123/local/tileboard/index.html` and will prompt you for your login credentials after restarting Home Assistant.
+
+## WARNING
+Files served from the www folder (/local/ url), aren’t protected by the Home Assistant authentication. Files stored in this folder, if the URL is known, can be accessed by anybody without authentication. Please make sure that your HA instance is not exposed via inetrnet or at least that long-lived token is not hardcoded in the config. 
 
 ## Configure
 
@@ -53,7 +56,7 @@ var CONFIG = {
     */
    wsUrl: 'ws://hassio.local:8123/api/websocket',
    
-   /* authToken: Optional Long live token that you can create in your HomeAssistant
+   /* authToken: Optional Long live token that you can create in your HomeAssistant. You should never add this if HA is exposed via internet.
     */
    authToken: null,
    /* pingConnection: Set to false disable pinging of the websocket connection.
