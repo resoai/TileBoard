@@ -241,6 +241,10 @@ body {
   top: 0;
   font-size: 20px;
   color: #fff;
+  pointer-events: none;
+}
+.header-content {
+  pointer-events: all;
 }
 .header-content:after {
   content: " ";
