@@ -21,6 +21,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.activeDoorEntry = null;
    $scope.activeIframe = null;
    $scope.activeHistory = null;
+   $scope.activePopup = null;
 
    $scope.alarmCode = null;
    $scope.activeAlarm = null;
@@ -71,6 +72,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          case TYPES.DIMMER_SWITCH: return $scope.dimmerToggle(item, entity);
 
          case TYPES.POPUP_IFRAME: return $scope.openPopupIframe(item, entity);
+
+         case TYPES.POPUP: return $scope.openPopup(item, entity);
 
          case TYPES.INPUT_DATETIME: return $scope.openDatetime(item, entity);
       }
@@ -1529,6 +1532,14 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $scope.activeIframe = null;
    };
 
+   $scope.openPopup = function (item, entity) {
+      $scope.activePopup = item;
+   };
+
+   $scope.closePopup = function () {
+      $scope.activePopup = null;
+   };
+
    $scope.getPopupHistoryStyles = function () {
       if(!$scope.activeHistory || !$scope.activeHistory.item.history || !$scope.activeHistory.item.history.styles) return null;
 
@@ -1844,7 +1855,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    function hasOpenPopup () {
       return $scope.activeCamera || $scope.activeDoorEntry || $scope.activeIframe
-         || $scope.activeHistory;
+         || $scope.activeHistory || $scope.activePopup;
    }
 
    $scope.toggleSelect = function (item) {

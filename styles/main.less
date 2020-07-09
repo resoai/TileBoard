@@ -63,6 +63,7 @@
 @CUSTOM: rgb(37, 158, 176);
 @VACUUM: rgb(37, 158, 176);
 @POPUP_IFRAME: rgb(68, 116, 156);
+@POPUP: rgb(68, 116, 156);
 @DIMMER_SWITCH: rgb(130, 156, 108);
 @IMAGE: rgb(37, 158, 176);
 
@@ -113,6 +114,7 @@
    &.-th-custom {background-color: @CUSTOM;}
    &.-th-vacuum {background-color: @VACUUM;}
    &.-th-popup_iframe {background-color: @POPUP_IFRAME;}
+   &.-th-popup {background-color: @POPUP;}
    &.-th-dimmer_switch {background-color: @DIMMER_SWITCH;}
    &.-th-image {background-color: @IMAGE;}    
 }
@@ -588,6 +590,7 @@ body {
    &.-alarm,
    &.-door_entry,
    &.-popup_iframe,
+   &.-popup,
    &.-input_datetime,
    &.-dimmer_switch,
    &.-scene {
@@ -1157,7 +1160,8 @@ camera_stream {
 .camera-popup,
 .door-entry-popup,
 .iframe-popup,
-.history-popup {
+.history-popup,
+.popup {
    position: fixed;
    top: 0;
    left: 0;
@@ -1211,7 +1215,6 @@ camera_stream {
 .camera-popup,
 .door-entry-popup,
 .iframe-popup {
-
    &--list {
       width: 200px;
       display: inline-block;
@@ -1266,7 +1269,6 @@ camera_stream {
 }
 
 .history-popup {
-
    &-container {
       height: auto;
       max-height: 100%;
@@ -1308,7 +1310,8 @@ camera_stream {
    }
 }
 
-.door-entry-popup {
+.door-entry-popup,
+.popup {
 
    &-container {
    }

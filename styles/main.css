@@ -136,6 +136,9 @@
 .item.-th-popup_iframe {
   background-color: #44749c;
 }
+.item.-th-popup {
+  background-color: #44749c;
+}
 .item.-th-dimmer_switch {
   background-color: #829c6c;
 }
@@ -518,6 +521,7 @@ body {
 .item.-alarm,
 .item.-door_entry,
 .item.-popup_iframe,
+.item.-popup,
 .item.-input_datetime,
 .item.-dimmer_switch,
 .item.-scene {
@@ -545,6 +549,7 @@ body {
 .item.-alarm:active,
 .item.-door_entry:active,
 .item.-popup_iframe:active,
+.item.-popup:active,
 .item.-input_datetime:active,
 .item.-dimmer_switch:active,
 .item.-scene:active {
@@ -569,6 +574,7 @@ body {
 .item.-alarm .item-clickable,
 .item.-door_entry .item-clickable,
 .item.-popup_iframe .item-clickable,
+.item.-popup .item-clickable,
 .item.-input_datetime .item-clickable,
 .item.-dimmer_switch .item-clickable,
 .item.-scene .item-clickable {
@@ -1026,7 +1032,8 @@ camera_stream div {
 .camera-popup,
 .door-entry-popup,
 .iframe-popup,
-.history-popup {
+.history-popup,
+.popup {
   position: fixed;
   top: 0;
   left: 0;
@@ -1040,7 +1047,8 @@ camera_stream div {
 .camera-popup-container,
 .door-entry-popup-container,
 .iframe-popup-container,
-.history-popup-container {
+.history-popup-container,
+.popup-container {
   background: #111;
   height: 100%;
   width: 100%;
@@ -1052,7 +1060,8 @@ camera_stream div {
 .camera-popup-title,
 .door-entry-popup-title,
 .iframe-popup-title,
-.history-popup-title {
+.history-popup-title,
+.popup-title {
   background: #222;
   color: rgba(255, 255, 255, 0.6);
   font-size: 20px;
@@ -1066,7 +1075,8 @@ camera_stream div {
 .camera-popup-close,
 .door-entry-popup-close,
 .iframe-popup-close,
-.history-popup-close {
+.history-popup-close,
+.popup-close {
   float: left;
   text-align: center;
   color: rgba(255, 255, 255, 0.6);
@@ -1080,7 +1090,8 @@ camera_stream div {
 .camera-popup-close:active,
 .door-entry-popup-close:active,
 .iframe-popup-close:active,
-.history-popup-close:active {
+.history-popup-close:active,
+.popup-close:active {
   color: rgba(255, 255, 255, 0.8);
   background: rgba(0, 0, 0, 0.3);
 }
@@ -1178,13 +1189,15 @@ camera_stream div {
     height: calc(100% - 50px);
   }
 }
-.door-entry-popup--tiles {
+.door-entry-popup--tiles,
+.popup--tiles {
   position: absolute;
   left: 15px;
   top: 15px;
   z-index: 2;
 }
-.door-entry-popup--camera {
+.door-entry-popup--camera,
+.popup--camera {
   position: absolute;
   left: 0;
   right: 0;
