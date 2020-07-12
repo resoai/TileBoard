@@ -145,6 +145,9 @@
 .item.-th-image {
   background-color: #259eb0;
 }
+.item.-th-history {
+  background-color: #2d3135;
+}
 html,
 body {
   font-size: 14px;
@@ -990,6 +993,15 @@ body {
 }
 .item-gauge {
   padding-top: 10px;
+}
+.item-history,
+.item-history--placeholder,
+.item-history--canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 .clock div,
 clock div {

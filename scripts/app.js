@@ -64,6 +64,7 @@ var TYPES = {
    DIMMER_SWITCH: 'dimmer_switch',
    GAUGE: 'gauge',
    IMAGE: 'image',    
+   HISTORY: 'history',
 };
 
 var HEADER_ITEMS = {

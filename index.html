@@ -1290,6 +1290,22 @@
             <div class="item-image" 
                  ng-style="{'background-image': 'url(' + itemURL(item, entity) + ')'}"></div>
       </div>
+
+      <div ng-if="item.type === TYPES.HISTORY && (_h = initTileHistory(item, entity))"
+           class="item-entity-container">
+            <div class="item-history">
+               <div class="item-history--placeholder">
+                  <span ng-if="_h.isLoading && !_h.errorText">Loading history data...</span>
+                  <span ng-if="_h.errorText">{{ activeHistory.errorText }}</span>
+               </div>
+               <canvas id="item-history--canvas"
+                  class="chart chart-line"
+                  chart-data="_h.data"
+                  chart-dataset-override="_h.datasetOverride"
+                  chart-options="_h.options"></canvas>
+            </div>
+      </div>
+
    </div>
 </script>
 
