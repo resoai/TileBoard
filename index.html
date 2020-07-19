@@ -210,11 +210,8 @@
             </div>
             {{ entityTitle(activePopup, entity) }}
          </div>
-
-         <div class="popup-container">
-            <div class="popup--tiles">
-               <div tile ng-repeat="item in activePopup.layout.tiles track by $index"></div>
-            </div>
+         <div class="popup--tiles">
+            <div tile ng-repeat="item in activePopup.layout.tiles track by $index"></div>
          </div>
       </div>
    </div>
