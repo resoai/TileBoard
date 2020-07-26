@@ -1727,7 +1727,24 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.openPopupHistory = function (item, entity) {
-      $scope.activeHistory = getHistoryObject(item, entity, item.history);
+      //$scope.activeHistory = getHistoryObject(item, entity, item.history);
+      var default_layout = {
+         page: {},
+         tiles: [{
+            type: TYPES.HISTORY,
+            id: item.id,
+            title: '',
+            state: false,
+            position: [0,0],
+            customStyles: {
+               'margin': '-15px',
+               'height': 'calc(100% + 30px)',
+               'width': 'calc(100% + 30px)',
+            },
+         }]
+      };
+      item.layout = angular.merge(angular.merge(default_layout, item.history), item.layout);
+      return $scope.openPopup(item, entity);
    };
 
    $scope.closePopupHistory = function () {
