@@ -1680,18 +1680,17 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.initTileHistory = function (item, entity) {
       var key = "_historyObject";
 
-      if(!entity.attributes) entity.attributes = {};
-      if(entity.attributes[key]) return entity.attributes[key];
+      if(item[key]) return item[key];
 
       var historyConfig = angular.copy(item.history) || angular.copy(item);
 
-      entity.attributes[key] = $scope.getHistoryObject(item, entity, item);
+      item[key] = $scope.getHistoryObject(item, entity, item);
 
       $timeout(function () {
-         entity.attributes._historyInited = true;
+         item._historyInited = true;
       }, 50);
 
-      return entity.attributes[key];
+      return item[key];
    };
 
    $scope.openPopupHistory = function (item, entity) {
