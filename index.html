@@ -200,7 +200,7 @@
    </div>
 
    <div class="popup"
-        ng-if="activePopup && (page = activePopup.layout.page || {})
+        ng-if="activePopup && (page = activePopup.popup || {})
             && (entity = getItemEntity(activePopup))">
 
       <div class="popup-container">
@@ -210,8 +210,8 @@
             </div>
             {{ entityTitle(activePopup, entity) }}
          </div>
-         <div class="popup--tiles" ng-style="groupStyles({'items': activePopup.layout.tiles} ,page)">
-            <div tile ng-repeat="item in activePopup.layout.tiles track by $index"></div>
+         <div class="popup--tiles" ng-style="groupStyles(activePopup.popup, activePopup.popup)">
+            <div tile ng-repeat="item in activePopup.popup.items track by $index"></div>
          </div>
       </div>
    </div>
