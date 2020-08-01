@@ -1189,8 +1189,7 @@ camera_stream div {
     height: calc(100% - 50px);
   }
 }
-.door-entry-popup--tiles,
-.popup--tiles {
+.door-entry-popup--tiles {
   position: absolute;
   left: 15px;
   top: 65px;
@@ -1198,8 +1197,7 @@ camera_stream div {
   height: calc(100% - 50px - 30px);
   z-index: 2;
 }
-.door-entry-popup--camera,
-.popup--camera {
+.door-entry-popup--camera {
   position: absolute;
   left: 0;
   right: 0;
@@ -1207,6 +1205,39 @@ camera_stream div {
   top: 0;
   z-index: 1;
   width: 100%;
+}
+.popup {
+  /* center popup on screen */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popup-container {
+  /* auto-size container */
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  box-sizing: border-box;
+}
+.popup--tiles {
+  /* position tiles */
+  position: relative;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  margin: 15px;
+  /* max-width, if container hits max-width */
+  max-width: calc(100% - 30px);
+  /* min-width, if container is sized by title */
+  min-width: calc(100% - 30px);
+  /* absolute max-height */
+  max-height: calc(100vh - 50px - 80px - 30px);
+  /* default size to fill screen */
+  height: 100vh;
+  width: 100vw;
+  /* debug:
+      border: 0px solid red; */
 }
 .alarm-popup,
 .datetime-popup {

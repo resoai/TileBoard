@@ -1310,8 +1310,7 @@ camera_stream {
    }
 }
 
-.door-entry-popup,
-.popup {
+.door-entry-popup {
 
    &-container {
    }
@@ -1333,6 +1332,43 @@ camera_stream {
       top: 0;
       z-index: 1;
       width: 100%;
+   }
+}
+
+
+.popup {
+   /* center popup on screen */
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   &-container {
+      /* auto-size container */
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      box-sizing: border-box;
+   }
+
+   &--tiles {
+      /* position tiles */
+      position: relative;
+      top: 0;
+      left: 0;
+      box-sizing: border-box;
+      margin: 15px;
+      /* max-width, if container hits max-width */
+      max-width: calc(100% - 30px);
+      /* min-width, if container is sized by title */
+      min-width: calc(100% - 30px);
+      /* absolute max-height */
+      max-height: calc(100vh - @popupTitleHeight - 80px - 30px);
+      /* default size to fill screen */
+      height: 100vh;
+      width: 100vw;
+      /* debug:
+      border: 0px solid red; */
    }
 }
 
