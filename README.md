@@ -378,6 +378,14 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
       backgroundColor: 'rgba(0, 0, 0, 0.1)', // Defaults to rgba(0, 0, 0, 0.1)
       fractionSize: 0 // Number of decimal places to round the number to. Defaults to current locale formatting
    },
+   /** type: POPUP **/
+   /* popup: object containing the popup definition.
+      The popup is basically a single page with a single group. */
+   popup: { // can contain page or group settings, e.g.:
+      tileSize: 50, // size of tiles in popup
+      width: 2, height: 2, // size of the popup
+      items: {}, // definition of tiles in the popup
+   },
 
    /* classes: A list of classes to be appended to the tile element
     * Useful for custom CSS styles. 
