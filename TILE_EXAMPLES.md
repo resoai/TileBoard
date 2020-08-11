@@ -399,6 +399,36 @@ Locks and unlocks the lock on tap. Also shows icon depending on the state<br>
 },
 ```
 
+#### POPUP
+Opens a popup when clicked. 
+The popup can be configured with any tile you like.
+Think of the popup as a single stand-alone `group` of tiles.
+<br>
+![SCRIPT](images/tile-screenshots/POPUP.png)
+<br>
+![SCRIPT](images/tile-screenshots/POPUP_popup.png)
+
+```js
+{
+   type: TYPES.POPUP,
+   id: {},
+   icon: 'mdi-android',
+   title: 'History popup',
+   state: false,
+   popup: {
+      tileSize: 100,
+      height: 3,
+      items: [
+         {
+            position: [1, 1],
+            type: TYPES.SENSOR,
+            id: 'sensor.covid',
+         },
+      ]
+   }
+},
+```
+
 #### SCENE
 Works almost identical to the SCRIPT. Activates scene in a tap.
 ```js
