@@ -1682,8 +1682,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       if(item[key]) return item[key];
 
-      var historyConfig = angular.copy(item.history) || angular.copy(item);
-
       item[key] = $scope.getHistoryObject(item, entity, item);
 
       $timeout(function () {
