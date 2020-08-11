@@ -411,20 +411,20 @@ Think of the popup as a single stand-alone `group` of tiles.
 ```js
 {
    type: TYPES.POPUP,
-   id: {},
-   icon: 'mdi-android',
-   title: 'History popup',
-   state: false,
-   popup: {
-      tileSize: 100,
-      height: 3,
-      items: [
-         {
-            position: [1, 1],
-            type: TYPES.SENSOR,
-            id: 'sensor.covid',
-         },
-      ]
+   id: {},
+   icon: 'mdi-android',
+   title: 'History popup',
+   state: false,
+   popup: {
+      tileSize: 100,
+      height: 3,
+      items: [
+         {
+            position: [1, 1],
+            type: TYPES.SENSOR,
+            id: 'sensor.covid',
+         },
+      ]
    }
 },
 ```
