@@ -223,6 +223,23 @@ Allows you to toggle a fan on and off, as well as set the speed.
 }
 ```
 
+#### HISTORY
+Displays the history of defined states.
+
+![HISTORY](images/tile-screenshots/HISTORY.png)
+```js
+{
+   position: [0, 1],
+   width: 2, height: 2,
+   type: TYPES.HISTORY,
+   id: 'sensor.covid',
+   title: 'COVID-19 in Köln',
+   state: false,
+   offset: 5*24*3600*1000,
+   options: {legend: {display: false}}
+},
+```
+
 #### IFRAME
 ```js
 {
