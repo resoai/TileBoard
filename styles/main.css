@@ -1228,11 +1228,11 @@ camera_stream div {
   box-sizing: border-box;
   margin: 15px;
   /* max-width, if container hits max-width */
-  max-width: calc(100% - 30px);
+  max-width: calc(100% - 2*15px);
   /* min-width, if container is sized by title */
-  min-width: calc(100% - 30px);
+  min-width: calc(100% - 2*15px);
   /* absolute max-height */
-  max-height: calc(100vh - 50px - 80px - 30px);
+  max-height: calc(100vh - 50px - 2*40px - 2*15px);
   /* default size to fill screen */
   height: 100vh;
   width: 100vw;

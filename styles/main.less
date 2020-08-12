@@ -13,6 +13,8 @@
 @entityFontSize: 34px;
 @entitySelectFontSize: 21px;
 
+@popupMargin: 40px;
+@popupPadding: 15px;
 @popupTitleHeight: 50px;
 
 @opacity: 1;
@@ -1168,7 +1170,7 @@ camera_stream {
    right: 0;
    bottom: 0;
    z-index: 9;
-   padding: 40px;
+   padding: @popupMargin;
    box-sizing: border-box;
    background: rgba(45, 49, 53, 0.78);
 
@@ -1198,7 +1200,7 @@ camera_stream {
       float: left;
       text-align: center;
       color: rgba(255,255,255,.6);
-      width: 50px;
+      width: @popupTitleHeight;
       height: @popupTitleHeight;
       line-height: @popupTitleHeight;
       padding-left: 5px;
@@ -1357,13 +1359,13 @@ camera_stream {
       top: 0;
       left: 0;
       box-sizing: border-box;
-      margin: 15px;
+      margin: @popupPadding;
       /* max-width, if container hits max-width */
-      max-width: calc(100% - 30px);
+      max-width: calc(100% - 2*@popupPadding);
       /* min-width, if container is sized by title */
-      min-width: calc(100% - 30px);
+      min-width: calc(100% - 2*@popupPadding);
       /* absolute max-height */
-      max-height: calc(100vh - @popupTitleHeight - 80px - 30px);
+      max-height: calc(100vh - @popupTitleHeight - 2*@popupMargin - 2*@popupPadding);
       /* default size to fill screen */
       height: 100vh;
       width: 100vw;
