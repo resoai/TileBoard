@@ -670,7 +670,10 @@
       <div ng-if="item.type === TYPES.POPUP_IFRAME"
            class="item-entity-container">
 
-           <div class="item-entity">
+         <div ng-if="item.customHtml"
+              ng-bind-html="itemCustomHtml(item, entity)"></div>
+
+         <div ng-if="!item.customHtml" class="item-entity">
             <span class="item-entity--icon mdi"
                   ng-class="entityIcon(item, entity)"></span>
          </div>
