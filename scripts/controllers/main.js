@@ -1729,8 +1729,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.openPopupHistory = function (item, entity) {
       //$scope.activeHistory = getHistoryObject(item, entity, item.history);
       var history_layout = {
-         page: {},
-         tiles: [angular.merge({
+	 width: 3, height: 2,
+         items: [angular.merge({
             type: TYPES.HISTORY,
             id: item.id,
             title: '',
@@ -1743,7 +1743,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
             },
          }, item.history)]
       };
-      item.layout = angular.merge(history_layout, item.layout);
+      item.popup = angular.merge(history_layout, item.popup);
       return $scope.openPopup(item, entity);
    };
 
