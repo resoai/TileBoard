@@ -63,7 +63,7 @@ var TYPES = {
    POPUP: 'popup',
    DIMMER_SWITCH: 'dimmer_switch',
    GAUGE: 'gauge',
-   IMAGE: 'image',    
+   IMAGE: 'image',
    HISTORY: 'history',
 };
 

@@ -230,13 +230,13 @@ Displays the history of defined states.
 ```js
 {
    position: [0, 1],
-   width: 2, height: 2,
-   type: TYPES.HISTORY,
-   id: 'sensor.covid',
-   title: 'COVID-19 in Köln',
-   state: false,
-   offset: 5*24*3600*1000,
-   options: {legend: {display: false}}
+   width: 2, height: 2,
+   type: TYPES.HISTORY,
+   id: 'sensor.covid',
+   title: 'COVID-19 in Köln',
+   state: false,
+   offset: 5*24*3600*1000,
+   options: {legend: {display: false}}
 },
 ```
 
