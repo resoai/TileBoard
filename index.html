@@ -199,6 +199,23 @@
       </div>
    </div>
 
+   <div class="popup"
+        ng-if="activePopup && (page = activePopup.popup || {})
+            && (entity = getItemEntity(activePopup))">
+
+      <div class="popup-container">
+         <div class="popup-title">
+            <div class="popup-close" ng-click="closePopup()">
+               <i class="mdi mdi-close"></i>
+            </div>
+            {{ entityTitle(activePopup, entity) }}
+         </div>
+         <div class="popup--tiles" ng-style="groupStyles(activePopup.popup, activePopup.popup)">
+            <div tile ng-repeat="item in activePopup.popup.items track by $index"></div>
+         </div>
+      </div>
+   </div>
+
    <div class="alarm-popup"
         ng-if="activeAlarm && (alarmEntity = getItemEntity(activeAlarm))">
 
@@ -657,6 +674,15 @@
               ng-bind-html="itemCustomHtml(item, entity)"></div>
 
          <div ng-if="!item.customHtml" class="item-entity">
+            <span class="item-entity--icon mdi"
+                  ng-class="entityIcon(item, entity)"></span>
+         </div>
+      </div>
+
+      <div ng-if="item.type === TYPES.POPUP"
+           class="item-entity-container">
+
+         <div class="item-entity">
             <span class="item-entity--icon mdi"
                   ng-class="entityIcon(item, entity)"></span>
          </div>

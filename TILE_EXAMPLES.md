@@ -252,6 +252,34 @@ Also alows showing custom HTML content in the tile.
 }
 ```
 
+#### POPUP
+Opens a popup when clicked. 
+The popup contents can be configured with any tile you like.
+Think of the popup as a single stand-alone `group` of tiles.
+
+![POPUP](images/tile-screenshots/POPUP.png)<br>
+![POPUP](images/tile-screenshots/POPUP_popup.png)
+
+```js
+{
+   type: TYPES.POPUP,
+   id: {},
+   icon: 'mdi-android',
+   title: 'History popup',
+   state: false,
+   popup: {
+      tileSize: 100,
+      items: [
+         {
+            position: [1, 1],
+            type: TYPES.SENSOR,
+            id: 'sensor.covid',
+         },
+      ]
+   }
+},
+```
+
 #### INPUT_BOOLEAN
 ```js
 {

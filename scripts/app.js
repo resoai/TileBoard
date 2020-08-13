@@ -60,6 +60,7 @@ var TYPES = {
    WEATHER_LIST: 'weather_list',
    VACUUM: 'vacuum',
    POPUP_IFRAME: 'popup_iframe',
+   POPUP: 'popup',
    DIMMER_SWITCH: 'dimmer_switch',
    GAUGE: 'gauge',
    IMAGE: 'image',    
