@@ -399,3 +399,23 @@ App.directive('onScroll', [function () {
    }
 }]);
 
+// Custom directives to fix angularjs bug with dynamic max values being overriden to 100.
+// https://github.com/angular/angular.js/issues/6726
+App.directive('ngMin', function() {
+   return {
+      restrict: 'A',
+      require: 'ngModel',
+      link: function(scope, elem, attr) {
+         elem.attr('min', attr.ngMin);
+      },
+   };
+})
+App.directive('ngMax', function() {
+   return {
+      restrict: 'A',
+      require: 'ngModel',
+      link: function(scope, elem, attr) {
+         elem.attr('max', attr.ngMax);
+      },
+   };
+})
