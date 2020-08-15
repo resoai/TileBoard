@@ -146,7 +146,7 @@
   background-color: #259eb0;
 }
 .item.-th-history {
-  background-color: #2d3135;
+  background-color: #222;
 }
 html,
 body {
@@ -1129,7 +1129,7 @@ camera_stream div {
   color: #bbb;
   cursor: pointer;
   /*&:hover {
-         background: #222;
+         background: @popupBackground;
       }*/
 }
 .camera-popup--list-item.-active,

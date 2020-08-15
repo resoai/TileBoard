@@ -16,6 +16,7 @@
 @popupMargin: 40px;
 @popupPadding: 15px;
 @popupTitleHeight: 50px;
+@popupBackground: #222;
 
 @opacity: 1;
 
@@ -67,9 +68,10 @@
 @VACUUM: rgb(37, 158, 176);
 @POPUP_IFRAME: rgb(68, 116, 156);
 @POPUP: rgb(68, 116, 156);
+@POPUP_popup: #222;
 @DIMMER_SWITCH: rgb(130, 156, 108);
 @IMAGE: rgb(37, 158, 176);
-@HISTORY: rgb(45, 49, 53);
+@HISTORY: @popupBackground;
 
 .item {
    &.-th-transparent {background-color: @TRANSPARENT;}
@@ -1202,7 +1204,7 @@ camera_stream {
    }
 
    &-title {
-      background: #222;
+      background: @popupBackground;
       color: rgba(255,255,255,.6);
       font-size: 20px;
       height: @popupTitleHeight;
@@ -1251,7 +1253,7 @@ camera_stream {
       cursor: pointer;
 
       /*&:hover {
-         background: #222;
+         background: @popupBackground;
       }*/
 
       &.-active {
@@ -1265,7 +1267,7 @@ camera_stream {
       height: 100%;
       display: inline-block;
       vertical-align: top;
-      background: #222;
+      background: @popupBackground;
 
       > div {
          height: 100%;
@@ -1278,7 +1280,7 @@ camera_stream {
       height: 100%;
       display: inline-block;
       vertical-align: top;
-      background: #222;
+      background: @popupBackground;
 
       > iframe {
          height: 100%;
@@ -1320,7 +1322,7 @@ camera_stream {
       bottom: 0; 
       right: 0; 
       vertical-align: top;
-      background: #222;
+      background: @popupBackground;
       padding: 6px;
 
       @media (orientation: landscape) {
@@ -1498,7 +1500,7 @@ camera_stream {
       white-space: nowrap;
 
       &:active {
-         background: #222;
+         background: @popupBackground;
       }
 
       &.-l2 {
