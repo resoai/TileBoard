@@ -1710,10 +1710,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       item[key] = $scope.getHistoryObject(item, entity, item);
 
-      $timeout(function () {
-         item._historyInited = true;
-      }, 50);
-
       return item[key];
    };
 
