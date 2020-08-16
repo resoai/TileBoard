@@ -234,7 +234,6 @@ Displays the history of defined states.
    type: TYPES.HISTORY,
    id: 'sensor.covid',
    title: 'COVID-19 in Köln',
-   state: false,
    offset: 5*24*3600*1000,
    options: {legend: {display: false}}
 },
