@@ -1294,7 +1294,8 @@
       <div ng-if="item.type === TYPES.HISTORY && (_h = initTileHistory(item, entity))"
            class="item-entity-container">
             <div class="item-history">
-               <div class="item-history--placeholder">
+               <div class="item-history--placeholder"
+                    ng-if="_h.isLoading || _h.errorText">
                   <span ng-if="_h.isLoading && !_h.errorText">Loading history data...</span>
                   <span ng-if="_h.errorText">{{ activeHistory.errorText }}</span>
                </div>
