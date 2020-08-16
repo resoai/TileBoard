@@ -487,7 +487,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          return item.states[entity.state] || entity.state;
       }
 
-      return entity.state;
+      var unit = entity.attributes ? entity.attributes.unit_of_measurement : '';
+      return entity.state + (unit ? ' ' + unit : '');
    };
 
    $scope.entityIcon = function (item, entity) {
