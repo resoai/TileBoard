@@ -1675,30 +1675,36 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                  duration: 0
                },
                legend: {
-                 display: typeof entityId != 'string'
+                 display: typeof entityId !== 'string'
                },
             }, $scope.itemField('options', config, entity));
          });
 
-      if (typeof entityId == 'string') {
-         $scope.$watch(function () {
-            return $scope.states[entityId].state;
-         }, function (newValue, oldValue, scope) {
-            historyObject.data[0].push({
-               x: Date.now(),
-               y: newValue
+      if (typeof entityId === 'string') {
+         $scope.$watch(
+            function () {
+               return $scope.states[entityId].state;
+            },
+            function (newValue) {
+               historyObject.data[0].push({
+                  x: Date.now(),
+                  y: newValue
+               });
             });
+      } else {
+         entityId.forEach(function(entityId, index) {
+            $scope.$watch(
+               function () {
+                  return $scope.states[entityId].state;
+               },
+               function (newValue) {
+                  historyObject.data[index].push({
+                     x: Date.now(),
+                     y: newValue
+                  });
+               });
          });
-      } else { entityId.map(function(id, index) {
-         $scope.$watch(function () {
-            return $scope.states[id].state;
-         }, function (newValue, oldValue, scope) {
-            historyObject.data[index].push({
-               x: Date.now(),
-               y: newValue
-            });
-         });
-      });}
+      }
 
       return historyObject;
    };
