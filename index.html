@@ -765,12 +765,13 @@
                </div>
 
                <div class="item-slider">
-                  <input type="range" ng-model="_c.value" value="{{ _c.value }}"
+                  <input type="range"
+                         ng-model="_c.value"
                          ng-on-touchstart="$event.stopPropagation()"
                          ng-on-touchmove="$event.stopPropagation()"
                          ng-on-pointerdown="$event.stopPropagation()"
                          ng-change="lightSliderChanged(slider, item, entity, _c)"
-                         step="{{ _c.step }}" min="{{ _c.min }}" max="{{ _c.max }}">
+                         step="{{ _c.step }}" ng-min="{{ _c.min }}" ng-max="{{ _c.max }}">
                </div>
             </div>
           
