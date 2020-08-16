@@ -707,6 +707,8 @@ body {
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.01);
   z-index: 2;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .item-subtitle {
   position: absolute;
