@@ -1561,7 +1561,13 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          item: angular.copy(item),
          config: angular.copy(config),
          isLoading: true,
-         errorText: null
+         errorText: null,
+         watchers: [],
+      };
+      historyObject.deregister = function () {
+         historyObject.watchers.forEach(function (watcher) {
+            watcher();
+         });
       };
 
       var entityId = $scope.itemField('entity', config, entity) || entity.entity_id;
@@ -1678,33 +1684,34 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                  display: typeof entityId !== 'string'
                },
             }, $scope.itemField('options', config, entity));
-         });
 
-      if (typeof entityId === 'string') {
-         $scope.$watch(
-            function () {
-               return $scope.states[entityId].state;
-            },
-            function (newValue) {
-               historyObject.data[0].push({
-                  x: Date.now(),
-                  y: newValue
+            // Add watchers to update data on the fly
+            if (typeof entityId === 'string') {
+               historyObject.watchers.push($scope.$watch(
+                  function () {
+                     return $scope.states[entityId].state;
+                  },
+                  function (newValue) {
+                     historyObject.data[0].push({
+                        x: Date.now(),
+                        y: newValue
+                     });
+                  }));
+            } else {
+               entityId.forEach(function(entityId, index) {
+                  historyObject.watchers.push($scope.$watch(
+                     function () {
+                        return $scope.states[entityId].state;
+                     },
+                     function (newValue) {
+                        historyObject.data[index].push({
+                           x: Date.now(),
+                           y: newValue
+                        });
+                     }));
                });
-            });
-      } else {
-         entityId.forEach(function(entityId, index) {
-            $scope.$watch(
-               function () {
-                  return $scope.states[entityId].state;
-               },
-               function (newValue) {
-                  historyObject.data[index].push({
-                     x: Date.now(),
-                     y: newValue
-                  });
-               });
+            }
          });
-      }
 
       return historyObject;
    };
@@ -1724,6 +1731,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.closePopupHistory = function () {
+      $scope.activeHistory.deregister();
       $scope.activeHistory = null;
    };
 
