@@ -1657,7 +1657,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                }
 
                datasetOverride.push({
-                  label: seriesUnit ? (seriesName + ' / ' + seriesUnit) : seriesName,
+                  label: [undefined, '1', '', ' '].includes(seriesUnit) ? seriesName : (seriesName + ' / ' + seriesUnit),
                   yAxisID: yAxisId,
                });
             });
