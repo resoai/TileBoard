@@ -225,17 +225,24 @@ Allows you to toggle a fan on and off, as well as set the speed.
 
 #### HISTORY
 Displays the history of defined states.
+The variable `MINIMAL_CHART_OPTIONS` defines options for a minimal chart suited to be displayed in a tile.
+The below example illustrates how you can amend these options with a custom padding, such that the subtitle is readable.
 
 ![HISTORY](images/tile-screenshots/HISTORY.png)
 ```js
 {
    position: [0, 1],
-   width: 2, height: 2,
    type: TYPES.HISTORY,
    id: 'sensor.covid',
    title: 'COVID-19 in Köln',
+   subtitle: function (item, entity) {
+      return 'since ' + timeAgo(Date.now() - (item.offset || 24*3600*1000));
+   },
    offset: 5*24*3600*1000,
-   options: {legend: {display: false}}
+   options: angular.merge(
+      MINIMAL_CHART_OPTIONS,
+      {layout: {padding: {bottom: 45}}}
+   )
 },
 ```
 

@@ -184,6 +184,36 @@ var DEFAULT_HEADER = {
    ]
 };
 
+var MINIMAL_CHART_OPTIONS = {
+   animation: {
+      duration: 0
+   },
+   layout: {
+      padding: {bottom: 25}
+   },
+   elements: {line: {
+      fill: false,
+      borderWidth: 3,
+      stepped: false
+   }},
+   legend: {display: false},
+   scales: {
+      xAxes: [{
+         display: false
+      }],
+      yAxes: [{
+         display: true,
+         ticks: {
+            mirror: true,
+            callback: function(value, index, values) {
+               if (index === values.length - 1 || index === 0) return value;
+               return null;
+            }
+         }
+      }]
+   }
+};
+
 window.onerror = function (error, file, line, char) {
    var text = [
       error,

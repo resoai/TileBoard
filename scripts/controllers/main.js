@@ -1677,9 +1677,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                hover: {
                  mode: interactionsMode
                },
-               animation: {
-                 duration: 0
-               },
                legend: {
                  display: typeof entityId !== 'string'
                },
