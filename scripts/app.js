@@ -185,9 +185,6 @@ var DEFAULT_HEADER = {
 };
 
 var MINIMAL_CHART_OPTIONS = {
-   animation: {
-      duration: 0
-   },
    layout: {
       padding: {bottom: 25}
    },

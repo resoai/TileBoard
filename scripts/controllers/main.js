@@ -1680,6 +1680,9 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                legend: {
                  display: typeof entityId !== 'string'
                },
+               animation: {
+                  duration: 0
+               },
             }, $scope.itemField('options', config, entity));
 
             // Add watchers to update data on the fly
