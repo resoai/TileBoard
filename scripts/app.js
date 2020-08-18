@@ -194,7 +194,8 @@ var MINIMAL_CHART_OPTIONS = {
    elements: {line: {
       fill: false,
       borderWidth: 3,
-      stepped: false
+      stepped: false,
+      cubicInterpolationMode: 'monotone'
    }},
    legend: {display: false},
    scales: {
