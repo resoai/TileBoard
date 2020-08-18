@@ -209,7 +209,17 @@ var MINIMAL_CHART_OPTIONS = {
             }
          }
       }]
-   }
+   },
+   tooltips: {
+      callbacks: {
+         title: function(tooltipItem, data) {
+            return timeAgo(tooltipItem[0].label);
+         },
+         label: function(tooltipItem, data) {
+            return tooltipItem.value;
+         }
+      }
+   },
 };
 
 window.onerror = function (error, file, line, char) {
