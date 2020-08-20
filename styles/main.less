@@ -1120,17 +1120,42 @@ body {
    padding-top: 10px;
 }
 
-.item-history,
-.item-history--placeholder,
-.item-history--canvas {
+.item-history {
+   // Fill complete tile as ever
    position: absolute;
    top: 0;
    left: 0;
    bottom: 0;
    right: 0;
+   // Stack contents vertically in a flexbox
    display: flex;
-   justify-content: center;
-   align-items: center;
+   flex-direction: column;
+
+   &-container {
+      position: static; // Use flex positioning
+      flex: 1 1 0; // May grow and shrink as desired
+      min-height: 0; // Required for Chart to shrink as well
+      // border: 1px solid green; //DEBUG
+   }
+
+   & > .mock-title {
+      position: static; // Use flex positioning
+      flex: 0 0 auto; // Do not grow or shrink
+      // border: 1px solid red; //DEBUG
+   }
+
+   &--placeholder {
+      // Fill complete -container area
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      // Use flexbox to center contents
+      display: flex;
+      justify-content: center;
+      align-items: center;
+   }
 }
 
 .clock, clock {

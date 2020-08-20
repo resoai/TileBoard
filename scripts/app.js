@@ -186,7 +186,9 @@ var DEFAULT_HEADER = {
 
 var MINIMAL_CHART_OPTIONS = {
    layout: {
-      padding: {bottom: 25}
+      padding: {
+         left: 0
+      }
    },
    elements: {line: {
       fill: false,
