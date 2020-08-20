@@ -1677,11 +1677,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                hover: {
                  mode: interactionsMode
                },
-               legend: {
-                 display: typeof entityId !== 'string'
-               },
                animation: {
                   duration: 0
+               },
+               legend: {
+                 display: typeof entityId !== 'string'
                },
             }, $scope.itemField('options', config, entity));
 

@@ -204,7 +204,9 @@ var MINIMAL_CHART_OPTIONS = {
          ticks: {
             mirror: true,
             callback: function(value, index, values) {
-               if (index === values.length - 1 || index === 0) return value;
+               if (index === values.length - 1 || index === 0) {
+                  return value;
+               }
                return null;
             }
          }
