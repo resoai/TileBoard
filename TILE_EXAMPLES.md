@@ -228,6 +228,7 @@ Displays the history of defined states.
 The variable `MINIMAL_CHART_OPTIONS` defines options for a minimal chart suited to be displayed in a tile.
 
 ![HISTORY](images/tile-screenshots/HISTORY.png)
+
 ```js
 {
    position: [0, 1],

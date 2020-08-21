@@ -1556,7 +1556,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       return popupHistoryStyles;
    };
 
-   $scope.getHistoryObject = function(item, entity, config) {
+   function getHistoryObject(item, entity, config) {
       var historyObject = {
          item: angular.copy(item),
          config: angular.copy(config),
@@ -1721,13 +1721,13 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       if(item[key]) return item[key];
 
-      item[key] = $scope.getHistoryObject(item, entity, item);
+      item[key] = getHistoryObject(item, entity, item);
 
       return item[key];
    };
 
    $scope.openPopupHistory = function (item, entity) {
-      $scope.activeHistory = $scope.getHistoryObject(item, entity, item.history);
+      $scope.activeHistory = getHistoryObject(item, entity, item.history);
    };
 
    $scope.closePopupHistory = function () {
