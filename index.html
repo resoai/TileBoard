@@ -1290,6 +1290,28 @@
             <div class="item-image" 
                  ng-style="{'background-image': 'url(' + itemURL(item, entity) + ')'}"></div>
       </div>
+
+      <div ng-if="item.type === TYPES.HISTORY && (_h = initTileHistory(item, entity))"
+           class="item-entity-container">
+         <div class="item-history">
+            <div class="item-history-container">
+               <div class="item-history--placeholder"
+                    ng-if="_h.isLoading || _h.errorText">
+                  <span ng-if="_h.isLoading && !_h.errorText"
+                     class="mdi mdi-progress-clock"></span>
+                  <span ng-if="_h.errorText">{{ _h.errorText }}</span>
+               </div>
+               <canvas id="item-history--canvas"
+                  class="chart chart-line"
+                  chart-data="_h.data"
+                  chart-dataset-override="_h.datasetOverride"
+                  chart-options="_h.options"></canvas>
+            </div>
+            <div class="item-title mock-title" ng-if="entityTitle(item, entity) || entitySubtitle(item, entity)">&nbsp;</div>
+            <div class="item-subtitle mock-title" ng-if="entitySubtitle(item, entity)">&nbsp;</div>
+         </div>
+      </div>
+
    </div>
 </script>
 

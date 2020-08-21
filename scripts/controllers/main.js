@@ -1556,29 +1556,36 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       return popupHistoryStyles;
    };
 
-   $scope.openPopupHistory = function (item, entity) {
-      $scope.activeHistory = {
+   function getHistoryObject(item, entity, config) {
+      var historyObject = {
          item: angular.copy(item),
+         config: angular.copy(config),
          isLoading: true,
-         errorText: null
+         errorText: null,
+         watchers: [],
+      };
+      historyObject.deregister = function () {
+         historyObject.watchers.forEach(function (watcher) {
+            watcher();
+         });
       };
 
-      var entityId = $scope.itemField('history.entity', item, entity) || entity.entity_id;
+      var entityId = $scope.itemField('entity', config, entity) || entity.entity_id;
 
       if(!entityId) {
-         $scope.activeHistory.errorText = 'No entity was specified';
-         return;
+         historyObject.errorText = 'No entity was specified';
+         return historyObject;
       }
 
       var day = 24 * 60 * 60 * 1000;
-      var startDate = new Date(Date.now() - ($scope.itemField('history.offset', item, entity) || day)).toISOString();
+      var startDate = new Date(Date.now() - ($scope.itemField('offset', config, entity) || day)).toISOString();
 
-      return Api.getHistory(startDate, entityId)
+      Api.getHistory(startDate, entityId)
          .then(function (data) {
-            $scope.activeHistory.isLoading = false;
+            historyObject.isLoading = false;
 
             if(data.length === 0) {
-               $scope.activeHistory.errorText = 'No history data found';
+               historyObject.errorText = 'No history data found';
                return;
             }
 
@@ -1658,9 +1665,9 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
             // 'index' mode doesn't work well with multiple datasets - revert to default mode.
             var interactionsMode = datasets.length > 1 ? 'nearest' : 'index';
 
-            $scope.activeHistory.data = datasets;
-            $scope.activeHistory.datasetOverride = datasetOverride;
-            $scope.activeHistory.options = angular.merge({
+            historyObject.data = datasets;
+            historyObject.datasetOverride = datasetOverride;
+            historyObject.options = angular.merge({
                scales: {
                   yAxes: yAxes
                },
@@ -1669,12 +1676,62 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                },
                hover: {
                  mode: interactionsMode
-               }
-            }, $scope.itemField('history.options', item, entity));
+               },
+               animation: {
+                  duration: 0
+               },
+               legend: {
+                 display: typeof entityId !== 'string'
+               },
+            }, $scope.itemField('options', config, entity));
+
+            // Add watchers to update data on the fly
+            if (typeof entityId === 'string') {
+               historyObject.watchers.push($scope.$watch(
+                  function () {
+                     return $scope.states[entityId].state;
+                  },
+                  function (newValue) {
+                     historyObject.data[0].push({
+                        x: Date.now(),
+                        y: newValue
+                     });
+                  }));
+            } else {
+               entityId.forEach(function(entityId, index) {
+                  historyObject.watchers.push($scope.$watch(
+                     function () {
+                        return $scope.states[entityId].state;
+                     },
+                     function (newValue) {
+                        historyObject.data[index].push({
+                           x: Date.now(),
+                           y: newValue
+                        });
+                     }));
+               });
+            }
          });
+
+      return historyObject;
+   };
+
+   $scope.initTileHistory = function (item, entity) {
+      var key = "_historyObject";
+
+      if(item[key]) return item[key];
+
+      item[key] = getHistoryObject(item, entity, item);
+
+      return item[key];
+   };
+
+   $scope.openPopupHistory = function (item, entity) {
+      $scope.activeHistory = getHistoryObject(item, entity, item.history);
    };
 
    $scope.closePopupHistory = function () {
+      $scope.activeHistory.deregister();
       $scope.activeHistory = null;
    };
 

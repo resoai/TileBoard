@@ -16,6 +16,7 @@
 @popupMargin: 40px;
 @popupPadding: 15px;
 @popupTitleHeight: 50px;
+@popupBackground: #222;
 
 @opacity: 1;
 
@@ -69,6 +70,7 @@
 @POPUP: rgb(68, 116, 156);
 @DIMMER_SWITCH: rgb(130, 156, 108);
 @IMAGE: rgb(37, 158, 176);
+@HISTORY: @popupBackground;
 
 .item {
    &.-th-transparent {background-color: @TRANSPARENT;}
@@ -121,6 +123,7 @@
    &.-th-popup {background-color: @POPUP;}
    &.-th-dimmer_switch {background-color: @DIMMER_SWITCH;}
    &.-th-image {background-color: @IMAGE;}    
+   &.-th-history {background-color: @HISTORY;}
 }
 
 
@@ -1115,7 +1118,43 @@ body {
 
 .item-gauge {
    padding-top: 10px;
- }
+}
+
+.item-history {
+   // Fill complete tile as ever
+   position: absolute;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+   // Stack contents vertically in a flexbox
+   display: flex;
+   flex-direction: column;
+
+   &-container {
+      position: static; // Use flex positioning
+      flex: 1 1 0; // May grow and shrink as desired
+      min-height: 0; // Required for Chart to shrink as well
+   }
+
+   & > .mock-title {
+      position: static; // Use flex positioning
+      flex: 0 0 auto; // Do not grow or shrink
+   }
+
+   &--placeholder {
+      // Fill complete -container area
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      // Use flexbox to center contents
+      display: flex;
+      justify-content: center;
+      align-items: center;
+   }
+}
 
 .clock, clock {
    div {
@@ -1189,7 +1228,7 @@ camera_stream {
    }
 
    &-title {
-      background: #222;
+      background: @popupBackground;
       color: rgba(255,255,255,.6);
       font-size: 20px;
       height: @popupTitleHeight;
@@ -1238,7 +1277,7 @@ camera_stream {
       cursor: pointer;
 
       /*&:hover {
-         background: #222;
+         background: @popupBackground;
       }*/
 
       &.-active {
@@ -1252,7 +1291,7 @@ camera_stream {
       height: 100%;
       display: inline-block;
       vertical-align: top;
-      background: #222;
+      background: @popupBackground;
 
       > div {
          height: 100%;
@@ -1265,7 +1304,7 @@ camera_stream {
       height: 100%;
       display: inline-block;
       vertical-align: top;
-      background: #222;
+      background: @popupBackground;
 
       > iframe {
          height: 100%;
@@ -1307,7 +1346,7 @@ camera_stream {
       bottom: 0; 
       right: 0; 
       vertical-align: top;
-      background: #222;
+      background: @popupBackground;
       padding: 6px;
 
       @media (orientation: landscape) {
@@ -1485,7 +1524,7 @@ camera_stream {
       white-space: nowrap;
 
       &:active {
-         background: #222;
+         background: @popupBackground;
       }
 
       &.-l2 {

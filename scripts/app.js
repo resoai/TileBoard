@@ -63,7 +63,8 @@ var TYPES = {
    POPUP: 'popup',
    DIMMER_SWITCH: 'dimmer_switch',
    GAUGE: 'gauge',
-   IMAGE: 'image',    
+   IMAGE: 'image',
+   HISTORY: 'history',
 };
 
 var HEADER_ITEMS = {
@@ -181,6 +182,48 @@ var DEFAULT_HEADER = {
          }
       }*/
    ]
+};
+
+var MINIMAL_CHART_OPTIONS = {
+   layout: {
+      padding: {
+         left: 0
+      }
+   },
+   elements: {line: {
+      fill: false,
+      borderWidth: 3,
+      stepped: false,
+      cubicInterpolationMode: 'monotone'
+   }},
+   legend: {display: false},
+   scales: {
+      xAxes: [{
+         display: false
+      }],
+      yAxes: [{
+         display: true,
+         ticks: {
+            mirror: true,
+            callback: function(value, index, values) {
+               if (index === values.length - 1 || index === 0) {
+                  return value;
+               }
+               return null;
+            }
+         }
+      }]
+   },
+   tooltips: {
+      callbacks: {
+         title: function(tooltipItem, data) {
+            return timeAgo(tooltipItem[0].label);
+         },
+         label: function(tooltipItem, data) {
+            return tooltipItem.value;
+         }
+      }
+   },
 };
 
 window.onerror = function (error, file, line, char) {
