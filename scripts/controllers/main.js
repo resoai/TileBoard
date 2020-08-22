@@ -73,7 +73,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
          case TYPES.POPUP_IFRAME: return $scope.openPopupIframe(item, entity);
 
-         case TYPES.POPUP: return $scope.openPopup(item, entity);
+         case TYPES.POPUP: return $scope.openPopup(item, entity, item.popup);
 
          case TYPES.INPUT_DATETIME: return $scope.openDatetime(item, entity);
       }
@@ -1533,8 +1533,12 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $scope.activeIframe = null;
    };
 
-   $scope.openPopup = function (item, entity) {
-      $scope.activePopup = item;
+   $scope.openPopup = function (item, entity, layout) {
+      $scope.activePopup = {
+        item: item,
+        entity: entity,
+        layout: layout
+      };
    };
 
    $scope.closePopup = function () {
@@ -1727,24 +1731,27 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.openPopupHistory = function (item, entity) {
-      //$scope.activeHistory = getHistoryObject(item, entity, item.history);
-      var history_layout = {
-	 width: 3, height: 2,
-         items: [angular.merge({
-            type: TYPES.HISTORY,
-            id: item.id,
-            title: '',
-            state: false,
-            position: [0,0],
-            customStyles: {
-               'margin': '-15px',
-               'height': 'calc(100% + 30px)',
-               'width': 'calc(100% + 30px)',
-            },
-         }, item.history)]
-      };
-      item.popup = angular.merge(history_layout, item.popup);
-      return $scope.openPopup(item, entity);
+      var key = "_popupHistory";
+
+      if(!item[key]) {
+         item[key] = {
+            width: 3, height: 2,
+            items: [angular.merge({
+               type: TYPES.HISTORY,
+               id: item.id,
+               title: '',
+               state: false,
+               position: [0,0],
+               customStyles: {
+                  'margin': '-15px',
+                  'height': 'calc(100% + 30px)',
+                  'width': 'calc(100% + 30px)',
+               },
+            }, item.history)]
+         };
+      }
+
+      return $scope.openPopup(item, entity, item[key]);
    };
 
    $scope.closePopupHistory = function () {

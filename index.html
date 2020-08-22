@@ -200,18 +200,18 @@
    </div>
 
    <div class="popup"
-        ng-if="activePopup && (page = activePopup.popup || {})
-            && (entity = getItemEntity(activePopup))">
+        ng-if="activePopup && (page = activePopup.layout || {})"
+        ng-click="closePopup()">
 
-      <div class="popup-container">
+      <div class="popup-container" ng-click="preventClick($event)">
          <div class="popup-title">
             <div class="popup-close" ng-click="closePopup()">
                <i class="mdi mdi-close"></i>
             </div>
-            {{ entityTitle(activePopup, entity) }}
+            {{ entityTitle(activePopup.item, activePopup.entity) }}
          </div>
-         <div class="popup--tiles" ng-style="groupStyles(activePopup.popup, activePopup.popup)">
-            <div tile ng-repeat="item in activePopup.popup.items track by $index"></div>
+         <div class="popup--tiles" ng-style="groupStyles(activePopup.layout, activePopup.layout)">
+            <div tile ng-repeat="item in activePopup.layout.items track by $index"></div>
          </div>
       </div>
    </div>
