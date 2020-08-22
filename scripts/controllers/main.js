@@ -1735,7 +1735,10 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       if(!item[key]) {
          item[key] = {
-            width: 3, height: 2,
+            styles: {
+               width: '100vw',
+               height: '56vw',
+            },
             items: [angular.merge({
                type: TYPES.HISTORY,
                id: item.id,
@@ -1743,9 +1746,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                state: false,
                position: [0,0],
                customStyles: {
-                  'margin': '-15px',
-                  'height': 'calc(100% + 30px)',
-                  'width': 'calc(100% + 30px)',
+                  width: '100%',
+                  height: '100%',
                },
             }, item.history)]
          };
