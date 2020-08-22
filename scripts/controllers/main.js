@@ -1004,6 +1004,9 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.toggleSwitch = function (item, entity, callback) {
+      if(item.type === TYPES.LIGHT && item.controlsEnabled) {
+         return;
+      }
       var domain = "homeassistant";
       var group = item.id.split('.')[0];
 
