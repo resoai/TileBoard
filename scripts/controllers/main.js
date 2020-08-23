@@ -1742,8 +1742,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
             items: [angular.merge({
                type: TYPES.HISTORY,
                id: item.id,
-               title: '',
-               state: false,
+               title: false,
                position: [0,0],
                customStyles: {
                   width: '100%',
