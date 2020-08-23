@@ -20,7 +20,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.activeCamera = null;
    $scope.activeDoorEntry = null;
    $scope.activeIframe = null;
-   $scope.activeHistory = null;
    $scope.activePopup = null;
 
    $scope.alarmCode = null;
@@ -35,7 +34,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    var activePage = null;
    var cameraList = null;
    var popupIframeStyles = {};
-   var popupHistoryStyles = {};
 
    $scope.entityClick = function (page, item, entity) {
       if(typeof item.action === "function") {
@@ -1545,21 +1543,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $scope.activePopup = null;
    };
 
-   $scope.getPopupHistoryStyles = function () {
-      if(!$scope.activeHistory || !$scope.activeHistory.item.history || !$scope.activeHistory.item.history.styles) return null;
-
-      var entity = $scope.getItemEntity($scope.activeHistory.item);
-
-      var styles = $scope.itemField('history.styles', $scope.activeHistory.item, entity);
-
-      if(!styles) return null;
-
-      for (var k in popupHistoryStyles) delete popupHistoryStyles[k];
-      for (k in styles) popupHistoryStyles[k] = styles[k];
-
-      return popupHistoryStyles;
-   };
-
    function getHistoryObject(item, entity, config) {
       var historyObject = {
          item: angular.copy(item),
@@ -1757,11 +1740,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       return $scope.openPopup(item, entity, item[key]);
    };
 
-   $scope.closePopupHistory = function () {
-      $scope.activeHistory.deregister();
-      $scope.activeHistory = null;
-   };
-
    $scope.openDoorEntry = function (item, entity) {
       $scope.activeDoorEntry = item;
 
@@ -1940,7 +1918,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    function hasOpenPopup () {
       return $scope.activeCamera || $scope.activeDoorEntry || $scope.activeIframe
-         || $scope.activeHistory || $scope.activePopup;
+         || $scope.activePopup;
    }
 
    $scope.toggleSelect = function (item) {
