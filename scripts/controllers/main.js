@@ -1538,7 +1538,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $scope.activePopup = {
         item: item,
         entity: entity,
-        layout: layout
+        layout: layout || item.popup
       };
    };
 
