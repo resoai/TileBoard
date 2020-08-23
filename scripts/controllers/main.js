@@ -1738,6 +1738,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
             styles: {
                width: '100vw',
                height: '56vw',
+               margin: 0,
+               maxWidth: '100%',
             },
             items: [angular.merge({
                type: TYPES.HISTORY,
