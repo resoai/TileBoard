@@ -1206,7 +1206,6 @@ camera_stream {
 .camera-popup,
 .door-entry-popup,
 .iframe-popup,
-.history-popup,
 .popup {
    position: fixed;
    top: 0;
@@ -1310,48 +1309,6 @@ camera_stream {
       > iframe {
          height: 100%;
          width: 100%;
-      }
-   }
-}
-
-.history-popup {
-   &-container {
-      height: auto;
-      max-height: 100%;
-
-      @media (orientation: landscape) {
-         height: 100%;
-      }
-
-      &--canvas {
-         &::before {
-            content: '';
-            display: block;
-            padding-bottom: ~'calc(75% - 50px)';
-         }
-      }
-   }
-
-   &--placeholder {
-      position: absolute;
-      text-align: center;
-      top: ~'calc(50% - 10px)';
-      width: 100%;
-   }
-
-   &--canvas {
-      box-sizing: border-box;
-      position: absolute; 
-      top: 0; 
-      left: 0; 
-      bottom: 0; 
-      right: 0; 
-      vertical-align: top;
-      background: @popupTitleBackground;
-      padding: 6px;
-
-      @media (orientation: landscape) {
-         height: ~'calc(100% - 50px)';
       }
    }
 }
