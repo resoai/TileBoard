@@ -1068,7 +1068,6 @@ camera_stream div {
 .camera-popup,
 .door-entry-popup,
 .iframe-popup,
-.history-popup,
 .popup {
   position: fixed;
   top: 0;
@@ -1083,7 +1082,6 @@ camera_stream div {
 .camera-popup-container,
 .door-entry-popup-container,
 .iframe-popup-container,
-.history-popup-container,
 .popup-container {
   background: #111;
   height: 100%;
@@ -1096,7 +1094,6 @@ camera_stream div {
 .camera-popup-title,
 .door-entry-popup-title,
 .iframe-popup-title,
-.history-popup-title,
 .popup-title {
   background: #222;
   color: rgba(255, 255, 255, 0.6);
@@ -1111,7 +1108,6 @@ camera_stream div {
 .camera-popup-close,
 .door-entry-popup-close,
 .iframe-popup-close,
-.history-popup-close,
 .popup-close {
   float: left;
   text-align: center;
@@ -1126,7 +1122,6 @@ camera_stream div {
 .camera-popup-close:active,
 .door-entry-popup-close:active,
 .iframe-popup-close:active,
-.history-popup-close:active,
 .popup-close:active {
   color: rgba(255, 255, 255, 0.8);
   background: rgba(0, 0, 0, 0.3);
@@ -1150,7 +1145,7 @@ camera_stream div {
   color: #bbb;
   cursor: pointer;
   /*&:hover {
-         background: @popupBackground;
+         background: @popupTitleBackground;
       }*/
 }
 .camera-popup--list-item.-active,
@@ -1188,42 +1183,6 @@ camera_stream div {
 .iframe-popup--iframe > iframe {
   height: 100%;
   width: 100%;
-}
-.history-popup-container {
-  height: auto;
-  max-height: 100%;
-}
-@media (orientation: landscape) {
-  .history-popup-container {
-    height: 100%;
-  }
-}
-.history-popup-container--canvas::before {
-  content: '';
-  display: block;
-  padding-bottom: calc(75% - 50px);
-}
-.history-popup--placeholder {
-  position: absolute;
-  text-align: center;
-  top: calc(50% - 10px);
-  width: 100%;
-}
-.history-popup--canvas {
-  box-sizing: border-box;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  vertical-align: top;
-  background: #222;
-  padding: 6px;
-}
-@media (orientation: landscape) {
-  .history-popup--canvas {
-    height: calc(100% - 50px);
-  }
 }
 .door-entry-popup--tiles {
   position: absolute;

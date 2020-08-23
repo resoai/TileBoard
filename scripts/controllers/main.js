@@ -20,7 +20,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.activeCamera = null;
    $scope.activeDoorEntry = null;
    $scope.activeIframe = null;
-   $scope.activeHistory = null;
    $scope.activePopup = null;
 
    $scope.alarmCode = null;
@@ -35,7 +34,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    var activePage = null;
    var cameraList = null;
    var popupIframeStyles = {};
-   var popupHistoryStyles = {};
 
    $scope.entityClick = function (page, item, entity) {
       if(typeof item.action === "function") {
@@ -73,7 +71,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
          case TYPES.POPUP_IFRAME: return $scope.openPopupIframe(item, entity);
 
-         case TYPES.POPUP: return $scope.openPopup(item, entity);
+         case TYPES.POPUP: return $scope.openPopup(item, entity, item.popup);
 
          case TYPES.INPUT_DATETIME: return $scope.openDatetime(item, entity);
       }
@@ -1536,27 +1534,16 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $scope.activeIframe = null;
    };
 
-   $scope.openPopup = function (item, entity) {
-      $scope.activePopup = item;
+   $scope.openPopup = function (item, entity, layout) {
+      $scope.activePopup = {
+        item: item,
+        entity: entity,
+        layout: layout
+      };
    };
 
    $scope.closePopup = function () {
       $scope.activePopup = null;
-   };
-
-   $scope.getPopupHistoryStyles = function () {
-      if(!$scope.activeHistory || !$scope.activeHistory.item.history || !$scope.activeHistory.item.history.styles) return null;
-
-      var entity = $scope.getItemEntity($scope.activeHistory.item);
-
-      var styles = $scope.itemField('history.styles', $scope.activeHistory.item, entity);
-
-      if(!styles) return null;
-
-      for (var k in popupHistoryStyles) delete popupHistoryStyles[k];
-      for (k in styles) popupHistoryStyles[k] = styles[k];
-
-      return popupHistoryStyles;
    };
 
    function getHistoryObject(item, entity, config) {
@@ -1730,12 +1717,30 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.openPopupHistory = function (item, entity) {
-      $scope.activeHistory = getHistoryObject(item, entity, item.history);
-   };
+      var key = "_popupHistory";
 
-   $scope.closePopupHistory = function () {
-      $scope.activeHistory.deregister();
-      $scope.activeHistory = null;
+      if(!item[key]) {
+         item[key] = {
+            styles: {
+               width: '100vw',
+               height: '56vw',
+               margin: 0,
+               maxWidth: '100%',
+            },
+            items: [angular.merge({
+               type: TYPES.HISTORY,
+               id: item.id,
+               title: false,
+               position: [0,0],
+               customStyles: {
+                  width: '100%',
+                  height: '100%',
+               },
+            }, item.history)]
+         };
+      }
+
+      return $scope.openPopup(item, entity, item[key]);
    };
 
    $scope.openDoorEntry = function (item, entity) {
@@ -1916,7 +1921,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    function hasOpenPopup () {
       return $scope.activeCamera || $scope.activeDoorEntry || $scope.activeIframe
-         || $scope.activeHistory || $scope.activePopup;
+         || $scope.activePopup;
    }
 
    $scope.toggleSelect = function (item) {

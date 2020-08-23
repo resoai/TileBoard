@@ -135,33 +135,6 @@
       </div>
    </div>
 
-   <div class="history-popup"
-        ng-class="itemField('history.classes', activeHistory, entity)"
-        ng-if="activeHistory && (entity = getItemEntity(activeHistory.item))">
-      <div class="history-popup-container" ng-style="getPopupHistoryStyles()">
-         <div class="history-popup-title">
-            <div class="history-popup-close" ng-click="closePopupHistory()">
-               <i class="mdi mdi-close"></i>
-            </div>
-            {{ entityTitle(activeHistory.item, entity) }}
-         </div>
-
-         <div class="history-popup-container history-popup-container--canvas">
-            <div class="history-popup--canvas">
-               <div class="history-popup--placeholder">
-                  <span ng-if="activeHistory.isLoading && !activeHistory.errorText">Loading history data...</span>
-                  <span ng-if="activeHistory.errorText">{{ activeHistory.errorText }}</span>
-               </div>
-               <canvas id="history-popup--canvas"
-                  class="chart chart-line"
-                  chart-data="activeHistory.data"
-                  chart-dataset-override="activeHistory.datasetOverride"
-                  chart-options="activeHistory.options"></canvas>
-            </div>
-         </div>
-      </div>
-   </div>
-
    <div class="door-entry-popup"
         ng-if="activeDoorEntry && (page = activeDoorEntry.layout.page)
             && (cameraEntity = getEntryCameraEntity(activeDoorEntry))">
@@ -200,18 +173,18 @@
    </div>
 
    <div class="popup"
-        ng-if="activePopup && (page = activePopup.popup || {})
-            && (entity = getItemEntity(activePopup))">
+        ng-if="activePopup && (page = activePopup.layout || {})"
+        ng-click="closePopup()">
 
-      <div class="popup-container">
+      <div class="popup-container" ng-click="preventClick($event)">
          <div class="popup-title">
             <div class="popup-close" ng-click="closePopup()">
                <i class="mdi mdi-close"></i>
             </div>
-            {{ entityTitle(activePopup, entity) }}
+            {{ entityTitle(activePopup.item, activePopup.entity) }}
          </div>
-         <div class="popup--tiles" ng-style="groupStyles(activePopup.popup, activePopup.popup)">
-            <div tile ng-repeat="item in activePopup.popup.items track by $index"></div>
+         <div class="popup--tiles" ng-style="groupStyles(activePopup.layout, activePopup.layout)">
+            <div tile ng-repeat="item in activePopup.layout.items track by $index"></div>
          </div>
       </div>
    </div>

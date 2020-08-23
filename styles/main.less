@@ -16,7 +16,8 @@
 @popupMargin: 40px;
 @popupPadding: 15px;
 @popupTitleHeight: 50px;
-@popupBackground: #222;
+@popupTitleBackground: #222;
+@popupBackground: #111;
 
 @opacity: 1;
 
@@ -70,7 +71,7 @@
 @POPUP: rgb(68, 116, 156);
 @DIMMER_SWITCH: rgb(130, 156, 108);
 @IMAGE: rgb(37, 158, 176);
-@HISTORY: @popupBackground;
+@HISTORY: @popupTitleBackground;
 
 .item {
    &.-th-transparent {background-color: @TRANSPARENT;}
@@ -1205,7 +1206,6 @@ camera_stream {
 .camera-popup,
 .door-entry-popup,
 .iframe-popup,
-.history-popup,
 .popup {
    position: fixed;
    top: 0;
@@ -1218,7 +1218,7 @@ camera_stream {
    background: rgba(45, 49, 53, 0.78);
 
    &-container {
-      background: #111;
+      background: @popupBackground;
       height: 100%;
       width: 100%;
       overflow: hidden;
@@ -1228,7 +1228,7 @@ camera_stream {
    }
 
    &-title {
-      background: @popupBackground;
+      background: @popupTitleBackground;
       color: rgba(255,255,255,.6);
       font-size: 20px;
       height: @popupTitleHeight;
@@ -1277,7 +1277,7 @@ camera_stream {
       cursor: pointer;
 
       /*&:hover {
-         background: @popupBackground;
+         background: @popupTitleBackground;
       }*/
 
       &.-active {
@@ -1291,7 +1291,7 @@ camera_stream {
       height: 100%;
       display: inline-block;
       vertical-align: top;
-      background: @popupBackground;
+      background: @popupTitleBackground;
 
       > div {
          height: 100%;
@@ -1304,53 +1304,11 @@ camera_stream {
       height: 100%;
       display: inline-block;
       vertical-align: top;
-      background: @popupBackground;
+      background: @popupTitleBackground;
 
       > iframe {
          height: 100%;
          width: 100%;
-      }
-   }
-}
-
-.history-popup {
-   &-container {
-      height: auto;
-      max-height: 100%;
-
-      @media (orientation: landscape) {
-         height: 100%;
-      }
-
-      &--canvas {
-         &::before {
-            content: '';
-            display: block;
-            padding-bottom: ~'calc(75% - 50px)';
-         }
-      }
-   }
-
-   &--placeholder {
-      position: absolute;
-      text-align: center;
-      top: ~'calc(50% - 10px)';
-      width: 100%;
-   }
-
-   &--canvas {
-      box-sizing: border-box;
-      position: absolute; 
-      top: 0; 
-      left: 0; 
-      bottom: 0; 
-      right: 0; 
-      vertical-align: top;
-      background: @popupBackground;
-      padding: 6px;
-
-      @media (orientation: landscape) {
-         height: ~'calc(100% - 50px)';
       }
    }
 }
@@ -1439,7 +1397,7 @@ camera_stream {
    }
 
    &-container {
-      background: #111;
+      background: @popupBackground;
       //height: @alarmHeight;
       width: @alarmWidth;
       overflow: hidden;
@@ -1524,7 +1482,7 @@ camera_stream {
       white-space: nowrap;
 
       &:active {
-         background: @popupBackground;
+         background: @popupTitleBackground;
       }
 
       &.-l2 {
