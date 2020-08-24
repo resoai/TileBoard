@@ -82,7 +82,7 @@
 
       <div class="camera-popup-container">
          <div class="camera-popup-title">
-            <div class="camera-popup-close" ng-click="closeCamera()">
+            <div class="camera-popup-close" hm-tap="closeCamera()">
                <i class="mdi mdi-close"></i>
             </div>
             {{ entityTitle(activeCamera, entity) }}
@@ -90,7 +90,7 @@
 
          <div class="camera-popup--list">
             <div class="camera-popup--list-item"
-                 ng-click="openCamera(item)"
+                 hm-tap="openCamera(item)"
                  ng-class="{'-active': activeCamera === item}"
                  ng-repeat="item in getCameraList() track by $index">
                <span ng-show="entity = getCameraEntityFullscreen(item)">
@@ -123,7 +123,7 @@
         ng-if="activeIframe && (entity = getItemEntity(activeIframe))">
       <div class="iframe-popup-container" ng-style="getPopupIframeStyles()">
          <div class="iframe-popup-title">
-            <div class="iframe-popup-close" ng-click="closePopupIframe()">
+            <div class="iframe-popup-close" hm-tap="closePopupIframe()">
                <i class="mdi mdi-close"></i>
             </div>
             {{ entityTitle(activeIframe, entity) }}
@@ -141,7 +141,7 @@
 
       <div class="door-entry-popup-container">
          <div class="door-entry-popup-title">
-            <div class="door-entry-popup-close" ng-click="closeDoorEntry()">
+            <div class="door-entry-popup-close" hm-tap="closeDoorEntry()">
                <i class="mdi mdi-close"></i>
             </div>
             {{ entityTitle(activeDoorEntry, entity) }}
@@ -174,11 +174,11 @@
 
    <div class="popup"
         ng-if="activePopup && (page = activePopup.layout || {})"
-        ng-click="closePopup()">
+        hm-tap="closePopup()">
 
-      <div class="popup-container" ng-click="preventClick($event)">
+      <div class="popup-container" hm-tap="preventClick($event)">
          <div class="popup-title">
-            <div class="popup-close" ng-click="closePopup()">
+            <div class="popup-close" hm-tap="closePopup()">
                <i class="mdi mdi-close"></i>
             </div>
             {{ entityTitle(activePopup.item, activePopup.entity) }}
@@ -192,12 +192,12 @@
    <div class="alarm-popup"
         ng-if="activeAlarm && (alarmEntity = getItemEntity(activeAlarm))">
 
-      <div class="alarm-popup-overlay" ng-click="closeAlarm()"></div>
+      <div class="alarm-popup-overlay" hm-tap="closeAlarm()"></div>
 
       <div class="alarm-popup-container"
            ng-class="{'-no-code': !alarmEntity.attributes.code_format}">
 
-         <div class="alarm-popup-close" ng-click="closeAlarm()">
+         <div class="alarm-popup-close" hm-tap="closeAlarm()">
             <i class="mdi mdi-close"></i>
          </div>
 
@@ -221,13 +221,13 @@
                <div class="alarm-popup-buttons-line"
                     ng-repeat="line in [6, 3, 0] track by $index">
                   <div class="alarm-popup-button" ng-bind="button + line"
-                       ng-click="inputAlarm(button + line)"
+                       hm-tap="inputAlarm(button + line)"
                        ng-repeat="button in [1, 2, 3] track by $index"></div>
                </div>
 
                <div class="alarm-popup-buttons-line">
-                  <div class="alarm-popup-button -l2" ng-click="inputAlarm(0)">0</div>
-                  <div class="alarm-popup-button -warning" ng-click="clearAlarm()">
+                  <div class="alarm-popup-button -l2" hm-tap="inputAlarm(0)">0</div>
+                  <div class="alarm-popup-button -warning" hm-tap="clearAlarm()">
                      <div class="mdi mdi-close"></div>
                   </div>
                </div>
@@ -236,22 +236,22 @@
             <div class="alarm-popup-buttons-line">
                <div class="alarm-popup-button -icon -home"
                     ng-if="!isDisarmed(alarmEntity)" 
-                    ng-click="actionAlarm('alarm_arm_home', activeAlarm, alarmEntity)">
+                    hm-tap="actionAlarm('alarm_arm_home', activeAlarm, alarmEntity)">
                   <div class="mdi mdi-bell-plus"></div> Arm home
                </div>
                <div class="alarm-popup-button -icon -away"
                     ng-if="!isDisarmed(alarmEntity)" 
-                    ng-click="actionAlarm('alarm_arm_away', activeAlarm, alarmEntity)">
+                    hm-tap="actionAlarm('alarm_arm_away', activeAlarm, alarmEntity)">
                   <div class="mdi mdi-bell"></div> Arm away
                </div>
                <div class="alarm-popup-button -icon -night"
                     ng-if="!isDisarmed(alarmEntity)" 
-                    ng-click="actionAlarm('alarm_arm_night', activeAlarm, alarmEntity)">
+                    hm-tap="actionAlarm('alarm_arm_night', activeAlarm, alarmEntity)">
                   <div class="mdi mdi-sleep"></div> Arm night
                </div>
                <div class="alarm-popup-button -icon -disarm"
                     ng-if="isDisarmed(alarmEntity)"
-                    ng-click="actionAlarm('alarm_disarm', activeAlarm, alarmEntity)">
+                    hm-tap="actionAlarm('alarm_disarm', activeAlarm, alarmEntity)">
                   <div class="mdi mdi-bell-off"></div> Disarm
                </div>
             </div>
@@ -262,10 +262,10 @@
    <div class="datetime-popup"
         ng-if="activeDatetime && (dtEntity = getItemEntity(activeDatetime))">
 
-      <div class="datetime-popup-overlay" ng-click="closeDatetime()"></div>
+      <div class="datetime-popup-overlay" hm-tap="closeDatetime()"></div>
 
       <div class="datetime-popup-container">
-         <div class="datetime-popup-close" ng-click="closeDatetime()">
+         <div class="datetime-popup-close" hm-tap="closeDatetime()">
             <i class="mdi mdi-close"></i>
          </div>
 
@@ -286,19 +286,19 @@
             <div class="datetime-popup-buttons-line"
                  ng-repeat="line in [6, 3, 0] track by $index">
                <div class="datetime-popup-button" ng-bind="button + line"
-                    ng-click="inputDatetime(button + line)"
+                    hm-tap="inputDatetime(button + line)"
                     ng-repeat="button in [1, 2, 3] track by $index"></div>
             </div>
 
             <div class="datetime-popup-buttons-line">
-               <div class="datetime-popup-button -warning" ng-click="clearCharDatetime()">
+               <div class="datetime-popup-button -warning" hm-tap="clearCharDatetime()">
                   <div class="mdi mdi-arrow-left"></div>
                </div>
-               <div class="datetime-popup-button" ng-click="inputDatetime(0)">0</div>
+               <div class="datetime-popup-button" hm-tap="inputDatetime(0)">0</div>
 
                <div class="datetime-popup-button -success"
                     ng-class="{'-disabled': !activeDatetimeValid()}"
-                    ng-click="sendDatetime()">
+                    hm-tap="sendDatetime()">
                   <div class="mdi mdi-check"></div>
                </div>
             </div>
@@ -315,7 +315,7 @@
 
       <div class="pages-menu--items">
          <div ng-repeat="page in pages track by $index"
-              class="pages-menu--item" ng-click="openPage(page)"
+              class="pages-menu--item" hm-tap="openPage(page)"
               ng-if="!isHidden(page)" ng-class="{'-active': isPageActive(page)}">
 
             <i class="mdi" ng-class="page.icon"></i>
@@ -328,7 +328,7 @@
 
    <div class="pages" id="pages" ng-style="pagesContainerStyles">
       <div class="page-overlay" ng-if="activeSelect"
-           ng-click="closeActiveSelect()"></div>
+           hm-tap="closeActiveSelect()"></div>
 
       <div ng-repeat="page in pages track by $index"
            ng-class="{'-active': isPageActive(page)}"
@@ -352,7 +352,7 @@
    </div>
 </div>
 
-<div class="screensaver" ng-click="hideScreensaver()"
+<div class="screensaver" hm-tap="hideScreensaver()"
      ng-show="isShown" ng-controller="Screensaver"  ng-style="conf.styles">
 
    <div class="screensaver-slides" ng-if="isShown">
@@ -397,7 +397,7 @@
         ng-repeat="noty in getNoties() track by noty.id">
       <div class="noty-header">
          <div class="noty-title" ng-if="noty.title" ng-bind="noty.title"></div>
-         <div class="noty-close" ng-click="noty.remove()">
+         <div class="noty-close" hm-tap="noty.remove()">
             <i class="mdi mdi-close"></i>
          </div>
       </div>
@@ -413,7 +413,7 @@
       </div>
    </div>
 
-   <div class="noties-button" ng-if="getNoties().length > 1" ng-click="clearAll()">
+   <div class="noties-button" ng-if="getNoties().length > 1" hm-tap="clearAll()">
       Clear all
    </div>
 </div>
@@ -493,7 +493,7 @@
 
 <script type="text/ng-template" id="tile.html">
    <div ng-style="itemStyles(page, item, entity)" class="item"
-        ng-click="entityClick(page, item, entity)"
+        hm-tap="entityClick(page, item, entity)"
         hm-press="entityLongPress($event, page, item, entity)"
         hm-recognizer-options="{time: 600}"
         ng-if="(entity = getItemEntity(item)) && !isHidden(item, entity)"
@@ -575,18 +575,18 @@
          <div class="item-cover">
             <div class="item-cover--button -open"
                  ng-class="{'-disabled': entity.state === 'open' && (!entity.attributes.current_position || entity.attributes.current_position === 100)}"
-                 ng-click="sendCover('open_cover', item, entity)">
+                 hm-tap="sendCover('open_cover', item, entity)">
                <i class="mdi mdi-arrow-up"></i>
             </div>
 
             <div class="item-cover--button -stop"
-                 ng-click="sendCover('stop_cover', item, entity)">
+                 hm-tap="sendCover('stop_cover', item, entity)">
                <i class="mdi mdi-stop"></i>
             </div>
 
             <div class="item-cover--button -close"
                  ng-class="{'-disabled': entity.state === 'closed'}"
-                 ng-click="sendCover('close_cover', item, entity)">
+                 hm-tap="sendCover('close_cover', item, entity)">
                <i class="mdi mdi-arrow-down"></i>
             </div>
          </div>
@@ -611,7 +611,7 @@
 
          <div class="item-fan">
             <div class="item-fan--speed" ng-if="entity.attributes.speed_list"
-                 ng-click="openFanSpeedSelect($event, item)">
+                 hm-tap="openFanSpeedSelect($event, item)">
                <span ng-bind="entity.attributes.speed"></span>
             </div>
          </div>
@@ -622,7 +622,7 @@
             <div class="item-select--option"
                  ng-repeat="option in entity.attributes.speed_list track by $index"
                  ng-class="{'-active': option === entity.attributes.speed}"
-                 ng-click="setFanSpeed($event, item, entity, option)">
+                 hm-tap="setFanSpeed($event, item, entity, option)">
                <span ng-bind="option"></span>
             </div>
          </div>
@@ -712,12 +712,12 @@
             <div ng-if="entity.state !== 'off'">
                <div ng-if="supportsFeature(FEATURES.LIGHT.BRIGHTNESS, entity)"
                     class="item-button -center-right"
-                    ng-click="increaseBrightness($event, item, entity)">
+                    hm-tap="increaseBrightness($event, item, entity)">
                   <i class="mdi mdi-plus"></i>
                </div>
                <div ng-if="supportsFeature(FEATURES.LIGHT.BRIGHTNESS, entity)"
                     class="item-button -bottom-right"
-                    ng-click="decreaseBrightness($event, item, entity)">
+                    hm-tap="decreaseBrightness($event, item, entity)">
                   <i class="mdi mdi-minus"></i>
                </div>
             </div>
@@ -727,7 +727,7 @@
             </div>
          </div>
          <div ng-if="item.controlsEnabled" class="item-entity-sliders"
-              ng-click="preventClick($event)">
+              hm-tap="preventClick($event)">
             <div ng-repeat="slider in item.sliders track by $index"
                  ng-if="(_c = getLightSliderConf(slider, entity))"
                  class="item-slider-container">
@@ -763,7 +763,7 @@
             </div>
 
             <div class="item-entity--back-button"
-                 ng-click="closeLightSliders($event, item, entity)">
+                 hm-tap="closeLightSliders($event, item, entity)">
                <i class="mdi mdi-chevron-left"></i> Back
             </div>
          </div>
@@ -773,11 +773,11 @@
 
          <div ng-if="entityState(item, entity) && entity.state !== 'off'">
             <div class="item-button -center-right"
-                 ng-click="dimmerAction('plus', $event, item, entity)">
+                 hm-tap="dimmerAction('plus', $event, item, entity)">
                <i class="mdi mdi-plus"></i>
             </div>
             <div class="item-button -bottom-right"
-                 ng-click="dimmerAction('minus', $event, item, entity)">
+                 hm-tap="dimmerAction('minus', $event, item, entity)">
                <i class="mdi mdi-minus"></i>
             </div>
          </div>
@@ -809,11 +809,11 @@
            class="item-entity-container">
          <div>
             <div class="item-button -center-right"
-                 ng-click="increaseNumber($event, item, entity)">
+                 hm-tap="increaseNumber($event, item, entity)">
                <i class="mdi mdi-plus"></i>
             </div>
             <div class="item-button -bottom-right"
-                 ng-click="decreaseNumber($event, item, entity)">
+                 hm-tap="decreaseNumber($event, item, entity)">
                <i class="mdi mdi-minus"></i>
             </div>
          </div>
@@ -834,7 +834,7 @@
             <div class="item-select--option"
                  ng-repeat="option in entity.attributes.options track by $index"
                  ng-class="{'-active': option === entity.state}"
-                 ng-click="setSelectOption($event, item, entity, option)">
+                 hm-tap="setSelectOption($event, item, entity, option)">
                <span ng-bind="option"></span>
             </div>
          </div>
@@ -1072,12 +1072,12 @@
          <div>
             <div class="item-button -center-right"
                  ng-if="entity.attributes.temperature && entity.state !== 'off'"
-                 ng-click="increaseClimateTemp($event, item, entity)">
+                 hm-tap="increaseClimateTemp($event, item, entity)">
                <i class="mdi mdi-plus"></i>
             </div>
             <div class="item-button -bottom-right"
                  ng-if="entity.attributes.temperature && entity.state !== 'off'"
-                 ng-click="decreaseClimateTemp($event, item, entity)">
+                 hm-tap="decreaseClimateTemp($event, item, entity)">
                <i class="mdi mdi-minus"></i>
             </div>
          </div>
@@ -1089,7 +1089,7 @@
                      class="item-climate--target--unit" ng-bind="_unit"></span>
             </div>
             <div class="item-climate--mode" ng-if="(_options = getClimateOptions(item, entity))"
-                 ng-click="openSelect(item)">
+                 hm-tap="openSelect(item)">
                <span ng-bind="getClimateCurrentOption(item, entity)"></span>
             </div>
          </div>
@@ -1100,7 +1100,7 @@
             <div class="item-select--option"
                  ng-repeat="option in _options track by $index"
                  ng-class="{'-active': option === entity.state}"
-                 ng-click="setClimateOption($event, item, entity, option)">
+                 hm-tap="setClimateOption($event, item, entity, option)">
                <span ng-bind="option"></span>
             </div>
          </div>
@@ -1116,19 +1116,19 @@
                   <td class="media-player-table--td-main-button">
                      <div class="media-player--main-button" ng-if="entity.state !== 'off'">
                         <span class="mdi mdi-pause" ng-if="supportsFeature(FEATURES.MEDIA_PLAYER.PAUSE, entity) && entity.state === 'playing'"
-                              ng-click="sendPlayer('media_pause', item, entity)"></span>
+                              hm-tap="sendPlayer('media_pause', item, entity)"></span>
 
                         <span class="mdi mdi-stop" ng-if="!supportsFeature(FEATURES.MEDIA_PLAYER.PAUSE, entity) && entity.state === 'playing'"
-                              ng-click="sendPlayer('media_stop', item, entity)"></span>
+                              hm-tap="sendPlayer('media_stop', item, entity)"></span>
 
                         <span class="mdi mdi-play" ng-if="entity.state === 'stopped'"
-                              ng-click="sendPlayer('media_play', item, entity)"></span>
+                              hm-tap="sendPlayer('media_play', item, entity)"></span>
 
                         <span class="mdi mdi-play" ng-if="entity.state === 'paused'"
-                              ng-click="sendPlayer('media_play', item, entity)"></span>
+                              hm-tap="sendPlayer('media_play', item, entity)"></span>
 
                         <span class="mdi mdi-play" ng-if="entity.state === 'idle'"
-                              ng-click="sendPlayer('media_play', item, entity)"></span>
+                              hm-tap="sendPlayer('media_play', item, entity)"></span>
 
                      </div>
                   </td>
@@ -1136,26 +1136,26 @@
                      <div class="media-player--buttons">
                         <div class="media-player--button -prev"
                              ng-if="supportsFeature(FEATURES.MEDIA_PLAYER.PREVIOUS_TRACK, entity) && entity.state !== 'off'"
-                             ng-click="sendPlayer('media_previous_track', item, entity)">
+                             hm-tap="sendPlayer('media_previous_track', item, entity)">
                            <i class="mdi mdi-skip-previous"></i>
                         </div>
 
                         <div class="media-player--button -next"
                              ng-if="supportsFeature(FEATURES.MEDIA_PLAYER.NEXT_TRACK, entity) && entity.state !== 'off'"
-                             ng-click="sendPlayer('media_next_track', item, entity)">
+                             hm-tap="sendPlayer('media_next_track', item, entity)">
                            <i class="mdi mdi-skip-next"></i>
                         </div>
 
 
                         <div class="media-player--button -power"
                              ng-if="supportsFeature(FEATURES.MEDIA_PLAYER.TURN_ON, entity) && entity.state === 'off'"
-                             ng-click="sendPlayer('turn_on', item, entity)">
+                             hm-tap="sendPlayer('turn_on', item, entity)">
                            <i class="mdi mdi-power"></i>
                         </div>
 
                         <div class="media-player--button -power"
                              ng-if="supportsFeature(FEATURES.MEDIA_PLAYER.TURN_OFF, entity) && entity.state !== 'off'"
-                             ng-click="sendPlayer('turn_off', item, entity)">
+                             hm-tap="sendPlayer('turn_off', item, entity)">
                            <i class="mdi mdi-power"></i>
                         </div>
                      </div>
@@ -1168,7 +1168,7 @@
 
                <tr class="media-player-table--source">
                   <td colspan="3" class="media-player-table--td-source">
-                     <div class="media-player--source" ng-click="openSelect(item)"
+                     <div class="media-player--source" hm-tap="openSelect(item)"
                           ng-if="entity.attributes.source_list.length && !item.hideSource">
                         <span ng-bind="entity.attributes.source || 'Source'"></span>
                      </div>
@@ -1191,12 +1191,12 @@
                <tr ng-if="shouldShowVolumeButtons(entity)">
                   <td colspan="3" class="media-player-table--td-volume-buttons">
                      <div class="media-player--button -volume_down"
-                          ng-click="sendPlayer('volume_down', item, entity)">
+                          hm-tap="sendPlayer('volume_down', item, entity)">
                         <i class="mdi mdi-volume-minus"></i>
                      </div>
 
                      <div class="media-player--button -volume_up"
-                          ng-click="sendPlayer('volume_up', item, entity)">
+                          hm-tap="sendPlayer('volume_up', item, entity)">
                         <i class="mdi mdi-volume-plus"></i>
                      </div>
                   </td>
@@ -1209,13 +1209,13 @@
                         <div ng-if="supportsFeature(FEATURES.MEDIA_PLAYER.VOLUME_MUTE, entity)">
                            <div class="media-player--button -mute"
                                 ng-if="entity.attributes.is_volume_muted"
-                                ng-click="mutePlayer(false, item, entity)">
+                                hm-tap="mutePlayer(false, item, entity)">
                               <i class="mdi mdi-volume-mute"></i>
                            </div>
 
                            <div class="media-player--button -mute"
                                 ng-if="!entity.attributes.is_volume_muted"
-                                ng-click="mutePlayer(true, item, entity)">
+                                hm-tap="mutePlayer(true, item, entity)">
                               <i class="mdi mdi-volume-high"></i>
                            </div>
                         </div>
@@ -1231,7 +1231,7 @@
             <div class="item-select--option"
                  ng-repeat="option in entity.attributes.source_list track by $index"
                  ng-class="{'-active': option === entity.attributes.source}"
-                 ng-click="setSourcePlayer($event, item, entity, option)">
+                 hm-tap="setSourcePlayer($event, item, entity, option)">
                <span ng-bind="option"></span>
             </div>
          </div>
