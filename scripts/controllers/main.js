@@ -864,7 +864,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.closeLightSliders = function ($event, item, entity) {
       $event.preventDefault();
-      $event.stopPropagation();
+      $event.srcEvent.stopImmediatePropagation();
 
       item.controlsEnabled = false;
       item._controlsInited = false;
@@ -874,7 +874,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.preventClick = function ($event) {
       $event.preventDefault();
-      $event.stopPropagation();
+      $event.srcEvent.stopImmediatePropagation();
 
       return false;
    };
@@ -1036,7 +1036,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.dimmerAction = function (action, $event, item, entity) {
       $event.preventDefault();
-      $event.stopPropagation();
+      $event.srcEvent.stopImmediatePropagation();
 
       var func = "action" + (action === "plus" ? "Plus" : "Minus");
 
@@ -1138,7 +1138,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.increaseBrightness = function ($event, item, entity) {
       $event.preventDefault();
-      $event.stopPropagation();
+      $event.srcEvent.stopImmediatePropagation();
 
       if(entity.state === "off") return false;
 
@@ -1157,7 +1157,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.decreaseBrightness = function ($event, item, entity) {
       $event.preventDefault();
-      $event.stopPropagation();
+      $event.srcEvent.stopImmediatePropagation();
 
       if(entity.state === "off") return false;
 
@@ -1176,7 +1176,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.increaseNumber = function ($event, item, entity) {
       $event.preventDefault();
-      $event.stopPropagation();
+      $event.srcEvent.stopImmediatePropagation();
 
       var value = parseFloat(entity.state);
 
@@ -1193,7 +1193,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.decreaseNumber = function ($event, item, entity) {
       $event.preventDefault();
-      $event.stopPropagation();
+      $event.srcEvent.stopImmediatePropagation();
 
       var value = parseFloat(entity.state);
 
@@ -1278,7 +1278,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.setSelectOption = function ($event, item, entity, option) {
       $event.preventDefault();
-      $event.stopPropagation();
+      $event.srcEvent.stopImmediatePropagation();
 
       sendItemData(item, {
          type: "call_service",
@@ -1297,7 +1297,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.setSourcePlayer = function ($event, item, entity, option) {
       $event.preventDefault();
-      $event.stopPropagation();
+      $event.srcEvent.stopImmediatePropagation();
 
       sendItemData(item, {
          type: "call_service",
@@ -1324,7 +1324,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.setClimateOption = function ($event, item, entity, option) {
       $event.preventDefault();
-      $event.stopPropagation();
+      $event.srcEvent.stopImmediatePropagation();
 
       var data = {entity_id: item.id};
 
@@ -1352,7 +1352,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.increaseClimateTemp = function ($event, item, entity) {
       $event.preventDefault();
-      $event.stopPropagation();
+      $event.srcEvent.stopImmediatePropagation();
 
       var value = parseFloat(entity.attributes.temperature);
 
@@ -1369,7 +1369,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.decreaseClimateTemp = function ($event, item, entity) {
       $event.preventDefault();
-      $event.stopPropagation();
+      $event.srcEvent.stopImmediatePropagation();
 
       var value = parseFloat(entity.attributes.temperature);
 
@@ -1416,13 +1416,13 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.openFanSpeedSelect = function ($event, item) {
       $event.preventDefault();
-      $event.stopPropagation();
+      $event.srcEvent.stopImmediatePropagation();
       $scope.openSelect(item);
    };
 
    $scope.setFanSpeed = function ($event, item, entity, option) {
       $event.preventDefault();
-      $event.stopPropagation();
+      $event.srcEvent.stopImmediatePropagation();
 
       sendItemData(item, {
          type: "call_service",
