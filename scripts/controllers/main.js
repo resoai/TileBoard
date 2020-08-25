@@ -844,21 +844,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       if(entity.state !== "on") {
          return $scope.toggleSwitch(item, entity, function () {
-            $timeout(function () {
-               if(entity.state === "on") {
-                  $scope.openLightSliders(item, entity);
-               }
-            }, 0);
+            item.controlsEnabled = true;
          })
       }
       else {
-         if(!item.controlsEnabled) {
-            item.controlsEnabled = true;
-
-            $timeout(function () {
-               item._controlsInited = true;
-            }, 50);
-         }
+         item.controlsEnabled = true;
       }
    };
 
@@ -867,7 +857,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $event.srcEvent.stopImmediatePropagation();
 
       item.controlsEnabled = false;
-      item._controlsInited = false;
 
       return false;
    };
@@ -994,7 +983,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.lightSliderChanged = function (slider, item, entity, value) {
-      if(!item._controlsInited) return;
       if(!slider._sliderInited) return;
       if(!entity.attributes._sliderInited) return;
 
