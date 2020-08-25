@@ -708,7 +708,7 @@
       <div ng-if="item.type === TYPES.LIGHT"
            class="item-entity-container">
 
-         <div ng-if="!item.controlsEnabled">
+         <div ng-if="entity.state !== 'on' || !item.controlsEnabled">
             <div ng-if="entity.state !== 'off'">
                <div ng-if="supportsFeature(FEATURES.LIGHT.BRIGHTNESS, entity)"
                     class="item-button -center-right"
