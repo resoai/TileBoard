@@ -1540,9 +1540,14 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
         entity: entity,
         layout: layout || item.popup
       };
+      // prevent popup closing from ghost clicks
+      $timeout(function () {
+         $scope.activePopup.inited = true;
+      }, 500); // trades responsiveness vs prevention
    };
 
    $scope.closePopup = function () {
+      if (!$scope.activePopup.inited) return;
       $scope.activePopup = null;
    };
 
