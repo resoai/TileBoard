@@ -226,6 +226,8 @@ var MINIMAL_CHART_OPTIONS = {
    },
 };
 
+var GHOST_CLICK_TIMEOUT = 500;
+
 window.onerror = function (error, file, line, char) {
    var text = [
       error,

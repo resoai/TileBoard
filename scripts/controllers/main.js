@@ -857,7 +857,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
             $timeout(function () {
                item._controlsInited = true;
-            }, 50);
+            }, GHOST_CLICK_TIMEOUT);
          }
       }
    };
@@ -865,6 +865,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.closeLightSliders = function ($event, item, entity) {
       $event.preventDefault();
       $event.stopPropagation();
+
+      if(!item._controlsInited) return;
 
       item.controlsEnabled = false;
       item._controlsInited = false;
@@ -1540,10 +1542,9 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
         entity: entity,
         layout: layout || item.popup
       };
-      // prevent popup closing from ghost clicks
       $timeout(function () {
          $scope.activePopup.inited = true;
-      }, 500); // trades responsiveness vs prevention
+      }, GHOST_CLICK_TIMEOUT);
    };
 
    $scope.closePopup = function () {
