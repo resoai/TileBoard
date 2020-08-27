@@ -176,7 +176,7 @@
         ng-if="activePopup && (page = activePopup.layout || {})"
         ng-click="closePopup()">
 
-      <div class="popup-container" ng-click="preventClick($event)">
+      <div class="popup-container" ng-click="preventClick($event)" ng-class="getPopupClasses()">
          <div class="popup-title">
             <div class="popup-close" ng-click="closePopup()">
                <i class="mdi mdi-close"></i>

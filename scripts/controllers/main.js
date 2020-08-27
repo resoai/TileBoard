@@ -1546,6 +1546,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $scope.activePopup = null;
    };
 
+   $scope.getPopupClasses = function () {
+      if(!$scope.activePopup || !$scope.activePopup.layout.classes) return [];
+      return parseFieldValue($scope.activePopup.layout.classes, $scope.activePopup.item, $scope.activePopup.entity);
+   };
+
    function getHistoryObject(item, entity, config) {
       var historyObject = {
          item: angular.copy(item),
@@ -1726,6 +1731,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.openPopupHistory = function (item, entity) {
       return initPopupLayout(item, entity, "_popupHistory",
          {
+            classes: getItemFieldValue('history.classes', item, entity) || [],
             styles: {
                width: '100vw',
                height: '56vw',
@@ -1741,19 +1747,20 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                   width: '100%',
                   height: '100%',
                },
-            }, item.history)]
+            }, getItemFieldValue('history', item, entity))]
          });
    };
 
    $scope.openPopupIframe = function (item, entity) {
       return initPopupLayout(item, entity, "_popupIframe",
          {
-            styles: {
+            classes: getItemFieldValue('iframeClasses', item, entity) || [],
+            styles: angular.merge({
                width: '100vw',
                height: '100vh',
                margin: 0,
                maxWidth: '100%',
-            },
+            }, getItemFieldValue('iframeStyles', item, entity)),
             items: [angular.merge({
                type: TYPES.IFRAME,
                url: item.url,
@@ -1765,7 +1772,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                   width: '100%',
                   height: '100%',
                },
-            }, item.iframe)]
+            }, getItemFieldValue('iframe', item, entity))]
          });
    };
 
