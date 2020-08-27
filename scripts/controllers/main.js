@@ -1526,7 +1526,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       return popupIframeStyles;
    };
 
-   $scope.openPopupIframe = function (item, entity) {
+   $scope.openPopupIframes = function (item, entity) {
       $scope.activeIframe = item;
    };
 
@@ -1716,11 +1716,16 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       return item[key];
    };
 
-   $scope.openPopupHistory = function (item, entity) {
-      var key = "_popupHistory";
-
+   function initPopupLayout (item, entity, key, layout) {
       if(!item[key]) {
-         item[key] = {
+         item[key] = layout;
+      }
+      return $scope.openPopup(item, entity, item[key]);
+   }
+
+   $scope.openPopupHistory = function (item, entity) {
+      return initPopupLayout(item, entity, "_popupHistory",
+         {
             styles: {
                width: '100vw',
                height: '56vw',
@@ -1737,10 +1742,31 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                   height: '100%',
                },
             }, item.history)]
-         };
-      }
+         });
+   };
 
-      return $scope.openPopup(item, entity, item[key]);
+   $scope.openPopupIframe = function (item, entity) {
+      return initPopupLayout(item, entity, "_popupIframe",
+         {
+            styles: {
+               width: '100vw',
+               height: '100vh',
+               margin: 0,
+               maxWidth: '100%',
+            },
+            items: [angular.merge({
+               type: TYPES.IFRAME,
+               url: item.url,
+               id: {},
+               state: false,
+               title: false,
+               position: [0,0],
+               customStyles: {
+                  width: '100%',
+                  height: '100%',
+               },
+            }, item.iframe)]
+         });
    };
 
    $scope.openDoorEntry = function (item, entity) {
