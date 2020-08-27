@@ -81,8 +81,8 @@
      */
     window[exportName] = function(el) {
         // TileBoard: support AngularJS (was el.addEv...)
-        el[0].addEventListener("touchstart", resetCoordinates, true);
-        el[0].addEventListener("touchend", registerCoordinates, true);
+        el[0].addEventListener("touchstart", resetCoordinates, false);
+        el[0].addEventListener("touchend", registerCoordinates, false);
     };
 
     document.addEventListener("click", preventGhostClick, true);

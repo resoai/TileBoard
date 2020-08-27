@@ -1,6 +1,6 @@
 import Hls from 'hls.js';
 import { App } from './app';
-import { leadZero, toAbsoluteServerURL, PreventGhostClick } from './globals/utils';
+import { leadZero, toAbsoluteServerURL } from './globals/utils';
 
 App.directive('tile', function () {
    return {
@@ -456,16 +456,6 @@ App.directive('ngMax', function () {
       require: 'ngModel',
       link: function (scope, elem, attr) {
          elem.attr('max', attr.ngMax);
-      },
-   };
-});
-
-// Custom directive to prevent ghost clicks
-App.directive('preventGhostClick', function () {
-   return {
-      restrict: 'A',
-      link: function (scope, elem, attr) {
-         PreventGhostClick(elem);
       },
    };
 });
