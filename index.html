@@ -118,23 +118,6 @@
       </div>
    </div>
 
-   <div class="iframe-popup"
-        ng-class="itemField('iframeClasses', activeIframe, entity)"
-        ng-if="activeIframe && (entity = getItemEntity(activeIframe))">
-      <div class="iframe-popup-container" ng-style="getPopupIframeStyles()">
-         <div class="iframe-popup-title">
-            <div class="iframe-popup-close" ng-click="closePopupIframe()">
-               <i class="mdi mdi-close"></i>
-            </div>
-            {{ entityTitle(activeIframe, entity) }}
-         </div>
-         <div class="iframe-popup--iframe">
-            <iframe ng-src="{{ itemField('url', activeIframe, entity) }}"
-                    iframe-tile="activeIframe" frameborder="0"></iframe>
-         </div>
-      </div>
-   </div>
-
    <div class="door-entry-popup"
         ng-if="activeDoorEntry && (page = activeDoorEntry.layout.page)
             && (cameraEntity = getEntryCameraEntity(activeDoorEntry))">

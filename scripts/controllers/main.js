@@ -19,7 +19,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.activeCamera = null;
    $scope.activeDoorEntry = null;
-   $scope.activeIframe = null;
    $scope.activePopup = null;
 
    $scope.alarmCode = null;
@@ -33,7 +32,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    var mainStyles = {};
    var activePage = null;
    var cameraList = null;
-   var popupIframeStyles = {};
 
    $scope.entityClick = function (page, item, entity) {
       if(typeof item.action === "function") {
@@ -1511,29 +1509,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $scope.datetimeString = null;
    };
 
-   $scope.getPopupIframeStyles = function () {
-      if(!$scope.activeIframe || !$scope.activeIframe.iframeStyles) return null;
-
-      var entity = $scope.getItemEntity($scope.activeIframe);
-
-      var styles = $scope.itemField('iframeStyles', $scope.activeIframe, entity);
-
-      if(!styles) return null;
-
-      for (var k in popupIframeStyles) delete popupIframeStyles[k];
-      for (k in styles) popupIframeStyles[k] = styles[k];
-
-      return popupIframeStyles;
-   };
-
-   $scope.openPopupIframes = function (item, entity) {
-      $scope.activeIframe = item;
-   };
-
-   $scope.closePopupIframe = function () {
-      $scope.activeIframe = null;
-   };
-
    $scope.openPopup = function (item, entity, layout) {
       $scope.activePopup = {
         item: item,
@@ -1541,6 +1516,13 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
         layout: layout || item.popup
       };
    };
+
+   function initPopupLayout (item, entity, key, layout) {
+      if(!item[key]) {
+         item[key] = layout;
+      }
+      return $scope.openPopup(item, entity, item[key]);
+   }
 
    $scope.closePopup = function () {
       $scope.activePopup = null;
@@ -1720,13 +1702,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       return item[key];
    };
-
-   function initPopupLayout (item, entity, key, layout) {
-      if(!item[key]) {
-         item[key] = layout;
-      }
-      return $scope.openPopup(item, entity, item[key]);
-   }
 
    $scope.openPopupHistory = function (item, entity) {
       return initPopupLayout(item, entity, "_popupHistory",
@@ -1953,8 +1928,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    }
 
    function hasOpenPopup () {
-      return $scope.activeCamera || $scope.activeDoorEntry || $scope.activeIframe
-         || $scope.activePopup;
+      return $scope.activeCamera || $scope.activeDoorEntry || $scope.activePopup;
    }
 
    $scope.toggleSelect = function (item) {
