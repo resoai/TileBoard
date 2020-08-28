@@ -1736,7 +1736,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                margin: 0,
                maxWidth: '100%',
             }, getItemFieldValue('iframeStyles', item, entity)),
-            items: [angular.merge({
+            items: [{
                type: TYPES.IFRAME,
                url: item.url,
                id: {},
@@ -1747,7 +1747,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                   width: '100%',
                   height: '100%',
                },
-            }, getItemFieldValue('iframe', item, entity))]
+            }]
          });
    };
 
