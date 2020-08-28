@@ -521,6 +521,31 @@
          </div>
       </div>
 
+      <div ng-if="[TYPES.ALARM,
+                   TYPES.AUTOMATION,
+                   TYPES.COVER_TOGGLE,
+                   TYPES.CUSTOM,
+                   TYPES.DOOR_ENTRY,
+                   TYPES.INPUT_BOOLEAN,
+                   TYPES.LOCK,
+                   TYPES.POPUP,
+                   TYPES.POPUP_IFRAME,
+                   TYPES.SCENE,
+                   TYPES.SCRIPT,
+                   TYPES.SENSOR_ICON,
+                   TYPES.SWITCH,
+                   TYPES.VACUUM,
+                   ].includes(item.type)"
+           class="item-entity-container">
+         <div ng-if="item.customHtml"
+              ng-bind-html="itemCustomHtml(item, entity)"></div>
+
+         <div ng-if="!item.customHtml" class="item-entity">
+            <span class="item-entity--icon mdi"
+                  ng-class="entityIcon(item, entity)"></span>
+         </div>
+      </div>
+
       <div ng-if="item.type === TYPES.DEVICE_TRACKER"
            class="item-entity-container -below">
 
@@ -551,24 +576,6 @@
          </div>
       </div>
 
-      <div ng-if="item.type === TYPES.SWITCH"
-           class="item-entity-container">
-
-         <div class="item-entity">
-            <span class="item-entity--icon mdi"
-                  ng-class="entityIcon(item, entity)"></span>
-         </div>
-      </div>
-
-      <div ng-if="item.type === TYPES.LOCK"
-           class="item-entity-container">
-
-         <div class="item-entity">
-            <span class="item-entity--icon mdi"
-                  ng-class="entityIcon(item, entity)"></span>
-         </div>
-      </div>
-
       <div ng-if="item.type === TYPES.COVER"
            class="item-entity-container">
 
@@ -589,15 +596,6 @@
                  ng-click="sendCover('close_cover', item, entity)">
                <i class="mdi mdi-arrow-down"></i>
             </div>
-         </div>
-      </div>
-
-      <div ng-if="item.type === TYPES.COVER_TOGGLE"
-           class="item-entity-container">
-
-         <div class="item-entity">
-            <span class="item-entity--icon mdi"
-                  ng-class="entityIcon(item, entity)"></span>
          </div>
       </div>
 
@@ -625,83 +623,6 @@
                  ng-click="setFanSpeed($event, item, entity, option)">
                <span ng-bind="option"></span>
             </div>
-         </div>
-      </div>
-
-      <div ng-if="item.type === TYPES.CUSTOM"
-           class="item-entity-container">
-
-         <div ng-if="item.customHtml"
-              ng-bind-html="itemCustomHtml(item, entity)"></div>
-
-         <div ng-if="!item.customHtml" class="item-entity">
-            <span class="item-entity--icon mdi"
-                  ng-class="entityIcon(item, entity)"></span>
-         </div>
-      </div>
-
-      <div ng-if="item.type === TYPES.POPUP_IFRAME"
-           class="item-entity-container">
-
-         <div ng-if="item.customHtml"
-              ng-bind-html="itemCustomHtml(item, entity)"></div>
-
-         <div ng-if="!item.customHtml" class="item-entity">
-            <span class="item-entity--icon mdi"
-                  ng-class="entityIcon(item, entity)"></span>
-         </div>
-      </div>
-
-      <div ng-if="item.type === TYPES.POPUP"
-           class="item-entity-container">
-
-         <div class="item-entity">
-            <span class="item-entity--icon mdi"
-                  ng-class="entityIcon(item, entity)"></span>
-         </div>
-      </div>
-
-      <div ng-if="item.type === TYPES.SCRIPT"
-           class="item-entity-container">
-
-         <div class="item-entity">
-            <span class="item-entity--icon mdi"
-                  ng-class="entityIcon(item, entity)"></span>
-         </div>
-      </div>
-
-      <div ng-if="item.type === TYPES.AUTOMATION"
-           class="item-entity-container">
-
-         <div class="item-entity">
-            <span class="item-entity--icon mdi"
-                  ng-class="entityIcon(item, entity)"></span>
-         </div>
-      </div>
-
-      <div ng-if="item.type === TYPES.VACUUM"
-           class="item-entity-container">
-
-         <div class="item-entity">
-            <span class="item-entity--icon mdi"
-                  ng-class="entityIcon(item, entity)"></span>
-         </div>
-      </div>
-
-      <div ng-if="item.type === TYPES.SENSOR_ICON"
-           class="item-entity-container">
-         <div class="item-entity">
-            <span class="item-entity--icon mdi"
-                  ng-class="entityIcon(item, entity)"></span>
-         </div>
-      </div>
-
-      <div ng-if="item.type === TYPES.INPUT_BOOLEAN"
-           class="item-entity-container">
-
-         <div class="item-entity">
-            <span class="item-entity--icon mdi"
-                  ng-class="entityIcon(item, entity)"></span>
          </div>
       </div>
 
@@ -768,6 +689,7 @@
             </div>
          </div>
       </div>
+
       <div ng-if="item.type === TYPES.DIMMER_SWITCH"
            class="item-entity-container">
 
@@ -826,7 +748,6 @@
          </div>
       </div>
 
-
       <div ng-if="item.type === TYPES.INPUT_SELECT"
            class="item-entity-container">
          <div ng-if="selectOpened(item)" class="item-select"
@@ -860,7 +781,6 @@
          </div>
       </div>
 
-
       <div ng-if="item.type === TYPES.CAMERA"
            class="item-entity-container -below">
          <div class="item-camera">
@@ -882,15 +802,6 @@
          <div class="item-camera">
             <camera-stream item="item" entity="entity"
                            freezed="!isPageActive(page) || activeCamera || screensaverShown"></camera-stream>
-         </div>
-      </div>
-
-      <div ng-if="item.type === TYPES.SCENE"
-           class="item-entity-container">
-
-         <div class="item-entity">
-            <span class="item-entity--icon mdi"
-                  ng-class="entityIcon(item, entity)"></span>
          </div>
       </div>
 
@@ -922,27 +833,6 @@
                     iframe-tile="item" frameborder="0"></iframe>
          </div>
       </div>
-
-
-      <div ng-if="item.type === TYPES.DOOR_ENTRY"
-           class="item-entity-container">
-
-         <div class="item-entity">
-            <span class="item-entity--icon mdi"
-                  ng-class="entityIcon(item, entity)"></span>
-         </div>
-      </div>
-
-
-      <div ng-if="item.type === TYPES.ALARM"
-           class="item-entity-container">
-
-         <div class="item-entity">
-            <span class="item-entity--icon mdi"
-                  ng-class="entityIcon(item, entity)"></span>
-         </div>
-      </div>
-
 
       <div ng-if="item.type === TYPES.WEATHER"
            class="item-entity-container">
@@ -1105,7 +995,6 @@
             </div>
          </div>
       </div>
-
 
       <div ng-if="item.type === TYPES.MEDIA_PLAYER"
            class="item-entity-container">
