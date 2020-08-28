@@ -1067,7 +1067,6 @@ camera_stream div {
 }
 .camera-popup,
 .door-entry-popup,
-.iframe-popup,
 .popup {
   position: fixed;
   top: 0;
@@ -1081,7 +1080,6 @@ camera_stream div {
 }
 .camera-popup-container,
 .door-entry-popup-container,
-.iframe-popup-container,
 .popup-container {
   background: #111;
   overflow: hidden;
@@ -1091,7 +1089,6 @@ camera_stream div {
 }
 .camera-popup-title,
 .door-entry-popup-title,
-.iframe-popup-title,
 .popup-title {
   background: #222;
   color: rgba(255, 255, 255, 0.6);
@@ -1105,7 +1102,6 @@ camera_stream div {
 }
 .camera-popup-close,
 .door-entry-popup-close,
-.iframe-popup-close,
 .popup-close {
   float: left;
   text-align: center;
@@ -1119,20 +1115,17 @@ camera_stream div {
 }
 .camera-popup-close:active,
 .door-entry-popup-close:active,
-.iframe-popup-close:active,
 .popup-close:active {
   color: rgba(255, 255, 255, 0.8);
   background: rgba(0, 0, 0, 0.3);
 }
 .camera-popup-container,
-.door-entry-popup-container,
-.iframe-popup-container {
+.door-entry-popup-container {
   height: 100%;
   width: 100%;
 }
 .camera-popup--list,
-.door-entry-popup--list,
-.iframe-popup--list {
+.door-entry-popup--list {
   width: 200px;
   display: inline-block;
   vertical-align: top;
@@ -1140,8 +1133,7 @@ camera_stream div {
   float: left;
 }
 .camera-popup--list-item,
-.door-entry-popup--list-item,
-.iframe-popup--list-item {
+.door-entry-popup--list-item {
   padding: 6px 10px;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -1153,14 +1145,12 @@ camera_stream div {
       }*/
 }
 .camera-popup--list-item.-active,
-.door-entry-popup--list-item.-active,
-.iframe-popup--list-item.-active {
+.door-entry-popup--list-item.-active {
   color: #eee;
   background: #333;
 }
 .camera-popup--camera,
-.door-entry-popup--camera,
-.iframe-popup--camera {
+.door-entry-popup--camera {
   width: calc(100% - 220px);
   height: 100%;
   display: inline-block;
@@ -1168,23 +1158,7 @@ camera_stream div {
   background: #222;
 }
 .camera-popup--camera > div,
-.door-entry-popup--camera > div,
-.iframe-popup--camera > div {
-  height: 100%;
-  width: 100%;
-}
-.camera-popup--iframe,
-.door-entry-popup--iframe,
-.iframe-popup--iframe {
-  width: 100%;
-  height: 100%;
-  display: inline-block;
-  vertical-align: top;
-  background: #222;
-}
-.camera-popup--iframe > iframe,
-.door-entry-popup--iframe > iframe,
-.iframe-popup--iframe > iframe {
+.door-entry-popup--camera > div {
   height: 100%;
   width: 100%;
 }

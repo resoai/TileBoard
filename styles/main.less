@@ -1205,7 +1205,6 @@ camera_stream {
 
 .camera-popup,
 .door-entry-popup,
-.iframe-popup,
 .popup {
    position: fixed;
    top: 0;
@@ -1256,8 +1255,7 @@ camera_stream {
 }
 
 .camera-popup,
-.door-entry-popup,
-.iframe-popup {
+.door-entry-popup {
    &-container {
       height: 100%;
       width: 100%;
@@ -1297,19 +1295,6 @@ camera_stream {
       background: @popupTitleBackground;
 
       > div {
-         height: 100%;
-         width: 100%;
-      }
-   }
-
-   &--iframe {
-      width: 100%;
-      height: 100%;
-      display: inline-block;
-      vertical-align: top;
-      background: @popupTitleBackground;
-
-      > iframe {
          height: 100%;
          width: 100%;
       }
