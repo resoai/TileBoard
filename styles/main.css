@@ -1236,6 +1236,9 @@ camera_stream div {
   margin: -15px !important;
   border: none !important;
 }
+.-tile-fullsize .item-clickable {
+  display: none ! important;
+}
 .alarm-popup,
 .datetime-popup {
   position: fixed;
