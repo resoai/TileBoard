@@ -1706,21 +1706,21 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.openPopupHistory = function (item, entity) {
       return initPopupLayout(item, entity, "_popupHistory",
          {
-            classes: getItemFieldValue('history.classes', item, entity) || [],
-            styles: {
-               width: '100vw',
-               height: '56vw',
-               margin: 0,
-               maxWidth: '100%',
-            },
+            classes: ['-popup-landscape'].concat(
+               getItemFieldValue('history.classes', item, entity) || []
+            ),
+            styles: {},
             items: [angular.merge({
                type: TYPES.HISTORY,
                id: item.id,
                title: false,
                position: [0,0],
+               classes: ['-tile-fullsize'],
                customStyles: {
-                  width: '100%',
-                  height: '100%',
+                  width: null,
+                  height: null,
+                  top: null,
+                  left: null,
                },
             }, getItemFieldValue('history', item, entity))]
          });
@@ -1729,13 +1729,10 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.openPopupIframe = function (item, entity) {
       return initPopupLayout(item, entity, "_popupIframe",
          {
-            classes: getItemFieldValue('iframeClasses', item, entity) || [],
-            styles: angular.merge({
-               width: '100vw',
-               height: '100vh',
-               margin: 0,
-               maxWidth: '100%',
-            }, getItemFieldValue('iframeStyles', item, entity)),
+            classes: ['-popup-fullsize'].concat(
+               getItemFieldValue('iframeClasses', item, entity) || []
+            ),
+            styles: getItemFieldValue('iframeStyles', item, entity),
             items: [{
                type: TYPES.IFRAME,
                url: item.url,
@@ -1743,9 +1740,12 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                state: false,
                title: false,
                position: [0,0],
+               classes: ['-tile-fullsize'],
                customStyles: {
-                  width: '100%',
-                  height: '100%',
+                  width: null,
+                  height: null,
+                  top: null,
+                  left: null,
                },
             }]
          });

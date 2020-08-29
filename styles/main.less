@@ -1366,6 +1366,14 @@ camera_stream {
       max-width: calc(100% - 2*@popupPadding);
    }
 }
+.-popup-landscape {
+   .popup--tiles {
+      /* use classes: ['-popup-landscape'] for a landscape oriented full-width popup */
+      width: 100vw;
+      height: 56vw;
+      max-width: calc(100% - 2*@popupPadding);
+   }
+}
 .-tile-fullsize {
    /* use classes: ['-tile-fullsize'] to make the tile fill the entire popup */
    /* be sure to also set top, left, width, height to null in customStyles */
@@ -1377,10 +1385,8 @@ camera_stream {
    z-index: 0;
 
    &:active {
-      margin: calc(-@popupPadding - 2px) !important;
-      left: 2px;
-      border: 2px solid rgba(200,200,200,.9);
-      box-sizing: border-box;
+      margin: -@popupPadding !important;
+      border: none !important;
    }
 }
 

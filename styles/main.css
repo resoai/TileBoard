@@ -1217,6 +1217,12 @@ camera_stream div {
   height: 100vh;
   max-width: calc(100% - 2*15px);
 }
+.-popup-landscape .popup--tiles {
+  /* use classes: ['-popup-landscape'] for a landscape oriented full-width popup */
+  width: 100vw;
+  height: 56vw;
+  max-width: calc(100% - 2*15px);
+}
 .-tile-fullsize {
   /* use classes: ['-tile-fullsize'] to make the tile fill the entire popup */
   /* be sure to also set top, left, width, height to null in customStyles */
@@ -1228,10 +1234,8 @@ camera_stream div {
   z-index: 0;
 }
 .-tile-fullsize:active {
-  margin: calc(-15px - 2px) !important;
-  left: 2px;
-  border: 2px solid rgba(200, 200, 200, 0.9);
-  box-sizing: border-box;
+  margin: -15px !important;
+  border: none !important;
 }
 .alarm-popup,
 .datetime-popup {
