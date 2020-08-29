@@ -1357,6 +1357,33 @@ camera_stream {
    }
 }
 
+// the following classes can be used to style the popup-container
+.-popup-fullsize {
+   .popup--tiles {
+      /* use classes: ['-popup-fullsize'] to fullsize the popup */
+      width: 100vw;
+      height: 100vh;
+      max-width: calc(100% - 2*@popupPadding);
+   }
+}
+.-tile-fullsize {
+   /* use classes: ['-tile-fullsize'] to make the tile fill the entire popup */
+   /* be sure to also set top, left, width, height to null in customStyles */
+   margin: -@popupPadding;
+   width: calc(100% + 2*@popupPadding);
+   height: calc(100% + 2*@popupPadding);
+   top: 0;
+   left: 0;
+   z-index: 0;
+
+   &:active {
+      margin: calc(-@popupPadding - 2px) !important;
+      left: 2px;
+      border: 2px solid rgba(200,200,200,.9);
+      box-sizing: border-box;
+   }
+}
+
 @alarmHeight: 423px;
 @alarmWidth: 280px;
 .alarm-popup, .datetime-popup {
