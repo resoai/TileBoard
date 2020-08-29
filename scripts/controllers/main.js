@@ -1775,7 +1775,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
                   left: null,
                },
             }, getItemFieldValue('layout.camera', item, entity))]
-            .concat(getItemFieldValue('layout.tiles', item, entity))
+            .concat(getItemFieldValue('layout.tiles', item, entity) || [])
          }, getItemFieldValue('layout.page', item, entity)));
    };
 
