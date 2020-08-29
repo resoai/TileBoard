@@ -1732,7 +1732,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
             classes: ['-popup-fullsize'].concat(
                getItemFieldValue('iframeClasses', item, entity) || []
             ),
-            styles: getItemFieldValue('iframeStyles', item, entity),
+            styles: {},
             items: [{
                type: TYPES.IFRAME,
                url: item.url,
@@ -1741,12 +1741,12 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                title: false,
                position: [0,0],
                classes: ['-tile-fullsize'],
-               customStyles: {
+               customStyles: angular.merge({
                   width: null,
                   height: null,
                   top: null,
                   left: null,
-               },
+               }, getItemFieldValue('iframeStyles', item, entity)),
             }]
          });
    };

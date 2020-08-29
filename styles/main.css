@@ -1226,11 +1226,10 @@ camera_stream div {
 .-tile-fullsize {
   /* use classes: ['-tile-fullsize'] to make the tile fill the entire popup */
   /* be sure to also set top, left, width, height to null in customStyles */
-  margin: -15px;
-  width: calc(100% + 2*15px);
-  height: calc(100% + 2*15px);
-  top: 0;
-  left: 0;
+  top: -15px;
+  left: -15px;
+  bottom: -15px;
+  right: -15px;
   z-index: 0;
 }
 .-tile-fullsize:active {
