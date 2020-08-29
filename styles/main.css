@@ -1207,7 +1207,7 @@ camera_stream div {
   justify-content: center;
   align-items: center;
 }
-.popup-container {
+.popup .popup-container {
   /* auto-size container */
   width: auto;
   height: auto;

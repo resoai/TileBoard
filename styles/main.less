@@ -1345,8 +1345,10 @@ camera_stream {
    justify-content: center;
    align-items: center;
 
-   &-container {
+   .popup-container { 
       /* auto-size container */
+      // Not simply &-container, in order to make this more specific
+      // and override the less specific height and width settings above
       width: auto;
       height: auto;
       max-width: 100%;
