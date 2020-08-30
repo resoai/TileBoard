@@ -538,7 +538,7 @@
                    ].includes(item.type)"
            class="item-entity-container">
          <div ng-if="item.customHtml"
-              ng-bind-html="itemCustomHtml(item, entity)"></div>
+              ng-bind-html="itemField('customHtml', item, entity)"></div>
 
          <div ng-if="!item.customHtml" class="item-entity">
             <span class="item-entity--icon mdi"
