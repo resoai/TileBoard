@@ -1079,6 +1079,16 @@ camera_stream div {
   box-sizing: border-box;
   background: rgba(45, 49, 53, 0.78);
 }
+.camera-popup-container,
+.door-entry-popup-container,
+.iframe-popup-container,
+.popup-container {
+  background: #111;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  margin: auto;
+}
 .camera-popup-title,
 .door-entry-popup-title,
 .iframe-popup-title,
@@ -1117,13 +1127,8 @@ camera_stream div {
 .camera-popup-container,
 .door-entry-popup-container,
 .iframe-popup-container {
-  background: #111;
   height: 100%;
   width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-  margin: auto;
 }
 .camera-popup--list,
 .door-entry-popup--list,
@@ -1207,12 +1212,7 @@ camera_stream div {
   align-items: center;
 }
 .popup-container {
-  background: #111;
   overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-  margin: auto;
-  /* auto-size container */
   width: auto;
   height: auto;
   max-width: 100%;
