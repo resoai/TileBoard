@@ -1212,7 +1212,6 @@ camera_stream div {
   align-items: center;
 }
 .popup-container {
-  overflow: hidden;
   width: auto;
   height: auto;
   max-width: 100%;
