@@ -1079,6 +1079,7 @@ camera_stream div {
   box-sizing: border-box;
   background: rgba(45, 49, 53, 0.78);
 }
+<<<<<<< Updated upstream
 .camera-popup-container,
 .door-entry-popup-container,
 .iframe-popup-container,
@@ -1091,6 +1092,8 @@ camera_stream div {
   position: relative;
   margin: auto;
 }
+=======
+>>>>>>> Stashed changes
 .camera-popup-title,
 .door-entry-popup-title,
 .iframe-popup-title,
@@ -1125,6 +1128,16 @@ camera_stream div {
 .popup-close:active {
   color: rgba(255, 255, 255, 0.8);
   background: rgba(0, 0, 0, 0.3);
+}
+.camera-popup-container,
+.door-entry-popup-container {
+  background: #111;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  margin: auto;
 }
 .camera-popup--list,
 .door-entry-popup--list,
@@ -1207,7 +1220,12 @@ camera_stream div {
   justify-content: center;
   align-items: center;
 }
-.popup .popup-container {
+.popup-container {
+  background: #111;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  margin: auto;
   /* auto-size container */
   width: auto;
   height: auto;

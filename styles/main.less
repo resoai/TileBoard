@@ -1217,16 +1217,6 @@ camera_stream {
    box-sizing: border-box;
    background: rgba(45, 49, 53, 0.78);
 
-   &-container {
-      background: @popupBackground;
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-      white-space: nowrap;
-      position: relative;
-      margin: auto;
-   }
-
    &-title {
       background: @popupTitleBackground;
       color: rgba(255,255,255,.6);
@@ -1258,8 +1248,22 @@ camera_stream {
 }
 
 .camera-popup,
+<<<<<<< Updated upstream
 .door-entry-popup,
 .iframe-popup {
+=======
+.door-entry-popup {
+   &-container {
+      background: @popupBackground;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      margin: auto;
+   }
+
+>>>>>>> Stashed changes
    &--list {
       width: 200px;
       display: inline-block;
@@ -1345,10 +1349,14 @@ camera_stream {
    justify-content: center;
    align-items: center;
 
-   .popup-container { 
+   &-container {
+      background: @popupBackground;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      margin: auto;
+
       /* auto-size container */
-      // Not simply &-container, in order to make this more specific
-      // and override the less specific height and width settings above
       width: auto;
       height: auto;
       max-width: 100%;
