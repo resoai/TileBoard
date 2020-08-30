@@ -1079,21 +1079,6 @@ camera_stream div {
   box-sizing: border-box;
   background: rgba(45, 49, 53, 0.78);
 }
-<<<<<<< Updated upstream
-.camera-popup-container,
-.door-entry-popup-container,
-.iframe-popup-container,
-.popup-container {
-  background: #111;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-  margin: auto;
-}
-=======
->>>>>>> Stashed changes
 .camera-popup-title,
 .door-entry-popup-title,
 .iframe-popup-title,
@@ -1130,7 +1115,8 @@ camera_stream div {
   background: rgba(0, 0, 0, 0.3);
 }
 .camera-popup-container,
-.door-entry-popup-container {
+.door-entry-popup-container,
+.iframe-popup-container {
   background: #111;
   height: 100%;
   width: 100%;
