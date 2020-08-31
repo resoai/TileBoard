@@ -77,7 +77,7 @@ Optionally, the fullscreen camera entity can be different from the thumbnail cam
    state: false,
    fullscreen: {
       type: TYPES.CAMERA_STREAM,
-      objFit: 'contain',
+      objFit: 'contain',  // https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
       id: 'camera.front_gate_highres',  // Optional: camera entity to use on fullscreen, defaults to the tile camera entity if omitted
       bufferLength: 5  // Optional: buffer length in seconds for the HLS buffer, default is 5 seconds
    },
@@ -160,6 +160,7 @@ Essentially a door entry tile is a pop-up with a fullscreen camera and a set of 
     layout: {
         camera: {
             type: TYPES.CAMERA,
+            objFit: 'contain',  // https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
             id: 'camera.front_gate',
             refresh: 1500,
             bgSize: 'cover'
