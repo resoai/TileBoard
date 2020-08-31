@@ -1219,8 +1219,6 @@ camera_stream {
 
    &-container {
       background: @popupBackground;
-      height: 100%;
-      width: 100%;
       overflow: hidden;
       white-space: nowrap;
       position: relative;
@@ -1260,6 +1258,11 @@ camera_stream {
 .camera-popup,
 .door-entry-popup,
 .iframe-popup {
+   &-container {
+      height: 100%;
+      width: 100%;
+   }
+
    &--list {
       width: 200px;
       display: inline-block;
@@ -1314,10 +1317,6 @@ camera_stream {
 }
 
 .door-entry-popup {
-
-   &-container {
-   }
-
    &--tiles {
       position: absolute;
       left: 15px;
@@ -1338,7 +1337,6 @@ camera_stream {
    }
 }
 
-
 .popup {
    /* center popup on screen */
    display: flex;
@@ -1346,7 +1344,6 @@ camera_stream {
    align-items: center;
 
    &-container {
-      /* auto-size container */
       width: auto;
       height: auto;
       max-width: 100%;
