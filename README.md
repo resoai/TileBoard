@@ -247,7 +247,7 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
    * You can use any of the material design icons from https://materialdesignicons.com/
    * as long as they have been published in the [latest npm package](https://github.com/templarian/materialdesign-svg).
    */
-  icon: 'mdi-phone'
+  icon: 'mdi-phone',
   /* customHtml: Replace the icon by a custom HTML content
    * If you define this option, simple tiles will not show the icon. They will show your custom HTML instead.
    * You can use an anonymous function here, or a string that will be interpreted as a template
