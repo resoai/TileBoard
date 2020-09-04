@@ -221,7 +221,15 @@ body {
   font-size: 0;
 }
 .-hide-scrollbar .page {
-  height: 102%;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* Internet Explorer 10+ */
+}
+.-hide-scrollbar .page::-webkit-scrollbar {
+  /* WebKit */
+  width: 0;
+  height: 0;
 }
 .page-head {
   position: absolute;
