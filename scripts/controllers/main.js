@@ -521,14 +521,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       return getItemFieldValue(field, item, entity);
    };
 
-   $scope.itemCustomHtml = function (item, entity) {
-      if (typeof item.customHtml === 'function') {
-         return callFunction(item.customHtml, [item, entity]);
-      }
-
-      return item.customHtml;
-   };
-
    $scope.entityUnit = function (item, entity) {
       if(!('unit' in item)) {
          return entity.attributes ? entity.attributes.unit_of_measurement : null;
