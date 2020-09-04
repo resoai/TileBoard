@@ -39,7 +39,42 @@ var CONFIG = {
          {
             type: HEADER_ITEMS.DATETIME,
             dateFormat: 'EEEE, LLLL dd', //https://docs.angularjs.org/api/ng/filter/date
-         }
+         },
+         // {
+         //    type: HEADER_ITEMS.DATE,
+         //    dateFormat: 'EEEE, LLLL dd', //https://docs.angularjs.org/api/ng/filter/date
+         // },
+         // {
+         //    type: HEADER_ITEMS.TIME,
+         // },
+         // {
+         //    type: HEADER_ITEMS.CUSTOM_HTML,
+         //    html: 'Welcome to the <b>TileBoard</b>'
+         // },
+         // {
+         //    type: HEADER_ITEMS.WEATHER,
+         //    styles: {
+         //       margin: '0 0 0'
+         //    },
+         //    icon: '&sensor.dark_sky_icon.state',
+         //    icons: {
+         //       'clear-day': 'clear',
+         //       'clear-night': 'nt-clear',
+         //       'cloudy': 'cloudy',
+         //       'rain': 'rain',
+         //       'sleet': 'sleet',
+         //       'snow': 'snow',
+         //       'wind': 'hazy',
+         //       'fog': 'fog',
+         //       'partly-cloudy-day': 'partlycloudy',
+         //       'partly-cloudy-night': 'nt-partlycloudy'
+         //    },
+         //    fields: {
+         //       summary: '&sensor.dark_sky_summary.state',
+         //       temperature: '&sensor.dark_sky_temperature.state',
+         //       temperatureUnit: '&sensor.dark_sky_temperature.attributes.unit_of_measurement',
+         //    }
+         // }
       ]
    },
 
