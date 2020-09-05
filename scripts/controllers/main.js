@@ -1107,12 +1107,12 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.callScript = function (item, entity) {
-      var variables
+      var variables;
 
       if(typeof item.variables === "function") {
          variables = callFunction(item.variables, [item, entity]);
       } else {
-         variables = item.variables || {}
+         variables = item.variables || {};
       }
 
       sendItemData(item, {
