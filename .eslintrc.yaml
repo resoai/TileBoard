@@ -1,0 +1,84 @@
+env:
+  browser: true
+  es2017: true
+  node: true
+parserOptions:
+  sourceType: module
+extends: 'eslint:recommended'
+ignorePatterns:
+  - vendors/
+rules:
+  # array-callback-return: error
+  # arrow-spacing: error
+  # block-scoped-var: error
+  brace-style:
+    - error
+    - stroustrup
+    - allowSingleLine: true
+  comma-dangle:
+    - error
+    - always-multiline
+  comma-spacing: error
+  comma-style: error
+  # computed-property-spacing: error
+  curly:
+    - error
+    - multi-line
+  # dot-notation: error
+  # eol-last: error
+  eqeqeq: error
+  # func-call-spacing: error
+  # getter-return: error
+  # guard-for-in: error
+  indent:
+    - error
+    - 3
+    - SwitchCase: 1
+  # key-spacing: error
+  # keyword-spacing: error
+  linebreak-style: error
+  # lines-between-class-members: error
+  # no-bitwise: error
+  # no-caller: error
+  # no-console:
+  #   - error
+  #   - allow: [assert, info, warn, error]
+  no-multi-spaces:
+    - error
+    - ignoreEOLComments: true
+  # no-self-compare: error
+  # no-sequences: error
+  # no-lonely-if: error
+  no-multiple-empty-lines: error
+  # no-template-curly-in-string: error
+  no-trailing-spaces: error
+  # no-unneeded-ternary: error
+  # no-unused-expressions: error
+  # no-useless-return: error
+  no-unused-vars:
+    - error
+    - args: none
+      ignoreRestSiblings: true
+      varsIgnorePattern: '^_'
+  # no-var: error
+  object-curly-spacing:
+    - error
+    - always
+  # one-var-declaration-per-line: error
+  padded-blocks:
+    - error
+    - never
+  # prefer-const: error
+  quotes:
+    - error
+    - single
+  # require-await: error
+  semi: error
+  space-before-blocks: error
+  # space-before-function-paren:
+  #   - error
+  space-in-parens: error
+  space-infix-ops: error
+  spaced-comment: error
+  # strict: error
+  # switch-colon-spacing: error

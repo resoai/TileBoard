@@ -13,7 +13,7 @@
    <title>TileBoard</title>
 
    <!-- WebApp configuration -->
-   <link rel="manifest" href="manifest.webmanifest" crossorigin="use-credentials">
+   <link rel="manifest" href="manifest.webmanifest?v=1.0.0" crossorigin="use-credentials">
    <!-- legacy tags -->
    <meta name="mobile-web-app-capable" content="yes">
    <!-- iOS Settings -->
@@ -27,45 +27,14 @@
       [ng-cloak] { display: none; }
    </style>
 
-   <script type="text/javascript">
-      var suffix = location.protocol === "file:" ? "" : "?r=" + Math.random();
+   <link rel="stylesheet" href="./styles/styles.css?v=1.0.0">
+   <link rel="stylesheet" href="./styles/custom.css">
 
-      [
-         'styles/main.css',
-         'styles/themes.css',
-         'styles/weather-icons.css',
-         'styles/color-picker.min.css',
-         'styles/custom.css',
-      ].map(function (value) {
-         document.write('<li'+'nk rel="stylesheet" href="'+value+suffix+'"/>');
-      });
-
-      [
-         'scripts/vendors/angular.min.js',
-         'scripts/vendors/hammer.js',
-         'scripts/vendors/angular.hammer.js',
-         'scripts/vendors/color-picker.js',
-         'scripts/vendors/angularjs-gauge.js',
-         'scripts/vendors/moment.min.js', // Required by Chart.js for time axes
-         'scripts/vendors/Chart.min.js',  // Required for history charts
-         'scripts/vendors/angular-chart.min.js',  // Required for linking charts to angular.js
-         'scripts/vendors/hls.js',
-
-         'scripts/models/noty.js',
-         'scripts/app.js',
-
-         'config.js', // <----- NOT config.example.js !!
-
-         'scripts/init.js',
-         'scripts/models/api.js',
-         'scripts/directives.js',
-         'scripts/controllers/main.js',
-         'scripts/controllers/noty.js',
-         'scripts/controllers/screensaver.js'
-      ].map(function (value) {
-         document.write('<sc'+'ript src="'+value+suffix+'"></scr'+'ipt>');
-      });
+   <script src="./scripts/globals.js?v=1.0.0"></script>
+   <script>
+      document.write('<scr' + 'ipt src="./config.js?r=' + Date.now() + '"></scr' + 'ipt>')
    </script>
+   <script src="./scripts/app.js?v=1.0.0"></script>
 </head>
 
 <body ng-controller="Main" ng-class="getBodyClass()">
@@ -109,7 +78,7 @@
                <camera-thumbnail item="activeCamera.fullscreen" entity="entity"
                                  freezed="false"></camera-thumbnail>
             </div>
-         
+
             <div ng-if="activeCamera.fullscreen.type === TYPES.CAMERA_STREAM">
                <camera-stream item="activeCamera.fullscreen" entity="entity"
                               freezed="false"></camera-stream>
@@ -235,17 +204,17 @@
 
             <div class="alarm-popup-buttons-line">
                <div class="alarm-popup-button -icon -home"
-                    ng-if="!isDisarmed(alarmEntity)" 
+                    ng-if="!isDisarmed(alarmEntity)"
                     ng-click="actionAlarm('alarm_arm_home', activeAlarm, alarmEntity)">
                   <div class="mdi mdi-bell-plus"></div> Arm home
                </div>
                <div class="alarm-popup-button -icon -away"
-                    ng-if="!isDisarmed(alarmEntity)" 
+                    ng-if="!isDisarmed(alarmEntity)"
                     ng-click="actionAlarm('alarm_arm_away', activeAlarm, alarmEntity)">
                   <div class="mdi mdi-bell"></div> Arm away
                </div>
                <div class="alarm-popup-button -icon -night"
-                    ng-if="!isDisarmed(alarmEntity)" 
+                    ng-if="!isDisarmed(alarmEntity)"
                     ng-click="actionAlarm('alarm_arm_night', activeAlarm, alarmEntity)">
                   <div class="mdi mdi-sleep"></div> Arm night
                </div>
@@ -668,10 +637,10 @@
                          step="{{ _c.step }}" ng-min="{{ _c.min }}" ng-max="{{ _c.max }}">
                </div>
             </div>
-          
+
             <div ng-if="item.colorpicker" class="item-entity-colorpicker">
-               <span>Color:</span> 
-               <input color-picker 
+               <span>Color:</span>
+               <input color-picker
                   color-picker-model="getRGBStringFromArray(entity.attributes.rgb_color)"
                   color-picker-show-value="false"
                   color-picker-output-format="'rgba'"
@@ -1127,29 +1096,30 @@
       </div>
 
       <div ng-if="item.type === TYPES.GAUGE"
-         class="item-entity-container">         
+         class="item-entity-container">
          <div class="item-gauge">
-            <ng-gauge size="getGaugeField('size', item, entity)" 
-                      type="getGaugeField('type', item, entity)" 
-                      thick="getGaugeField('thick', item, entity)" 
-                      min="getGaugeField('min', item, entity)" 
-                      max="getGaugeField('max', item, entity)" 
-                      value="entityValue(item, entity)" 
-                      cap="getGaugeField('cap', item, entity)" 
-                      label="getGaugeField('label', item, entity)" 
-                      prepend="getGaugeField('prepend', item, entity)"
-                      foreground-color="getGaugeField('foregroundColor', item, entity)" 
-                      background-color="getGaugeField('backgroundColor', item, entity)" 
-                      append="getGaugeField('append', item, entity)" 
-                      thresholds="getGaugeField('thresholds', item, entity)" 
-                      label-only="getGaugeField('labelOnly', item, entity)"
-                      duration="getGaugeField('duration', item, entity)" 
+            <ng-gauge
+                      size="{{ getGaugeField('size', item, entity) }}"
+                      type="{{ getGaugeField('type', item, entity) }}"
+                      thick="{{ getGaugeField('thick', item, entity) }}"
+                      min="getGaugeField('min', item, entity)"
+                      max="getGaugeField('max', item, entity)"
+                      value="entityValue(item, entity)"
+                      cap="{{ getGaugeField('cap', item, entity) }}"
+                      label="{{ getGaugeField('label', item, entity) }}"
+                      prepend="{{ getGaugeField('prepend', item, entity) }}"
+                      foreground-color="{{ getGaugeField('foregroundColor', item, entity) }}"
+                      background-color="{{ getGaugeField('backgroundColor', item, entity) }}"
+                      append="{{ getGaugeField('append', item, entity) }}"
+                      thresholds="getGaugeField('thresholds', item, entity)"
+                      label-only="{{ getGaugeField('labelOnly', item, entity) }}"
+                      duration="{{ getGaugeField('duration', item, entity) }}"
                       fraction-size="getGaugeField('fractionSize', item, entity)"></ng-gauge>
          </div>
       </div>
-       
+
       <div ng-if="item.type === TYPES.IMAGE" class="item-entity-container">
-            <div class="item-image" 
+            <div class="item-image"
                  ng-style="{'background-image': 'url(' + itemURL(item, entity) + ')'}"></div>
       </div>
 

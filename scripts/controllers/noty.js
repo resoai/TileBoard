@@ -1,3 +1,7 @@
+import { App } from '../app';
+import { NOTIES_POSITIONS } from '../globals/constants';
+import Noty from '../models/noty';
+
 App.controller('Noty', ['$scope', NotyController]);
 
 function NotyController ($scope) {
@@ -17,8 +21,8 @@ function NotyController ($scope) {
 
          var position = NOTIES_POSITIONS.RIGHT;
 
-         if(window.CONFIG && CONFIG.notiesPosition) {
-            position = CONFIG.notiesPosition;
+         if(window.CONFIG && window.CONFIG.notiesPosition) {
+            position = window.CONFIG.notiesPosition;
          }
 
          notiesClasses.push('-' + position);
