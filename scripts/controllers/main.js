@@ -1835,12 +1835,12 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       var str = $scope.getActiveDatetimeInput();
       var dt = str.split(' ');
 
-      var data = {};
+      var serviceData = {};
 
-      if(entity.attributes.has_date) data.date = dt[0];
-      if(entity.attributes.has_time) data.time = dt[1] || dt[0];
+      if(entity.attributes.has_date) serviceData.date = dt[0];
+      if(entity.attributes.has_time) serviceData.time = dt[1] || dt[0];
 
-      callService(item, 'input_datetime', 'set_datetime', data)
+      callService(item, 'input_datetime', 'set_datetime', serviceData)
    };
 
    $scope.inputDatetime = function (num) {
