@@ -1147,8 +1147,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.setLightBrightness = function (item, brightness) {
-      if(item.loading) return;
-
       var serviceData = {
          brightness_pct: Math.round(brightness / 255 * 100 / 10) * 10
       };
@@ -1177,8 +1175,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.setLightColor = function (item, color) {
-      if(item.loading) return;
-
       var colors = $scope.getRGBArrayFromString(color);
 
       if(colors) {
@@ -1191,8 +1187,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    });
 
    $scope.setInputNumber = function (item, value) {
-      if(item.loading) return;
-
       callService(item, 'input_number', 'set_value', {value: value});
    };
 
