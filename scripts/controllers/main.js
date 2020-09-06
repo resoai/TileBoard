@@ -1,5 +1,14 @@
+import angular from 'angular';
+import Hammer from 'hammerjs';
+import { App } from '../app';
+import { TYPES, FEATURES, HEADER_ITEMS, MENU_POSITIONS, GROUP_ALIGNS, TRANSITIONS, MAPBOX_MAP, YANDEX_MAP } from '../globals/constants';
+import { debounce, leadZero, toAbsoluteServerURL } from '../globals/utils';
+import Noty from '../models/noty';
+
 App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($scope, $timeout, $location, Api) {
    if(!window.CONFIG) return;
+
+   const CONFIG = window.CONFIG;
 
    $scope.pages = CONFIG.pages;
    $scope.pagesContainerStyles = {};
@@ -36,7 +45,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    var popupIframeStyles = {};
 
    $scope.entityClick = function (page, item, entity) {
-      if(typeof item.action === "function") {
+      if(typeof item.action === 'function') {
          return callFunction(item.action, [item, entity]);
       }
 
@@ -78,7 +87,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.entityLongPress = function ($event, page, item, entity) {
-      if(typeof item.secondaryAction === "function") {
+      if(typeof item.secondaryAction === 'function') {
          return callFunction(item.secondaryAction, [item, entity]);
       }
 
@@ -101,7 +110,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          if(CONFIG.customTheme) {
             var themes = CONFIG.customTheme;
 
-            if(typeof themes === "string") themes = [themes];
+            if(typeof themes === 'string') themes = [themes];
 
             themes.map(function (theme) {
                bodyClass.push('-theme-' + theme);
@@ -140,7 +149,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
 
    $scope.getItemEntity = function (item) {
-      if(typeof item.id === "object") return item.id;
+      if(typeof item.id === 'object') return item.id;
 
       if(!(item.id in $scope.states)) {
          warnUnknownItem(item);
@@ -153,11 +162,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.getCameraEntityFullscreen = function (item) {
       var entity_id = item.fullscreen.id;
 
-      if(typeof entity_id === "undefined") {
+      if(typeof entity_id === 'undefined') {
          entity_id = item.id;
       }
 
-      if(typeof entity_id === "object") return entity_id;
+      if(typeof entity_id === 'object') return entity_id;
 
       return $scope.states[entity_id];
    };
@@ -165,7 +174,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.getEntryCameraEntity = function (itemEntry) {
       var item = itemEntry.layout.camera;
 
-      if(typeof item.id === "object") return item.id;
+      if(typeof item.id === 'object') return item.id;
 
       return $scope.states[item.id];
    };
@@ -196,6 +205,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          var sizes = Math.ceil(tileSize * width) + ',' + Math.ceil((tileSize * height) + 80);
 
          var url;
+         var label;
+         var marker;
 
          if(item.map === YANDEX_MAP) {
             var icon = 'round';
@@ -205,16 +216,16 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
             var pt = coords + ',' + icon;
 
-            url = "https://static-maps.yandex.ru/1.x/?lang=en-US&ll="
-               + coords + "&z=" + zoom + "&l=map&size=" + sizes + "&pt=" + pt;
+            url = 'https://static-maps.yandex.ru/1.x/?lang=en-US&ll='
+               + coords + '&z=' + zoom + '&l=map&size=' + sizes + '&pt=' + pt;
          }
          else if(item.map === MAPBOX_MAP) {
             coords = obj.longitude + ',' + obj.latitude;
             sizes = sizes.replace(',', 'x');
 
-            var label = name[0].toLowerCase();
-            var marker = "pin-s-" + label + "(" + obj.longitude + ',' + obj.latitude + ")";
-            var style = "mapbox/streets-v11";
+            label = name[0].toLowerCase();
+            marker = 'pin-s-' + label + '(' + obj.longitude + ',' + obj.latitude + ')';
+            var style = 'mapbox/streets-v11';
 
             if(CONFIG.mapboxStyle) {
                var styleGroups = /^mapbox:\/\/styles\/(.+)$/.exec(CONFIG.mapboxStyle);
@@ -223,29 +234,29 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                }
             }
 
-            url = "https://api.mapbox.com/styles/v1/" + style + "/static/"
-               + marker + "/" + coords + "," + zoom + ",0/" + sizes;
+            url = 'https://api.mapbox.com/styles/v1/' + style + '/static/'
+               + marker + '/' + coords + ',' + zoom + ',0/' + sizes;
 
             if(CONFIG.mapboxToken) {
-               url += "?access_token=" + CONFIG.mapboxToken;
+               url += '?access_token=' + CONFIG.mapboxToken;
             }
          }
          else {
             coords = obj.latitude + ',' + obj.longitude;
             sizes = sizes.replace(',', 'x');
 
-            var label = name[0].toUpperCase();
-            var marker = encodeURIComponent("color:gray|label:"+label+"|" + coords);
+            label = name[0].toUpperCase();
+            marker = encodeURIComponent('color:gray|label:' + label + '|' + coords);
 
-            url = "https://maps.googleapis.com/maps/api/staticmap?center="
-               + coords + "&zoom=" + zoom + "&size=" + sizes + "&scale=2&maptype=roadmap&markers=" + marker;
+            url = 'https://maps.googleapis.com/maps/api/staticmap?center='
+               + coords + '&zoom=' + zoom + '&size=' + sizes + '&scale=2&maptype=roadmap&markers=' + marker;
 
             if(CONFIG.googleApiKey) {
-               url += "&key=" + CONFIG.googleApiKey;
+               url += '&key=' + CONFIG.googleApiKey;
             }
          }
 
-         obj[key] = {backgroundImage: "url('" + url + "')"};
+         obj[key] = { backgroundImage: 'url(\'' + url + '\')' };
       }
 
       return obj[key];
@@ -399,10 +410,10 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       if(item.customStyles) {
          var res;
 
-         if(typeof item.customStyles === "function") {
+         if(typeof item.customStyles === 'function') {
             res = callFunction(item.customStyles, [item, entity]);
          }
-         else if(typeof item.customStyles === "object") {
+         else if(typeof item.customStyles === 'object') {
             res = item.customStyles;
          }
          if(res) for(var k in res) item.styles[k] = res[k];
@@ -453,9 +464,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       if(item.theme) item._classes.push('-th-' + item.theme);
       else item._classes.push('-th-' + item.type);
 
-      if(item.classes) item.classes.forEach(function (c) {
-         item._classes.push(c);
-      });
+      if(item.classes) {
+         item.classes.forEach(function (c) {
+            item._classes.push(c);
+         });
+      }
 
       if(item.loading) item._classes.push('-loading');
       if($scope.selectOpened(item)) item._classes.push('-top-entity');
@@ -467,10 +480,10 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       if(item.state === false) return null;
 
       if(typeof item.state !== 'undefined') {
-         if(typeof item.state === "string") {
+         if(typeof item.state === 'string') {
             return parseString(item.state, entity);
          }
-         else if(typeof item.state === "function") {
+         else if(typeof item.state === 'function') {
             return callFunction(item.state, [item, entity]);
          }
          else {
@@ -478,10 +491,10 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          }
       }
 
-      if(typeof item.states === "function") {
+      if(typeof item.states === 'function') {
          return callFunction(item.states, [item, entity]);
       }
-      else if(typeof item.states === "object") {
+      else if(typeof item.states === 'object') {
          return item.states[entity.state] || entity.state;
       }
 
@@ -502,7 +515,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       if(!item.icons) return state;
 
-      if(typeof item.icons === "function") {
+      if(typeof item.icons === 'function') {
          return callFunction(item.icons, [item, entity]);
       }
 
@@ -540,7 +553,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          value = getItemFieldValue('value', item, entity);
       }
 
-      if(typeof item.filter === "function") {
+      if(typeof item.filter === 'function') {
          return callFunction(item.filter, [value, item, entity]);
       }
 
@@ -550,8 +563,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.climateTarget = function (item, entity) {
       var value = entity.attributes.temperature || [
          entity.attributes.target_temp_low,
-         entity.attributes.target_temp_high
-      ].join(" - ");
+         entity.attributes.target_temp_high,
+      ].join(' - ');
 
       if(item.filter) return item.filter(value);
 
@@ -561,7 +574,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.listField = function (field, item, list) {
       var value = parseFieldValue(list[field], item, list);
 
-      if(typeof item.filter === "function") {
+      if(typeof item.filter === 'function') {
          return callFunction(item.filter, [value, field, item]);
       }
 
@@ -592,9 +605,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       if(!icon) {
          icon = $scope.getWeatherField('icon', item, entity);
 
-         if(icon) console.warn(
-            "`icon` field inside fields is deprecated for WEATHER tile, " +
-            "please move it to the tile object");
+         if(icon) {
+            console.warn(
+               '`icon` field inside fields is deprecated for WEATHER tile, ' +
+            'please move it to the tile object');
+         }
       }
 
       if(!icon) return null;
@@ -604,12 +619,14 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       if(!map && item.fields.iconMap) {
          map = item.fields.iconMap;
 
-         if(icon) console.warn(
-            "`iconMap` field inside fields is deprecated for WEATHER tile, " +
-            "please move it to the tile object as `icons`");
+         if(icon) {
+            console.warn(
+               '`iconMap` field inside fields is deprecated for WEATHER tile, ' +
+            'please move it to the tile object as `icons`');
+         }
       }
 
-      if(typeof map === "function") return callFunction(map, [icon, item, entity]);
+      if(typeof map === 'function') return callFunction(map, [icon, item, entity]);
 
       if(!map) return icon;
 
@@ -621,7 +638,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       var iconImage = parseFieldValue(item.iconImage, item, entity);
 
-      if(typeof item.icons === "function") {
+      if(typeof item.icons === 'function') {
          iconImage = callFunction(item.icons, [iconImage, item, entity]);
       }
 
@@ -649,7 +666,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       if(!icon) return null;
 
-      if(typeof item.icons === "function") {
+      if(typeof item.icons === 'function') {
          return callFunction(item.icons, [icon, item, entity]);
       }
 
@@ -663,7 +680,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       if(!iconImage) return null;
 
-      if(typeof item.icons === "function") {
+      if(typeof item.icons === 'function') {
          iconImage = callFunction(item.icons, [iconImage, item, entity]);
       }
 
@@ -683,7 +700,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.slidesStyles = function (item, $index) {
       if(!item.slidesStyles) {
          item.slidesStyles = {
-            'animation-delay': ((item.slidesDelay || $index* 0.8)) + 's'
+            'animation-delay': ((item.slidesDelay || $index * 0.8)) + 's',
          };
 
          if('bgOpacity' in item) {
@@ -736,7 +753,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.getSliderConf = function (item, entity) {
-      var key = "_c";
+      var key = '_c';
 
       if(!entity.attributes) entity.attributes = {};
       if(entity.attributes[key]) return entity.attributes[key];
@@ -751,10 +768,10 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          step: attrs.step || def.step || 1,
          value: value || +entity.state || def.value || 0,
          request: def.request || {
-            domain: "input_number",
-            service: "set_value",
-            field: "value"
-         }
+            domain: 'input_number',
+            service: 'set_value',
+            field: 'value',
+         },
       };
 
       $timeout(function () {
@@ -765,7 +782,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.getLightSliderConf = function (slider, entity) {
-      var key = "_c_" + slider.field;
+      var key = '_c_' + slider.field;
 
       if(!entity.attributes) entity.attributes = {};
       if(entity.attributes[key]) return entity.attributes[key];
@@ -781,10 +798,10 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          step: def.step || attrs.step || 1,
          value: value || def.min || attrs.min || 0,
          request: def.request || {
-            domain: "input_number",
-            service: "set_value",
-            field: "value"
-         }
+            domain: 'input_number',
+            service: 'set_value',
+            field: 'value',
+         },
       };
 
       $timeout(function () {
@@ -803,7 +820,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       if(!entity.attributes) entity.attributes = {};
       if(entity.attributes._c) return entity.attributes._c;
 
-      var def = {max: 100, min: 0, step: 2};
+      var def = { max: 100, min: 0, step: 2 };
       var attrs = entity.attributes;
       var value = attrs.volume_level * 100 || 0;
 
@@ -813,7 +830,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          max: attrs.max || def.max || 100,
          min: attrs.min || def.min || 0,
          step: attrs.step || def.step || 1,
-         value: value || 0
+         value: value || 0,
       };
 
       $timeout(function () {
@@ -832,14 +849,14 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.openLightSliders = function (item, entity) {
       if((!item.sliders || !item.sliders.length) && !item.colorpicker) return;
 
-      if(entity.state !== "on") {
+      if(entity.state !== 'on') {
          return $scope.toggleSwitch(item, entity, function () {
             $timeout(function () {
-               if(entity.state === "on") {
+               if(entity.state === 'on') {
                   $scope.openLightSliders(item, entity);
                }
             }, 0);
-         })
+         });
       }
       else {
          if(!item.controlsEnabled) {
@@ -918,10 +935,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.getGaugeField = function (field, item, entity) {
       if(!item) return null;
 
-      if(typeof item.filter === "function") {
-         return callFunction(item.filter, [value, item, entity]);
-      }
-
       if(item.settings && field in item.settings) {
          return parseFieldValue(item.settings[field], item, entity);
       }
@@ -967,10 +980,10 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       var value = {
          value: conf.value / 100,
          request: {
-            domain: "media_player",
-            service: "volume_set",
-            field: "volume_level"
-         }
+            domain: 'media_player',
+            service: 'volume_set',
+            field: 'volume_level',
+         },
       };
 
       setSliderValue(item, entity, value);
@@ -988,15 +1001,15 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       if(item.type === TYPES.LIGHT && item.controlsEnabled) {
          return;
       }
-      var domain = "homeassistant";
+      var domain = 'homeassistant';
       var group = item.id.split('.')[0];
 
       if(['switch', 'light', 'fan'].indexOf(group) !== -1) domain = group;
 
-      var service = "toggle";
+      var service = 'toggle';
 
-      if(entity.state === "off") service = "turn_on";
-      else if(entity.state === "on") service = "turn_off";
+      if(entity.state === 'off') service = 'turn_on';
+      else if(entity.state === 'on') service = 'turn_off';
 
       callService(item, domain, service, {}, callback);
    };
@@ -1014,7 +1027,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $event.preventDefault();
       $event.stopPropagation();
 
-      var func = "action" + (action === "plus" ? "Plus" : "Minus");
+      var func = 'action' + (action === 'plus' ? 'Plus' : 'Minus');
 
       if(item[func]) callFunction(item[func], [item, entity, $event]);
 
@@ -1024,20 +1037,20 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.toggleLock = function (item, entity) {
       var service;
 
-      if(entity.state === "locked") service = "unlock";
-      else if(entity.state === "unlocked") service = "lock";
+      if(entity.state === 'locked') service = 'unlock';
+      else if(entity.state === 'unlocked') service = 'lock';
 
       callService(item, 'lock', service, {});
    };
 
    $scope.toggleVacuum = function (item, entity) {
       var service;
-      if(entity.state === "off") service = "turn_on";
-      else if(entity.state === "on") service = "turn_off";
+      if(entity.state === 'off') service = 'turn_on';
+      else if(entity.state === 'on') service = 'turn_off';
       else if(['idle', 'docked', 'paused'].indexOf(entity.state) !== -1) {
-         service = "start";
+         service = 'start';
       }
-      else if(entity.state === "cleaning") service = "return_to_base";
+      else if(entity.state === 'cleaning') service = 'return_to_base';
 
       callService(item, 'vacuum', service, {});
    };
@@ -1051,20 +1064,21 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.mutePlayer = function (muteState, item, entity) {
-      callService(item, 'media_player', 'volume_mute', {is_volume_muted: muteState});
+      callService(item, 'media_player', 'volume_mute', { is_volume_muted: muteState });
    };
 
    $scope.callScript = function (item, entity) {
       var variables;
 
-      if(typeof item.variables === "function") {
+      if(typeof item.variables === 'function') {
          variables = callFunction(item.variables, [item, entity]);
-      } else {
+      }
+      else {
          variables = item.variables || {};
       }
 
       var serviceData = {
-         variables: variables
+         variables: variables,
       };
 
       callService(item, 'script', 'turn_on', serviceData);
@@ -1078,10 +1092,10 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $event.preventDefault();
       $event.stopPropagation();
 
-      if(entity.state === "off") return false;
+      if(entity.state === 'off') return false;
 
       if(!('brightness' in entity.attributes)) {
-         return addError("No brightness field in object");
+         return addError('No brightness field in object');
       }
 
       var brightness = +entity.attributes.brightness + 25.5;
@@ -1097,10 +1111,10 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $event.preventDefault();
       $event.stopPropagation();
 
-      if(entity.state === "off") return false;
+      if(entity.state === 'off') return false;
 
       if(!('brightness' in entity.attributes)) {
-         return addError("No brightness field in object");
+         return addError('No brightness field in object');
       }
 
       var brightness = +entity.attributes.brightness - 25.5;
@@ -1148,27 +1162,27 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.setLightBrightness = function (item, brightness) {
       var serviceData = {
-         brightness_pct: Math.round(brightness / 255 * 100 / 10) * 10
+         brightness_pct: Math.round(brightness / 255 * 100 / 10) * 10,
       };
 
       callService(item, 'light', 'turn_on', serviceData);
    };
 
-   $scope.getRGBStringFromArray = function( color ) {
+   $scope.getRGBStringFromArray = function(color) {
       if(!color) return null;
-      return "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
+      return 'rgb(' + color[0] + ',' + color[1] + ',' + color[2] + ')';
    };
 
-   $scope.getRGBArrayFromString = function( color ) {
-      if(!color || color.indexOf("rgb") !== 0) return null;
+   $scope.getRGBArrayFromString = function(color) {
+      if(!color || color.indexOf('rgb') !== 0) return null;
 
       var colorValues;
 
-      if (color.indexOf("rgba") === 0) {
-         colorValues = color.substring(color.indexOf("(") + 1, color.lastIndexOf(",")).split(",");
+      if (color.indexOf('rgba') === 0) {
+         colorValues = color.substring(color.indexOf('(') + 1, color.lastIndexOf(',')).split(',');
       }
       else {
-         colorValues = color.substring(color.indexOf("(") + 1, color.indexOf(")")).split(",");
+         colorValues = color.substring(color.indexOf('(') + 1, color.indexOf(')')).split(',');
       }
 
       return [parseInt(colorValues[0]), parseInt(colorValues[1]), parseInt(colorValues[2])];
@@ -1178,7 +1192,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       var colors = $scope.getRGBArrayFromString(color);
 
       if(colors) {
-         callService(item, 'light', 'turn_on', {rgb_color: colors});
+         callService(item, 'light', 'turn_on', { rgb_color: colors });
       }
    };
 
@@ -1187,14 +1201,14 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    });
 
    $scope.setInputNumber = function (item, value) {
-      callService(item, 'input_number', 'set_value', {value: value});
+      callService(item, 'input_number', 'set_value', { value: value });
    };
 
    $scope.setSelectOption = function ($event, item, entity, option) {
       $event.preventDefault();
       $event.stopPropagation();
 
-      callService(item, 'input_select', 'select_option', {option: option});
+      callService(item, 'input_select', 'select_option', { option: option });
 
       $scope.closeActiveSelect();
 
@@ -1205,7 +1219,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $event.preventDefault();
       $event.stopPropagation();
 
-      callService(item, 'media_player', 'select_source', {source: option});
+      callService(item, 'media_player', 'select_source', { source: option });
 
       $scope.closeActiveSelect();
 
@@ -1224,14 +1238,15 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $event.preventDefault();
       $event.stopPropagation();
 
+      var service;
       var serviceData = {};
 
       if(item.useHvacMode) {
-         var service = "set_hvac_mode";
+         service = 'set_hvac_mode';
          serviceData.hvac_mode = option;
       }
       else {
-         var service = "set_preset_mode";
+         service = 'set_preset_mode';
          serviceData.preset_mode = option;
       }
 
@@ -1278,7 +1293,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.setClimateTemp = function (item, value) {
-      callService(item, 'climate', 'set_temperature', {temperature: value});
+      callService(item, 'climate', 'set_temperature', { temperature: value });
    };
 
    $scope.sendCover = function (service, item, entity) {
@@ -1286,10 +1301,14 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.toggleCover = function (item, entity) {
-      if(entity.state === "open") service = "close_cover";
-      else if(entity.state === "closed") service = "open_cover";
+      var service;
 
-      $scope.sendCover(service, item, entity);
+      if(entity.state === 'open') service = 'close_cover';
+      else if(entity.state === 'closed') service = 'open_cover';
+
+      if (service) {
+         $scope.sendCover(service, item, entity);
+      }
    };
 
    $scope.openFanSpeedSelect = function ($event, item) {
@@ -1302,7 +1321,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $event.preventDefault();
       $event.stopPropagation();
 
-      callService(item, 'fan', 'set_speed', {speed: option});
+      callService(item, 'fan', 'set_speed', { speed: option });
 
       $scope.closeActiveSelect();
 
@@ -1331,7 +1350,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       showedPages = [];
 
       if(activePage) {
-         showedPages = [activePage]
+         showedPages = [activePage];
       }
 
       showedPages.push(page);
@@ -1339,7 +1358,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       activePage = page;
 
       if(CONFIG.transition === TRANSITIONS.SIMPLE) {
-
+         // Do nothing
       }
       else {
          $timeout(function () {
@@ -1365,7 +1384,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       if(entity.attributes && entity.attributes.has_date) {
          var d = new Date();
 
-         $scope.datetimeString = d.getFullYear() + "";
+         $scope.datetimeString = d.getFullYear() + '';
          $scope.datetimeString += leadZero(d.getMonth() + 1);
          $scope.datetimeString += leadZero(d.getDate());
       }
@@ -1401,9 +1420,9 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.openPopup = function (item, entity, layout) {
       $scope.activePopup = {
-        item: item,
-        entity: entity,
-        layout: layout || item.popup
+         item: item,
+         entity: entity,
+         layout: layout || item.popup,
       };
    };
 
@@ -1439,6 +1458,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          .then(function (data) {
             historyObject.isLoading = false;
 
+            if (!data) {
+               historyObject.errorText = 'Failed';
+               return;
+            }
+
             if(data.length === 0) {
                historyObject.errorText = 'No history data found';
                return;
@@ -1459,7 +1483,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                // Create extra state with current value.
                dataset.push({
                   x: Date.now(),
-                  y: $scope.states[firstStateInfo.entity_id].state
+                  y: $scope.states[firstStateInfo.entity_id].state,
                });
 
                datasets.push(dataset);
@@ -1476,7 +1500,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                if(seriesUnit && !(seriesUnit in seenAxisIds)) {
                   seenAxisIds[seriesUnit] = true;
                   createYAxis = true;
-               } else if(!seriesUnit) {
+               }
+               else if(!seriesUnit) {
                   createYAxis = true;
                }
 
@@ -1496,7 +1521,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                         // on/off - add the other state so that y axis positioning is consistent.
                         if(['on', 'off'].indexOf(yLabels[0]) !== -1) {
                            yLabels = ['on', 'off'];
-                        } else {
+                        }
+                        else {
                            // Add dummy states to vertically center the actual state.
                            yLabels.push('');
                            yLabels.unshift('');
@@ -1524,19 +1550,19 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
             historyObject.datasetOverride = datasetOverride;
             historyObject.options = angular.merge({
                scales: {
-                  yAxes: yAxes
+                  yAxes: yAxes,
                },
                tooltips: {
-                  mode: interactionsMode
+                  mode: interactionsMode,
                },
                hover: {
-                 mode: interactionsMode
+                  mode: interactionsMode,
                },
                animation: {
-                  duration: 0
+                  duration: 0,
                },
                legend: {
-                 display: typeof entityId !== 'string'
+                  display: typeof entityId !== 'string',
                },
             }, $scope.itemField('options', config, entity));
 
@@ -1549,10 +1575,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                   function (newValue) {
                      historyObject.data[0].push({
                         x: Date.now(),
-                        y: newValue
+                        y: newValue,
                      });
                   }));
-            } else {
+            }
+            else {
                entityId.forEach(function(entityId, index) {
                   historyObject.watchers.push($scope.$watch(
                      function () {
@@ -1561,7 +1588,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                      function (newValue) {
                         historyObject.data[index].push({
                            x: Date.now(),
-                           y: newValue
+                           y: newValue,
                         });
                      }));
                });
@@ -1569,10 +1596,10 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          });
 
       return historyObject;
-   };
+   }
 
    $scope.initTileHistory = function (item, entity) {
-      var key = "_historyObject";
+      var key = '_historyObject';
 
       if(item[key]) return item[key];
 
@@ -1582,7 +1609,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.openPopupHistory = function (item, entity) {
-      var key = "_popupHistory";
+      var key = '_popupHistory';
 
       if(!item[key]) {
          item[key] = {
@@ -1596,12 +1623,12 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                type: TYPES.HISTORY,
                id: item.id,
                title: false,
-               position: [0,0],
+               position: [0, 0],
                customStyles: {
                   width: '100%',
                   height: '100%',
                },
-            }, item.history)]
+            }, item.history)],
          };
       }
 
@@ -1645,11 +1672,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          (page.groups || []).forEach(function (group) {
             (group.items || []).forEach(function (item) {
                if([TYPES.CAMERA, TYPES.CAMERA_THUMBNAIL, TYPES.CAMERA_STREAM]
-                     .indexOf(item.type) !== -1 && !item.hideFromList) {
+                  .indexOf(item.type) !== -1 && !item.hideFromList) {
                   res.push(item);
                }
-            })
-         })
+            });
+         });
       });
 
       cameraList = res;
@@ -1672,13 +1699,15 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    }
 
    function getTransformCssValue(translateValue) {
+      var params;
+
       if(CONFIG.transition === TRANSITIONS.ANIMATED_GPU) {
-         var params = $scope.isMenuOnTheLeft ? [0, translateValue, 0] : [translateValue, 0, 0];
+         params = $scope.isMenuOnTheLeft ? [0, translateValue, 0] : [translateValue, 0, 0];
          return 'translate3d(' + params.join(',') + ')';
       }
 
       if(CONFIG.transition === TRANSITIONS.ANIMATED) {
-         var params = $scope.isMenuOnTheLeft ? [0, translateValue] : [translateValue, 0];
+         params = $scope.isMenuOnTheLeft ? [0, translateValue] : [translateValue, 0];
          return 'translate(' + params.join(',') + ')';
       }
    }
@@ -1698,7 +1727,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.isHidden = function (object, entity) {
       if(!('hidden' in object)) return false;
 
-      if(typeof object.hidden === "function") {
+      if(typeof object.hidden === 'function') {
          return callFunction(object.hidden, [object, entity]);
       }
 
@@ -1732,7 +1761,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       }
 
       return true;
-   }
+   };
 
    $scope.onPagePan = function (event) {
       if(event.eventType & (Hammer.INPUT_END | Hammer.INPUT_CANCEL)) {
@@ -1744,7 +1773,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
             scrollToActivePage();
             return;
          }
-      } else {
+      }
+      else {
          // Disable transitions.
          $scope.pagesContainerStyles.transition = 'none';
       }
@@ -1782,7 +1812,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       if(newOffset <= 0 && newOffset >= ((pageCount - 1) * -100)) {
          $scope.pagesContainerStyles.transform = getTransformCssValue(newOffset + '%');
       }
-   }
+   };
 
    function hasOpenPopup () {
       return $scope.activeCamera || $scope.activeDoorEntry || $scope.activeIframe
@@ -1811,13 +1841,13 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.inputAlarm = function (num) {
-      $scope.alarmCode = $scope.alarmCode || "";
+      $scope.alarmCode = $scope.alarmCode || '';
 
       $scope.alarmCode += num;
    };
 
    $scope.clearAlarm = function () {
-      $scope.alarmCode = "";
+      $scope.alarmCode = '';
    };
 
    $scope.sendDatetime = function () {
@@ -1834,7 +1864,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       if(entity.attributes.has_date) serviceData.date = dt[0];
       if(entity.attributes.has_time) serviceData.time = dt[1] || dt[0];
 
-      callService(item, 'input_datetime', 'set_datetime', serviceData)
+      callService(item, 'input_datetime', 'set_datetime', serviceData);
    };
 
    $scope.inputDatetime = function (num) {
@@ -1844,9 +1874,9 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       var placeholder = getDatetimePlaceholder(entity);
 
-      placeholder = placeholder.replace(/\W/gi, "");
+      placeholder = placeholder.replace(/\W/gi, '');
 
-      $scope.datetimeString = $scope.datetimeString || "";
+      $scope.datetimeString = $scope.datetimeString || '';
 
       if($scope.datetimeString.length >= placeholder.length) return;
 
@@ -1864,12 +1894,12 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       var entity = $scope.getItemEntity($scope.activeDatetime);
       var placeholder = getDatetimePlaceholder(entity);
 
-      var res = $scope.datetimeString || "";
+      var res = $scope.datetimeString || '';
 
       var i = 0;
 
       return placeholder.replace(/\w|\W/gi, function (match, index) {
-         if(i >= res.length) return "";
+         if(i >= res.length) return '';
 
          if(/\W/.test(match)) return match;
 
@@ -1881,7 +1911,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       var entity = $scope.getItemEntity($scope.activeDatetime);
       var placeholder = getDatetimePlaceholder(entity);
 
-      var dt = $scope.getActiveDatetimeInput() || "";
+      var dt = $scope.getActiveDatetimeInput() || '';
 
       return placeholder.slice(dt.length);
    };
@@ -1893,9 +1923,9 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       var placeholder = getDatetimePlaceholder(entity);
 
-      placeholder = placeholder.replace(/\W/gi, "");
+      placeholder = placeholder.replace(/\W/gi, '');
 
-      $scope.datetimeString = $scope.datetimeString || "";
+      $scope.datetimeString = $scope.datetimeString || '';
 
       return $scope.datetimeString.length === placeholder.length;
    };
@@ -1905,14 +1935,14 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       if(!entity || !entity.attributes) return null;
 
-      if(entity.attributes.has_date) res.push("YYYY-MM-DD");
-      if(entity.attributes.has_time) res.push("hh:mm");
+      if(entity.attributes.has_date) res.push('YYYY-MM-DD');
+      if(entity.attributes.has_time) res.push('hh:mm');
 
-      return res.join(" ");
+      return res.join(' ');
    }
 
 
-   /// INIT
+   // / INIT
 
    var realReadyState = false;
 
@@ -1922,11 +1952,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    });
 
    Api.onReady(function () {
-      Api.subscribeEvents("state_changed", function (res) {
+      Api.subscribeEvents('state_changed', function (res) {
          debugLog('subscribed to state_changed', res);
       });
 
-      Api.subscribeEvents("tileboard", function (res) {
+      Api.subscribeEvents('tileboard', function (res) {
          debugLog('subscribed to tileboard', res);
       });
 
@@ -1956,9 +1986,9 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    Api.onUnready(function () {
       realReadyState = false;
 
-      //$scope.ready = false;
+      // $scope.ready = false;
 
-      //we give a timeout to prevent blinking (if reconnected)
+      // we give a timeout to prevent blinking (if reconnected)
       $timeout(function () {
          if(realReadyState === false) {
             $scope.ready = false;
@@ -1975,8 +2005,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    });
 
    $scope.$watchGroup([
-     'activePage.scrolledVertically',
-     'activePage.scrolledHorizontally',
+      'activePage.scrolledVertically',
+      'activePage.scrolledHorizontally',
    ], updateView);
 
    function calcGroupSizes (group) {
@@ -1992,8 +2022,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       return {
          width: maxWidth,
-         height: maxHeight
-      }
+         height: maxHeight,
+      };
    }
 
    function getContext () {
@@ -2007,7 +2037,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    }
 
    function callFunction (func, args) {
-      if(typeof func !== "function") return func;
+      if(typeof func !== 'function') return func;
 
       return func.apply(getContext(), args || []);
    }
@@ -2025,7 +2055,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       item.loading = true;
 
-      var serviceData = angular.extend({entity_id: item.id}, data)
+      var serviceData = angular.extend({ entity_id: item.id }, data);
 
       Api.callService(domain, service, serviceData, function (res) {
          item.loading = false;
@@ -2047,39 +2077,39 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    function parseFieldValue (value, item, entity) {
       if(!value) return null;
 
-      if(typeof value === "function") return callFunction(value, [item, entity]);
-      if(typeof value === "string") return parseString(value, entity);
+      if(typeof value === 'function') return callFunction(value, [item, entity]);
+      if(typeof value === 'string') return parseString(value, entity);
 
       return value;
    }
 
    function parseVariable (value, entity) {
-      if(value[0] === "@") return getObjectAttr(entity, value.slice(1));
-      if(value[0] === "&") return getEntityAttr(value.slice(1));
+      if(value[0] === '@') return getObjectAttr(entity, value.slice(1));
+      if(value[0] === '&') return getEntityAttr(value.slice(1));
 
       return value;
    }
 
    function parseString (value, entity) {
       return value.replace(/([&@][\w\d._]+)/gi, function (match, contents, offset) {
-         if(match[0] === "&" && match.split('.').length < 3) return match;
+         if(match[0] === '&' && match.split('.').length < 3) return match;
 
          var res = parseVariable(match, entity);
 
-         if(typeof res === "undefined") {
-            if(match === value) return "";
+         if(typeof res === 'undefined') {
+            if(match === value) return '';
 
             return match;
          }
 
-         if(res === null) return "";
+         if(res === null) return '';
 
          return res;
       });
    }
 
    function escapeClass (text) {
-      return text && typeof text === "string"
+      return text && typeof text === 'string'
          ? text.replace(/[^a-z0-9]/gi, '_').toLowerCase() : 'non';
    }
 
@@ -2136,25 +2166,25 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       CONFIG.events.forEach(function (event) {
          if (eventData.command !== event.command) return;
 
-         if (typeof event.action === "function") {
+         if (typeof event.action === 'function') {
             callFunction(event.action, [eventData]);
          }
       });
    }
 
    function handleMessage (data) {
-      if(data.type === "event") handleEvent(data.event);
+      if(data.type === 'event') handleEvent(data.event);
    }
 
    function handleEvent (event) {
       try {
-         if (event.event_type === "state_changed") {
+         if (event.event_type === 'state_changed') {
             debugLog('state change', event.data.entity_id, event.data.new_state);
 
             setNewState(event.data.entity_id, event.data.new_state);
             checkStatesTriggers(event.data.entity_id, event.data.new_state);
          }
-         else if (event.event_type === "tileboard") {
+         else if (event.event_type === 'tileboard') {
             debugLog('tileboard', event.data);
 
             triggerEvents(event.data);
@@ -2165,12 +2195,14 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    }
 
    function addError (error) {
-      if(!CONFIG.ignoreErrors) Noty.addObject({
-         type: Noty.ERROR,
-         title: 'Error',
-         message: error,
-         lifetime: 10
-      });
+      if(!CONFIG.ignoreErrors) {
+         Noty.addObject({
+            type: Noty.ERROR,
+            title: 'Error',
+            message: error,
+            lifetime: 10,
+         });
+      }
    }
 
    function warnUnknownItem(item) {
@@ -2180,7 +2212,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
             type: Noty.WARNING,
             title: 'Entity not found',
             message: 'Entity "' + item.id + '" not found',
-            id: notyId
+            id: notyId,
          });
       }
    }
@@ -2195,11 +2227,13 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       if(!$scope.$$phase) $scope.$apply();
    }
 
+   // @ts-ignore
    window.openPage = function (page) {
       $scope.openPage(page);
       updateView();
    };
 
+   // @ts-ignore
    window.setScreensaverShown = function (state) {
       $scope.screensaverShown = state;
 
@@ -2241,7 +2275,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                message: 'Reconnection successful',
                lifetime: 1,
             });
-
          });
       }, timeout);
    }
@@ -2249,7 +2282,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    if(CONFIG.pingConnection !== false) {
       setInterval(pingConnection, 5000);
 
-      window.addEventListener("focus", function () {
+      window.addEventListener('focus', function () {
          pingConnection();
       });
    }

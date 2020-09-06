@@ -1,3 +1,7 @@
+import angular from 'angular';
+import { App } from '../app';
+import { mergeObjects } from '../globals/utils';
+
 App.controller('Screensaver', ['$scope', ScreensaverController]);
 
 function ScreensaverController ($scope) {
@@ -5,7 +9,7 @@ function ScreensaverController ($scope) {
 
    var $window = angular.element(window);
    var lastActivity = Date.now();
-   var conf = CONFIG.screensaver || null;
+   var conf = window.CONFIG.screensaver || null;
 
    if(!conf || !conf.timeout) return;
 
@@ -42,7 +46,7 @@ function ScreensaverController ($scope) {
       $scope.isShown = state;
 
       if(window.setScreensaverShown) {
-         setScreensaverShown(state);
+         window.setScreensaverShown(state);
       }
 
       if(!$scope.$$phase) $scope.$digest();
@@ -55,11 +59,11 @@ function ScreensaverController ($scope) {
    $scope.getSlideStyle = function (slide) {
       if(!slide._styles) {
          slide._styles = {
-            backgroundImage: 'url(' + slide.bg + ')'
+            backgroundImage: 'url(' + slide.bg + ')',
          };
 
          if(slide.styles) {
-            slide._styles = mergeObjects(slide._styles, slide.styles)
+            slide._styles = mergeObjects(slide._styles, slide.styles);
          }
       }
 

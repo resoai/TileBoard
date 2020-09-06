@@ -86,7 +86,7 @@ var Noty = (function () {
 
    Noty.onUpdate = function (callback) {
       if(updatesListeners.indexOf(callback) !== -1) {
-         return function () {}
+         return function () {};
       }
 
       updatesListeners.push(callback);
@@ -95,7 +95,7 @@ var Noty = (function () {
          updatesListeners = updatesListeners.filter(function (a) {
             return a !== callback;
          });
-      }
+      };
    };
 
    Noty.fireUpdate = function () {
@@ -110,7 +110,9 @@ var Noty = (function () {
                callback();
             }, 0);
          }
-         catch (e) {}
+         catch (e) {
+            // ignore
+         }
       });
 
       setTimeout(function () {
@@ -125,7 +127,7 @@ var Noty = (function () {
          message: message,
          icon: icon,
          lifetime: lifetime,
-         id: id
+         id: id,
       });
    };
 
@@ -178,3 +180,5 @@ var Noty = (function () {
 
    return Noty;
 }());
+
+export default Noty;
