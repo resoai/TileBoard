@@ -1107,12 +1107,21 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.callScript = function (item, entity) {
+      var variables;
+
+      if(typeof item.variables === "function") {
+         variables = callFunction(item.variables, [item, entity]);
+      } else {
+         variables = item.variables || {};
+      }
+
       sendItemData(item, {
          type: "call_service",
          domain: "script",
          service: "turn_on",
          service_data: {
-            entity_id: item.id
+            entity_id: item.id,
+            variables: variables
          }
       });
    };

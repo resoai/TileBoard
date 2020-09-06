@@ -286,6 +286,12 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
    */
   hidden: Boolean | Function,
   /*** TILE SPECIFIC SETTINGS ***/
+  /** type: SCRIPT **/
+  /* variables: Provides extra variables to the script
+   * Can be a function which will be evaluated when script is called.
+   */
+  variables: {},
+  variables: function(item, entity) {return { dynamicVar: true };},
   /** type: SENSOR **/
   /* value: Override sensor value */
   value: '&sensor.bathroom_temp.state',

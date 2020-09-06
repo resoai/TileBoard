@@ -473,7 +473,8 @@ Call script on click/tap<br>
       on: "mdi-gate",
       off: "mdi-gate"
    },
-   state: false
+   state: false,
+   variables: { var1: 'foo' },
 }
 ```
 
