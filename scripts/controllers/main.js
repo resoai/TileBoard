@@ -2027,14 +2027,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       var serviceData = angular.extend({entity_id: item.id}, data)
 
-      var apiData = {
-         type: "call_service",
-         domain: domain,
-         service: service,
-         service_data: serviceData
-      }
-
-      Api.send(apiData, function (res) {
+      Api.callService(domain, service, serviceData, function (res) {
          item.loading = false;
 
          updateView();
