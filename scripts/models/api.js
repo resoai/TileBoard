@@ -111,6 +111,21 @@ App.provider('Api', function () {
          return this.socket.send(wsData);
       };
 
+      $Api.prototype.callService = function (domain, service, data, callback) {
+         const apiData = {
+            type: 'call_service',
+            domain: domain,
+            service: service,
+            service_data: data
+         };
+
+         this.send(apiData, function(res) {
+            if (callback) {
+               callback(res)
+            }
+         });
+      };
+
       $Api.prototype.rest = function (requestStub) {
          var request = angular.copy(requestStub);
          request.url = toAbsoluteServerURL(request.url);

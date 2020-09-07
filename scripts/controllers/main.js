@@ -1,6 +1,6 @@
 App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($scope, $timeout, $location, Api) {
    if(!window.CONFIG) return;
-   
+
    $scope.pages = CONFIG.pages;
    $scope.pagesContainerStyles = {};
    $scope.TYPES = TYPES;
@@ -407,7 +407,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          }
          if(res) for(var k in res) item.styles[k] = res[k];
       }
-      
+
       return item.styles;
    };
 
@@ -744,14 +744,13 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       var def = item.slider || {};
       var attrs = entity.attributes || {};
       var value = +attrs[def.field] || 0;
-      
+
       entity.attributes[key] = {
          max: attrs.max || def.max || 100,
          min: attrs.min || def.min || 0,
          step: attrs.step || def.step || 1,
          value: value || +entity.state || def.value || 0,
          request: def.request || {
-            type: "call_service",
             domain: "input_number",
             service: "set_value",
             field: "value"
@@ -782,7 +781,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          step: def.step || attrs.step || 1,
          value: value || def.min || attrs.min || 0,
          request: def.request || {
-            type: "call_service",
             domain: "input_number",
             service: "set_value",
             field: "value"
@@ -951,22 +949,16 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       if(!value.request) return;
 
       var conf = value.request;
-      var serviceData = {entity_id: item.id};
-
+      var serviceData = {};
       serviceData[conf.field] = value.value;
 
-      sendItemData(item, {
-         type: conf.type,
-         domain: conf.domain,
-         service: conf.service,
-         service_data: serviceData
-      });
+      callService(item, conf.domain, conf.service, serviceData);
    }
 
    $scope.sliderChanged = function (item, entity, value) {
       if(!item._sliderInited) return;
 
-      setSliderValue(item, entity, value, true);
+      setSliderValue(item, entity, value);
    };
 
    $scope.volumeChanged = function (item, entity, conf) {
@@ -975,14 +967,13 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       var value = {
          value: conf.value / 100,
          request: {
-            type: "call_service",
             domain: "media_player",
             service: "volume_set",
             field: "volume_level"
          }
       };
 
-      setSliderValue(item, entity, value, false);
+      setSliderValue(item, entity, value);
    };
 
    $scope.lightSliderChanged = function (slider, item, entity, value) {
@@ -990,7 +981,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       if(!slider._sliderInited) return;
       if(!entity.attributes._sliderInited) return;
 
-      setSliderValue(item, entity, value, false);
+      setSliderValue(item, entity, value);
    };
 
    $scope.toggleSwitch = function (item, entity, callback) {
@@ -1007,14 +998,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       if(entity.state === "off") service = "turn_on";
       else if(entity.state === "on") service = "turn_off";
 
-      sendItemData(item, {
-         type: "call_service",
-         domain: domain,
-         service: service,
-         service_data: {
-            entity_id: item.id
-         }
-      }, callback);
+      callService(item, domain, service, {}, callback);
    };
 
    $scope.dimmerToggle = function (item, entity, callback) {
@@ -1043,14 +1027,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       if(entity.state === "locked") service = "unlock";
       else if(entity.state === "unlocked") service = "lock";
 
-      sendItemData(item, {
-         type: "call_service",
-         domain: "lock",
-         service: service,
-         service_data: {
-            entity_id: item.id
-         }
-      });
+      callService(item, 'lock', service, {});
    };
 
    $scope.toggleVacuum = function (item, entity) {
@@ -1062,48 +1039,19 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       }
       else if(entity.state === "cleaning") service = "return_to_base";
 
-      sendItemData(item, {
-         type: "call_service",
-         domain: "vacuum",
-         service: service,
-         service_data: {
-            entity_id: item.id
-         }
-      });
+      callService(item, 'vacuum', service, {});
    };
 
    $scope.triggerAutomation = function (item, entity) {
-      sendItemData(item, {
-         type: "call_service",
-         domain: "automation",
-         service: "trigger",
-         service_data: {
-            entity_id: item.id
-         }
-      });
+      callService(item, 'automation', 'trigger', {});
    };
 
    $scope.sendPlayer = function (service, item, entity) {
-      sendItemData(item, {
-         type: "call_service",
-         domain: "media_player",
-         service: service,
-         service_data: {
-            entity_id: item.id
-         }
-      });
+      callService(item, 'media_player', service, {});
    };
 
    $scope.mutePlayer = function (muteState, item, entity) {
-      sendItemData(item, {
-         type: "call_service",
-         domain: "media_player",
-         service: "volume_mute",
-         service_data: {
-            entity_id: item.id,
-            is_volume_muted: muteState
-         }
-      });
+      callService(item, 'media_player', 'volume_mute', {is_volume_muted: muteState});
    };
 
    $scope.callScript = function (item, entity) {
@@ -1115,26 +1063,15 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          variables = item.variables || {};
       }
 
-      sendItemData(item, {
-         type: "call_service",
-         domain: "script",
-         service: "turn_on",
-         service_data: {
-            entity_id: item.id,
-            variables: variables
-         }
-      });
+      var serviceData = {
+         variables: variables
+      };
+
+      callService(item, 'script', 'turn_on', serviceData);
    };
 
    $scope.callScene = function (item, entity) {
-      sendItemData(item, {
-         type: "call_service",
-         domain: "scene",
-         service: "turn_on",
-         service_data: {
-            entity_id: item.id
-         }
-      });
+      callService(item, 'scene', 'turn_on', {});
    };
 
    $scope.increaseBrightness = function ($event, item, entity) {
@@ -1210,17 +1147,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.setLightBrightness = function (item, brightness) {
-      if(item.loading) return;
+      var serviceData = {
+         brightness_pct: Math.round(brightness / 255 * 100 / 10) * 10
+      };
 
-      sendItemData(item, {
-         type: "call_service",
-         domain: "light",
-         service: "turn_on",
-         service_data: {
-            entity_id: item.id,
-            brightness_pct: Math.round(brightness / 255 * 100 / 10) * 10
-         }
-      });
+      callService(item, 'light', 'turn_on', serviceData);
    };
 
    $scope.getRGBStringFromArray = function( color ) {
@@ -1244,52 +1175,26 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.setLightColor = function (item, color) {
-      if(item.loading) return;
-
       var colors = $scope.getRGBArrayFromString(color);
 
-      if(colors) sendItemData(item, {
-         type: "call_service",
-         domain: "light",
-         service: "turn_on",
-         service_data: {
-            entity_id: item.id,
-            rgb_color: colors
-         }
-      });
-   };   
+      if(colors) {
+         callService(item, 'light', 'turn_on', {rgb_color: colors});
+      }
+   };
 
    $scope.$on('colorpicker-colorupdated', function (event, data) {
       $scope.setLightColor(data.item, data.color);
    });
 
    $scope.setInputNumber = function (item, value) {
-      if(item.loading) return;
-
-      sendItemData(item, {
-         type: "call_service",
-         domain: "input_number",
-         service: "set_value",
-         service_data: {
-            entity_id: item.id,
-            value: value
-         }
-      });
+      callService(item, 'input_number', 'set_value', {value: value});
    };
 
    $scope.setSelectOption = function ($event, item, entity, option) {
       $event.preventDefault();
       $event.stopPropagation();
 
-      sendItemData(item, {
-         type: "call_service",
-         domain: "input_select",
-         service: "select_option",
-         service_data: {
-            entity_id: item.id,
-            option: option
-         }
-      });
+      callService(item, 'input_select', 'select_option', {option: option});
 
       $scope.closeActiveSelect();
 
@@ -1300,15 +1205,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $event.preventDefault();
       $event.stopPropagation();
 
-      sendItemData(item, {
-         type: "call_service",
-         domain: "media_player",
-         service: "select_source",
-         service_data: {
-            entity_id: item.id,
-            source: option
-         }
-      });
+      callService(item, 'media_player', 'select_source', {source: option});
 
       $scope.closeActiveSelect();
 
@@ -1316,34 +1213,29 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.getClimateOptions = function (item, entity) {
-      return item.useHvacMode ? entity.attributes.hvac_modes : entity.attributes.preset_modes; 
+      return item.useHvacMode ? entity.attributes.hvac_modes : entity.attributes.preset_modes;
    };
 
    $scope.getClimateCurrentOption = function (item, entity) {
-      return item.useHvacMode ? entity.attributes.hvac_mode : entity.attributes.preset_mode; 
+      return item.useHvacMode ? entity.attributes.hvac_mode : entity.attributes.preset_mode;
    };
 
    $scope.setClimateOption = function ($event, item, entity, option) {
       $event.preventDefault();
       $event.stopPropagation();
 
-      var data = {entity_id: item.id};
+      var serviceData = {};
 
       if(item.useHvacMode) {
          var service = "set_hvac_mode";
-         data.hvac_mode = option; 
+         serviceData.hvac_mode = option;
       }
       else {
-         var service = "set_preset_mode"; 
-         data.preset_mode = option; 
+         var service = "set_preset_mode";
+         serviceData.preset_mode = option;
       }
 
-      sendItemData(item, {
-         type: "call_service",
-         domain: "climate",
-         service: service,
-         service_data: data
-      });
+      callService(item, 'climate', service, serviceData);
 
       $scope.closeActiveSelect();
 
@@ -1386,26 +1278,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.setClimateTemp = function (item, value) {
-      sendItemData(item, {
-         type: "call_service",
-         domain: "climate",
-         service: "set_temperature",
-         service_data: {
-            entity_id: item.id,
-            temperature: value
-         }
-      });
+      callService(item, 'climate', 'set_temperature', {temperature: value});
    };
 
    $scope.sendCover = function (service, item, entity) {
-      sendItemData(item, {
-         type: "call_service",
-         domain: "cover",
-         service: service,
-         service_data: {
-            entity_id: item.id
-         }
-      });
+      callService(item, 'cover', service, {});
    };
 
    $scope.toggleCover = function (item, entity) {
@@ -1425,15 +1302,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $event.preventDefault();
       $event.stopPropagation();
 
-      sendItemData(item, {
-         type: "call_service",
-         domain: "fan",
-         service: "set_speed",
-         service_data: {
-            entity_id: item.id,
-            speed: option
-         }
-      });
+      callService(item, 'fan', 'set_speed', {speed: option});
 
       $scope.closeActiveSelect();
 
@@ -1443,18 +1312,13 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.actionAlarm = function (action, item, entity) {
       var code = $scope.alarmCode;
 
-      var data = {entity_id: item.id};
+      var serviceData = {};
 
-      if (code) data.code = code;
+      if (code) serviceData.code = code;
 
       latestAlarmActions[item.id] = Date.now();
 
-      sendItemData(item, {
-         type: "call_service",
-         domain: "alarm_control_panel",
-         service: action,
-         service_data: data
-      });
+      callService(item, 'alarm_control_panel', action, serviceData);
 
       $scope.alarmCode = null;
    };
@@ -1490,7 +1354,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.openCamera = function (item) {
       $scope.activeCamera = item;
    };
-   
+
    $scope.closeCamera = function () {
       $scope.activeCamera = null;
    };
@@ -1965,17 +1829,12 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       var str = $scope.getActiveDatetimeInput();
       var dt = str.split(' ');
 
-      var data = {entity_id: item.id};
+      var serviceData = {};
 
-      if(entity.attributes.has_date) data.date = dt[0];
-      if(entity.attributes.has_time) data.time = dt[1] || dt[0];
+      if(entity.attributes.has_date) serviceData.date = dt[0];
+      if(entity.attributes.has_time) serviceData.time = dt[1] || dt[0];
 
-      sendItemData(item, {
-         type: "call_service",
-         domain: "input_datetime",
-         service: "set_datetime",
-         service_data: data
-      });
+      callService(item, 'input_datetime', 'set_datetime', serviceData)
    };
 
    $scope.inputDatetime = function (num) {
@@ -2161,12 +2020,14 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       });
    }
 
-   function sendItemData (item, data, callback) {
+   function callService(item, domain, service, data, callback) {
       if(item.loading) return;
 
       item.loading = true;
 
-      Api.send(data, function (res) {
+      var serviceData = angular.extend({entity_id: item.id}, data)
+
+      Api.callService(domain, service, serviceData, function (res) {
          item.loading = false;
 
          updateView();
@@ -2381,7 +2242,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                lifetime: 1,
             });
 
-         });  
+         });
       }, timeout);
    }
 
