@@ -1382,6 +1382,16 @@ camera_stream {
          right: -@popupPadding;
          z-index: 0;
       }
+      .-item-non-clickable { 
+         /* use classes: ['-item-non-clickable'] to display as non-interactive tile */
+         &:active {
+            margin: 0; 
+            border: none;
+         }
+         .item-clickable {
+            display: none;
+         }
+      }
    }
 }
 
