@@ -59,11 +59,11 @@ function ScreensaverController ($scope) {
    $scope.getSlideStyle = function (slide) {
       if(!slide._styles) {
          slide._styles = {
-            backgroundImage: 'url(' + slide.bg + ')',
+            backgroundImage: 'url(' + slide.bg + ')'
          };
 
          if(slide.styles) {
-            slide._styles = mergeObjects(slide._styles, slide.styles);
+            slide._styles = mergeObjects(slide._styles, slide.styles)
          }
       }
 
