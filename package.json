@@ -2,25 +2,12 @@
   "name": "tileboard",
   "version": "1.0.0",
   "description": "Simple yet highly customizable dashboard for Home Assistant",
-  "main": "src/main.js",
   "scripts": {
     "dev": "rollup --config --watch",
     "build": "rollup --config --environment PRODUCTION",
     "lint": "eslint scripts",
     "preversion": "git pull && npm run build && git add dist",
     "postversion": "git push --follow-tags"
-  },
-  "staticFiles": {
-    "staticPath": [
-      {
-        "staticPath": "static",
-        "staticOutDir": "."
-      }
-    ],
-    "watcherGlob": "**"
-  },
-  "eslintConfig": {
-    "ignorePatterns": "scripts/vendors/**/*.js"
   },
   "husky": {
     "hooks": {
