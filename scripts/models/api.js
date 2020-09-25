@@ -31,7 +31,7 @@ App.provider('Api', function () {
             error: [],
             message: [],
             ready: [],
-            unready: [],
+            unready: []
          };
 
          this._callbacks = {};
@@ -61,7 +61,7 @@ App.provider('Api', function () {
                Noty.addObject({
                   type: Noty.ERROR,
                   title: 'ACCESS TOKEN',
-                  message: 'Error while receiving access token',
+                  message: 'Error while receiving access token'
                });
             }
          });
@@ -71,7 +71,7 @@ App.provider('Api', function () {
          var self = this;
 
          if(this._listeners[key].indexOf(callback) !== -1) {
-            return function () {};
+            return function () {}
          }
 
          this._listeners[key].push(callback);
@@ -80,14 +80,14 @@ App.provider('Api', function () {
             self._listeners[key] = self._listeners[key].filter(function (a) {
                return a !== callback;
             });
-         };
+         }
       };
 
       $Api.prototype.onError = function (callback) {
-         return this.on('error', callback);
+         return this.on('error', callback)
       };
       $Api.prototype.onMessage = function (callback) {
-         return this.on('message', callback);
+         return this.on('message', callback)
       };
       $Api.prototype.onReady = function (callback) {
          if(this.status === STATUS_READY) {
@@ -99,10 +99,10 @@ App.provider('Api', function () {
             }
          }
 
-         return this.on('ready', callback);
+         return this.on('ready', callback)
       };
       $Api.prototype.onUnready = function (callback) {
-         return this.on('unready', callback);
+         return this.on('unready', callback)
       };
 
       $Api.prototype.send = function (data, callback, id) {
@@ -124,12 +124,12 @@ App.provider('Api', function () {
             type: 'call_service',
             domain: domain,
             service: service,
-            service_data: data,
+            service_data: data
          };
 
          this.send(apiData, function(res) {
             if (callback) {
-               callback(res);
+               callback(res)
             }
          });
       };
@@ -158,13 +158,12 @@ App.provider('Api', function () {
       $Api.prototype.getHistory = function (startDate, filterEntityId, endDate) {
          var request = {
             type: 'GET',
-            url: '/api/history/period',
+            url: '/api/history/period'
          };
          if (startDate) request.url += '/' + startDate;
          if (endDate) {
             request.url += '?end_time=' + endDate;
-         }
-         else {
+         } else {
             request.url += '?end_time=' + new Date(Date.now()).toISOString();
          }
          if (filterEntityId) {
@@ -176,16 +175,16 @@ App.provider('Api', function () {
 
       $Api.prototype.subscribeEvents = function (events, callback) {
          var self = this;
-         if(events && typeof events === 'object') {
+         if(events && typeof events === "object") {
             events.forEach(function (event) {
                self.subscribeEvent(event, callback);
-            });
+            })
          }
          else this.subscribeEvent(events, callback);
       };
 
       $Api.prototype.subscribeEvent = function (event, callback) {
-         var data = { type: 'subscribe_events' };
+         var data = {type: "subscribe_events"};
 
          if(event) data.event_type = event;
 
@@ -193,27 +192,27 @@ App.provider('Api', function () {
       };
 
       $Api.prototype.getStates = function (callback) {
-         return this.send({ type: 'get_states' }, callback);
+         return this.send({type: "get_states"}, callback);
       };
 
       $Api.prototype.getPanels = function (callback) {
-         return this.send({ type: 'get_panels' }, callback);
+         return this.send({type: "get_panels"}, callback);
       };
 
       $Api.prototype.getConfig = function (callback) {
-         return this.send({ type: 'get_config' }, callback);
+         return this.send({type: "get_config"}, callback);
       };
 
       $Api.prototype.getServices = function (callback) {
-         return this.send({ type: 'get_services' }, callback);
+         return this.send({type: "get_services"}, callback);
       };
 
       $Api.prototype.getUser = function (callback) {
-         return this.send({ type: 'auth/current_user' }, callback);
+         return this.send({type: "auth/current_user"}, callback);
       };
 
       $Api.prototype.sendPing = function (callback) {
-         return this.send({ type: 'ping' }, callback);
+         return this.send({type: "ping"}, callback);
       };
 
       $Api.prototype._connect = function () {
@@ -235,7 +234,7 @@ App.provider('Api', function () {
 
          this.socket.addEventListener('error', function (e) {
             self._setStatus(STATUS_ERROR);
-            self._sendError.call(self, 'System error', e);
+            self._sendError.call(self, "System error", e);
             self._reconnect.call(self, 1000);
          });
 
@@ -256,7 +255,7 @@ App.provider('Api', function () {
       $Api.prototype._reconnect = function (delayBeforeConnect) {
          delayBeforeConnect = delayBeforeConnect || 0;
 
-         this._fire('unready', { status: this.status });
+         this._fire('unready', {status: this.status});
 
          if(reconnectTimeout) clearTimeout(reconnectTimeout);
 
@@ -265,19 +264,19 @@ App.provider('Api', function () {
 
       $Api.prototype._fire = function (key, data) {
          this._listeners[key].forEach(function (cb) {
-            setTimeout(function () { cb(data); }, 0);
-         });
+            setTimeout(function () { cb(data) }, 0);
+         })
       };
 
       $Api.prototype._handleMessage = function (data) {
          var self = this;
-         if(data.type === 'auth_required') return this._authenticate();
-         if(data.type === 'auth_invalid') return this._authInvalid(data.message);
-         if(data.type === 'auth_ok') return this._ready();
+         if(data.type === "auth_required") return this._authenticate();
+         if(data.type === "auth_invalid") return this._authInvalid(data.message);
+         if(data.type === "auth_ok") return this._ready();
 
          if(data.error) return this._sendError(data.error.message, data);
 
-         if(data.type === 'result' && data.id) {
+         if(data.type === "result" && data.id) {
             if(this._callbacks[data.id]) {
                setTimeout(function () {
                   self._callbacks[data.id](data);
@@ -285,7 +284,7 @@ App.provider('Api', function () {
             }
          }
 
-         if(data.type === 'pong' && data.id) {
+         if(data.type === "pong" && data.id) {
             if(this._callbacks[data.id]) {
                setTimeout(function () {
                   self._callbacks[data.id](data);
@@ -303,7 +302,7 @@ App.provider('Api', function () {
       };
 
       $Api.prototype._sendError = function (message, data) {
-         var msg = { message: message };
+         var msg = {message: message};
 
          if(data) msg.data = data;
 
@@ -312,8 +311,8 @@ App.provider('Api', function () {
 
       $Api.prototype._authenticate = function () {
          var data = {
-            type: 'auth',
-            access_token: this._token,
+            type: "auth",
+            access_token: this._token
          };
 
          this.send(data, null, false);
@@ -321,7 +320,7 @@ App.provider('Api', function () {
 
       $Api.prototype._ready = function () {
          this._setStatus(STATUS_READY);
-         this._fire('ready', { status: STATUS_READY });
+         this._fire('ready', {status: STATUS_READY});
       };
 
       $Api.prototype._setStatus = function (status) {
@@ -333,10 +332,10 @@ App.provider('Api', function () {
             method: 'POST',
             url: toAbsoluteServerURL('/auth/token'),
             headers: {
-               'Content-Type': 'application/x-www-form-urlencoded',
+               'Content-Type': 'application/x-www-form-urlencoded'
             },
-            data: data + '&client_id=' + getOAuthClientId(),
-         };
+            data: data + '&client_id=' + getOAuthClientId()
+         }
 
          return $http(request)
             .then(function (response) {
@@ -345,8 +344,7 @@ App.provider('Api', function () {
             .catch(function (response) {
                if (response.status >= 400 && response.status <= 499) {  // authentication error
                   redirectOAuth();
-               }
-               else {
+               } else {
                   return null;
                }
             });
@@ -402,7 +400,7 @@ App.provider('Api', function () {
 
       $Api.prototype._getToken = function () {
          if(this._configToken) {
-            return $q.resolve({ access_token: this._configToken });
+            return $q.resolve({access_token: this._configToken});
          }
 
          var token = readToken();
@@ -462,7 +460,7 @@ App.provider('Api', function () {
 
          window.location.href = toAbsoluteServerURL(
             '/auth/authorize?client_id=' + getOAuthClientId()
-            + '&redirect_uri=' + getOAuthRedirectUrl(),
+            + '&redirect_uri=' + getOAuthRedirectUrl()
          );
       }
 

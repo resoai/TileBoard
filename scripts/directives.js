@@ -9,8 +9,8 @@ App.directive('tile', function () {
       scope: true,
       templateUrl: 'tile.html',
       link: function ($scope, $el, attrs) {
-      },
-   };
+      }
+   }
 });
 
 App.directive('camera', function () {
@@ -20,7 +20,7 @@ App.directive('camera', function () {
       scope: {
          item: '=item',
          entity: '=entity',
-         freezed: '=freezed',
+         freezed: '=freezed'
       },
       link: function ($scope, $el, attrs) {
          var $i = 0;
@@ -29,7 +29,7 @@ App.directive('camera', function () {
          var current = null;
          var prev = null;
 
-         if(typeof refresh === 'function') refresh = refresh();
+         if(typeof refresh === "function") refresh = refresh();
 
          var appendImage = function (url) {
             var el = document.createElement('div');
@@ -52,7 +52,7 @@ App.directive('camera', function () {
 
          var getImageUrl = function () {
             if($scope.item.filter) {
-               return $scope.item.filter($scope.item, $scope.entity);
+               return $scope.item.filter($scope.item, $scope.entity)
             }
 
             if($scope.entity && $scope.entity.attributes.entity_picture) {
@@ -90,7 +90,7 @@ App.directive('camera', function () {
          $scope.$watchGroup([
             'item',
             'entity',
-            'entity.attributes.entity_picture',
+            'entity.attributes.entity_picture'
          ], updateImage);
 
          if(refresh) {
@@ -100,8 +100,8 @@ App.directive('camera', function () {
                clearInterval(interval);
             });
          }
-      },
-   };
+      }
+   }
 });
 
 App.directive('cameraThumbnail', ['Api', function (Api) {
@@ -111,12 +111,12 @@ App.directive('cameraThumbnail', ['Api', function (Api) {
       scope: {
          item: '=item',
          entity: '=entity',
-         freezed: '=freezed',
+         freezed: '=freezed'
       },
       link: function ($scope, $el, attrs) {
          var refresh = 'refresh' in $scope.item ? $scope.item.refresh : 2000;
 
-         if(typeof refresh === 'function') refresh = refresh();
+         if(typeof refresh === "function") refresh = refresh();
 
          var throttle = refresh ? refresh * 0.9 : 100;
          var lastUpdate = 0;
@@ -148,18 +148,18 @@ App.directive('cameraThumbnail', ['Api', function (Api) {
 
             lastUpdate = Date.now();
 
-            if($scope.entity.state === 'off') return;
+            if($scope.entity.state === "off") return;
 
             Api.send({
-               type: 'camera_thumbnail',
-               entity_id: $scope.entity.entity_id,
-            },
-            function (res) {
-               if(!res.result) return;
+                  type: "camera_thumbnail",
+                  entity_id: $scope.entity.entity_id
+               },
+               function (res) {
+                  if(!res.result) return;
 
-               var url = 'data:' + res.result.content_type + ';base64,' + res.result.content;
+                  var url = 'data:'+res.result.content_type+';base64,' + res.result.content;
 
-               appendImage(url);
+                  appendImage(url);
             });
          };
 
@@ -175,8 +175,8 @@ App.directive('cameraThumbnail', ['Api', function (Api) {
                clearInterval(interval);
             });
          }
-      },
-   };
+      }
+   }
 }]);
 
 App.directive('cameraStream', ['Api', function (Api) {
@@ -186,7 +186,7 @@ App.directive('cameraStream', ['Api', function (Api) {
       scope: {
          item: '=item',
          entity: '=entity',
-         freezed: '=freezed',
+         freezed: '=freezed'
       },
       link: function ($scope, $el, attrs) {
          var current = null;
@@ -203,7 +203,7 @@ App.directive('cameraStream', ['Api', function (Api) {
 
             var config = {
                maxBufferLength: len,
-               maxMaxBufferLength: len,
+               maxMaxBufferLength: len
             };
 
             hls && hls.destroy();
@@ -221,16 +221,16 @@ App.directive('cameraStream', ['Api', function (Api) {
          };
 
          var requestStream = function () {
-            if($scope.entity.state === 'off') return;
+            if($scope.entity.state === "off") return;
 
             Api.send({
-               type: 'camera/stream',
-               entity_id: $scope.entity.entity_id,
-            },
-            function (res) {
-               if(!res.result) return;
-               appendVideo(toAbsoluteServerURL(res.result.url));
-            });
+                  type: "camera/stream",
+                  entity_id: $scope.entity.entity_id
+               },
+               function (res) {
+                  if(!res.result) return;
+                  appendVideo(toAbsoluteServerURL(res.result.url));
+               });
          };
 
          $scope.$watch('entity', requestStream);
@@ -238,8 +238,8 @@ App.directive('cameraStream', ['Api', function (Api) {
          $scope.$on('$destroy', function() {
             hls && hls.destroy();
          });
-      },
-   };
+      }
+   }
 }]);
 
 App.directive('clock', ['$interval', function ($interval) {
@@ -258,7 +258,7 @@ App.directive('clock', ['$interval', function ($interval) {
          $postfix.classList.add('clock--postfix');
 
          $colon.classList.add('clock--colon');
-         $colon.textContent = ':';
+         $colon.textContent = ":";
 
          var updateTime = function () {
             var d = new Date();
@@ -292,8 +292,8 @@ App.directive('clock', ['$interval', function ($interval) {
          $scope.$on('$destroy', function() {
             clearInterval(interval);
          });
-      },
-   };
+      }
+   }
 }]);
 
 
@@ -315,7 +315,7 @@ App.directive('iframeTile', ['$interval', function ($interval) {
          if($scope.item.refresh) {
             var time = $scope.item.refresh;
 
-            if(typeof time === 'function') time = time();
+            if(typeof time === "function") time = time();
 
             time = Math.max(1000, time);
 
@@ -325,9 +325,11 @@ App.directive('iframeTile', ['$interval', function ($interval) {
                clearInterval(interval);
             });
          }
-      },
-   };
+
+      }
+   }
 }]);
+
 
 
 App.directive('headerItem', ['$interval', function ($interval) {
@@ -338,8 +340,8 @@ App.directive('headerItem', ['$interval', function ($interval) {
       templateUrl: 'header-items.html',
       link: function ($scope, $el, attrs) {
 
-      },
-   };
+      }
+   }
 }]);
 
 
@@ -348,7 +350,7 @@ App.directive('date', ['$interval', function ($interval) {
       restrict: 'AE',
       replace: true,
       scope: {
-         format: '=',
+         format: '='
       },
       template: '<div class="date" ng-bind="date|date:format"></div>',
       link: function ($scope, $el, attrs) {
@@ -359,8 +361,8 @@ App.directive('date', ['$interval', function ($interval) {
          $interval(function () {
             $scope.date = new Date();
          }, 60 * 1000);
-      },
-   };
+      }
+   }
 }]);
 
 
@@ -399,7 +401,7 @@ App.directive('onScroll', [function () {
             }
          });
       },
-   };
+   }
 }]);
 
 // Custom directives to fix angularjs bug with dynamic max values being overriden to 100.
@@ -412,7 +414,7 @@ App.directive('ngMin', function() {
          elem.attr('min', attr.ngMin);
       },
    };
-});
+})
 App.directive('ngMax', function() {
    return {
       restrict: 'A',
@@ -421,4 +423,4 @@ App.directive('ngMax', function() {
          elem.attr('max', attr.ngMax);
       },
    };
-});
+})
