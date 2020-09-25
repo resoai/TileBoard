@@ -26,81 +26,52 @@ else {
    }));
 }
 
-/**  @type {import('rollup').RollupOptions[]} */
-const config = [
-   {
-      input: './scripts/globals.js',
-      output: {
-         dir: outDir,
-         entryFileNames: 'scripts/globals.js',
-         format: 'iife',
-         globals: {
-            '@babel/runtime/regenerator': 'regeneratorRuntime',
-         },
-         name: 'TileBoardGlobals',
-         sourcemap: 'hidden',
+/**  @type {import('rollup').RollupOptions} */
+const config = {
+   input: './scripts/index.js',
+   output: {
+      dir: outDir,
+      entryFileNames: 'scripts/app.js',
+      format: 'iife',
+      globals: {
+         '@babel/runtime/regenerator': 'regeneratorRuntime',
       },
-      plugins: [
-         del({
-            targets: [`${outDir}/scripts/globals.*`],
-         }),
-         progress(),
-         babel({
-            'babelrc': false,
-            babelHelpers: 'bundled',
-            exclude: 'node_modules/**',
-            plugins: [
-               'angularjs-annotate',
-            ],
-         }),
-      ],
+      name: 'TileBoard',
+      sourcemap: 'hidden',
    },
-   {
-      input: './scripts/index.js',
-      output: {
-         dir: outDir,
-         entryFileNames: 'scripts/app.js',
-         format: 'iife',
-         globals: {
-            '@babel/runtime/regenerator': 'regeneratorRuntime',
+   plugins: [
+      // Clean up output directory before building.
+      del({
+         targets: [`${outDir}/scripts/app.*`],
+      }),
+      progress(),
+      commonjs(),
+      resolve(),
+      babel({
+         'babelrc': false,
+         babelHelpers: 'bundled',
+         exclude: 'node_modules/**',
+         plugins: [
+            'angularjs-annotate',
+         ],
+      }),
+      less({
+         output: `${outDir}/styles/styles.css`,
+      }),
+      emitEJS({
+         src: '.',
+         data: {
+            VERSION: packageJson.version,
          },
-         name: 'TileBoard',
-         sourcemap: 'hidden',
-      },
-      plugins: [
-         // Clean up output directory before building.
-         del({
-            targets: [`${outDir}/scripts/app.*`],
-         }),
-         progress(),
-         commonjs(),
-         resolve(),
-         babel({
-            'babelrc': false,
-            babelHelpers: 'bundled',
-            exclude: 'node_modules/**',
-            plugins: [
-               'angularjs-annotate',
-            ],
-         }),
-         less({
-            output: `${outDir}/styles/styles.css`,
-         }),
-         emitEJS({
-            src: '.',
-            data: {
-               VERSION: packageJson.version,
-            },
-         }),
-         copy([
-            { files: './favicon.png', dest: `./${outDir}/` },
-            { files: './manifest.webmanifest', dest: `./${outDir}/` },
-            { files: './images/*.*', dest: `./${outDir}/images/` },
-            { files: './styles/custom.css', dest: `./${outDir}/styles/`, options: { overwrite: false } },
-         ]),
-         ...appPlugins,
-      ],
-   },
-];
+      }),
+      copy([
+         { files: './favicon.png', dest: `./${outDir}/` },
+         { files: './manifest.webmanifest', dest: `./${outDir}/` },
+         { files: './images/*.*', dest: `./${outDir}/images/` },
+         { files: './styles/custom.css', dest: `./${outDir}/styles/`, options: { overwrite: false } },
+      ]),
+      ...appPlugins,
+   ],
+};
 
 export default config;
