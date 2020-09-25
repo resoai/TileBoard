@@ -1,5 +1,7 @@
+import angular from 'angular';
+
 export const mergeObjects = function (a, b) {
-   return window.angular.merge(a, b);
+   return angular.merge(a, b);
 };
 
 export const leadZero = function (num) {
