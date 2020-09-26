@@ -45,7 +45,7 @@ const config = {
          '@babel/runtime/regenerator': 'regeneratorRuntime',
       },
       name: 'TileBoard',
-      sourcemap: 'hidden',
+      sourcemap: true,
    },
    plugins: [
       // Clean up output directory before building.
