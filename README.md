@@ -17,6 +17,7 @@ Should you have any ideas or questions please post them on the home-assistant fo
 ![screen](./images/screenshots/homekit.jpg)
 
 ## How to use
+
 * Make sure that you have Home Assistant 0.77 or greater installed as only new authentication system is supported from now on
 * Pull/download repository
 * Copy `config.example.js` to `dist/config.js` and edit it for your needs
