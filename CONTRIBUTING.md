@@ -2,18 +2,25 @@
 
 All contributions are welcome! If you would like to make some changes, follow these steps:
 
-- Fork the project and clone it.
-- Copy `config.example.js` to `dist/config.js` and modify for your server.
-- Run those commands:
+1. Fork the project and clone it.
+2. Install `npm` dependencies:
 
 ```sh
 npm i
+```
+
+3. Copy `config.example.js` to `dist-dev/config.js` and modify for your server.
+4. Change `serverUrl` in the config to point to the Home Assistant URL.
+5. Change `wsUrl` in the config to point to the Home Assistant API (use `wss` instead of `ws` protocol if HA is running on secure connection).
+6. Start the development server:
+
+```sh
 npm run dev
 ```
 
-This starts a local development server at address http://localhost:8080, serving the built app.
+This starts a local development server at address http://localhost:8080, serving the built TileBoard.
 
-Modifications to the project trigger an automatic rebuild to make it easy to iterate fast.
+Modifications to the project trigger an automatic rebuild to make it easy to iterate quickly.
 
 ## Releases
 
