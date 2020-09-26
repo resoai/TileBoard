@@ -12,12 +12,12 @@ npm i
 3. Copy `config.example.js` to `dist-dev/config.js` and modify for your server.
 4. Change `serverUrl` in the config to point to the Home Assistant URL.
 5. Change `wsUrl` in the config to point to the Home Assistant API (use `wss` instead of `ws` protocol if HA is running on secure connection).
-6. Configure `http.cors_allowed_origins` setting in Home Assistant to allow localhost to communicate with the HA API:
+6. Configure `http.cors_allowed_origins` setting in Home Assistant to allow your server (e.g. localhost) to communicate with the HA API:
 
 ```yaml
 http:
   cors_allowed_origins:
-    - http://localhost:8080
+    - http://<your-server>:8080
 ```
 
 This needs to be added in `configuration.yaml` in HA. See https://www.home-assistant.io/integrations/http/#cors_allowed_origins for more info.
