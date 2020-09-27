@@ -8,15 +8,15 @@ import './controllers/noty';
 import './controllers/screensaver';
 import '../styles/all.less';
 
-function onConfigLoadOrError(loaded) {
-   if (loaded && !window.CONFIG) {
-      alert('The "config.js" configuration file has loaded but window.CONFIG is not defined!\n' +
-               'Please make sure that it defines a CONFIG variable with proper configuration.');
-      return;
-   }
-   if (!loaded) {
+function onConfigLoadOrError(error) {
+   if (error) {
       alert('Please make sure that you have "config.js" file and it is a valid javascript!\n' +
               'If you are running TileBoard for the first time, please copy "config.example.js" into "dist/config.js"');
+      return;
+   }
+   if (!window.CONFIG) {
+      alert('The "config.js" configuration file has loaded but window.CONFIG is not defined!\n' +
+               'Please make sure that it defines a CONFIG variable with proper configuration.');
       return;
    }
    // @ts-ignore
@@ -25,6 +25,6 @@ function onConfigLoadOrError(loaded) {
 
 const script = document.createElement('script');
 script.src = './config.js?r=' + Date.now();
-script.onload = () => onConfigLoadOrError(true);
-script.onerror = () => onConfigLoadOrError(false);
+script.onload = () => onConfigLoadOrError();
+script.onerror = event => onConfigLoadOrError(event);
 document.head.appendChild(script);
