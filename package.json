@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "rollup --config --watch",
     "build": "rollup --config --environment PRODUCTION",
+    "build:watch": "rollup --config --environment PRODUCTION --watch",
     "lint": "eslint scripts",
     "preversion": "git pull && npm run build",
     "postversion": "git push --follow-tags",
