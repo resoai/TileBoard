@@ -3,12 +3,6 @@
 .DS_Store
 /.cache/
 /.idea/
-/dist/config.js
-/dist/images/bg4.png
-/dist/images/slides/london.png
-/dist/includes/
-/dist/sensors.js
-/dist/styles/custom.css
-/dist-dev/
+/dist*
 /includes/
 /node_modules/
