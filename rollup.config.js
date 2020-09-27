@@ -60,12 +60,8 @@ const config = {
       commonjs(),
       resolve(),
       babel({
-         'babelrc': false,
          babelHelpers: 'bundled',
          exclude: 'node_modules/**',
-         plugins: [
-            'angularjs-annotate',
-         ],
       }),
       styles({
          // Extract CSS into separate file (path specified through output.assetFileNames).
