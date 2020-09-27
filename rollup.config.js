@@ -11,19 +11,17 @@ import styles from 'rollup-plugin-styles';
 import { terser } from 'rollup-plugin-terser';
 
 const isProduction = process.env.PRODUCTION === 'true';
-let outDir = '';
+let outDir = 'build';
 let outputJsName = ''
 let outputCssName = ''
 const appPlugins = [];
 
 if (isProduction) {
-   outDir = 'dist';
    outputJsName = 'app-[hash].js'
    outputCssName = 'styles-[hash][extname]'
    appPlugins.push(terser());
 }
 else {
-   outDir = 'dist-dev';
    outputJsName = 'app.js'
    outputCssName = 'styles[extname]'
    appPlugins.push(serve({

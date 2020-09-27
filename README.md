@@ -19,12 +19,15 @@ Should you have any ideas or questions please post them on the home-assistant fo
 ## How to use
 
 * Make sure that you have Home Assistant 0.77 or greater installed as only new authentication system is supported from now on
-* Pull/download repository
-* Copy `config.example.js` to `dist/config.js` and edit it for your needs
-* Create a directory called `tileboard` inside `www` directory in HA's config path and copy all files from the `dist` directory there.
+* Download latest release zip file from https://github.com/resoai/TileBoard/releases and unpack to a directory of your choice
+* In chosen directory rename `config.example.js` to `config.js` and adjust it for your needs
+* Create a directory called `tileboard` inside `www` directory in HA's config path and copy all unpacked files there.
 * TileBoard will be available at `http://HASS_IP:8123/local/tileboard/index.html` and will prompt you for your login credentials after restarting Home Assistant.
 
+Alternatively you can checkout the repo and build the app manually. Check [CONTRIBUTING](./CONTRIBUTING.md) for more info.
+
 ## WARNING
+
 Files served from the www folder (/local/ url), aren’t protected by the Home Assistant authentication. Files stored in this folder, if the URL is known, can be accessed by anybody without authentication. Please make sure that your HA instance is not exposed via inetrnet or at least that long-lived token is not hardcoded in the config. 
 
 ## Configure

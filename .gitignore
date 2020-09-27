@@ -3,6 +3,6 @@
 .DS_Store
 /.cache/
 /.idea/
-/dist*
+/build/
 /includes/
 /node_modules/

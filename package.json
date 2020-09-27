@@ -6,7 +6,7 @@
     "dev": "rollup --config --watch",
     "build": "rollup --config --environment PRODUCTION",
     "lint": "eslint scripts",
-    "preversion": "git pull && npm run build && git add dist",
+    "preversion": "git pull && npm run build",
     "postversion": "git push --follow-tags",
     "preinstall": "npx npm-force-resolutions"
   },

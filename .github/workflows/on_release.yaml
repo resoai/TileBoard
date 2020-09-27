@@ -1,20 +1,25 @@
-name: Build Release
+name: Create Release
 
 on:
   push:
-    branches:
-      - "feat/rollup"
+    tags:
+      - 'v*'
 
 jobs:
   build:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
     steps:
 
-      - name: Checkout repo
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Build app
-        run: bash create_release.sh
+        run: |
+          npm ci \
+          npm run build \
+          cp config.example.js build \
+          pushd build \
+          zip -qr "../TileBoard.zip" .
 
       - name: Create release
         id: create-release
@@ -22,11 +27,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: 1.0.0
-          release_name: Release 1.0.0
-          draft: true
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
           prerelease: false
-          body: This release contains version 1.0.0 of the TileBoard app.
+          body: This release contains version ${{ github.ref }} of the TileBoard app. Check "assets" section for downloading the package.
 
       - name: Upload assets
         uses: actions/upload-release-asset@v1

@@ -6,8 +6,7 @@ parserOptions:
   sourceType: module
 extends: 'eslint:recommended'
 ignorePatterns:
-  - dist/
-  - dist-dev/
+  - build/
   - vendors/
 rules:
   # array-callback-return: error
