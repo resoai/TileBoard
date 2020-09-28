@@ -1,6 +1,6 @@
 {
   "name": "tileboard",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple yet highly customizable dashboard for Home Assistant",
   "scripts": {
     "dev": "rollup --config --watch",
