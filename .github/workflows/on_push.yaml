@@ -1,9 +1,6 @@
 name: On Push
 
-on:
-  push:
-  pull_request:
-    branches: [master]
+on: push
 
 jobs:
   lint_and_build:
