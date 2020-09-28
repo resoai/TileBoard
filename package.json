@@ -8,7 +8,9 @@
     "build:watch": "rollup --config --environment PRODUCTION --watch",
     "lint": "eslint scripts",
     "fix": "eslint scripts --fix",
-    "release": "git pull && npm run build && standard-version && git push --follow-tags",
+    "release": "standard-version",
+    "prerelease": "git pull && npm i && npm run build",
+    "posttag": "git push --follow-tags",
     "preinstall": "npx npm-force-resolutions"
   },
   "husky": {
