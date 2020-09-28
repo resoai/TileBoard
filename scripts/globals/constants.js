@@ -205,7 +205,7 @@ export const MINIMAL_CHART_OPTIONS = {
          display: true,
          ticks: {
             mirror: true,
-            callback: function(value, index, values) {
+            callback: function (value, index, values) {
                if (index === values.length - 1 || index === 0) {
                   return value;
                }
@@ -216,10 +216,10 @@ export const MINIMAL_CHART_OPTIONS = {
    },
    tooltips: {
       callbacks: {
-         title: function(tooltipItem, data) {
+         title: function (tooltipItem, data) {
             return timeAgo(tooltipItem[0].label);
          },
-         label: function(tooltipItem, data) {
+         label: function (tooltipItem, data) {
             return tooltipItem.value;
          },
       },

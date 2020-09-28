@@ -5,7 +5,7 @@ import Noty from '../models/noty';
 App.controller('Noty', ['$scope', NotyController]);
 
 function NotyController ($scope) {
-   var notiesClasses = null;
+   let notiesClasses = null;
 
    $scope.getNoties = function () {
       return Noty.noties;
@@ -16,12 +16,12 @@ function NotyController ($scope) {
    };
 
    $scope.getNotiesClasses = function () {
-      if(!notiesClasses) {
+      if (!notiesClasses) {
          notiesClasses = [];
 
-         var position = NOTIES_POSITIONS.RIGHT;
+         let position = NOTIES_POSITIONS.RIGHT;
 
-         if(window.CONFIG && window.CONFIG.notiesPosition) {
+         if (window.CONFIG && window.CONFIG.notiesPosition) {
             position = window.CONFIG.notiesPosition;
          }
 
@@ -32,6 +32,8 @@ function NotyController ($scope) {
    };
 
    Noty.onUpdate(function () {
-      if(!$scope.$$phase) $scope.$digest();
+      if (!$scope.$$phase) {
+         $scope.$digest();
+      }
    });
 }
