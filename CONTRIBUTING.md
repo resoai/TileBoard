@@ -34,6 +34,36 @@ This starts a local development server at address http://localhost:8080, serving
 
 Modifications to the project trigger an automatic rebuild to make it easy to iterate quickly.
 
+### Commit messages
+
+Commit message should follow a `conventional commit` convention which means it should match a format like:
+
+`type(scope?): subject`
+
+where:
+
+`type` can be:
+ - build
+ - ci
+ - chore
+ - docs
+ - feat
+ - fix
+ - perf
+ - refactor
+ - revert
+ - style
+ - test
+
+`scope` is optional and, if provided, should refer to the part of the code that is modified (`styles`, `api`, etc.).
+
+`subject` is a description of the changes starting with lower-case letter.
+
+Read more about that conventional commits at:
+ - https://www.conventionalcommits.org/
+ - https://github.com/conventional-changelog/commitlint
+ - https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-angular
+
 ### Production build
 
 Run command:
