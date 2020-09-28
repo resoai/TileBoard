@@ -78,4 +78,4 @@ Release builds are also attached to GitHub releases in "assets" section so if yo
 
 ### Releases (only for maintainers)
 
-A new release can be created by running `npm version [patch|minor|major]` (choose `patch`, `minor` or `major` based on semver versioning rules). A new tagged commit will be created and pushed to the remote repo, triggering automatic creation of new release with built app package attached in "assets" section.
+A new release can be created by running `npm run release`. A new tagged commit will be created and pushed to the remote repo, triggering automatic creation of new release with built app package attached in "assets" section.
