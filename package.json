@@ -8,6 +8,7 @@
     "build:watch": "rollup --config --environment PRODUCTION --watch",
     "lint": "eslint scripts",
     "fix": "eslint scripts --fix",
+    "release": "standard-version",
     "preversion": "git pull && npm run build",
     "postversion": "git push --follow-tags",
     "preinstall": "npx npm-force-resolutions"
@@ -54,7 +55,8 @@
     "rollup-plugin-progress": "^1.1.2",
     "rollup-plugin-serve": "^1.0.4",
     "rollup-plugin-styles": "^3.10.0",
-    "rollup-plugin-terser": "^7.0.2"
+    "rollup-plugin-terser": "^7.0.2",
+    "standard-version": "^9.0.0"
   },
   "dependencies": {
     "angular": "^1.8.0",
