@@ -5,7 +5,7 @@ export const mergeObjects = function (a, b) {
 };
 
 export const leadZero = function (num) {
-   if(num >= 0 && num < 10) {
+   if (num >= 0 && num < 10) {
       return '0' + num;
    }
 
@@ -14,7 +14,7 @@ export const leadZero = function (num) {
 
 export const numberFilter = function (precision) {
    return function (value) {
-      var num = parseFloat(value);
+      const num = parseFloat(value);
 
       return num && !isNaN(num) ? num.toFixed(precision) : value;
    };
@@ -25,14 +25,14 @@ export const switchPercents = function (field, max, round) {
    max = max || 100;
 
    return function (item, entity) {
-      var value = field in entity.attributes ? entity.attributes[field] : null;
+      let value = field in entity.attributes ? entity.attributes[field] : null;
 
       value = parseFloat(value);
 
-      if(isNaN(value)) {
+      if (isNaN(value)) {
          value = entity.state;
 
-         if(item.states && value in item.states) {
+         if (item.states && value in item.states) {
             return item.states[value];
          }
 
@@ -41,14 +41,16 @@ export const switchPercents = function (field, max, round) {
 
       value = Math.round((value / max * 100));
 
-      if(round) value = Math.round(value / 10) * 10;
+      if (round) {
+         value = Math.round(value / 10) * 10;
+      }
 
       return value + '%';
    };
 };
 
-export const playSound = function(sound) {
-   var audio = new Audio(sound);
+export const playSound = function (sound) {
+   const audio = new Audio(sound);
    audio.loop = false;
    audio.play();
 };
@@ -56,7 +58,7 @@ export const playSound = function(sound) {
 export const timeAgo = function (time) {
    time = +new Date(time);
 
-   var timeFormats = [
+   const timeFormats = [
       [60, 'seconds', 1],
       [120, '1 minute ago', '1 minute from now'],
       [3600, 'minutes', 60],
@@ -72,7 +74,7 @@ export const timeAgo = function (time) {
       [2903040000, 'years', 29030400],
    ];
 
-   var seconds = (+new Date() - time) / 1000,
+   let seconds = (+new Date() - time) / 1000,
       token = 'ago',
       listChoice = 1;
 
@@ -87,14 +89,14 @@ export const timeAgo = function (time) {
       return 'just now';
    }
 
-   var i = 0, format;
+   let i = 0,
+      format;
 
    while ((format = timeFormats[i++])) {
       if (seconds < format[0]) {
          if (typeof format[2] === 'string') {
             return format[listChoice];
-         }
-         else {
+         } else {
             return Math.floor(seconds / format[2]) + ' ' + format[1] + ' ' + token;
          }
       }
@@ -103,24 +105,29 @@ export const timeAgo = function (time) {
    return time;
 };
 
-export const debounce = function(func, wait, immediate) {
-   var timeout;
-   return function() {
-      var context = this, args = arguments;
-      var later = function() {
+export const debounce = function (func, wait, immediate) {
+   let timeout;
+   return function () {
+      const context = this,
+         args = arguments;
+      const later = function () {
          timeout = null;
-         if (!immediate) func.apply(context, args);
+         if (!immediate) {
+            func.apply(context, args);
+         }
       };
-      var callNow = immediate && !timeout;
+      const callNow = immediate && !timeout;
       clearTimeout(timeout);
       timeout = setTimeout(later, wait);
-      if (callNow) func.apply(context, args);
+      if (callNow) {
+         func.apply(context, args);
+      }
    };
 };
 
-export const toAbsoluteServerURL = function(path) {
-   var startsWithProtocol = path.indexOf('http') === 0;
-   var url = startsWithProtocol ? path : window.CONFIG.serverUrl + '/' + path;
+export const toAbsoluteServerURL = function (path) {
+   const startsWithProtocol = path.indexOf('http') === 0;
+   const url = startsWithProtocol ? path : window.CONFIG.serverUrl + '/' + path;
    // Replace extra forward slashes but not in protocol.
    return url.replace(/([^:])\/+/g, '$1/');
 };

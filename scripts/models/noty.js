@@ -1,8 +1,8 @@
-var Noty = (function () {
-   var updatesListeners = [];
-   var updatesFired = false;
+const Noty = (function () {
+   let updatesListeners = [];
+   let updatesFired = false;
 
-   var Noty = function (data) {
+   const Noty = function (data) {
       this.setData(data);
    };
 
@@ -18,7 +18,7 @@ var Noty = (function () {
 
       this.resetTimeout();
 
-      var self = this;
+      const self = this;
 
       setTimeout(function () {
          self.showed = true;
@@ -30,11 +30,11 @@ var Noty = (function () {
    };
 
    Noty.prototype.resetTimeout = function () {
-      var self = this;
+      const self = this;
 
       this.clearTimeout();
 
-      if(this.lifetime) {
+      if (this.lifetime) {
          this._timeout = setTimeout(function () {
             Noty.remove(self);
             Noty.fireUpdate();
@@ -43,7 +43,7 @@ var Noty = (function () {
    };
 
    Noty.prototype.getClasses = function () {
-      if(!this._classes) {
+      if (!this._classes) {
          this._classes = [];
       }
 
@@ -51,16 +51,18 @@ var Noty = (function () {
 
       this._classes.push('-' + this.type);
 
-      if(this.showed) this._classes.push('-showed');
+      if (this.showed) {
+         this._classes.push('-showed');
+      }
 
       return this._classes;
    };
 
    Noty.prototype.getLifetimeStyles = function () {
-      if(!this._lifetimeStyles) {
+      if (!this._lifetimeStyles) {
          this._lifetimeStyles = {};
 
-         if(this.lifetime) {
+         if (this.lifetime) {
             this._lifetimeStyles.animationDuration = this.lifetime + 's';
          }
       }
@@ -69,7 +71,9 @@ var Noty = (function () {
    };
 
    Noty.prototype.clearTimeout = function () {
-      if(this._timeout) clearTimeout(this._timeout);
+      if (this._timeout) {
+         clearTimeout(this._timeout);
+      }
    };
 
    Noty.prototype.remove = function () {
@@ -85,7 +89,7 @@ var Noty = (function () {
    Noty.SUCCESS = 'success';
 
    Noty.onUpdate = function (callback) {
-      if(updatesListeners.indexOf(callback) !== -1) {
+      if (updatesListeners.indexOf(callback) !== -1) {
          return function () {};
       }
 
@@ -99,7 +103,9 @@ var Noty = (function () {
    };
 
    Noty.fireUpdate = function () {
-      if(updatesFired) return;
+      if (updatesFired) {
+         return;
+      }
 
       updatesFired = true;
 
@@ -109,8 +115,7 @@ var Noty = (function () {
                updatesFired = false;
                callback();
             }, 0);
-         }
-         catch (e) {
+         } catch (e) {
             // ignore
          }
       });
@@ -132,15 +137,15 @@ var Noty = (function () {
    };
 
    Noty.addObject = function (data) {
-      if(data.id && Noty.getById(data.id)) {
-         var oldNoty = Noty.getById(data.id);
+      if (data.id && Noty.getById(data.id)) {
+         const oldNoty = Noty.getById(data.id);
 
          oldNoty.setData(data);
 
          return oldNoty;
       }
 
-      var noty = new Noty(data);
+      const noty = new Noty(data);
 
       Noty.noties.push(noty);
       Noty.notiesHistory.push(noty);
@@ -149,8 +154,8 @@ var Noty = (function () {
    };
 
    Noty.getById = function (id) {
-      for(var i = 0; i < Noty.noties.length; i++) {
-         if(Noty.noties[i].id === id) {
+      for (let i = 0; i < Noty.noties.length; i++) {
+         if (Noty.noties[i].id === id) {
             return Noty.noties[i];
          }
       }
@@ -159,8 +164,8 @@ var Noty = (function () {
    };
 
    Noty.hasSeenNoteId = function (id) {
-      for(var i = 0; i < Noty.notiesHistory.length; i++) {
-         if(Noty.notiesHistory[i].id === id) {
+      for (let i = 0; i < Noty.notiesHistory.length; i++) {
+         if (Noty.notiesHistory[i].id === id) {
             return true;
          }
       }

@@ -9,12 +9,12 @@ import { App } from './app';
 
 // Initializes angular app manually. This is triggered from the onload event of the config.js script.
 // @ts-ignore
-window.initApp = function() {
-   angular.element(function() {
+window.initApp = function () {
+   angular.element(function () {
       angular.bootstrap(document, [App.name]);
    });
 
-   App.config(function($sceProvider, $locationProvider, ApiProvider, ChartJsProvider) {
+   App.config(function ($sceProvider, $locationProvider, ApiProvider, ChartJsProvider) {
       $sceProvider.enabled(false);
 
       $locationProvider.html5Mode({
@@ -27,7 +27,7 @@ window.initApp = function() {
          authToken: window.CONFIG.authToken,
       });
 
-      var clock24 = window.CONFIG.timeFormat === 24;
+      const clock24 = window.CONFIG.timeFormat === 24;
 
       ChartJsProvider.setOptions('line', {
          maintainAspectRatio: false, // to fit popup automatically
@@ -82,6 +82,8 @@ window.initApp = function() {
       });
 
       // Workaround to add padding around legend.
-      window.Chart.Legend.prototype.afterFit = function() { this.height += 20; };
+      window.Chart.Legend.prototype.afterFit = function () {
+         this.height += 20;
+      };
    });
 };

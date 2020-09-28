@@ -8,7 +8,7 @@ import './controllers/noty';
 import './controllers/screensaver';
 import '../styles/all.less';
 
-function onConfigLoadOrError(error) {
+function onConfigLoadOrError (error) {
    if (error) {
       alert('Please make sure that you have "config.js" file and it is a valid javascript!\n' +
               'If you are running TileBoard for the first time, please copy "config.example.js" into "dist/config.js"');

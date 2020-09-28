@@ -6,7 +6,9 @@ import { debounce, leadZero, toAbsoluteServerURL } from '../globals/utils';
 import Noty from '../models/noty';
 
 App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($scope, $timeout, $location, Api) {
-   if(!window.CONFIG) return;
+   if (!window.CONFIG) {
+      return;
+   }
 
    const CONFIG = window.CONFIG;
 
@@ -34,18 +36,18 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.alarmCode = null;
    $scope.activeAlarm = null;
 
-   var showedPages = [];
+   let showedPages = [];
 
-   var latestAlarmActions = {};
-   var doorEntryTimeout = null;
-   var bodyClass = null;
-   var mainStyles = {};
-   var activePage = null;
-   var cameraList = null;
-   var popupIframeStyles = {};
+   const latestAlarmActions = {};
+   let doorEntryTimeout = null;
+   let bodyClass = null;
+   const mainStyles = {};
+   let activePage = null;
+   let cameraList = null;
+   const popupIframeStyles = {};
 
    $scope.entityClick = function (page, item, entity) {
-      if(typeof item.action === "function") {
+      if (typeof item.action === 'function') {
          return callFunction(item.action, [item, entity]);
       }
 
@@ -87,11 +89,13 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.entityLongPress = function ($event, page, item, entity) {
-      if(typeof item.secondaryAction === "function") {
+      if (typeof item.secondaryAction === 'function') {
          return callFunction(item.secondaryAction, [item, entity]);
       }
 
-      if (item.history) return $scope.openPopupHistory(item, entity);
+      if (item.history) {
+         return $scope.openPopupHistory(item, entity);
+      }
 
       switch (item.type) {
          case TYPES.LIGHT: return $scope.openLightSliders(item, entity);
@@ -104,42 +108,44 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.getBodyClass = function () {
-      if(!bodyClass) {
+      if (!bodyClass) {
          bodyClass = [];
 
-         if(CONFIG.customTheme) {
-            var themes = CONFIG.customTheme;
+         if (CONFIG.customTheme) {
+            let themes = CONFIG.customTheme;
 
-            if(typeof themes === "string") themes = [themes];
+            if (typeof themes === 'string') {
+               themes = [themes];
+            }
 
-            themes.map(function (theme) {
+            themes.forEach(function (theme) {
                bodyClass.push('-theme-' + theme);
             });
          }
 
-         if(CONFIG.entitySize) {
+         if (CONFIG.entitySize) {
             bodyClass.push('-' + CONFIG.entitySize + '-entity');
          }
 
-         var menuPos = CONFIG.menuPosition || MENU_POSITIONS.LEFT;
-         var groupsAlign = CONFIG.groupsAlign || GROUP_ALIGNS.HORIZONTALLY;
+         const menuPos = CONFIG.menuPosition || MENU_POSITIONS.LEFT;
+         const groupsAlign = CONFIG.groupsAlign || GROUP_ALIGNS.HORIZONTALLY;
 
          bodyClass.push('-menu-' + menuPos);
          bodyClass.push('-groups-align-' + groupsAlign);
 
-         if(CONFIG.hideScrollbar) {
+         if (CONFIG.hideScrollbar) {
             bodyClass.push('-hide-scrollbar');
          }
       }
 
-      var scrollClasses = [];
+      const scrollClasses = [];
 
-      if(activePage) {
-         if(activePage.scrolledHorizontally) {
+      if (activePage) {
+         if (activePage.scrolledHorizontally) {
             scrollClasses.push('-scrolled-horizontally');
          }
 
-         if(activePage.scrolledVertically) {
+         if (activePage.scrolledVertically) {
             scrollClasses.push('-scrolled-vertically');
          }
       }
@@ -149,9 +155,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
 
    $scope.getItemEntity = function (item) {
-      if(typeof item.id === "object") return item.id;
+      if (typeof item.id === 'object') {
+         return item.id;
+      }
 
-      if(!(item.id in $scope.states)) {
+      if (!(item.id in $scope.states)) {
          warnUnknownItem(item);
          return null;
       }
@@ -160,21 +168,25 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.getCameraEntityFullscreen = function (item) {
-      var entity_id = item.fullscreen.id;
+      let entity_id = item.fullscreen.id;
 
-      if(typeof entity_id === "undefined") {
+      if (typeof entity_id === 'undefined') {
          entity_id = item.id;
       }
 
-      if(typeof entity_id === "object") return entity_id;
+      if (typeof entity_id === 'object') {
+         return entity_id;
+      }
 
       return $scope.states[entity_id];
    };
 
    $scope.getEntryCameraEntity = function (itemEntry) {
-      var item = itemEntry.layout.camera;
+      const item = itemEntry.layout.camera;
 
-      if(typeof item.id === "object") return item.id;
+      if (typeof item.id === 'object') {
+         return item.id;
+      }
 
       return $scope.states[item.id];
    };
@@ -185,78 +197,84 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
 
    $scope.hasTrackerCoords = function (entity) {
-      if(!entity.attributes) return false;
+      if (!entity.attributes) {
+         return false;
+      }
 
       return entity.attributes.longitude || entity.attributes.latitude;
    };
 
    $scope.slideMapStyles = function (item, page, obj, zoom, state) {
-      var key = 'mapStyles' + zoom + (item.width || '1') + (item.height || '1');
+      const key = 'mapStyles' + zoom + (item.width || '1') + (item.height || '1');
 
-      if(!obj[key]) {
-         var width = item.width || 1, height = item.height || 1;
-         var tileSize = page.tileSize || CONFIG.tileSize;
-         var name = obj.friendly_name || ' ';
+      if (!obj[key]) {
+         const width = item.width || 1,
+            height = item.height || 1;
+         const tileSize = page.tileSize || CONFIG.tileSize;
+         const name = obj.friendly_name || ' ';
 
-         if(!obj.longitude && !obj.latitude) return null;
-
-         var coords = obj.longitude + ',' + obj.latitude;
-         // +80 - hack to hide logo
-         var sizes = Math.ceil(tileSize * width) + ',' + Math.ceil((tileSize * height) + 80);
-
-         var url;
-         var label;
-         var marker;
-
-         if(item.map === YANDEX_MAP) {
-            var icon = 'round';
-
-            if(state.toLowerCase() === 'home') icon = 'home';
-            else if(state.toLowerCase() === 'office') icon = 'work';
-
-            var pt = coords + ',' + icon;
-
-            url = "https://static-maps.yandex.ru/1.x/?lang=en-US&ll="
-               + coords + "&z=" + zoom + "&l=map&size=" + sizes + "&pt=" + pt;
+         if (!obj.longitude && !obj.latitude) {
+            return null;
          }
-         else if(item.map === MAPBOX_MAP) {
+
+         let coords = obj.longitude + ',' + obj.latitude;
+         // +80 - hack to hide logo
+         let sizes = Math.ceil(tileSize * width) + ',' + Math.ceil((tileSize * height) + 80);
+
+         let url;
+         let label;
+         let marker;
+
+         if (item.map === YANDEX_MAP) {
+            let icon = 'round';
+
+            if (state.toLowerCase() === 'home') {
+               icon = 'home';
+            } else if (state.toLowerCase() === 'office') {
+               icon = 'work';
+            }
+
+            const pt = coords + ',' + icon;
+
+            url = 'https://static-maps.yandex.ru/1.x/?lang=en-US&ll='
+               + coords + '&z=' + zoom + '&l=map&size=' + sizes + '&pt=' + pt;
+         } else if (item.map === MAPBOX_MAP) {
             coords = obj.longitude + ',' + obj.latitude;
             sizes = sizes.replace(',', 'x');
 
             label = name[0].toLowerCase();
-            marker = "pin-s-" + label + "(" + obj.longitude + ',' + obj.latitude + ")";
-            var style = "mapbox/streets-v11";
+            marker = 'pin-s-' + label + '(' + obj.longitude + ',' + obj.latitude + ')';
+            let style = 'mapbox/streets-v11';
 
-            if(CONFIG.mapboxStyle) {
-               var styleGroups = /^mapbox:\/\/styles\/(.+)$/.exec(CONFIG.mapboxStyle);
+            if (CONFIG.mapboxStyle) {
+               const styleGroups = /^mapbox:\/\/styles\/(.+)$/.exec(CONFIG.mapboxStyle);
                if (styleGroups.length > 1) {
                   style = styleGroups[1];
                }
             }
 
-            url = "https://api.mapbox.com/styles/v1/" + style + "/static/"
-               + marker + "/" + coords + "," + zoom + ",0/" + sizes;
+            url = 'https://api.mapbox.com/styles/v1/' + style + '/static/'
+               + marker + '/' + coords + ',' + zoom + ',0/' + sizes;
 
-            if(CONFIG.mapboxToken) {
-               url += "?access_token=" + CONFIG.mapboxToken;
+            if (CONFIG.mapboxToken) {
+               url += '?access_token=' + CONFIG.mapboxToken;
             }
-         }
-         else {
+         } else {
             coords = obj.latitude + ',' + obj.longitude;
             sizes = sizes.replace(',', 'x');
 
             label = name[0].toUpperCase();
-            marker = encodeURIComponent("color:gray|label:"+label+"|" + coords);
+            marker = encodeURIComponent('color:gray|label:' + label + '|' + coords);
 
-            url = "https://maps.googleapis.com/maps/api/staticmap?center="
-               + coords + "&zoom=" + zoom + "&size=" + sizes + "&scale=2&maptype=roadmap&markers=" + marker;
+            url = 'https://maps.googleapis.com/maps/api/staticmap?center='
+               + coords + '&zoom=' + zoom + '&size=' + sizes + '&scale=2&maptype=roadmap&markers=' + marker;
 
-            if(CONFIG.googleApiKey) {
-               url += "&key=" + CONFIG.googleApiKey;
+            if (CONFIG.googleApiKey) {
+               url += '&key=' + CONFIG.googleApiKey;
             }
          }
 
-         obj[key] = {backgroundImage: "url('" + url + "')"};
+         obj[key] = { backgroundImage: 'url(\'' + url + '\')' };
       }
 
       return obj[key];
@@ -267,18 +285,21 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.pageStyles = function (page, index) {
-      if(!page.styles) {
-         var styles = {};
+      if (!page.styles) {
+         const styles = {};
 
-         if(page.bg) {
-            var bg = parseFieldValue(page.bg, page, {});
+         if (page.bg) {
+            const bg = parseFieldValue(page.bg, page, {});
 
-            if(bg) styles.backgroundImage = 'url("' + bg + '")';
-         }
-         else if(page.bgSuffix) {
-            var sbg = parseFieldValue(page.bgSuffix, page, {});
+            if (bg) {
+               styles.backgroundImage = 'url("' + bg + '")';
+            }
+         } else if (page.bgSuffix) {
+            const sbg = parseFieldValue(page.bgSuffix, page, {});
 
-            if(sbg) styles.backgroundImage = 'url("' + toAbsoluteServerURL(sbg) + '")';
+            if (sbg) {
+               styles.backgroundImage = 'url("' + toAbsoluteServerURL(sbg) + '")';
+            }
          }
 
          if ((CONFIG.transition === TRANSITIONS.ANIMATED || CONFIG.transition === TRANSITIONS.ANIMATED_GPU)
@@ -299,18 +320,20 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.pagesMenuClasses = function () {
-      var position = CONFIG.menuPosition;
+      let position = CONFIG.menuPosition;
 
-      if(!position) position = MENU_POSITIONS.LEFT;
+      if (!position) {
+         position = MENU_POSITIONS.LEFT;
+      }
 
       return '-' + position;
    };
 
    $scope.trackerZoomLevels = function (item, entity) {
-      if(!entity.zoomLevels) {
+      if (!entity.zoomLevels) {
          entity.zoomLevels = [9, 13];
 
-         if(item.zoomLevels) {
+         if (item.zoomLevels) {
             entity.zoomLevels = item.zoomLevels;
          }
       }
@@ -319,20 +342,22 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.trackerSlidesClass = function (item, entity) {
-      var maps = $scope.trackerZoomLevels(item, entity);
+      const maps = $scope.trackerZoomLevels(item, entity);
 
-      var c = maps.length;
+      let c = maps.length;
 
-      if($scope.showTrackerBg(item, entity)) c++;
+      if ($scope.showTrackerBg(item, entity)) {
+         c++;
+      }
 
       return '-c' + c;
    };
 
    $scope.trackerBg = function (entity) {
-      if(!entity.trackerBg) {
-         var styles = {};
+      if (!entity.trackerBg) {
+         const styles = {};
 
-         if(entity.attributes.entity_picture) {
+         if (entity.attributes.entity_picture) {
             styles.backgroundImage = 'url("' + toAbsoluteServerURL(entity.attributes.entity_picture) + '")';
          }
 
@@ -343,7 +368,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.showTrackerBg = function (item, entity) {
-      if(!entity.attributes.entity_picture) {
+      if (!entity.attributes.entity_picture) {
          return false;
       }
 
@@ -351,29 +376,31 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.groupStyles = function (group, page) {
-      if(!group.styles) {
-         var tileSize = page.tileSize || CONFIG.tileSize;
-         var tileMargin = page.tileMargin || CONFIG.tileMargin;
+      if (!group.styles) {
+         const tileSize = page.tileSize || CONFIG.tileSize;
+         const tileMargin = page.tileMargin || CONFIG.tileMargin;
 
-         if(!('width' in group) || !('height' in group)) {
-            var sizes = calcGroupSizes(group);
+         if (!('width' in group) || !('height' in group)) {
+            const sizes = calcGroupSizes(group);
 
-            if(!group.width) group.width = sizes.width;
-            if(!group.height) group.height = sizes.height;
+            if (!group.width) {
+               group.width = sizes.width;
+            }
+            if (!group.height) {
+               group.height = sizes.height;
+            }
          }
 
-         var styles = {
+         const styles = {
             width: tileSize * group.width + tileMargin * (group.width - 1) + 'px',
             height: tileSize * group.height + tileMargin * (group.height - 1) + 'px',
          };
 
-         if(page.groupMarginCss) {
+         if (page.groupMarginCss) {
             styles.margin = page.groupMarginCss;
-         }
-         else if(group.groupMarginCss) {
+         } else if (group.groupMarginCss) {
             styles.margin = group.groupMarginCss;
-         }
-         else if(CONFIG.groupMarginCss) {
+         } else if (CONFIG.groupMarginCss) {
             styles.margin = CONFIG.groupMarginCss;
          }
 
@@ -384,20 +411,20 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.itemStyles = function (page, item, entity) {
-      var prevSize = item._prevTileSize || page.tileSize || CONFIG.tileSize;
-      var currentSize = page.tileSize || CONFIG.tileSize;
-      var hasChanged = prevSize !== currentSize;
+      const prevSize = item._prevTileSize || page.tileSize || CONFIG.tileSize;
+      const currentSize = page.tileSize || CONFIG.tileSize;
+      const hasChanged = prevSize !== currentSize;
 
-      if(!item.styles || hasChanged) {
-         var width = item.width || 1;
-         var height = item.height || 1;
-         var pos = item.position;
-         var tileSize = page.tileSize || CONFIG.tileSize;
-         var tileMargin = page.tileMargin || CONFIG.tileMargin;
+      if (!item.styles || hasChanged) {
+         const width = item.width || 1;
+         const height = item.height || 1;
+         const pos = item.position;
+         const tileSize = page.tileSize || CONFIG.tileSize;
+         const tileMargin = page.tileMargin || CONFIG.tileMargin;
 
          item._prevTileSize = tileSize;
 
-         var styles = {
+         const styles = {
             width: tileSize * width + tileMargin * (width - 1) + 'px',
             height: tileSize * height + tileMargin * (height - 1) + 'px',
             left: pos[0] * tileSize + (tileMargin * pos[0]) + 'px',
@@ -407,40 +434,47 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          item.styles = styles;
       }
 
-      if(item.customStyles) {
-         var res;
+      if (item.customStyles) {
+         let res;
 
-         if(typeof item.customStyles === "function") {
+         if (typeof item.customStyles === 'function') {
             res = callFunction(item.customStyles, [item, entity]);
-         }
-         else if(typeof item.customStyles === "object") {
+         } else if (typeof item.customStyles === 'object') {
             res = item.customStyles;
          }
-         if(res) for(var k in res) item.styles[k] = res[k];
+         if (res) {
+            for (const k in res) {
+               item.styles[k] = res[k];
+            }
+         }
       }
 
       return item.styles;
    };
 
    $scope.itemBgStyles = function (item, entity) {
-      var obj = entity.attributes || entity;
+      const obj = entity.attributes || entity;
 
-      if(!obj.bgStyles) {
-         var bg, styles = {};
+      if (!obj.bgStyles) {
+         let bg;
+         const styles = {};
 
-         if('bgOpacity' in item) {
+         if ('bgOpacity' in item) {
             styles.opacity = parseFieldValue(item.bgOpacity, item, entity);
          }
 
-         if(item.bg) {
+         if (item.bg) {
             bg = parseFieldValue(item.bg, item, entity);
 
-            if(bg) styles.backgroundImage = 'url(' + bg + ')';
-         }
-         else if(item.bgSuffix) {
+            if (bg) {
+               styles.backgroundImage = 'url(' + bg + ')';
+            }
+         } else if (item.bgSuffix) {
             bg = parseFieldValue(item.bgSuffix, item, entity);
 
-            if(bg) styles.backgroundImage = 'url("' + toAbsoluteServerURL(bg) + '")';
+            if (bg) {
+               styles.backgroundImage = 'url("' + toAbsoluteServerURL(bg) + '")';
+            }
          }
 
          obj.bgStyles = styles;
@@ -450,9 +484,9 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.itemClasses = function (item) {
-      var entity = $scope.getItemEntity(item);
+      const entity = $scope.getItemEntity(item);
 
-      if(!item._classes) {
+      if (!item._classes) {
          item._classes = [];
       }
 
@@ -461,59 +495,69 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       item._classes.push('-' + item.type);
       item._classes.push('-' + escapeClass(entity.state));
 
-      if(item.theme) item._classes.push('-th-' + item.theme);
-      else item._classes.push('-th-' + item.type);
+      if (item.theme) {
+         item._classes.push('-th-' + item.theme);
+      } else {
+         item._classes.push('-th-' + item.type);
+      }
 
-      if(item.classes) item.classes.forEach(function (c) {
-         item._classes.push(c);
-      });
+      if (item.classes) {
+         item.classes.forEach(function (c) {
+            item._classes.push(c);
+         });
+      }
 
-      if(item.loading) item._classes.push('-loading');
-      if($scope.selectOpened(item)) item._classes.push('-top-entity');
+      if (item.loading) {
+         item._classes.push('-loading');
+      }
+      if ($scope.selectOpened(item)) {
+         item._classes.push('-top-entity');
+      }
 
       return item._classes;
    };
 
    $scope.entityState = function (item, entity) {
-      if(item.state === false) return null;
+      if (item.state === false) {
+         return null;
+      }
 
-      if(typeof item.state !== 'undefined') {
-         if(typeof item.state === "string") {
+      if (typeof item.state !== 'undefined') {
+         if (typeof item.state === 'string') {
             return parseString(item.state, entity);
-         }
-         else if(typeof item.state === "function") {
+         } else if (typeof item.state === 'function') {
             return callFunction(item.state, [item, entity]);
-         }
-         else {
+         } else {
             return item.state;
          }
       }
 
-      if(typeof item.states === "function") {
+      if (typeof item.states === 'function') {
          return callFunction(item.states, [item, entity]);
-      }
-      else if(typeof item.states === "object") {
+      } else if (typeof item.states === 'object') {
          return item.states[entity.state] || entity.state;
       }
 
-      var unit = entity.attributes ? entity.attributes.unit_of_measurement : '';
+      const unit = entity.attributes ? entity.attributes.unit_of_measurement : '';
       return entity.state + (unit ? ' ' + unit : '');
    };
 
    $scope.entityIcon = function (item, entity) {
-      var state = parseFieldValue(entity.state, item, entity);
+      let state = parseFieldValue(entity.state, item, entity);
 
-      if(!state && item.state) {
+      if (!state && item.state) {
          state = parseFieldValue(item.state, item, entity);
       }
 
-      if(item.icon) {
+      if (item.icon) {
          state = parseFieldValue(item.icon, item, entity);
       }
 
-      if(!item.icons) return state;
+      if (!item.icons) {
+         return state;
+      }
 
-      if(typeof item.icons === "function") {
+      if (typeof item.icons === 'function') {
          return callFunction(item.icons, [item, entity]);
       }
 
@@ -521,7 +565,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.entityTitle = function (item, entity) {
-      if(!('title' in item)) {
+      if (!('title' in item)) {
          return entity.attributes ? entity.attributes.friendly_name : null;
       }
 
@@ -533,7 +577,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.entityUnit = function (item, entity) {
-      if(!('unit' in item)) {
+      if (!('unit' in item)) {
          return entity.attributes ? entity.attributes.unit_of_measurement : null;
       }
 
@@ -545,13 +589,13 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.entityValue = function (item, entity) {
-      var value = entity.state;
+      let value = entity.state;
 
-      if(item.value) {
+      if (item.value) {
          value = getItemFieldValue('value', item, entity);
       }
 
-      if(typeof item.filter === "function") {
+      if (typeof item.filter === 'function') {
          return callFunction(item.filter, [value, item, entity]);
       }
 
@@ -559,20 +603,22 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.climateTarget = function (item, entity) {
-      var value = entity.attributes.temperature || [
+      const value = entity.attributes.temperature || [
          entity.attributes.target_temp_low,
-         entity.attributes.target_temp_high
-      ].join(" - ");
+         entity.attributes.target_temp_high,
+      ].join(' - ');
 
-      if(item.filter) return item.filter(value);
+      if (item.filter) {
+         return item.filter(value);
+      }
 
       return value;
    };
 
    $scope.listField = function (field, item, list) {
-      var value = parseFieldValue(list[field], item, list);
+      const value = parseFieldValue(list[field], item, list);
 
-      if(typeof item.filter === "function") {
+      if (typeof item.filter === 'function') {
          return callFunction(item.filter, [value, field, item]);
       }
 
@@ -580,124 +626,156 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.getWeatherField = function (field, item, entity) {
-      var fields = item.fields;
+      const fields = item.fields;
 
-      if(!fields || !fields[field]) return null;
+      if (!fields || !fields[field]) {
+         return null;
+      }
 
       return parseFieldValue(fields[field], item, entity);
    };
 
    $scope.getWeatherLine = function (line, item, entity) {
-      if(!line) return null;
+      if (!line) {
+         return null;
+      }
 
       return parseFieldValue(line, item, entity);
    };
 
    $scope.getWeatherIcon = function (item, entity) {
-      var icon;
+      let icon;
 
-      if(item.icon || item.icons) {
+      if (item.icon || item.icons) {
          icon = $scope.entityIcon(item, entity);
       }
 
-      if(!icon) {
+      if (!icon) {
          icon = $scope.getWeatherField('icon', item, entity);
 
-         if(icon) console.warn(
-            "`icon` field inside fields is deprecated for WEATHER tile, " +
-            "please move it to the tile object");
+         if (icon) {
+            console.warn(
+               '`icon` field inside fields is deprecated for WEATHER tile, ' +
+               'please move it to the tile object');
+         }
       }
 
-      if(!icon) return null;
+      if (!icon) {
+         return null;
+      }
 
-      var map = item.icons;
+      let map = item.icons;
 
-      if(!map && item.fields.iconMap) {
+      if (!map && item.fields.iconMap) {
          map = item.fields.iconMap;
 
-         if(icon) console.warn(
-            "`iconMap` field inside fields is deprecated for WEATHER tile, " +
-            "please move it to the tile object as `icons`");
+         if (icon) {
+            console.warn(
+               '`iconMap` field inside fields is deprecated for WEATHER tile, ' +
+               'please move it to the tile object as `icons`');
+         }
       }
 
-      if(typeof map === "function") return callFunction(map, [icon, item, entity]);
+      if (typeof map === 'function') {
+         return callFunction(map, [icon, item, entity]);
+      }
 
-      if(!map) return icon;
+      if (!map) {
+         return icon;
+      }
 
       return map[icon] || icon;
    };
 
    $scope.getWeatherImageStyles = function (item, entity) {
-      if(!item.iconImage) return null;
+      if (!item.iconImage) {
+         return null;
+      }
 
-      var iconImage = parseFieldValue(item.iconImage, item, entity);
+      let iconImage = parseFieldValue(item.iconImage, item, entity);
 
-      if(typeof item.icons === "function") {
+      if (typeof item.icons === 'function') {
          iconImage = callFunction(item.icons, [iconImage, item, entity]);
       }
 
-      if(item.icons && (iconImage in item.icons)) {
+      if (item.icons && (iconImage in item.icons)) {
          iconImage = item.icons[iconImage];
       }
 
-      if(!iconImage) return null;
+      if (!iconImage) {
+         return null;
+      }
 
-      if(!item._imgStyles) item._imgStyles = {};
+      if (!item._imgStyles) {
+         item._imgStyles = {};
+      }
 
-      item._imgStyles['backgroundImage'] = 'url("' + iconImage + '")';
+      item._imgStyles.backgroundImage = 'url("' + iconImage + '")';
 
       return item._imgStyles;
    };
 
    $scope.weatherListField = function (field, line, item, entity) {
-      if(!line || !line[field]) return null;
+      if (!line || !line[field]) {
+         return null;
+      }
 
       return parseFieldValue(line[field], item, entity);
    };
 
    $scope.weatherListIcon = function (line, item, entity) {
-      var icon = $scope.weatherListField('icon', line, item, entity);
+      const icon = $scope.weatherListField('icon', line, item, entity);
 
-      if(!icon) return null;
+      if (!icon) {
+         return null;
+      }
 
-      if(typeof item.icons === "function") {
+      if (typeof item.icons === 'function') {
          return callFunction(item.icons, [icon, item, entity]);
       }
 
-      if(!item.icons) return icon;
+      if (!item.icons) {
+         return icon;
+      }
 
       return item.icons[icon] || icon;
    };
 
    $scope.weatherListImageStyles = function (line, item, entity) {
-      var iconImage = $scope.weatherListField('iconImage', line, item, entity);
+      let iconImage = $scope.weatherListField('iconImage', line, item, entity);
 
-      if(!iconImage) return null;
+      if (!iconImage) {
+         return null;
+      }
 
-      if(typeof item.icons === "function") {
+      if (typeof item.icons === 'function') {
          iconImage = callFunction(item.icons, [iconImage, item, entity]);
       }
 
-      if(item.icons && (iconImage in item.icons)) {
+      if (item.icons && (iconImage in item.icons)) {
          iconImage = item.icons[iconImage];
       }
 
-      if(!iconImage) return null;
+      if (!iconImage) {
+         return null;
+      }
 
-      if(!line._imgStyles) line._imgStyles = {};
+      if (!line._imgStyles) {
+         line._imgStyles = {};
+      }
 
-      line._imgStyles['backgroundImage'] = 'url("' + iconImage + '")';
+      line._imgStyles.backgroundImage = 'url("' + iconImage + '")';
 
       return line._imgStyles;
    };
 
    $scope.slidesStyles = function (item, $index) {
-      if(!item.slidesStyles) {
+      if (!item.slidesStyles) {
          item.slidesStyles = {
-            'animation-delay': ((item.slidesDelay || $index* 0.8)) + 's'
+            'animation-delay': ((item.slidesDelay || $index * 0.8)) + 's',
          };
 
-         if('bgOpacity' in item) {
+         if ('bgOpacity' in item) {
             item.slidesStyles.opacity = item.bgOpacity;
          }
       }
@@ -706,13 +784,15 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.slideStyles = function (slide, item, entity) {
-      if(!slide.slideStyles) {
-         var styles = {};
+      if (!slide.slideStyles) {
+         const styles = {};
 
-         if(slide.bg) {
-            var bg = parseFieldValue(slide.bg, item, entity);
+         if (slide.bg) {
+            const bg = parseFieldValue(slide.bg, item, entity);
 
-            if(bg) styles.backgroundImage = 'url(' + bg + ')';
+            if (bg) {
+               styles.backgroundImage = 'url(' + bg + ')';
+            }
          }
 
          slide.slideStyles = styles;
@@ -722,10 +802,10 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.itemSelectStyles = function (entity, items) {
-      if(!entity.itemSelectStyles) {
-         var styles = {};
+      if (!entity.itemSelectStyles) {
+         const styles = {};
 
-         if(items) {
+         if (items) {
             // magic numbers
             styles.marginTop = (-Math.min(items.length * 17, 180)) + 'px';
          }
@@ -741,20 +821,26 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.getHeader = function (page) {
-      if(!page) return CONFIG.header;
+      if (!page) {
+         return CONFIG.header;
+      }
 
       return page.header;
    };
 
    $scope.getSliderConf = function (item, entity) {
-      var key = "_c";
+      const key = '_c';
 
-      if(!entity.attributes) entity.attributes = {};
-      if(entity.attributes[key]) return entity.attributes[key];
+      if (!entity.attributes) {
+         entity.attributes = {};
+      }
+      if (entity.attributes[key]) {
+         return entity.attributes[key];
+      }
 
-      var def = item.slider || {};
-      var attrs = entity.attributes || {};
-      var value = +attrs[def.field] || 0;
+      const def = item.slider || {};
+      const attrs = entity.attributes || {};
+      const value = +attrs[def.field] || 0;
 
       entity.attributes[key] = {
          max: attrs.max || def.max || 100,
@@ -762,10 +848,10 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          step: attrs.step || def.step || 1,
          value: value || +entity.state || def.value || 0,
          request: def.request || {
-            domain: "input_number",
-            service: "set_value",
-            field: "value"
-         }
+            domain: 'input_number',
+            service: 'set_value',
+            field: 'value',
+         },
       };
 
       $timeout(function () {
@@ -776,15 +862,19 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.getLightSliderConf = function (slider, entity) {
-      var key = "_c_" + slider.field;
+      const key = '_c_' + slider.field;
 
-      if(!entity.attributes) entity.attributes = {};
-      if(entity.attributes[key]) return entity.attributes[key];
+      if (!entity.attributes) {
+         entity.attributes = {};
+      }
+      if (entity.attributes[key]) {
+         return entity.attributes[key];
+      }
 
 
-      var def = slider || {};
-      var attrs = entity.attributes;
-      var value = +attrs[def.field] || 0;
+      const def = slider || {};
+      const attrs = entity.attributes;
+      const value = +attrs[def.field] || 0;
 
       entity.attributes[key] = {
          max: def.max || attrs.max || 100,
@@ -792,10 +882,10 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          step: def.step || attrs.step || 1,
          value: value || def.min || attrs.min || 0,
          request: def.request || {
-            domain: "input_number",
-            service: "set_value",
-            field: "value"
-         }
+            domain: 'input_number',
+            service: 'set_value',
+            field: 'value',
+         },
       };
 
       $timeout(function () {
@@ -811,20 +901,26 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.getVolumeConf = function (item, entity) {
-      if(!entity.attributes) entity.attributes = {};
-      if(entity.attributes._c) return entity.attributes._c;
+      if (!entity.attributes) {
+         entity.attributes = {};
+      }
+      if (entity.attributes._c) {
+         return entity.attributes._c;
+      }
 
-      var def = {max: 100, min: 0, step: 2};
-      var attrs = entity.attributes;
-      var value = attrs.volume_level * 100 || 0;
+      const def = { max: 100, min: 0, step: 2 };
+      const attrs = entity.attributes;
+      const value = attrs.volume_level * 100 || 0;
 
-      if(!('volume_level' in attrs)) return false;
+      if (!('volume_level' in attrs)) {
+         return false;
+      }
 
       entity.attributes._c = {
          max: attrs.max || def.max || 100,
          min: attrs.min || def.min || 0,
          step: attrs.step || def.step || 1,
-         value: value || 0
+         value: value || 0,
       };
 
       $timeout(function () {
@@ -835,31 +931,32 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.getLightSliderValue = function (slider, conf) {
-      if(slider.formatValue) return slider.formatValue(conf);
+      if (slider.formatValue) {
+         return slider.formatValue(conf);
+      }
 
       return conf.value;
    };
 
    $scope.openLightSliders = function (item, entity) {
-      if((!item.sliders || !item.sliders.length) && !item.colorpicker) return;
+      if ((!item.sliders || !item.sliders.length) && !item.colorpicker) {
+         return;
+      }
 
-      if(entity.state !== "on") {
+      if (entity.state !== 'on') {
          return $scope.toggleSwitch(item, entity, function () {
             $timeout(function () {
-               if(entity.state === "on") {
+               if (entity.state === 'on') {
                   $scope.openLightSliders(item, entity);
                }
             }, 0);
-         })
-      }
-      else {
-         if(!item.controlsEnabled) {
-            item.controlsEnabled = true;
+         });
+      } else if (!item.controlsEnabled) {
+         item.controlsEnabled = true;
 
-            $timeout(function () {
-               item._controlsInited = true;
-            }, 50);
-         }
+         $timeout(function () {
+            item._controlsInited = true;
+         }, 50);
       }
    };
 
@@ -881,17 +978,17 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.supportsFeature = function (feature, entity) {
-      if(!('supported_features' in entity.attributes)) {
+      if (!('supported_features' in entity.attributes)) {
          return false;
       }
 
-      var features = entity.attributes.supported_features;
+      const features = entity.attributes.supported_features;
 
       return (features | feature) === features;
    };
 
    $scope.isDisarmed = function (entity) {
-      if(['disarmed'].indexOf(entity.state) === -1) {
+      if (['disarmed'].indexOf(entity.state) === -1) {
          return true;
       }
 
@@ -911,7 +1008,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
           && entity.state !== 'off';
    };
 
-   var GAUGE_DEFAULTS = {
+   const GAUGE_DEFAULTS = {
       backgroundColor: 'rgba(0, 0, 0, 0.1)',
       foregroundColor: 'rgba(0, 150, 136, 1)',
       size: function (item) {
@@ -927,13 +1024,15 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.getGaugeField = function (field, item, entity) {
-      if(!item) return null;
+      if (!item) {
+         return null;
+      }
 
-      if(item.settings && field in item.settings) {
+      if (item.settings && field in item.settings) {
          return parseFieldValue(item.settings[field], item, entity);
       }
 
-      if(field in GAUGE_DEFAULTS) {
+      if (field in GAUGE_DEFAULTS) {
          return parseFieldValue(GAUGE_DEFAULTS[field], item, entity);
       }
 
@@ -941,7 +1040,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.itemURL = function (item, entity) {
-      if(typeof item.url === 'function') {
+      if (typeof item.url === 'function') {
          return callFunction(item.url, [item, entity]);
       }
 
@@ -950,69 +1049,85 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    // Actions
 
-   var setSliderValue = debounce(setSliderValueFn, 250);
+   const setSliderValue = debounce(setSliderValueFn, 250);
 
    function setSliderValueFn (item, entity, value) {
-      if(!value.request) return;
+      if (!value.request) {
+         return;
+      }
 
-      var conf = value.request;
-      var serviceData = {};
+      const conf = value.request;
+      const serviceData = {};
       serviceData[conf.field] = value.value;
 
       callService(item, conf.domain, conf.service, serviceData);
    }
 
    $scope.sliderChanged = function (item, entity, value) {
-      if(!item._sliderInited) return;
+      if (!item._sliderInited) {
+         return;
+      }
 
       setSliderValue(item, entity, value);
    };
 
    $scope.volumeChanged = function (item, entity, conf) {
-      if(!entity.attributes._sliderInited) return;
+      if (!entity.attributes._sliderInited) {
+         return;
+      }
 
-      var value = {
+      const value = {
          value: conf.value / 100,
          request: {
-            domain: "media_player",
-            service: "volume_set",
-            field: "volume_level"
-         }
+            domain: 'media_player',
+            service: 'volume_set',
+            field: 'volume_level',
+         },
       };
 
       setSliderValue(item, entity, value);
    };
 
    $scope.lightSliderChanged = function (slider, item, entity, value) {
-      if(!item._controlsInited) return;
-      if(!slider._sliderInited) return;
-      if(!entity.attributes._sliderInited) return;
+      if (!item._controlsInited) {
+         return;
+      }
+      if (!slider._sliderInited) {
+         return;
+      }
+      if (!entity.attributes._sliderInited) {
+         return;
+      }
 
       setSliderValue(item, entity, value);
    };
 
    $scope.toggleSwitch = function (item, entity, callback) {
-      if(item.type === TYPES.LIGHT && item.controlsEnabled) {
+      if (item.type === TYPES.LIGHT && item.controlsEnabled) {
          return;
       }
-      var domain = "homeassistant";
-      var group = item.id.split('.')[0];
+      let domain = 'homeassistant';
+      const group = item.id.split('.')[0];
 
-      if(['switch', 'light', 'fan'].indexOf(group) !== -1) domain = group;
+      if (['switch', 'light', 'fan'].indexOf(group) !== -1) {
+         domain = group;
+      }
 
-      var service = "toggle";
+      let service = 'toggle';
 
-      if(entity.state === "off") service = "turn_on";
-      else if(entity.state === "on") service = "turn_off";
+      if (entity.state === 'off') {
+         service = 'turn_on';
+      } else if (entity.state === 'on') {
+         service = 'turn_off';
+      }
 
       callService(item, domain, service, {}, callback);
    };
 
    $scope.dimmerToggle = function (item, entity, callback) {
-      if(item.action) {
+      if (item.action) {
          callFunction(item.action, [item, entity, callback]);
-      }
-      else if(angular.isString(item.id) && entity) {
+      } else if (angular.isString(item.id) && entity) {
          $scope.toggleSwitch(item, entity, callback);
       }
    };
@@ -1021,30 +1136,38 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $event.preventDefault();
       $event.stopPropagation();
 
-      var func = "action" + (action === "plus" ? "Plus" : "Minus");
+      const func = 'action' + (action === 'plus' ? 'Plus' : 'Minus');
 
-      if(item[func]) callFunction(item[func], [item, entity, $event]);
+      if (item[func]) {
+         callFunction(item[func], [item, entity, $event]);
+      }
 
       return false;
    };
 
    $scope.toggleLock = function (item, entity) {
-      var service;
+      let service;
 
-      if(entity.state === "locked") service = "unlock";
-      else if(entity.state === "unlocked") service = "lock";
+      if (entity.state === 'locked') {
+         service = 'unlock';
+      } else if (entity.state === 'unlocked') {
+         service = 'lock';
+      }
 
       callService(item, 'lock', service, {});
    };
 
    $scope.toggleVacuum = function (item, entity) {
-      var service;
-      if(entity.state === "off") service = "turn_on";
-      else if(entity.state === "on") service = "turn_off";
-      else if(['idle', 'docked', 'paused'].indexOf(entity.state) !== -1) {
-         service = "start";
+      let service;
+      if (entity.state === 'off') {
+         service = 'turn_on';
+      } else if (entity.state === 'on') {
+         service = 'turn_off';
+      } else if (['idle', 'docked', 'paused'].indexOf(entity.state) !== -1) {
+         service = 'start';
+      } else if (entity.state === 'cleaning') {
+         service = 'return_to_base';
       }
-      else if(entity.state === "cleaning") service = "return_to_base";
 
       callService(item, 'vacuum', service, {});
    };
@@ -1058,20 +1181,20 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.mutePlayer = function (muteState, item, entity) {
-      callService(item, 'media_player', 'volume_mute', {is_volume_muted: muteState});
+      callService(item, 'media_player', 'volume_mute', { is_volume_muted: muteState });
    };
 
    $scope.callScript = function (item, entity) {
-      var variables;
+      let variables;
 
-      if(typeof item.variables === "function") {
+      if (typeof item.variables === 'function') {
          variables = callFunction(item.variables, [item, entity]);
       } else {
          variables = item.variables || {};
       }
 
-      var serviceData = {
-         variables: variables
+      const serviceData = {
+         variables: variables,
       };
 
       callService(item, 'script', 'turn_on', serviceData);
@@ -1085,13 +1208,15 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $event.preventDefault();
       $event.stopPropagation();
 
-      if(entity.state === "off") return false;
-
-      if(!('brightness' in entity.attributes)) {
-         return addError("No brightness field in object");
+      if (entity.state === 'off') {
+         return false;
       }
 
-      var brightness = +entity.attributes.brightness + 25.5;
+      if (!('brightness' in entity.attributes)) {
+         return addError('No brightness field in object');
+      }
+
+      let brightness = +entity.attributes.brightness + 25.5;
 
       brightness = Math.min(brightness, 255);
 
@@ -1104,13 +1229,15 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $event.preventDefault();
       $event.stopPropagation();
 
-      if(entity.state === "off") return false;
-
-      if(!('brightness' in entity.attributes)) {
-         return addError("No brightness field in object");
+      if (entity.state === 'off') {
+         return false;
       }
 
-      var brightness = +entity.attributes.brightness - 25.5;
+      if (!('brightness' in entity.attributes)) {
+         return addError('No brightness field in object');
+      }
+
+      let brightness = +entity.attributes.brightness - 25.5;
 
       brightness = Math.max(brightness, 1);
 
@@ -1123,11 +1250,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $event.preventDefault();
       $event.stopPropagation();
 
-      var value = parseFloat(entity.state);
+      let value = parseFloat(entity.state);
 
       value += (entity.attributes.step || 1);
 
-      if(entity.attributes.max) {
+      if (entity.attributes.max) {
          value = Math.min(value, entity.attributes.max);
       }
 
@@ -1140,11 +1267,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $event.preventDefault();
       $event.stopPropagation();
 
-      var value = parseFloat(entity.state);
+      let value = parseFloat(entity.state);
 
       value -= (entity.attributes.step || 1);
 
-      if(entity.attributes.min) {
+      if (entity.attributes.min) {
          value = Math.max(value, entity.attributes.min);
       }
 
@@ -1154,38 +1281,41 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.setLightBrightness = function (item, brightness) {
-      var serviceData = {
-         brightness_pct: Math.round(brightness / 255 * 100 / 10) * 10
+      const serviceData = {
+         brightness_pct: Math.round(brightness / 255 * 100 / 10) * 10,
       };
 
       callService(item, 'light', 'turn_on', serviceData);
    };
 
-   $scope.getRGBStringFromArray = function( color ) {
-      if(!color) return null;
-      return "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
+   $scope.getRGBStringFromArray = function (color) {
+      if (!color) {
+         return null;
+      }
+      return 'rgb(' + color[0] + ',' + color[1] + ',' + color[2] + ')';
    };
 
-   $scope.getRGBArrayFromString = function( color ) {
-      if(!color || color.indexOf("rgb") !== 0) return null;
-
-      var colorValues;
-
-      if (color.indexOf("rgba") === 0) {
-         colorValues = color.substring(color.indexOf("(") + 1, color.lastIndexOf(",")).split(",");
+   $scope.getRGBArrayFromString = function (color) {
+      if (!color || color.indexOf('rgb') !== 0) {
+         return null;
       }
-      else {
-         colorValues = color.substring(color.indexOf("(") + 1, color.indexOf(")")).split(",");
+
+      let colorValues;
+
+      if (color.indexOf('rgba') === 0) {
+         colorValues = color.substring(color.indexOf('(') + 1, color.lastIndexOf(',')).split(',');
+      } else {
+         colorValues = color.substring(color.indexOf('(') + 1, color.indexOf(')')).split(',');
       }
 
       return [parseInt(colorValues[0]), parseInt(colorValues[1]), parseInt(colorValues[2])];
    };
 
    $scope.setLightColor = function (item, color) {
-      var colors = $scope.getRGBArrayFromString(color);
+      const colors = $scope.getRGBArrayFromString(color);
 
-      if(colors) {
-         callService(item, 'light', 'turn_on', {rgb_color: colors});
+      if (colors) {
+         callService(item, 'light', 'turn_on', { rgb_color: colors });
       }
    };
 
@@ -1194,14 +1324,14 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    });
 
    $scope.setInputNumber = function (item, value) {
-      callService(item, 'input_number', 'set_value', {value: value});
+      callService(item, 'input_number', 'set_value', { value: value });
    };
 
    $scope.setSelectOption = function ($event, item, entity, option) {
       $event.preventDefault();
       $event.stopPropagation();
 
-      callService(item, 'input_select', 'select_option', {option: option});
+      callService(item, 'input_select', 'select_option', { option: option });
 
       $scope.closeActiveSelect();
 
@@ -1212,7 +1342,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $event.preventDefault();
       $event.stopPropagation();
 
-      callService(item, 'media_player', 'select_source', {source: option});
+      callService(item, 'media_player', 'select_source', { source: option });
 
       $scope.closeActiveSelect();
 
@@ -1231,15 +1361,14 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $event.preventDefault();
       $event.stopPropagation();
 
-      var service;
-      var serviceData = {};
+      let service;
+      const serviceData = {};
 
-      if(item.useHvacMode) {
-         service = "set_hvac_mode";
+      if (item.useHvacMode) {
+         service = 'set_hvac_mode';
          serviceData.hvac_mode = option;
-      }
-      else {
-         service = "set_preset_mode";
+      } else {
+         service = 'set_preset_mode';
          serviceData.preset_mode = option;
       }
 
@@ -1255,11 +1384,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $event.preventDefault();
       $event.stopPropagation();
 
-      var value = parseFloat(entity.attributes.temperature);
+      let value = parseFloat(entity.attributes.temperature);
 
       value += (entity.attributes.target_temp_step || 1);
 
-      if(entity.attributes.max_temp) {
+      if (entity.attributes.max_temp) {
          value = Math.min(value, entity.attributes.max_temp);
       }
 
@@ -1272,11 +1401,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $event.preventDefault();
       $event.stopPropagation();
 
-      var value = parseFloat(entity.attributes.temperature);
+      let value = parseFloat(entity.attributes.temperature);
 
       value -= (entity.attributes.target_temp_step || 1);
 
-      if(entity.attributes.min_temp) {
+      if (entity.attributes.min_temp) {
          value = Math.max(value, entity.attributes.min_temp);
       }
 
@@ -1294,10 +1423,13 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.toggleCover = function (item, entity) {
-      var service;
+      let service;
 
-      if(entity.state === 'open') service = 'close_cover';
-      else if(entity.state === 'closed') service = 'open_cover';
+      if (entity.state === 'open') {
+         service = 'close_cover';
+      } else if (entity.state === 'closed') {
+         service = 'open_cover';
+      }
 
       if (service) {
          $scope.sendCover(service, item, entity);
@@ -1314,7 +1446,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $event.preventDefault();
       $event.stopPropagation();
 
-      callService(item, 'fan', 'set_speed', {speed: option});
+      callService(item, 'fan', 'set_speed', { speed: option });
 
       $scope.closeActiveSelect();
 
@@ -1322,11 +1454,13 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.actionAlarm = function (action, item, entity) {
-      var code = $scope.alarmCode;
+      const code = $scope.alarmCode;
 
-      var serviceData = {};
+      const serviceData = {};
 
-      if (code) serviceData.code = code;
+      if (code) {
+         serviceData.code = code;
+      }
 
       latestAlarmActions[item.id] = Date.now();
 
@@ -1342,18 +1476,17 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       preventAnimation = preventAnimation || false;
       showedPages = [];
 
-      if(activePage) {
-         showedPages = [activePage]
+      if (activePage) {
+         showedPages = [activePage];
       }
 
       showedPages.push(page);
 
       activePage = page;
 
-      if(CONFIG.transition === TRANSITIONS.SIMPLE) {
-         // do nothing
-      }
-      else {
+      if (CONFIG.transition === TRANSITIONS.SIMPLE) {
+         // Do nothing
+      } else {
          $timeout(function () {
             scrollToActivePage(preventAnimation);
          }, 20);
@@ -1374,10 +1507,10 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.openDatetime = function (item, entity) {
       $scope.activeDatetime = item;
 
-      if(entity.attributes && entity.attributes.has_date) {
-         var d = new Date();
+      if (entity.attributes && entity.attributes.has_date) {
+         const d = new Date();
 
-         $scope.datetimeString = d.getFullYear() + "";
+         $scope.datetimeString = d.getFullYear() + '';
          $scope.datetimeString += leadZero(d.getMonth() + 1);
          $scope.datetimeString += leadZero(d.getDate());
       }
@@ -1389,16 +1522,24 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.getPopupIframeStyles = function () {
-      if(!$scope.activeIframe || !$scope.activeIframe.iframeStyles) return null;
+      if (!$scope.activeIframe || !$scope.activeIframe.iframeStyles) {
+         return null;
+      }
 
-      var entity = $scope.getItemEntity($scope.activeIframe);
+      const entity = $scope.getItemEntity($scope.activeIframe);
 
-      var styles = $scope.itemField('iframeStyles', $scope.activeIframe, entity);
+      const styles = $scope.itemField('iframeStyles', $scope.activeIframe, entity);
 
-      if(!styles) return null;
+      if (!styles) {
+         return null;
+      }
 
-      for (var k in popupIframeStyles) delete popupIframeStyles[k];
-      for (k in styles) popupIframeStyles[k] = styles[k];
+      for (const k in popupIframeStyles) {
+         delete popupIframeStyles[k];
+      }
+      for (const k in styles) {
+         popupIframeStyles[k] = styles[k];
+      }
 
       return popupIframeStyles;
    };
@@ -1413,9 +1554,9 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.openPopup = function (item, entity, layout) {
       $scope.activePopup = {
-        item: item,
-        entity: entity,
-        layout: layout || item.popup
+         item: item,
+         entity: entity,
+         layout: layout || item.popup,
       };
    };
 
@@ -1423,8 +1564,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $scope.activePopup = null;
    };
 
-   function getHistoryObject(item, entity, config) {
-      var historyObject = {
+   function getHistoryObject (item, entity, config) {
+      const historyObject = {
          item: angular.copy(item),
          config: angular.copy(config),
          isLoading: true,
@@ -1437,15 +1578,15 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          });
       };
 
-      var entityId = $scope.itemField('entity', config, entity) || entity.entity_id;
+      const entityId = $scope.itemField('entity', config, entity) || entity.entity_id;
 
-      if(!entityId) {
+      if (!entityId) {
          historyObject.errorText = 'No entity was specified';
          return historyObject;
       }
 
-      var day = 24 * 60 * 60 * 1000;
-      var startDate = new Date(Date.now() - ($scope.itemField('offset', config, entity) || day)).toISOString();
+      const day = 24 * 60 * 60 * 1000;
+      const startDate = new Date(Date.now() - ($scope.itemField('offset', config, entity) || day)).toISOString();
 
       Api.getHistory(startDate, entityId)
          .then(function (data) {
@@ -1456,62 +1597,62 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                return;
             }
 
-            if(data.length === 0) {
+            if (data.length === 0) {
                historyObject.errorText = 'No history data found';
                return;
             }
 
-            var datasets = [];
-            var datasetOverride = [];
-            var yAxes = [];
-            var seenAxisIds = {};
+            const datasets = [];
+            const datasetOverride = [];
+            const yAxes = [];
+            const seenAxisIds = {};
 
             data.forEach(function (states) {
-               var firstStateInfo = states[0];
+               const firstStateInfo = states[0];
 
-               var dataset = states.map(function (state) {
+               const dataset = states.map(function (state) {
                   return { x: new Date(state.last_changed), y: state.state };
                });
 
                // Create extra state with current value.
                dataset.push({
                   x: Date.now(),
-                  y: $scope.states[firstStateInfo.entity_id].state
+                  y: $scope.states[firstStateInfo.entity_id].state,
                });
 
                datasets.push(dataset);
 
-               var seriesName = firstStateInfo.attributes.friendly_name;
-               var seriesUnit = firstStateInfo.attributes.unit_of_measurement;
+               const seriesName = firstStateInfo.attributes.friendly_name;
+               const seriesUnit = firstStateInfo.attributes.unit_of_measurement;
 
                // Either categorial or continuous data.
-               var yAxisType = Number.isNaN(parseFloat(dataset[dataset.length - 1].y)) ? 'category' : 'linear';
-               var yAxisId = yAxisType + (seriesUnit ? '-' + seriesUnit : '');
-               var createYAxis = false;
+               const yAxisType = Number.isNaN(parseFloat(dataset[dataset.length - 1].y)) ? 'category' : 'linear';
+               const yAxisId = yAxisType + (seriesUnit ? '-' + seriesUnit : '');
+               let createYAxis = false;
 
                // Create once and reuse same axis for multiple entities using same unit.
-               if(seriesUnit && !(seriesUnit in seenAxisIds)) {
+               if (seriesUnit && !(seriesUnit in seenAxisIds)) {
                   seenAxisIds[seriesUnit] = true;
                   createYAxis = true;
-               } else if(!seriesUnit) {
+               } else if (!seriesUnit) {
                   createYAxis = true;
                }
 
-               if(createYAxis) {
-                  var yLabels = null;
+               if (createYAxis) {
+                  let yLabels = null;
                   // Only non-continuous data needs explicit labels.
-                  if(yAxisType === 'category') {
+                  if (yAxisType === 'category') {
                      yLabels = [];
                      dataset.forEach(function (value) {
-                        if(yLabels.indexOf(value.y) === -1) {
+                        if (yLabels.indexOf(value.y) === -1) {
                            yLabels.push(value.y);
                         }
                      });
                      yLabels.sort().reverse();
                      // Special handling for labels when there is only one label present in history.
-                     if(yLabels.length === 1) {
+                     if (yLabels.length === 1) {
                         // on/off - add the other state so that y axis positioning is consistent.
-                        if(['on', 'off'].indexOf(yLabels[0]) !== -1) {
+                        if (['on', 'off'].indexOf(yLabels[0]) !== -1) {
                            yLabels = ['on', 'off'];
                         } else {
                            // Add dummy states to vertically center the actual state.
@@ -1535,25 +1676,25 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
             });
 
             // 'index' mode doesn't work well with multiple datasets - revert to default mode.
-            var interactionsMode = datasets.length > 1 ? 'nearest' : 'index';
+            const interactionsMode = datasets.length > 1 ? 'nearest' : 'index';
 
             historyObject.data = datasets;
             historyObject.datasetOverride = datasetOverride;
             historyObject.options = angular.merge({
                scales: {
-                  yAxes: yAxes
+                  yAxes: yAxes,
                },
                tooltips: {
-                  mode: interactionsMode
+                  mode: interactionsMode,
                },
                hover: {
-                 mode: interactionsMode
+                  mode: interactionsMode,
                },
                animation: {
-                  duration: 0
+                  duration: 0,
                },
                legend: {
-                 display: typeof entityId !== 'string'
+                  display: typeof entityId !== 'string',
                },
             }, $scope.itemField('options', config, entity));
 
@@ -1566,11 +1707,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                   function (newValue) {
                      historyObject.data[0].push({
                         x: Date.now(),
-                        y: newValue
+                        y: newValue,
                      });
                   }));
             } else {
-               entityId.forEach(function(entityId, index) {
+               entityId.forEach(function (entityId, index) {
                   historyObject.watchers.push($scope.$watch(
                      function () {
                         return $scope.states[entityId].state;
@@ -1578,7 +1719,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                      function (newValue) {
                         historyObject.data[index].push({
                            x: Date.now(),
-                           y: newValue
+                           y: newValue,
                         });
                      }));
                });
@@ -1589,9 +1730,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    }
 
    $scope.initTileHistory = function (item, entity) {
-      var key = "_historyObject";
+      const key = '_historyObject';
 
-      if(item[key]) return item[key];
+      if (item[key]) {
+         return item[key];
+      }
 
       item[key] = getHistoryObject(item, entity, item);
 
@@ -1599,9 +1742,9 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.openPopupHistory = function (item, entity) {
-      var key = "_popupHistory";
+      const key = '_popupHistory';
 
-      if(!item[key]) {
+      if (!item[key]) {
          item[key] = {
             styles: {
                width: '100vw',
@@ -1613,12 +1756,12 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                type: TYPES.HISTORY,
                id: item.id,
                title: false,
-               position: [0,0],
+               position: [0, 0],
                customStyles: {
                   width: '100%',
                   height: '100%',
                },
-            }, item.history)]
+            }, item.history)],
          };
       }
 
@@ -1628,9 +1771,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.openDoorEntry = function (item, entity) {
       $scope.activeDoorEntry = item;
 
-      if(doorEntryTimeout) clearTimeout(doorEntryTimeout);
+      if (doorEntryTimeout) {
+         clearTimeout(doorEntryTimeout);
+      }
 
-      if(CONFIG.doorEntryTimeout) {
+      if (CONFIG.doorEntryTimeout) {
          doorEntryTimeout = $timeout(function () {
             $scope.closeDoorEntry();
          }, CONFIG.doorEntryTimeout * 1000);
@@ -1640,7 +1785,9 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.closeDoorEntry = function () {
       $scope.activeDoorEntry = null;
 
-      if(doorEntryTimeout) clearTimeout(doorEntryTimeout);
+      if (doorEntryTimeout) {
+         clearTimeout(doorEntryTimeout);
+      }
    };
 
    $scope.openAlarm = function (item) {
@@ -1654,19 +1801,21 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.getCameraList = function () {
-      if(cameraList) return cameraList;
+      if (cameraList) {
+         return cameraList;
+      }
 
-      var res = [];
+      const res = [];
 
       $scope.pages.forEach(function (page) {
          (page.groups || []).forEach(function (group) {
             (group.items || []).forEach(function (item) {
-               if([TYPES.CAMERA, TYPES.CAMERA_THUMBNAIL, TYPES.CAMERA_STREAM]
-                     .indexOf(item.type) !== -1 && !item.hideFromList) {
+               if ([TYPES.CAMERA, TYPES.CAMERA_THUMBNAIL, TYPES.CAMERA_STREAM]
+                  .indexOf(item.type) !== -1 && !item.hideFromList) {
                   res.push(item);
                }
-            })
-         })
+            });
+         });
       });
 
       cameraList = res;
@@ -1675,11 +1824,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    function scrollToActivePage (preventAnimation) {
-      var index = $scope.pages.indexOf(activePage);
-      var translate = '-' + (index * 100) + '%';
+      const index = $scope.pages.indexOf(activePage);
+      const translate = '-' + (index * 100) + '%';
       $scope.pagesContainerStyles.transform = getTransformCssValue(translate);
 
-      if(preventAnimation) {
+      if (preventAnimation) {
          $scope.pagesContainerStyles.transition = 'none';
 
          $timeout(function () {
@@ -1688,15 +1837,15 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       }
    }
 
-   function getTransformCssValue(translateValue) {
-      var params;
+   function getTransformCssValue (translateValue) {
+      let params;
 
-      if(CONFIG.transition === TRANSITIONS.ANIMATED_GPU) {
+      if (CONFIG.transition === TRANSITIONS.ANIMATED_GPU) {
          params = $scope.isMenuOnTheLeft ? [0, translateValue, 0] : [translateValue, 0, 0];
          return 'translate3d(' + params.join(',') + ')';
       }
 
-      if(CONFIG.transition === TRANSITIONS.ANIMATED) {
+      if (CONFIG.transition === TRANSITIONS.ANIMATED) {
          params = $scope.isMenuOnTheLeft ? [0, translateValue] : [translateValue, 0];
          return 'translate(' + params.join(',') + ')';
       }
@@ -1707,7 +1856,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.shouldDrawPage = function (page) {
-      if(CONFIG.transition === TRANSITIONS.SIMPLE) {
+      if (CONFIG.transition === TRANSITIONS.SIMPLE) {
          return $scope.isPageActive(page);
       }
 
@@ -1715,9 +1864,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.isHidden = function (object, entity) {
-      if(!('hidden' in object)) return false;
+      if (!('hidden' in object)) {
+         return false;
+      }
 
-      if(typeof object.hidden === "function") {
+      if (typeof object.hidden === 'function') {
          return callFunction(object.hidden, [object, entity]);
       }
 
@@ -1726,7 +1877,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.isMenuOnTheLeft = CONFIG.menuPosition === MENU_POSITIONS.LEFT;
 
-   var hasScrolledDuringPan = false;
+   let hasScrolledDuringPan = false;
 
    $scope.onPageScroll = function () {
       // Will disable panning when page starts scrolling.
@@ -1737,13 +1888,13 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.isPanEnabled = function (recognizer, event) {
-      if(hasOpenPopup()) {
+      if (hasOpenPopup()) {
          return;
       }
 
       // Workaround for touch events - cancel recognition on scroll event.
-      if(event && event.pointerType === 'touch') {
-         if(event.isFirst) {
+      if (event && event.pointerType === 'touch') {
+         if (event.isFirst) {
             hasScrolledDuringPan = false;
          }
 
@@ -1751,14 +1902,14 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       }
 
       return true;
-   }
+   };
 
    $scope.onPagePan = function (event) {
-      if(event.eventType & (Hammer.INPUT_END | Hammer.INPUT_CANCEL)) {
+      if (event.eventType & (Hammer.INPUT_END | Hammer.INPUT_CANCEL)) {
          // Re-enable transitions.
          $scope.pagesContainerStyles.transition = null;
 
-         if(event.eventType === Hammer.INPUT_CANCEL) {
+         if (event.eventType === Hammer.INPUT_CANCEL) {
             // Reverts any partial scrolling.
             scrollToActivePage();
             return;
@@ -1768,27 +1919,27 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          $scope.pagesContainerStyles.transition = 'none';
       }
 
-      var pageCount = $scope.pages.length;
-      var pageIndex = $scope.pages.indexOf(activePage);
-      var initialOffset = -pageIndex * 100;
-      var viewportDimension = $scope.isMenuOnTheLeft ? window.innerHeight : window.innerWidth;
-      var panDelta = $scope.isMenuOnTheLeft ? event.deltaY : event.deltaX;
-      var panPercentViewport = (panDelta / viewportDimension) * 100;
-      var newOffset = initialOffset + panPercentViewport;
+      const pageCount = $scope.pages.length;
+      const pageIndex = $scope.pages.indexOf(activePage);
+      const initialOffset = -pageIndex * 100;
+      const viewportDimension = $scope.isMenuOnTheLeft ? window.innerHeight : window.innerWidth;
+      const panDelta = $scope.isMenuOnTheLeft ? event.deltaY : event.deltaX;
+      const panPercentViewport = (panDelta / viewportDimension) * 100;
+      const newOffset = initialOffset + panPercentViewport;
 
       // If gesture is finished, determine whether page should switch or be rolled back.
-      if(event.isFinal) {
-         var targetPageIndex = pageIndex;
+      if (event.isFinal) {
+         let targetPageIndex = pageIndex;
 
          // Switch to other page if:
          // - panned 50% of new page onto screen
          // or
          // - the velocity of movement was above the threshold (and velocity direction matches delta direction)
-         var velocity = $scope.isMenuOnTheLeft ? event.velocityY : event.velocityX;
-         if(Math.abs(panPercentViewport) >= 50 || (Math.abs(velocity) > .5 && velocity < 0 === panDelta < 0)) {
-            var potentialTargetIndex = targetPageIndex + (newOffset < initialOffset ? 1 : -1);
+         const velocity = $scope.isMenuOnTheLeft ? event.velocityY : event.velocityX;
+         if (Math.abs(panPercentViewport) >= 50 || (Math.abs(velocity) > .5 && velocity < 0 === panDelta < 0)) {
+            const potentialTargetIndex = targetPageIndex + (newOffset < initialOffset ? 1 : -1);
             // Set new page index if new index is within range.
-            if(potentialTargetIndex >= 0 && potentialTargetIndex < pageCount) {
+            if (potentialTargetIndex >= 0 && potentialTargetIndex < pageCount) {
                targetPageIndex = potentialTargetIndex;
             }
          }
@@ -1798,10 +1949,10 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       }
 
       // Check that new offset is within range of pages area.
-      if(newOffset <= 0 && newOffset >= ((pageCount - 1) * -100)) {
+      if (newOffset <= 0 && newOffset >= ((pageCount - 1) * -100)) {
          $scope.pagesContainerStyles.transform = getTransformCssValue(newOffset + '%');
       }
-   }
+   };
 
    function hasOpenPopup () {
       return $scope.activeCamera || $scope.activeDoorEntry || $scope.activeIframe
@@ -1809,10 +1960,9 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    }
 
    $scope.toggleSelect = function (item) {
-      if($scope.selectOpened(item)) {
+      if ($scope.selectOpened(item)) {
          $scope.closeActiveSelect();
-      }
-      else {
+      } else {
          $scope.openSelect(item);
       }
    };
@@ -1830,110 +1980,132 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.inputAlarm = function (num) {
-      $scope.alarmCode = $scope.alarmCode || "";
+      $scope.alarmCode = $scope.alarmCode || '';
 
       $scope.alarmCode += num;
    };
 
    $scope.clearAlarm = function () {
-      $scope.alarmCode = "";
+      $scope.alarmCode = '';
    };
 
    $scope.sendDatetime = function () {
-      if(!$scope.activeDatetimeValid()) return;
+      if (!$scope.activeDatetimeValid()) {
+         return;
+      }
 
-      var item = $scope.activeDatetime;
-      var entity = $scope.getItemEntity(item);
+      const item = $scope.activeDatetime;
+      const entity = $scope.getItemEntity(item);
 
-      var str = $scope.getActiveDatetimeInput();
-      var dt = str.split(' ');
+      const str = $scope.getActiveDatetimeInput();
+      const dt = str.split(' ');
 
-      var serviceData = {};
+      const serviceData = {};
 
-      if(entity.attributes.has_date) serviceData.date = dt[0];
-      if(entity.attributes.has_time) serviceData.time = dt[1] || dt[0];
+      if (entity.attributes.has_date) {
+         serviceData.date = dt[0];
+      }
+      if (entity.attributes.has_time) {
+         serviceData.time = dt[1] || dt[0];
+      }
 
-      callService(item, 'input_datetime', 'set_datetime', serviceData)
+      callService(item, 'input_datetime', 'set_datetime', serviceData);
    };
 
    $scope.inputDatetime = function (num) {
-      var entity = $scope.getItemEntity($scope.activeDatetime);
+      const entity = $scope.getItemEntity($scope.activeDatetime);
 
-      if(!entity) return;
+      if (!entity) {
+         return;
+      }
 
-      var placeholder = getDatetimePlaceholder(entity);
+      let placeholder = getDatetimePlaceholder(entity);
 
-      placeholder = placeholder.replace(/\W/gi, "");
+      placeholder = placeholder.replace(/\W/gi, '');
 
-      $scope.datetimeString = $scope.datetimeString || "";
+      $scope.datetimeString = $scope.datetimeString || '';
 
-      if($scope.datetimeString.length >= placeholder.length) return;
+      if ($scope.datetimeString.length >= placeholder.length) {
+         return;
+      }
 
       $scope.datetimeString += num;
    };
 
    $scope.clearCharDatetime = function () {
-      if($scope.datetimeString) {
+      if ($scope.datetimeString) {
          $scope.datetimeString = $scope.datetimeString
             .slice(0, $scope.datetimeString.length - 1);
       }
    };
 
    $scope.getActiveDatetimeInput = function () {
-      var entity = $scope.getItemEntity($scope.activeDatetime);
-      var placeholder = getDatetimePlaceholder(entity);
+      const entity = $scope.getItemEntity($scope.activeDatetime);
+      const placeholder = getDatetimePlaceholder(entity);
 
-      var res = $scope.datetimeString || "";
+      const res = $scope.datetimeString || '';
 
-      var i = 0;
+      let i = 0;
 
       return placeholder.replace(/\w|\W/gi, function (match, index) {
-         if(i >= res.length) return "";
+         if (i >= res.length) {
+            return '';
+         }
 
-         if(/\W/.test(match)) return match;
+         if (/\W/.test(match)) {
+            return match;
+         }
 
          return res[i++];
       });
    };
 
    $scope.getActiveDatetimePlaceholder = function () {
-      var entity = $scope.getItemEntity($scope.activeDatetime);
-      var placeholder = getDatetimePlaceholder(entity);
+      const entity = $scope.getItemEntity($scope.activeDatetime);
+      const placeholder = getDatetimePlaceholder(entity);
 
-      var dt = $scope.getActiveDatetimeInput() || "";
+      const dt = $scope.getActiveDatetimeInput() || '';
 
       return placeholder.slice(dt.length);
    };
 
    $scope.activeDatetimeValid = function () {
-      var entity = $scope.getItemEntity($scope.activeDatetime);
+      const entity = $scope.getItemEntity($scope.activeDatetime);
 
-      if(!entity) return false;
+      if (!entity) {
+         return false;
+      }
 
-      var placeholder = getDatetimePlaceholder(entity);
+      let placeholder = getDatetimePlaceholder(entity);
 
-      placeholder = placeholder.replace(/\W/gi, "");
+      placeholder = placeholder.replace(/\W/gi, '');
 
-      $scope.datetimeString = $scope.datetimeString || "";
+      $scope.datetimeString = $scope.datetimeString || '';
 
       return $scope.datetimeString.length === placeholder.length;
    };
 
    function getDatetimePlaceholder (entity) {
-      var res = [];
+      const res = [];
 
-      if(!entity || !entity.attributes) return null;
+      if (!entity || !entity.attributes) {
+         return null;
+      }
 
-      if(entity.attributes.has_date) res.push("YYYY-MM-DD");
-      if(entity.attributes.has_time) res.push("hh:mm");
+      if (entity.attributes.has_date) {
+         res.push('YYYY-MM-DD');
+      }
+      if (entity.attributes.has_time) {
+         res.push('hh:mm');
+      }
 
-      return res.join(" ");
+      return res.join(' ');
    }
 
 
-   /// INIT
+   // / INIT
 
-   var realReadyState = false;
+   let realReadyState = false;
 
    Api.onError(function (data) {
       console.error(data);
@@ -1941,16 +2113,16 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    });
 
    Api.onReady(function () {
-      Api.subscribeEvents("state_changed", function (res) {
+      Api.subscribeEvents('state_changed', function (res) {
          debugLog('subscribed to state_changed', res);
       });
 
-      Api.subscribeEvents("tileboard", function (res) {
+      Api.subscribeEvents('tileboard', function (res) {
          debugLog('subscribed to tileboard', res);
       });
 
       Api.getStates(function (res) {
-         if(res.success) {
+         if (res.success) {
             debugLog(res.result);
 
             setStates(res.result);
@@ -1960,7 +2132,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          realReadyState = true;
          callFunction(CONFIG.onReady);
 
-         var pageNum = $location.hash();
+         let pageNum = $location.hash();
 
          if (!CONFIG.rememberLastPage || !$scope.pages[pageNum]) {
             pageNum = 0;
@@ -1975,11 +2147,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    Api.onUnready(function () {
       realReadyState = false;
 
-      //$scope.ready = false;
+      // $scope.ready = false;
 
-      //we give a timeout to prevent blinking (if reconnected)
+      // we give a timeout to prevent blinking (if reconnected)
       $timeout(function () {
-         if(realReadyState === false) {
+         if (realReadyState === false) {
             $scope.ready = false;
          }
       }, 1000);
@@ -1994,16 +2166,16 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    });
 
    $scope.$watchGroup([
-     'activePage.scrolledVertically',
-     'activePage.scrolledHorizontally',
+      'activePage.scrolledVertically',
+      'activePage.scrolledHorizontally',
    ], updateView);
 
    function calcGroupSizes (group) {
-      var maxWidth = 0;
-      var maxHeight = 0;
+      let maxWidth = 0;
+      let maxHeight = 0;
 
-      for (var i = 0; i < (group.items || []).length; i++) {
-         var item = group.items[i];
+      for (let i = 0; i < (group.items || []).length; i++) {
+         const item = group.items[i];
 
          maxHeight = Math.max(maxHeight, item.position[1] + (item.height || 1));
          maxWidth = Math.max(maxWidth, item.position[0] + (item.width || 1));
@@ -2011,8 +2183,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
       return {
          width: maxWidth,
-         height: maxHeight
-      }
+         height: maxHeight,
+      };
    }
 
    function getContext () {
@@ -2026,7 +2198,9 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    }
 
    function callFunction (func, args) {
-      if(typeof func !== "function") return func;
+      if (typeof func !== 'function') {
+         return func;
+      }
 
       return func.apply(getContext(), args || []);
    }
@@ -2035,28 +2209,34 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       Api.send(data, function (res) {
          updateView();
 
-         if(callback) callback(res);
+         if (callback) {
+            callback(res);
+         }
       });
    }
 
-   function callService(item, domain, service, data, callback) {
-      if(item.loading) return;
+   function callService (item, domain, service, data, callback) {
+      if (item.loading) {
+         return;
+      }
 
       item.loading = true;
 
-      var serviceData = angular.extend({entity_id: item.id}, data)
+      const serviceData = angular.extend({ entity_id: item.id }, data);
 
       Api.callService(domain, service, serviceData, function (res) {
          item.loading = false;
 
          updateView();
 
-         if(callback) callback(res);
+         if (callback) {
+            callback(res);
+         }
       });
    }
 
    function getItemFieldValue (field, item, entity) {
-      var value = item;
+      let value = item;
       field.split('.').forEach(function (f) {
          value = (typeof value === 'object') ? value[f] : undefined;
       });
@@ -2064,56 +2244,74 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    }
 
    function parseFieldValue (value, item, entity) {
-      if(!value) return null;
+      if (!value) {
+         return null;
+      }
 
-      if(typeof value === "function") return callFunction(value, [item, entity]);
-      if(typeof value === "string") return parseString(value, entity);
+      if (typeof value === 'function') {
+         return callFunction(value, [item, entity]);
+      }
+      if (typeof value === 'string') {
+         return parseString(value, entity);
+      }
 
       return value;
    }
 
    function parseVariable (value, entity) {
-      if(value[0] === "@") return getObjectAttr(entity, value.slice(1));
-      if(value[0] === "&") return getEntityAttr(value.slice(1));
+      if (value[0] === '@') {
+         return getObjectAttr(entity, value.slice(1));
+      }
+      if (value[0] === '&') {
+         return getEntityAttr(value.slice(1));
+      }
 
       return value;
    }
 
    function parseString (value, entity) {
       return value.replace(/([&@][\w\d._]+)/gi, function (match, contents, offset) {
-         if(match[0] === "&" && match.split('.').length < 3) return match;
+         if (match[0] === '&' && match.split('.').length < 3) {
+            return match;
+         }
 
-         var res = parseVariable(match, entity);
+         const res = parseVariable(match, entity);
 
-         if(typeof res === "undefined") {
-            if(match === value) return "";
+         if (typeof res === 'undefined') {
+            if (match === value) {
+               return '';
+            }
 
             return match;
          }
 
-         if(res === null) return "";
+         if (res === null) {
+            return '';
+         }
 
          return res;
       });
    }
 
    function escapeClass (text) {
-      return text && typeof text === "string"
+      return text && typeof text === 'string'
          ? text.replace(/[^a-z0-9]/gi, '_').toLowerCase() : 'non';
    }
 
    function getEntityAttr (str) {
-      var path = str.split('.');
+      const path = str.split('.');
 
-      if(path.length < 3) return;
+      if (path.length < 3) {
+         return;
+      }
 
-      var entity = $scope.states[path.slice(0, 2).join('.')] || null;
+      const entity = $scope.states[path.slice(0, 2).join('.')] || null;
 
       return getObjectAttr(entity, path.slice(2).join('.'));
    }
 
    function getObjectAttr (obj, path) {
-      var res = obj;
+      let res = obj;
 
       path.split('.').forEach(function (key) {
          res = typeof res === 'object' && res ? res[key] : undefined;
@@ -2129,9 +2327,13 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    }
 
    function setNewState (key, state) {
-      if(!$scope.states[key]) $scope.states[key] = state;
+      if (!$scope.states[key]) {
+         $scope.states[key] = state;
+      }
 
-      for(var k in state) $scope.states[key][k] = state[k];
+      for (const k in state) {
+         $scope.states[key][k] = state[k];
+      }
    }
 
    function checkStatesTriggers (key, state) {
@@ -2139,10 +2341,10 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    }
 
    function checkAlarmState (key, state) {
-      if(key in latestAlarmActions) {
-         var ts = latestAlarmActions[key];
+      if (key in latestAlarmActions) {
+         const ts = latestAlarmActions[key];
 
-         if(Date.now() - ts < 3000) {
+         if (Date.now() - ts < 3000) {
             $scope.closeAlarm();
             updateView();
          }
@@ -2150,68 +2352,78 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    }
 
    function triggerEvents (eventData) {
-      if(!CONFIG.events) return;
+      if (!CONFIG.events) {
+         return;
+      }
 
       CONFIG.events.forEach(function (event) {
-         if (eventData.command !== event.command) return;
+         if (eventData.command !== event.command) {
+            return;
+         }
 
-         if (typeof event.action === "function") {
+         if (typeof event.action === 'function') {
             callFunction(event.action, [eventData]);
          }
       });
    }
 
    function handleMessage (data) {
-      if(data.type === "event") handleEvent(data.event);
+      if (data.type === 'event') {
+         handleEvent(data.event);
+      }
    }
 
    function handleEvent (event) {
       try {
-         if (event.event_type === "state_changed") {
+         if (event.event_type === 'state_changed') {
             debugLog('state change', event.data.entity_id, event.data.new_state);
 
             setNewState(event.data.entity_id, event.data.new_state);
             checkStatesTriggers(event.data.entity_id, event.data.new_state);
-         }
-         else if (event.event_type === "tileboard") {
+         } else if (event.event_type === 'tileboard') {
             debugLog('tileboard', event.data);
 
             triggerEvents(event.data);
          }
+      } catch (e) {
+         console.error(e);
       }
-      catch (e) {console.error(e);}
       updateView();
    }
 
    function addError (error) {
-      if(!CONFIG.ignoreErrors) Noty.addObject({
-         type: Noty.ERROR,
-         title: 'Error',
-         message: error,
-         lifetime: 10
-      });
+      if (!CONFIG.ignoreErrors) {
+         Noty.addObject({
+            type: Noty.ERROR,
+            title: 'Error',
+            message: error,
+            lifetime: 10,
+         });
+      }
    }
 
-   function warnUnknownItem(item) {
-      var notyId = item.id + '_not_found';
-      if(!CONFIG.ignoreErrors && !Noty.hasSeenNoteId(notyId)) {
+   function warnUnknownItem (item) {
+      const notyId = item.id + '_not_found';
+      if (!CONFIG.ignoreErrors && !Noty.hasSeenNoteId(notyId)) {
          Noty.addObject({
             type: Noty.WARNING,
             title: 'Entity not found',
             message: 'Entity "' + item.id + '" not found',
-            id: notyId
+            id: notyId,
          });
       }
    }
 
    function debugLog () {
-      if(CONFIG.debug) {
+      if (CONFIG.debug) {
          console.log.apply(console, [].slice.call(arguments));
       }
    }
 
    function updateView () {
-      if(!$scope.$$phase) $scope.$apply();
+      if (!$scope.$$phase) {
+         $scope.$apply();
+      }
    }
 
    // @ts-ignore
@@ -2228,22 +2440,28 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    function pingConnection () {
-      if(!$scope.ready || realReadyState === false) return; // no reason to ping if unready was fired
+      if (!$scope.ready || realReadyState === false) {
+         return;
+      } // no reason to ping if unready was fired
 
-      var timeout = 3000;
+      const timeout = 3000;
 
-      var success = false;
+      let success = false;
 
       Api.sendPing(function (res) {
-         if('id' in res) success = true;
+         if ('id' in res) {
+            success = true;
+         }
       });
 
       $timeout(function () {
-         if(success) return;
+         if (success) {
+            return;
+         }
 
          realReadyState = false;
 
-         var noty = Noty.addObject({
+         const noty = Noty.addObject({
             type: Noty.WARNING,
             title: 'Ping unsuccessful',
             message: 'Trying to reconnect',
@@ -2251,10 +2469,12 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
          Api.forceReconnect();
 
-         var destroy = Api.onReady(function () {
+         const destroy = Api.onReady(function () {
             destroy();
 
-            if(noty) noty.remove();
+            if (noty) {
+               noty.remove();
+            }
 
             Noty.addObject({
                type: Noty.SUCCESS,
@@ -2262,15 +2482,14 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
                message: 'Reconnection successful',
                lifetime: 1,
             });
-
          });
       }, timeout);
    }
 
-   if(CONFIG.pingConnection !== false) {
+   if (CONFIG.pingConnection !== false) {
       setInterval(pingConnection, 5000);
 
-      window.addEventListener("focus", function () {
+      window.addEventListener('focus', function () {
          pingConnection();
       });
    }
