@@ -15,10 +15,10 @@ jobs:
 
       - name: Build app
         run: |
-          npm ci \
-          npm run build \
-          cp config.example.js build \
-          pushd build \
+          npm ci
+          npm run build
+          cp config.example.js build
+          pushd build
           zip -qr "../TileBoard.zip" .
 
       - name: Create release
@@ -31,7 +31,7 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
-          body: This release contains version ${{ github.ref }} of the TileBoard app. Check "assets" section for downloading the package.
+          body: Check "assets" section for links to download TileBoard.
 
       - name: Upload assets
         uses: actions/upload-release-asset@v1
