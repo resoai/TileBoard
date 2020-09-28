@@ -5,7 +5,7 @@ import { TYPES, FEATURES, HEADER_ITEMS, MENU_POSITIONS, GROUP_ALIGNS, TRANSITION
 import { debounce, leadZero, toAbsoluteServerURL } from '../globals/utils';
 import Noty from '../models/noty';
 
-App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($scope, $timeout, $location, Api) {
+App.controller('Main', function ($scope, $timeout, $location, Api) {
    if (!window.CONFIG) {
       return;
    }
@@ -208,8 +208,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       const key = 'mapStyles' + zoom + (item.width || '1') + (item.height || '1');
 
       if (!obj[key]) {
-         const width = item.width || 1,
-            height = item.height || 1;
+         const width = item.width || 1;
+         const height = item.height || 1;
          const tileSize = page.tileSize || CONFIG.tileSize;
          const name = obj.friendly_name || ' ';
 
@@ -2493,4 +2493,4 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          pingConnection();
       });
    }
-}]);
+});

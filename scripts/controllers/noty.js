@@ -2,9 +2,7 @@ import { App } from '../app';
 import { NOTIES_POSITIONS } from '../globals/constants';
 import Noty from '../models/noty';
 
-App.controller('Noty', ['$scope', NotyController]);
-
-function NotyController ($scope) {
+App.controller('Noty', function ($scope) {
    let notiesClasses = null;
 
    $scope.getNoties = function () {
@@ -36,4 +34,4 @@ function NotyController ($scope) {
          $scope.$digest();
       }
    });
-}
+});

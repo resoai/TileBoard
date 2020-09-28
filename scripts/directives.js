@@ -118,7 +118,7 @@ App.directive('camera', function () {
    };
 });
 
-App.directive('cameraThumbnail', ['Api', function (Api) {
+App.directive('cameraThumbnail', function (Api) {
    return {
       restrict: 'AE',
       replace: true,
@@ -205,9 +205,9 @@ App.directive('cameraThumbnail', ['Api', function (Api) {
          }
       },
    };
-}]);
+});
 
-App.directive('cameraStream', ['Api', function (Api) {
+App.directive('cameraStream', function (Api) {
    return {
       restrict: 'AE',
       replace: true,
@@ -278,9 +278,9 @@ App.directive('cameraStream', ['Api', function (Api) {
          });
       },
    };
-}]);
+});
 
-App.directive('clock', ['$interval', function ($interval) {
+App.directive('clock', function ($interval) {
    return {
       restrict: 'AE',
       replace: true,
@@ -331,10 +331,10 @@ App.directive('clock', ['$interval', function ($interval) {
          });
       },
    };
-}]);
+});
 
 
-App.directive('iframeTile', ['$interval', function ($interval) {
+App.directive('iframeTile', function ($interval) {
    return {
       restrict: 'A',
       replace: false,
@@ -366,23 +366,21 @@ App.directive('iframeTile', ['$interval', function ($interval) {
          }
       },
    };
-}]);
+});
 
 
-App.directive('headerItem', ['$interval', function ($interval) {
+App.directive('headerItem', function () {
    return {
       restrict: 'AE',
       replace: false,
       scope: '=',
       templateUrl: 'header-items.html',
-      link: function ($scope, $el, attrs) {
-
-      },
+      link: function ($scope, $el, attrs) {},
    };
-}]);
+});
 
 
-App.directive('date', ['$interval', function ($interval) {
+App.directive('date', function ($interval) {
    return {
       restrict: 'AE',
       replace: true,
@@ -400,10 +398,10 @@ App.directive('date', ['$interval', function ($interval) {
          }, 60 * 1000);
       },
    };
-}]);
+});
 
 
-App.directive('onScroll', [function () {
+App.directive('onScroll', function () {
    return {
       restrict: 'A',
       scope: {
@@ -439,7 +437,7 @@ App.directive('onScroll', [function () {
          });
       },
    };
-}]);
+});
 
 // Custom directives to fix angularjs bug with dynamic max values being overriden to 100.
 // https://github.com/angular/angular.js/issues/6726
