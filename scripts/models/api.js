@@ -41,6 +41,12 @@ App.provider('Api', function () {
          }
 
          this._init();
+
+         window.onbeforeunload = event => {
+            if (this.socket && this.socket.readyState < WebSocket.CLOSING) {
+               this.socket.close();
+            }
+         };
       }
 
       $Api.prototype._init = function () {
@@ -223,7 +229,7 @@ App.provider('Api', function () {
       $Api.prototype._connect = function () {
          const self = this;
 
-         if (this.socket && this.socket.readyState < 2) {
+         if (this.socket && this.socket.readyState < WebSocket.CLOSING) {
             return;
          } // opened or connecting
 
@@ -253,7 +259,7 @@ App.provider('Api', function () {
       };
 
       $Api.prototype.forceReconnect = function () {
-         if (this.socket && this.socket.readyState < 2) {
+         if (this.socket && this.socket.readyState < WebSocket.CLOSING) {
             this.socket.close();
          } else {
             this._reconnect();
