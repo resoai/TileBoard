@@ -40,7 +40,7 @@
     "@types/hls.js": "^0.13.1",
     "@types/rollup-plugin-commonjs": "^9.3.1",
     "babel-plugin-angularjs-annotate": "^0.10.0",
-    "eslint": "^7.9.0",
+    "eslint": "^7.10.0",
     "husky": "^4.3.0",
     "less": "^3.12.2",
     "npm-force-resolutions": "0.0.3",
