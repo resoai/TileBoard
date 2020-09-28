@@ -1,3 +1,9 @@
+import angular from 'angular';
+import { App } from '../app';
+import { TOKEN_CACHE_KEY } from '../globals/constants';
+import { toAbsoluteServerURL } from '../globals/utils';
+import Noty from '../models/noty';
+
 App.provider('Api', function () {
    var wsUrl;
    var authToken;
@@ -86,9 +92,11 @@ App.provider('Api', function () {
       $Api.prototype.onReady = function (callback) {
          if(this.status === STATUS_READY) {
             try {
-               callback({status: STATUS_READY});
+               callback({ status: STATUS_READY });
             }
-            catch (e) {}
+            catch (e) {
+               // Ignore
+            }
          }
 
          return this.on('ready', callback)
@@ -139,8 +147,9 @@ App.provider('Api', function () {
                switch (response.status) {
                   case 401:
                      redirectOAuth();
+                     return;
                   default:
-                     Noty.add(Noty.ERROR, 'Error in REST api', 'Code ' + response.status + ' retrieved for ' + request.url + '.');
+                     window.Noty.add(window.Noty.ERROR, 'Error in REST api', 'Code ' + response.status + ' retrieved for ' + request.url + '.');
                      return null;
                }
             });

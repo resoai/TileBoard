@@ -1,5 +1,14 @@
+import angular from 'angular';
+import Hammer from 'hammerjs';
+import { App } from '../app';
+import { TYPES, FEATURES, HEADER_ITEMS, MENU_POSITIONS, GROUP_ALIGNS, TRANSITIONS, MAPBOX_MAP, YANDEX_MAP } from '../globals/constants';
+import { debounce, leadZero, toAbsoluteServerURL } from '../globals/utils';
+import Noty from '../models/noty';
+
 App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($scope, $timeout, $location, Api) {
    if(!window.CONFIG) return;
+
+   const CONFIG = window.CONFIG;
 
    $scope.pages = CONFIG.pages;
    $scope.pagesContainerStyles = {};
@@ -196,6 +205,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          var sizes = Math.ceil(tileSize * width) + ',' + Math.ceil((tileSize * height) + 80);
 
          var url;
+         var label;
+         var marker;
 
          if(item.map === YANDEX_MAP) {
             var icon = 'round';
@@ -212,8 +223,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
             coords = obj.longitude + ',' + obj.latitude;
             sizes = sizes.replace(',', 'x');
 
-            var label = name[0].toLowerCase();
-            var marker = "pin-s-" + label + "(" + obj.longitude + ',' + obj.latitude + ")";
+            label = name[0].toLowerCase();
+            marker = "pin-s-" + label + "(" + obj.longitude + ',' + obj.latitude + ")";
             var style = "mapbox/streets-v11";
 
             if(CONFIG.mapboxStyle) {
@@ -234,8 +245,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
             coords = obj.latitude + ',' + obj.longitude;
             sizes = sizes.replace(',', 'x');
 
-            var label = name[0].toUpperCase();
-            var marker = encodeURIComponent("color:gray|label:"+label+"|" + coords);
+            label = name[0].toUpperCase();
+            marker = encodeURIComponent("color:gray|label:"+label+"|" + coords);
 
             url = "https://maps.googleapis.com/maps/api/staticmap?center="
                + coords + "&zoom=" + zoom + "&size=" + sizes + "&scale=2&maptype=roadmap&markers=" + marker;
@@ -918,10 +929,6 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    $scope.getGaugeField = function (field, item, entity) {
       if(!item) return null;
 
-      if(typeof item.filter === "function") {
-         return callFunction(item.filter, [value, item, entity]);
-      }
-
       if(item.settings && field in item.settings) {
          return parseFieldValue(item.settings[field], item, entity);
       }
@@ -1224,14 +1231,15 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $event.preventDefault();
       $event.stopPropagation();
 
+      var service;
       var serviceData = {};
 
       if(item.useHvacMode) {
-         var service = "set_hvac_mode";
+         service = "set_hvac_mode";
          serviceData.hvac_mode = option;
       }
       else {
-         var service = "set_preset_mode";
+         service = "set_preset_mode";
          serviceData.preset_mode = option;
       }
 
@@ -1278,7 +1286,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.setClimateTemp = function (item, value) {
-      callService(item, 'climate', 'set_temperature', {temperature: value});
+      callService(item, 'climate', 'set_temperature', { temperature: value });
    };
 
    $scope.sendCover = function (service, item, entity) {
@@ -1286,10 +1294,14 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    };
 
    $scope.toggleCover = function (item, entity) {
-      if(entity.state === "open") service = "close_cover";
-      else if(entity.state === "closed") service = "open_cover";
+      var service;
 
-      $scope.sendCover(service, item, entity);
+      if(entity.state === 'open') service = 'close_cover';
+      else if(entity.state === 'closed') service = 'open_cover';
+
+      if (service) {
+         $scope.sendCover(service, item, entity);
+      }
    };
 
    $scope.openFanSpeedSelect = function ($event, item) {
@@ -1339,7 +1351,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       activePage = page;
 
       if(CONFIG.transition === TRANSITIONS.SIMPLE) {
-
+         // do nothing
       }
       else {
          $timeout(function () {
@@ -1438,6 +1450,11 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       Api.getHistory(startDate, entityId)
          .then(function (data) {
             historyObject.isLoading = false;
+
+            if (!data) {
+               historyObject.errorText = 'Failed';
+               return;
+            }
 
             if(data.length === 0) {
                historyObject.errorText = 'No history data found';
@@ -1569,7 +1586,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          });
 
       return historyObject;
-   };
+   }
 
    $scope.initTileHistory = function (item, entity) {
       var key = "_historyObject";
@@ -1672,13 +1689,15 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
    }
 
    function getTransformCssValue(translateValue) {
+      var params;
+
       if(CONFIG.transition === TRANSITIONS.ANIMATED_GPU) {
-         var params = $scope.isMenuOnTheLeft ? [0, translateValue, 0] : [translateValue, 0, 0];
+         params = $scope.isMenuOnTheLeft ? [0, translateValue, 0] : [translateValue, 0, 0];
          return 'translate3d(' + params.join(',') + ')';
       }
 
       if(CONFIG.transition === TRANSITIONS.ANIMATED) {
-         var params = $scope.isMenuOnTheLeft ? [0, translateValue] : [translateValue, 0];
+         params = $scope.isMenuOnTheLeft ? [0, translateValue] : [translateValue, 0];
          return 'translate(' + params.join(',') + ')';
       }
    }
@@ -2195,11 +2214,13 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       if(!$scope.$$phase) $scope.$apply();
    }
 
+   // @ts-ignore
    window.openPage = function (page) {
       $scope.openPage(page);
       updateView();
    };
 
+   // @ts-ignore
    window.setScreensaverShown = function (state) {
       $scope.screensaverShown = state;
 
