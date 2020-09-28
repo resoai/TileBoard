@@ -211,7 +211,13 @@ body {
 
 .-hide-scrollbar {
    .page {
-      height: 102%; // hack but imo better than calc()
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none;  /* Internet Explorer 10+ */
+
+      &::-webkit-scrollbar { /* WebKit */
+         width: 0;
+         height: 0;
+      }
    }
 }
 
@@ -224,10 +230,6 @@ body {
    top: 0;
 
    color: #fff;
-
-   &-content {
-
-   }
 
    &--left {
       float: left;

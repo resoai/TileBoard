@@ -9,6 +9,10 @@ Should you have any ideas or questions please post them on the home-assistant fo
 * [Demo Video](https://youtu.be/L8JwzWNAPr8)
 
 
+## :warning: Migrate from pre-1.0.0 version
+
+The project structure has changed in the first versioned (v1.0.0) release. Instead of checking out the repo, consider grabbing latest release from https://github.com/resoai/TileBoard/releases. For full setup instructions, see [How to use](#how-to-use) section.
+
 
 ## Screenshots
 
@@ -17,13 +21,17 @@ Should you have any ideas or questions please post them on the home-assistant fo
 ![screen](./images/screenshots/homekit.jpg)
 
 ## How to use
+
 * Make sure that you have Home Assistant 0.77 or greater installed as only new authentication system is supported from now on
-* Pull/download repository
-* Copy `config.example.js` to `config.js` and edit it for your needs
-* Create a directory called `tileboard` inside `www` directory in HA's config path and move all of the files there.
+* Download latest release zip file from https://github.com/resoai/TileBoard/releases and unpack to a directory of your choice
+* In chosen directory rename `config.example.js` to `config.js` and adjust it for your needs
+* Create a directory called `tileboard` inside `www` directory in HA's config path and copy all unpacked files there.
 * TileBoard will be available at `http://HASS_IP:8123/local/tileboard/index.html` and will prompt you for your login credentials after restarting Home Assistant.
 
+Alternatively you can checkout the repo and build the app manually. Check [CONTRIBUTING](./CONTRIBUTING.md) for more info.
+
 ## WARNING
+
 Files served from the www folder (/local/ url), aren’t protected by the Home Assistant authentication. Files stored in this folder, if the URL is known, can be accessed by anybody without authentication. Please make sure that your HA instance is not exposed via inetrnet or at least that long-lived token is not hardcoded in the config. 
 
 ## Configure
@@ -120,7 +128,7 @@ var CONFIG = {
      slides: [
        {bg: 'images/bg1.jpeg'},
        {bg: 'images/bg2.png'},
-       {bg: 'images/bg3.png'}
+       {bg: 'images/bg3.jpg'}
      ]
    },
    
@@ -141,7 +149,7 @@ Page object can have the following fields:
   /* title: The page title (not currently used) */
   title: 'Page title',
   /* bg: Link to the background image */
-  bg: 'images/bg1.jpg',
+  bg: 'images/bg1.jpeg',
   /* icon: Page icon for the side menu */
   icon: 'mdi-home-outline', // icon of page (for the side menu)
   /* header: object of header for current page
@@ -247,7 +255,13 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
    * You can use any of the material design icons from https://materialdesignicons.com/
    * as long as they have been published in the [latest npm package](https://github.com/templarian/materialdesign-svg).
    */
-  icon: 'mdi-phone'
+  icon: 'mdi-phone',
+  /* customHtml: Replace the icon by a custom HTML content
+   * If you define this option, simple tiles will not show the icon. They will show your custom HTML instead.
+   * You can use an anonymous function here, or a string that will be interpreted as a template
+   */
+  customHtml: function (item, entity) {return '<b>' + entity.state + '</b>';},
+  customHtml: '<b>&group.lights.state</b>',
   /* bg: Link to a background image for the tile
    * @ and & prefixes are explained below
    */
@@ -280,6 +294,12 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
    */
   hidden: Boolean | Function,
   /*** TILE SPECIFIC SETTINGS ***/
+  /** type: SCRIPT **/
+  /* variables: Provides extra variables to the script
+   * Can be a function which will be evaluated when script is called.
+   */
+  variables: {},
+  variables: function(item, entity) {return { dynamicVar: true };},
   /** type: SENSOR **/
   /* value: Override sensor value */
   value: '&sensor.bathroom_temp.state',
@@ -538,8 +558,8 @@ events: [
        * The variable e contains the full event_data from HomeAssistant
        */
       action: function(e) {
-        if (typeof fully !== undefined) {
-            fully.startScreensaver();
+        if (window.fully) {
+            window.fully.startScreensaver();
         }
       },
     },
@@ -549,9 +569,9 @@ events: [
     {
       command: 'screen_on',
       action: function(e) {
-        if (typeof fully !== undefined) {
-          fully.stopScreensaver();
-          fully.bringToForeground();
+        if (window.fully) {
+          window.fully.stopScreensaver();
+          window.fully.bringToForeground();
         }
       },
     },
@@ -561,7 +581,7 @@ events: [
     {
       command: 'play_sound',
       action: function(e) {
-        playSound(e.sound_url);
+        window.playSound(e.sound_url);
       }
     },
     /* Example: Open a specific TileBoard page
@@ -600,7 +620,7 @@ lower right corner. To set them up, add the following to `events` in `CONFIG`:
 {
    command: 'notify',
    action: function(e) {
-      Noty.addObject(e);
+      window.Noty.addObject(e);
    }
 }
 ```
@@ -637,9 +657,6 @@ Several classes are added to each tile depending on the type of tile and state. 
 ## Tablet and mobile configuration
 For the tablet configuration use `COMPACT` custom theme and reduce padding. 
 For the mobiles check out [wiki article](https://github.com/resoai/TileBoard/wiki/Mobile-configuration). 
-
-## Contribution
-Please feel free to post an issue or pull request and we will sort it out
 
 ## License
 MIT License

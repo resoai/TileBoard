@@ -1,8 +1,12 @@
+import Hls from 'hls.js';
+import { App } from './app';
+import { leadZero, toAbsoluteServerURL } from './globals/utils';
+
 App.directive('tile', function () {
    return {
       restrict: 'AE',
       replace: false,
-      scope: '=',
+      scope: true,
       templateUrl: 'tile.html',
       link: function ($scope, $el, attrs) {
       }
@@ -84,8 +88,8 @@ App.directive('camera', function () {
             if(imageUrl !== newUrl) setImage(newUrl);
          };
          $scope.$watchGroup([
-            'item', 
-            'entity', 
+            'item',
+            'entity',
             'entity.attributes.entity_picture'
          ], updateImage);
 
@@ -160,8 +164,8 @@ App.directive('cameraThumbnail', ['Api', function (Api) {
          };
 
          $scope.$watchGroup([
-            'item', 
-            'entity', 
+            'item',
+            'entity',
          ], reloadImage);
 
          if(refresh) {
@@ -201,7 +205,7 @@ App.directive('cameraStream', ['Api', function (Api) {
                maxBufferLength: len,
                maxMaxBufferLength: len
             };
-            
+
             hls && hls.destroy();
             hls = new Hls(config);
             hls.loadSource(url);
@@ -209,7 +213,7 @@ App.directive('cameraStream', ['Api', function (Api) {
             hls.on(Hls.Events.MANIFEST_PARSED, function() {
                el.play();
             });
-            
+
             if(current) $el[0].removeChild(current);
             $el[0].appendChild(el);
 
@@ -228,7 +232,7 @@ App.directive('cameraStream', ['Api', function (Api) {
                   appendVideo(toAbsoluteServerURL(res.result.url));
                });
          };
-         
+
          $scope.$watch('entity', requestStream);
 
          $scope.$on('$destroy', function() {
@@ -262,7 +266,7 @@ App.directive('clock', ['$interval', function ($interval) {
             var m = d.getMinutes();
             var postfix = '';
 
-            if(CONFIG.timeFormat === 12) {
+            if(window.CONFIG.timeFormat === 12) {
                postfix = h >= 12 ? 'PM' : 'AM';
 
                h = h % 12 || 12;
@@ -304,6 +308,7 @@ App.directive('iframeTile', ['$interval', function ($interval) {
          var iframe = $el[0];
 
          var updateIframe = function () {
+            // eslint-disable-next-line no-self-assign
             iframe.src = iframe.src;
          };
 

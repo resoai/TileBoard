@@ -77,7 +77,7 @@ Optionally, the fullscreen camera entity can be different from the thumbnail cam
    state: false,
    fullscreen: {
       type: TYPES.CAMERA_STREAM,
-      objFit: 'contain',
+      objFit: 'contain',  // https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
       id: 'camera.front_gate_highres',  // Optional: camera entity to use on fullscreen, defaults to the tile camera entity if omitted
       bufferLength: 5  // Optional: buffer length in seconds for the HLS buffer, default is 5 seconds
    },
@@ -119,7 +119,7 @@ The custom tile type does not have handling for any specific entity types. It ca
    icon: 'mdi-monitor',
    customHtml: '<b>Hi</b>',  // Can also be a function that will be passed item and entity.
    action: function(item, entity) {
-        fully.startScreensaver();
+        window.fully.startScreensaver();
    },
    secondaryAction: function(item, entity) {
       return this.$scope.openPopupIframe(item, entity);
@@ -160,6 +160,7 @@ Essentially a door entry tile is a pop-up with a fullscreen camera and a set of 
     layout: {
         camera: {
             type: TYPES.CAMERA,
+            objFit: 'contain',  // https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
             id: 'camera.front_gate',
             refresh: 1500,
             bgSize: 'cover'
@@ -472,7 +473,8 @@ Call script on click/tap<br>
       on: "mdi-gate",
       off: "mdi-gate"
    },
-   state: false
+   state: false,
+   variables: { var1: 'foo' },
 }
 ```
 
