@@ -9,6 +9,10 @@ Should you have any ideas or questions please post them on the home-assistant fo
 * [Demo Video](https://youtu.be/L8JwzWNAPr8)
 
 
+## :warning: Migrate from pre-1.0.0 version
+
+The project structure has changed in the first versioned (v1.0.0) release. Instead of checking out the repo, consider grabbing latest release from https://github.com/resoai/TileBoard/releases. For full setup instructions, see [How to use](#how-to-use) section.
+
 
 ## Screenshots
 
