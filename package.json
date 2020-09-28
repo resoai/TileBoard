@@ -17,7 +17,7 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "npm run lint",
-      "post-merge": "npm i"
+      "post-merge": "node post-merge-warn.js"
     }
   },
   "repository": {
@@ -48,6 +48,7 @@
     "husky": "^4.3.0",
     "less": "^3.12.2",
     "npm-force-resolutions": "0.0.3",
+    "print-message": "^3.0.1",
     "rollup": "^2.28.2",
     "rollup-plugin-cpy": "^2.0.1",
     "rollup-plugin-delete": "^2.0.0",
