@@ -55,6 +55,9 @@ rules:
   object-curly-spacing:
     - error
     - always
+  one-var:
+    - error
+    - never
   one-var-declaration-per-line: error
   padded-blocks:
     - error

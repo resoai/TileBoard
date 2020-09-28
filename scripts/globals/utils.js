@@ -1,8 +1,6 @@
 import angular from 'angular';
 
-export const mergeObjects = function (a, b) {
-   return angular.merge(a, b);
-};
+export const mergeObjects = angular.merge;
 
 export const leadZero = function (num) {
    if (num >= 0 && num < 10) {
@@ -74,9 +72,9 @@ export const timeAgo = function (time) {
       [2903040000, 'years', 29030400],
    ];
 
-   let seconds = (+new Date() - time) / 1000,
-      token = 'ago',
-      listChoice = 1;
+   let seconds = (+new Date() - time) / 1000;
+   let token = 'ago';
+   let listChoice = 1;
 
 
    if (seconds < 0) {
@@ -89,8 +87,8 @@ export const timeAgo = function (time) {
       return 'just now';
    }
 
-   let i = 0,
-      format;
+   let i = 0;
+   let format;
 
    while ((format = timeFormats[i++])) {
       if (seconds < format[0]) {
@@ -108,8 +106,8 @@ export const timeAgo = function (time) {
 export const debounce = function (func, wait, immediate) {
    let timeout;
    return function () {
-      const context = this,
-         args = arguments;
+      const context = this;
+      const args = arguments;
       const later = function () {
          timeout = null;
          if (!immediate) {
