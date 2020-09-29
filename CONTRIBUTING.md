@@ -1,6 +1,4 @@
-## Contributing
-
-### Developing
+# Contributing to TileBoard
 
 All contributions are welcome! If you would like to make some changes, follow these steps:
 
@@ -34,48 +32,18 @@ This starts a local development server at address http://localhost:8080, serving
 
 Modifications to the project trigger an automatic rebuild to make it easy to iterate quickly.
 
-### Commit messages
+## Production build
 
-Commit message should follow a `conventional commit` convention which means it should match a format like:
-
-`type(scope?): subject`
-
-where:
-
-`type` can be:
- - build
- - ci
- - chore
- - docs
- - feat
- - fix
- - perf
- - refactor
- - revert
- - style
- - test
-
-`scope` is optional and, if provided, should refer to the part of the code that is modified (`styles`, `api`, etc.).
-
-`subject` is a description of the changes starting with lower-case letter.
-
-Read more about that conventional commits at:
- - https://www.conventionalcommits.org/
- - https://github.com/conventional-changelog/commitlint
- - https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-angular
-
-### Production build
-
-Run command:
+To create an optimized release build of TileBoard run:
 
 ```sh
 npm run build
 ```
 
-to create production build. This creates optimized, smaller build that should be used for normal use. This command doesn't start development server.
+This creates optimized, smaller build that should be used when running TileBoard in "production". This command doesn't start development server.
 
 Release builds are also attached to GitHub releases in "assets" section so if you are not planning to make any changes then you can use those instead.
 
-### Releases (only for maintainers)
+## Releases (only for maintainers)
 
 A new release can be created by running `npm run release`. A new tagged commit will be created and pushed to the remote repo, triggering automatic creation of new release with built app package attached in "assets" section.
