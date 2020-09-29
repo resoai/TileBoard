@@ -1,6 +1,4 @@
-## Contributing
-
-### Developing
+# Contributing to TileBoard
 
 All contributions are welcome! If you would like to make some changes, follow these steps:
 
@@ -34,18 +32,18 @@ This starts a local development server at address http://localhost:8080, serving
 
 Modifications to the project trigger an automatic rebuild to make it easy to iterate quickly.
 
-### Production build
+## Production build
 
-Run command:
+To create an optimized release build of TileBoard run:
 
 ```sh
 npm run build
 ```
 
-to create production build. This creates optimized, smaller build that should be used for normal use. This command doesn't start development server.
+This creates optimized, smaller build that should be used when running TileBoard in "production". This command doesn't start development server.
 
 Release builds are also attached to GitHub releases in "assets" section so if you are not planning to make any changes then you can use those instead.
 
-### Releases (only for maintainers)
+## Releases (only for maintainers)
 
-A new release can be created by running `npm version [patch|minor|major]` (choose `patch`, `minor` or `major` based on semver versioning rules). A new tagged commit will be created and pushed to the remote repo, triggering automatic creation of new release with built app package attached in "assets" section.
+A new release can be created by running `npm run release`. A new tagged commit will be created and pushed to the remote repo, triggering automatic creation of new release with built app package attached in "assets" section.

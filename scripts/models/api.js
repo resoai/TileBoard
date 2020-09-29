@@ -5,8 +5,8 @@ import { toAbsoluteServerURL } from '../globals/utils';
 import Noty from '../models/noty';
 
 App.provider('Api', function () {
-   var wsUrl;
-   var authToken;
+   let wsUrl;
+   let authToken;
 
    this.setInitOptions = function (options) {
       wsUrl = options.wsUrl;
@@ -14,13 +14,13 @@ App.provider('Api', function () {
    };
 
    this.$get = ['$http', '$location', '$q', function ($http, $location, $q) {
-      var STATUS_LOADING = 1;
-      var STATUS_OPENED = 2;
-      var STATUS_READY = 3;
-      var STATUS_ERROR = 4;
-      var STATUS_CLOSED = 5;
+      const STATUS_LOADING = 1;
+      const STATUS_OPENED = 2;
+      const STATUS_READY = 3;
+      const STATUS_ERROR = 4;
+      const STATUS_CLOSED = 5;
 
-      var reconnectTimeout = null;
+      let reconnectTimeout = null;
 
       function $Api (url, token) {
          this._id = 1;
@@ -31,47 +31,52 @@ App.provider('Api', function () {
             error: [],
             message: [],
             ready: [],
-            unready: []
+            unready: [],
          };
 
          this._callbacks = {};
 
-         if(token) {
+         if (token) {
             this._configToken = token;
          }
 
          this._init();
+
+         window.onbeforeunload = event => {
+            if (this.socket && this.socket.readyState < WebSocket.CLOSING) {
+               this.socket.close();
+            }
+         };
       }
 
       $Api.prototype._init = function () {
-         var self = this;
+         const self = this;
 
          this._getToken().then(function (token) {
-            if(token) {
+            if (token) {
                self._token = token.access_token;
                self._connect.call(self);
 
-               if(token.expires_in) {
+               if (token.expires_in) {
                   setTimeout(
                      self._refreshToken.bind(self),
                      token.expires_in * 900);
                }
-            }
-            else {
+            } else {
                Noty.addObject({
                   type: Noty.ERROR,
                   title: 'ACCESS TOKEN',
-                  message: 'Error while receiving access token'
+                  message: 'Error while receiving access token',
                });
             }
          });
       };
 
       $Api.prototype.on = function (key, callback) {
-         var self = this;
+         const self = this;
 
-         if(this._listeners[key].indexOf(callback) !== -1) {
-            return function () {}
+         if (this._listeners[key].indexOf(callback) !== -1) {
+            return function () {};
          }
 
          this._listeners[key].push(callback);
@@ -80,39 +85,40 @@ App.provider('Api', function () {
             self._listeners[key] = self._listeners[key].filter(function (a) {
                return a !== callback;
             });
-         }
+         };
       };
 
       $Api.prototype.onError = function (callback) {
-         return this.on('error', callback)
+         return this.on('error', callback);
       };
       $Api.prototype.onMessage = function (callback) {
-         return this.on('message', callback)
+         return this.on('message', callback);
       };
       $Api.prototype.onReady = function (callback) {
-         if(this.status === STATUS_READY) {
+         if (this.status === STATUS_READY) {
             try {
                callback({ status: STATUS_READY });
-            }
-            catch (e) {
+            } catch (e) {
                // Ignore
             }
          }
 
-         return this.on('ready', callback)
+         return this.on('ready', callback);
       };
       $Api.prototype.onUnready = function (callback) {
-         return this.on('unready', callback)
+         return this.on('unready', callback);
       };
 
       $Api.prototype.send = function (data, callback, id) {
          id = id !== false;
 
-         if(!data.id && id) data.id = this._id++;
+         if (!data.id && id) {
+            data.id = this._id++;
+         }
 
-         var wsData = JSON.stringify(data);
+         const wsData = JSON.stringify(data);
 
-         if(callback && data.id) {
+         if (callback && data.id) {
             this._callbacks[data.id] = callback;
          }
 
@@ -124,18 +130,18 @@ App.provider('Api', function () {
             type: 'call_service',
             domain: domain,
             service: service,
-            service_data: data
+            service_data: data,
          };
 
-         this.send(apiData, function(res) {
+         this.send(apiData, function (res) {
             if (callback) {
-               callback(res)
+               callback(res);
             }
          });
       };
 
       $Api.prototype.rest = function (requestStub) {
-         var request = angular.copy(requestStub);
+         const request = angular.copy(requestStub);
          request.url = toAbsoluteServerURL(request.url);
          request.headers = request.headers || {};
          request.headers.Authorization = 'Bearer ' + this._token;
@@ -156,69 +162,76 @@ App.provider('Api', function () {
       };
 
       $Api.prototype.getHistory = function (startDate, filterEntityId, endDate) {
-         var request = {
+         const request = {
             type: 'GET',
-            url: '/api/history/period'
+            url: '/api/history/period',
          };
-         if (startDate) request.url += '/' + startDate;
+         if (startDate) {
+            request.url += '/' + startDate;
+         }
          if (endDate) {
             request.url += '?end_time=' + endDate;
          } else {
             request.url += '?end_time=' + new Date(Date.now()).toISOString();
          }
          if (filterEntityId) {
-            var entityIds = filterEntityId instanceof Array ? filterEntityId.join(',') : filterEntityId;
+            const entityIds = filterEntityId instanceof Array ? filterEntityId.join(',') : filterEntityId;
             request.url += '&filter_entity_id=' + entityIds;
          }
          return this.rest(request);
       };
 
       $Api.prototype.subscribeEvents = function (events, callback) {
-         var self = this;
-         if(events && typeof events === "object") {
+         const self = this;
+         if (events && typeof events === 'object') {
             events.forEach(function (event) {
                self.subscribeEvent(event, callback);
-            })
+            });
+         } else {
+            this.subscribeEvent(events, callback);
          }
-         else this.subscribeEvent(events, callback);
       };
 
       $Api.prototype.subscribeEvent = function (event, callback) {
-         var data = {type: "subscribe_events"};
+         const data = { type: 'subscribe_events' };
 
-         if(event) data.event_type = event;
+         if (event) {
+            data.event_type = event;
+         }
 
          this.send(data, callback);
       };
 
       $Api.prototype.getStates = function (callback) {
-         return this.send({type: "get_states"}, callback);
+         return this.send({ type: 'get_states' }, callback);
       };
 
       $Api.prototype.getPanels = function (callback) {
-         return this.send({type: "get_panels"}, callback);
+         return this.send({ type: 'get_panels' }, callback);
       };
 
       $Api.prototype.getConfig = function (callback) {
-         return this.send({type: "get_config"}, callback);
+         return this.send({ type: 'get_config' }, callback);
       };
 
       $Api.prototype.getServices = function (callback) {
-         return this.send({type: "get_services"}, callback);
+         return this.send({ type: 'get_services' }, callback);
       };
 
       $Api.prototype.getUser = function (callback) {
-         return this.send({type: "auth/current_user"}, callback);
+         return this.send({ type: 'auth/current_user' }, callback);
       };
 
       $Api.prototype.sendPing = function (callback) {
-         return this.send({type: "ping"}, callback);
+         return this.send({ type: 'ping' }, callback);
       };
 
       $Api.prototype._connect = function () {
-         var self = this;
+         const self = this;
 
-         if(this.socket && this.socket.readyState < 2) return; // opened or connecting
+         if (this.socket && this.socket.readyState < WebSocket.CLOSING) {
+            return;
+         } // opened or connecting
 
          this.status = STATUS_LOADING;
          this.socket = new WebSocket(this._url);
@@ -234,58 +247,71 @@ App.provider('Api', function () {
 
          this.socket.addEventListener('error', function (e) {
             self._setStatus(STATUS_ERROR);
-            self._sendError.call(self, "System error", e);
+            self._sendError.call(self, 'System error', e);
             self._reconnect.call(self, 1000);
          });
 
          this.socket.addEventListener('message', function (e) {
-            var data = JSON.parse(e.data);
+            const data = JSON.parse(e.data);
 
             self._handleMessage.call(self, data);
          });
       };
 
       $Api.prototype.forceReconnect = function () {
-         if(this.socket && this.socket.readyState < 2) {
+         if (this.socket && this.socket.readyState < WebSocket.CLOSING) {
             this.socket.close();
+         } else {
+            this._reconnect();
          }
-         else this._reconnect();
       };
 
       $Api.prototype._reconnect = function (delayBeforeConnect) {
          delayBeforeConnect = delayBeforeConnect || 0;
 
-         this._fire('unready', {status: this.status});
+         this._fire('unready', { status: this.status });
 
-         if(reconnectTimeout) clearTimeout(reconnectTimeout);
+         if (reconnectTimeout) {
+            clearTimeout(reconnectTimeout);
+         }
 
          reconnectTimeout = setTimeout(this._connect.bind(this), delayBeforeConnect);
       };
 
       $Api.prototype._fire = function (key, data) {
          this._listeners[key].forEach(function (cb) {
-            setTimeout(function () { cb(data) }, 0);
-         })
+            setTimeout(function () {
+               cb(data);
+            }, 0);
+         });
       };
 
       $Api.prototype._handleMessage = function (data) {
-         var self = this;
-         if(data.type === "auth_required") return this._authenticate();
-         if(data.type === "auth_invalid") return this._authInvalid(data.message);
-         if(data.type === "auth_ok") return this._ready();
+         const self = this;
+         if (data.type === 'auth_required') {
+            return this._authenticate();
+         }
+         if (data.type === 'auth_invalid') {
+            return this._authInvalid(data.message);
+         }
+         if (data.type === 'auth_ok') {
+            return this._ready();
+         }
 
-         if(data.error) return this._sendError(data.error.message, data);
+         if (data.error) {
+            return this._sendError(data.error.message, data);
+         }
 
-         if(data.type === "result" && data.id) {
-            if(this._callbacks[data.id]) {
+         if (data.type === 'result' && data.id) {
+            if (this._callbacks[data.id]) {
                setTimeout(function () {
                   self._callbacks[data.id](data);
                }, 0);
             }
          }
 
-         if(data.type === "pong" && data.id) {
-            if(this._callbacks[data.id]) {
+         if (data.type === 'pong' && data.id) {
+            if (this._callbacks[data.id]) {
                setTimeout(function () {
                   self._callbacks[data.id](data);
                }, 0);
@@ -302,17 +328,19 @@ App.provider('Api', function () {
       };
 
       $Api.prototype._sendError = function (message, data) {
-         var msg = {message: message};
+         const msg = { message: message };
 
-         if(data) msg.data = data;
+         if (data) {
+            msg.data = data;
+         }
 
          this._fire('error', msg);
       };
 
       $Api.prototype._authenticate = function () {
-         var data = {
-            type: "auth",
-            access_token: this._token
+         const data = {
+            type: 'auth',
+            access_token: this._token,
          };
 
          this.send(data, null, false);
@@ -320,7 +348,7 @@ App.provider('Api', function () {
 
       $Api.prototype._ready = function () {
          this._setStatus(STATUS_READY);
-         this._fire('ready', {status: STATUS_READY});
+         this._fire('ready', { status: STATUS_READY });
       };
 
       $Api.prototype._setStatus = function (status) {
@@ -328,14 +356,14 @@ App.provider('Api', function () {
       };
 
       $Api.prototype._tokenRequest = function (data) {
-         var request = {
+         const request = {
             method: 'POST',
             url: toAbsoluteServerURL('/auth/token'),
             headers: {
-               'Content-Type': 'application/x-www-form-urlencoded'
+               'Content-Type': 'application/x-www-form-urlencoded',
             },
-            data: data + '&client_id=' + getOAuthClientId()
-         }
+            data: data + '&client_id=' + getOAuthClientId(),
+         };
 
          return $http(request)
             .then(function (response) {
@@ -351,13 +379,13 @@ App.provider('Api', function () {
       };
 
       $Api.prototype._refreshToken = function () {
-         var self = this;
+         const self = this;
 
          this._getFreshToken().then(function (token) {
-            if(token) {
+            if (token) {
                self._token = token.access_token;
 
-               if(token.expires_in) {
+               if (token.expires_in) {
                   setTimeout(
                      self._refreshToken.bind(self),
                      token.expires_in * 900);
@@ -367,12 +395,12 @@ App.provider('Api', function () {
       };
 
       $Api.prototype._getFreshToken = function () {
-         var token = readToken();
+         const token = readToken();
 
-         var data = 'grant_type=refresh_token&refresh_token=' + token.refresh_token;
+         const data = 'grant_type=refresh_token&refresh_token=' + token.refresh_token;
 
          return this._tokenRequest(data).then(function (data) {
-            if(!data) {
+            if (!data) {
                return null;
             }
 
@@ -385,10 +413,10 @@ App.provider('Api', function () {
       };
 
       $Api.prototype._getTokenByCode = function (code) {
-         var data = 'grant_type=authorization_code&code=' + code;
+         const data = 'grant_type=authorization_code&code=' + code;
 
          return this._tokenRequest(data).then(function (data) {
-            if(!data) {
+            if (!data) {
                return null;
             }
 
@@ -399,20 +427,20 @@ App.provider('Api', function () {
       };
 
       $Api.prototype._getToken = function () {
-         if(this._configToken) {
-            return $q.resolve({access_token: this._configToken});
+         if (this._configToken) {
+            return $q.resolve({ access_token: this._configToken });
          }
 
-         var token = readToken();
+         const token = readToken();
 
          if (token) {
             return this._getFreshToken();
          }
 
-         var params = $location.search();
+         const params = $location.search();
 
          if (params.oauth && params.code) {
-            var code = params.code;
+            const code = params.code;
 
             // Remove oauth params to clean up the URL.
             $location.search('oauth', null).search('code', null);
@@ -424,43 +452,42 @@ App.provider('Api', function () {
          return $q.resolve(null);
       };
 
-      function saveToken(token) {
+      function saveToken (token) {
          localStorage.setItem(TOKEN_CACHE_KEY, JSON.stringify(token));
       }
 
-      function readToken() {
-         var token = localStorage.getItem(TOKEN_CACHE_KEY);
+      function readToken () {
+         const token = localStorage.getItem(TOKEN_CACHE_KEY);
 
          return token ? JSON.parse(token) : null;
       }
 
-      function removeToken() {
+      function removeToken () {
          localStorage.removeItem(TOKEN_CACHE_KEY);
       }
 
-      function getOAuthClientId() {
+      function getOAuthClientId () {
          return encodeURIComponent(window.location.origin);
       }
 
-      function getOAuthRedirectUrl() {
-         var url = window.location.origin + window.location.pathname;
+      function getOAuthRedirectUrl () {
+         let url = window.location.origin + window.location.pathname;
 
-         if(window.location.search) {
+         if (window.location.search) {
             url += window.location.search + '&oauth=1';
-         }
-         else {
+         } else {
             url += '?oauth=1';
          }
 
          return encodeURIComponent(url);
       }
 
-      function redirectOAuth() {
+      function redirectOAuth () {
          removeToken();
 
          window.location.href = toAbsoluteServerURL(
             '/auth/authorize?client_id=' + getOAuthClientId()
-            + '&redirect_uri=' + getOAuthRedirectUrl()
+            + '&redirect_uri=' + getOAuthRedirectUrl(),
          );
       }
 

@@ -1,20 +1,22 @@
 {
   "name": "tileboard",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple yet highly customizable dashboard for Home Assistant",
   "scripts": {
     "dev": "rollup --config --watch",
     "build": "rollup --config --environment PRODUCTION",
     "build:watch": "rollup --config --environment PRODUCTION --watch",
     "lint": "eslint scripts",
-    "preversion": "git pull && npm run build",
-    "postversion": "git push --follow-tags",
+    "fix": "eslint scripts --fix",
+    "release": "standard-version",
+    "prerelease": "git pull && npm i && npm run build",
+    "posttag": "git push --follow-tags",
     "preinstall": "npx npm-force-resolutions"
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint",
-      "post-merge": "npm i"
+      "post-merge": "node post-merge-warn.js"
     }
   },
   "repository": {
@@ -39,18 +41,20 @@
     "@types/hls.js": "^0.13.1",
     "@types/rollup-plugin-commonjs": "^9.3.1",
     "babel-plugin-angularjs-annotate": "^0.10.0",
-    "eslint": "^7.9.0",
+    "eslint": "^7.10.0",
     "husky": "^4.3.0",
     "less": "^3.12.2",
     "npm-force-resolutions": "0.0.3",
-    "rollup": "^2.28.1",
+    "print-message": "^3.0.1",
+    "rollup": "^2.28.2",
     "rollup-plugin-cpy": "^2.0.1",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-emit-ejs": "^3.1.0",
     "rollup-plugin-progress": "^1.1.2",
     "rollup-plugin-serve": "^1.0.4",
     "rollup-plugin-styles": "^3.10.0",
-    "rollup-plugin-terser": "^7.0.2"
+    "rollup-plugin-terser": "^7.0.2",
+    "standard-version": "^9.0.0"
   },
   "dependencies": {
     "angular": "^1.8.0",
@@ -59,7 +63,7 @@
     "angular-moment": "^1.3.0",
     "angularjs-gauge": "^2.2.0",
     "chart.js": "^2.9.3",
-    "hls.js": "^0.14.12"
+    "hls.js": "^0.14.13"
   },
   "resolutions": {
     "chart.js": "2.9.3"
