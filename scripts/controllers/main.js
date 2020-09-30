@@ -1759,14 +1759,14 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.openDoorEntry = function (item, entity) {
-      return initPopupLayout(item, entity, "_doorEntry",
+      return initPopupLayout(item, entity, '_doorEntry',
          angular.merge({
             classes: ['-popup-fullsize'],
             styles: {},
             items: [angular.merge({
                state: false,
                title: false,
-               position: [0,0],
+               position: [0, 0],
                classes: ['-tile-fullsize'],
                customStyles: {
                   width: null,
@@ -1775,7 +1775,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
                   left: null,
                },
             }, getItemFieldValue('layout.camera', item, entity))]
-            .concat(getItemFieldValue('layout.tiles', item, entity) || [])
+               .concat(getItemFieldValue('layout.tiles', item, entity) || []),
          }, getItemFieldValue('layout.page', item, entity)));
    };
 
