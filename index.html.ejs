@@ -562,7 +562,7 @@
          <div ng-if="item.controlsEnabled" class="item-entity-sliders"
               ng-click="preventClick($event)">
             <div ng-repeat="slider in item.sliders track by $index"
-                 ng-if="(_c = getLightSliderConf(slider, entity))"
+                 ng-if="(_c = getLightSliderConf(item, entity, slider))"
                  class="item-slider-container">
 
                <div class="item-slider-title" ng-if="slider.title">

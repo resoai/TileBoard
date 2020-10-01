@@ -839,7 +839,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       return initSliderConf(item, entity, '_c_inputNumberSlider', def, attrs, value, default_request);
    };
 
-   $scope.getLightSliderConf = function (slider, entity) {
+   $scope.getLightSliderConf = function (item, entity, slider) {
       const def = slider || {};
       const attrs = entity.attributes;
       const value = +attrs[def.field] || 0;
@@ -858,7 +858,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
          entity.attributes._sliderInited = true;
       }, 0);
 
-      return initSliderConf(slider, entity, '_c_lightSlider', def, attrs, value, default_request);
+      return initSliderConf(item, entity, '_c_lightSlider_' + slider.field, def, attrs, value, default_request);
    };
 
    $scope.getVolumeConf = function (item, entity) {
