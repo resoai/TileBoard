@@ -1356,26 +1356,23 @@ camera_stream {
       width: 100vw;
       /* debug:
       border: 0px solid red; */
+
+      // the following classes can be used to style the popup (including the blurred overlay around it)
+      .-popup-fullsize & {
+         /* use classes: ['-popup-fullsize'] to fullsize the popup */
+         /* be sure to also set styles: {}, in order to avoid size calculations */
+         width: 100vw;
+         height: 100vh;
+      }
+      .-popup-landscape & {
+         /* use classes: ['-popup-landscape'] for a landscape oriented full-width popup */
+         /* be sure to also set styles: {}, in order to avoid size calculations */
+         width: 100vw;
+         height: 56vw;
+      }
    }
 }
 
-// the following classes can be used to style the popup-container
-.-popup-fullsize {
-   .popup--tiles {
-      /* use classes: ['-popup-fullsize'] to fullsize the popup */
-      width: 100vw;
-      height: 100vh;
-      max-width: calc(100% - 2*@popupPadding);
-   }
-}
-.-popup-landscape {
-   .popup--tiles {
-      /* use classes: ['-popup-landscape'] for a landscape oriented full-width popup */
-      width: 100vw;
-      height: 56vw;
-      max-width: calc(100% - 2*@popupPadding);
-   }
-}
 .-tile-fullsize {
    /* use classes: ['-tile-fullsize'] to make the tile fill the entire popup */
    /* be sure to also set top, left, width, height to null in customStyles */
