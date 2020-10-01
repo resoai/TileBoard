@@ -797,12 +797,18 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    function initSliderConf (item, entity, key, def, attrs, value, default_request) {
-      return cacheInItem(item, key, {
-         max: attrs.max || def.max || 100,
-         min: attrs.min || def.min || 0,
-         step: attrs.step || def.step || 1,
-         value: value || +entity.state || def.value || 0,
-         request: def.request || default_request,
+      return cacheInItem(item, key, function () {
+         $timeout(function () {
+            item._sliderInited = true;
+         }, 50);
+
+         return {
+            max: attrs.max || def.max || 100,
+            min: attrs.min || def.min || 0,
+            step: attrs.step || def.step || 1,
+            value: value || +entity.state || def.value || 0,
+            request: def.request || default_request,
+         };
       });
    }
 
@@ -815,11 +821,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
          service: 'set_value',
          field: 'value',
       };
-
-      $timeout(function () {
-         item._sliderInited = true;
-      }, 50);
-
       return initSliderConf(item, entity, '_c_inputNumberSlider', def, attrs, value, default_request);
    };
 
@@ -834,13 +835,8 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       };
 
       $timeout(function () {
-         entity.attributes._sliderInited = true;
          slider._sliderInited = true;
       }, 100);
-
-      $timeout(function () {
-         entity.attributes._sliderInited = true;
-      }, 0);
 
       return initSliderConf(item, entity, '_c_lightSlider_' + slider.field, def, attrs, value, default_request);
    };
@@ -854,10 +850,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       if (!('volume_level' in attrs)) {
          return false;
       }
-
-      $timeout(function () {
-         entity.attributes._sliderInited = true;
-      }, 50);
 
       return initSliderConf(item, entity, '_c_volumeSlider', def, attrs, value, default_request);
    };
@@ -1004,7 +996,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.volumeChanged = function (item, entity, conf) {
-      if (!entity.attributes._sliderInited) {
+      if (!item._sliderInited) {
          return;
       }
 
@@ -1027,7 +1019,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       if (!slider._sliderInited) {
          return;
       }
-      if (!entity.attributes._sliderInited) {
+      if (!item._sliderInited) {
          return;
       }
 
