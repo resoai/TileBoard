@@ -449,35 +449,22 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       return item.styles;
    };
 
-   $scope.itemBgStyles = function (item, entity) {
-      const obj = entity.attributes || entity;
-
-      if (!obj.bgStyles) {
-         let bg;
-         const styles = {};
-
-         if ('bgOpacity' in item) {
-            styles.opacity = parseFieldValue(item.bgOpacity, item, entity);
-         }
-
-         if (item.bg) {
-            bg = parseFieldValue(item.bg, item, entity);
-
-            if (bg) {
-               styles.backgroundImage = 'url(' + bg + ')';
-            }
-         } else if (item.bgSuffix) {
-            bg = parseFieldValue(item.bgSuffix, item, entity);
-
-            if (bg) {
-               styles.backgroundImage = 'url("' + toAbsoluteServerURL(bg) + '")';
-            }
-         }
-
-         obj.bgStyles = styles;
+   function cacheInItem (item, key, data) {
+      if (!item[key]) {
+         item[key] = typeof data === 'function' ? data() : data;
       }
+      return item[key];
+   }
 
-      return obj.bgStyles;
+   $scope.itemBgStyles = function (item, entity) {
+      const bg = getItemFieldValue('bg', item, entity);
+      const bgSuffix = getItemFieldValue('bgSuffix', item, entity);
+
+      return cacheInItem(item, 'bgStyles', {
+         opacity: getItemFieldValue('bgOpacity', item, entity) || null,
+         backgroundImage: bg ? 'url(' + bg + ')'
+            : bgSuffix ? 'url(' + toAbsoluteServerURL(bgSuffix) + ')' : null,
+      });
    };
 
    $scope.itemClasses = function (item) {
@@ -825,64 +812,41 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       return page.header;
    };
 
-   $scope.getSliderConf = function (item, entity) {
-      const key = '_c';
-
-      if (!entity.attributes) {
-         entity.attributes = {};
-      }
-      if (entity.attributes[key]) {
-         return entity.attributes[key];
-      }
-
-      const def = item.slider || {};
-      const attrs = entity.attributes || {};
-      const value = +attrs[def.field] || 0;
-
-      entity.attributes[key] = {
+   function initSliderConf (item, entity, key, def, attrs, value, default_request) {
+      return cacheInItem(item, key, {
          max: attrs.max || def.max || 100,
          min: attrs.min || def.min || 0,
          step: attrs.step || def.step || 1,
          value: value || +entity.state || def.value || 0,
-         request: def.request || {
-            domain: 'input_number',
-            service: 'set_value',
-            field: 'value',
-         },
+         request: def.request || default_request,
+      });
+   }
+
+   $scope.getSliderConf = function (item, entity) {
+      const def = item.slider || {};
+      const attrs = entity.attributes || {};
+      const value = +attrs[def.field] || 0;
+      const default_request = {
+         domain: 'input_number',
+         service: 'set_value',
+         field: 'value',
       };
 
       $timeout(function () {
          item._sliderInited = true;
       }, 50);
 
-      return entity.attributes[key];
+      return initSliderConf(item, entity, '_c_inputNumberSlider', def, attrs, value, default_request);
    };
 
    $scope.getLightSliderConf = function (slider, entity) {
-      const key = '_c_' + slider.field;
-
-      if (!entity.attributes) {
-         entity.attributes = {};
-      }
-      if (entity.attributes[key]) {
-         return entity.attributes[key];
-      }
-
-
       const def = slider || {};
       const attrs = entity.attributes;
       const value = +attrs[def.field] || 0;
-
-      entity.attributes[key] = {
-         max: def.max || attrs.max || 100,
-         min: def.min || attrs.min || 0,
-         step: def.step || attrs.step || 1,
-         value: value || def.min || attrs.min || 0,
-         request: def.request || {
-            domain: 'input_number',
-            service: 'set_value',
-            field: 'value',
-         },
+      const default_request = {
+         domain: 'input_number',
+         service: 'set_value',
+         field: 'value',
       };
 
       $timeout(function () {
@@ -894,37 +858,24 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
          entity.attributes._sliderInited = true;
       }, 0);
 
-      return entity.attributes[key];
+      return initSliderConf(slider, entity, '_c_lightSlider', def, attrs, value, default_request);
    };
 
    $scope.getVolumeConf = function (item, entity) {
-      if (!entity.attributes) {
-         entity.attributes = {};
-      }
-      if (entity.attributes._c) {
-         return entity.attributes._c;
-      }
-
       const def = { max: 100, min: 0, step: 2 };
       const attrs = entity.attributes;
       const value = attrs.volume_level * 100 || 0;
+      const default_request = {};
 
       if (!('volume_level' in attrs)) {
          return false;
       }
 
-      entity.attributes._c = {
-         max: attrs.max || def.max || 100,
-         min: attrs.min || def.min || 0,
-         step: attrs.step || def.step || 1,
-         value: value || 0,
-      };
-
       $timeout(function () {
          entity.attributes._sliderInited = true;
       }, 50);
 
-      return entity.attributes._c;
+      return initSliderConf(item, entity, '_c_volumeSlider', def, attrs, value, default_request);
    };
 
    $scope.getLightSliderValue = function (slider, conf) {
