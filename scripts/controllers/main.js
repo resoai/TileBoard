@@ -1746,7 +1746,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    $scope.openPopupIframe = function (item, entity) {
       return initPopupLayout(item, entity, '_popupIframe',
          {
-            classes: ['-popup-landscape', ...(getItemFieldValue('iframeClasses', item, entity) || [])],
+            classes: ['-popup-fullsize', ...(getItemFieldValue('iframeClasses', item, entity) || [])],
             styles: {},
             items: [{
                type: TYPES.IFRAME,
