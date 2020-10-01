@@ -1725,9 +1725,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    $scope.openPopupHistory = function (item, entity) {
       return initPopupLayout(item, entity, '_popupHistory',
          {
-            classes: ['-popup-landscape'].concat(
-               getItemFieldValue('history.classes', item, entity) || [],
-            ),
+            classes: ['-popup-landscape', ...(getItemFieldValue('history.classes', item, entity) || [])],
             styles: {},
             items: [angular.merge({
                type: TYPES.HISTORY,
@@ -1748,9 +1746,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    $scope.openPopupIframe = function (item, entity) {
       return initPopupLayout(item, entity, '_popupIframe',
          {
-            classes: ['-popup-fullsize'].concat(
-               getItemFieldValue('iframeClasses', item, entity) || [],
-            ),
+            classes: ['-popup-landscape', ...(getItemFieldValue('iframeClasses', item, entity) || [])],
             styles: {},
             items: [{
                type: TYPES.IFRAME,
