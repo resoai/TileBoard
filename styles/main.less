@@ -1373,20 +1373,21 @@ camera_stream {
    }
 }
 
-.-tile-fullsize {
-   /* use classes: ['-tile-fullsize'] to make the tile fill the entire popup */
+.-item-fullsize {
+   /* use classes: ['-item-fullsize'] to make the tile fill the entire popup */
    /* be sure to also set top, left, width, height to null in customStyles */
    top: -@popupPadding;
    left: -@popupPadding;
    bottom: -@popupPadding;
    right: -@popupPadding;
    z-index: 0;
-
+}
+.-item-non-clickable {
+   /* use classes: ['-item-non-clickable'] to display as non-interactive tile */
    &:active {
       margin: -@popupPadding !important;
       border: none !important;
    }
-
    .item-clickable {
       display: none ! important;
    }

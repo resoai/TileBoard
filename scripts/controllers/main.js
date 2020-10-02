@@ -1732,7 +1732,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
                id: item.id,
                title: false,
                position: [0, 0],
-               classes: ['-tile-fullsize'],
+               classes: ['-item-fullsize'],
                customStyles: {
                   width: null,
                   height: null,
@@ -1755,7 +1755,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
                state: false,
                title: false,
                position: [0, 0],
-               classes: ['-tile-fullsize'],
+               classes: ['-item-fullsize'],
                customStyles: angular.merge({
                   width: null,
                   height: null,
