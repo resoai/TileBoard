@@ -1527,13 +1527,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       };
    };
 
-   function initPopupLayout (item, entity, key, layout) {
-      if (!item[key]) {
-         item[key] = layout;
-      }
-      return $scope.openPopup(item, entity, item[key]);
-   }
-
    $scope.closePopup = function () {
       $scope.activePopup = null;
    };
@@ -1710,60 +1703,59 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       return historyObject;
    }
 
-   $scope.initTileHistory = function (item, entity) {
-      const key = '_historyObject';
-
-      if (item[key]) {
-         return item[key];
+   function cacheInItem (item, key, data) {
+      if (!item[key]) {
+         item[key] = typeof data === 'function' ? data() : data;
       }
-
-      item[key] = getHistoryObject(item, entity, item);
-
       return item[key];
+   }
+
+   $scope.initTileHistory = function (item, entity) {
+      return cacheInItem(item, '_historyObject', () => getHistoryObject(item, entity, item));
    };
 
    $scope.openPopupHistory = function (item, entity) {
-      return initPopupLayout(item, entity, '_popupHistory',
-         {
-            classes: ['-popup-landscape', ...(getItemFieldValue('history.classes', item, entity) || [])],
-            styles: {},
-            items: [angular.merge({
-               type: TYPES.HISTORY,
-               id: item.id,
-               title: false,
-               position: [0, 0],
-               classes: ['-item-fullsize'],
-               customStyles: {
-                  width: null,
-                  height: null,
-                  top: null,
-                  left: null,
-               },
-            }, getItemFieldValue('history', item, entity))],
-         });
+      const layout = cacheInItem(item, '_popupHistory', () => ({
+         classes: ['-popup-landscape', ...(getItemFieldValue('history.classes', item, entity) || [])],
+         styles: {},
+         items: [angular.merge({
+            type: TYPES.HISTORY,
+            id: item.id,
+            title: false,
+            position: [0, 0],
+            classes: ['-item-fullsize'],
+            customStyles: {
+               width: null,
+               height: null,
+               top: null,
+               left: null,
+            },
+         }, getItemFieldValue('history', item, entity))],
+      }));
+      return $scope.openPopup(item, entity, layout);
    };
 
    $scope.openPopupIframe = function (item, entity) {
-      return initPopupLayout(item, entity, '_popupIframe',
-         {
-            classes: ['-popup-fullsize', ...(getItemFieldValue('iframeClasses', item, entity) || [])],
-            styles: {},
-            items: [{
-               type: TYPES.IFRAME,
-               url: item.url,
-               id: {},
-               state: false,
-               title: false,
-               position: [0, 0],
-               classes: ['-item-fullsize'],
-               customStyles: angular.merge({
-                  width: null,
-                  height: null,
-                  top: null,
-                  left: null,
-               }, getItemFieldValue('iframeStyles', item, entity)),
-            }],
-         });
+      const layout = cacheInItem(item, '_popupIframe', () => ({
+         classes: ['-popup-fullsize', ...(getItemFieldValue('iframeClasses', item, entity) || [])],
+         styles: {},
+         items: [{
+            type: TYPES.IFRAME,
+            url: item.url,
+            id: {},
+            state: false,
+            title: false,
+            position: [0, 0],
+            classes: ['-item-fullsize'],
+            customStyles: angular.merge({
+               width: null,
+               height: null,
+               top: null,
+               left: null,
+            }, getItemFieldValue('iframeStyles', item, entity)),
+         }],
+      }));
+      return $scope.openPopup(item, entity, layout);
    };
 
    $scope.openDoorEntry = function (item, entity) {
