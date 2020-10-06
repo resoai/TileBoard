@@ -6,8 +6,8 @@
     "dev": "rollup --config --watch",
     "build": "rollup --config --environment PRODUCTION",
     "build:watch": "rollup --config --environment PRODUCTION --watch",
-    "lint": "eslint scripts",
-    "fix": "eslint scripts --fix",
+    "lint": "eslint rollup.config.js scripts",
+    "fix": "eslint rollup.config.js scripts --fix",
     "release": "standard-version"
   },
   "standard-version": {
@@ -58,13 +58,15 @@
     "standard-version": "^9.0.0"
   },
   "dependencies": {
+    "@mdi/font": "^5.6.55",
     "angular": "^1.8.1",
     "angular-chart.js": "^1.1.1",
     "angular-hammer": "^2.2.0",
     "angular-moment": "^1.3.0",
     "angularjs-gauge": "^2.2.0",
     "chart.js": "^2.9.3",
-    "hls.js": "^0.14.14"
+    "hls.js": "^0.14.14",
+    "node-sass": "^4.14.1"
   },
   "resolutions": {
     "chart.js": "2.9.3"

@@ -11,19 +11,18 @@ import styles from 'rollup-plugin-styles';
 import { terser } from 'rollup-plugin-terser';
 
 const isProduction = process.env.PRODUCTION === 'true';
-let outDir = 'build';
-let outputJsName = ''
-let outputCssName = ''
+const outDir = 'build';
+let outputJsName = '';
+let outputCssName = '';
 const appPlugins = [];
 
 if (isProduction) {
-   outputJsName = 'app-[hash].js'
-   outputCssName = 'styles-[hash][extname]'
+   outputJsName = 'app-[hash].js';
+   outputCssName = 'styles-[hash][extname]';
    appPlugins.push(terser());
-}
-else {
-   outputJsName = 'app.js'
-   outputCssName = 'styles[extname]'
+} else {
+   outputJsName = 'app.js';
+   outputCssName = 'styles[extname]';
    appPlugins.push(serve({
       contentBase: outDir,
       port: 8080,
@@ -70,7 +69,7 @@ const config = {
          url: {
             hash: 'assets/[name]-[hash][extname]',
             // The public path where assets referenced from css files are available.
-            publicPath: '../assets/'
+            publicPath: '../assets/',
          },
       }),
       emitEJS({
