@@ -1,4 +1,4 @@
-name: On Push
+name: on-push
 
 on:
   push:
@@ -10,6 +10,7 @@ on:
 
 jobs:
   lint_and_build:
+    name: Lint and Build
     runs-on: ubuntu-latest
     steps:
 
