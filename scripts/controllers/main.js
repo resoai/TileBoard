@@ -1533,7 +1533,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
    $scope.getPopupClasses = function () {
       if (!$scope.activePopup || !$scope.activePopup.layout.classes) {
-         return [];
+         return '';
       }
       return parseFieldValue($scope.activePopup.layout.classes, $scope.activePopup.item, $scope.activePopup.entity);
    };
