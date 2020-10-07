@@ -1759,7 +1759,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.openDoorEntry = function (item, entity) {
-      return initPopupLayout(item, entity, '_doorEntry',
+      const layout = cacheInItem(item, '_popupDoorEntry', () => (
          angular.merge({
             classes: ['-popup-fullsize'],
             styles: {},
@@ -1767,16 +1767,18 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
                state: false,
                title: false,
                position: [0, 0],
-               classes: ['-tile-fullsize'],
+               classes: ['-item-fullsize', '-item-non-clickable'],
                customStyles: {
                   width: null,
                   height: null,
                   top: null,
                   left: null,
                },
-            }, getItemFieldValue('layout.camera', item, entity))]
-               .concat(getItemFieldValue('layout.tiles', item, entity) || []),
-         }, getItemFieldValue('layout.page', item, entity)));
+            }, getItemFieldValue('layout.camera', item, entity)),
+            ...(getItemFieldValue('layout.tiles', item, entity) || [])],
+         }, getItemFieldValue('layout.page', item, entity))
+      ));
+      return $scope.openPopup(item, entity, layout);
    };
 
    $scope.openDoorEntryss = function (item, entity) {
