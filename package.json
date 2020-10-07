@@ -9,9 +9,13 @@
     "lint": "eslint scripts",
     "fix": "eslint scripts --fix",
     "release": "standard-version",
-    "prerelease": "git pull && npm i && npm run build",
-    "posttag": "git push --follow-tags",
     "preinstall": "npx npm-force-resolutions"
+  },
+  "standard-version": {
+    "scripts": {
+      "prerelease": "git pull && npm i && npm run build",
+      "posttag": "git push --follow-tags"
+    }
   },
   "husky": {
     "hooks": {
