@@ -30,7 +30,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
    $scope.activeCamera = null;
    $scope.activeDoorEntry = null;
-   $scope.activeIframe = null;
    $scope.activePopup = null;
 
    $scope.alarmCode = null;
@@ -44,7 +43,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    const mainStyles = {};
    let activePage = null;
    let cameraList = null;
-   const popupIframeStyles = {};
 
    $scope.entityClick = function (page, item, entity) {
       if (typeof item.action === 'function') {
@@ -1521,37 +1519,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       $scope.datetimeString = null;
    };
 
-   $scope.getPopupIframeStyles = function () {
-      if (!$scope.activeIframe || !$scope.activeIframe.iframeStyles) {
-         return null;
-      }
-
-      const entity = $scope.getItemEntity($scope.activeIframe);
-
-      const styles = $scope.itemField('iframeStyles', $scope.activeIframe, entity);
-
-      if (!styles) {
-         return null;
-      }
-
-      for (const k in popupIframeStyles) {
-         delete popupIframeStyles[k];
-      }
-      for (const k in styles) {
-         popupIframeStyles[k] = styles[k];
-      }
-
-      return popupIframeStyles;
-   };
-
-   $scope.openPopupIframe = function (item, entity) {
-      $scope.activeIframe = item;
-   };
-
-   $scope.closePopupIframe = function () {
-      $scope.activeIframe = null;
-   };
-
    $scope.openPopup = function (item, entity, layout) {
       $scope.activePopup = {
          item: item,
@@ -1562,6 +1529,13 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
    $scope.closePopup = function () {
       $scope.activePopup = null;
+   };
+
+   $scope.getPopupClasses = function () {
+      if (!$scope.activePopup || !$scope.activePopup.layout.classes) {
+         return '';
+      }
+      return parseFieldValue($scope.activePopup.layout.classes, $scope.activePopup.item, $scope.activePopup.entity);
    };
 
    function getHistoryObject (item, entity, config) {
@@ -1729,43 +1703,59 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       return historyObject;
    }
 
-   $scope.initTileHistory = function (item, entity) {
-      const key = '_historyObject';
-
-      if (item[key]) {
-         return item[key];
+   function cacheInItem (item, key, data) {
+      if (!item[key]) {
+         item[key] = typeof data === 'function' ? data() : data;
       }
-
-      item[key] = getHistoryObject(item, entity, item);
-
       return item[key];
+   }
+
+   $scope.initTileHistory = function (item, entity) {
+      return cacheInItem(item, '_historyObject', () => getHistoryObject(item, entity, item));
    };
 
    $scope.openPopupHistory = function (item, entity) {
-      const key = '_popupHistory';
-
-      if (!item[key]) {
-         item[key] = {
-            styles: {
-               width: '100vw',
-               height: '56vw',
-               margin: 0,
-               maxWidth: '100%',
+      const layout = cacheInItem(item, '_popupHistory', () => ({
+         classes: ['-popup-landscape', ...(getItemFieldValue('history.classes', item, entity) || [])],
+         styles: {},
+         items: [angular.merge({
+            type: TYPES.HISTORY,
+            id: item.id,
+            title: false,
+            position: [0, 0],
+            classes: ['-item-fullsize'],
+            customStyles: {
+               width: null,
+               height: null,
+               top: null,
+               left: null,
             },
-            items: [angular.merge({
-               type: TYPES.HISTORY,
-               id: item.id,
-               title: false,
-               position: [0, 0],
-               customStyles: {
-                  width: '100%',
-                  height: '100%',
-               },
-            }, item.history)],
-         };
-      }
+         }, getItemFieldValue('history', item, entity))],
+      }));
+      return $scope.openPopup(item, entity, layout);
+   };
 
-      return $scope.openPopup(item, entity, item[key]);
+   $scope.openPopupIframe = function (item, entity) {
+      const layout = cacheInItem(item, '_popupIframe', () => ({
+         classes: ['-popup-fullsize', ...(getItemFieldValue('iframeClasses', item, entity) || [])],
+         styles: {},
+         items: [{
+            type: TYPES.IFRAME,
+            url: item.url,
+            id: {},
+            state: false,
+            title: false,
+            position: [0, 0],
+            classes: ['-item-fullsize'],
+            customStyles: angular.merge({
+               width: null,
+               height: null,
+               top: null,
+               left: null,
+            }, getItemFieldValue('iframeStyles', item, entity)),
+         }],
+      }));
+      return $scope.openPopup(item, entity, layout);
    };
 
    $scope.openDoorEntry = function (item, entity) {
@@ -1955,8 +1945,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    function hasOpenPopup () {
-      return $scope.activeCamera || $scope.activeDoorEntry || $scope.activeIframe
-         || $scope.activePopup;
+      return $scope.activeCamera || $scope.activeDoorEntry || $scope.activePopup;
    }
 
    $scope.toggleSelect = function (item) {
