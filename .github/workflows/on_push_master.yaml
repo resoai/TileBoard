@@ -1,13 +1,13 @@
-name: tagged-release
+name: pre-release
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - master
 
 jobs:
-  tagged-release:
-    name: Tagged Release
+  pre-release:
+    name: Pre Release
     runs-on: ubuntu-latest
     steps:
 
@@ -25,6 +25,8 @@ jobs:
       - uses: marvinpinto/action-automatic-releases@v1
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          prerelease: false
+          automatic_release_tag: latest
+          prerelease: true
+          title: Development Build
           files: |
             TileBoard.zip
