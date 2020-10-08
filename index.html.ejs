@@ -734,7 +734,7 @@
            class="item-entity-container -below">
          <div class="item-camera">
             <camera item="item" entity="entity"
-                    freezed="!isPageActive(page) || activeCamera || screensaverShown"></camera>
+                    freezed="(!isPopupActive(page) && !isPageActive(page)) || activeCamera || screensaverShown"></camera>
          </div>
       </div>
 
@@ -742,7 +742,7 @@
            class="item-entity-container -below">
          <div class="item-camera">
             <camera-thumbnail item="item" entity="entity"
-                              freezed="!isPageActive(page) || activeCamera || screensaverShown"></camera-thumbnail>
+                              freezed="(!isPopupActive(page) && !isPageActive(page)) || activeCamera || screensaverShown"></camera-thumbnail>
          </div>
       </div>
 
@@ -750,7 +750,7 @@
            class="item-entity-container -below">
          <div class="item-camera">
             <camera-stream item="item" entity="entity"
-                           freezed="!isPageActive(page) || activeCamera || screensaverShown"></camera-stream>
+                           freezed="(!isPopupActive(page) && !isPageActive(page)) || activeCamera || screensaverShown"></camera-stream>
          </div>
       </div>
 

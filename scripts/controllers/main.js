@@ -1545,6 +1545,10 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       return parseFieldValue($scope.activePopup.layout.classes, $scope.activePopup.item, $scope.activePopup.entity);
    };
 
+   $scope.isPopupActive = function (page) {
+      return $scope.activePopup && $scope.activePopup.layout === page;
+   };
+
    function getHistoryObject (item, entity, config) {
       const historyObject = {
          item: angular.copy(item),
