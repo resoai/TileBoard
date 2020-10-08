@@ -83,43 +83,6 @@
       </div>
    </div>
 
-   <div class="door-entry-popup"
-        ng-if="activeDoorEntry && (page = activeDoorEntry.layout.page)
-            && (cameraEntity = getEntryCameraEntity(activeDoorEntry))">
-
-      <div class="door-entry-popup-container">
-         <div class="door-entry-popup-title">
-            <div class="door-entry-popup-close" ng-click="closeDoorEntry()">
-               <i class="mdi mdi-close"></i>
-            </div>
-            {{ entityTitle(activeDoorEntry, entity) }}
-         </div>
-
-         <div class="door-entry-popup-container">
-            <div class="door-entry-popup--camera">
-               <div ng-if="activeDoorEntry.layout.camera.type === TYPES.CAMERA">
-                  <camera item="activeDoorEntry.layout.camera" entity="cameraEntity"
-                          freezed="false"></camera>
-               </div>
-
-               <div ng-if="activeDoorEntry.layout.camera.type === TYPES.CAMERA_THUMBNAIL">
-                  <camera-thumbnail item="activeDoorEntry.layout.camera" entity="cameraEntity"
-                                    freezed="false"></camera-thumbnail>
-               </div>
-
-               <div ng-if="activeDoorEntry.layout.camera.type === TYPES.CAMERA_STREAM">
-                  <camera-stream item="activeDoorEntry.layout.camera" entity="cameraEntity"
-                                    freezed="false"></camera-stream>
-               </div>
-            </div>
-
-            <div class="door-entry-popup--tiles">
-               <div tile ng-repeat="item in activeDoorEntry.layout.tiles track by $index"></div>
-            </div>
-         </div>
-      </div>
-   </div>
-
    <div class="popup"
         ng-if="activePopup && (page = activePopup.layout || {})"
         ng-class="getPopupClasses()"

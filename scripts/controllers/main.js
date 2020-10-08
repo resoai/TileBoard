@@ -29,7 +29,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    $scope.datetimeString = null;
 
    $scope.activeCamera = null;
-   $scope.activeDoorEntry = null;
    $scope.activePopup = null;
 
    $scope.alarmCode = null;
@@ -38,7 +37,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    let showedPages = [];
 
    const latestAlarmActions = {};
-   let doorEntryTimeout = null;
    let popupTimeout = null;
    let bodyClass = null;
    const mainStyles = {};
@@ -1799,28 +1797,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       }
    };
 
-   $scope.openDoorEntryss = function (item, entity) {
-      $scope.activeDoorEntry = item;
-
-      if (doorEntryTimeout) {
-         clearTimeout(doorEntryTimeout);
-      }
-
-      if (CONFIG.doorEntryTimeout) {
-         doorEntryTimeout = $timeout(function () {
-            $scope.closeDoorEntry();
-         }, CONFIG.doorEntryTimeout * 1000);
-      }
-   };
-
-   $scope.closeDoorEntry = function () {
-      $scope.activeDoorEntry = null;
-
-      if (doorEntryTimeout) {
-         clearTimeout(doorEntryTimeout);
-      }
-   };
-
    $scope.openAlarm = function (item) {
       $scope.activeAlarm = item;
       $scope.alarmCode = null;
@@ -1986,7 +1962,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    function hasOpenPopup () {
-      return $scope.activeCamera || $scope.activeDoorEntry || $scope.activePopup;
+      return $scope.activeCamera || $scope.activePopup;
    }
 
    $scope.toggleSelect = function (item) {
