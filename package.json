@@ -8,18 +8,17 @@
     "build:watch": "rollup --config --environment PRODUCTION --watch",
     "lint": "eslint scripts",
     "fix": "eslint scripts --fix",
-    "release": "standard-version",
-    "preinstall": "npx npm-force-resolutions"
+    "release": "standard-version"
   },
   "standard-version": {
     "scripts": {
-      "prerelease": "git pull && npm i && npm run build",
+      "prerelease": "git pull && yarn && yarn build",
       "posttag": "git push --follow-tags"
     }
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint",
+      "pre-commit": "yarn lint",
       "post-merge": "node post-merge-warn.js"
     }
   },
@@ -43,12 +42,10 @@
     "@types/angular": "^1.7.3",
     "@types/hammerjs": "^2.0.36",
     "@types/hls.js": "^0.13.2",
-    "@types/rollup-plugin-commonjs": "^9.3.1",
     "babel-plugin-angularjs-annotate": "^0.10.0",
     "eslint": "^7.10.0",
     "husky": "^4.3.0",
     "less": "^3.12.2",
-    "npm-force-resolutions": "0.0.3",
     "print-message": "^3.0.1",
     "rollup": "^2.29.0",
     "rollup-plugin-cpy": "^2.0.1",
