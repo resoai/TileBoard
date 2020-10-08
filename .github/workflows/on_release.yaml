@@ -16,8 +16,8 @@ jobs:
 
       - name: Build app
         run: |
-          npm ci
-          npm run build
+          yarn install --frozen-lockfile
+          yarn build
           cp config.example.js build
           pushd build
           zip -qr "../TileBoard.zip" .

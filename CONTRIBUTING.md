@@ -3,10 +3,12 @@
 All contributions are welcome! If you would like to make some changes, follow these steps:
 
 1. Fork the project and clone it.
-2. Install `npm` dependencies:
+2. Install project dependencies:
+
+Note: You might need to install `yarn` globally first with `npm i -g yarn` or by follow instructions at https://classic.yarnpkg.com/en/docs/install.
 
 ```sh
-npm i
+yarn
 ```
 
 3. Copy `config.example.js` to `build/config.js` (create `build` directory if necessary) and adjust options for your server:
@@ -25,7 +27,7 @@ This needs to be added in `configuration.yaml` in HA. See https://www.home-assis
 5. Start the development server:
 
 ```sh
-npm run dev
+yarn dev
 ```
 
 This starts a local development server at address http://localhost:8080, serving the built TileBoard.
@@ -37,7 +39,7 @@ Modifications to the project trigger an automatic rebuild to make it easy to ite
 To create an optimized release build of TileBoard run:
 
 ```sh
-npm run build
+yarn build
 ```
 
 This creates optimized, smaller build that should be used when running TileBoard in "production". This command doesn't start development server.
@@ -46,4 +48,4 @@ Release builds are also attached to GitHub releases in "assets" section so if yo
 
 ## Releases (only for maintainers)
 
-A new release can be created by running `npm run release`. A new tagged commit will be created and pushed to the remote repo, triggering automatic creation of new release with built app package attached in "assets" section.
+A new release can be created by running `yarn release`. A new tagged commit will be created and pushed to the remote repo, triggering automatic creation of new release with built app package attached in "assets" section.
