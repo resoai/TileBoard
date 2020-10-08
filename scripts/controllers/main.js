@@ -39,6 +39,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
    const latestAlarmActions = {};
    let doorEntryTimeout = null;
+   let popupTimeout = null;
    let bodyClass = null;
    const mainStyles = {};
    let activePage = null;
@@ -1520,6 +1521,9 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.openPopup = function (item, entity, layout) {
+      if (popupTimeout) {
+         clearTimeout(popupTimeout);
+      }
       $scope.activePopup = {
          item: item,
          entity: entity,
@@ -1528,6 +1532,9 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.closePopup = function () {
+      if (popupTimeout) {
+         clearTimeout(popupTimeout);
+      }
       $scope.activePopup = null;
    };
 
@@ -1732,7 +1739,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
             },
          }, getItemFieldValue('history', item, entity))],
       }));
-      return $scope.openPopup(item, entity, layout);
+      $scope.openPopup(item, entity, layout);
    };
 
    $scope.openPopupIframe = function (item, entity) {
@@ -1755,7 +1762,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
             }, getItemFieldValue('iframeStyles', item, entity)),
          }],
       }));
-      return $scope.openPopup(item, entity, layout);
+      $scope.openPopup(item, entity, layout);
    };
 
    $scope.openDoorEntry = function (item, entity) {
@@ -1778,7 +1785,14 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
             ...(getItemFieldValue('layout.tiles', item, entity) || [])],
          }, getItemFieldValue('layout.page', item, entity))
       ));
-      return $scope.openPopup(item, entity, layout);
+
+      $scope.openPopup(item, entity, layout);
+
+      if (CONFIG.doorEntryTimeout) {
+         popupTimeout = $timeout(function () {
+            $scope.closePopup();
+         }, CONFIG.doorEntryTimeout * 1000);
+      }
    };
 
    $scope.openDoorEntryss = function (item, entity) {
