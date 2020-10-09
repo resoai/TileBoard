@@ -1358,6 +1358,10 @@ camera_stream {
          bottom: -@popupPadding;
          right: -@popupPadding;
          z-index: 0;
+
+         &.-th-camera, &.-th-camera_thumbnail, &.-th-camera_stream {
+            background-color: transparent;
+         }
       }
       .-item-non-clickable {
          /* use classes: ['-item-non-clickable'] to display as non-interactive tile */
