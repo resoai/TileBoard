@@ -1207,7 +1207,6 @@ camera_stream {
 }
 
 .camera-popup,
-.door-entry-popup,
 .popup {
    position: fixed;
    top: 0;
@@ -1257,8 +1256,7 @@ camera_stream {
    }
 }
 
-.camera-popup,
-.door-entry-popup {
+.camera-popup {
    &-container {
       height: 100%;
       width: 100%;
@@ -1301,27 +1299,6 @@ camera_stream {
          height: 100%;
          width: 100%;
       }
-   }
-}
-
-.door-entry-popup {
-   &--tiles {
-      position: absolute;
-      left: 15px;
-      top: @popupTitleHeight + 15px;
-      width: calc(100% - 30px);
-      height: calc(100% - @popupTitleHeight - 30px);
-      z-index: 2;
-   }
-
-   &--camera {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      top: 0;
-      z-index: 1;
-      width: 100%;
    }
 }
 
@@ -1381,6 +1358,20 @@ camera_stream {
          bottom: -@popupPadding;
          right: -@popupPadding;
          z-index: 0;
+
+         &.-th-camera, &.-th-camera_thumbnail, &.-th-camera_stream {
+            background-color: transparent;
+         }
+      }
+      .-item-non-clickable {
+         /* use classes: ['-item-non-clickable'] to display as non-interactive tile */
+         &:active {
+            margin: 0;
+            border: none;
+         }
+         .item-clickable {
+            display: none;
+         }
       }
    }
 }

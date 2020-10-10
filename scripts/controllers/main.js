@@ -29,7 +29,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    $scope.datetimeString = null;
 
    $scope.activeCamera = null;
-   $scope.activeDoorEntry = null;
    $scope.activePopup = null;
 
    $scope.alarmCode = null;
@@ -38,7 +37,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    let showedPages = [];
 
    const latestAlarmActions = {};
-   let doorEntryTimeout = null;
+   let popupTimeout = null;
    let bodyClass = null;
    const mainStyles = {};
    let activePage = null;
@@ -166,7 +165,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.getCameraEntityFullscreen = function (item) {
-      let entity_id = item.fullscreen.id;
+      let entity_id = getItemFieldValue('fullscreen.id', item, {});
 
       if (typeof entity_id === 'undefined') {
          entity_id = item.id;
@@ -1520,6 +1519,9 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.openPopup = function (item, entity, layout) {
+      if (popupTimeout) {
+         clearTimeout(popupTimeout);
+      }
       $scope.activePopup = {
          item: item,
          entity: entity,
@@ -1528,6 +1530,9 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.closePopup = function () {
+      if (popupTimeout) {
+         clearTimeout(popupTimeout);
+      }
       $scope.activePopup = null;
    };
 
@@ -1536,6 +1541,10 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
          return '';
       }
       return parseFieldValue($scope.activePopup.layout.classes, $scope.activePopup.item, $scope.activePopup.entity);
+   };
+
+   $scope.isPopupActive = function (page) {
+      return $scope.activePopup && $scope.activePopup.layout === page;
    };
 
    function getHistoryObject (item, entity, config) {
@@ -1732,7 +1741,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
             },
          }, getItemFieldValue('history', item, entity))],
       }));
-      return $scope.openPopup(item, entity, layout);
+      $scope.openPopup(item, entity, layout);
    };
 
    $scope.openPopupIframe = function (item, entity) {
@@ -1755,28 +1764,36 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
             }, getItemFieldValue('iframeStyles', item, entity)),
          }],
       }));
-      return $scope.openPopup(item, entity, layout);
+      $scope.openPopup(item, entity, layout);
    };
 
    $scope.openDoorEntry = function (item, entity) {
-      $scope.activeDoorEntry = item;
+      const layout = cacheInItem(item, '_popupDoorEntry', () => (
+         angular.merge({
+            classes: ['-popup-fullsize'],
+            styles: {},
+            items: [angular.merge({
+               state: false,
+               title: false,
+               position: [0, 0],
+               classes: ['-item-fullsize', '-item-non-clickable'],
+               customStyles: {
+                  width: null,
+                  height: null,
+                  top: null,
+                  left: null,
+               },
+            }, getItemFieldValue('layout.camera', item, entity)),
+            ...(getItemFieldValue('layout.tiles', item, entity) || [])],
+         }, getItemFieldValue('layout.page', item, entity))
+      ));
 
-      if (doorEntryTimeout) {
-         clearTimeout(doorEntryTimeout);
-      }
+      $scope.openPopup(item, entity, layout);
 
       if (CONFIG.doorEntryTimeout) {
-         doorEntryTimeout = $timeout(function () {
-            $scope.closeDoorEntry();
+         popupTimeout = $timeout(function () {
+            $scope.closePopup();
          }, CONFIG.doorEntryTimeout * 1000);
-      }
-   };
-
-   $scope.closeDoorEntry = function () {
-      $scope.activeDoorEntry = null;
-
-      if (doorEntryTimeout) {
-         clearTimeout(doorEntryTimeout);
       }
    };
 
@@ -1945,7 +1962,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    function hasOpenPopup () {
-      return $scope.activeCamera || $scope.activeDoorEntry || $scope.activePopup;
+      return $scope.activeCamera || $scope.activePopup;
    }
 
    $scope.toggleSelect = function (item) {
