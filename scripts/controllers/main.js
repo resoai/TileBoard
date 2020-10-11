@@ -449,13 +449,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       return item.styles;
    };
 
-   function cacheInItem (item, key, data) {
-      if (!item[key]) {
-         item[key] = typeof data === 'function' ? data() : data;
-      }
-      return item[key];
-   }
-
    $scope.itemBgStyles = function (item, entity) {
       const bg = getItemFieldValue('bg', item, entity);
       const bgSuffix = getItemFieldValue('bgSuffix', item, entity);
