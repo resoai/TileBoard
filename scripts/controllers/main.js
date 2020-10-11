@@ -1776,6 +1776,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
                state: false,
                title: false,
                position: [0, 0],
+               action: function (item, entity) {},
                classes: ['-item-fullsize', '-item-non-clickable'],
                customStyles: {
                   width: null,
