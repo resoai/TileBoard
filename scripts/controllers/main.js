@@ -796,8 +796,18 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       return page.header;
    };
 
-   function initSliderConf (item, entity, key, def, attrs, value, default_request) {
+   function initSliderConf (item, entity, def, value) {
+      const key = '_c_slider_' + def.field;
+
       return cacheInItem(item, key, function () {
+         const attrs = entity.attributes || {};
+         const value = +attrs[def.field] || 0;
+         const default_request = {
+            domain: 'input_number',
+            service: 'set_value',
+            field: 'value',
+         };
+
          $timeout(function () {
             item._sliderInited = true;
          }, 50);
@@ -814,44 +824,27 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
    $scope.getSliderConf = function (item, entity) {
       const def = item.slider || {};
-      const attrs = entity.attributes || {};
-      const value = +attrs[def.field] || 0;
-      const default_request = {
-         domain: 'input_number',
-         service: 'set_value',
-         field: 'value',
-      };
-      return initSliderConf(item, entity, '_c_inputNumberSlider', def, attrs, value, default_request);
+      return initSliderConf(item, entity, def);
    };
 
    $scope.getLightSliderConf = function (item, entity, slider) {
       const def = slider || {};
-      const attrs = entity.attributes;
-      const value = +attrs[def.field] || 0;
-      const default_request = {
-         domain: 'input_number',
-         service: 'set_value',
-         field: 'value',
-      };
 
       $timeout(function () {
          slider._sliderInited = true;
       }, 100);
 
-      return initSliderConf(item, entity, '_c_lightSlider_' + slider.field, def, attrs, value, default_request);
+      return initSliderConf(item, entity, def);
    };
 
    $scope.getVolumeConf = function (item, entity) {
-      const def = { max: 100, min: 0, step: 2 };
-      const attrs = entity.attributes;
-      const value = attrs.volume_level * 100 || 0;
-      const default_request = {};
+      const def = { max: 1.0, min: 0.0, step: 0.02, field: 'volume_level' };
 
-      if (!('volume_level' in attrs)) {
+      if (!('volume_level' in entity.attributes)) {
          return false;
       }
 
-      return initSliderConf(item, entity, '_c_volumeSlider', def, attrs, value, default_request);
+      return initSliderConf(item, entity, def);
    };
 
    $scope.getLightSliderValue = function (slider, conf) {
@@ -1001,7 +994,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       }
 
       const value = {
-         value: conf.value / 100,
+         value: conf.value,
          request: {
             domain: 'media_player',
             service: 'volume_set',
