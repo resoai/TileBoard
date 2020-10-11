@@ -167,7 +167,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    $scope.getCameraEntityFullscreen = function (item) {
       let entity_id = getItemFieldValue('fullscreen.id', item, {});
 
-      if (typeof entity_id === 'undefined') {
+      if (entity_id === null) {
          entity_id = item.id;
       }
 
