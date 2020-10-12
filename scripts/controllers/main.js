@@ -801,7 +801,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
       return cacheInItem(item, key, function () {
          const attrs = entity.attributes || {};
-         const value = +attrs[def.field] || 0;
          const default_request = {
             domain: 'input_number',
             service: 'set_value',
@@ -813,10 +812,10 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
          }, 50);
 
          return {
-            max: attrs.max || def.max || 100,
-            min: attrs.min || def.min || 0,
-            step: attrs.step || def.step || 1,
-            value: value || +entity.state || def.value || 0,
+            max: def.max || attrs.max || 100,
+            min: def.min || attrs.min || 0,
+            step: def.step || attrs.step || 1,
+            value: +attrs[def.field] || +entity.state || def.value || 0,
             request: def.request || default_request,
          };
       });
