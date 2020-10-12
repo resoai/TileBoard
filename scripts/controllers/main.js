@@ -1,7 +1,7 @@
 import angular from 'angular';
 import Hammer from 'hammerjs';
 import { App } from '../app';
-import { TYPES, FEATURES, HEADER_ITEMS, MENU_POSITIONS, GROUP_ALIGNS, TRANSITIONS, MAPBOX_MAP, YANDEX_MAP } from '../globals/constants';
+import { TYPES, FEATURES, HEADER_ITEMS, MENU_POSITIONS, GROUP_ALIGNS, TRANSITIONS, MAPBOX_MAP, YANDEX_MAP, DEFAULT_SLIDER_OPTIONS, DEFAULT_LIGHT_SLIDER_OPTIONS, DEFAULT_VOLUME_SLIDER_OPTIONS } from '../globals/constants';
 import { debounce, leadZero, toAbsoluteServerURL } from '../globals/utils';
 import Noty from '../models/noty';
 
@@ -796,54 +796,49 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       return page.header;
    };
 
-   function initSliderConf (item, entity, def, value) {
-      const key = '_c_slider_' + def.field;
+   function initSliderConf (item, entity, config, defaults) {
+      const key = '_c_slider_' + (config.field || defaults.field);
 
       return cacheInItem(item, key, function () {
          const attrs = entity.attributes || {};
-         const defaultRequest = {
-            domain: 'input_number',
-            service: 'set_value',
-            field: 'value',
-         };
 
          $timeout(function () {
             item._sliderInited = true;
          }, 50);
 
          return {
-            max: def.max || attrs.max || 100,
-            min: def.min || attrs.min || 0,
-            step: def.step || attrs.step || 1,
-            value: +attrs[def.field] || +entity.state || def.value || 0,
-            request: def.request || defaultRequest,
+            max: config.max || attrs.max || defaults.max,
+            min: config.min || attrs.min || defaults.min,
+            step: config.step || attrs.step || defaults.step,
+            value: config.value || +attrs[config.field] || +entity.state || defaults.value || +attrs[defaults.field],
+            request: config.request || defaults.request,
          };
       });
    }
 
    $scope.getSliderConf = function (item, entity) {
-      const def = item.slider || {};
-      return initSliderConf(item, entity, def);
+      const config = item.slider || {};
+      return initSliderConf(item, entity, config, DEFAULT_SLIDER_OPTIONS);
    };
 
    $scope.getLightSliderConf = function (item, entity, slider) {
-      const def = slider || {};
+      const config = slider || {};
 
       $timeout(function () {
          slider._sliderInited = true;
       }, 100);
 
-      return initSliderConf(item, entity, def);
+      return initSliderConf(item, entity, config, DEFAULT_LIGHT_SLIDER_OPTIONS);
    };
 
    $scope.getVolumeConf = function (item, entity) {
-      const def = { max: 1.0, min: 0.0, step: 0.02, field: 'volume_level' };
+      const config = { };
 
       if (!('volume_level' in entity.attributes)) {
          return false;
       }
 
-      return initSliderConf(item, entity, def);
+      return initSliderConf(item, entity, config, DEFAULT_VOLUME_SLIDER_OPTIONS);
    };
 
    $scope.getLightSliderValue = function (slider, conf) {
