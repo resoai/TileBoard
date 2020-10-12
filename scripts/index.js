@@ -7,6 +7,7 @@ import './controllers/main';
 import './controllers/noty';
 import './controllers/screensaver';
 import '../styles/all.less';
+import '@mdi/font/scss/materialdesignicons.scss';
 
 function onConfigLoadOrError (error) {
    if (error) {
