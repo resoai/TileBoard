@@ -440,34 +440,14 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.itemBgStyles = function (item, entity) {
-      const obj = entity.attributes || entity;
+      const bg = getItemFieldValue('bg', item, entity);
+      const bgSuffix = getItemFieldValue('bgSuffix', item, entity);
 
-      if (!obj.bgStyles) {
-         let bg;
-         const styles = {};
-
-         if ('bgOpacity' in item) {
-            styles.opacity = parseFieldValue(item.bgOpacity, item, entity);
-         }
-
-         if (item.bg) {
-            bg = parseFieldValue(item.bg, item, entity);
-
-            if (bg) {
-               styles.backgroundImage = 'url(' + bg + ')';
-            }
-         } else if (item.bgSuffix) {
-            bg = parseFieldValue(item.bgSuffix, item, entity);
-
-            if (bg) {
-               styles.backgroundImage = 'url("' + toAbsoluteServerURL(bg) + '")';
-            }
-         }
-
-         obj.bgStyles = styles;
-      }
-
-      return obj.bgStyles;
+      return cacheInItem(item, 'bgStyles', {
+         opacity: getItemFieldValue('bgOpacity', item, entity) || null,
+         backgroundImage: bg ? 'url(' + bg + ')'
+            : bgSuffix ? 'url(' + toAbsoluteServerURL(bgSuffix) + ')' : null,
+      });
    };
 
    $scope.itemClasses = function (item) {
