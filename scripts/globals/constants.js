@@ -78,6 +78,14 @@ export const HEADER_ITEMS = {
 export const SCREENSAVER_ITEMS = HEADER_ITEMS;
 
 export const FEATURES = {
+   ALARM: {
+      // https://github.com/home-assistant/core/blob/dev/homeassistant/components/alarm_control_panel/const.py
+      ARM_HOME: 1,
+      ARM_AWAY: 2,
+      ARM_NIGHT: 4,
+      TRIGGER: 8,
+      ARM_CUSTOM_BYPASS: 16,
+   },
    LIGHT: {
       BRIGHTNESS: 1,
    },

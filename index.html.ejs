@@ -147,17 +147,17 @@
 
             <div class="alarm-popup-buttons-line">
                <div class="alarm-popup-button -icon -home"
-                    ng-if="!isDisarmed(alarmEntity)"
+                    ng-if="supportsFeature(FEATURES.ALARM.ARM_HOME, alarmEntity) && !isDisarmed(alarmEntity)"
                     ng-click="actionAlarm('alarm_arm_home', activeAlarm, alarmEntity)">
                   <div class="mdi mdi-bell-plus"></div> Arm home
                </div>
                <div class="alarm-popup-button -icon -away"
-                    ng-if="!isDisarmed(alarmEntity)"
+                    ng-if="supportsFeature(FEATURES.ALARM.ARM_AWAY, alarmEntity) && !isDisarmed(alarmEntity)"
                     ng-click="actionAlarm('alarm_arm_away', activeAlarm, alarmEntity)">
                   <div class="mdi mdi-bell"></div> Arm away
                </div>
                <div class="alarm-popup-button -icon -night"
-                    ng-if="!isDisarmed(alarmEntity)"
+                    ng-if="supportsFeature(FEATURES.ALARM.ARM_NIGHT, alarmEntity) && !isDisarmed(alarmEntity)"
                     ng-click="actionAlarm('alarm_arm_night', activeAlarm, alarmEntity)">
                   <div class="mdi mdi-sleep"></div> Arm night
                </div>
