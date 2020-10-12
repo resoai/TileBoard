@@ -178,16 +178,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       return $scope.states[entity_id];
    };
 
-   $scope.getEntryCameraEntity = function (itemEntry) {
-      const item = itemEntry.layout.camera;
-
-      if (typeof item.id === 'object') {
-         return item.id;
-      }
-
-      return $scope.states[item.id];
-   };
-
    $scope.showPage = function (page) {
       return showedPages.indexOf(page) !== -1;
    };
