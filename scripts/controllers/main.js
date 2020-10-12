@@ -440,17 +440,15 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.itemBgStyles = function (item, entity) {
-      return cacheInItem(item, 'bgStyles', () => {
-         const bg = getItemFieldValue('bg', item, entity);
-         const bgSuffix = getItemFieldValue('bgSuffix', item, entity);
-         const opacity = getItemFieldValue('bgOpacity', item, entity);
+      const bg = getItemFieldValue('bg', item, entity);
+      const bgSuffix = getItemFieldValue('bgSuffix', item, entity);
+      const opacity = getItemFieldValue('bgOpacity', item, entity);
 
-         return {
-            opacity: opacity || null,
-            backgroundImage: bg ? `url("${bg}")`
-               : bgSuffix ? `url("${toAbsoluteServerURL(bgSuffix)}")` : null,
-         };
-      });
+      return {
+         opacity: opacity || null,
+         backgroundImage: bg ? `url("${bg}")`
+            : bgSuffix ? `url("${toAbsoluteServerURL(bgSuffix)}")` : null,
+      };
    };
 
    $scope.itemClasses = function (item) {
