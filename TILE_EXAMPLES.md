@@ -6,24 +6,30 @@ Here are some real life examples of Tiles.<br>
 
 ```js
 {
- position: [0, 3],
- type: TYPES.ALARM,
- title: 'Alarm',
- id: 'alarm_control_panel.home_alarm',
- icons: {
-    disarmed: 'mdi-bell-off',
-    pending: 'mdi-bell',
-    armed_home: 'mdi-bell-plus',
-    armed_away: 'mdi-bell',
-    triggered: 'mdi-bell-ring'
- },
- states: {
-    disarmed: 'Disarmed',
-    pending: 'Pending',
-    armed_home: 'Armed home',
-    armed_away: 'Armed away',
-    triggered: 'Triggered'
- }
+   position: [0, 3],
+   type: TYPES.ALARM,
+   title: 'Alarm',
+   id: 'alarm_control_panel.home_alarm',
+   icons: {
+      arming: 'mdi-bell-outline',
+      disarmed: 'mdi-bell-off',
+      pending: 'mdi-bell',
+      armed_custom_bypass: 'mdi-bell-check',
+      armed_home: 'mdi-bell-plus',
+      armed_night: 'mdi-bell-sleep',
+      armed_away: 'mdi-bell',
+      triggered: 'mdi-bell-ring'
+   },
+   states: {
+      arming: 'Arming',
+      disarmed: 'Disarmed',
+      pending: 'Pending',
+      armed_custom_bypass: 'Armed custom bypass',
+      armed_home: 'Armed home',
+      armed_night: 'Armed night',
+      armed_away: 'Armed away',
+      triggered: 'Triggered'
+   }
 }
 ```
 
