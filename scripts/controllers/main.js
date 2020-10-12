@@ -447,8 +447,8 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
          return {
             opacity: opacity || null,
-            backgroundImage: bg ? 'url(' + bg + ')'
-               : bgSuffix ? 'url(' + toAbsoluteServerURL(bgSuffix) + ')' : null,
+            backgroundImage: bg ? `url("${bg}")`
+               : bgSuffix ? `url("${toAbsoluteServerURL(bgSuffix)}")` : null,
          };
       });
    };
