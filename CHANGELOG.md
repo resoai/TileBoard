@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/resoai/TileBoard/compare/v2.0.0...v2.0.1) (2020-10-12)
+
+
+### Bug Fixes
+
+* bundle with mdi fonts instead of loading from external server ([#468](https://github.com/resoai/TileBoard/issues/468)) ([51bfd3b](https://github.com/resoai/TileBoard/commit/51bfd3befa3682c8ac19bcfafe704739bea1e1c5)), closes [#453](https://github.com/resoai/TileBoard/issues/453)
+* camera full screen opening when clicking door entry camera ([#463](https://github.com/resoai/TileBoard/issues/463)) ([18f232a](https://github.com/resoai/TileBoard/commit/18f232ade9585b3bd98a119e4b5da89a79523c88))
+
 ## [2.0.0](https://github.com/resoai/TileBoard/compare/v1.0.4...v2.0.0) (2020-10-08)
 
 
