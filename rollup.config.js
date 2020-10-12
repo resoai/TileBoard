@@ -66,6 +66,7 @@ const config = {
          // Don't try to resolve CSS @imports.
          import: false,
          sourceMap: true,
+         minimize: isProduction,
          url: {
             hash: 'assets/[name]-[hash][extname]',
             // The public path where assets referenced from css files are available.
