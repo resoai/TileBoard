@@ -58,7 +58,7 @@
     "standard-version": "^9.0.0"
   },
   "dependencies": {
-    "@mdi/font": "^5.6.55",
+    "@mdi/font": "^5.7.55",
     "angular": "^1.8.1",
     "angular-chart.js": "^1.1.1",
     "angular-hammer": "^2.2.0",
