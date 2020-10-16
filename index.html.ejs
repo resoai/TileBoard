@@ -147,22 +147,22 @@
 
             <div class="alarm-popup-buttons-line">
                <div class="alarm-popup-button -icon -home"
-                    ng-if="supportsFeature(FEATURES.ALARM.ARM_HOME, alarmEntity) && alarmEntity.state !== 'disarmed'"
+                    ng-if="supportsFeature(FEATURES.ALARM.ARM_HOME, alarmEntity) && alarmEntity.state === 'disarmed'"
                     ng-click="actionAlarm('alarm_arm_home', activeAlarm, alarmEntity)">
                   <div class="mdi mdi-bell-plus"></div> Arm home
                </div>
                <div class="alarm-popup-button -icon -away"
-                    ng-if="supportsFeature(FEATURES.ALARM.ARM_AWAY, alarmEntity) && alarmEntity.state !== 'disarmed'"
+                    ng-if="supportsFeature(FEATURES.ALARM.ARM_AWAY, alarmEntity) && alarmEntity.state === 'disarmed'"
                     ng-click="actionAlarm('alarm_arm_away', activeAlarm, alarmEntity)">
                   <div class="mdi mdi-bell"></div> Arm away
                </div>
                <div class="alarm-popup-button -icon -night"
-                    ng-if="supportsFeature(FEATURES.ALARM.ARM_NIGHT, alarmEntity) && alarmEntity.state !== 'disarmed'"
+                    ng-if="supportsFeature(FEATURES.ALARM.ARM_NIGHT, alarmEntity) && alarmEntity.state === 'disarmed'"
                     ng-click="actionAlarm('alarm_arm_night', activeAlarm, alarmEntity)">
                   <div class="mdi mdi-sleep"></div> Arm night
                </div>
                <div class="alarm-popup-button -icon -disarm"
-                    ng-if="alarmEntity.state === 'disarmed'"
+                    ng-if="alarmEntity.state !== 'disarmed'"
                     ng-click="actionAlarm('alarm_disarm', activeAlarm, alarmEntity)">
                   <div class="mdi mdi-bell-off"></div> Disarm
                </div>
