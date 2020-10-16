@@ -955,14 +955,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       return (features | feature) === features;
    };
 
-   $scope.isDisarmed = function (entity) {
-      if (['disarmed'].indexOf(entity.state) === -1) {
-         return true;
-      }
-
-      return false;
-   };
-
    $scope.shouldShowVolumeSlider = function (entity) {
       return $scope.supportsFeature(FEATURES.MEDIA_PLAYER.VOLUME_SET, entity)
           && ('volume_level' in entity.attributes)
