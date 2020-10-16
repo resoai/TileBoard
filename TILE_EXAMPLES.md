@@ -24,10 +24,10 @@ Here are some real life examples of Tiles.<br>
       arming: 'Arming',
       disarmed: 'Disarmed',
       pending: 'Pending',
-      armed_custom_bypass: 'Armed custom bypass',
-      armed_home: 'Armed home',
-      armed_night: 'Armed night',
-      armed_away: 'Armed away',
+      armed_custom_bypass: 'Armed (bypass)',
+      armed_home: 'Armed (home)',
+      armed_night: 'Armed (night)',
+      armed_away: 'Armed (away)',
       triggered: 'Triggered'
    }
 }
