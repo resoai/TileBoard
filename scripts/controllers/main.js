@@ -806,13 +806,21 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
             item._sliderInited = true;
          }, 50);
 
-         return {
-            max: config.max || attrs.max || defaults.max,
+         const sliderConf = {
             min: config.min || attrs.min || defaults.min,
+            max: config.max || attrs.max || defaults.max,
             step: config.step || attrs.step || defaults.step,
-            value: config.value || +attrs[config.field] || +entity.state || defaults.value || +attrs[defaults.field],
             request: config.request || defaults.request,
          };
+         sliderConf.getSetValue = function (newValue) {
+            if (arguments.length) {
+               sliderConf.newValue = newValue;
+            }
+            sliderConf.value = config.value || +entity.attributes[config.field] || +entity.state || defaults.value || +entity.attributes[defaults.field];
+            return (sliderConf.oldValue !== sliderConf.value) ? (sliderConf.oldValue = sliderConf.value) : sliderConf.newValue;
+         };
+         sliderConf.getSetValue();
+         return sliderConf;
       });
    }
 
@@ -969,7 +977,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
       const conf = value.request;
       const serviceData = {};
-      serviceData[conf.field] = value.value;
+      serviceData[conf.field] = value.newValue;
 
       callService(item, conf.domain, conf.service, serviceData);
    }
