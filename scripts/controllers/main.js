@@ -800,8 +800,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       const key = '_c_slider_' + (config.field || defaults.field);
 
       return cacheInItem(item, key, function () {
-         const attrs = entity.attributes || {};
-
          $timeout(function () {
             item._sliderInited = true;
          }, 50);
@@ -809,6 +807,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
             config._sliderInited = true;
          }, 100);
 
+         const attrs = entity.attributes || {};
          const sliderConf = {
             min: config.min || attrs.min || defaults.min,
             max: config.max || attrs.max || defaults.max,
@@ -824,7 +823,10 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
                sliderConf.newValue = newValue;
                sliderConf.value = newValue;
             } else {
-               sliderConf.curValue = +entity.attributes[config.field] || +entity.attributes[defaults.field] || +entity.state || config.value || defaults.value || config.min || defaults.min || entity.attributes.min || 0;
+               const { attributes, state } = entity;
+               sliderConf.curValue = +attributes[config.field] || +attributes[defaults.field] || +state
+                  || config.value || defaults.value
+                  || config.min || defaults.min || attributes.min || 0;
                if (sliderConf.oldValue !== sliderConf.curValue) {
                   sliderConf.oldValue = sliderConf.curValue;
                   sliderConf.value = sliderConf.curValue;
@@ -847,13 +849,10 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.getVolumeConf = function (item, entity) {
-      const config = { };
-
       if (!('volume_level' in entity.attributes)) {
          return false;
       }
-
-      return initSliderConf(item, entity, config, DEFAULT_VOLUME_SLIDER_OPTIONS);
+      return initSliderConf(item, entity, { }, DEFAULT_VOLUME_SLIDER_OPTIONS);
    };
 
    $scope.getLightSliderValue = function (slider, conf) {
@@ -978,14 +977,16 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    const setSliderValue = debounce(setSliderValueFn, 250);
 
    function setSliderValueFn (item, entity, sliderConf) {
-      if (!sliderConf.request) {
+      const { request, newValue } = sliderConf;
+
+      if (!request) {
          return;
       }
 
       const serviceData = {};
-      serviceData[sliderConf.request.field] = sliderConf.newValue;
+      serviceData[request.field] = newValue;
 
-      callService(item, sliderConf.request.domain, sliderConf.request.service, serviceData);
+      callService(item, request.domain, request.service, serviceData);
    }
 
    $scope.sliderChanged = function (item, entity, sliderConf) {
