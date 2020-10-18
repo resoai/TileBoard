@@ -824,7 +824,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
                sliderConf.newValue = newValue;
                sliderConf.value = newValue;
             } else {
-               sliderConf.curValue = config.value || +entity.attributes[config.field] || +entity.state || defaults.value || +entity.attributes[defaults.field];
+               sliderConf.curValue = +entity.attributes[config.field] || +entity.attributes[defaults.field] || +entity.state || config.value || defaults.value || config.min || defaults.min || entity.attributes.min || 0;
                if (sliderConf.oldValue !== sliderConf.curValue) {
                   sliderConf.oldValue = sliderConf.curValue;
                   sliderConf.value = sliderConf.curValue;
