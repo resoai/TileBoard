@@ -861,7 +861,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
          return slider.formatValue(conf);
       }
 
-      return conf.getSetValue();
+      return conf.value;
    };
 
    $scope.openLightSliders = function (item, entity) {
