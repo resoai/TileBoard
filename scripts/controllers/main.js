@@ -843,7 +843,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
    $scope.getLightSliderConf = function (item, entity, slider) {
       const config = slider || {};
-
       return initSliderConf(item, entity, config, DEFAULT_LIGHT_SLIDER_OPTIONS);
    };
 
