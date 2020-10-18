@@ -814,8 +814,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
             max: config.max || attrs.max || defaults.max,
             step: config.step || attrs.step || defaults.step,
             request: config.request || defaults.request,
-            title: config.title || defaults.title,
-            formatValue: config.formatValue || defaults.formatValue,
             curValue: undefined, // current value received from HA
             oldValue: undefined, // last value received from HA
             newValue: undefined, // new value set by the user through the slider
@@ -858,12 +856,12 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       return initSliderConf(item, entity, config, DEFAULT_VOLUME_SLIDER_OPTIONS);
    };
 
-   $scope.getLightSliderValue = function (conf) {
-      if (conf.formatValue) {
-         return conf.formatValue(conf);
+   $scope.getLightSliderValue = function (slider, conf) {
+      if (slider.formatValue) {
+         return slider.formatValue(conf);
       }
 
-      return conf.value;
+      return conf.getSetValue();
    };
 
    $scope.openLightSliders = function (item, entity) {

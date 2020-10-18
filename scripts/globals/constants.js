@@ -227,8 +227,8 @@ export const MINIMAL_CHART_OPTIONS = {
 };
 
 export const DEFAULT_SLIDER_OPTIONS = {
-   min: 0,
    max: 100,
+   min: 0,
    step: 1,
    field: 'value',
    request: {
@@ -239,14 +239,10 @@ export const DEFAULT_SLIDER_OPTIONS = {
 };
 
 export const DEFAULT_LIGHT_SLIDER_OPTIONS = {
-   min: 0,
    max: 255,
+   min: 0,
    step: 1,
    field: 'brightness',
-   title: 'Brightness',
-   formatValue: function (conf) {
-      return conf.value;
-   },
    request: {
       domain: 'light',
       service: 'turn_on',
@@ -255,8 +251,8 @@ export const DEFAULT_LIGHT_SLIDER_OPTIONS = {
 };
 
 export const DEFAULT_VOLUME_SLIDER_OPTIONS = {
-   min: 0.0,
    max: 1.0,
+   min: 0.0,
    step: 0.02,
    field: 'volume_level',
    request: {
