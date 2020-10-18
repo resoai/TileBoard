@@ -996,21 +996,12 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       setSliderValue(item, entity, sliderConf);
    };
 
-   $scope.volumeChanged = function (item, entity, conf) {
+   $scope.volumeChanged = function (item, entity, sliderConf) {
       if (!item._sliderInited) {
          return;
       }
 
-      const value = {
-         value: conf.value,
-         request: {
-            domain: 'media_player',
-            service: 'volume_set',
-            field: 'volume_level',
-         },
-      };
-
-      setSliderValue(item, entity, value);
+      setSliderValue(item, entity, sliderConf);
    };
 
    $scope.lightSliderChanged = function (item, entity, slider, sliderConf) {

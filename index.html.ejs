@@ -982,7 +982,9 @@
                <tr ng-if="shouldShowVolumeSlider(entity) && (_c = getVolumeConf(item, entity))">
                   <td colspan="3" class="media-player-table--td-volume">
                      <div class="media-player--volume">
-                        <input type="range" ng-model="_c.value"
+                        <input type="range"
+                               ng-model="_c.getSetValue"
+                               ng-model-options="{ getterSetter: true }"
                                ng-change="volumeChanged(item, entity, _c)"
                                ng-on-touchstart="$event.stopPropagation()"
                                ng-on-touchmove="$event.stopPropagation()"
