@@ -233,3 +233,39 @@ export const MINIMAL_CHART_OPTIONS = {
       },
    },
 };
+
+export const DEFAULT_SLIDER_OPTIONS = {
+   max: 100,
+   min: 0,
+   step: 1,
+   field: 'value',
+   request: {
+      domain: 'input_number',
+      service: 'set_value',
+      field: 'value',
+   },
+};
+
+export const DEFAULT_LIGHT_SLIDER_OPTIONS = {
+   max: 255,
+   min: 0,
+   step: 1,
+   field: 'brightness',
+   request: {
+      domain: 'light',
+      service: 'turn_on',
+      field: 'brightness',
+   },
+};
+
+export const DEFAULT_VOLUME_SLIDER_OPTIONS = {
+   max: 1.0,
+   min: 0.0,
+   step: 0.02,
+   field: 'volume_level',
+   request: {
+      domain: 'media_player',
+      service: 'volume_set',
+      field: 'volume_level',
+   },
+};

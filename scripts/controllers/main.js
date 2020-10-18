@@ -1,7 +1,7 @@
 import angular from 'angular';
 import Hammer from 'hammerjs';
 import { App } from '../app';
-import { TYPES, FEATURES, HEADER_ITEMS, MENU_POSITIONS, GROUP_ALIGNS, TRANSITIONS, MAPBOX_MAP, YANDEX_MAP } from '../globals/constants';
+import { TYPES, FEATURES, HEADER_ITEMS, MENU_POSITIONS, GROUP_ALIGNS, TRANSITIONS, MAPBOX_MAP, YANDEX_MAP, DEFAULT_SLIDER_OPTIONS, DEFAULT_LIGHT_SLIDER_OPTIONS, DEFAULT_VOLUME_SLIDER_OPTIONS } from '../globals/constants';
 import { debounce, leadZero, toAbsoluteServerURL } from '../globals/utils';
 import Noty from '../models/noty';
 
@@ -796,106 +796,63 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       return page.header;
    };
 
+   function initSliderConf (item, entity, config, defaults) {
+      const key = '_c_slider_' + (config.field || defaults.field);
+
+      return cacheInItem(item, key, function () {
+         $timeout(function () {
+            item._sliderInited = true;
+         }, 50);
+         $timeout(function () {
+            config._sliderInited = true;
+         }, 100);
+
+         const attrs = entity.attributes || {};
+         const sliderConf = {
+            min: config.min || attrs.min || defaults.min,
+            max: config.max || attrs.max || defaults.max,
+            step: config.step || attrs.step || defaults.step,
+            request: config.request || defaults.request,
+            curValue: undefined, // current value received from HA
+            oldValue: undefined, // last value received from HA
+            newValue: undefined, // new value set by the user through the slider
+            value: undefined, // the most current value from all the above
+         };
+         sliderConf.getSetValue = function (newValue) {
+            if (arguments.length) {
+               sliderConf.newValue = newValue;
+               sliderConf.value = newValue;
+            } else {
+               const { attributes, state } = entity;
+               sliderConf.curValue = +attributes[config.field] || +attributes[defaults.field] || +state
+                  || config.value || defaults.value
+                  || config.min || defaults.min || attributes.min || 0;
+               if (sliderConf.oldValue !== sliderConf.curValue) {
+                  sliderConf.oldValue = sliderConf.curValue;
+                  sliderConf.value = sliderConf.curValue;
+               }
+            }
+            return sliderConf.value;
+         };
+         return sliderConf;
+      });
+   }
+
    $scope.getSliderConf = function (item, entity) {
-      const key = '_c';
-
-      if (!entity.attributes) {
-         entity.attributes = {};
-      }
-      if (entity.attributes[key]) {
-         return entity.attributes[key];
-      }
-
-      const def = item.slider || {};
-      const attrs = entity.attributes || {};
-      const value = +attrs[def.field] || 0;
-
-      entity.attributes[key] = {
-         max: attrs.max || def.max || 100,
-         min: attrs.min || def.min || 0,
-         step: attrs.step || def.step || 1,
-         value: value || +entity.state || def.value || 0,
-         request: def.request || {
-            domain: 'input_number',
-            service: 'set_value',
-            field: 'value',
-         },
-      };
-
-      $timeout(function () {
-         item._sliderInited = true;
-      }, 50);
-
-      return entity.attributes[key];
+      const config = item.slider || {};
+      return initSliderConf(item, entity, config, DEFAULT_SLIDER_OPTIONS);
    };
 
-   $scope.getLightSliderConf = function (slider, entity) {
-      const key = '_c_' + slider.field;
-
-      if (!entity.attributes) {
-         entity.attributes = {};
-      }
-      if (entity.attributes[key]) {
-         return entity.attributes[key];
-      }
-
-
-      const def = slider || {};
-      const attrs = entity.attributes;
-      const value = +attrs[def.field] || 0;
-
-      entity.attributes[key] = {
-         max: def.max || attrs.max || 100,
-         min: def.min || attrs.min || 0,
-         step: def.step || attrs.step || 1,
-         value: value || def.min || attrs.min || 0,
-         request: def.request || {
-            domain: 'input_number',
-            service: 'set_value',
-            field: 'value',
-         },
-      };
-
-      $timeout(function () {
-         entity.attributes._sliderInited = true;
-         slider._sliderInited = true;
-      }, 100);
-
-      $timeout(function () {
-         entity.attributes._sliderInited = true;
-      }, 0);
-
-      return entity.attributes[key];
+   $scope.getLightSliderConf = function (item, entity, slider) {
+      const config = slider || {};
+      return initSliderConf(item, entity, config, DEFAULT_LIGHT_SLIDER_OPTIONS);
    };
 
    $scope.getVolumeConf = function (item, entity) {
-      if (!entity.attributes) {
-         entity.attributes = {};
-      }
-      if (entity.attributes._c) {
-         return entity.attributes._c;
-      }
-
-      const def = { max: 100, min: 0, step: 2 };
-      const attrs = entity.attributes;
-      const value = attrs.volume_level * 100 || 0;
-
-      if (!('volume_level' in attrs)) {
+      if (!('volume_level' in entity.attributes)) {
          return false;
       }
-
-      entity.attributes._c = {
-         max: attrs.max || def.max || 100,
-         min: attrs.min || def.min || 0,
-         step: attrs.step || def.step || 1,
-         value: value || 0,
-      };
-
-      $timeout(function () {
-         entity.attributes._sliderInited = true;
-      }, 50);
-
-      return entity.attributes._c;
+      return initSliderConf(item, entity, { }, DEFAULT_VOLUME_SLIDER_OPTIONS);
    };
 
    $scope.getLightSliderValue = function (slider, conf) {
@@ -1011,55 +968,41 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
    const setSliderValue = debounce(setSliderValueFn, 250);
 
-   function setSliderValueFn (item, entity, value) {
-      if (!value.request) {
+   function setSliderValueFn (item, entity, sliderConf) {
+      const { request, newValue } = sliderConf;
+
+      if (!request) {
          return;
       }
 
-      const conf = value.request;
       const serviceData = {};
-      serviceData[conf.field] = value.value;
+      serviceData[request.field] = newValue;
 
-      callService(item, conf.domain, conf.service, serviceData);
+      callService(item, request.domain, request.service, serviceData);
    }
 
-   $scope.sliderChanged = function (item, entity, value) {
+   $scope.sliderChanged = function (item, entity, sliderConf) {
       if (!item._sliderInited) {
          return;
       }
 
-      setSliderValue(item, entity, value);
+      setSliderValue(item, entity, sliderConf);
    };
 
-   $scope.volumeChanged = function (item, entity, conf) {
-      if (!entity.attributes._sliderInited) {
+   $scope.volumeChanged = function (item, entity, sliderConf) {
+      if (!item._sliderInited) {
          return;
       }
 
-      const value = {
-         value: conf.value / 100,
-         request: {
-            domain: 'media_player',
-            service: 'volume_set',
-            field: 'volume_level',
-         },
-      };
-
-      setSliderValue(item, entity, value);
+      setSliderValue(item, entity, sliderConf);
    };
 
-   $scope.lightSliderChanged = function (slider, item, entity, value) {
-      if (!item._controlsInited) {
-         return;
-      }
-      if (!slider._sliderInited) {
-         return;
-      }
-      if (!entity.attributes._sliderInited) {
+   $scope.lightSliderChanged = function (item, entity, slider, sliderConf) {
+      if (!item._controlsInited || !item._sliderInited || !slider._sliderInited) {
          return;
       }
 
-      setSliderValue(item, entity, value);
+      setSliderValue(item, entity, sliderConf);
    };
 
    $scope.toggleSwitch = function (item, entity, callback) {

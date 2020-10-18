@@ -562,7 +562,7 @@
          <div ng-if="item.controlsEnabled" class="item-entity-sliders"
               ng-click="preventClick($event)">
             <div ng-repeat="slider in item.sliders track by $index"
-                 ng-if="(_c = getLightSliderConf(slider, entity))"
+                 ng-if="(_c = getLightSliderConf(item, entity, slider))"
                  class="item-slider-container">
 
                <div class="item-slider-title" ng-if="slider.title">
@@ -572,11 +572,12 @@
 
                <div class="item-slider">
                   <input type="range"
-                         ng-model="_c.value"
+                         ng-model="_c.getSetValue"
+                         ng-model-options="{ getterSetter: true }"
                          ng-on-touchstart="$event.stopPropagation()"
                          ng-on-touchmove="$event.stopPropagation()"
                          ng-on-pointerdown="$event.stopPropagation()"
-                         ng-change="lightSliderChanged(slider, item, entity, _c)"
+                         ng-change="lightSliderChanged(item, entity, slider, _c)"
                          step="{{ _c.step }}" ng-min="{{ _c.min }}" ng-max="{{ _c.max }}">
                </div>
             </div>
@@ -728,7 +729,9 @@
          </div>
 
          <div class="item-slider" ng-if="(_c = getSliderConf(item, entity))">
-            <input type="range" ng-model="_c.value"
+            <input type="range"
+                   ng-model="_c.getSetValue"
+                   ng-model-options="{ getterSetter: true }"
                    ng-change="sliderChanged(item, entity, _c)"
                    ng-on-touchstart="$event.stopPropagation()"
                    ng-on-touchmove="$event.stopPropagation()"
@@ -979,7 +982,9 @@
                <tr ng-if="shouldShowVolumeSlider(entity) && (_c = getVolumeConf(item, entity))">
                   <td colspan="3" class="media-player-table--td-volume">
                      <div class="media-player--volume">
-                        <input type="range" ng-model="_c.value"
+                        <input type="range"
+                               ng-model="_c.getSetValue"
+                               ng-model-options="{ getterSetter: true }"
                                ng-change="volumeChanged(item, entity, _c)"
                                ng-on-touchstart="$event.stopPropagation()"
                                ng-on-touchmove="$event.stopPropagation()"
