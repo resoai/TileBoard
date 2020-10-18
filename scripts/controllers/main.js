@@ -805,21 +805,33 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
          $timeout(function () {
             item._sliderInited = true;
          }, 50);
+         $timeout(function () {
+            config._sliderInited = true;
+         }, 100);
 
          const sliderConf = {
             min: config.min || attrs.min || defaults.min,
             max: config.max || attrs.max || defaults.max,
             step: config.step || attrs.step || defaults.step,
             request: config.request || defaults.request,
+            curValue: undefined, // current value received from HA
+            oldValue: undefined, // last value received from HA
+            newValue: undefined, // new value set by the user through the slider
+            value: undefined, // the most current value from all the above
          };
          sliderConf.getSetValue = function (newValue) {
             if (arguments.length) {
                sliderConf.newValue = newValue;
+               sliderConf.value = newValue;
+            } else {
+               sliderConf.curValue = config.value || +entity.attributes[config.field] || +entity.state || defaults.value || +entity.attributes[defaults.field];
+               if (sliderConf.oldValue !== sliderConf.curValue) {
+                  sliderConf.oldValue = sliderConf.curValue;
+                  sliderConf.value = sliderConf.curValue;
+               }
             }
-            sliderConf.value = config.value || +entity.attributes[config.field] || +entity.state || defaults.value || +entity.attributes[defaults.field];
-            return (sliderConf.oldValue !== sliderConf.value) ? (sliderConf.oldValue = sliderConf.value) : sliderConf.newValue;
+            return sliderConf.value;
          };
-         sliderConf.getSetValue();
          return sliderConf;
       });
    }
@@ -831,10 +843,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
    $scope.getLightSliderConf = function (item, entity, slider) {
       const config = slider || {};
-
-      $timeout(function () {
-         slider._sliderInited = true;
-      }, 100);
 
       return initSliderConf(item, entity, config, DEFAULT_LIGHT_SLIDER_OPTIONS);
    };
@@ -854,7 +862,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
          return slider.formatValue(conf);
       }
 
-      return conf.value;
+      return conf.getSetValue();
    };
 
    $scope.openLightSliders = function (item, entity) {
