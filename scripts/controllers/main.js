@@ -864,7 +864,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.openLightSliders = function (item, entity) {
-      if ((!item.sliders || !item.sliders.length) && !item.colorpicker) {
+      if ((!item.sliders || !item.sliders.length) && !$scope.supportsFeature(FEATURES.LIGHT.COLOR, entity)) {
          return;
       }
 

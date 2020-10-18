@@ -87,7 +87,14 @@ export const FEATURES = {
       ARM_CUSTOM_BYPASS: 16,
    },
    LIGHT: {
+      // https://github.com/home-assistant/core/blob/dev/homeassistant/components/light/__init__.py
       BRIGHTNESS: 1,
+      COLOR_TEMP: 2,
+      EFFECT: 4,
+      FLASH: 8,
+      COLOR: 16,
+      TRANSITION: 32,
+      WHITE_VALUE: 128,
    },
    MEDIA_PLAYER: {
       PAUSE: 1,

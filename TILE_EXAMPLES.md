@@ -414,7 +414,6 @@ Light switch. You can optionally define sliders to control colour temperature or
          }
       }
    ],
-   colorpicker: true
 }
 ```
 
