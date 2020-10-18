@@ -729,7 +729,9 @@
          </div>
 
          <div class="item-slider" ng-if="(_c = getSliderConf(item, entity))">
-            <input type="range" ng-model="_c.value"
+            <input type="range"
+                   ng-model="_c.getSetValue"
+                   ng-model-options="{ getterSetter: true }"
                    ng-change="sliderChanged(item, entity, _c)"
                    ng-on-touchstart="$event.stopPropagation()"
                    ng-on-touchmove="$event.stopPropagation()"

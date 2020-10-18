@@ -988,12 +988,12 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       callService(item, sliderConf.request.domain, sliderConf.request.service, serviceData);
    }
 
-   $scope.sliderChanged = function (item, entity, value) {
+   $scope.sliderChanged = function (item, entity, sliderConf) {
       if (!item._sliderInited) {
          return;
       }
 
-      setSliderValue(item, entity, value);
+      setSliderValue(item, entity, sliderConf);
    };
 
    $scope.volumeChanged = function (item, entity, conf) {
