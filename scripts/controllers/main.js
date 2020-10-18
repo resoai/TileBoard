@@ -2415,22 +2415,18 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       const timeout = 500;
       ghostCoordinates.push(coordinates);
       $timeout(popGhost, timeout);
-      // alert(ghostCoordinates);
    }
 
    function popGhost () {
-      // alert(ghostCoordinates);
       ghostCoordinates.splice(0, 1);
    }
 
    function preventGhostClick ($event) {
-      // alert(ghostCoordinates);
       const threshold = 25;
       for (let i = 0; i < ghostCoordinates.length; i++) {
          const x = ghostCoordinates[i][0];
          const y = ghostCoordinates[i][1];
 
-         // within the range, so prevent the click
          if (Math.abs($event.clientX - x) < threshold && Math.abs($event.clientY - y) < threshold) {
             $event.stopPropagation();
             $event.preventDefault();
