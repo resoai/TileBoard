@@ -977,16 +977,15 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
    const setSliderValue = debounce(setSliderValueFn, 250);
 
-   function setSliderValueFn (item, entity, value) {
-      if (!value.request) {
+   function setSliderValueFn (item, entity, sliderConf) {
+      if (!sliderConf.request) {
          return;
       }
 
-      const conf = value.request;
       const serviceData = {};
-      serviceData[conf.field] = value.newValue;
+      serviceData[sliderConf.request.field] = sliderConf.newValue;
 
-      callService(item, conf.domain, conf.service, serviceData);
+      callService(item, sliderConf.request.domain, sliderConf.request.service, serviceData);
    }
 
    $scope.sliderChanged = function (item, entity, value) {
@@ -1014,18 +1013,12 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       setSliderValue(item, entity, value);
    };
 
-   $scope.lightSliderChanged = function (slider, item, entity, value) {
-      if (!item._controlsInited) {
-         return;
-      }
-      if (!slider._sliderInited) {
-         return;
-      }
-      if (!item._sliderInited) {
+   $scope.lightSliderChanged = function (item, entity, slider, sliderConf) {
+      if (!item._controlsInited || !item._sliderInited || !slider._sliderInited) {
          return;
       }
 
-      setSliderValue(item, entity, value);
+      setSliderValue(item, entity, sliderConf);
    };
 
    $scope.toggleSwitch = function (item, entity, callback) {
