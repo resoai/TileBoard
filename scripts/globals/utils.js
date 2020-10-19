@@ -129,3 +129,13 @@ export const toAbsoluteServerURL = function (path) {
    // Replace extra forward slashes but not in protocol.
    return url.replace(/([^:])\/+/g, '$1/');
 };
+
+export function supportsFeature (feature, entity) {
+   if (!('supported_features' in entity.attributes)) {
+      return false;
+   }
+
+   const features = entity.attributes.supported_features;
+
+   return (features | feature) === features;
+}

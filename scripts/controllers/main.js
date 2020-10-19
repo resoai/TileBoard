@@ -1,8 +1,9 @@
 import angular from 'angular';
 import Hammer from 'hammerjs';
+import { mergeConfigDefaults } from './main-utilities';
 import { App } from '../app';
 import { TYPES, FEATURES, HEADER_ITEMS, MENU_POSITIONS, GROUP_ALIGNS, TRANSITIONS, MAPBOX_MAP, YANDEX_MAP, DEFAULT_SLIDER_OPTIONS, DEFAULT_LIGHT_SLIDER_OPTIONS, DEFAULT_VOLUME_SLIDER_OPTIONS } from '../globals/constants';
-import { debounce, leadZero, toAbsoluteServerURL } from '../globals/utils';
+import { debounce, leadZero, supportsFeature, toAbsoluteServerURL } from '../globals/utils';
 import Noty from '../models/noty';
 
 App.controller('Main', function ($scope, $timeout, $location, Api) {
@@ -12,7 +13,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
    const CONFIG = window.CONFIG;
 
-   $scope.pages = CONFIG.pages;
+   $scope.pages = mergeConfigDefaults(CONFIG.pages);
    $scope.pagesContainerStyles = {};
    $scope.TYPES = TYPES;
    $scope.FEATURES = FEATURES;
@@ -33,6 +34,8 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
    $scope.alarmCode = null;
    $scope.activeAlarm = null;
+
+   $scope.supportsFeature = supportsFeature;
 
    let showedPages = [];
 
@@ -864,7 +867,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.openLightSliders = function (item, entity) {
-      if ((!item.sliders || !item.sliders.length) && !$scope.supportsFeature(FEATURES.LIGHT.COLOR, entity)) {
+      if ((!item.sliders || !item.sliders.length) && !$scope.itemField('colorpicker', item, entity)) {
          return;
       }
 
@@ -902,58 +905,21 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       return false;
    };
 
-   $scope.supportsFeature = function (feature, entity) {
-      if (!('supported_features' in entity.attributes)) {
-         return false;
-      }
-
-      const features = entity.attributes.supported_features;
-
-      return (features | feature) === features;
-   };
-
    $scope.shouldShowVolumeSlider = function (entity) {
-      return $scope.supportsFeature(FEATURES.MEDIA_PLAYER.VOLUME_SET, entity)
+      return supportsFeature(FEATURES.MEDIA_PLAYER.VOLUME_SET, entity)
           && ('volume_level' in entity.attributes)
           && entity.state !== 'off';
    };
 
    $scope.shouldShowVolumeButtons = function (entity) {
-      return (!$scope.supportsFeature(FEATURES.MEDIA_PLAYER.VOLUME_SET, entity)
+      return (!supportsFeature(FEATURES.MEDIA_PLAYER.VOLUME_SET, entity)
           || !('volume_level' in entity.attributes))
-          && $scope.supportsFeature(FEATURES.MEDIA_PLAYER.VOLUME_STEP, entity)
+          && supportsFeature(FEATURES.MEDIA_PLAYER.VOLUME_STEP, entity)
           && entity.state !== 'off';
    };
 
-   const GAUGE_DEFAULTS = {
-      backgroundColor: 'rgba(0, 0, 0, 0.1)',
-      foregroundColor: 'rgba(0, 150, 136, 1)',
-      size: function (item) {
-         return .8 * (CONFIG.tileSize * (item.height < item.width ? item.height : item.width));
-      },
-      duration: 1500,
-      thick: 6,
-      type: 'full',
-      min: 0,
-      max: 100,
-      cap: 'butt',
-      thresholds: {},
-   };
-
    $scope.getGaugeField = function (field, item, entity) {
-      if (!item) {
-         return null;
-      }
-
-      if (item.settings && field in item.settings) {
-         return parseFieldValue(item.settings[field], item, entity);
-      }
-
-      if (field in GAUGE_DEFAULTS) {
-         return parseFieldValue(GAUGE_DEFAULTS[field], item, entity);
-      }
-
-      return null;
+      return parseFieldValue(item.settings[field], item, entity);
    };
 
    $scope.itemURL = function (item, entity) {
