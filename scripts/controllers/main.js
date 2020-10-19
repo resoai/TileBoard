@@ -809,8 +809,8 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
          const attrs = entity.attributes || {};
          const sliderConf = {
-            min: config.min || attrs.min || defaults.min,
-            max: config.max || attrs.max || defaults.max,
+            min: config.min ?? attrs.min ?? defaults.min,
+            max: config.max ?? attrs.max ?? defaults.max,
             step: config.step || attrs.step || defaults.step,
             request: config.request || defaults.request,
             curValue: undefined, // current value received from HA
@@ -824,9 +824,11 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
                sliderConf.value = newValue;
             } else {
                const { attributes, state } = entity;
-               sliderConf.curValue = +attributes[config.field] || +attributes[defaults.field] || +state
-                  || config.value || defaults.value
-                  || config.min || defaults.min || attributes.min || 0;
+               sliderConf.curValue = (!isNaN(+attributes[config.field]) ? +attributes[config.field] : null)
+                  ?? (!isNaN(+attributes[defaults.field]) ? +attributes[defaults.field] : null)
+                  ?? (!isNaN(+state) ? +state : null)
+                  ?? config.value ?? defaults.value
+                  ?? config.min ?? defaults.min ?? attributes.min ?? 0;
                if (sliderConf.oldValue !== sliderConf.curValue) {
                   sliderConf.oldValue = sliderConf.curValue;
                   sliderConf.value = sliderConf.curValue;
