@@ -58,9 +58,8 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
    function preventGhostClick ($event) {
       const threshold = 25;
-      for (let i = 0; i < ghostCoordinates.length; i++) {
-         const x = ghostCoordinates[i][0];
-         const y = ghostCoordinates[i][1];
+      for (const coordinates of ghostCoordinates) {
+         const [x, y] = coordinates;
 
          if (Math.abs($event.clientX - x) < threshold && Math.abs($event.clientY - y) < threshold) {
             $event.stopPropagation();
