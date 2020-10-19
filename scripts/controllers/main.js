@@ -44,6 +44,31 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    let cameraList = null;
 
    const ghostCoordinates = [];
+   document.addEventListener('click', preventGhostClick, true);
+
+   function addGhost (coordinates) {
+      const timeout = 500;
+      ghostCoordinates.push(coordinates);
+      $timeout(popGhost, timeout);
+   }
+
+   function popGhost () {
+      ghostCoordinates.splice(0, 1);
+   }
+
+   function preventGhostClick ($event) {
+      const threshold = 25;
+      for (let i = 0; i < ghostCoordinates.length; i++) {
+         const x = ghostCoordinates[i][0];
+         const y = ghostCoordinates[i][1];
+
+         if (Math.abs($event.clientX - x) < threshold && Math.abs($event.clientY - y) < threshold) {
+            $event.stopPropagation();
+            $event.preventDefault();
+            break;
+         }
+      }
+   }
 
    $scope.entityClick = function (page, item, entity) {
       if (typeof item.action === 'function') {
@@ -2410,29 +2435,4 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
          pingConnection();
       });
    }
-
-   function addGhost (coordinates) {
-      const timeout = 500;
-      ghostCoordinates.push(coordinates);
-      $timeout(popGhost, timeout);
-   }
-
-   function popGhost () {
-      ghostCoordinates.splice(0, 1);
-   }
-
-   function preventGhostClick ($event) {
-      const threshold = 25;
-      for (let i = 0; i < ghostCoordinates.length; i++) {
-         const x = ghostCoordinates[i][0];
-         const y = ghostCoordinates[i][1];
-
-         if (Math.abs($event.clientX - x) < threshold && Math.abs($event.clientY - y) < threshold) {
-            $event.stopPropagation();
-            $event.preventDefault();
-            break;
-         }
-      }
-   }
-   document.addEventListener('click', preventGhostClick, true);
 });
