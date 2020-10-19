@@ -43,6 +43,32 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    let activePage = null;
    let cameraList = null;
 
+   const ghostCoordinates = [];
+   document.addEventListener('click', preventGhostClick, true);
+
+   function addGhost (coordinates) {
+      const timeout = 500;
+      ghostCoordinates.push(coordinates);
+      $timeout(popGhost, timeout);
+   }
+
+   function popGhost () {
+      ghostCoordinates.splice(0, 1);
+   }
+
+   function preventGhostClick ($event) {
+      const threshold = 25;
+      for (const coordinates of ghostCoordinates) {
+         const [x, y] = coordinates;
+
+         if (Math.abs($event.clientX - x) < threshold && Math.abs($event.clientY - y) < threshold) {
+            $event.stopPropagation();
+            $event.preventDefault();
+            break;
+         }
+      }
+   }
+
    $scope.entityClick = function (page, item, entity) {
       if (typeof item.action === 'function') {
          return callFunction(item.action, [item, entity]);
@@ -86,6 +112,8 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.entityLongPress = function ($event, page, item, entity) {
+      addGhost([$event.changedPointers[0].clientX, $event.changedPointers[0].clientY]);
+
       if (typeof item.secondaryAction === 'function') {
          return callFunction(item.secondaryAction, [item, entity]);
       }
