@@ -919,7 +919,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.getGaugeField = function (field, item, entity) {
-      return parseFieldValue(item.settings[field], item, entity);
+      return getItemFieldValue(`settings.${field}`, item, entity);
    };
 
    $scope.itemURL = function (item, entity) {

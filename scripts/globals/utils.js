@@ -131,11 +131,6 @@ export const toAbsoluteServerURL = function (path) {
 };
 
 export function supportsFeature (feature, entity) {
-   if (!('supported_features' in entity.attributes)) {
-      return false;
-   }
-
-   const features = entity.attributes.supported_features;
-
-   return (features | feature) === features;
+   return 'supported_features' in entity.attributes
+      && (entity.attributes.supported_features & feature) !== 0;
 }

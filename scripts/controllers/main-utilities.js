@@ -15,10 +15,10 @@ function mergeTileListDefaults (tiles) {
       return;
    }
    for (const [index, tile] of tiles.entries()) {
-      if (tile.type in TILE_DEFAULTS) {
-         tiles[index] = mergeTileDefaults(tile);
-      }
+      tiles[index] = mergeTileDefaults(tile);
       switch (tile.type) {
+         case TYPES.CAMERA:
+         case TYPES.CAMERA_STREAM:
          case TYPES.CAMERA_THUMBNAIL:
             tile.fullscreen = mergeTileDefaults(tile.fullscreen);
             break;
@@ -37,5 +37,8 @@ function mergeTileListDefaults (tiles) {
 }
 
 function mergeTileDefaults (tile) {
-   return angular.merge({}, TILE_DEFAULTS[tile.type], tile);
+   if (tile && tile.type in TILE_DEFAULTS) {
+      return angular.merge({}, TILE_DEFAULTS[tile.type], tile);
+   }
+   return tile;
 }
