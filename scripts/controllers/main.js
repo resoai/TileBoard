@@ -827,6 +827,10 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       return page.header;
    };
 
+   function toSafeNumber (value) {
+      return !isNaN(+value) ? +value : null;
+   }
+
    function initSliderConf (item, entity, config, defaults) {
       const key = '_c_slider_' + (config.field || defaults.field);
 
@@ -840,8 +844,8 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
          const attrs = entity.attributes || {};
          const sliderConf = {
-            min: config.min || attrs.min || defaults.min,
-            max: config.max || attrs.max || defaults.max,
+            min: config.min ?? attrs.min ?? defaults.min,
+            max: config.max ?? attrs.max ?? defaults.max,
             step: config.step || attrs.step || defaults.step,
             request: config.request || defaults.request,
             curValue: undefined, // current value received from HA
@@ -855,9 +859,9 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
                sliderConf.value = newValue;
             } else {
                const { attributes, state } = entity;
-               sliderConf.curValue = +attributes[config.field] || +attributes[defaults.field] || +state
-                  || config.value || defaults.value
-                  || config.min || defaults.min || attributes.min || 0;
+               sliderConf.curValue = toSafeNumber(+attributes[config.field]) ?? toSafeNumber(+attributes[defaults.field]) ?? toSafeNumber(+state)
+                  ?? config.value ?? defaults.value
+                  ?? config.min ?? attributes.min ?? defaults.min ?? 0;
                if (sliderConf.oldValue !== sliderConf.curValue) {
                   sliderConf.oldValue = sliderConf.curValue;
                   sliderConf.value = sliderConf.curValue;
