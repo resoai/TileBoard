@@ -356,12 +356,10 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
    /** type: LIGHT **/
    /* sliders: list of slider object. See slider documentation below */
    sliders: [{}],
-   
-   /* colorpicker: whether or not the color picker should be used. 
-    * Only works with lights that have the rgb_color attribute 
-    * Valid options: true, false 
+   /* colorpicker: whether or not the color picker should be shown.
+    * Valid options: true, false, function. Default: auto-detected
     */
-   colorpicker: true,
+   colorpicker: false,
    /** type: POPUP_IFRAME **/
    url: String || Function,
    /* optional */

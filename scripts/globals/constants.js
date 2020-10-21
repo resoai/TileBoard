@@ -1,4 +1,4 @@
-import { timeAgo } from './utils';
+import { supportsFeature, timeAgo } from './utils';
 
 export const CLASS_BIG = '-big-entity';
 export const CLASS_SMALL = '-small-entity';
@@ -87,7 +87,14 @@ export const FEATURES = {
       ARM_CUSTOM_BYPASS: 16,
    },
    LIGHT: {
+      // https://github.com/home-assistant/core/blob/dev/homeassistant/components/light/__init__.py
       BRIGHTNESS: 1,
+      COLOR_TEMP: 2,
+      EFFECT: 4,
+      FLASH: 8,
+      COLOR: 16,
+      TRANSITION: 32,
+      WHITE_VALUE: 128,
    },
    MEDIA_PLAYER: {
       PAUSE: 1,
@@ -267,5 +274,27 @@ export const DEFAULT_VOLUME_SLIDER_OPTIONS = {
       domain: 'media_player',
       service: 'volume_set',
       field: 'volume_level',
+   },
+};
+
+export const TILE_DEFAULTS = {
+   [TYPES.GAUGE]: {
+      settings: {
+         backgroundColor: 'rgba(0, 0, 0, 0.1)',
+         foregroundColor: 'rgba(0, 150, 136, 1)',
+         size (item) {
+            return .8 * (window.CONFIG.tileSize * (item.height < item.width ? item.height : item.width));
+         },
+         duration: 1500,
+         thick: 6,
+         type: 'full',
+         min: 0,
+         max: 100,
+         cap: 'butt',
+         thresholds: {},
+      },
+   },
+   [TYPES.LIGHT]: {
+      colorpicker: (item, entity) => supportsFeature(FEATURES.LIGHT.COLOR, entity),
    },
 };
