@@ -2,7 +2,7 @@
   "name": "TileBoard",
   "icons": [{
     "src": "favicon.png",
-    "sizes": "16x16 24x24 32x32 48x48 64x64",
+    "sizes": "16x16 24x24 32x32 48x48 64x64 192x192",
     "type": "image/png"
   }],
   "display": "fullscreen"
