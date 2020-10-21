@@ -796,6 +796,10 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       return page.header;
    };
 
+   function toSafeNumber (value) {
+      return !isNaN(+value) ? +value : null;
+   }
+
    function initSliderConf (item, entity, config, defaults) {
       const key = '_c_slider_' + (config.field || defaults.field);
 
@@ -824,11 +828,9 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
                sliderConf.value = newValue;
             } else {
                const { attributes, state } = entity;
-               sliderConf.curValue = (!isNaN(+attributes[config.field]) ? +attributes[config.field] : null)
-                  ?? (!isNaN(+attributes[defaults.field]) ? +attributes[defaults.field] : null)
-                  ?? (!isNaN(+state) ? +state : null)
+               sliderConf.curValue = toSafeNumber(+attributes[config.field]) ?? toSafeNumber(+attributes[defaults.field]) ?? toSafeNumber(+state)
                   ?? config.value ?? defaults.value
-                  ?? config.min ?? defaults.min ?? attributes.min ?? 0;
+                  ?? config.min ?? attributes.min ?? defaults.min ?? 0;
                if (sliderConf.oldValue !== sliderConf.curValue) {
                   sliderConf.oldValue = sliderConf.curValue;
                   sliderConf.value = sliderConf.curValue;
