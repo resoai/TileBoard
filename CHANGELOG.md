@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.2](https://github.com/resoai/TileBoard/compare/v2.0.1...v2.0.2) (2020-10-21)
+
+
+### Bug Fixes
+
+* sliders to allow zero values ([#493](https://github.com/resoai/TileBoard/issues/493)) ([232204e](https://github.com/resoai/TileBoard/commit/232204e4700d3decacabc4214682daf902900b03))
+* **LIGHT:** show color picker based on feature check ([#488](https://github.com/resoai/TileBoard/issues/488)) ([9f55a3d](https://github.com/resoai/TileBoard/commit/9f55a3d748f33806919b37f94b0d81a5cb56539f))
+* don't cache icon background ([#471](https://github.com/resoai/TileBoard/issues/471)) ([f9ea1ef](https://github.com/resoai/TileBoard/commit/f9ea1efbdb2f06bf02847266cc3ab1d07ac22a9d)), closes [#425](https://github.com/resoai/TileBoard/issues/425)
+* enable arm buttons based on supported alarm features ([9d829c1](https://github.com/resoai/TileBoard/commit/9d829c179c24e186ba9ff1921b7f44564d27838a)), closes [#365](https://github.com/resoai/TileBoard/issues/365)
+* enable arm buttons based on supported alarm features ([#473](https://github.com/resoai/TileBoard/issues/473)) ([31d5a5a](https://github.com/resoai/TileBoard/commit/31d5a5ae6440ef2ccac6d3c977133216fef3e9cd)), closes [#365](https://github.com/resoai/TileBoard/issues/365)
+* long-press closes popups and light sliders immediately ([#489](https://github.com/resoai/TileBoard/issues/489)) ([492895b](https://github.com/resoai/TileBoard/commit/492895bf7e0942ab20cb880db40e38b84f8a0a25))
+* update alarm tile example with support for new states ([#472](https://github.com/resoai/TileBoard/issues/472)) ([43f151b](https://github.com/resoai/TileBoard/commit/43f151b4aeebc8e93e27880ed161f98e787d99fe))
+
 ### [2.0.1](https://github.com/resoai/TileBoard/compare/v2.0.0...v2.0.1) (2020-10-12)
 
 
