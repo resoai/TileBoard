@@ -277,6 +277,62 @@ export const DEFAULT_VOLUME_SLIDER_OPTIONS = {
    },
 };
 
+export const DEFAULT_POPUP_HISTORY = (item, entitiy) => ({
+   classes: ['-popup-landscape'],
+   styles: {},
+   items: [{
+      type: TYPES.HISTORY,
+      id: item.id,
+      title: false,
+      position: [0, 0],
+      classes: ['-item-fullsize'],
+      customStyles: {
+         width: null,
+         height: null,
+         top: null,
+         left: null,
+      },
+   }],
+});
+
+export const DEFAULT_POPUP_IFRAME = (item, entity) => ({
+   classes: ['-popup-fullsize'],
+   styles: {},
+   items: [{
+      type: TYPES.IFRAME,
+      url: item.url,
+      id: {},
+      state: false,
+      title: false,
+      position: [0, 0],
+      classes: ['-item-fullsize'],
+      customStyles: {
+         width: null,
+         height: null,
+         top: null,
+         left: null,
+      },
+   }],
+});
+
+export const DEFAULT_POPUP_DOOR_ENTRY = (item, entity) => ({
+   classes: ['-popup-fullsize'],
+   styles: {},
+   items: [{
+      state: false,
+      title: false,
+      position: [0, 0],
+      action: function (item, entity) {},
+      classes: ['-item-fullsize', '-item-non-clickable'],
+      customStyles: {
+         width: null,
+         height: null,
+         top: null,
+         left: null,
+      },
+   }],
+});
+
 export const TILE_DEFAULTS = {
    [TYPES.GAUGE]: {
       settings: {

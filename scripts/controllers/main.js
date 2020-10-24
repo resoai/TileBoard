@@ -2,7 +2,7 @@ import angular from 'angular';
 import Hammer from 'hammerjs';
 import { mergeConfigDefaults } from './main-utilities';
 import { App } from '../app';
-import { TYPES, FEATURES, HEADER_ITEMS, MENU_POSITIONS, GROUP_ALIGNS, TRANSITIONS, MAPBOX_MAP, YANDEX_MAP, DEFAULT_SLIDER_OPTIONS, DEFAULT_LIGHT_SLIDER_OPTIONS, DEFAULT_VOLUME_SLIDER_OPTIONS } from '../globals/constants';
+import { TYPES, FEATURES, HEADER_ITEMS, MENU_POSITIONS, GROUP_ALIGNS, TRANSITIONS, MAPBOX_MAP, YANDEX_MAP, DEFAULT_SLIDER_OPTIONS, DEFAULT_LIGHT_SLIDER_OPTIONS, DEFAULT_VOLUME_SLIDER_OPTIONS, DEFAULT_POPUP_HISTORY, DEFAULT_POPUP_IFRAME, DEFAULT_POPUP_DOOR_ENTRY } from '../globals/constants';
 import { debounce, leadZero, supportsFeature, toAbsoluteServerURL } from '../globals/utils';
 import Noty from '../models/noty';
 
@@ -1635,70 +1635,30 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.openPopupHistory = function (item, entity) {
-      const layout = cacheInItem(item, '_popupHistory', () => ({
-         classes: ['-popup-landscape', ...(getItemFieldValue('history.classes', item, entity) || [])],
-         styles: {},
-         items: [angular.merge({
-            type: TYPES.HISTORY,
-            id: item.id,
-            title: false,
-            position: [0, 0],
-            classes: ['-item-fullsize'],
-            customStyles: {
-               width: null,
-               height: null,
-               top: null,
-               left: null,
-            },
-         }, getItemFieldValue('history', item, entity))],
+      const layout = cacheInItem(item, '_popupHistory', () => angular.merge(DEFAULT_POPUP_HISTORY(item, entity), {
+         classes: getItemFieldValue('history.classes', item, entity) || [],
+         items: [getItemFieldValue('history', item, entity) || {}],
       }));
       $scope.openPopup(item, entity, layout);
    };
 
    $scope.openPopupIframe = function (item, entity) {
-      const layout = cacheInItem(item, '_popupIframe', () => ({
-         classes: ['-popup-fullsize', ...(getItemFieldValue('iframeClasses', item, entity) || [])],
-         styles: {},
+      const layout = cacheInItem(item, '_popupIframe', () => angular.merge(DEFAULT_POPUP_IFRAME(item, entity), {
+         classes: getItemFieldValue('iframeClasses', item, entity) || [],
          items: [{
-            type: TYPES.IFRAME,
-            url: item.url,
-            id: {},
-            state: false,
-            title: false,
-            position: [0, 0],
-            classes: ['-item-fullsize'],
-            customStyles: angular.merge({
-               width: null,
-               height: null,
-               top: null,
-               left: null,
-            }, getItemFieldValue('iframeStyles', item, entity)),
+            customStyles: getItemFieldValue('iframeStyles', item, entity) || {},
          }],
       }));
       $scope.openPopup(item, entity, layout);
    };
 
    $scope.openDoorEntry = function (item, entity) {
-      const layout = cacheInItem(item, '_popupDoorEntry', () => (
-         angular.merge({
-            classes: ['-popup-fullsize'],
-            styles: {},
-            items: [angular.merge({
-               state: false,
-               title: false,
-               position: [0, 0],
-               action: function (item, entity) {},
-               classes: ['-item-fullsize', '-item-non-clickable'],
-               customStyles: {
-                  width: null,
-                  height: null,
-                  top: null,
-                  left: null,
-               },
-            }, getItemFieldValue('layout.camera', item, entity)),
-            ...(getItemFieldValue('layout.tiles', item, entity) || [])],
-         }, getItemFieldValue('layout.page', item, entity))
-      ));
+      const layout = cacheInItem(item, '_popupDoorEntry', () => angular.merge(DEFAULT_POPUP_DOOR_ENTRY(item, entity), {
+         items: [
+            getItemFieldValue('layout.camera', item, entity) || {},
+            ...(getItemFieldValue('layout.tiles', item, entity) || []),
+         ],
+      }, getItemFieldValue('layout.page', item, entity) || {}));
 
       $scope.openPopup(item, entity, layout);
 
