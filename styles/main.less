@@ -1358,13 +1358,10 @@ camera_stream {
          bottom: -@popupPadding;
          right: -@popupPadding;
          z-index: 0;
-
-         &.-th-camera, &.-th-camera_thumbnail, &.-th-camera_stream {
-            background-color: transparent;
-         }
       }
       .-item-non-clickable {
          /* use classes: ['-item-non-clickable'] to display as non-interactive tile */
+         cursor: auto;
          &:active {
             margin: 0;
             border: none;
@@ -1372,6 +1369,10 @@ camera_stream {
          .item-clickable {
             display: none;
          }
+      }
+      .-item-transparent {
+         /* use classes: ['-item-transparent'] to remove background color */
+         background-color: transparent;
       }
    }
 }
