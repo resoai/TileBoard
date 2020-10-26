@@ -59,7 +59,7 @@
   },
   "dependencies": {
     "@mdi/font": "^5.8.55",
-    "angular": "^1.8.1",
+    "angular": "^1.8.2",
     "angular-chart.js": "^1.1.1",
     "angular-hammer": "^2.2.0",
     "angular-moment": "^1.3.0",
