@@ -72,6 +72,13 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       }
    }
 
+   function innerHeightToCSS () {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+   }
+   innerHeightToCSS();
+   window.addEventListener('resize', debounce(innerHeightToCSS, 250));
+
    $scope.entityClick = function (page, item, entity) {
       if (typeof item.action === 'function') {
          return callFunction(item.action, [item, entity]);

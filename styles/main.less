@@ -1328,7 +1328,7 @@ camera_stream {
       /* min-width, if container is sized by title */
       min-width: calc(100% - 2*@popupPadding);
       /* absolute max-height */
-      max-height: calc(100vh - @popupTitleHeight - 2*@popupMargin - 2*@popupPadding);
+      max-height: calc(100*var(--vh, 1vh) - @popupTitleHeight - 2*@popupMargin - 2*@popupPadding);
       /* default size to fill screen */
       height: 100vh;
       width: 100vw;
