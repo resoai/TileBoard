@@ -1,33 +1,122 @@
-/*
- This is an example configuration file.
+/*<!-- vim: syntax=Markdown -->
+# Example configuration file
+This is a documented example configuration file.
 
- COPY OR RENAME THIS FILE TO config.js.
+**COPY OR RENAME THIS FILE TO `config.js` to get a starting point for your configuration.**
 
- Make sure you use real IDs from your HA entities.
+Make sure you use real IDs from your HA entities.
+
+# Table of contents
+1. [General options](#general-options-back-to-toc)
+2. [Structure of a TileBoard layout](#structure-of-a-tileboard-layout-back-to-toc)
+
+## General options <sup>[back to toc](#table-of-contents)</sup>
+
+
+`config.js` will initialize a global `CONFIG` object with the following fields to influence general behavior:
+
+```js 
 */
-
-
 var CONFIG = {
-   customTheme: null, // CUSTOM_THEMES.TRANSPARENT, CUSTOM_THEMES.MATERIAL, CUSTOM_THEMES.MOBILE, CUSTOM_THEMES.COMPACT, CUSTOM_THEMES.HOMEKIT, CUSTOM_THEMES.WINPHONE, CUSTOM_THEMES.WIN95
-   transition: TRANSITIONS.ANIMATED_GPU, //ANIMATED or SIMPLE (better perfomance)
-   entitySize: ENTITY_SIZES.NORMAL, //SMALL, BIG are available
-   tileSize: 150,
-   tileMargin: 6,
+/*
+```
+
+### Connection settings <sup>[back to toc](#table-of-contents)</sup>
+
+```js
+/*
    serverUrl: 'http://' + location.hostname + ':8123',
    wsUrl: 'ws://' + location.hostname + ':8123/api/websocket',
+   debug: false, // Prints entities and state change info to the console.
+   pingConnection: true, //ping connection to prevent silent disconnections
+/*
+```
+> :warning: **Security advice**:
+> The following authentication info will be readable in the source code. So, make sure you are either not using it, or, your TileBoard is not exposed to untrusted persons (e.g. on the internet)!
+```js
+/*
    authToken: null, // optional long-lived token (CAUTION: only if TileBoard is not exposed to the internet)
    //googleApiKey: "XXXXXXXXXX", // Required if you are using Google Maps for device tracker
    //mapboxToken: "XXXXXXXXXX", // Required if you are using Mapbox for device tracker
-   debug: false, // Prints entities and state change info to the console.
-   pingConnection: true, //ping connection to prevent silent disconnections
+/*
+```
 
-   // next fields are optional
-   events: [],
+### Basic appearance settings <sup>[back to toc](#table-of-contents)</sup>
+
+```js
+/*
    timeFormat: 24,
    menuPosition: MENU_POSITIONS.LEFT, // or BOTTOM
    hideScrollbar: false, // horizontal scrollbar
    groupsAlign: GROUP_ALIGNS.HORIZONTALLY, // or VERTICALLY
+
+   /* customTheme: Specify a custom theme for your dashboard
+    * Valid options: null, CUSTOM_THEMES.TRANSPARENT, CUSTOM_THEMES.MATERIAL, CUSTOM_THEMES.MOBILE, CUSTOM_THEMES.COMPACT, CUSTOM_THEMES.HOMEKIT, CUSTOM_THEMES.WINPHONE, CUSTOM_THEMES.WIN95 or a custom theme you have created
+    * Default: null. Array supported
+    */
+   customTheme: null,
+   
+   /* transition: The transition effect used between Pages
+    * Valid options: TRANSITIONS.ANIMATED, TRANSITIONS.ANIMATED_GPU, TRANSITIONS.SIMPLE
+    */
+   transition: TRANSITIONS.ANIMATED_GPU,
+   
+   /* tileSize: The default size (in pixels) of a tile */
+   tileSize: 150,
+   /* tileMargin: The default margin (in pixels) between tiles */
+   tileMargin: 6,
+   /* entitySize: Size of each tile's content
+    * valid option: ENTITY_SIZES.NORMAL, ENTITY_SIZES.SMALL, ENTITY_SIZES.BIG
+    */
+   entitySize: ENTITY_SIZES.NORMAL,
+   
+/*
+```
+
+### Global interactive elements <sup>[back to toc](#table-of-contents)</sup>
+
+```js
+/*
+   /* events: A list of events. See documentation on Events below */
+   events: [],
    onReady: function () {},
+/*
+```
+
+## Structure of a TileBoard layout <sup>[back to toc](#table-of-contents)</sup>
+
+The following fields are used to influence the actual appearance of your TileBoard:
+
+```js 
+*/
+
+   /* pages: A list of page objects. See documentation on Pages below */
+   pages: [],
+   /* screensaver: A digital picture frame with a clock. Appears when    
+    * the dashboard has been idle
+    * https://github.com/resoai/TileBoard/wiki/Screensaver-configuration
+    * (optional)
+    */
+   screensaver: { },
+   
+   /* header: object of header. Will be applied globally
+    * https://github.com/resoai/TileBoard/wiki/Header-configuration
+    * (optional)
+    */
+   header: DEFAULT_HEADER,
+
+/*
+```
+
+### Pages
+
+Page object can have the following fields:
+
+```js 
+*/
+
+
+
 
    header: { // https://github.com/resoai/TileBoard/wiki/Header-configuration
       styles: {
