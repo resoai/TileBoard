@@ -10,7 +10,7 @@ Make sure you use real IDs from your HA entities.
 1. [General options](#general-options-back-to-toc)
 2. [Structure of a TileBoard layout](#structure-of-a-tileboard-layout-back-to-toc)
 
-## General options <sup>[back to toc](#table-of-contents)</sup>
+# General options <sup>[back to toc](#table-of-contents)</sup>
 
 
 `config.js` will initialize a global `CONFIG` object with the following fields to influence general behavior:
@@ -21,7 +21,7 @@ var CONFIG = {
 /*
 ```
 
-### Connection settings <sup>[back to toc](#table-of-contents)</sup>
+## Connection settings <sup>[back to toc](#table-of-contents)</sup>
 
 ```js
 /*
@@ -41,7 +41,7 @@ var CONFIG = {
 /*
 ```
 
-### Basic appearance settings <sup>[back to toc](#table-of-contents)</sup>
+## Basic appearance settings <sup>[back to toc](#table-of-contents)</sup>
 
 ```js
 /*
@@ -73,7 +73,7 @@ var CONFIG = {
 /*
 ```
 
-### Global interactive elements <sup>[back to toc](#table-of-contents)</sup>
+## Global interactive elements <sup>[back to toc](#table-of-contents)</sup>
 
 ```js
 /*
@@ -83,7 +83,7 @@ var CONFIG = {
 /*
 ```
 
-## Structure of a TileBoard layout <sup>[back to toc](#table-of-contents)</sup>
+# Structure of a TileBoard layout <sup>[back to toc](#table-of-contents)</sup>
 
 The following fields are used to influence the actual appearance of your TileBoard:
 
@@ -108,7 +108,7 @@ The following fields are used to influence the actual appearance of your TileBoa
 /*
 ```
 
-### Pages
+## Pages
 
 Page object can have the following fields:
 
@@ -264,33 +264,38 @@ Page object can have the following fields:
                      title: 'Custom switch',
                      icons: {'off': 'mdi-volume-off', 'on': 'mdi-volume-high'}
                   },
-                  {
-                     position: [0, 1],
-                     type: TYPES.ALARM,
-                     // id: "alarm_control_panel.home_alarm",
-                     id: { state: 'disarmed' }, // replace it with real string id
-                     title: 'Home Alarm',
-                     icons: {
-                        arming: 'mdi-bell-outline',
-                        disarmed: 'mdi-bell-off',
-                        pending: 'mdi-bell',
-                        armed_custom_bypass: 'mdi-bell-check',
-                        armed_home: 'mdi-bell-plus',
-                        armed_night: 'mdi-bell-sleep',
-                        armed_away: 'mdi-bell',
-                        triggered: 'mdi-bell-ring',
-                     },
-                     states: {
-                        arming: 'Arming',
-                        disarmed: 'Disarmed',
-                        pending: 'Pending',
-                        armed_custom_bypass: 'Armed custom bypass',
-                        armed_home: 'Armed home',
-                        armed_night: 'Armed night',
-                        armed_away: 'Armed away',
-                        triggered: 'Triggered',
-                     },
-                  },
+/*
+```                  
+                  
+#### ALARM
+
+![ALARM](images/tile-screenshots/ALARM.png)
+
+```js 
+*/
+{
+   position: [0, 3],
+   type: TYPES.ALARM,
+   title: 'Alarm',
+   //id: "alarm_control_panel.home_alarm",
+   id: id: { state: 'disarmed' }, // replace it with real string id
+   icons: {
+      disarmed: 'mdi-bell-off',
+      pending: 'mdi-bell',
+      armed_home: 'mdi-bell-plus',
+      armed_away: 'mdi-bell',
+      triggered: 'mdi-bell-ring'
+   },
+   states: {
+      disarmed: 'Disarmed',
+      pending: 'Pending',
+      armed_home: 'Armed home',
+      armed_away: 'Armed away',
+      triggered: 'Triggered'
+   }
+},
+/*
+```
 
                ],
             },
@@ -412,3 +417,6 @@ Page object can have the following fields:
       }
    ],
 }
+/*
+```
+*/
