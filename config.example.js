@@ -108,9 +108,11 @@ The following fields are used to influence the actual appearance of your TileBoa
 /*
 ```
 
-## Pages
+## Header
 
-Page object can have the following fields:
+The header is always visible in your TileBoard. 
+You can configure it with various elements.
+The following settings are possible:
 
 ```js 
 */
@@ -187,24 +189,61 @@ Page object can have the following fields:
          { bg: 'images/bg3.jpg' }
       ]
    },*/
+/*
+```
 
+## Pages
+
+Pages represent a single view of your TileBoard.
+You can navigate between pages using the navigation menu, which is located on the left or on the bottom of the screen.
+The `pages` setting of your `CONFIG` is a list of individual page objects.
+The following settings are available for each page object.
+
+```js 
+*/
    pages: [
       {
          title: 'Main page',
          bg: 'images/bg1.jpeg',
          icon: 'mdi-home-outline', // home icon
+         groups: [], // list of group object as described next
+/*
+```
+
+## Groups
+
+Within a page, tiles are organized in groups. 
+The groups are aligned either horizontally or vertically.
+The `groups` setting of each `page` is a list of individual group objects.
+The following settings are available for each group object.
+
+```js 
+*/
          groups: [
             {
                title: 'First group',
                width: 2,
                height: 3,
+               items: [], // list of tile (or item) objects as described next
+/*
+```
+
+## Tiles
+
+Tiles (or items) are the basic elements of a TileBoard.
+As described above, they are organized in low-level groups and high-level pages.
+The `items` setting of each `group` is a list of individual tile objects.
+The following general settings are available for any tile object.
+```js 
+*/
                items: [
                   {
-                     position: [0, 0],
-                     width: 2,
                      type: TYPES.TEXT_LIST,
+                     position: [0, 0],
                      id: {}, // using empty object for an unknown id
-                     state: false, // disable state element
+                     width: 2,
+                     height: 1, 
+                     state: false, // disable state element             
                      list: [
                         {
                            title: 'Sun.sun state',
@@ -218,6 +257,43 @@ Page object can have the following fields:
                         }
                      ]
                   },
+/*
+```
+
+# Tile types
+
+In the following, the available tile types are explained as examples along with their specific settings.
+
+## ALARM
+
+![ALARM](images/tile-screenshots/ALARM.png)
+
+```js 
+*/
+{
+   position: [0, 3],
+   type: TYPES.ALARM,
+   title: 'Alarm',
+   //id: "alarm_control_panel.home_alarm",
+   id: id: { state: 'disarmed' }, // replace it with real string id
+   icons: {
+      disarmed: 'mdi-bell-off',
+      pending: 'mdi-bell',
+      armed_home: 'mdi-bell-plus',
+      armed_away: 'mdi-bell',
+      triggered: 'mdi-bell-ring'
+   },
+   states: {
+      disarmed: 'Disarmed',
+      pending: 'Pending',
+      armed_home: 'Armed home',
+      armed_away: 'Armed away',
+      triggered: 'Triggered'
+   }
+},
+/*
+```
+                  
                   {
                      position: [0, 1], // [x, y]
                      width: 1,
@@ -264,39 +340,6 @@ Page object can have the following fields:
                      title: 'Custom switch',
                      icons: {'off': 'mdi-volume-off', 'on': 'mdi-volume-high'}
                   },
-/*
-```                  
-                  
-#### ALARM
-
-![ALARM](images/tile-screenshots/ALARM.png)
-
-```js 
-*/
-{
-   position: [0, 3],
-   type: TYPES.ALARM,
-   title: 'Alarm',
-   //id: "alarm_control_panel.home_alarm",
-   id: id: { state: 'disarmed' }, // replace it with real string id
-   icons: {
-      disarmed: 'mdi-bell-off',
-      pending: 'mdi-bell',
-      armed_home: 'mdi-bell-plus',
-      armed_away: 'mdi-bell',
-      triggered: 'mdi-bell-ring'
-   },
-   states: {
-      disarmed: 'Disarmed',
-      pending: 'Pending',
-      armed_home: 'Armed home',
-      armed_away: 'Armed away',
-      triggered: 'Triggered'
-   }
-},
-/*
-```
-
                ],
             },
 
