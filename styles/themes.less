@@ -451,11 +451,15 @@
   color: #fff;
   background: #eee !important;
 
+  @TILE_COLOR_ON: #fff;
+  @TILE_BACKGROUND_ON: rgb(255, 255, 255);
+  @TILE_COLOR_OFF: rgb(84, 77, 75);
+  @TILE_BACKGROUND_OFF: linear-gradient(to right bottom, rgba(253, 251, 249, 0.95), rgba(245, 245, 245, 0.8));
+
   .item {
     color: #363636;
-    //background: rgba(132, 122, 116, 0.1) !important;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 1);
+    background: @TILE_BACKGROUND_ON;
 
     &-state {
       background: transparent;
@@ -500,11 +504,8 @@
     &.-device_tracker,
     &.-camera,
     &.-camera_thumbnail {
-      .item-title {
-        color: #fff;
-      }
-      .item-state {
-        color: #fff;
+      .item-title, .item-state {
+        color: @TILE_COLOR_ON;
       }
     }
 
@@ -512,19 +513,22 @@
       color: rgb(144, 142, 150);
     }
 
-    &.-disarmed, &.-off {
-      color: rgb(84, 77, 75);
+    &.-on, &.-armed, &.-locked {
+      background: @TILE_BACKGROUND_ON;
+    }
+
+    &.-off, &.-disarmed, &.-arming, &.-loading {
+      color: @TILE_COLOR_OFF;
 
       .item-state {
-        color: rgb(84, 77, 75);
+        color: @TILE_COLOR_OFF;
       }
 
       .item-entity--icon {
         color: rgba(159, 150, 140, 0.8);
       }
 
-      background: linear-gradient(to right bottom,
-      rgba(253, 251, 249, 0.95), rgba(245, 245, 245, 0.8));
+      background: @TILE_BACKGROUND_OFF;
     }
   }
 
