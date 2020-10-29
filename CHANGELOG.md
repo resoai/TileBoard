@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.3](https://github.com/resoai/TileBoard/compare/v2.0.2...v2.0.3) (2020-10-29)
+
+
+### Bug Fixes
+
+* app not installable on firefox ([#495](https://github.com/resoai/TileBoard/issues/495)) ([0bd4710](https://github.com/resoai/TileBoard/commit/0bd471004840cad750c268acaec4013ef182ef13))
+
 ### [2.0.2](https://github.com/resoai/TileBoard/compare/v2.0.1...v2.0.2) (2020-10-21)
 
 
