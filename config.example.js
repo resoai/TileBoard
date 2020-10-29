@@ -21,7 +21,7 @@ var CONFIG = {
 /*
 ```
 
-## Connection settings <sup>[back to toc](#table-of-contents)</sup>
+## Connection <sup>[back to toc](#table-of-contents)</sup>
 
 ```js
 /*
@@ -41,7 +41,7 @@ var CONFIG = {
 /*
 ```
 
-## Basic appearance settings <sup>[back to toc](#table-of-contents)</sup>
+## Basic appearance <sup>[back to toc](#table-of-contents)</sup>
 
 ```js
 /*
