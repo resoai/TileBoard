@@ -5215,10 +5215,10 @@ rollup-plugin-progress@^1.1.2:
   dependencies:
     chalk "^2.4.2"
 
-rollup-plugin-serve@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-serve/-/rollup-plugin-serve-1.0.4.tgz#17665974185f9007ecaeb0835c4e89612e04d234"
-  integrity sha512-74Gh47+dGKhmy04MIu9deXwn8VGlWsk93HcGIbO+NCdZ9roRXVO7y4l/9MLAAujuYpzsWCopHHZT8/6PSRzGLg==
+rollup-plugin-serve@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-serve/-/rollup-plugin-serve-1.1.0.tgz#0654a57021a21b903340c69940f7463706e8288d"
+  integrity sha512-pYkSsuA0/psKqhhictkJw1c2klya5b+LlCvipWqI9OE1aG2M97mRumZCbBlry5CMEOzYBBgSDgd1694sNbmyIw==
   dependencies:
     mime ">=2.4.6"
     opener "1"
