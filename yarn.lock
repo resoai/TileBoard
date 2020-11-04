@@ -940,10 +940,10 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
-"@types/angular@^1.7.4":
-  version "1.7.4"
-  resolved "https://registry.yarnpkg.com/@types/angular/-/angular-1.7.4.tgz#f50ed06e2ddb3437ec8c730e6a3189fbd59125e5"
-  integrity sha512-ZcBdve7BszuzwtgDiaYuHhEGPkA0gKhBRMckGZVfZ6M4L8Jt/rqQTV4I3koQg8ZPf9sdDExs3xx9GpZIkAyyjg==
+"@types/angular@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@types/angular/-/angular-1.8.0.tgz#6bce6f21d69f9dfa45e3e3dd76f723496b12c32c"
+  integrity sha512-tF4Ulq9GC54wKboxfvt91tkfJNGcFWEfkuptX5HCNVt4emwJQqWloCpUzepyKLjpKSIEOZaxupb/GX2ESwz3wQ==
 
 "@types/cssnano@^4.0.0":
   version "4.0.0"
