@@ -80,65 +80,28 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    window.addEventListener('resize', debounce(innerHeightToCSS, 250));
 
    $scope.entityClick = function (page, item, entity) {
-      if (typeof item.action === 'function') {
-         return callFunction(item.action, [item, entity]);
+      if (item.action === false) {
+         return null;
       }
 
-      switch (item.type) {
-         case TYPES.SWITCH:
-         case TYPES.LIGHT:
-         case TYPES.FAN:
-         case TYPES.INPUT_BOOLEAN: return $scope.toggleSwitch(item, entity);
-
-         case TYPES.LOCK: return $scope.toggleLock(item, entity);
-         case TYPES.COVER_TOGGLE: return $scope.toggleCover(item, entity);
-
-         case TYPES.VACUUM: return $scope.toggleVacuum(item, entity);
-
-         case TYPES.AUTOMATION: return $scope.triggerAutomation(item, entity);
-
-         case TYPES.SCRIPT: return $scope.callScript(item, entity);
-
-         case TYPES.INPUT_SELECT: return $scope.toggleSelect(item, entity);
-
-         case TYPES.CAMERA:
-         case TYPES.CAMERA_STREAM:
-         case TYPES.CAMERA_THUMBNAIL: return $scope.openCamera(item, entity);
-
-         case TYPES.SCENE: return $scope.callScene(item, entity);
-
-         case TYPES.DOOR_ENTRY: return $scope.openDoorEntry(item, entity);
-
-         case TYPES.ALARM: return $scope.openAlarm(item, entity);
-
-         case TYPES.DIMMER_SWITCH: return $scope.dimmerToggle(item, entity);
-
-         case TYPES.POPUP_IFRAME: return $scope.openPopupIframe(item, entity);
-
-         case TYPES.POPUP: return $scope.openPopup(item, entity, item.popup);
-
-         case TYPES.INPUT_DATETIME: return $scope.openDatetime(item, entity);
+      if (typeof item.action === 'function') {
+         return callFunction(item.action, [item, entity]);
       }
    };
 
    $scope.entityLongPress = function ($event, page, item, entity) {
       addGhost([$event.changedPointers[0].clientX, $event.changedPointers[0].clientY]);
 
+      if (item.secondaryAction === false) {
+         return null;
+      }
+
       if (typeof item.secondaryAction === 'function') {
          return callFunction(item.secondaryAction, [item, entity]);
       }
 
-      if (item.history) {
+      if (item.history || entity && entity.entity_id) {
          return $scope.openPopupHistory(item, entity);
-      }
-
-      switch (item.type) {
-         case TYPES.LIGHT: return $scope.openLightSliders(item, entity);
-         default: {
-            if (entity && entity.entity_id) {
-               return $scope.openPopupHistory(item, entity);
-            }
-         }
       }
    };
 

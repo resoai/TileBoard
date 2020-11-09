@@ -278,6 +278,51 @@ export const DEFAULT_VOLUME_SLIDER_OPTIONS = {
 };
 
 export const TILE_DEFAULTS = {
+   [TYPES.ALARM]: {
+      action (item, entity) {
+         return this.$scope.openAlarm(item, entity);
+      },
+   },
+   [TYPES.AUTOMATION]: {
+      action (item, entity) {
+         return this.$scope.triggerAutomation(item, entity);
+      },
+   },
+   [TYPES.CAMERA]: {
+      action (item, entity) {
+         return this.$scope.openCamera(item, entity);
+      },
+   },
+   [TYPES.CAMERA_STREAM]: {
+      action (item, entity) {
+         return this.$scope.openCamera(item, entity);
+      },
+   },
+   [TYPES.CAMERA_THUMBNAIL]: {
+      action (item, entity) {
+         return this.$scope.openCamera(item, entity);
+      },
+   },
+   [TYPES.COVER_TOGGLE]: {
+      action (item, entity) {
+         return this.$scope.toggleCover(item, entity);
+      },
+   },
+   [TYPES.DIMMER_SWITCH]: {
+      action (item, entity) {
+         return this.$scope.dimmerToggle(item, entity);
+      },
+   },
+   [TYPES.DOOR_ENTRY]: {
+      action (item, entity) {
+         return this.$scope.openDoorEntry(item, entity);
+      },
+   },
+   [TYPES.FAN]: {
+      action (item, entity) {
+         return this.$scope.toggleSwitch(item, entity);
+      },
+   },
    [TYPES.GAUGE]: {
       settings: {
          backgroundColor: 'rgba(0, 0, 0, 0.1)',
@@ -294,7 +339,63 @@ export const TILE_DEFAULTS = {
          thresholds: {},
       },
    },
+   [TYPES.INPUT_BOOLEAN]: {
+      action (item, entity) {
+         return this.$scope.toggleSwitch(item, entity);
+      },
+   },
+   [TYPES.INPUT_DATETIME]: {
+      action (item, entity) {
+         return this.$scope.openDatetime(item, entity);
+      },
+   },
+   [TYPES.INPUT_SELECT]: {
+      action (item, entity) {
+         return this.$scope.toggleSelect(item, entity);
+      },
+   },
    [TYPES.LIGHT]: {
       colorpicker: (item, entity) => supportsFeature(FEATURES.LIGHT.COLOR, entity),
+      action (item, entity) {
+         return this.$scope.toggleSwitch(item, entity);
+      },
+      secondaryAction (item, entity) {
+         return this.$scope.openLightSliders(item, entity);
+      },
+   },
+   [TYPES.LOCK]: {
+      action (item, entity) {
+         return this.$scope.toggleLock(item, entity);
+      },
+   },
+   [TYPES.POPUP]: {
+      action (item, entity) {
+         return this.$scope.openPopup(item, entity);
+      },
+   },
+   [TYPES.POPUP_IFRAME]: {
+      action (item, entity) {
+         return this.$scope.openPopupIframe(item, entity);
+      },
+   },
+   [TYPES.SCENE]: {
+      action (item, entity) {
+         return this.$scope.callScene(item, entity);
+      },
+   },
+   [TYPES.SCRIPT]: {
+      action (item, entity) {
+         return this.$scope.callScript(item, entity);
+      },
+   },
+   [TYPES.SWITCH]: {
+      action (item, entity) {
+         return this.$scope.toggleSwitch(item, entity);
+      },
+   },
+   [TYPES.VACUUM]: {
+      action (item, entity) {
+         return this.$scope.toggleVacuum(item, entity);
+      },
    },
 };
