@@ -1,4 +1,5 @@
 import angular from 'angular';
+// @ts-ignore: No type definitions in imported module
 import moment from 'moment/min/moment-with-locales';
 
 export { moment };
