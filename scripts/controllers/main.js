@@ -482,6 +482,9 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       if ($scope.selectOpened(item)) {
          item._classes.push('-top-entity');
       }
+      if (item.action) {
+         item._classes.push('-clickable');
+      }
 
       return item._classes;
    };
