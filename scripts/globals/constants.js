@@ -370,7 +370,7 @@ export const TILE_DEFAULTS = {
    },
    [TYPES.POPUP]: {
       action (item, entity) {
-         return this.$scope.openPopup(item, entity);
+         return this.$scope.openPopup(item, entity, item.popup);
       },
    },
    [TYPES.POPUP_IFRAME]: {

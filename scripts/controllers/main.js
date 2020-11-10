@@ -81,7 +81,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
    $scope.entityClick = function (page, item, entity) {
       if (item.action === false) {
-         return null;
+         return;
       }
 
       if (typeof item.action === 'function') {
@@ -93,7 +93,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       addGhost([$event.changedPointers[0].clientX, $event.changedPointers[0].clientY]);
 
       if (item.secondaryAction === false) {
-         return null;
+         return;
       }
 
       if (typeof item.secondaryAction === 'function') {
