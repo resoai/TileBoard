@@ -92,3 +92,12 @@ export function supportsFeature (feature, entity) {
    return 'supported_features' in entity.attributes
       && (entity.attributes.supported_features & feature) !== 0;
 }
+
+export function loadScript (url) {
+   const xhttp = new XMLHttpRequest();
+   const script = document.createElement('script');
+   xhttp.open('GET', url + '?c=' + Date.now(), false);
+   xhttp.send();
+   script.text = xhttp.responseText;
+   document.head.appendChild(script).parentNode.removeChild(script);
+}
