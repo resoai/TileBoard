@@ -581,36 +581,23 @@ body {
 
    &-clickable {
       display: none;
+      left: 5px;
+      top: 5px;
+      height: 6px;
+      width: 6px;
+      border-left: 2px solid rgba(255,255,255,.8);
+      border-top: 2px solid rgba(255,255,255,.8);
+      opacity: 0.5;
+      position: absolute;
+      z-index: 2;
    }
 
-   &.-switch,
-   &.-lock,
-   &.-cover_toggle,
-   &.-vacuum,
-   &.-fan,
-   &.-custom,
-   &.-light,
-   &.-script,
-   &.-automation,
-   &.-input_boolean,
-   &.-input_select,
-   &.-camera,
-   &.-camera_thumbnail,
-   &.-camera_stream,
-   &.-alarm,
-   &.-door_entry,
-   &.-popup_iframe,
-   &.-popup,
-   &.-input_datetime,
-   &.-dimmer_switch,
-   &.-scene {
-      cursor: pointer;
+   &:active &-clickable {
+      opacity: 1;
+   }
 
-      /*&:hover {
-         margin-top: -2px;
-         margin-left: -2px;
-         border: 2px solid rgba(200,200,200,.6);
-      }*/
+   &.-clickable {
+      cursor: pointer;
 
       &:active {
          margin-top: -2px;
@@ -620,20 +607,7 @@ body {
 
       .item-clickable {
          display: block;
-         left: 5px;
-         top: 5px;
-         height: 6px;
-         width: 6px;
-         border-left: 2px solid rgba(255,255,255,.8);
-         border-top: 2px solid rgba(255,255,255,.8);
-         opacity: 0.5;
-         position: absolute;
-         z-index: 2;
       }
-   }
-
-   &:active .item-clickable {
-      opacity: 1;
    }
 
    &.-device_tracker {
