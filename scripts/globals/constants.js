@@ -285,8 +285,8 @@ export const DEFAULT_POPUP_HISTORY = (item, entitiy) => ({
       id: item.id,
       title: false,
       position: [0, 0],
-      action: function (item, entity) {},
-      secondaryAction: function (item, entity) {},
+      action: false,
+      secondaryAction: false,
       classes: ['-item-fullsize'],
       customStyles: {
          width: null,
@@ -324,8 +324,8 @@ export const DEFAULT_POPUP_DOOR_ENTRY = (item, entity) => ({
       state: false,
       title: false,
       position: [0, 0],
-      action: function (item, entity) {},
-      secondaryAction: function (item, entity) {},
+      action: false,
+      secondaryAction: false,
       classes: ['-item-fullsize', '-item-non-clickable', '-item-transparent'],
       customStyles: {
          width: null,
