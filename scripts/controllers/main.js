@@ -31,6 +31,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
    $scope.activeCamera = null;
    $scope.activePopup = null;
+   $scope.popupTimeout = null;
 
    $scope.alarmCode = null;
    $scope.activeAlarm = null;
@@ -40,7 +41,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    let showedPages = [];
 
    const latestAlarmActions = {};
-   let popupTimeout = null;
    let bodyClass = null;
    const mainStyles = {};
    let activePage = null;
@@ -1396,8 +1396,8 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.openPopup = function (item, entity, layout) {
-      if (popupTimeout) {
-         clearTimeout(popupTimeout);
+      if ($scope.popupTimeout) {
+         clearTimeout($scope.popupTimeout);
       }
       $scope.activePopup = {
          item: item,
@@ -1407,8 +1407,8 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.closePopup = function () {
-      if (popupTimeout) {
-         clearTimeout(popupTimeout);
+      if ($scope.popupTimeout) {
+         clearTimeout($scope.popupTimeout);
       }
       $scope.activePopup = null;
    };
@@ -1669,7 +1669,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       $scope.openPopup(item, entity, layout);
 
       if (CONFIG.doorEntryTimeout) {
-         popupTimeout = $timeout(function () {
+         $scope.popupTimeout = $timeout(function () {
             $scope.closePopup();
          }, CONFIG.doorEntryTimeout * 1000);
       }
