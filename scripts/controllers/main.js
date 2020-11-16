@@ -452,9 +452,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       };
    };
 
-   $scope.itemClasses = function (item) {
-      const entity = $scope.getItemEntity(item);
-
+   $scope.itemClasses = function (item, entity) {
       if (!item._classes) {
          item._classes = [];
       }
@@ -470,8 +468,12 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
          item._classes.push('-th-' + item.type);
       }
 
-      if (item.classes) {
-         item.classes.forEach(function (c) {
+      let item_classes = getItemFieldValue('classes', item, entity);
+      if (item_classes) {
+         if (!Array.isArray(item_classes)) {
+            item_classes = [item_classes];
+         }
+         item_classes.forEach(function (c) {
             item._classes.push(c);
          });
       }
