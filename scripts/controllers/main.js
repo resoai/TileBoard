@@ -468,12 +468,12 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
          item._classes.push('-th-' + item.type);
       }
 
-      let item_classes = getItemFieldValue('classes', item, entity);
-      if (item_classes) {
-         if (!Array.isArray(item_classes)) {
-            item_classes = [item_classes];
+      let itemClasses = getItemFieldValue('classes', item, entity);
+      if (itemClasses) {
+         if (!Array.isArray(itemClasses)) {
+            itemClasses = [itemClasses];
          }
-         item._classes.push(...item_classes);
+         item._classes.push(...itemClasses);
       }
 
       if (item.loading) {
