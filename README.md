@@ -24,9 +24,10 @@ The project structure has changed in the first versioned (v1.0.0) release. Inste
 
 * Make sure that you have Home Assistant 0.77 or greater installed as only new authentication system is supported from now on
 * Download latest release zip file from https://github.com/resoai/TileBoard/releases and unpack to a directory of your choice
-* In chosen directory rename `config.example.js` to `config.js` and adjust it for your needs
+* In chosen directory rename `config.example.js` to `config.js` or to a specific name (ex: `bedroom.js`) and adjust it for your needs
 * Create a directory called `tileboard` inside `www` directory in HA's config path and copy all unpacked files there.
-* TileBoard will be available at `http://HASS_IP:8123/local/tileboard/index.html` and will prompt you for your login credentials after restarting Home Assistant.
+* TileBoard will be available at `http://HASS_IP:8123/local/tileboard/index.html` for the config named `config.js` or at `http://HASS_IP:8123/local/tileboard/index.html?config=<CONFIG_NAME>` for a specific config. Just set the name of the config, ex `?config=bedroom`.
+* TileBoard will prompt you for your login credentials after restarting Home Assistant.
 
 Alternatively you can checkout the repo and build the app manually. Check [CONTRIBUTING](./CONTRIBUTING.md) for more info.
 
@@ -36,7 +37,7 @@ Files served from the www folder (/local/ url), aren’t protected by the Home A
 
 ## Configure
 
-`config.js` will initialize a global CONFIG object with the following fields:
+`config.js` or any specific config will initialize a global CONFIG object with the following fields:
 
 ```js
 var CONFIG = {
