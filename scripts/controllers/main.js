@@ -473,9 +473,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
          if (!Array.isArray(item_classes)) {
             item_classes = [item_classes];
          }
-         item_classes.forEach(function (c) {
-            item._classes.push(c);
-         });
+         item._classes.push(...item_classes);
       }
 
       if (item.loading) {
