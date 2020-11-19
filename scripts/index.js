@@ -6,7 +6,6 @@ import './directives';
 import './controllers/main';
 import './controllers/noty';
 import './controllers/screensaver';
-import { getJsonFromUrl } from './dynamic-config';
 import '../styles/all.less';
 import '@mdi/font/scss/materialdesignicons.scss';
 
@@ -25,8 +24,8 @@ Please make sure that it defines a CONFIG variable with proper configuration.`);
    window.window.initApp();
 }
 
-const queryParmas = getJsonFromUrl(document.location.search);
-const configName = queryParmas.config ?? 'config';
+const url = new URL(document.location.href);
+const configName = url.searchParams.get('config') ?? 'config';
 
 const script = document.createElement('script');
 script.src = `./${configName}.js?r=${Date.now()}`;
