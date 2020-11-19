@@ -409,7 +409,7 @@
         hm-press="entityLongPress($event, page, item, entity)"
         hm-recognizer-options="{time: 600}"
         ng-if="(entity = getItemEntity(item)) && !isHidden(item, entity)"
-        ng-class="itemClasses(item)">
+        ng-class="itemClasses(item, entity)">
 
       <div class="item-clickable"></div>
 
