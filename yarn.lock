@@ -980,10 +980,10 @@
   resolved "https://registry.yarnpkg.com/@types/hammerjs/-/hammerjs-2.0.36.tgz#17ce0a235e9ffbcdcdf5095646b374c2bf615a4c"
   integrity sha512-7TUK/k2/QGpEAv/BCwSHlYu3NXZhQ9ZwBYpzr9tjlPIL2C5BeGhH3DmVavRx3ZNyELX5TLC91JTz/cen6AAtIQ==
 
-"@types/hls.js@^0.13.2":
-  version "0.13.2"
-  resolved "https://registry.yarnpkg.com/@types/hls.js/-/hls.js-0.13.2.tgz#ee39117c621c19686620e9c71a7cacabbe634582"
-  integrity sha512-kIEDGDerBgNZ0d0MRic5PV8P6m8gt/5r9AE8uAnkKFQbVeXEe1u54Rj+7f4zjUOQZRR3ofMMla+1bP0jMX0JDA==
+"@types/hls.js@^0.13.3":
+  version "0.13.3"
+  resolved "https://registry.yarnpkg.com/@types/hls.js/-/hls.js-0.13.3.tgz#eb982a866125745eadee468c989fc9e189f24019"
+  integrity sha512-Po8ZPCsAcPPuf5OODPEkb6cdWJ/w4BdX1veP7IIOc2WG0x1SW4GEQ1+FHKN1AMG2AePJfNUceJbh5PKtP92yRQ==
 
 "@types/minimatch@*":
   version "3.0.3"
