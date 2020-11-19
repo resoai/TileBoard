@@ -36,7 +36,9 @@ Files served from the www folder (/local/ url), aren’t protected by the Home A
 
 ## Configure
 
-`config.js` will initialize a global CONFIG object with the following fields:
+`config.js` will initialize a global CONFIG object. If you want to have several config files, you can create another one next to `config.js` and name it for example `bedroom.js`. The specific config will be available at `http://HASS_IP:8123/local/tileboard/index.html?config=bedroom`.
+
+This config object has the following fields:
 
 ```js
 var CONFIG = {

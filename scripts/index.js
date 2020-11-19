@@ -11,21 +11,24 @@ import '@mdi/font/scss/materialdesignicons.scss';
 
 function onConfigLoadOrError (error) {
    if (error) {
-      alert('Please make sure that you have "config.js" file and it is a valid javascript!\n' +
-              'If you are running TileBoard for the first time, please copy "config.example.js" into "dist/config.js"');
+      alert(`Please make sure that you have "${configName}.js" file and it is a valid javascript!
+If you are running TileBoard for the first time, please copy "config.example.js" into "dist/${configName}.js"`);
       return;
    }
    if (!window.CONFIG) {
-      alert('The "config.js" configuration file has loaded but window.CONFIG is not defined!\n' +
-               'Please make sure that it defines a CONFIG variable with proper configuration.');
+      alert(`The "${configName}.js" configuration file has loaded but window.CONFIG is not defined!
+Please make sure that it defines a CONFIG variable with proper configuration.`);
       return;
    }
    // @ts-ignore
    window.window.initApp();
 }
 
+const url = new URL(document.location.href);
+const configName = url.searchParams.get('config') || 'config';
+
 const script = document.createElement('script');
-script.src = './config.js?r=' + Date.now();
+script.src = `./${configName}.js?r=${Date.now()}`;
 script.onload = () => onConfigLoadOrError();
 script.onerror = event => onConfigLoadOrError(event);
 document.head.appendChild(script);
