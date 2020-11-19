@@ -25,7 +25,7 @@ Please make sure that it defines a CONFIG variable with proper configuration.`);
 }
 
 const url = new URL(document.location.href);
-const configName = url.searchParams.get('config') ?? 'config';
+const configName = url.searchParams.get('config') || 'config';
 
 const script = document.createElement('script');
 script.src = `./${configName}.js?r=${Date.now()}`;
