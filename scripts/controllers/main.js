@@ -1228,7 +1228,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.getClimateCurrentOption = function (item, entity) {
-      return item.useHvacMode ? entity.attributes.hvac_mode : entity.attributes.preset_mode;
+      return item.useHvacMode ? entity.state : entity.attributes.preset_mode;
    };
 
    $scope.setClimateOption = function ($event, item, entity, option) {
