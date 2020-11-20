@@ -14,6 +14,9 @@ rules:
   arrow-spacing: error
   block-scoped-var: error
   brace-style: error
+  camelcase:
+    - error
+    - properties: never
   comma-dangle:
     - error
     - always-multiline

@@ -7,7 +7,7 @@
     "build": "rollup --config --environment PRODUCTION",
     "build:watch": "rollup --config --environment PRODUCTION --watch",
     "lint": "eslint rollup.config.js scripts",
-    "fix": "eslint rollup.config.js scripts --fix",
+    "fix": "eslint --fix rollup.config.js scripts",
     "release": "standard-version"
   },
   "standard-version": {

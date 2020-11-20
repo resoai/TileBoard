@@ -166,17 +166,17 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.getCameraEntityFullscreen = function (item) {
-      let entity_id = getItemFieldValue('fullscreen.id', item, {});
+      let entityId = getItemFieldValue('fullscreen.id', item, {});
 
-      if (entity_id === null) {
-         entity_id = item.id;
+      if (entityId === null) {
+         entityId = item.id;
       }
 
-      if (typeof entity_id === 'object') {
-         return entity_id;
+      if (typeof entityId === 'object') {
+         return entityId;
       }
 
-      return $scope.states[entity_id];
+      return $scope.states[entityId];
    };
 
    $scope.showPage = function (page) {
