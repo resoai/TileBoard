@@ -1,4 +1,5 @@
 import angular from 'angular';
+import moment from 'moment';
 
 export const mergeObjects = angular.merge;
 
@@ -54,53 +55,8 @@ export const playSound = function (sound) {
 };
 
 export const timeAgo = function (time) {
-   time = +new Date(time);
-
-   const timeFormats = [
-      [60, 'seconds', 1],
-      [120, '1 minute ago', '1 minute from now'],
-      [3600, 'minutes', 60],
-      [7200, '1 hour ago', '1 hour from now'],
-      [86400, 'hours', 3600],
-      [172800, 'a day ago', 'Tomorrow'],
-      [604800, 'days', 86400],
-      [1209600, 'Last week', 'Next week'],
-      [2419200, 'weeks', 604800],
-      [4838400, 'a month ago', 'Next month'],
-      [29030400, 'months', 2419200],
-      [58060800, 'a year ago', 'Next year'],
-      [2903040000, 'years', 29030400],
-   ];
-
-   let seconds = (+new Date() - time) / 1000;
-   let token = 'ago';
-   let listChoice = 1;
-
-
-   if (seconds < 0) {
-      seconds = Math.abs(seconds);
-      token = 'from now';
-      listChoice = 2;
-   }
-
-   if (seconds >= 0 && seconds < 5) {
-      return 'just now';
-   }
-
-   let i = 0;
-   let format;
-
-   while ((format = timeFormats[i++])) {
-      if (seconds < format[0]) {
-         if (typeof format[2] === 'string') {
-            return format[listChoice];
-         } else {
-            return Math.floor(seconds / format[2]) + ' ' + format[1] + ' ' + token;
-         }
-      }
-   }
-
-   return time;
+   const momentInTime = moment(new Date(time));
+   return momentInTime.fromNow();
 };
 
 export const debounce = function (func, wait, immediate) {
