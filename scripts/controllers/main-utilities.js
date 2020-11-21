@@ -1,4 +1,4 @@
-import angular from 'angular';
+import mergeWith from 'lodash.mergewith';
 import { TILE_DEFAULTS, TYPES } from '../globals/constants';
 
 export function mergeConfigDefaults (pages) {
@@ -38,7 +38,21 @@ function mergeTileListDefaults (tiles) {
 
 function mergeTileDefaults (tile) {
    if (tile && tile.type in TILE_DEFAULTS) {
-      return angular.merge({}, TILE_DEFAULTS[tile.type], tile);
+      return mergeTileConfigs({}, TILE_DEFAULTS[tile.type], tile);
    }
    return tile;
+}
+
+export function mergeTileConfigs (object, ...sources) {
+   return mergeWith(object, ...sources, mergeTileCustomizer);
+}
+
+function mergeTileCustomizer (objValue, srcValue, key) {
+   if (key === 'classes') {
+      return function (item, entity) {
+         const objValueParsed = this.parseFieldValue(objValue, item, entity) || [];
+         const srcValueParsed = this.parseFieldValue(srcValue, item, entity) || [];
+         return (Array.isArray(objValueParsed) ? objValueParsed : [objValueParsed]).concat(Array.isArray(srcValueParsed) ? srcValueParsed : [srcValueParsed]);
+      };
+   }
 }
