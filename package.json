@@ -73,6 +73,7 @@
     "angularjs-gauge": "^2.2.0",
     "chart.js": "^2.9.4",
     "hls.js": "^0.14.16",
+    "lodash.mergewith": "^4.6.2",
     "node-sass": "^5.0.0"
   },
   "resolutions": {

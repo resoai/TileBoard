@@ -1,6 +1,6 @@
 import angular from 'angular';
 import Hammer from 'hammerjs';
-import { mergeConfigDefaults } from './main-utilities';
+import { mergeConfigDefaults, mergeTileConfigs } from './main-utilities';
 import { App } from '../app';
 import { TYPES, FEATURES, HEADER_ITEMS, MENU_POSITIONS, GROUP_ALIGNS, TRANSITIONS, MAPBOX_MAP, YANDEX_MAP, DEFAULT_SLIDER_OPTIONS, DEFAULT_LIGHT_SLIDER_OPTIONS, DEFAULT_VOLUME_SLIDER_OPTIONS, DEFAULT_POPUP_HISTORY, DEFAULT_POPUP_IFRAME, DEFAULT_POPUP_DOOR_ENTRY } from '../globals/constants';
 import { debounce, leadZero, supportsFeature, toAbsoluteServerURL } from '../globals/utils';
@@ -1601,7 +1601,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.openPopupHistory = function (item, entity) {
-      const layout = cacheInItem(item, '_popupHistory', () => angular.merge(DEFAULT_POPUP_HISTORY(item, entity), {
+      const layout = cacheInItem(item, '_popupHistory', () => mergeTileConfigs({}, DEFAULT_POPUP_HISTORY(item, entity), {
          classes: getItemFieldValue('history.classes', item, entity) || [],
          items: [getItemFieldValue('history', item, entity) || {}],
       }));
@@ -1609,7 +1609,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.openPopupIframe = function (item, entity) {
-      const layout = cacheInItem(item, '_popupIframe', () => angular.merge(DEFAULT_POPUP_IFRAME(item, entity), {
+      const layout = cacheInItem(item, '_popupIframe', () => mergeTileConfigs({}, DEFAULT_POPUP_IFRAME(item, entity), {
          classes: getItemFieldValue('iframeClasses', item, entity) || [],
          items: [{
             customStyles: getItemFieldValue('iframeStyles', item, entity) || {},
@@ -1619,7 +1619,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.openDoorEntry = function (item, entity) {
-      const layout = cacheInItem(item, '_popupDoorEntry', () => angular.merge(DEFAULT_POPUP_DOOR_ENTRY(item, entity), {
+      const layout = cacheInItem(item, '_popupDoorEntry', () => mergeTileConfigs({}, DEFAULT_POPUP_DOOR_ENTRY(item, entity), {
          items: [
             getItemFieldValue('layout.camera', item, entity) || {},
             ...(getItemFieldValue('layout.tiles', item, entity) || []),
