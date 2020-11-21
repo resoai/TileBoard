@@ -1398,6 +1398,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    $scope.openPopup = function (item, entity, layout) {
       if ($scope.popupTimeout) {
          clearTimeout($scope.popupTimeout);
+         $scope.popupTimeout = null;
       }
       $scope.activePopup = {
          item: item,
@@ -1409,6 +1410,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    $scope.closePopup = function () {
       if ($scope.popupTimeout) {
          clearTimeout($scope.popupTimeout);
+         $scope.popupTimeout = null;
       }
       $scope.activePopup = null;
    };
