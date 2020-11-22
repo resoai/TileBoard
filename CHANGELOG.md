@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/resoai/TileBoard/compare/v2.0.3...v2.1.0) (2020-11-22)
+
+
+### Features
+
+* allow item.classes to be a function ([#527](https://github.com/resoai/TileBoard/issues/527)) ([813f315](https://github.com/resoai/TileBoard/commit/813f31586d5fc9007873c70423219c98381f114e))
+* support config file selection using a "config" query ([#530](https://github.com/resoai/TileBoard/issues/530)) ([711e2b8](https://github.com/resoai/TileBoard/commit/711e2b8fd9ccc286c55807156c790a2ecf573b0c))
+* use moment.js for timeAgo ([#521](https://github.com/resoai/TileBoard/issues/521)) ([5227be4](https://github.com/resoai/TileBoard/commit/5227be46955f57b157b0003ae17d2977bce1ccd1))
+
+
+### Bug Fixes
+
+* **popup:** popup timeout now accessible to user on $scope ([#535](https://github.com/resoai/TileBoard/issues/535)) ([6e73deb](https://github.com/resoai/TileBoard/commit/6e73deb6c9f37065c07e1baac287e43428fcc9f3))
+* improve handling of merging defaults for popup tiles ([#519](https://github.com/resoai/TileBoard/issues/519)) ([250ac64](https://github.com/resoai/TileBoard/commit/250ac6419e2ee33e329cabc9a4f9577d6d68730d))
+* **CLIMATE:** fix climate state toggle not showing up in hvac mode ([#533](https://github.com/resoai/TileBoard/issues/533)) ([d2b3717](https://github.com/resoai/TileBoard/commit/d2b37179ca55aaab21760b988708a6662e4d532e)), closes [#526](https://github.com/resoai/TileBoard/issues/526)
+* **dev:** automatically fix eslint errors in changed files on commit ([5d2a83d](https://github.com/resoai/TileBoard/commit/5d2a83da424303bc2a7ed94de9376dd207a4452f))
+* **dev:** don't lint unstaged changes on commit ([bee9da4](https://github.com/resoai/TileBoard/commit/bee9da45fc9ad87a740523c85ba0f66bdb4feb38)), closes [#512](https://github.com/resoai/TileBoard/issues/512)
+* **HOMEKIT:** make colors of ON tiles consistent ([#511](https://github.com/resoai/TileBoard/issues/511)) ([76fae10](https://github.com/resoai/TileBoard/commit/76fae10e05d69d72d0298491e25d6135198bc2da)), closes [#448](https://github.com/resoai/TileBoard/issues/448)
+* fullsize popup cropped at the bottom ([#508](https://github.com/resoai/TileBoard/issues/508)) ([3cfaef8](https://github.com/resoai/TileBoard/commit/3cfaef8b8eb4b3684203f32d2e97756dc22c6e4a)), closes [#423](https://github.com/resoai/TileBoard/issues/423)
+
 ### [2.0.3](https://github.com/resoai/TileBoard/compare/v2.0.2...v2.0.3) (2020-10-29)
 
 
