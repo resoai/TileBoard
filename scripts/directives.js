@@ -20,7 +20,7 @@ App.directive('camera', function () {
       scope: {
          item: '=item',
          entity: '=entity',
-         freezed: '=freezed',
+         frozen: '=frozen',
       },
       link: function ($scope, $el, attrs) {
          let $i = 0;
@@ -73,7 +73,7 @@ App.directive('camera', function () {
                return;
             }
 
-            if ($i > 1 && $scope.freezed) {
+            if ($i > 1 && $scope.frozen) {
                return;
             }
 
@@ -125,7 +125,7 @@ App.directive('cameraThumbnail', function (Api) {
       scope: {
          item: '=item',
          entity: '=entity',
-         freezed: '=freezed',
+         frozen: '=frozen',
       },
       link: function ($scope, $el, attrs) {
          let refresh = 'refresh' in $scope.item ? $scope.item.refresh : 2000;
@@ -166,7 +166,7 @@ App.directive('cameraThumbnail', function (Api) {
                return;
             }
 
-            if (lastUpdate && $scope.freezed) {
+            if (lastUpdate && $scope.frozen) {
                return;
             }
 
@@ -207,25 +207,63 @@ App.directive('cameraThumbnail', function (Api) {
    };
 });
 
-App.directive('cameraStream', function (Api) {
+App.directive('cameraStream', function (Api, $timeout) {
    return {
       restrict: 'AE',
       replace: true,
       scope: {
          item: '=item',
          entity: '=entity',
-         freezed: '=freezed',
+         frozen: '=frozen',
       },
       link: function ($scope, $el, attrs) {
+         // Time after which the stream will be stopped entirely (media element will be detached)
+         // after the playback was paused due to frozen=true.
+         const SUSPEND_TIMEOUT_MS = 5000;
+         let suspendPromise = null;
+         /** @type {HTMLMediaElement | null} */
          let current = null;
+         /** @type {Hls | null} */
          let hls = null;
+
+         $scope.$watch('frozen', frozen => {
+            if (current) {
+               if (frozen) {
+                  onFreezed();
+               } else {
+                  onUnfreezed();
+               }
+            }
+         });
+
+         function onFreezed () {
+            if (!current.paused) {
+               current.pause();
+               suspendPromise = $timeout(() => {
+                  if (hls) {
+                     hls.stopLoad();
+                     hls.detachMedia();
+                  }
+               }, SUSPEND_TIMEOUT_MS);
+            }
+         }
+
+         function onUnfreezed () {
+            $timeout.cancel(suspendPromise);
+            if (current.paused) {
+               if (hls) {
+                  hls.attachMedia(current);
+               }
+               Promise.resolve(current.play()).catch(() => {});
+            }
+         }
 
          const appendVideo = function (url) {
             const el = document.createElement('video');
             el.style.objectFit = $scope.item.objFit || 'fill';
             el.style.width = '100%';
             el.style.height = '100%';
-            el.muted = 'muted';
+            el.muted = true;
 
             if (Hls.isSupported()) {
                const len = $scope.item.bufferLength || 5;
@@ -239,11 +277,13 @@ App.directive('cameraStream', function (Api) {
                   hls.destroy();
                }
                hls = new Hls(config);
-               hls.loadSource(url);
-               hls.attachMedia(el);
+               hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+                  hls.loadSource(url);
+               });
                hls.on(Hls.Events.MANIFEST_PARSED, function () {
                   el.play();
                });
+               hls.attachMedia(el);
             } else {
                el.src = url;
                el.setAttribute('playsinline', 'playsinline');
@@ -280,6 +320,7 @@ App.directive('cameraStream', function (Api) {
          $scope.$watch('entity', requestStream);
 
          $scope.$on('$destroy', function () {
+            $timeout.cancel(suspendPromise);
             if (hls) {
                hls.destroy();
             }
