@@ -20,7 +20,7 @@ App.directive('camera', function () {
       scope: {
          item: '=item',
          entity: '=entity',
-         freezed: '=freezed',
+         frozen: '=frozen',
       },
       link: function ($scope, $el, attrs) {
          let $i = 0;
@@ -73,7 +73,7 @@ App.directive('camera', function () {
                return;
             }
 
-            if ($i > 1 && $scope.freezed) {
+            if ($i > 1 && $scope.frozen) {
                return;
             }
 
@@ -125,7 +125,7 @@ App.directive('cameraThumbnail', function (Api) {
       scope: {
          item: '=item',
          entity: '=entity',
-         freezed: '=freezed',
+         frozen: '=frozen',
       },
       link: function ($scope, $el, attrs) {
          let refresh = 'refresh' in $scope.item ? $scope.item.refresh : 2000;
@@ -166,7 +166,7 @@ App.directive('cameraThumbnail', function (Api) {
                return;
             }
 
-            if (lastUpdate && $scope.freezed) {
+            if (lastUpdate && $scope.frozen) {
                return;
             }
 
@@ -214,11 +214,11 @@ App.directive('cameraStream', function (Api, $timeout) {
       scope: {
          item: '=item',
          entity: '=entity',
-         freezed: '=freezed',
+         frozen: '=frozen',
       },
       link: function ($scope, $el, attrs) {
          // Time after which the stream will be stopped entirely (media element will be detached)
-         // after the playback was paused due to freezed=true.
+         // after the playback was paused due to frozen=true.
          const SUSPEND_TIMEOUT_MS = 5000;
          let suspendPromise = null;
          /** @type {HTMLMediaElement | null} */
@@ -226,9 +226,9 @@ App.directive('cameraStream', function (Api, $timeout) {
          /** @type {Hls | null} */
          let hls = null;
 
-         $scope.$watch('freezed', freezed => {
+         $scope.$watch('frozen', frozen => {
             if (current) {
-               if (freezed) {
+               if (frozen) {
                   onFreezed();
                } else {
                   onUnfreezed();
