@@ -227,22 +227,30 @@ App.directive('cameraStream', function (Api) {
             el.style.height = '100%';
             el.muted = 'muted';
 
-            const len = $scope.item.bufferLength || 5;
+            if (Hls.isSupported()) {
+               const len = $scope.item.bufferLength || 5;
 
-            const config = {
-               maxBufferLength: len,
-               maxMaxBufferLength: len,
-            };
+               const config = {
+                  maxBufferLength: len,
+                  maxMaxBufferLength: len,
+               };
 
-            if (hls) {
-               hls.destroy();
+               if (hls) {
+                  hls.destroy();
+               }
+               hls = new Hls(config);
+               hls.loadSource(url);
+               hls.attachMedia(el);
+               hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                  el.play();
+               });
+            } else {
+               el.src = url;
+               el.setAttribute('playsinline', 'playsinline');
+               el.addEventListener('loadedmetadata', function () {
+                  el.play();
+               });
             }
-            hls = new Hls(config);
-            hls.loadSource(url);
-            hls.attachMedia(el);
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
-               el.play();
-            });
 
             if (current) {
                $el[0].removeChild(current);
