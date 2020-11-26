@@ -1657,8 +1657,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       $scope.pages.forEach(function (page) {
          (page.groups || []).forEach(function (group) {
             (group.items || []).forEach(function (item) {
-               if ([TYPES.CAMERA, TYPES.CAMERA_THUMBNAIL, TYPES.CAMERA_STREAM]
-                  .indexOf(item.type) !== -1 && !item.hideFromList) {
+               if ([TYPES.CAMERA, TYPES.CAMERA_STREAM].includes(item.type) && !item.hideFromList) {
                   res.push(item);
                }
             });

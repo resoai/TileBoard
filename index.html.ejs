@@ -69,10 +69,6 @@
                <camera item="activeCamera.fullscreen" entity="entity" frozen="false"></camera>
             </div>
 
-            <div ng-if="activeCamera.fullscreen.type === TYPES.CAMERA_THUMBNAIL">
-               <camera-thumbnail item="activeCamera.fullscreen" entity="entity" frozen="false"></camera-thumbnail>
-            </div>
-
             <div ng-if="activeCamera.fullscreen.type === TYPES.CAMERA_STREAM">
                <camera-stream item="activeCamera.fullscreen" entity="entity" frozen="screensaverShown"></camera-stream>
             </div>
@@ -696,14 +692,6 @@
          <div class="item-camera">
             <camera item="item" entity="entity"
                     frozen="(!isPopupActive(page) && !isPageActive(page)) || activeCamera || screensaverShown"></camera>
-         </div>
-      </div>
-
-      <div ng-if="item.type === TYPES.CAMERA_THUMBNAIL"
-           class="item-entity-container -below">
-         <div class="item-camera">
-            <camera-thumbnail item="item" entity="entity"
-                              frozen="(!isPopupActive(page) && !isPageActive(page)) || activeCamera || screensaverShown"></camera-thumbnail>
          </div>
       </div>
 
