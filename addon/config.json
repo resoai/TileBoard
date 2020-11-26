@@ -1,0 +1,36 @@
+{
+    "name": "Tile Board",
+    "version": "2.1.0",
+    "slug": "tile_board",
+    "description": "TileBoard Addon",
+    "url": "https://github.com/resoai/TileBoard",
+    "webui": "http://[HOST]:[PORT:8080]",
+    "startup": "application",
+    "init": false,
+    "image": "<DOCKER_USERNAME_HERE>/tileboard-addon-{arch}",
+    "arch": [
+      "armhf",
+      "armv7",
+      "aarch64",
+      "amd64",
+      "i386"
+    ],
+    "map": [
+      "config"
+    ],
+    "boot": "auto",
+    "hassio_api": true,
+    "hassio_role": "default",
+    "ports": {
+      "80/tcp": 8080
+    },
+    "ports_description": {
+      "80/tcp": "Dashboard interface"
+    },
+    "options": {
+      "configFolder": "tile-board"
+    },
+    "schema": {
+      "configFolder": "str"
+    }
+  }

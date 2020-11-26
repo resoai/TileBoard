@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Home Assistant Community Add-on: TileBoard
+# Runs the Nginx daemon
+# ==============================================================================
+
+bashio::log.info "Starting NGinx server..."
+exec nginx -g "daemon off;"

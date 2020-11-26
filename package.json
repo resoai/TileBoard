@@ -13,8 +13,15 @@
   "standard-version": {
     "scripts": {
       "prerelease": "git pull && yarn && yarn build",
+      "postchangelog": "cp README.md addon/README.md && cp CHANGELOG.md addon/CHANGELOG.md",
       "posttag": "git push --follow-tags"
-    }
+    },
+    "bumpFiles": [
+      {
+        "filename": "addon/config.json",
+        "type": "json"
+      }
+    ]
   },
   "husky": {
     "hooks": {
