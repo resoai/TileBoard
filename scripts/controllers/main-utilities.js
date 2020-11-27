@@ -15,25 +15,26 @@ function mergeTileListDefaults (tiles) {
       return;
    }
    for (const [index, tile] of tiles.entries()) {
-      tiles[index] = mergeTileDefaults(tile);
-      switch (tile.type) {
+      const mergedTile = mergeTileDefaults(tile);
+      tiles[index] = mergedTile;
+      switch (mergedTile.type) {
          case TYPES.CAMERA:
          case TYPES.CAMERA_STREAM:
          case TYPES.CAMERA_THUMBNAIL:
-            if (tile.type === TYPES.CAMERA_THUMBNAIL) {
+            if (mergedTile.type === TYPES.CAMERA_THUMBNAIL) {
                console.warn('The CAMERA_THUMBNAIL tile is deprecated. Please replace it with the CAMERA tile. Tile: ', tile);
-               tile.type = TYPES.CAMERA;
+               mergedTile.type = TYPES.CAMERA;
             }
-            tile.fullscreen = mergeTileDefaults(tile.fullscreen);
+            mergedTile.fullscreen = mergeTileDefaults(mergedTile.fullscreen);
             break;
          case TYPES.DOOR_ENTRY:
-            if (tile.layout?.camera) {
-               tile.layout.camera = mergeTileDefaults(tile.layout.camera);
+            if (mergedTile.layout?.camera) {
+               mergedTile.layout.camera = mergeTileDefaults(mergedTile.layout.camera);
             }
-            mergeTileListDefaults(tile.layout?.tiles);
+            mergeTileListDefaults(mergedTile.layout?.tiles);
             break;
          case TYPES.POPUP:
-            mergeTileListDefaults(tile.popup?.items);
+            mergeTileListDefaults(mergedTile.popup?.items);
             break;
       }
    }
