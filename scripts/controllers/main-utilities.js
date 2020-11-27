@@ -20,6 +20,10 @@ function mergeTileListDefaults (tiles) {
          case TYPES.CAMERA:
          case TYPES.CAMERA_STREAM:
          case TYPES.CAMERA_THUMBNAIL:
+            if (tile.type === TYPES.CAMERA_THUMBNAIL) {
+               console.warn('The CAMERA_THUMBNAIL tile is deprecated. Please replace it with the CAMERA tile. Tile: ', tile);
+               tile.type = TYPES.CAMERA;
+            }
             tile.fullscreen = mergeTileDefaults(tile.fullscreen);
             break;
          case TYPES.DOOR_ENTRY:

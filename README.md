@@ -346,12 +346,12 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
   bottom: true,
   /* slider: Object with slider config. See slider documentation below */
   slider: {}
-  /** type: CAMERA or CAMERA_THUMBNAIL **/
+  /** type: CAMERA **/
   /* bgSize: CSS background-size property */
-   bgSize: 'cover',
+   bgSize: 'cover',  // 'cover', 'contain', 'auto' (defaults to 'cover')
    /* filter: Function for filtering/formatting the camera URL */
    filter: function (url) {return url},
-   /* fullscreen: object of type CAMERA or CAMERA_THUMBNAIL to show it in fullscreen */
+   /* fullscreen: object of type CAMERA to show it in fullscreen */
    fullscreen: {},
    /* refresh: Number in milliseconds (or function returning a time) to set the
     * interval for refreshing the camera image
@@ -477,7 +477,6 @@ var TYPES = {
    INPUT_SELECT: 'input_select',
    INPUT_DATETIME: 'input_datetime',
    CAMERA: 'camera',
-   CAMERA_THUMBNAIL: 'camera_thumbnail',
    SCENE: 'scene',
    SLIDER: 'slider',
    IFRAME: 'iframe',
