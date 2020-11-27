@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.1](https://github.com/resoai/TileBoard/compare/v2.1.0...v2.1.1) (2020-11-27)
+
+
+### Bug Fixes
+
+* merge default tile values correctly ([#551](https://github.com/resoai/TileBoard/issues/551)) ([6a814f2](https://github.com/resoai/TileBoard/commit/6a814f208714fc41733441eda25b99671f649a86))
+* **CAMERA_STREAM:** pause stream when screensaver active or page changed ([#544](https://github.com/resoai/TileBoard/issues/544)) ([3ba99d1](https://github.com/resoai/TileBoard/commit/3ba99d198d53529f97bfd3a71ac8802048af5fc8)), closes [#541](https://github.com/resoai/TileBoard/issues/541)
+* **CAMERA_STREAM:** support non-HLS-capable devices ([#537](https://github.com/resoai/TileBoard/issues/537)) ([7bbeb3c](https://github.com/resoai/TileBoard/commit/7bbeb3ca9aa983d35271b7566d9f4a5530cd271d))
+* **CAMERA_THUMBNAIL:** remove deprecated CAMERA_THUMBNAIL tile ([#548](https://github.com/resoai/TileBoard/issues/548)) ([0b0a101](https://github.com/resoai/TileBoard/commit/0b0a101864b735e9958acd582a4691eca97f62b1))
+* **docs:** clearer instructions in the fallback index.html ([8eaa551](https://github.com/resoai/TileBoard/commit/8eaa551ba2525fe9d392c2e0afcef844859d6548))
+
 ## [2.1.0](https://github.com/resoai/TileBoard/compare/v2.0.3...v2.1.0) (2020-11-22)
 
 
