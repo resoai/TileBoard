@@ -52,6 +52,11 @@ App.provider('Api', function () {
       $Api.prototype._init = function () {
          const self = this;
 
+         if (!self._url) {
+            console.info('Skipping API service initialization since no API URL was provided.');
+            return;
+         }
+
          this._getToken().then(function (token) {
             if (token) {
                self._token = token.access_token;
