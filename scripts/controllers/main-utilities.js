@@ -1,6 +1,8 @@
 import mergeWith from 'lodash.mergewith';
 import { TILE_DEFAULTS, TYPES } from '../globals/constants';
 
+const MERGED_DEFAULTS_KEY = '__merged_defaults';
+
 export function mergeConfigDefaults (pages) {
    for (const page of pages) {
       for (const group of page.groups) {
@@ -15,37 +17,47 @@ function mergeTileListDefaults (tiles) {
       return;
    }
    for (const [index, tile] of tiles.entries()) {
-      const mergedTile = mergeTileDefaults(tile);
-      tiles[index] = mergedTile;
-      switch (mergedTile.type) {
-         case TYPES.CAMERA:
-         case TYPES.CAMERA_STREAM:
-         case TYPES.CAMERA_THUMBNAIL:
-            if (mergedTile.type === TYPES.CAMERA_THUMBNAIL) {
-               console.warn('The CAMERA_THUMBNAIL tile is deprecated. Please replace it with the CAMERA tile. Tile: ', tile);
-               mergedTile.type = TYPES.CAMERA;
-            }
-            mergedTile.fullscreen = mergeTileDefaults(mergedTile.fullscreen);
-            break;
-         case TYPES.DOOR_ENTRY:
-            if (mergedTile.layout?.camera) {
-               mergedTile.layout.camera = mergeTileDefaults(mergedTile.layout.camera);
-            }
-            mergeTileListDefaults(mergedTile.layout?.tiles);
-            break;
-         case TYPES.POPUP:
-            mergeTileListDefaults(mergedTile.popup?.items);
-            break;
-      }
+      tiles[index] = mergeTileDefaults(tile);
    }
    return tiles;
 }
 
-function mergeTileDefaults (tile) {
-   if (tile && tile.type in TILE_DEFAULTS) {
-      return mergeTileConfigs({}, TILE_DEFAULTS[tile.type], tile);
+export function mergeTileDefaults (tile) {
+   if (tile[MERGED_DEFAULTS_KEY]) {
+      return tile;
    }
-   return tile;
+   let mergedTile = tile;
+   if (mergedTile && mergedTile.type in TILE_DEFAULTS) {
+      mergedTile = mergeTileConfigs({}, TILE_DEFAULTS[mergedTile.type], mergedTile);
+   }
+   switch (mergedTile.type) {
+      case TYPES.CAMERA:
+      case TYPES.CAMERA_STREAM:
+      case TYPES.CAMERA_THUMBNAIL:
+         if (mergedTile.type === TYPES.CAMERA_THUMBNAIL) {
+            console.warn('The CAMERA_THUMBNAIL tile is deprecated. Please replace it with the CAMERA tile. Tile: ', mergedTile);
+            mergedTile.type = TYPES.CAMERA;
+         }
+         if (mergedTile.fullscreen) {
+            mergedTile.fullscreen = mergeTileDefaults(mergedTile.fullscreen);
+         }
+         break;
+      case TYPES.DOOR_ENTRY:
+         if (mergedTile.layout?.camera) {
+            mergedTile.layout.camera = mergeTileDefaults(mergedTile.layout.camera);
+         }
+         if (mergedTile.layout?.tiles) {
+            mergeTileListDefaults(mergedTile.layout.tiles);
+         }
+         break;
+      case TYPES.POPUP:
+         if (mergedTile.popup?.items) {
+            mergeTileListDefaults(mergedTile.popup.items);
+         }
+         break;
+   }
+   mergedTile[MERGED_DEFAULTS_KEY] = true;
+   return mergedTile;
 }
 
 export function mergeTileConfigs (object, ...sources) {
