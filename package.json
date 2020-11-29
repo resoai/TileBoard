@@ -50,6 +50,7 @@
     "@types/hls.js": "^0.13.3",
     "@types/lodash.mergewith": "^4.6.6",
     "babel-plugin-angularjs-annotate": "^0.10.0",
+    "core-js": "3",
     "eslint": "^7.14.0",
     "husky": "^4.3.0",
     "less": "^3.12.2",
