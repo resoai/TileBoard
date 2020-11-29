@@ -8,6 +8,7 @@ import './controllers/noty';
 import './controllers/screensaver';
 import '../styles/all.less';
 import '@mdi/font/scss/materialdesignicons.scss';
+import 'url-search-params-polyfill';
 
 function onConfigLoadOrError (error) {
    if (error) {
@@ -24,8 +25,7 @@ Please make sure that it defines a CONFIG variable with proper configuration.`);
    window.window.initApp();
 }
 
-const url = new URL(document.location.href);
-const configName = url.searchParams.get('config') || 'config';
+const configName = new URLSearchParams(document.location.search).get('config') || 'config';
 
 const script = document.createElement('script');
 script.src = `./${configName}.js?r=${Date.now()}`;

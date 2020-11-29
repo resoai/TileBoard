@@ -74,7 +74,8 @@
     "chart.js": "^2.9.4",
     "hls.js": "^0.14.16",
     "lodash.mergewith": "^4.6.2",
-    "node-sass": "^5.0.0"
+    "node-sass": "^5.0.0",
+    "url-search-params-polyfill": "^8.1.0"
   },
   "resolutions": {
     "chart.js": "2.9.4"
