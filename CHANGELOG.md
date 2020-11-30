@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.2](https://github.com/resoai/TileBoard/compare/v2.1.1...v2.1.2) (2020-11-30)
+
+
+### Bug Fixes
+
+* add polyfills for URL/URLSearchParams ([637e37f](https://github.com/resoai/TileBoard/commit/637e37f73477ba800bc49e8ef28997efc44ab26b))
+* ensure app is initialized even when config fails to load ([4d3ec12](https://github.com/resoai/TileBoard/commit/4d3ec123d08722f2fea98f6129b6846b434f6642))
+* **POPUP:** merge tile defaults when passing newly created tile object ([#555](https://github.com/resoai/TileBoard/issues/555)) ([63e2b87](https://github.com/resoai/TileBoard/commit/63e2b873a457f04e089d8d82e4b0d5d73743aac8)), closes [#553](https://github.com/resoai/TileBoard/issues/553)
+* incorrect message telling user to copy example config to "dist" ([94a9801](https://github.com/resoai/TileBoard/commit/94a9801a7244ecfac0048ba912eb42203b7a5599))
+
 ### [2.1.1](https://github.com/resoai/TileBoard/compare/v2.1.0...v2.1.1) (2020-11-27)
 
 
