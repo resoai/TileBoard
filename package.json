@@ -55,7 +55,7 @@
     "less": "^3.12.2",
     "lint-staged": "^10.5.2",
     "print-message": "^3.0.1",
-    "rollup": "^2.33.3",
+    "rollup": "^2.34.0",
     "rollup-plugin-cpy": "^2.0.1",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-emit-ejs": "^3.1.0",
