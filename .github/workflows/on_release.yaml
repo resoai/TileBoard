@@ -22,7 +22,7 @@ jobs:
           pushd build
           zip -qr "../TileBoard.zip" .
 
-      - uses: marvinpinto/action-automatic-releases@v1
+      - uses: marvinpinto/action-automatic-releases@v1.1.0
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: false
