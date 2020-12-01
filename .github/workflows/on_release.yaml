@@ -21,14 +21,12 @@ jobs:
           pushd build
           zip -qr "../TileBoard.zip" .
 
-      - uses: svenstaro/upload-release-action@v2
+      - uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: false
-          file: TileBoard.zip
-          tag: ${{ github.ref }}
-          overwrite: true
-          body: Release ${{ github.ref }}
+          files: |
+            TileBoard.zip
   
       - name: Login to DockerHub
         uses: docker/login-action@v1
