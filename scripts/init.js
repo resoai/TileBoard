@@ -22,6 +22,10 @@ window.initApp = function () {
          requireBase: false,
       });
 
+      if (!window.CONFIG) {
+         return;
+      }
+
       ApiProvider.setInitOptions({
          wsUrl: window.CONFIG.wsUrl,
          authToken: window.CONFIG.authToken,

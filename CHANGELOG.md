@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.2](https://github.com/resoai/TileBoard/compare/v2.1.1...v2.1.2) (2020-11-30)
+
+
+### Bug Fixes
+
+* add polyfills for URL/URLSearchParams ([637e37f](https://github.com/resoai/TileBoard/commit/637e37f73477ba800bc49e8ef28997efc44ab26b))
+* ensure app is initialized even when config fails to load ([4d3ec12](https://github.com/resoai/TileBoard/commit/4d3ec123d08722f2fea98f6129b6846b434f6642))
+* **POPUP:** merge tile defaults when passing newly created tile object ([#555](https://github.com/resoai/TileBoard/issues/555)) ([63e2b87](https://github.com/resoai/TileBoard/commit/63e2b873a457f04e089d8d82e4b0d5d73743aac8)), closes [#553](https://github.com/resoai/TileBoard/issues/553)
+* incorrect message telling user to copy example config to "dist" ([94a9801](https://github.com/resoai/TileBoard/commit/94a9801a7244ecfac0048ba912eb42203b7a5599))
+
+### [2.1.1](https://github.com/resoai/TileBoard/compare/v2.1.0...v2.1.1) (2020-11-27)
+
+
+### Bug Fixes
+
+* merge default tile values correctly ([#551](https://github.com/resoai/TileBoard/issues/551)) ([6a814f2](https://github.com/resoai/TileBoard/commit/6a814f208714fc41733441eda25b99671f649a86))
+* **CAMERA_STREAM:** pause stream when screensaver active or page changed ([#544](https://github.com/resoai/TileBoard/issues/544)) ([3ba99d1](https://github.com/resoai/TileBoard/commit/3ba99d198d53529f97bfd3a71ac8802048af5fc8)), closes [#541](https://github.com/resoai/TileBoard/issues/541)
+* **CAMERA_STREAM:** support non-HLS-capable devices ([#537](https://github.com/resoai/TileBoard/issues/537)) ([7bbeb3c](https://github.com/resoai/TileBoard/commit/7bbeb3ca9aa983d35271b7566d9f4a5530cd271d))
+* **CAMERA_THUMBNAIL:** remove deprecated CAMERA_THUMBNAIL tile ([#548](https://github.com/resoai/TileBoard/issues/548)) ([0b0a101](https://github.com/resoai/TileBoard/commit/0b0a101864b735e9958acd582a4691eca97f62b1))
+* **docs:** clearer instructions in the fallback index.html ([8eaa551](https://github.com/resoai/TileBoard/commit/8eaa551ba2525fe9d392c2e0afcef844859d6548))
+
 ## [2.1.0](https://github.com/resoai/TileBoard/compare/v2.0.3...v2.1.0) (2020-11-22)
 
 

@@ -1,6 +1,6 @@
 import angular from 'angular';
 import Hammer from 'hammerjs';
-import { mergeConfigDefaults, mergeTileConfigs } from './main-utilities';
+import { mergeConfigDefaults, mergeTileConfigs, mergeTileDefaults } from './main-utilities';
 import { App } from '../app';
 import { TYPES, FEATURES, HEADER_ITEMS, MENU_POSITIONS, GROUP_ALIGNS, TRANSITIONS, MAPBOX_MAP, YANDEX_MAP, DEFAULT_SLIDER_OPTIONS, DEFAULT_LIGHT_SLIDER_OPTIONS, DEFAULT_VOLUME_SLIDER_OPTIONS, DEFAULT_POPUP_HISTORY, DEFAULT_POPUP_IFRAME, DEFAULT_POPUP_DOOR_ENTRY } from '../globals/constants';
 import { debounce, leadZero, supportsFeature, toAbsoluteServerURL } from '../globals/utils';
@@ -1396,6 +1396,8 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
    };
 
    $scope.openPopup = function (item, entity, layout) {
+      item = mergeTileDefaults(item);
+
       if ($scope.popupTimeout) {
          clearTimeout($scope.popupTimeout);
          $scope.popupTimeout = null;
@@ -1657,8 +1659,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       $scope.pages.forEach(function (page) {
          (page.groups || []).forEach(function (group) {
             (group.items || []).forEach(function (item) {
-               if ([TYPES.CAMERA, TYPES.CAMERA_THUMBNAIL, TYPES.CAMERA_STREAM]
-                  .indexOf(item.type) !== -1 && !item.hideFromList) {
+               if ([TYPES.CAMERA, TYPES.CAMERA_STREAM].includes(item.type) && !item.hideFromList) {
                   res.push(item);
                }
             });

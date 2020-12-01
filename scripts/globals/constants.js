@@ -357,11 +357,6 @@ export const TILE_DEFAULTS = {
          return this.$scope.openCamera(item, entity);
       },
    },
-   [TYPES.CAMERA_THUMBNAIL]: {
-      action (item, entity) {
-         return this.$scope.openCamera(item, entity);
-      },
-   },
    [TYPES.CLIMATE]: {
       subtitle (item, entity) {
          return item.useHvacMode ? entity.attributes.hvac_action : undefined;

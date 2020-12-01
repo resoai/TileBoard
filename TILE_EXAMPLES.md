@@ -49,35 +49,18 @@ Manually trigger an automation
 }
 ```
 
-#### CAMERA_THUMBNAIL and CAMERA
-```js
-{
-   position: [0, 0],
-   id: 'camera.front_gate',
-   type: TYPES.CAMERA_THUMBNAIL,
-   bgSize: 'cover',
-   width: 2,
-   state: false,
-   fullscreen: {
-      type: TYPES.CAMERA,
-      refresh: 1500, // can be number in milliseconds
-      bgSize: 'contain'
-   },
-   refresh: function () { // can also be a function
-      return 3000 + Math.random() * 1000
-   }
-}
-```
+#### CAMERA and CAMERA_STREAM
 
-#### CAMERA_THUMBNAIL and CAMERA_STREAM
-Shows a camera feed on the tile and opens a fullscreen popup with an RTSP stream when pressed.
-Optionally, the fullscreen camera entity can be different from the thumbnail camera entity, for example to show a hires stream on the fullscreen popup only.
+Shows a camera snapshot on the tile (can also refresh every specified amount of time) and opens a fullscreen popup with an RTSP stream when pressed.
+Optionally, the fullscreen camera entity can be different from the camera entity, for example to show a hi-res stream on the fullscreen popup only.
+
+**Note**: Make sure to enable the `stream` integration (https://www.home-assistant.io/integrations/stream/) in Home-assistant for the CAMERA_STREAM tile to work.
 
 ```js
 {
    position: [0, 0],
    id: 'camera.front_gate',
-   type: TYPES.CAMERA_THUMBNAIL,
+   type: TYPES.CAMERA,
    bgSize: 'cover',
    width: 2,
    state: false,
@@ -87,7 +70,8 @@ Optionally, the fullscreen camera entity can be different from the thumbnail cam
       id: 'camera.front_gate_highres',  // Optional: camera entity to use on fullscreen, defaults to the tile camera entity if omitted
       bufferLength: 5  // Optional: buffer length in seconds for the HLS buffer, default is 5 seconds
    },
-   refresh: function () { // can also be a function
+   refresh: 1500,  // can be number in milliseconds
+   refresh: function () {  // can also be a function
       return 3000 + Math.random() * 1000
    }
 }

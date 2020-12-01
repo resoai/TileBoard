@@ -12,14 +12,14 @@ import '@mdi/font/scss/materialdesignicons.scss';
 function onConfigLoadOrError (error) {
    if (error) {
       alert(`Please make sure that you have "${configName}.js" file and it is a valid javascript!
-If you are running TileBoard for the first time, please copy "config.example.js" into "dist/${configName}.js"`);
+If you are running TileBoard for the first time, please rename "config.example.js" to "${configName}.js"`);
       return;
    }
    if (!window.CONFIG) {
       alert(`The "${configName}.js" configuration file has loaded but window.CONFIG is not defined!
 Please make sure that it defines a CONFIG variable with proper configuration.`);
-      return;
    }
+   // Initialize the app even though we have no valid configuration so that notifications are working.
    // @ts-ignore
    window.window.initApp();
 }
