@@ -40,4 +40,4 @@ jobs:
           args: |
             --all \
             --target ./addon \
-            --docker-hub ${{ secrets.DOCKER_USERNAME }}
+            --docker-hub ${{ secrets.DOCKERHUB_USERNAME }}
