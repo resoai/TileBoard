@@ -1,0 +1,34 @@
+name: addon-bump
+
+on:
+  workflow_dispatch:
+
+jobs:
+  addon-bump:
+    name: Test addon bump
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Get version
+        id: get-version
+        run: |
+          version=`echo $(jq -r '.version' package.json)`
+          echo "::set-output name=version::${version}"
+
+      - name: Bump TileBoard in addon
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches
+          owner: resoai
+          repo: TileBoard-addon
+          workflow_id: on_tileboard_release.yaml
+          ref: main
+          inputs: |
+            version: ${{ steps.get-version.outputs.version }}
+            release_url: https://github.com/resoai/TileBoard/releases/tag/v${{ steps.get-version.outputs.version }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_WORKFLOW_TOKEN }}
+
