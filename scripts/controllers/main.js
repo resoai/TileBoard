@@ -1455,7 +1455,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       }
 
       const day = 24 * 60 * 60 * 1000;
-      var startDate = new Date(Date.now() - ($scope.itemField('offset', config, entity) || day)).toISOString();
+      let startDate = new Date(Date.now() - ($scope.itemField('offset', config, entity) || day)).toISOString();
 
       Api.getHistory(startDate, entityId)
          .then(function (data) {
@@ -1568,15 +1568,15 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
             }, $scope.itemField('options', config, entity));
 
             // Delete old data
-            var deleteOldData = function () {
+            const deleteOldData = function () {
                // Update start date
-               startDate = new Date(Date.now() - ($scope.itemField("offset", config, entity) || day)).toISOString();
+               startDate = new Date(Date.now() - ($scope.itemField('offset', config, entity) || day)).toISOString();
 
                // Clean data older than new start date (done on all datasets)
                for (let dataIndex = 0; dataIndex < historyObject.data.length; dataIndex++) {
                   let cleaningFinished = false;
                   while (!cleaningFinished && historyObject.data[dataIndex].length > 0) {
-                     let firstHistoryDate = historyObject.data[dataIndex][0].x;
+                     const firstHistoryDate = historyObject.data[dataIndex][0].x;
                      if (Date.parse(firstHistoryDate) < Date.parse(startDate)) {
                         historyObject.data[dataIndex].shift();
                      } else {
