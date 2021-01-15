@@ -1588,27 +1588,27 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
             // Add watchers to update data on the fly
             if (typeof entityId === 'string') {
-               historyObject.watchers.push($scope.$watch(
+               historyObject.watchers.push($scope.$watchCollection(
                   function () {
-                     return $scope.states[entityId].state;
+                     return [ $scope.states[entityId].state, $scope.states[entityId].last_updated ];
                   },
                   function (newValue) {
                      historyObject.data[0].push({
                         x: new Date(),
-                        y: newValue,
+                        y: newValue[0],
                      });
                      deleteOldData();
                   }));
             } else {
                entityId.forEach(function (entityId, index) {
-                  historyObject.watchers.push($scope.$watch(
+                  historyObject.watchers.push($scope.$watchCollection(
                      function () {
-                        return $scope.states[entityId].state;
+                        return [ $scope.states[entityId].state, $scope.states[entityId].last_updated ];
                      },
                      function (newValue) {
                         historyObject.data[index].push({
                            x: new Date(),
-                           y: newValue,
+                           y: newValue[0],
                         });
                         deleteOldData();
                      }));
