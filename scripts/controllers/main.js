@@ -1455,7 +1455,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
       }
 
       const day = 24 * 60 * 60 * 1000;
-      const startDate = new Date(Date.now() - ($scope.itemField('offset', config, entity) || day)).toISOString();
+      var startDate = new Date(Date.now() - ($scope.itemField('offset', config, entity) || day)).toISOString();
 
       Api.getHistory(startDate, entityId)
          .then(function (data) {
@@ -1485,7 +1485,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
                // Create extra state with current value.
                dataset.push({
-                  x: Date.now(),
+                  x: new Date(),
                   y: $scope.states[firstStateInfo.entity_id].state,
                });
 
@@ -1567,6 +1567,25 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
                },
             }, $scope.itemField('options', config, entity));
 
+            // Delete old data
+            var deleteOldData = function () {
+               // Update start date
+               startDate = new Date(Date.now() - ($scope.itemField("offset", config, entity) || day)).toISOString();
+
+               // Clean data older than new start date (done on all datasets)
+               for (let dataIndex = 0; dataIndex < historyObject.data.length; dataIndex++) {
+                  let cleaningFinished = false;
+                  while (!cleaningFinished && historyObject.data[dataIndex].length > 0) {
+                     let firstHistoryDate = historyObject.data[dataIndex][0].x;
+                     if (Date.parse(firstHistoryDate) < Date.parse(startDate)) {
+                        historyObject.data[dataIndex].shift();
+                     } else {
+                        cleaningFinished = true;
+                     }
+                  }
+               }
+            };
+
             // Add watchers to update data on the fly
             if (typeof entityId === 'string') {
                historyObject.watchers.push($scope.$watch(
@@ -1575,9 +1594,10 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
                   },
                   function (newValue) {
                      historyObject.data[0].push({
-                        x: Date.now(),
+                        x: new Date(),
                         y: newValue,
                      });
+                     deleteOldData();
                   }));
             } else {
                entityId.forEach(function (entityId, index) {
@@ -1587,9 +1607,10 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
                      },
                      function (newValue) {
                         historyObject.data[index].push({
-                           x: Date.now(),
+                           x: new Date(),
                            y: newValue,
                         });
+                        deleteOldData();
                      }));
                });
             }
