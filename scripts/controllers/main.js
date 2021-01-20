@@ -206,8 +206,8 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
          }
 
          let coords = obj.longitude + ',' + obj.latitude;
-         // +80 - hack to hide logo
-         let sizes = Math.ceil(tileSize * width) + ',' + Math.ceil((tileSize * height) + 80);
+         let mapWidth = Math.ceil(tileSize * width);
+         let mapHeight = Math.ceil((tileSize * height) + 80); // +80 is a hack to hide the logo
 
          let url;
          let label;
@@ -221,14 +221,20 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
             } else if (state.toLowerCase() === 'office') {
                icon = 'work';
             }
+            // Yandex allows max 650x450px
+            mapWidth = Math.min(mapWidth, 650);
+            mapHeight = Math.min(mapHeight, 450);
 
             const pt = coords + ',' + icon;
 
             url = 'https://static-maps.yandex.ru/1.x/?lang=en-US&ll='
-               + coords + '&z=' + zoom + '&l=map&size=' + sizes + '&pt=' + pt;
+               + coords + '&z=' + zoom + '&l=map&size=' + mapWidth + ',' + mapHeight + '&pt=' + pt;
          } else if (item.map === MAPBOX_MAP) {
+            // MapBox allows max 1280x1280px
+            mapWidth = Math.min(mapWidth, 1280);
+            mapHeight = Math.min(mapHeight, 1280);
+
             coords = obj.longitude + ',' + obj.latitude;
-            sizes = sizes.replace(',', 'x');
 
             label = name[0].toLowerCase();
             marker = 'pin-s-' + label + '(' + obj.longitude + ',' + obj.latitude + ')';
@@ -242,20 +248,19 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
             }
 
             url = 'https://api.mapbox.com/styles/v1/' + style + '/static/'
-               + marker + '/' + coords + ',' + zoom + ',0/' + sizes;
+               + marker + '/' + coords + ',' + zoom + ',0/' + mapWidth + 'x' + mapHeight + '@2x';
 
             if (CONFIG.mapboxToken) {
                url += '?access_token=' + CONFIG.mapboxToken;
             }
          } else {
             coords = obj.latitude + ',' + obj.longitude;
-            sizes = sizes.replace(',', 'x');
 
             label = name[0].toUpperCase();
             marker = encodeURIComponent('color:gray|label:' + label + '|' + coords);
 
             url = 'https://maps.googleapis.com/maps/api/staticmap?center='
-               + coords + '&zoom=' + zoom + '&size=' + sizes + '&scale=2&maptype=roadmap&markers=' + marker;
+               + coords + '&zoom=' + zoom + '&size=' + mapWidth + 'x' + mapHeight + '&scale=2&maptype=roadmap&markers=' + marker;
 
             if (CONFIG.googleApiKey) {
                url += '&key=' + CONFIG.googleApiKey;
