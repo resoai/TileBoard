@@ -769,7 +769,7 @@ body {
 }
 
 .item-entity {
-   @entityTop: @entitySize / 2 + 5px;
+   @entityTop: (@entitySize / 2) + 5px;
    position: absolute;
    height: @entitySize;
    line-height: @entitySize;
@@ -829,7 +829,7 @@ body {
       max-width: 100%;
       padding: 0 7px;
       white-space: normal;
-      line-height: @entitySize / 3;
+      line-height: (@entitySize / 3);
       text-align: left;
    }
 }
@@ -846,7 +846,7 @@ body {
 
 .-small-entity {
    @smallEntitySize: 60px;
-   @smallEntityTop: @smallEntitySize / 2 + 5px;
+   @smallEntityTop: (@smallEntitySize / 2) + 5px;
 
    .item-entity {
       position: absolute;
@@ -914,7 +914,7 @@ body {
 
    &.-select .item-entity--value {
       font-size: 16px;
-      line-height: @smallEntitySize / 3;
+      line-height: (@smallEntitySize / 3);
    }
 
    .item-cover {
@@ -938,7 +938,7 @@ body {
    @smallEntitySize: 40px;
 
    .item-entity {
-      @smallEntityTop: @smallEntitySize / 2 + 0px;
+      @smallEntityTop: (@smallEntitySize / 2) + 0px;
       position: absolute;
       height: @smallEntitySize;
       line-height: @smallEntitySize;
@@ -1378,8 +1378,8 @@ camera_stream {
       position: absolute;
       left: 50%;
       top: 50%;
-      margin-left: -@alarmWidth / 2;
-      margin-top: -@alarmHeight / 2;
+      margin-left: (-@alarmWidth / 2);
+      margin-top: (-@alarmHeight / 2);
       z-index: 12;
       box-sizing: border-box;
       padding: 10px;
