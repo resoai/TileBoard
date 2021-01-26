@@ -46,7 +46,7 @@
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.1.0",
     "@types/angular": "^1.8.0",
-    "@types/hammerjs": "^2.0.36",
+    "@types/hammerjs": "^2.0.37",
     "@types/hls.js": "^0.13.3",
     "@types/lodash.mergewith": "^4.6.6",
     "babel-plugin-angularjs-annotate": "^0.10.0",
