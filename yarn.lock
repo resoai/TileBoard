@@ -5599,10 +5599,10 @@ rollup-plugin-serve@^1.1.0:
     mime ">=2.4.6"
     opener "1"
 
-rollup-plugin-styles@^3.14.0:
-  version "3.14.0"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-styles/-/rollup-plugin-styles-3.14.0.tgz#6535a3d920809b38f760e49317bfc65ef19de4cb"
-  integrity sha512-OG7laC49CgSx9Z289bDK2nVsseYlJ3V/A1CPOkZt+eJhkgY06x8oktGsP8g6qgVDROgKn6mTXGF5wykl05y4xQ==
+rollup-plugin-styles@^3.14.1:
+  version "3.14.1"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-styles/-/rollup-plugin-styles-3.14.1.tgz#8a9d13885ac5c82f513099f567b94cff9379728c"
+  integrity sha512-0JodP26O3WZ8320X3sBn5S2SOPv9Al2tLyOmLco+H2UqLjbmycM9KWGypLjcDuIEWwa0oLYiXpViMmO2yyeqIA==
   dependencies:
     "@rollup/pluginutils" "^4.1.0"
     "@types/cssnano" "^4.0.0"
