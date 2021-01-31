@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.3](https://github.com/resoai/TileBoard/compare/v2.1.2...v2.1.3) (2021-01-31)
+
+
+### Bug Fixes
+
+* update history tile's start date on state change ([#581](https://github.com/resoai/TileBoard/issues/581)) ([af1d878](https://github.com/resoai/TileBoard/commit/af1d878de37667512227ca381cfc2318e5a2533b))
+* **ci:** switch to latest version of release action ([46875cf](https://github.com/resoai/TileBoard/commit/46875cff8c6cf5f56716c8b503fe79c552495c56))
+* **styles:** Fix divisions in SCSS files after updating to less 4 ([71d7ff4](https://github.com/resoai/TileBoard/commit/71d7ff416b2d4f8544c3ad3a2951880c65ac7f59))
+
 ### [2.1.2](https://github.com/resoai/TileBoard/compare/v2.1.1...v2.1.2) (2020-11-30)
 
 
