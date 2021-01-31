@@ -1485,7 +1485,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
                // Create extra state with current value.
                dataset.push({
-                  x: Date.now(),
+                  x: new Date(),
                   y: $scope.states[firstStateInfo.entity_id].state,
                });
 
@@ -1567,29 +1567,50 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
                },
             }, $scope.itemField('options', config, entity));
 
+            // Delete old data
+            const deleteOldData = function () {
+               // Update start date
+               const newStartDate = new Date(Date.now() - ($scope.itemField('offset', config, entity) || day));
+
+               // Clean data older than new start date (done on all datasets)
+               for (let dataIndex = 0; dataIndex < historyObject.data.length; dataIndex++) {
+                  let cleaningFinished = false;
+                  while (!cleaningFinished && historyObject.data[dataIndex].length > 0) {
+                     const firstHistoryDate = historyObject.data[dataIndex][0].x;
+                     if (firstHistoryDate < newStartDate) {
+                        historyObject.data[dataIndex].shift();
+                     } else {
+                        cleaningFinished = true;
+                     }
+                  }
+               }
+            };
+
             // Add watchers to update data on the fly
             if (typeof entityId === 'string') {
-               historyObject.watchers.push($scope.$watch(
+               historyObject.watchers.push($scope.$watchCollection(
                   function () {
-                     return $scope.states[entityId].state;
+                     return [ $scope.states[entityId].state, $scope.states[entityId].last_updated ];
                   },
                   function (newValue) {
                      historyObject.data[0].push({
-                        x: Date.now(),
-                        y: newValue,
+                        x: new Date(),
+                        y: newValue[0],
                      });
+                     deleteOldData();
                   }));
             } else {
                entityId.forEach(function (entityId, index) {
-                  historyObject.watchers.push($scope.$watch(
+                  historyObject.watchers.push($scope.$watchCollection(
                      function () {
-                        return $scope.states[entityId].state;
+                        return [ $scope.states[entityId].state, $scope.states[entityId].last_updated ];
                      },
                      function (newValue) {
                         historyObject.data[index].push({
-                           x: Date.now(),
-                           y: newValue,
+                           x: new Date(),
+                           y: newValue[0],
                         });
+                        deleteOldData();
                      }));
                });
             }
