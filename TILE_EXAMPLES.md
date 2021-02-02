@@ -718,6 +718,7 @@ This is a custom tile which can be used for displaying values from different sen
 
 #### IMAGE
 ![IMAGE](images/tile-screenshots/IMAGE.png)<br>
+A QR code can be generated to easily share your WiFi with guests, using a generator like: https://www.qr-code-generator.com/solutions/wifi-qr-code/
 ```js
 {
    position: [0, 1],
