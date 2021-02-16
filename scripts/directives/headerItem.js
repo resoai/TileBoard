@@ -1,3 +1,5 @@
+import template from './headerItem.html';
+
 /**
  * @ngInject
  *
@@ -8,7 +10,7 @@ export default function () {
       restrict: 'AE',
       replace: false,
       scope: '=',
-      templateUrl: 'header-items.html',
+      template,
       link: function ($scope, $el, attrs) {},
    };
 }

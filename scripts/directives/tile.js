@@ -1,3 +1,5 @@
+import template from './tile.html';
+
 /**
  * @ngInject
  *
@@ -8,6 +10,6 @@ export default function () {
       restrict: 'AE',
       replace: false,
       scope: true,
-      templateUrl: 'tile.html',
+      template,
    };
 }

@@ -5,6 +5,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import copy from 'rollup-plugin-cpy';
 import del from 'rollup-plugin-delete';
 import emitEJS from 'rollup-plugin-emit-ejs';
+import html from 'rollup-plugin-html';
 import resolve from '@rollup/plugin-node-resolve';
 import serve from 'rollup-plugin-serve';
 import styles from 'rollup-plugin-styles';
@@ -64,7 +65,13 @@ const config = {
       resolve(),
       babel({
          babelHelpers: 'bundled',
-         exclude: 'node_modules/**',
+         exclude: [
+            'node_modules/**',
+            'scripts/directives/*.html',
+         ],
+      }),
+      html({
+         include: 'scripts/directives/*.html',
       }),
       styles({
          // Extract CSS into separate file (path specified through output.assetFileNames).
