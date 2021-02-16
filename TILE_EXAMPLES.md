@@ -593,7 +593,9 @@ This is a custom tile which can be used for displaying values from different sen
    id: 'group.weather',
    state: '&sensor.dark_sky_summary.state', // label with weather summary (e.g. Sunny)
    icon: '&sensor.dark_sky_icon.state',
-   //iconImage: '&sensor.dark_sky_icon.state', // use this one if you want to replace icon with image
+   // Use this one if you have an URL of the image to show.
+   //iconImage: '&sensor.dark_sky_icon.state',
+   // A map from sensor's state (key) to icon name (value).
    icons: {
       'clear-day': 'clear',
       'clear-night': 'nt-clear',

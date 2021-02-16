@@ -250,12 +250,14 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
    * You can use any of the material design icons from https://materialdesignicons.com/
    * as long as they have been published in the [latest npm package](https://github.com/templarian/materialdesign-svg).
    * Use an object or function to map states to icons
+   * Note: handling differs for Weather tile. See details in TILE_EXAMPLES.md#weather.
    */
   icons: {on: "mdi-volume-high", off: "mdi-volume-off"}, // Object example
   icons: function (item, entity) {return entity.attributes.icon}, // Function example
   /* icon: Set a static icon for a tile
    * You can use any of the material design icons from https://materialdesignicons.com/
    * as long as they have been published in the [latest npm package](https://github.com/templarian/materialdesign-svg).
+   * Note: handling differs for Weather tile. See details in TILE_EXAMPLES.md#weather.
    */
   icon: 'mdi-phone',
   /* customHtml: Replace the icon by a custom HTML content
