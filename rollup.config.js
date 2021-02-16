@@ -23,10 +23,16 @@ if (isProduction) {
 } else {
    outputJsName = 'app.js';
    outputCssName = 'styles[extname]';
-   appPlugins.push(serve({
-      contentBase: outDir,
-      port: 8080,
-   }));
+   appPlugins.push(
+      copy([
+         // Copy over empty custom.css but don't overwrite in case user has customized it.
+         { files: './styles/custom.css', dest: `./${outDir}/styles/`, options: { overwrite: false } },
+      ]),
+      serve({
+         contentBase: outDir,
+         port: 8080,
+      }),
+   );
 }
 
 /**  @type {import('rollup').RollupOptions} */
@@ -83,8 +89,6 @@ const config = {
          { files: './favicon.png', dest: `./${outDir}/` },
          { files: './manifest.webmanifest', dest: `./${outDir}/` },
          { files: './images/*.*', dest: `./${outDir}/images/` },
-         // Copy over empty custom.css but don't overwrite in case user has customized it.
-         { files: './styles/custom.css', dest: `./${outDir}/styles/`, options: { overwrite: false } },
       ]),
       ...appPlugins,
    ],
