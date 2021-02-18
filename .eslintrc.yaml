@@ -8,6 +8,7 @@ extends: 'eslint:recommended'
 ignorePatterns:
   - build/
   - scripts/vendors/
+  - sources/
   - config.example.js
 rules:
   array-callback-return: error
@@ -35,7 +36,7 @@ rules:
     - SwitchCase: 1
   key-spacing: error
   keyword-spacing: error
-  linebreak-style: error
+  # linebreak-style: error
   lines-between-class-members: error
   no-caller: error
   no-multi-spaces:

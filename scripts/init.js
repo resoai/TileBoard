@@ -4,6 +4,7 @@ import 'angular-hammer';
 import 'angular-chart.js';
 import 'angularjs-gauge';
 import 'angular-moment';
+import 'angular-dynamic-locale';
 import './vendors/color-picker';
 import { App } from './app';
 

@@ -51,6 +51,7 @@ const config = {
             `${outDir}/assets/`,
             `${outDir}/scripts/app*`,
             `${outDir}/styles/styles*`,
+            `${outDir}/sources/`,
          ],
       }),
       progress(),
@@ -83,6 +84,7 @@ const config = {
          { files: './favicon.png', dest: `./${outDir}/` },
          { files: './manifest.webmanifest', dest: `./${outDir}/` },
          { files: './images/*.*', dest: `./${outDir}/images/` },
+         { files: './sources/*.*', dest: `./${outDir}/sources/` },
          // Copy over empty custom.css but don't overwrite in case user has customized it.
          { files: './styles/custom.css', dest: `./${outDir}/styles/`, options: { overwrite: false } },
       ]),
