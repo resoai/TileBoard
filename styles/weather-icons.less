@@ -1,0 +1,25 @@
+/*https://github.com/manifestinteractive/weather-underground-icons*/
+
+@icon-sizes: 16, 32, 64, 128, 256;
+@icon-names: chanceflurries, chancerain, chancesleet, chancesnow, chancetstorms, clear, cloudy, flurries, fog, hazy, mostlycloudy, mostlysunny, partlycloudy, partlysunny, rain, sleet, snow, sunny, tstorms, unknown;
+@path: '../images/weather-icons/';
+
+.wu {
+   display: inline-block;
+   background-position: center center;
+   background-repeat: no-repeat;
+   padding: 0;
+   margin: 0;
+}
+
+/*! Setup Default Sizes */
+each(@icon-sizes, {
+   .wu-@{value} { width: unit(@value, px); height: unit(@value, px); }
+})
+
+each(@icon-names, {
+   .wu-@{value} { background-image: url('@{path}white/@{value}.svg') }
+   .wu-nt-@{value} { background-image: url('@{path}white/nt_@{value}.svg') }
+   .wu-dark-@{value} { background-image: url('@{path}black/@{value}.svg') }
+   .wu-dark-nt-@{value} { background-image: url('@{path}black/nt_@{value}.svg') }
+})

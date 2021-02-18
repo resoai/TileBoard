@@ -592,8 +592,38 @@ This is a custom tile which can be used for displaying values from different sen
    type: TYPES.WEATHER,
    id: 'group.weather',
    state: '&sensor.dark_sky_summary.state', // label with weather summary (e.g. Sunny)
+   // Resolved value must either match one of the supported icons or be mapped
+   // to one using the 'icons' option. See the 'icons' option for more information.
    icon: '&sensor.dark_sky_icon.state',
-   //iconImage: '&sensor.dark_sky_icon.state', // use this one if you want to replace icon with image
+   // Use this one if you have an URL of the image to show.
+   //iconImage: '&sensor.dark_sky_icon.state',
+   // A map from sensor's state (key) to icon name (value).
+   // The value must match the format:
+   //   [dark-][nt-]icon_name
+   // where dark- (optional) selects the dark version of the icon,
+   // and nt- (optional) selects the night version of the icon and the icon_name can be one of:
+   //   chanceflurries
+   //   chancerain
+   //   chancesleet
+   //   chancesnow
+   //   chancetstorms
+   //   clear
+   //   cloudy
+   //   flurries
+   //   fog
+   //   hazy
+   //   mostlycloudy
+   //   mostlysunny
+   //   partlycloudy
+   //   partlysunny
+   //   rain
+   //   sleet
+   //   snow
+   //   sunny
+   //   tstorms
+   //   unknown
+   // So for example, to map 'cloudy-night' sensor value to a respective icon, set the value to
+   // 'nt-cloudy' (for light icon) or 'dark-nt-cloudy' (for dark icon).
    icons: {
       'clear-day': 'clear',
       'clear-night': 'nt-clear',

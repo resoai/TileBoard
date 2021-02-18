@@ -1,0 +1,34 @@
+<div class="header-item" ng-class="'-' + item.type" ng-style="item.styles" ng-if="!isHidden(item,{})">
+   <div ng-if="item.type === HEADER_ITEMS.TIME">
+      <clock></clock>
+   </div>
+   <div ng-if="item.type === HEADER_ITEMS.DATE">
+      <date format="item.dateFormat || item.format"></date>
+   </div>
+   <div ng-if="item.type === HEADER_ITEMS.DATETIME">
+      <clock></clock>
+      <date format="item.dateFormat"></date>
+   </div>
+   <div ng-if="item.type === HEADER_ITEMS.CUSTOM_HTML">
+      <div ng-bind-html="item.html"></div>
+   </div>
+   <div ng-if="item.type === HEADER_ITEMS.WEATHER">
+      <div class="header-weather--icon-container">
+         <div class="header-weather--icon" ng-if="(_icon = getWeatherIcon(item, {}))">
+            <div class="wu " ng-class="'wu-' + _icon"></div>
+         </div>
+         <div class="header-weather--icon-image" ng-if="(_imgStyles = getWeatherImageStyles(item, {}))">
+            <div ng-style="_imgStyles"></div>
+         </div>
+      </div>
+
+      <div class="header-weather--temperature" ng-if="item.fields.temperature">
+         <span ng-bind="getWeatherField('temperature', item, {})"></span>
+         <span ng-bind="getWeatherField('temperatureUnit', item, {})"></span>
+      </div>
+
+      <div class="header-weather--summary" ng-if="item.fields.summary">
+         <span ng-bind="getWeatherField('summary', item, {})"></span>
+      </div>
+   </div>
+</div>

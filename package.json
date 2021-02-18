@@ -60,6 +60,7 @@
     "rollup-plugin-cpy": "^2.0.1",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-emit-ejs": "^3.1.0",
+    "rollup-plugin-html": "^0.2.1",
     "rollup-plugin-progress": "^1.1.2",
     "rollup-plugin-serve": "^1.1.0",
     "rollup-plugin-styles": "^3.14.1",
