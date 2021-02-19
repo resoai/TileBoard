@@ -6,7 +6,6 @@
  Make sure you use real IDs from your HA entities.
 */
 
-
 var CONFIG = {
    customTheme: null, // CUSTOM_THEMES.TRANSPARENT, CUSTOM_THEMES.MATERIAL, CUSTOM_THEMES.MOBILE, CUSTOM_THEMES.COMPACT, CUSTOM_THEMES.HOMEKIT, CUSTOM_THEMES.WINPHONE, CUSTOM_THEMES.WIN95
    transition: TRANSITIONS.ANIMATED_GPU, //ANIMATED or SIMPLE (better perfomance)
@@ -20,7 +19,7 @@ var CONFIG = {
    //mapboxToken: "XXXXXXXXXX", // Required if you are using Mapbox for device tracker
    debug: false, // Prints entities and state change info to the console.
    pingConnection: true, //ping connection to prevent silent disconnections
-   locale: 'it', // available locales: it, de, es, fr, pt, ru, en (default) - more languages adding angular_locale files in sources
+   locale: 'en', // available locales: it, de, es, fr, pt, ru, en, pl, nl (default) - more languages adding angular_locale files in sources
    // next fields are optional
    events: [],
    timeFormat: 24,
