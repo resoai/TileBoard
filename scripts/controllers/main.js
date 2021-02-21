@@ -501,7 +501,12 @@ App.controller('Main', function ($scope, $timeout, $location, Api) {
 
       if (typeof item.state !== 'undefined') {
          if (typeof item.state === 'string') {
-            return parseString(item.state, entity);
+            const s = parseString(item.state, entity);
+            if (typeof item.states === 'object') {
+               return item.states[s] || s;
+            } else {
+               return s;
+            }
          } else if (typeof item.state === 'function') {
             return callFunction(item.state, [item, entity]);
          } else {

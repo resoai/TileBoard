@@ -27,8 +27,7 @@
          <span ng-bind="getWeatherField('temperatureUnit', item, {})"></span>
       </div>
 
-      <div class="header-weather--summary" ng-if="item.fields.summary">
-         <span ng-bind="getWeatherField('summary', item, {})"></span>
-      </div>
-   </div>
+      <div class="header-weather--state"  ng-if="(_state = entityState(item, entity))">
+         <span ng-bind="_state"></span>         
+     </div>      
 </div>

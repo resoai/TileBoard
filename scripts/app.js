@@ -7,7 +7,7 @@ export const App = angular.module('App', ['hmTouchEvents', 'colorpicker', 'angul
          locale = window.CONFIG.locale.toLowerCase();
       }
       // check if available language else default to english
-      const locales = ['it', 'fr', 'es', 'de', 'pt', 'pl', 'nl', 'ru'];
+      const locales = ['it', 'fr', 'es', 'de', 'pt', 'pl', 'nl', 'ru', 'en'];
       if (locales.includes(locale)) {
          tmhDynamicLocaleProvider.localeLocationPattern('/sources/angular-locale_{{locale}}.js').defaultLocale(locale);
       }
