@@ -58,6 +58,7 @@ const config = {
             `${outDir}/assets/`,
             `${outDir}/scripts/app*`,
             `${outDir}/styles/styles*`,
+            `${outDir}/locales/`,
          ],
       }),
       progress(),
