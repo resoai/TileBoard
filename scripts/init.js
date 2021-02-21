@@ -32,8 +32,7 @@ window.initApp = function () {
          authToken: window.CONFIG.authToken,
       });
 
-      const locale = (window.CONFIG.locale || 'en-us').toLowerCase();
-      tmhDynamicLocaleProvider.localeLocationPattern('/locales/angular-locale_{{locale}}.js').defaultLocale(locale);
+      tmhDynamicLocaleProvider.localeLocationPattern('/locales/angular-locale_{{locale}}.js');
 
       const clock24 = window.CONFIG.timeFormat === 24;
 

@@ -6,12 +6,17 @@ import { TYPES, FEATURES, HEADER_ITEMS, MENU_POSITIONS, GROUP_ALIGNS, TRANSITION
 import { debounce, leadZero, supportsFeature, toAbsoluteServerURL } from '../globals/utils';
 import Noty from '../models/noty';
 
-App.controller('Main', function ($scope, $timeout, $location, Api) {
+App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLocale) {
    if (!window.CONFIG) {
       return;
    }
 
    const CONFIG = window.CONFIG;
+
+   const locale = (CONFIG.locale || 'en-us').toLowerCase();
+   tmhDynamicLocale.set(locale).catch(() => {
+      Noty.add(Noty.ERROR, 'Failed loading locale', `Could not find corresponding file for locale "${locale}" in the /locales/ directory.`);
+   });
 
    $scope.pages = mergeConfigDefaults(CONFIG.pages);
    $scope.pagesContainerStyles = {};
