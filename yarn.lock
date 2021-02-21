@@ -925,15 +925,10 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
-"@types/angular@^1.6.25":
+"@types/angular@^1.6.25", "@types/angular@^1.8.1":
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/@types/angular/-/angular-1.8.1.tgz#940b16476adff7b66608aae778e5e9f1c57ab847"
   integrity sha512-8zEjTC3gpkva6/dbUkiSxIUGUxYm9HD/pJJ0lbqfEM2TWqi/3vs4VtgoFxVXt5bmuJ+6G2caO2HaMD+NzB1VwA==
-
-"@types/angular@^1.8.0":
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/@types/angular/-/angular-1.8.0.tgz#6bce6f21d69f9dfa45e3e3dd76f723496b12c32c"
-  integrity sha512-tF4Ulq9GC54wKboxfvt91tkfJNGcFWEfkuptX5HCNVt4emwJQqWloCpUzepyKLjpKSIEOZaxupb/GX2ESwz3wQ==
 
 "@types/cssnano@^4.0.0":
   version "4.0.0"
