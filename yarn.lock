@@ -918,6 +918,11 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
+"@types/angular@^1.6.25":
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/@types/angular/-/angular-1.8.1.tgz#940b16476adff7b66608aae778e5e9f1c57ab847"
+  integrity sha512-8zEjTC3gpkva6/dbUkiSxIUGUxYm9HD/pJJ0lbqfEM2TWqi/3vs4VtgoFxVXt5bmuJ+6G2caO2HaMD+NzB1VwA==
+
 "@types/angular@^1.8.0":
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/@types/angular/-/angular-1.8.0.tgz#6bce6f21d69f9dfa45e3e3dd76f723496b12c32c"
@@ -1086,6 +1091,13 @@ angular-chart.js@^1.1.1:
     angular "1.x"
     chart.js "2.3.x"
 
+angular-dynamic-locale@^0.1.37:
+  version "0.1.37"
+  resolved "https://registry.yarnpkg.com/angular-dynamic-locale/-/angular-dynamic-locale-0.1.37.tgz#7e89fbd2ec45bdd6abc89f36cda8893838e49354"
+  integrity sha512-m5Kyk8W8/mOZSqRxuByOwHBjv8labLBAgvl0Z3iQx2xT/tWCqb94imKUPwumudszdPDjxeopwyucQvm8Sw7ogw==
+  dependencies:
+    "@types/angular" "^1.6.25"
+
 angular-hammer@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/angular-hammer/-/angular-hammer-2.2.0.tgz#12ffbb3fc2f9719c780ba332c905ac8fca4592e0"
@@ -1093,6 +1105,11 @@ angular-hammer@^2.2.0:
   dependencies:
     angular ">=1.2.0"
     hammerjs ">=2.0.0"
+
+angular-i18n@^1.8.2:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/angular-i18n/-/angular-i18n-1.8.2.tgz#eeeaef6e065d60759c03986397b37a87cbcbea33"
+  integrity sha512-IVXiWS0fWLnDPTy5z/iO/mVATE3/Eyj0aHEUrhSro8Dxtsv0iw6RLBATkawl4z7AZPX3eN6pqScd5dg56m0dpA==
 
 angular-moment@^1.3.0:
   version "1.3.0"

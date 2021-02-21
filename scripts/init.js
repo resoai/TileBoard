@@ -4,6 +4,7 @@ import 'angular-hammer';
 import 'angular-chart.js';
 import 'angularjs-gauge';
 import 'angular-moment';
+import 'angular-dynamic-locale';
 import './vendors/color-picker';
 import { App } from './app';
 
@@ -14,7 +15,7 @@ window.initApp = function () {
       angular.bootstrap(document, [App.name]);
    });
 
-   App.config(function ($sceProvider, $locationProvider, ApiProvider, ChartJsProvider) {
+   App.config(function ($sceProvider, $locationProvider, ApiProvider, ChartJsProvider, tmhDynamicLocaleProvider) {
       $sceProvider.enabled(false);
 
       $locationProvider.html5Mode({
@@ -30,6 +31,8 @@ window.initApp = function () {
          wsUrl: window.CONFIG.wsUrl,
          authToken: window.CONFIG.authToken,
       });
+
+      tmhDynamicLocaleProvider.localeLocationPattern('./locales/angular-locale_{{locale}}.js');
 
       const clock24 = window.CONFIG.timeFormat === 24;
 

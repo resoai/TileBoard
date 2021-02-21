@@ -11,6 +11,8 @@ import serve from 'rollup-plugin-serve';
 import styles from 'rollup-plugin-styles';
 import { terser } from 'rollup-plugin-terser';
 
+const BUNDLED_LOCALES = ['de', 'en-gb', 'en-us', 'es', 'fr', 'it', 'nl', 'pl', 'pt', 'ru'];
+
 const isProduction = process.env.PRODUCTION === 'true';
 const outDir = 'build';
 let outputJsName = '';
@@ -58,6 +60,7 @@ const config = {
             `${outDir}/assets/`,
             `${outDir}/scripts/app*`,
             `${outDir}/styles/styles*`,
+            `${outDir}/locales/`,
          ],
       }),
       progress(),
@@ -96,6 +99,7 @@ const config = {
          { files: './favicon.png', dest: `./${outDir}/` },
          { files: './manifest.webmanifest', dest: `./${outDir}/` },
          { files: './images/*.*', dest: `./${outDir}/images/` },
+         { files: `./node_modules/angular-i18n/angular-locale_(${BUNDLED_LOCALES.join('|')}).js`, dest: `./${outDir}/locales/` },
       ]),
       ...appPlugins,
    ],

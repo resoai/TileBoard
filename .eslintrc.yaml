@@ -8,6 +8,7 @@ extends: 'eslint:recommended'
 ignorePatterns:
   - build/
   - scripts/vendors/
+  - locales/
   - config.example.js
 rules:
   array-callback-return: error
