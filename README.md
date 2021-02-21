@@ -75,9 +75,9 @@ var CONFIG = {
     */
    pingConnection: true,
    /* locale: locale used for date and number formats - available locales: it, de, es, fr, pt, ru, nl, pl, en (default).
-    * The system use localization files from the package angular-i18n. 
-    * You can add your locale if it is not included adding the corresponding file from the angular-i18n package into the 'locales' folder.
-    * */
+    * The system uses localization files from the package angular-i18n. 
+    * You can add your locale if it is not included already by adding the corresponding file from the angular-i18n package into the 'locales' folder.
+    */
    locale: 'en',
    /* debug: Toggle for extra debugging information.
     * If enabled, will print info about state changes and entities to console.
