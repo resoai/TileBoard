@@ -13,10 +13,20 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
 
    const CONFIG = window.CONFIG;
 
+   // Load locale and update ChartJS date display formats.
    const locale = (CONFIG.locale || 'en-us').toLowerCase();
-   tmhDynamicLocale.set(locale).catch(() => {
-      Noty.add(Noty.ERROR, 'Failed loading locale', `Could not find corresponding file for locale "${locale}" in the /locales/ directory.`);
-   });
+   tmhDynamicLocale.set(locale)
+      .then(localeData => {
+         angular.merge(window.Chart.defaults.line.scales.xAxes[0].time.displayFormats, {
+            datetime: localeData.DATETIME_FORMATS.medium,
+            hour: localeData.DATETIME_FORMATS.shortTime,
+            minute: localeData.DATETIME_FORMATS.shortTime,
+            second: localeData.DATETIME_FORMATS.mediumTime,
+         });
+      })
+      .catch(() => {
+         Noty.add(Noty.ERROR, 'Failed loading locale', `Could not find corresponding file for locale "${locale}" in the /locales/ directory.`);
+      });
 
    $scope.pages = mergeConfigDefaults(CONFIG.pages);
    $scope.pagesContainerStyles = {};
