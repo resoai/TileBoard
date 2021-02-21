@@ -15,7 +15,7 @@ window.initApp = function () {
       angular.bootstrap(document, [App.name]);
    });
 
-   App.config(function ($sceProvider, $locationProvider, ApiProvider, ChartJsProvider) {
+   App.config(function ($sceProvider, $locationProvider, ApiProvider, ChartJsProvider, tmhDynamicLocaleProvider) {
       $sceProvider.enabled(false);
 
       $locationProvider.html5Mode({
@@ -31,6 +31,16 @@ window.initApp = function () {
          wsUrl: window.CONFIG.wsUrl,
          authToken: window.CONFIG.authToken,
       });
+
+      let locale = 'en';
+      if (window.CONFIG.locale !== null && window.CONFIG.locale !== undefined) {
+         locale = window.CONFIG.locale.toLowerCase();
+      }
+      // check if available language else default to english
+      const locales = ['it', 'fr', 'es', 'de', 'pt', 'pl', 'nl', 'ru', 'en'];
+      if (locales.includes(locale)) {
+         tmhDynamicLocaleProvider.localeLocationPattern('/locales/angular-locale_{{locale}}.js').defaultLocale(locale);
+      }
 
       const clock24 = window.CONFIG.timeFormat === 24;
 
