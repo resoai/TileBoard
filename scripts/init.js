@@ -36,11 +36,7 @@ window.initApp = function () {
       if (window.CONFIG.locale !== null && window.CONFIG.locale !== undefined) {
          locale = window.CONFIG.locale.toLowerCase();
       }
-      // check if available language else default to english
-      const locales = ['it', 'fr', 'es', 'de', 'pt', 'pl', 'nl', 'ru', 'en'];
-      if (locales.includes(locale)) {
-         tmhDynamicLocaleProvider.localeLocationPattern('/locales/angular-locale_{{locale}}.js').defaultLocale(locale);
-      }
+      tmhDynamicLocaleProvider.localeLocationPattern('/locales/angular-locale_{{locale}}.js').defaultLocale(locale);
 
       const clock24 = window.CONFIG.timeFormat === 24;
 
