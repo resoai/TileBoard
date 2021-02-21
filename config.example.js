@@ -206,9 +206,9 @@ var CONFIG = {
             },
 
             {
-               title: '',
+               title: 'My City',
                width: 1,
-               height: 3,
+               height: 2,
                items: [
                   {
                      // please read README.md for more information
@@ -218,19 +218,51 @@ var CONFIG = {
                      //classes: ['-compact'],
                      type: TYPES.WEATHER,
                      id: {},
-                     state: function () {return 'Sunny'}, // https://github.com/resoai/TileBoard/wiki/Anonymous-functions
-                     icon: 'clear-day',
-                     icons: { 'clear-day': 'clear'},
+                     state: function () {return 'Clear, night'}, // https://github.com/resoai/TileBoard/wiki/Anonymous-functions
+                     icon: 'clear-night',
+                     icons: {
+                        'clear-night': 'nt-clear',
+                        'cloudy': 'cloudy',
+                        'exceptional': 'sunny',
+                        'fog': 'fog',
+                        'hail': 'sleet',
+                        'lightning': 'chancestorms',
+                        'lightning-rainy': 'tstorms',
+                        'partlycloudy': 'partlycloudy',
+                        'pouring': 'rain',
+                        'rainy': 'chancerain',
+                        "snowy": 'snow',
+                        'snowy-rainy': 'sleet',
+                        'sunny': 'sunny',
+                        'windy': 'hazy',
+                        'windy-variant': 'flurries'
+                     },
+                     states: {
+                        "clear-night": "Clear, night",
+                        "cloudy": "Cloudy",
+                        "exceptional": "Exceptional",
+                        "fog": "Fog",
+                        "hail": "Hail",
+                        "lightning": "Lightning",
+                        "lightning-rainy": "Lightning, rainy",
+                        "partlycloudy": "Partly cloudy",
+                        "pouring": "Pouring",
+                        "rainy": "Rainy",
+                        "snowy": "Snowy",
+                        "snowy-rainy": "Snowy, rainy",
+                        "sunny": "Sunny",
+                        "windy": "Windy",
+                        "windy-variant": "Windy"
+                     }
                      fields: {
-                        summary: 'Sunny',
                         temperature: '18',
-                        temperatureUnit: 'C',
+                        temperatureUnit: '°C',
                         windSpeed: '5',
-                        windSpeedUnit: 'kmh',
+                        windSpeedUnit: 'Kmh',
                         humidity: '50',
                         humidityUnit: '%',
                         list: [
-                           'Feels like 16 C'
+                           'Feels like 16 °C'
                            /*
                            'Feels like '
                               + '&sensor.dark_sky_apparent_temperature.state'
