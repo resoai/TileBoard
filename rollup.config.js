@@ -11,7 +11,7 @@ import serve from 'rollup-plugin-serve';
 import styles from 'rollup-plugin-styles';
 import { terser } from 'rollup-plugin-terser';
 
-const BUNDLED_LOCALES = ['de', 'en', 'es', 'fr', 'it', 'nl', 'pl', 'pt', 'ru'];
+const BUNDLED_LOCALES = ['de', 'en-gb', 'en-us', 'es', 'fr', 'it', 'nl', 'pl', 'pt', 'ru'];
 
 const isProduction = process.env.PRODUCTION === 'true';
 const outDir = 'build';

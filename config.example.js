@@ -19,7 +19,7 @@ var CONFIG = {
    //mapboxToken: "XXXXXXXXXX", // Required if you are using Mapbox for device tracker
    debug: false, // Prints entities and state change info to the console.
    pingConnection: true, //ping connection to prevent silent disconnections
-   locale: 'en', // locale for date and number formats - available locales: it, de, es, fr, pt, ru, nl, pl, en (default). See readme on adding custom locales.
+   locale: 'en-us', // locale for date and number formats - available locales: it, de, es, fr, pt, ru, nl, pl, en-gb, en-us (default). See readme on adding custom locales.
    // next fields are optional
    events: [],
    timeFormat: 24,
