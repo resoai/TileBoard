@@ -1,51 +1,33 @@
-import { leadZero } from '../globals/utils';
-
 /**
  * @ngInject
  *
  * @type {angular.IDirectiveFactory}
+ * @param {angular.IFilterService} $filter
  */
-export default function ($interval) {
+export default function ($filter) {
    return {
-      restrict: 'AE',
-      replace: true,
-      link: function ($scope, $el, attrs) {
-         const $m = document.createElement('div');
-         const $h = document.createElement('div');
-         const $colon = document.createElement('div');
-         const $postfix = document.createElement('div');
-
-         $m.classList.add('clock--m');
-         $h.classList.add('clock--h');
-
-         $postfix.classList.add('clock--postfix');
-
-         $colon.classList.add('clock--colon');
-         $colon.textContent = ':';
+      restrict: 'E',
+      template: `
+         <div class="clock--h">{{ hour }}</div
+         ><div class="clock--colon">:</div
+         ><div class="clock--m">{{ minute }}</div
+         ><div class="clock--postfix">{{ postfix }}</div>
+      `,
+      link ($scope, $el, attrs) {
+         const children = $el.children();
+         const hourEl = children[0];
+         const minuteEl = children[2];
+         const postfixEl = children[3];
 
          const updateTime = function () {
-            const d = new Date();
-            let h = d.getHours();
-            const m = d.getMinutes();
-            let postfix = '';
+            const localeTime = $filter('date')(Date.now(), 'shortTime');
+            const [hour, remainder] = localeTime.split(':');
+            const [minute, postfix] = remainder.split(' ');
 
-            if (window.CONFIG.timeFormat === 12) {
-               postfix = h >= 12 ? 'PM' : 'AM';
-
-               h = h % 12 || 12;
-            } else {
-               h = leadZero(h);
-            }
-
-            $h.textContent = h;
-            $m.textContent = leadZero(m);
-            $postfix.textContent = postfix;
+            hourEl.textContent = hour;
+            minuteEl.textContent = minute;
+            postfixEl.textContent = postfix;
          };
-
-         $el[0].appendChild($h);
-         $el[0].appendChild($colon);
-         $el[0].appendChild($m);
-         $el[0].appendChild($postfix);
 
          updateTime();
 
