@@ -304,17 +304,19 @@
       </div>
    </div>
 
-   <div ng-if="item.type === TYPES.SLIDER"
+   <div ng-if="item.type === TYPES.SLIDER && (_c = getSliderConf(item, entity))"
         class="item-entity-container" ng-class="{'-slider-bottom': item.bottom}">
 
       <div class="item-entity">
-         <span ng-bind="entityValue(item, entity)"
+         <!-- <span ng-bind="entityValue(item, entity)"
+               class="item-entity--value"></span> -->
+         <span ng-bind="getSliderValue(item, entity, _c)" 
                class="item-entity--value"></span>
          <span ng-if="(_unit = entityUnit(item, entity))"
                class="item-entity--unit" ng-bind="_unit"></span>
       </div>
 
-      <div class="item-slider" ng-if="(_c = getSliderConf(item, entity))">
+      <div class="item-slider" >
          <input type="range"
                 ng-model="_c.getSetValue"
                 ng-model-options="{ getterSetter: true }"
