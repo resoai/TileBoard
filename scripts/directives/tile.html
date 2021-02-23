@@ -308,15 +308,13 @@
         class="item-entity-container" ng-class="{'-slider-bottom': item.bottom}">
 
       <div class="item-entity">
-         <!-- <span ng-bind="entityValue(item, entity)"
-               class="item-entity--value"></span> -->
-         <span ng-bind="getSliderValue(item, entity, _c)" 
+         <span ng-bind="getSliderValue(item, entity, _c)"
                class="item-entity--value"></span>
          <span ng-if="(_unit = entityUnit(item, entity))"
                class="item-entity--unit" ng-bind="_unit"></span>
       </div>
 
-      <div class="item-slider" >
+      <div class="item-slider">
          <input type="range"
                 ng-model="_c.getSetValue"
                 ng-model-options="{ getterSetter: true }"
