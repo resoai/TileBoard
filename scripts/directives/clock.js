@@ -14,10 +14,9 @@ export default function ($filter) {
          ><div class="clock--postfix">{{ postfix }}</div>
       `,
       link ($scope, $el, attrs) {
-         const children = $el.children();
-         const hourEl = children[0];
-         const minuteEl = children[2];
-         const postfixEl = children[3];
+         const hourEl = $el[0].querySelector('.clock--h');
+         const minuteEl = $el[0].querySelector('.clock--m');
+         const postfixEl = $el[0].querySelector('.clock--postfix');
 
          const updateTime = function () {
             const localeTime = $filter('date')(Date.now(), 'shortTime');
