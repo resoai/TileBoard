@@ -408,6 +408,10 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
       return group.styles;
    };
 
+   $scope.tileSize = function (page) {
+      return page.tileSize || CONFIG.tileSize;
+   };
+
    $scope.itemStyles = function (page, item, entity) {
       const prevSize = item._prevTileSize || page.tileSize || CONFIG.tileSize;
       const currentSize = page.tileSize || CONFIG.tileSize;
@@ -506,7 +510,12 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
 
       if (typeof item.state !== 'undefined') {
          if (typeof item.state === 'string') {
-            return parseString(item.state, entity);
+            const s = parseString(item.state, entity);
+            if (typeof item.states === 'object') {
+               return item.states[s] || s;
+            } else {
+               return s;
+            }
          } else if (typeof item.state === 'function') {
             return callFunction(item.state, [item, entity]);
          } else {

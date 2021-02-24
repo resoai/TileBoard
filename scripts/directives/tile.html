@@ -370,20 +370,34 @@
             </span>
          </div>
 
-         <div class="weather-line -items">
+         <div class="weather-line -items" ng-if="(tileSize(page) >= 140)">
             <span ng-if="item.fields.humidity" class="weather-item">
                <i class="mdi mdi-water"></i>
-               <span ng-bind="getWeatherField('humidity', item, entity)"></span><!--
-            --><span ng-bind="getWeatherField('humidityUnit', item, entity)"></span>
+               <span ng-bind="getWeatherField('humidity', item, entity)"></span>
+               <span ng-bind="getWeatherField('humidityUnit', item, entity)"></span>
             </span>
-
             <span ng-if="item.fields.windSpeed" class="weather-item">
                <i class="mdi mdi-weather-windy"></i>
-               <span ng-bind="getWeatherField('windSpeed', item, entity)"></span><!--
-            --><span ng-bind="getWeatherField('windSpeedUnit', item, entity)"></span>
+               <span ng-bind="getWeatherField('windSpeed', item, entity)"></span>
+               <span ng-bind="getWeatherField('windSpeedUnit', item, entity)"></span>
             </span>
          </div>
 
+         <div class="weather-line -items" ng-if="(tileSize(page) < 140)">
+            <span ng-if="item.fields.humidity" class="weather-item">
+               <i class="mdi mdi-water"></i>
+               <span ng-bind="getWeatherField('humidity', item, entity)"></span>
+               <span ng-bind="getWeatherField('humidityUnit', item, entity)"></span>
+            </span>
+         </div>
+         <div class="weather-line -items" ng-if="(tileSize(page) < 140)">
+            <span ng-if="item.fields.windSpeed" class="weather-item">
+               <i class="mdi mdi-weather-windy"></i>
+               <span ng-bind="getWeatherField('windSpeed', item, entity)"></span>
+               <span ng-bind="getWeatherField('windSpeedUnit', item, entity)"></span>
+            </span>
+         </div>
+      
          <div class="weather-line" ng-repeat="line in item.fields.list">
             <span ng-bind="getWeatherLine(line, item, entity)"></span>
          </div>
