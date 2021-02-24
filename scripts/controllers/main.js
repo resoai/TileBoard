@@ -882,6 +882,20 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
       return initSliderConf(item, entity, { }, DEFAULT_VOLUME_SLIDER_OPTIONS);
    };
 
+   $scope.getSliderValue = function (item, entity, conf) {
+      let value = conf.value;
+
+      if (item.slider.formatValue) {
+         value = item.slider.formatValue(conf);
+      }
+
+      if (typeof item.filter === 'function') {
+         return callFunction(item.filter, [value, item, entity]);
+      }
+
+      return value;
+   };
+
    $scope.getLightSliderValue = function (slider, conf) {
       if (slider.formatValue) {
          return slider.formatValue(conf);
