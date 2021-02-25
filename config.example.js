@@ -48,7 +48,7 @@ var CONFIG = {
               icons: {
                  'clear-night': 'nt-clear',
                  'cloudy': 'cloudy',
-                 'exceptional': 'sunny',
+                 'exceptional': 'fog',
                  'fog': 'fog',
                  'hail': 'sleet',
                  'lightning': 'chancestorms',
