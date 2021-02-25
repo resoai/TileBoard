@@ -408,8 +408,12 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
       return group.styles;
    };
 
-   $scope.tileSize = function (page) {
-      return page.tileSize || CONFIG.tileSize;
+   $scope.effectiveTileSize = function (page, item) {
+      const tileSize = page.tileSize || CONFIG.tileSize;
+      return {
+         height: (item.height || 1) * tileSize,
+         width: (item.width || 1) * tileSize,
+      };
    };
 
    $scope.itemStyles = function (page, item, entity) {
@@ -510,11 +514,11 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
 
       if (typeof item.state !== 'undefined') {
          if (typeof item.state === 'string') {
-            const s = parseString(item.state, entity);
-            if (typeof item.states === 'object') {
-               return item.states[s] || s;
+            const state = parseString(item.state, entity);
+            if (typeof item.states === 'object' && item.states !== null) {
+               return item.states[state] || state;
             } else {
-               return s;
+               return state;
             }
          } else if (typeof item.state === 'function') {
             return callFunction(item.state, [item, entity]);
