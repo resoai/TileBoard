@@ -37,53 +37,53 @@ var CONFIG = {
          {
             type: HEADER_ITEMS.CUSTOM_HTML,
             html: 'MyCity'
-          },
-          {
-              type: HEADER_ITEMS.WEATHER,
-              styles: {
-                 margin: '0 0 0'
-              },
-              icon: '&weather.mycity.state',
-              state: '&weather.mycity.state',
-              icons: {
-                 'clear-night': 'nt-clear',
-                 'cloudy': 'cloudy',
-                 'exceptional': 'fog',
-                 'fog': 'fog',
-                 'hail': 'sleet',
-                 'lightning': 'chancestorms',
-                 'lightning-rainy': 'tstorms',
-                 'partlycloudy': 'partlycloudy',
-                 'pouring': 'rain',
-                 'rainy': 'chancerain',
-                 "snowy": 'snow',
-                 'snowy-rainy': 'sleet',
-                 'sunny': 'sunny',
-                 'windy': 'hazy',
-                 'windy-variant': 'flurries'
-              },
-              states: {
-               "clear-night": "Clear, night",
-               "cloudy": "Cloudy",
-               "exceptional": "Exceptional",
-               "fog": "Fog",
-               "hail": "Hail",
-               "lightning": "Lightning",
-               "lightning-rainy": "Lightning, rainy",
-               "partlycloudy": "Partly cloudy",
-               "pouring": "Pouring",
-               "rainy": "Rainy",
-               "snowy": "Snowy",
-               "snowy-rainy": "Snowy, rainy",
-               "sunny": "Sunny",
-               "windy": "Windy",
-               "windy-variant": "Windy"
-              },
-              fields: {
-                 temperature: '&weather.mycity.attributes.temperature',
-                 temperatureUnit: '°C',
-              }
-          }         
+         },
+         {
+            type: HEADER_ITEMS.WEATHER,
+            styles: {
+               margin: '0'
+            },
+            icon: '&weather.mycity.state',
+            state: '&weather.mycity.state',
+            icons: {
+               'clear-night': 'nt-clear',
+               'cloudy': 'cloudy',
+               'exceptional': 'fog',
+               'fog': 'fog',
+               'hail': 'sleet',
+               'lightning': 'chancestorms',
+               'lightning-rainy': 'tstorms',
+               'partlycloudy': 'partlycloudy',
+               'pouring': 'rain',
+               'rainy': 'chancerain',
+               'snowy': 'snow',
+               'snowy-rainy': 'sleet',
+               'sunny': 'sunny',
+               'windy': 'hazy',
+               'windy-variant': 'flurries'
+            },
+            states: {
+               'clear-night': 'Clear, night',
+               'cloudy': 'Cloudy',
+               'exceptional': 'Exceptional',
+               'fog': 'Fog',
+               'hail': 'Hail',
+               'lightning': 'Lightning',
+               'lightning-rainy': 'Lightning, rainy',
+               'partlycloudy': 'Partly cloudy',
+               'pouring': 'Pouring',
+               'rainy': 'Rainy',
+               'snowy': 'Snowy',
+               'snowy-rainy': 'Snowy, rainy',
+               'sunny': 'Sunny',
+               'windy': 'Windy',
+               'windy-variant': 'Windy'
+            },
+            fields: {
+               temperature: '&weather.mycity.attributes.temperature',
+               temperatureUnit: '°C',
+            }
+          }
       ],
       left: [
          {
@@ -94,13 +94,13 @@ var CONFIG = {
             type: HEADER_ITEMS.DATETIME,
             dateFormat: 'EEEE, dd LLLL', //https://docs.angularjs.org/api/ng/filter/date
          },
-          // {
-          //    type: HEADER_ITEMS.DATE,
-          //    dateFormat: 'EEEE, LLLL dd', //https://docs.angularjs.org/api/ng/filter/date
-          // },
-          // {
-          //    type: HEADER_ITEMS.TIME,
-          // },
+         // {
+         //    type: HEADER_ITEMS.DATE,
+         //    dateFormat: 'EEEE, LLLL dd', //https://docs.angularjs.org/api/ng/filter/date
+         // },
+         // {
+         //    type: HEADER_ITEMS.TIME,
+         // },
       ]
    },
 
