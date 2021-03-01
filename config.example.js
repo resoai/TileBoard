@@ -33,11 +33,66 @@ var CONFIG = {
          margin: '30px 130px 0',
          fontSize: '28px'
       },
-      right: [],
+      right: [
+         {
+            type: HEADER_ITEMS.CUSTOM_HTML,
+            html: 'MyCity'
+         },
+         {
+            type: HEADER_ITEMS.WEATHER,
+            styles: {
+               margin: '0'
+            },
+            icon: '&weather.mycity.state',
+            state: '&weather.mycity.state',
+            icons: {
+               'clear-night': 'nt-clear',
+               'cloudy': 'cloudy',
+               'exceptional': 'fog',
+               'fog': 'fog',
+               'hail': 'sleet',
+               'lightning': 'chancestorms',
+               'lightning-rainy': 'tstorms',
+               'partlycloudy': 'partlycloudy',
+               'pouring': 'rain',
+               'rainy': 'chancerain',
+               'snowy': 'snow',
+               'snowy-rainy': 'sleet',
+               'sunny': 'sunny',
+               'windy': 'hazy',
+               'windy-variant': 'flurries'
+            },
+            states: {
+               'clear-night': 'Clear, night',
+               'cloudy': 'Cloudy',
+               'exceptional': 'Exceptional',
+               'fog': 'Fog',
+               'hail': 'Hail',
+               'lightning': 'Lightning',
+               'lightning-rainy': 'Lightning, rainy',
+               'partlycloudy': 'Partly cloudy',
+               'pouring': 'Pouring',
+               'rainy': 'Rainy',
+               'snowy': 'Snowy',
+               'snowy-rainy': 'Snowy, rainy',
+               'sunny': 'Sunny',
+               'windy': 'Windy',
+               'windy-variant': 'Windy'
+            },
+            fields: {
+               temperature: '&weather.mycity.attributes.temperature',
+               temperatureUnit: '°C',
+            }
+          }
+      ],
       left: [
          {
+            type: HEADER_ITEMS.CUSTOM_HTML,
+            html: '<b><i>Home Sweet Home</b></i>'
+         },
+         {
             type: HEADER_ITEMS.DATETIME,
-            dateFormat: 'EEEE, LLLL dd', //https://docs.angularjs.org/api/ng/filter/date
+            dateFormat: 'EEEE, dd LLLL', //https://docs.angularjs.org/api/ng/filter/date
          },
          // {
          //    type: HEADER_ITEMS.DATE,
@@ -46,34 +101,6 @@ var CONFIG = {
          // {
          //    type: HEADER_ITEMS.TIME,
          // },
-         // {
-         //    type: HEADER_ITEMS.CUSTOM_HTML,
-         //    html: 'Welcome to the <b>TileBoard</b>'
-         // },
-         // {
-         //    type: HEADER_ITEMS.WEATHER,
-         //    styles: {
-         //       margin: '0 0 0'
-         //    },
-         //    icon: '&sensor.dark_sky_icon.state',
-         //    icons: {
-         //       'clear-day': 'clear',
-         //       'clear-night': 'nt-clear',
-         //       'cloudy': 'cloudy',
-         //       'rain': 'rain',
-         //       'sleet': 'sleet',
-         //       'snow': 'snow',
-         //       'wind': 'hazy',
-         //       'fog': 'fog',
-         //       'partly-cloudy-day': 'partlycloudy',
-         //       'partly-cloudy-night': 'nt-partlycloudy'
-         //    },
-         //    fields: {
-         //       summary: '&sensor.dark_sky_summary.state',
-         //       temperature: '&sensor.dark_sky_temperature.state',
-         //       temperatureUnit: '&sensor.dark_sky_temperature.attributes.unit_of_measurement',
-         //    }
-         // }
       ]
    },
 
@@ -206,7 +233,7 @@ var CONFIG = {
             },
 
             {
-               title: '',
+               title: 'MyCity',
                width: 1,
                height: 3,
                items: [
@@ -218,19 +245,51 @@ var CONFIG = {
                      //classes: ['-compact'],
                      type: TYPES.WEATHER,
                      id: {},
-                     state: function () {return 'Sunny'}, // https://github.com/resoai/TileBoard/wiki/Anonymous-functions
-                     icon: 'clear-day',
-                     icons: { 'clear-day': 'clear'},
+                     state: function () {return 'Clear, night'}, // https://github.com/resoai/TileBoard/wiki/Anonymous-functions
+                     icon: 'clear-night',
+                     icons: {
+                        'clear-night': 'nt-clear',
+                        'cloudy': 'cloudy',
+                        'exceptional': 'sunny',
+                        'fog': 'fog',
+                        'hail': 'sleet',
+                        'lightning': 'chancestorms',
+                        'lightning-rainy': 'tstorms',
+                        'partlycloudy': 'partlycloudy',
+                        'pouring': 'rain',
+                        'rainy': 'chancerain',
+                        "snowy": 'snow',
+                        'snowy-rainy': 'sleet',
+                        'sunny': 'sunny',
+                        'windy': 'hazy',
+                        'windy-variant': 'flurries'
+                     },
+                     states: {
+                        "clear-night": "Clear, night",
+                        "cloudy": "Cloudy",
+                        "exceptional": "Exceptional",
+                        "fog": "Fog",
+                        "hail": "Hail",
+                        "lightning": "Lightning",
+                        "lightning-rainy": "Lightning, rainy",
+                        "partlycloudy": "Partly cloudy",
+                        "pouring": "Pouring",
+                        "rainy": "Rainy",
+                        "snowy": "Snowy",
+                        "snowy-rainy": "Snowy, rainy",
+                        "sunny": "Sunny",
+                        "windy": "Windy",
+                        "windy-variant": "Windy"
+                     },
                      fields: {
-                        summary: 'Sunny',
                         temperature: '18',
-                        temperatureUnit: 'C',
+                        temperatureUnit: '°C',
                         windSpeed: '5',
                         windSpeedUnit: 'kmh',
                         humidity: '50',
                         humidityUnit: '%',
                         list: [
-                           'Feels like 16 C'
+                           'Feels like 16 °C'
                            /*
                            'Feels like '
                               + '&sensor.dark_sky_apparent_temperature.state'
