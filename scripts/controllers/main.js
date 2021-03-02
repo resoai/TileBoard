@@ -307,6 +307,25 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
             styles.top = '0';
          }
 
+         // load array of group row for grid layout
+         const rowsindex = [];
+         if (CONFIG.groupsAlign === GROUP_ALIGNS.GRID) {
+            for (const group of page.groups) {
+               const grouprow = group.row || 0;
+               if (!(grouprow in rowsindex)) {
+                  rowsindex.push(grouprow);
+               }
+            }
+         }
+
+         if (rowsindex.length === 0) {
+            rowsindex.push(0);
+         } else {
+            rowsindex.sort();
+         }
+         page.rowsindex = rowsindex;
+
+         //
          page.styles = styles;
       }
 
@@ -388,7 +407,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
                group.height = sizes.height;
             }
          }
-
          const styles = {
             width: tileSize * group.width + tileMargin * (group.width - 1) + 'px',
             height: tileSize * group.height + tileMargin * (group.height - 1) + 'px',
@@ -406,6 +424,10 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
       }
 
       return group.styles;
+   };
+
+   $scope.hasGridAlignment = function () {
+      return ((CONFIG.groupsAlign || '') === GROUP_ALIGNS.GRID);
    };
 
    $scope.effectiveTileSize = function (page, item) {
@@ -515,7 +537,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
       if (typeof item.state !== 'undefined') {
          if (typeof item.state === 'string') {
             const state = parseString(item.state, entity);
-            if (typeof item.states === 'object' && item.states !== null) {
+            if (item.states !== null && typeof item.states === 'object') {
                return item.states[state] || state;
             } else {
                return state;
@@ -529,7 +551,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
 
       if (typeof item.states === 'function') {
          return callFunction(item.states, [item, entity]);
-      } else if (typeof item.states === 'object') {
+      } else if (item.states !== null && typeof item.states === 'object') {
          return item.states[entity.state] || entity.state;
       }
 
