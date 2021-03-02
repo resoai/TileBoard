@@ -622,19 +622,42 @@ This is a custom tile which can be used for displaying values from different sen
    //   sunny
    //   tstorms
    //   unknown
-   // So for example, to map 'cloudy-night' sensor value to a respective icon, set the value to
-   // 'nt-cloudy' (for light icon) or 'dark-nt-cloudy' (for dark icon).
+   // So for example, to map 'clear-night' sensor value to a respective icon, set the value to
+   // 'nt-clear' (for light icon) or 'dark-nt-clear' (for dark icon).
    icons: {
-      'clear-day': 'clear',
       'clear-night': 'nt-clear',
       'cloudy': 'cloudy',
-      'rain': 'rain',
-      'sleet': 'sleet',
-      'snow': 'snow',
-      'wind': 'hazy',
+      'exceptional': 'fog',
       'fog': 'fog',
-      'partly-cloudy-day': 'partlycloudy',
-      'partly-cloudy-night': 'nt-partlycloudy'
+      'hail': 'sleet',
+      'lightning': 'chancestorms',
+      'lightning-rainy': 'tstorms',
+      'partlycloudy': 'partlycloudy',
+      'pouring': 'rain',
+      'rainy': 'chancerain',
+      'snowy': 'snow',
+      'snowy-rainy': 'sleet',
+      'sunny': 'sunny',
+      'windy': 'hazy',
+      'windy-variant': 'flurries'
+   },
+   // A map from sensor's state (key) to human readable and possibly localized strings.
+   states: {
+      'clear-night': 'Clear, night',
+      'cloudy': 'Cloudy',
+      'exceptional': 'Exceptional',
+      'fog': 'Fog',
+      'hail': 'Hail',
+      'lightning': 'Lightning',
+      'lightning-rainy': 'Lightning, rainy',
+      'partlycloudy': 'Partly cloudy',
+      'pouring': 'Pouring',
+      'rainy': 'Rainy',
+      'snowy': 'Snowy',
+      'snowy-rainy': 'Snowy, rainy',
+      'sunny': 'Sunny',
+      'windy': 'Windy',
+      'windy-variant': 'Windy'
    },
    fields: { // most of that fields are optional
       summary: '&sensor.dark_sky_summary.state',
@@ -676,17 +699,39 @@ This is a custom tile which can be used for displaying values from different sen
    title: 'Forecast',
    id: {},
    icons: {
-      'clear-day': 'clear',
       'clear-night': 'nt-clear',
       'cloudy': 'cloudy',
-      'rain': 'rain',
-      'sleet': 'sleet',
-      'snow': 'snow',
-      'wind': 'hazy',
+      'exceptional': 'fog',
       'fog': 'fog',
-      'partly-cloudy-day': 'partlycloudy',
-      'partly-cloudy-night': 'nt-partlycloudy'
+      'hail': 'sleet',
+      'lightning': 'chancestorms',
+      'lightning-rainy': 'tstorms',
+      'partlycloudy': 'partlycloudy',
+      'pouring': 'rain',
+      'rainy': 'chancerain',
+      'snowy': 'snow',
+      'snowy-rainy': 'sleet',
+      'sunny': 'sunny',
+      'windy': 'hazy',
+      'windy-variant': 'flurries'
    },
+   states: {
+      'clear-night': 'Clear, night',
+      'cloudy': 'Cloudy',
+      'exceptional': 'Exceptional',
+      'fog': 'Fog',
+      'hail': 'Hail',
+      'lightning': 'Lightning',
+      'lightning-rainy': 'Lightning, rainy',
+      'partlycloudy': 'Partly cloudy',
+      'pouring': 'Pouring',
+      'rainy': 'Rainy',
+      'snowy': 'Snowy',
+      'snowy-rainy': 'Snowy, rainy',
+      'sunny': 'Sunny',
+      'windy': 'Windy',
+      'windy-variant': 'Windy'
+   },   
    hideHeader: false,
    secondaryTitle: 'Wind',
    list: [1,2,3,4,5].map(function (id) {
