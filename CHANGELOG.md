@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/resoai/TileBoard/compare/v2.1.3...v2.2.0) (2021-03-03)
+
+
+### Features
+
+* locale option for dates and number formatting ([#644](https://github.com/resoai/TileBoard/issues/644)) ([ce236f2](https://github.com/resoai/TileBoard/commit/ce236f2ffc3276cf2938c64f08cd1be61169661b))
+
+
+### Bug Fixes
+
+* **clock:** show locale-formatted time ([#651](https://github.com/resoai/TileBoard/issues/651)) ([86c281e](https://github.com/resoai/TileBoard/commit/86c281e178140a1944cb561f5ae861127e67a837))
+* **DOOR_ENTRY:** non-clickable items when opening popup programmatically ([#664](https://github.com/resoai/TileBoard/issues/664)) ([95373c7](https://github.com/resoai/TileBoard/commit/95373c7ebf0ad2cdeb9dbdc8dcf2fcecfd1c1fcf))
+* **SCREENSAVER:** fix console errors when using weather tile ([#663](https://github.com/resoai/TileBoard/issues/663)) ([1669a12](https://github.com/resoai/TileBoard/commit/1669a128a48b42a81a415802b5cf5194f5af8d01))
+* **SLIDER:** update value in real-time on change ([#652](https://github.com/resoai/TileBoard/issues/652)) ([7d83970](https://github.com/resoai/TileBoard/commit/7d83970e8f4144280c3e8d80841ca250f982edf4))
+* **WEATHER:** update state mappings and documentation ([#661](https://github.com/resoai/TileBoard/issues/661)) ([40114d8](https://github.com/resoai/TileBoard/commit/40114d87dda466ce359f0fedacd1d1b0a44d6c86))
+* don't include empty custom.css in the release ([d038e04](https://github.com/resoai/TileBoard/commit/d038e04969bee801869bf1b6bb59711a60474001)), closes [#564](https://github.com/resoai/TileBoard/issues/564)
+* **WEATHER:** minor fixes for weather icon ([e739b51](https://github.com/resoai/TileBoard/commit/e739b5149739763849a2f7f654973fa669cafbb4))
+
 ### [2.1.3](https://github.com/resoai/TileBoard/compare/v2.1.2...v2.1.3) (2021-01-31)
 
 
