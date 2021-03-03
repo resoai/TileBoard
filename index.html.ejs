@@ -248,10 +248,10 @@
          <div class="page-align"></div>
 
          <table class="groups-table">
-            <tr ng-repeat="rowno in page.rowsindex">
+            <tr ng-repeat="rowIndex in page.rowIndexes">
                <td class="groups-table-row">
                   <div ng-repeat="group in page.groups track by $index"
-                     ng-if="!isHidden(group) && (!hasGridAlignment() || (group.row || 0) === rowno)" class="group"
+                     ng-if="!isHidden(group) && (!hasGridAlignment() || (group.row || 0) === rowIndex)" class="group"
                      ng-style="groupStyles(group, page)">
                      <div ng-bind="group.title" class="group-title"></div>
                      <div tile ng-repeat="item in group.items track by $index"></div>

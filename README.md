@@ -194,17 +194,17 @@ We divide tiles (cells) into groups on every page. Group object can have the fol
 {
   /* title: Title to display above the group */
   title: 'Group title',
-  /* width: Number of tiles horizontally 
-   * (optional) Can be calculated automatically 
+  /* width: Number of tiles horizontally
+   * (optional) Can be calculated automatically
    */
   width: 3,
-  /* height: Number of tiles vertically 
-   * (optional) Can be calculated automatically 
+  /* height: Number of tiles vertically
+   * (optional) Can be calculated automatically
    */
   height: 4,
-  /*
-  *  (otional) default = 0; used for positioning the group when used GRID alignment. See description in 'groupsAlign'
-  */
+  /* row: Used for positioning the group when using GRID alignment. See description in 'groupsAlign'.
+   * (optional) default = 0
+   */
   row: 0,
   /* groupMarginCss: Override default margin of tiles for the current group
    * (optional)

@@ -25,7 +25,7 @@ var CONFIG = {
    timeFormat: 24,
    menuPosition: MENU_POSITIONS.LEFT, // or BOTTOM
    hideScrollbar: false, // horizontal scrollbar
-   groupsAlign: GROUP_ALIGNS.HORIZONTALLY,  //  HORIZONTALLY, VERTICALLY, GRID
+   groupsAlign: GROUP_ALIGNS.HORIZONTALLY, // HORIZONTALLY, VERTICALLY, GRID
    onReady: function () {},
 
    header: { // https://github.com/resoai/TileBoard/wiki/Header-configuration
@@ -135,7 +135,7 @@ var CONFIG = {
                title: 'First group',
                width: 2,
                height: 3,
-               //row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
+               // row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
                items: [
                   {
                      position: [0, 0],
@@ -170,7 +170,7 @@ var CONFIG = {
                title: 'Second group',
                width: 2,
                height: 3,
-               //row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
+               // row: 0,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
                items: [
                   {
                      position: [0, 0],
@@ -238,7 +238,7 @@ var CONFIG = {
                title: 'MyCity',
                width: 1,
                height: 3,
-               //row: 1,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
+               // row: 1,  // optional; index of the row used for the GRID layout. If not specified, the default is 0
                items: [
                   {
                      // please read README.md for more information
