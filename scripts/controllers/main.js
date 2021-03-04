@@ -1,6 +1,6 @@
 import angular from 'angular';
 import Hammer from 'hammerjs';
-import { mergeConfigDefaults, mergeTileConfigs, mergeTileDefaults } from './main-utilities';
+import { calcPageRowIndexes, mergeConfigDefaults, mergeTileConfigs, mergeTileDefaults } from './main-utilities';
 import { App } from '../app';
 import { TYPES, FEATURES, HEADER_ITEMS, MENU_POSITIONS, GROUP_ALIGNS, TRANSITIONS, MAPBOX_MAP, YANDEX_MAP, DEFAULT_SLIDER_OPTIONS, DEFAULT_LIGHT_SLIDER_OPTIONS, DEFAULT_VOLUME_SLIDER_OPTIONS, DEFAULT_POPUP_HISTORY, DEFAULT_POPUP_IFRAME, DEFAULT_POPUP_DOOR_ENTRY } from '../globals/constants';
 import { debounce, leadZero, supportsFeature, toAbsoluteServerURL } from '../globals/utils';
@@ -19,6 +19,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
    });
 
    $scope.pages = mergeConfigDefaults(CONFIG.pages);
+   calcPageRowIndexes(CONFIG.groupsAlign, $scope.pages);
    $scope.pagesContainerStyles = {};
    $scope.TYPES = TYPES;
    $scope.FEATURES = FEATURES;
@@ -306,24 +307,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
             styles.left = (index * 100) + '%';
             styles.top = '0';
          }
-
-         const rowIndexes = [];
-         if (CONFIG.groupsAlign === GROUP_ALIGNS.GRID) {
-            for (const group of page.groups) {
-               const rowIndex = group.row || 0;
-               if (!(rowIndex in rowIndexes)) {
-                  rowIndexes.push(rowIndex);
-               }
-            }
-         }
-
-         if (rowIndexes.length === 0) {
-            rowIndexes.push(0);
-         } else {
-            rowIndexes.sort();
-         }
-
-         page.rowIndexes = rowIndexes;
          page.styles = styles;
       }
 
