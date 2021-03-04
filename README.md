@@ -109,7 +109,8 @@ var CONFIG = {
     * to specify the row index on which you want to place the group. Each row will contain all the groups
     * with the corresponding index for which the maximum width of the screen will be that of the widest row. 
     * With this alignment you will be able to use the screen space to the maximum without having 
-    * to define groups with a very large height. Group 'row' setting is ignored for HORIZONTALLY and VERTICALLY alignments */
+    * to define groups with a very large height. Group 'row' setting is ignored for HORIZONTALLY and VERTICALLY alignments
+    * GRID alignment is not available for MOBILE and WINPHONE themes; if selected fallback to HORIZONTALLY alignment */
    groupsAlign: GROUP_ALIGNS.HORIZONTALLY,
 
    /* Called when connected to API and fetched the state.
