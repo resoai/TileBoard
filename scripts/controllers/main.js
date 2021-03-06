@@ -1671,6 +1671,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
    };
 
    $scope.openPopupHistory = function (item, entity) {
+      item = mergeTileDefaults(item);
       const layout = cacheInItem(item, '_popupHistory', () => mergeTileConfigs({}, DEFAULT_POPUP_HISTORY(item, entity), {
          classes: getItemFieldValue('history.classes', item, entity) || [],
          items: [getItemFieldValue('history', item, entity) || {}],
@@ -1679,6 +1680,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
    };
 
    $scope.openPopupIframe = function (item, entity) {
+      item = mergeTileDefaults(item);
       const layout = cacheInItem(item, '_popupIframe', () => mergeTileConfigs({}, DEFAULT_POPUP_IFRAME(item, entity), {
          classes: getItemFieldValue('iframeClasses', item, entity) || [],
          items: [{
@@ -1689,6 +1691,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
    };
 
    $scope.openDoorEntry = function (item, entity) {
+      item = mergeTileDefaults(item);
       const layout = cacheInItem(item, '_popupDoorEntry', () => mergeTileConfigs({}, DEFAULT_POPUP_DOOR_ENTRY(item, entity), {
          items: [
             getItemFieldValue('layout.camera', item, entity) || {},
