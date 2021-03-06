@@ -6,7 +6,7 @@ import { TYPES, FEATURES, HEADER_ITEMS, MENU_POSITIONS, CUSTOM_THEMES, GROUP_ALI
 import { debounce, leadZero, supportsFeature, toAbsoluteServerURL } from '../globals/utils';
 import Noty from '../models/noty';
 
-App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLocale) {
+App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLocale, $filter) {
    if (!window.CONFIG) {
       return;
    }
@@ -603,6 +603,10 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
       }
 
       return value;
+   };
+
+   $scope.filterNumber = function (number, precision) {
+      return $filter('number')(number, precision);
    };
 
    $scope.climateTarget = function (item, entity) {
