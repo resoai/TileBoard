@@ -507,7 +507,7 @@
 
          <div class="item-select--option"
               ng-repeat="option in _options track by $index"
-              ng-class="{'-active': option === entity.state}"
+              ng-class="{'-active': option === lookupClimateOption(item, entity, entity.state)}"
               ng-click="setClimateOption($event, item, entity, option)">
             <span ng-bind="option"></span>
          </div>
