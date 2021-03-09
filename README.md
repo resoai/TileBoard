@@ -354,6 +354,8 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
    * Value options: true, false
    */
   hideSource: false,
+  /* textSource: localized/customized text for 'Source' */
+  textSource: 'Audio Input',
   /** type: SLIDER **/
   /* filter: Function for filtering/formatting the value */
   filter: function (value) {return value},

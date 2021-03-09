@@ -528,13 +528,7 @@
                      <span class="mdi mdi-stop" ng-if="!supportsFeature(FEATURES.MEDIA_PLAYER.PAUSE, entity) && entity.state === 'playing'"
                            ng-click="sendPlayer('media_stop', item, entity)"></span>
 
-                     <span class="mdi mdi-play" ng-if="entity.state === 'stopped'"
-                           ng-click="sendPlayer('media_play', item, entity)"></span>
-
-                     <span class="mdi mdi-play" ng-if="entity.state === 'paused'"
-                           ng-click="sendPlayer('media_play', item, entity)"></span>
-
-                     <span class="mdi mdi-play" ng-if="entity.state === 'idle'"
+                     <span class="mdi mdi-play" ng-if="entity.state === 'stopped' || entity.state === 'paused' || entity.state === 'idle'"
                            ng-click="sendPlayer('media_play', item, entity)"></span>
 
                   </div>
@@ -577,7 +571,7 @@
                <td colspan="3" class="media-player-table--td-source">
                   <div class="media-player--source" ng-click="openSelect(item)"
                        ng-if="entity.attributes.source_list.length && !item.hideSource">
-                     <span ng-bind="entity.attributes.source || 'Source'"></span>
+                     <span ng-bind="entity.attributes.source || item.textSource || 'Source'"></span>
                   </div>
                </td>
             </tr>
