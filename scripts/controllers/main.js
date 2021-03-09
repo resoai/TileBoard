@@ -609,19 +609,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
       return $filter('number')(number, precision);
    };
 
-   $scope.climateTarget = function (item, entity) {
-      const value = entity.attributes.temperature || [
-         entity.attributes.target_temp_low,
-         entity.attributes.target_temp_high,
-      ].join(' - ');
-
-      if (item.filter) {
-         return item.filter(value);
-      }
-
-      return value;
-   };
-
    $scope.listField = function (field, item, list) {
       const value = parseFieldValue(list[field], item, list);
 
@@ -1270,6 +1257,19 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
       $scope.closeActiveSelect();
 
       return false;
+   };
+
+   $scope.climateTarget = function (item, entity) {
+      const value = entity.attributes.temperature || [
+         entity.attributes.target_temp_low,
+         entity.attributes.target_temp_high,
+      ].join(' - ');
+
+      if (item.filter) {
+         return item.filter(value);
+      }
+
+      return value;
    };
 
    $scope.reverseLookupClimateOption = function (item, entity, option) {
