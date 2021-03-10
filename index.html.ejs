@@ -251,9 +251,9 @@
             <div ng-repeat="rowIndex in page.rowIndexes" class="groups-table-row">
                <div ng-repeat="group in page.groups track by $index"
                     ng-if="!isHidden(group) && (group.row || 0) === rowIndex"
-                    class="group-row"
+                    class="group group--align-top"
                     ng-style="groupStyles(group, page)">
-                  <div ng-bind="group.title" class="group-row-title"></div>
+                  <div ng-bind="group.title" class="group-title"></div>
                   <div tile ng-repeat="item in group.items track by $index"></div>
                </div>
             </div>
