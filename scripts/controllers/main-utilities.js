@@ -7,7 +7,7 @@ export function calculateGridPageRowIndexes (page) {
    const rowIndexes = [];
    for (const group of page.groups) {
       const rowIndex = group.row || 0;
-      if (!(rowIndex in rowIndexes)) {
+      if (!rowIndexes.includes(rowIndex)) {
          rowIndexes.push(rowIndex);
       }
    }
