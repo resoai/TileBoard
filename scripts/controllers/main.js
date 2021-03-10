@@ -18,11 +18,12 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
       Noty.add(Noty.ERROR, 'Failed loading locale', `Could not find corresponding file for locale "${locale}" in the /locales/ directory.`);
    });
 
-   if (CONFIG.groupsAlign === GROUP_ALIGNS.GRID && (CONFIG.customTheme === CUSTOM_THEMES.MOBILE || CONFIG.customTheme === CUSTOM_THEMES.WINPHONE)) {
+   if (CONFIG.groupsAlign === GROUP_ALIGNS.GRID && [CUSTOM_THEMES.MOBILE, CUSTOM_THEMES.WINPHONE].includes(CONFIG.customTheme)) {
       CONFIG.groupsAlign = GROUP_ALIGNS.HORIZONTALLY;
    }
 
    $scope.pages = mergeConfigDefaults(CONFIG.pages);
+   $scope.hasGridAlignment = CONFIG.groupsAlign === GROUP_ALIGNS.GRID;
    calcPageRowIndexes(CONFIG.groupsAlign, $scope.pages);
    $scope.pagesContainerStyles = {};
    $scope.TYPES = TYPES;
@@ -410,10 +411,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
       }
 
       return group.styles;
-   };
-
-   $scope.hasGridAlignment = function () {
-      return CONFIG.groupsAlign === GROUP_ALIGNS.GRID;
    };
 
    $scope.effectiveTileSize = function (page, item) {
