@@ -1,6 +1,6 @@
 import angular from 'angular';
 import Hammer from 'hammerjs';
-import { calcPageRowIndexes, mergeConfigDefaults, mergeTileConfigs, mergeTileDefaults } from './main-utilities';
+import { calculateGridPageRowIndexes, mergeConfigDefaults, mergeTileConfigs, mergeTileDefaults } from './main-utilities';
 import { App } from '../app';
 import { TYPES, FEATURES, HEADER_ITEMS, MENU_POSITIONS, CUSTOM_THEMES, GROUP_ALIGNS, TRANSITIONS, MAPBOX_MAP, YANDEX_MAP, DEFAULT_SLIDER_OPTIONS, DEFAULT_LIGHT_SLIDER_OPTIONS, DEFAULT_VOLUME_SLIDER_OPTIONS, DEFAULT_POPUP_HISTORY, DEFAULT_POPUP_IFRAME, DEFAULT_POPUP_DOOR_ENTRY } from '../globals/constants';
 import { debounce, leadZero, supportsFeature, toAbsoluteServerURL } from '../globals/utils';
@@ -24,7 +24,12 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
 
    $scope.pages = mergeConfigDefaults(CONFIG.pages);
    $scope.hasGridAlignment = CONFIG.groupsAlign === GROUP_ALIGNS.GRID;
-   calcPageRowIndexes(CONFIG.groupsAlign, $scope.pages);
+   if ($scope.hasGridAlignment) {
+      for (const page of $scope.pages) {
+         page.rowIndexes = calculateGridPageRowIndexes(page);
+      }
+   }
+
    $scope.pagesContainerStyles = {};
    $scope.TYPES = TYPES;
    $scope.FEATURES = FEATURES;
