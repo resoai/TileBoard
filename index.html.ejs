@@ -247,19 +247,17 @@
 
          <div class="page-align"></div>
 
-         <table class="groups-table" ng-if="hasGridAlignment()">
-            <tr ng-repeat="rowIndex in page.rowIndexes">
-               <td class="groups-table-row">
-                  <div ng-repeat="group in page.groups track by $index"
-                       ng-if="!isHidden(group) && (group.row || 0) === rowIndex"
-                       class="group-row"
-                       ng-style="groupStyles(group, page)">
-                     <div ng-bind="group.title" class="group-row-title"></div>
-                     <div tile ng-repeat="item in group.items track by $index"></div>
-                  </div>
-               </td>
-            </tr>
-         </table>
+         <div class="groups-table" ng-if="hasGridAlignment()">
+            <div ng-repeat="rowIndex in page.rowIndexes" class="groups-table-row">
+               <div ng-repeat="group in page.groups track by $index"
+                     ng-if="!isHidden(group) && (group.row || 0) === rowIndex"
+                     class="group-row"
+                     ng-style="groupStyles(group, page)">
+                  <div ng-bind="group.title" class="group-row-title"></div>
+                  <div tile ng-repeat="item in group.items track by $index"></div>
+               </div>
+            </div>
+         </div>
          <div ng-repeat="group in page.groups track by $index"
                ng-if="!hasGridAlignment() && !isHidden(group)"
                class="group"
