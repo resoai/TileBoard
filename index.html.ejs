@@ -247,8 +247,8 @@
 
          <div class="page-align"></div>
 
-         <div class="groups-table" ng-if="hasGridAlignment">
-            <div ng-repeat="rowIndex in page.rowIndexes" class="groups-table-row">
+         <div class="grid-container" ng-if="hasGridAlignment">
+            <div ng-repeat="rowIndex in page.rowIndexes" class="grid-container-row">
                <div ng-repeat="group in page.groups track by $index"
                     ng-if="!isHidden(group) && (group.row || 0) === rowIndex"
                     class="group group--align-top"
