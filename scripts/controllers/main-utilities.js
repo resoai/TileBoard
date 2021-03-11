@@ -3,6 +3,24 @@ import { TILE_DEFAULTS, TYPES } from '../globals/constants';
 
 const MERGED_DEFAULTS_KEY = '__merged_defaults';
 
+export function calculateGridPageRowIndexes (page) {
+   const rowIndexes = [];
+   for (const group of page.groups) {
+      const rowIndex = group.row || 0;
+      if (!rowIndexes.includes(rowIndex)) {
+         rowIndexes.push(rowIndex);
+      }
+   }
+
+   if (rowIndexes.length === 0) {
+      rowIndexes.push(0);
+   } else {
+      rowIndexes.sort();
+   }
+
+   return rowIndexes;
+}
+
 export function mergeConfigDefaults (pages) {
    for (const page of pages) {
       for (const group of page.groups) {

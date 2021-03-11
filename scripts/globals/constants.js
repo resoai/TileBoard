@@ -135,6 +135,7 @@ export const MENU_POSITIONS = {
 export const GROUP_ALIGNS = {
    VERTICALLY: 'vertically',
    HORIZONTALLY: 'horizontally',
+   GRID: 'grid',
 };
 
 export const NOTIES_POSITIONS = {

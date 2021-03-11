@@ -104,7 +104,13 @@ var CONFIG = {
    /* hideScrollbar: Hiding horizontal scrollbar */
    hideScrollbar: false,
    
-   /* groupsAlign: Align groups HORIZONTALLY (default) or VERTICALLY */
+   /* groupsAlign: Align groups HORIZONTALLY (default) VERTICALLY or GRID
+    * The GRID alignment allows you to divide the groups on several lines; in this case it is necessary 
+    * to specify the row index on which you want to place the group. Each row will contain all the groups
+    * with the corresponding index for which the maximum width of the screen will be that of the widest row. 
+    * With this alignment you will be able to use the screen space to the maximum without having 
+    * to define groups with a very large height. Group 'row' setting is ignored for HORIZONTALLY and VERTICALLY alignments
+    * GRID alignment is not available for MOBILE and WINPHONE themes; if selected fallback to HORIZONTALLY alignment */
    groupsAlign: GROUP_ALIGNS.HORIZONTALLY,
 
    /* Called when connected to API and fetched the state.
@@ -189,14 +195,18 @@ We divide tiles (cells) into groups on every page. Group object can have the fol
 {
   /* title: Title to display above the group */
   title: 'Group title',
-  /* width: Number of tiles horizontally 
-   * (optional) Can be calculated automatically 
+  /* width: Number of tiles horizontally
+   * (optional) Can be calculated automatically
    */
   width: 3,
-  /* height: Number of tiles vertically 
-   * (optional) Can be calculated automatically 
+  /* height: Number of tiles vertically
+   * (optional) Can be calculated automatically
    */
   height: 4,
+  /* row: Used for positioning the group when using GRID alignment. See description in 'groupsAlign'.
+   * (optional) default = 0
+   */
+  row: 0,
   /* groupMarginCss: Override default margin of tiles for the current group
    * (optional)
    */
