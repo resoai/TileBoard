@@ -321,7 +321,7 @@ var CONFIG = {
          groups: [
             {
                title: '',
-               width: 2,
+               width: 4,
                height: 3,
                items: [
                   {
@@ -346,9 +346,24 @@ var CONFIG = {
                            title: 'Open an issue',
                            icon: 'mdi-numeric-3-box-outline',
                            value: 'github.com'
-                        }
+                        },
                      ]
                   },
+                  {
+                     position: [2, 0],
+                     width: 2,
+                     title: 'System Status',
+                     type: TYPES.TEXT_LIST,
+                     id: {}, // using empty object for an unknown id
+                     state: false, // disable state element
+                     list: [
+                        {
+                           title: 'Free Memory',
+                           icon: 'mdi-memory',
+                           value: function() {return this.$scope.filterNumber(this.parseFieldValue('&sensor.memory_free.state',null,null),1) + ' GB';}
+                        },
+                     ]
+                  },                  
                   {
                      position: [0, 1.5],
                      width: 1.5,
