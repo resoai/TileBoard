@@ -350,22 +350,22 @@
          </div>
 
          <div class="weather-temperature" ng-if="item.fields.temperature">
-            <span ng-bind="(getWeatherField('temperature', item, entity) | number:1)"></span><!--
+            <span ng-bind="(getWeatherField('temperature', item, entity) | number:1)"></span> <!--
          --><span ng-bind="getWeatherField('temperatureUnit', item, entity)"></span>
          </div>
 
          <div class="weather-line -items">
             <span ng-if="item.fields.highTemperature" class="weather-item">
                <i class="mdi mdi-arrow-collapse-up"></i>
-               <span ng-bind="(getWeatherField('highTemperature', item, entity) | number:1)"></span><!--
-            --><span ng-bind="getWeatherField('highTemperatureUnit', item, entity)"></span>
+               <span ng-bind="(getWeatherField('highTemperature', item, entity) | number:1)"></span> <!--
+            --><span ng-bind=" getWeatherField('highTemperatureUnit', item, entity)"></span>
             </span>
          </div>
 
          <div class="weather-line -items">
             <span ng-if="item.fields.lowTemperature" class="weather-item">
                <i class="mdi mdi-arrow-collapse-down"></i>
-               <span ng-bind="(getWeatherField('lowTemperature', item, entity) | number:1)"></span><!--
+               <span ng-bind="(getWeatherField('lowTemperature', item, entity) | number:1)"></span> <!--
             --><span ng-bind="getWeatherField('lowTemperatureUnit', item, entity)"></span>
             </span>
          </div>
@@ -373,12 +373,12 @@
          <div class="weather-line -items" ng-if="effectiveTileSize(page, item).width >= 140">
             <span ng-if="item.fields.humidity" class="weather-item">
                <i class="mdi mdi-water"></i>
-               <span ng-bind="(getWeatherField('humidity', item, entity) | number:0)"></span><!--
+               <span ng-bind="(getWeatherField('humidity', item, entity) | number:0)"></span> <!--
             --><span ng-bind="getWeatherField('humidityUnit', item, entity)"></span>
             </span>
             <span ng-if="item.fields.windSpeed" class="weather-item">
                <i class="mdi mdi-weather-windy"></i>
-               <span ng-bind="(getWeatherField('windSpeed', item, entity) | number:0)"></span><!--
+               <span ng-bind="(getWeatherField('windSpeed', item, entity) | number:0)"></span> <!--
             --><span ng-bind="getWeatherField('windSpeedUnit', item, entity)"></span>
             </span>
          </div>
@@ -386,22 +386,22 @@
          <div class="weather-line -items" ng-if="effectiveTileSize(page, item).width < 140">
             <span ng-if="item.fields.humidity" class="weather-item">
                <i class="mdi mdi-water"></i>
-               <span ng-bind="(getWeatherField('humidity', item, entity) | number:0)"></span><!--
+               <span ng-bind="(getWeatherField('humidity', item, entity) | number:0)"></span> <!--
             --><span ng-bind="getWeatherField('humidityUnit', item, entity)"></span>
             </span>
          </div>
          <div class="weather-line -items" ng-if="effectiveTileSize(page, item).width < 140">
             <span ng-if="item.fields.windSpeed" class="weather-item">
                <i class="mdi mdi-weather-windy"></i>
-               <span ng-bind="(getWeatherField('windSpeed', item, entity) | number:0)"></span><!--
+               <span ng-bind="(getWeatherField('windSpeed', item, entity) | number:0)"></span> <!--
             --><span ng-bind="getWeatherField('windSpeedUnit', item, entity)"></span>
             </span>
          </div>
 
          <div class="weather-line -items">
-            <span ng-if="item.fields.windSpeed" class="weather-item">
+            <span ng-if="item.fields.pressure" class="weather-item">
                <i class="mdi  mdi-gauge"></i>
-               <span ng-bind="(getWeatherField('pressure', item, entity) | number:0)"></span><!--
+               <span ng-bind="(getWeatherField('pressure', item, entity) | number:0)"></span> <!--
             --><span ng-bind="getWeatherField('pressureUnit', item, entity)"></span>
             </span>
          </div>
@@ -409,7 +409,7 @@
          <!-- DEPRECATED -->
          <div class="weather-line" ng-if="item.fields.apparentTemperature">
             Feels like
-            <span ng-bind="(getWeatherField('apparentTemperature', item, entity) | number:1)"></span><!--
+            <span ng-bind="(getWeatherField('apparentTemperature', item, entity) | number:1)"></span> <!--
          --><span ng-bind="getWeatherField('apparentTemperatureUnit', item, entity)"></span>
          </div>
 
@@ -419,7 +419,7 @@
          </div>
 
          <div class="weather-line" ng-if="item.fields.precipProbability">
-            <span ng-bind="(getWeatherField('precipProbability', item, entity) | number:0)"></span><!--
+            <span ng-bind="(getWeatherField('precipProbability', item, entity) | number:0)"></span> <!--
          --><span ng-bind="getWeatherField('precipProbabilityUnit', item, entity)"></span>
             chance of rain
          </div>
