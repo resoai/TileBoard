@@ -163,7 +163,23 @@ var CONFIG = {
                      type: TYPES.SENSOR,
                      id: 'binary_sensor.updater',
                      state: '@attributes.release_notes' // https://github.com/resoai/TileBoard/wiki/Templates
-                  }
+                  },
+                  {
+                     title: 'Heating',
+                     position: [1, 1],
+                     id: { attributes: { current_temperature: 11 } },
+                     type: TYPES.CLIMATE,
+                     unit: '°C',
+                     useHvacMode: true,  // Optional: enables HVAC mode (by default uses PRESET mode)
+                     state: function (item, entity) {
+                        return 'Actual: ' + this.$scope.filterNumber(entity.attributes.current_temperature, 1) + ' °C';
+                     },
+                     states: {
+                        'auto': 'Automatic',
+                        'heat': 'Manual',
+                        'off': 'Off'
+                     },
+                  },
                ]
             },
 

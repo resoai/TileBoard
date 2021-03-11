@@ -91,7 +91,12 @@ Optionally, the fullscreen camera entity can be different from the camera entity
       return 'Current '
          + entity.attributes.current_temperature
          + entity.attributes.unit_of_measurement;
-   }
+   },
+   states: {
+      'auto': 'Automatic',
+      'heat': 'Manual',
+      'off': 'Off',
+   },
 }
 ```
 
