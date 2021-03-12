@@ -667,17 +667,14 @@ This is a custom tile which can be used for displaying values from different sen
       windSpeedUnit: '&sensor.dark_sky_wind_speed.attributes.unit_of_measurement',
       humidity: '&sensor.dark_sky_humidity.state',
       humidityUnit: '&sensor.dark_sky_humidity.attributes.unit_of_measurement',
+      pressure: '&sensor.dark_sky_pressure.state',
+      pressureUnit: '&sensor.dark_sky_pressure.attributes.unit_of_measurement',
 
       list: [
          // custom line
          'Feels like '
             + '&sensor.dark_sky_apparent_temperature.state'
             + '&sensor.dark_sky_apparent_temperature.attributes.unit_of_measurement',
-
-         // another custom line
-         'Pressure '
-            + '&sensor.dark_sky_pressure.state'
-            + '&sensor.dark_sky_pressure.attributes.unit_of_measurement',
 
          // yet another custom line
          '&sensor.dark_sky_precip_probability.state'

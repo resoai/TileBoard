@@ -546,6 +546,8 @@ Supported weather fields
    windSpeedUnit: '&sensor.dark_sky_wind_speed.attributes.unit_of_measurement',
    humidity: '&sensor.dark_sky_humidity.state',
    humidityUnit: '&sensor.dark_sky_humidity.attributes.unit_of_measurement',
+   pressure: '&sensor.dark_sky_pressure.state',
+   pressureUnit: '&sensor.dark_sky_pressure.attributes.unit_of_measurement',
     
    list: [ // array of strings
       // custom line
@@ -553,9 +555,9 @@ Supported weather fields
          + '&sensor.dark_sky_apparent_temperature.state'
          + '&sensor.dark_sky_apparent_temperature.attributes.unit_of_measurement',
       // another custom line
-      'Pressure '
-         + '&sensor.dark_sky_pressure.state'
-         + '&sensor.dark_sky_pressure.attributes.unit_of_measurement',
+      '&sensor.dark_sky_precip_probability.state'
+         + '&sensor.dark_sky_precip_probability.attributes.unit_of_measurement'
+         + ' chance of rain'
    ]
 }
 ```

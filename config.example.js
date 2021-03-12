@@ -291,16 +291,14 @@ var CONFIG = {
                         windSpeedUnit: 'kmh',
                         humidity: '50',
                         humidityUnit: '%',
+                        pressure: '650',
+                        pressureUnit: 'hPa',
                         list: [
                            'Feels like 16 °C'
                            /*
                            'Feels like '
                               + '&sensor.dark_sky_apparent_temperature.state'
                               + '&sensor.dark_sky_apparent_temperature.attributes.unit_of_measurement',
-
-                           'Pressure '
-                              + '&sensor.dark_sky_pressure.state'
-                              + '&sensor.dark_sky_pressure.attributes.unit_of_measurement',
 
                            '&sensor.dark_sky_precip_probability.state'
                               + '&sensor.dark_sky_precip_probability.attributes.unit_of_measurement'
