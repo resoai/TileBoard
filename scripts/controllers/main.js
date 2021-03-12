@@ -611,19 +611,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
       return $filter('number')(number, precision);
    };
 
-   $scope.climateTarget = function (item, entity) {
-      const value = entity.attributes.temperature || [
-         entity.attributes.target_temp_low,
-         entity.attributes.target_temp_high,
-      ].join(' - ');
-
-      if (item.filter) {
-         return item.filter(value);
-      }
-
-      return value;
-   };
-
    $scope.listField = function (field, item, list) {
       const value = parseFieldValue(list[field], item, list);
 
@@ -1274,12 +1261,57 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
       return false;
    };
 
+   $scope.climateTarget = function (item, entity) {
+      const value = entity.attributes.temperature || [
+         entity.attributes.target_temp_low,
+         entity.attributes.target_temp_high,
+      ].join(' - ');
+
+      if (item.filter) {
+         return item.filter(value);
+      }
+
+      return value;
+   };
+
+   $scope.reverseLookupClimateOption = function (item, entity, option) {
+      initializeClimateOptions(item, entity);
+      for (const [key, value] of Object.entries(item.climateOptions)) {
+         if (value === option) {
+            return key;
+         }
+      }
+      return option;
+   };
+
+   $scope.lookupClimateOption = function (item, entity, option) {
+      initializeClimateOptions(item, entity);
+      return item.climateOptions[option] || option;
+   };
+
+   function initializeClimateOptions (item, entity) {
+      if (typeof item.climateOptions === 'undefined') {
+         const _options = item.useHvacMode ? entity.attributes.hvac_modes : entity.attributes.preset_modes;
+         const options = {};
+         for (const option of _options) {
+            if (item.states !== null && typeof item.states === 'object') {
+               options[option] = item.states[option] || option;
+            } else {
+               options[option] = option;
+            }
+         }
+         item.climateOptions = options;
+      }
+   }
+
    $scope.getClimateOptions = function (item, entity) {
-      return item.useHvacMode ? entity.attributes.hvac_modes : entity.attributes.preset_modes;
+      initializeClimateOptions(item, entity);
+      return item.climateOptions;
    };
 
    $scope.getClimateCurrentOption = function (item, entity) {
-      return item.useHvacMode ? entity.state : entity.attributes.preset_mode;
+      const option = item.useHvacMode ? entity.state : entity.attributes.preset_mode;
+      return $scope.lookupClimateOption(item, entity, option);
    };
 
    $scope.setClimateOption = function ($event, item, entity, option) {
@@ -1288,13 +1320,14 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
 
       let service;
       const serviceData = {};
+      const _option = $scope.reverseLookupClimateOption(item, entity, option);
 
       if (item.useHvacMode) {
          service = 'set_hvac_mode';
-         serviceData.hvac_mode = option;
+         serviceData.hvac_mode = _option;
       } else {
          service = 'set_preset_mode';
-         serviceData.preset_mode = option;
+         serviceData.preset_mode = _option;
       }
 
       callService(item, 'climate', service, serviceData);
