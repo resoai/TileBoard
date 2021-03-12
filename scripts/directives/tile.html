@@ -409,8 +409,8 @@
          <!-- DEPRECATED -->
          <div class="weather-line" ng-if="item.fields.apparentTemperature">
             Feels like
-            <span ng-bind="(getWeatherField('apparentTemperature', item, entity) | number:1)"></span>
-            <span ng-bind="getWeatherField('apparentTemperatureUnit', item, entity)"></span>
+            <span ng-bind="(getWeatherField('apparentTemperature', item, entity) | number:1)"></span><!--
+            --><span ng-bind="getWeatherField('apparentTemperatureUnit', item, entity)"></span>
          </div>
 
          <div class="weather-line" ng-if="item.fields.pollen">
