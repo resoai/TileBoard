@@ -1,28 +1,24 @@
 import mergeWith from 'lodash.mergewith';
-import { GROUP_ALIGNS, TILE_DEFAULTS, TYPES } from '../globals/constants';
+import { TILE_DEFAULTS, TYPES } from '../globals/constants';
 
 const MERGED_DEFAULTS_KEY = '__merged_defaults';
 
-export function calcPageRowIndexes (groupsAlign, pages) {
-   for (const page of pages) {
-      const rowIndexes = [];
-      if (groupsAlign === GROUP_ALIGNS.GRID) {
-         for (const group of page.groups) {
-            const rowIndex = group.row || 0;
-            if (!(rowIndex in rowIndexes)) {
-               rowIndexes.push(rowIndex);
-            }
-         }
+export function calculateGridPageRowIndexes (page) {
+   const rowIndexes = [];
+   for (const group of page.groups) {
+      const rowIndex = group.row || 0;
+      if (!rowIndexes.includes(rowIndex)) {
+         rowIndexes.push(rowIndex);
       }
-
-      if (rowIndexes.length === 0) {
-         rowIndexes.push(0);
-      } else {
-         rowIndexes.sort();
-      }
-
-      page.rowIndexes = rowIndexes;
    }
+
+   if (rowIndexes.length === 0) {
+      rowIndexes.push(0);
+   } else {
+      rowIndexes.sort();
+   }
+
+   return rowIndexes;
 }
 
 export function mergeConfigDefaults (pages) {

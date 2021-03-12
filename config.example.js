@@ -307,16 +307,14 @@ var CONFIG = {
                         windSpeedUnit: 'kmh',
                         humidity: '50',
                         humidityUnit: '%',
+                        pressure: '650',
+                        pressureUnit: 'hPa',
                         list: [
                            'Feels like 16 °C'
                            /*
                            'Feels like '
                               + '&sensor.dark_sky_apparent_temperature.state'
                               + '&sensor.dark_sky_apparent_temperature.attributes.unit_of_measurement',
-
-                           'Pressure '
-                              + '&sensor.dark_sky_pressure.state'
-                              + '&sensor.dark_sky_pressure.attributes.unit_of_measurement',
 
                            '&sensor.dark_sky_precip_probability.state'
                               + '&sensor.dark_sky_precip_probability.attributes.unit_of_measurement'
@@ -376,18 +374,23 @@ var CONFIG = {
                         {
                            title: 'Free Memory',
                            icon: 'mdi-memory',
-                           value: function() {return this.$scope.filterNumber(this.parseFieldValue('&sensor.memory_free.state',null,null),1) + ' GB';}
+                           value: function() {
+                              // var freeMemory = this.parseFieldValue('&sensor.memory_free.state')
+                              var freeMemory = 15.444  // Just an example.
+                              return this.$scope.filterNumber(freeMemory, 1) + ' GB';
+                           }
                         },
                      ]
-                  },                  
+                  },
                   {
                      position: [0, 1.5],
                      width: 1.5,
-                     height: 1,
+                     height: 1.5,
                      title: 'My Gauge Title',
                      subtitle: '',
                      type: TYPES.GAUGE,
-                     id: 'sensor.my_sample_sensor', // Assign the sensor you want to display on the gauge
+                     // id: 'sensor.my_sample_sensor', // Assign the sensor you want to display on the gauge
+                     id: {state: 11111}, // Remove after choosing to actual sensor ID
                      value: function(item, entity) {
                         return entity.state;
                      },

@@ -357,16 +357,16 @@
          <div class="weather-line -items">
             <span ng-if="item.fields.highTemperature" class="weather-item">
                <i class="mdi mdi-arrow-collapse-up"></i>
-               <span ng-bind="getWeatherField('highTemperature', item, entity)"></span><!--
-            --><span ng-bind="getWeatherField('highTemperatureUnit', item, entity)"></span>
+               <span ng-bind="(getWeatherField('highTemperature', item, entity) | number:1)"></span>
+               <span ng-bind=" getWeatherField('highTemperatureUnit', item, entity)"></span>
             </span>
          </div>
 
          <div class="weather-line -items">
             <span ng-if="item.fields.lowTemperature" class="weather-item">
                <i class="mdi mdi-arrow-collapse-down"></i>
-               <span ng-bind="(getWeatherField('lowTemperature', item, entity) | number:1)"></span><!--
-            --><span ng-bind="getWeatherField('lowTemperatureUnit', item, entity)"></span>
+               <span ng-bind="(getWeatherField('lowTemperature', item, entity) | number:1)"></span>
+               <span ng-bind="getWeatherField('lowTemperatureUnit', item, entity)"></span>
             </span>
          </div>
 
@@ -399,7 +399,7 @@
          </div>
 
          <div class="weather-line -items">
-            <span ng-if="item.fields.windSpeed" class="weather-item">
+            <span ng-if="item.fields.pressure" class="weather-item">
                <i class="mdi  mdi-gauge"></i>
                <span ng-bind="(getWeatherField('pressure', item, entity) | number:0)"></span><!--
             --><span ng-bind="getWeatherField('pressureUnit', item, entity)"></span>
