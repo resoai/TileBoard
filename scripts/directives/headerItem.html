@@ -23,8 +23,8 @@
       </div>
 
       <div class="header-weather--temperature" ng-if="item.fields.temperature">
-         <span ng-bind="(getWeatherField('temperature', item, {}) | number:1)"></span>
-         <span ng-bind="getWeatherField('temperatureUnit', item, {})"></span>
+         <span ng-bind="(getWeatherField('temperature', item, {}) | number:1)"></span><!--
+         --><span ng-bind="getWeatherField('temperatureUnit', item, {})"></span>
       </div>
 
       <div class="header-weather--summary" ng-if="item.fields.summary">
