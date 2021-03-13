@@ -429,6 +429,7 @@ Locks and unlocks the lock on tap. Also shows icon depending on the state<br>
    id: 'media_player.volumio',
    type: TYPES.MEDIA_PLAYER,
    hideSource: false,
+   textSource: 'Sorgente',
    hideMuteButton: false,
    state: false,
    //state: '@attributes.media_title',
