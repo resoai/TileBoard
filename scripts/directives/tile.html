@@ -505,8 +505,7 @@
          </div>
       </div>
       <div ng-if="selectOpened(item)" class="item-select"
-           ng-style="itemSelectStyles(entity, _options)">
-
+            ng-style="itemSelectStyles(entity, Object.keys(_options))">
          <div class="item-select--option"
               ng-repeat="option in _options track by $index"
               ng-class="{'-active': option === lookupClimateOption(item, entity, entity.state)}"
@@ -573,7 +572,7 @@
                <td colspan="3" class="media-player-table--td-source">
                   <div class="media-player--source" ng-click="openSelect(item)"
                        ng-if="entity.attributes.source_list.length && !item.hideSource">
-                     <span ng-bind="entity.attributes.source || item.textSource || 'Source'"></span>
+                     <span ng-bind="item.textSource || entity.attributes.source || 'Source'"></span>
                   </div>
                </td>
             </tr>
