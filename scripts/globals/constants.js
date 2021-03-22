@@ -50,6 +50,7 @@ export const TYPES = {
    CAMERA_STREAM: 'camera_stream',
    SCENE: 'scene',
    SLIDER: 'slider',
+   SLIDER_VERTICAL: 'slider_vertical',
    IFRAME: 'iframe',
    DOOR_ENTRY: 'door_entry',
    WEATHER: 'weather',

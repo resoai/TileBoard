@@ -426,6 +426,30 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
       };
    };
 
+   $scope.sliderVertStyles = function (page, item) {
+      const width = item.width || 1;
+      const height = item.height || 1;
+      const tileSize = page.tileSize || CONFIG.tileSize;
+      const tileMargin = page.tileMargin || CONFIG.tileMargin;
+
+      const itemHeight = tileSize * width + tileMargin * (width - 1);
+      const itemWidth = tileSize * height + tileMargin * (height - 1);
+
+      const iconHeight = item.icon || item.icon === '' ? 0 : 42;
+
+      const sliderHeight = item.slider.sliderWidth || itemHeight - 30;
+      const sliderWidth = item.slider.sliderHeight || (itemWidth - tileSize * width + iconHeight - (item.height === 1 ? 0 : (20 + tileMargin)));
+
+      const styles = {
+         height: sliderHeight + 'px',
+         width: sliderWidth + 'px',
+         top: sliderWidth / 2 - sliderHeight / 2 + 'px',
+         right: sliderHeight / 2 - sliderWidth / 2 + 'px',
+      };
+
+      return styles;
+   };
+
    $scope.itemStyles = function (page, item, entity) {
       const prevSize = item._prevTileSize || page.tileSize || CONFIG.tileSize;
       const currentSize = page.tileSize || CONFIG.tileSize;

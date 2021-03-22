@@ -326,6 +326,31 @@
       </div>
    </div>
 
+   <div ng-if="item.type === TYPES.SLIDER_VERTICAL && (_c = getSliderConf(item, entity))"
+        class="item-entity-container">
+
+        <div class="slidervertical-inner">
+         <div class="slidervertical-inner-icon" ng-if="item.icon && item.icon !=''">
+            <span class="item-entity--icon mdi" ng-class="entityIcon(item, entity)"></span>
+         </div>
+         <h4 class="slidervertical-inner-value">
+            <span ng-bind="getSliderValue(item, entity, _c)"></span>
+            <span ng-if="(_unit = entityUnit(item, entity))" ng-bind="_unit"></span>
+         </h4>
+         <div class="range-holder" ng-style="{'height': sliderVertStyles(page, item).width, 'width': sliderVertStyles(page, item).height }">
+           <input type="range"
+                  ng-model="_c.getSetValue"
+                  ng-model-options="{ getterSetter: true }"
+                  ng-change="sliderChanged(item, entity, _c)"
+                  ng-on-touchstart="$event.stopPropagation()"
+                  ng-on-touchmove="$event.stopPropagation()"
+                  ng-on-pointerdown="$event.stopPropagation()"
+                  step="{{ _c.step }}" min="{{ _c.min }}" max="{{ _c.max }}"
+                  ng-style="sliderVertStyles(page, item)">
+         </div>
+       </div>
+   </div>
+
    <div ng-if="item.type === TYPES.IFRAME"
         class="item-entity-container">
 
