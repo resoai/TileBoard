@@ -438,7 +438,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
       const iconHeight = item.icon || item.icon === '' ? 0 : 42;
 
       const sliderHeight = item.slider.sliderWidth || itemHeight - 30;
-      const sliderWidth = item.slider.sliderHeight || (itemWidth - tileSize * width + iconHeight - (item.height === 1 ? 0 : (20 + tileMargin)));
+      const sliderWidth = item.slider.sliderHeight || (itemWidth - tileSize * width + iconHeight - (height === 1 ? 0 : (20 + tileMargin)));
 
       const styles = {
          height: sliderHeight + 'px',
