@@ -528,6 +528,42 @@ Similar to sensor, but with an icon.<br>
 }
 ```
 
+#### SLIDER_VERTICAL
+Similar to SLIDER (Same rules and calculations are applied. ) but positioned Vertically.<br> 
+Has some extra options: sliderWidth and sliderHeight to define custom Slider width and height.<br>
+![SLIDER](images/tile-screenshots/SLIDER_VERTICAL.png)
+```js
+{
+    position: [0, 0],
+    height: 2,    // Best works with height > 1. In case height=1, better use custom sliderHeight to achieve your needs
+    id: 'light.entity',
+    type: TYPES.SLIDER_VERTICAL,
+    unit: '%',
+    title: 'Slider',
+    icon: 'mdi-lightbulb', // Can be defined or omited. Slider Height will be calculated automatically 
+    state: false,
+    filter: function (value) {
+       var num = parseFloat(value) / 2.55 ;
+       return num && !isNaN(num) ? num.toFixed() : 0;
+    },
+    value: '@attributes.brightness',
+    slider: {
+       max: 255,
+       min: 0,
+       step: 5,
+       field: 'brightness',
+       // sliderWidth: '60',     // Custom Slider Width.
+       // sliderHeight: '270',   // Custom Slider Height.
+       request: {
+          type: "call_service",
+          domain: "light",
+          service: "turn_on",
+          field: "brightness"
+       },
+    },
+}
+```
+
 #### SWITCH
 Toggle switch on tap. Also shows icon depending on the state<br>
 ![SWITCH](images/tile-screenshots/SWITCH.png)
