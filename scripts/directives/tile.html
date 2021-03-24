@@ -329,7 +329,7 @@
    <div ng-if="item.type === TYPES.SLIDER_VERTICAL && (_c = getSliderConf(item, entity))"
         class="item-entity-container">
 
-        <div class="slidervertical-inner">
+      <div class="slidervertical-inner">
          <div class="slidervertical-inner-icon" ng-if="item.icon">
             <span class="item-entity--icon mdi" ng-class="entityIcon(item, entity)"></span>
          </div>
@@ -348,7 +348,7 @@
                   step="{{ _c.step }}" min="{{ _c.min }}" max="{{ _c.max }}"
                   ng-style="sliderVertStyles(page, item)">
          </div>
-       </div>
+      </div>
    </div>
 
    <div ng-if="item.type === TYPES.IFRAME"

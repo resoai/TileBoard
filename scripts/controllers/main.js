@@ -427,26 +427,33 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
    };
 
    $scope.sliderVertStyles = function (page, item) {
-      const width = item.width || 1;
-      const height = item.height || 1;
-      const tileSize = page.tileSize || CONFIG.tileSize;
-      const tileMargin = page.tileMargin || CONFIG.tileMargin;
+      // const width = item.width || 1;
 
-      const itemHeight = tileSize * width + tileMargin * (width - 1);
-      const itemWidth = tileSize * height + tileMargin * (height - 1);
+      const width = cacheInItem(item, 'width', () => item.width || 1);
+      const height = cacheInItem(item, 'height', () => item.height || 1);
+      const tileSize = cacheInItem(item, '_tileSize', () => page.tileSize || CONFIG.tileSize);
+      const tileMargin = cacheInItem(item, '_tileMargin', () => page.tileMargin || CONFIG.tileMargin);
 
-      // if item.icon defined, iconHeight should be 0. CSS will count slider height automatically
-      // if item.icon is not defined - we have to count Height.
-      const iconHeight = (item.icon && item.icon !== '') ? 0 : 42;
+      const itemWidth = cacheInItem(item, '_itemWidth', () => tileSize * width + tileMargin * (width - 1));
+      const itemHeight = cacheInItem(item, '_itemHeight', () => tileSize * height + tileMargin * (height - 1));
 
-      const sliderHeight = item.slider.sliderWidth || itemHeight - 30;
-      const sliderWidth = item.slider.sliderHeight || (itemWidth - tileSize * width + iconHeight - (height === 1 ? 0 : (20 + tileMargin)));
+      // defines free space used by icon
+      const iconSpacer = item.icon ? 0 : 35;
+
+      // if `item.slider.sliderHeight` is defined - set SIZE to custom value
+      // if `item.slider.sliderHeight` is not defined: make calculation and compare if it greater than (0/20).
+      // This prevents:
+      //    to show very small sliders
+      //    negative values, which can break alignment
+      // If user would like to override automatic calculation appropriate option has to be defined
+      const sliderWidth = item.slider.sliderWidth || (x => x > 0 ? x : 0)(itemWidth - 30);
+      const sliderHeight = item.slider.sliderHeight || (x => x > 20 ? x : 0)(itemHeight - 100 + iconSpacer);
 
       const styles = {
-         height: sliderHeight + 'px',
-         width: sliderWidth + 'px',
-         top: sliderWidth / 2 - sliderHeight / 2 + 'px',
-         right: sliderHeight / 2 - sliderWidth / 2 + 'px',
+         width: sliderHeight + 'px',
+         height: sliderWidth + 'px',
+         top: sliderHeight / 2 - sliderWidth / 2 + 'px',
+         right: sliderWidth / 2 - sliderHeight / 2 + 'px',
       };
 
       return styles;
