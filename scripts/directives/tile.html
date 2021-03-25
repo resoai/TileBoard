@@ -338,15 +338,15 @@
             <span ng-if="(_unit = entityUnit(item, entity))" ng-bind="_unit"></span>
          </h4>
          <div class="range-holder" ng-style="{'height': sliderVertStyles(page, item).width, 'width': sliderVertStyles(page, item).height }">
-           <input type="range"
-                  ng-model="_c.getSetValue"
-                  ng-model-options="{ getterSetter: true }"
-                  ng-change="sliderChanged(item, entity, _c)"
-                  ng-on-touchstart="$event.stopPropagation()"
-                  ng-on-touchmove="$event.stopPropagation()"
-                  ng-on-pointerdown="$event.stopPropagation()"
-                  step="{{ _c.step }}" min="{{ _c.min }}" max="{{ _c.max }}"
-                  ng-style="sliderVertStyles(page, item)">
+            <input type="range"
+                   ng-model="_c.getSetValue"
+                   ng-model-options="{ getterSetter: true }"
+                   ng-change="sliderChanged(item, entity, _c)"
+                   ng-on-touchstart="$event.stopPropagation()"
+                   ng-on-touchmove="$event.stopPropagation()"
+                   ng-on-pointerdown="$event.stopPropagation()"
+                   step="{{ _c.step }}" min="{{ _c.min }}" max="{{ _c.max }}"
+                   ng-style="sliderVertStyles(page, item)">
          </div>
       </div>
    </div>

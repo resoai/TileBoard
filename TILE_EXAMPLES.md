@@ -529,8 +529,8 @@ Similar to sensor, but with an icon.<br>
 ```
 
 #### SLIDER_VERTICAL
-Similar to SLIDER (Same rules and calculations are applied. ) but positioned Vertically.<br> 
-Has some extra options: sliderWidth and sliderHeight to define custom Slider width and height.<br>
+Similar to SLIDER (same rules and calculations are applied) but positioned vertically.<br> 
+Has some extra options: `sliderWidth` and `sliderHeight` to define custom slider width and height.<br>
 ![SLIDER](images/tile-screenshots/SLIDER_VERTICAL.png)
 ```js
 {
@@ -540,10 +540,10 @@ Has some extra options: sliderWidth and sliderHeight to define custom Slider wid
     type: TYPES.SLIDER_VERTICAL,
     unit: '%',
     title: 'Slider',
-    icon: 'mdi-lightbulb', // Can be defined or omited. Slider Height will be calculated automatically 
+    icon: 'mdi-lightbulb', // Can be defined or omited. Slider height will be calculated automatically
     state: false,
     filter: function (value) {
-       var num = parseFloat(value) / 2.55 ;
+       var num = parseFloat(value) / 2.55;
        return num && !isNaN(num) ? num.toFixed() : 0;
     },
     value: '@attributes.brightness',
@@ -552,8 +552,8 @@ Has some extra options: sliderWidth and sliderHeight to define custom Slider wid
        min: 0,
        step: 5,
        field: 'brightness',
-       // sliderWidth: '60',     // Custom Slider Width.
-       // sliderHeight: '270',   // Custom Slider Height.
+       // sliderWidth: '60',     // Custom slider width
+       // sliderHeight: '270',   // Custom slider height
        request: {
           type: "call_service",
           domain: "light",

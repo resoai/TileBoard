@@ -427,36 +427,36 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
    };
 
    $scope.sliderVertStyles = function (page, item) {
-      // const width = item.width || 1;
+      return cacheInItem(item, '_v_slider', function () {
+         const width = item.width || 1;
+         const height = item.height || 1;
+         const tileSize = page.tileSize || CONFIG.tileSize;
+         const tileMargin = page.tileMargin || CONFIG.tileMargin;
 
-      const width = cacheInItem(item, 'width', () => item.width || 1);
-      const height = cacheInItem(item, 'height', () => item.height || 1);
-      const tileSize = cacheInItem(item, '_tileSize', () => page.tileSize || CONFIG.tileSize);
-      const tileMargin = cacheInItem(item, '_tileMargin', () => page.tileMargin || CONFIG.tileMargin);
+         const itemWidth = tileSize * width + tileMargin * (width - 1);
+         const itemHeight = tileSize * height + tileMargin * (height - 1);
 
-      const itemWidth = cacheInItem(item, '_itemWidth', () => tileSize * width + tileMargin * (width - 1));
-      const itemHeight = cacheInItem(item, '_itemHeight', () => tileSize * height + tileMargin * (height - 1));
+         // defines free space used by icon
+         const iconSpacer = item.icon ? 0 : 35;
 
-      // defines free space used by icon
-      const iconSpacer = item.icon ? 0 : 35;
+         // if `item.slider.sliderHeight` is defined - set SIZE to custom value
+         // if `item.slider.sliderHeight` is not defined: make calculation and compare if it greater than (0/20).
+         // This prevents:
+         //    to show very small sliders
+         //    negative values, which can break alignment
+         // If user would like to override automatic calculation appropriate option has to be defined
+         const sliderWidth = item.slider.sliderWidth || (x => x > 0 ? x : 0)(itemWidth - 30);
+         const sliderHeight = item.slider.sliderHeight || (x => x > 20 ? x : 0)(itemHeight - 100 + iconSpacer);
 
-      // if `item.slider.sliderHeight` is defined - set SIZE to custom value
-      // if `item.slider.sliderHeight` is not defined: make calculation and compare if it greater than (0/20).
-      // This prevents:
-      //    to show very small sliders
-      //    negative values, which can break alignment
-      // If user would like to override automatic calculation appropriate option has to be defined
-      const sliderWidth = item.slider.sliderWidth || (x => x > 0 ? x : 0)(itemWidth - 30);
-      const sliderHeight = item.slider.sliderHeight || (x => x > 20 ? x : 0)(itemHeight - 100 + iconSpacer);
+         const styles = {
+            width: sliderHeight + 'px',
+            height: sliderWidth + 'px',
+            top: sliderHeight / 2 - sliderWidth / 2 + 'px',
+            right: sliderWidth / 2 - sliderHeight / 2 + 'px',
+         };
 
-      const styles = {
-         width: sliderHeight + 'px',
-         height: sliderWidth + 'px',
-         top: sliderHeight / 2 - sliderWidth / 2 + 'px',
-         right: sliderWidth / 2 - sliderHeight / 2 + 'px',
-      };
-
-      return styles;
+         return styles;
+      });
    };
 
    $scope.itemStyles = function (page, item, entity) {
