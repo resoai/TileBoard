@@ -426,7 +426,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
       };
    };
 
-   $scope.sliderVertStyles = function (page, item) {
+   $scope.sliderStyles = function (page, item) {
       return cacheInItem(item, '_v_slider', function () {
          const width = item.width || 1;
          const height = item.height || 1;

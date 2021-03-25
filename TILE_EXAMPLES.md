@@ -506,31 +506,6 @@ Similar to sensor, but with an icon.<br>
 
 #### SLIDER
 ![SLIDER](images/tile-screenshots/SLIDER.png)
-```js
-{
-   position: [6, 1],
-   id: 'input_number.casatunes_volume_6',
-   type: TYPES.SLIDER,
-   unit: '%',
-   state: false,
-   //bottom: true, // puts slider on bottom
-   slider: {
-      //max: 100,
-      //min: 0,
-      //step: 2,
-      request: {
-         type: "call_service",
-         domain: "input_number",
-         service: "set_value",
-         field: "value"
-      }
-   }
-}
-```
-
-#### SLIDER_VERTICAL
-Similar to SLIDER (same rules and calculations are applied) but positioned vertically.<br> 
-Has some extra options: `sliderWidth` and `sliderHeight` to define custom slider width and height.<br>
 ![SLIDER](images/tile-screenshots/SLIDER_VERTICAL.png)
 ```js
 {
@@ -541,6 +516,9 @@ Has some extra options: `sliderWidth` and `sliderHeight` to define custom slider
     unit: '%',
     title: 'Slider',
     icon: 'mdi-lightbulb', // Can be defined or omited. Slider height will be calculated automatically
+    // legacy: true,  // old-style slider that only works in horizontal mode (defaults to `false`)
+    // bottom: true, // puts slider on the bottom (defaults to `true`)
+    // vertical: true,  // show vertical slider (defaults to `false` - horizontal)
     state: false,
     filter: function (value) {
        var num = parseFloat(value) / 2.55;
