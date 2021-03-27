@@ -54,9 +54,9 @@ export const playSound = function (sound) {
    audio.play();
 };
 
-export const timeAgo = function (time) {
+export const timeAgo = function (time, omitAgo) {
    const momentInTime = moment(new Date(time));
-   return momentInTime.fromNow();
+   return momentInTime.fromNow(omitAgo ?? false);
 };
 
 export const debounce = function (func, wait, immediate) {

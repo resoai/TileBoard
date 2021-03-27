@@ -328,8 +328,11 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
   value: '&sensor.bathroom_temp.state',
   /* unit: Override default unit of measurement */
   unit: 'kWh',
-  /* filter: Function for filtering/formatting the entity value */
-  filter: function (value) {return value},
+  /* filter: Function for filtering/formatting the entity value
+   * Is used by default to format a timestamp as time ago, e.g., for the uptime sensor.
+   */
+  filter: function (value, item, entity) {return Math.round(value);},
+  filter: function (value, item, entity) {return timeAgo(value, true);}, // true = exclude the word 'ago'
   /** type: DEVICE_TRACKER **/
   /* slidesDelay: Delay before slide animation starts (optional) */
   slidesDelay: 2,
