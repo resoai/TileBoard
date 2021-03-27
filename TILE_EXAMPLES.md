@@ -591,12 +591,12 @@ This is a custom tile which can be used for displaying values from different sen
    //classes: ['-compact'], // enable this if you want a little square tile (1x1)
    type: TYPES.WEATHER,
    id: 'group.weather',
-   state: '&sensor.dark_sky_summary.state', // label with weather summary (e.g. Sunny)
+   state: '&weather.openweathermap.state', // label with weather summary (e.g. Sunny)
    // Resolved value must either match one of the supported icons or be mapped
    // to one using the 'icons' option. See the 'icons' option for more information.
-   icon: '&sensor.dark_sky_icon.state',
+   icon: '&weather.openweathermap.state',
    // Use this one if you have an URL of the image to show.
-   //iconImage: '&sensor.dark_sky_icon.state',
+   //iconImage: '&sensor.my_weather_icon.state',
    // A map from sensor's state (key) to icon name (value).
    // The value must match the format:
    //   [dark-][nt-]icon_name
@@ -625,21 +625,22 @@ This is a custom tile which can be used for displaying values from different sen
    // So for example, to map 'clear-night' sensor value to a respective icon, set the value to
    // 'nt-clear' (for light icon) or 'dark-nt-clear' (for dark icon).
    icons: {
+      'clear-day': 'clear',
       'clear-night': 'nt-clear',
       'cloudy': 'cloudy',
-      'exceptional': 'fog',
+      'exceptional': 'unknown',
       'fog': 'fog',
       'hail': 'sleet',
       'lightning': 'chancestorms',
       'lightning-rainy': 'tstorms',
-      'partlycloudy': 'partlycloudy',
+      'partly-cloudy-day': 'partlycloudy',
+      'partly-cloudy-night': 'nt-partlycloudy',
       'pouring': 'rain',
-      'rainy': 'chancerain',
       'snowy': 'snow',
       'snowy-rainy': 'sleet',
-      'sunny': 'sunny',
-      'windy': 'hazy',
-      'windy-variant': 'flurries'
+      'wind': 'unknown',
+      'windy': 'unknown',
+      'windy-variant': 'unknown'
    },
    // A map from sensor's state (key) to human readable and possibly localized strings.
    states: {
@@ -660,32 +661,34 @@ This is a custom tile which can be used for displaying values from different sen
       'windy-variant': 'Windy'
    },
    fields: { // most of that fields are optional
-      summary: '&sensor.dark_sky_summary.state',
-      temperature: '&sensor.dark_sky_temperature.state',
-      temperatureUnit: '&sensor.dark_sky_temperature.attributes.unit_of_measurement',
-      windSpeed: '&sensor.dark_sky_wind_speed.state',
-      windSpeedUnit: '&sensor.dark_sky_wind_speed.attributes.unit_of_measurement',
-      humidity: '&sensor.dark_sky_humidity.state',
-      humidityUnit: '&sensor.dark_sky_humidity.attributes.unit_of_measurement',
-      pressure: '&sensor.dark_sky_pressure.state',
-      pressureUnit: '&sensor.dark_sky_pressure.attributes.unit_of_measurement',
+      summary: '&weather.openweathermap.state',
+      temperature: '&sensor.openweathermap_temperature.state',
+      temperatureUnit: '&sensor.openweathermap_temperature.attributes.unit_of_measurement',
+      windSpeed: '&sensor.openweathermap_wind_speed.state',
+      windSpeedUnit: '&sensor.openweathermap_wind_speed.attributes.unit_of_measurement',
+      humidity: '&sensor.openweathermap_humidity.state',
+      humidityUnit: '&sensor.openweathermap_humidity.attributes.unit_of_measurement',
+      pressure: '&sensor.openweathermap_pressure.state',
+      pressureUnit: '&sensor.openweathermap_pressure.attributes.unit_of_measurement',
 
       list: [
          // custom line
-         'Feels like '
-            + '&sensor.dark_sky_apparent_temperature.state'
-            + '&sensor.dark_sky_apparent_temperature.attributes.unit_of_measurement',
-
-         // yet another custom line
-         '&sensor.dark_sky_precip_probability.state'
-            + '&sensor.dark_sky_precip_probability.attributes.unit_of_measurement'
-            + ' chance of rain'
+         'Rain: '
+            + '&sensor.openweathermap_rain.state '
+            + '&sensor.openweathermap_rain.attributes.unit_of_measurement',
+         'Snow: '
+            + '&sensor.openweathermap_snow.state '
+            + '&sensor.openweathermap_snow.attributes.unit_of_measurement',
+         'Cloud coverage '
+            + '&sensor.openweathermap_cloud_coverage.state'
+            + '&sensor.openweathermap_cloud_coverage.attributes.unit_of_measurement',
       ]
    }
 }
 ```
 
 #### WEATHER_LIST
+The example below is for the OpenWeatherMap provider. The configuration can vary per weather provider.
 ![WEATHER_LIST](images/tile-screenshots/WEATHER_LIST.png)<br>
 ```js
 {
@@ -696,58 +699,51 @@ This is a custom tile which can be used for displaying values from different sen
    title: 'Forecast',
    id: {},
    icons: {
+      'clear-day': 'clear',
       'clear-night': 'nt-clear',
       'cloudy': 'cloudy',
-      'exceptional': 'fog',
+      'exceptional': 'unknown',
       'fog': 'fog',
       'hail': 'sleet',
       'lightning': 'chancestorms',
       'lightning-rainy': 'tstorms',
-      'partlycloudy': 'partlycloudy',
+      'partly-cloudy-day': 'partlycloudy',
+      'partly-cloudy-night': 'nt-partlycloudy',
       'pouring': 'rain',
-      'rainy': 'chancerain',
       'snowy': 'snow',
       'snowy-rainy': 'sleet',
-      'sunny': 'sunny',
-      'windy': 'hazy',
-      'windy-variant': 'flurries'
+      'wind': 'unknown',
+      'windy': 'unknown',
+      'windy-variant': 'unknown'
    },
-   states: {
-      'clear-night': 'Clear, night',
-      'cloudy': 'Cloudy',
-      'exceptional': 'Exceptional',
-      'fog': 'Fog',
-      'hail': 'Hail',
-      'lightning': 'Lightning',
-      'lightning-rainy': 'Lightning, rainy',
-      'partlycloudy': 'Partly cloudy',
-      'pouring': 'Pouring',
-      'rainy': 'Rainy',
-      'snowy': 'Snowy',
-      'snowy-rainy': 'Snowy, rainy',
-      'sunny': 'Sunny',
-      'windy': 'Windy',
-      'windy-variant': 'Windy'
-   },   
    hideHeader: false,
    secondaryTitle: 'Wind',
    list: [1,2,3,4,5].map(function (id) {
-      var forecast = "&sensor.dark_sky_overnight_low_temperature_" + id + "d.state - ";
-      forecast += "&sensor.dark_sky_daytime_high_temperature_" + id + "d.state";
-      forecast += "&sensor.dark_sky_daytime_high_temperature_" + id + "d.attributes.unit_of_measurement";
-
-      var wind = "&sensor.dark_sky_wind_speed_" + id + "d.state";
-      wind += " &sensor.dark_sky_wind_speed_" + id + "d.attributes.unit_of_measurement";
-
+      var ENTITY_ID = 'weather.openweathermap'
       return {
          date: function () {
-            var d = new Date(Date.now() + id * 24 * 60 * 60 * 1000);
-            return d.toString().split(' ').slice(1, 3).join(' ');
+            var entityState = this.states[ENTITY_ID];
+            return entityState.attributes.forecast[id].datetime
          },
-         icon: "&sensor.dark_sky_icon_" + id + ".state",
-         //iconImage: null, replace icon with image
-         primary: forecast,
-         secondary: wind
+         icon: function () {
+            var entityState = this.states[ENTITY_ID];
+            return entityState.attributes.forecast[id].condition
+         },
+         // iconImage: null,  // replace icon with image
+         primary: function () {
+            var entityState = this.states[ENTITY_ID];
+            var forecast = entityState.attributes.forecast[id]
+            return forecast.templow + ' - ' + forecast.temperature + ' °C'
+         },
+         secondary: function () {
+            var entityState = this.states[ENTITY_ID];
+            var forecast = entityState.attributes.forecast[id]
+
+            // Wind speed. Convert m/s to km/h.
+            // return Number.parseInt(forecast.wind_speed * 3.6) + ' km/h'
+            // Or if you prefer precipitation
+            return (forecast.precipitation || 0) + ' mm'
+         }
       }
    })
 }
