@@ -58,6 +58,7 @@
     "lint-staged": "^10.5.4",
     "print-message": "^3.0.1",
     "rollup": "^2.39.0",
+    "rollup-plugin-copy-merge": "^0.2.0",
     "rollup-plugin-cpy": "^2.0.1",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-emit-ejs": "^3.1.0",

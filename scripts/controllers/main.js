@@ -6,7 +6,7 @@ import { TYPES, FEATURES, HEADER_ITEMS, MENU_POSITIONS, CUSTOM_THEMES, GROUP_ALI
 import { debounce, leadZero, supportsFeature, toAbsoluteServerURL } from '../globals/utils';
 import Noty from '../models/noty';
 
-App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLocale, $filter) {
+App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLocale, $filter, amMoment) {
    if (!window.CONFIG) {
       return;
    }
@@ -14,9 +14,14 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
    const CONFIG = window.CONFIG;
 
    const locale = (CONFIG.locale || 'en-us').toLowerCase();
-   tmhDynamicLocale.set(locale).catch(() => {
-      Noty.add(Noty.ERROR, 'Failed loading locale', `Could not find corresponding file for locale "${locale}" in the /locales/ directory.`);
-   });
+   tmhDynamicLocale
+      .set(locale)
+      .catch(() => {
+         Noty.add(Noty.ERROR, 'Failed loading locale', `Could not find corresponding file for locale "${locale}" in the /locales/ directory.`);
+      })
+      .then(() => {
+         amMoment.changeLocale(locale);
+      });
 
    if (CONFIG.groupsAlign === GROUP_ALIGNS.GRID && [CUSTOM_THEMES.MOBILE, CUSTOM_THEMES.WINPHONE].includes(CONFIG.customTheme)) {
       CONFIG.groupsAlign = GROUP_ALIGNS.HORIZONTALLY;
