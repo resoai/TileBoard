@@ -16,11 +16,11 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
    const locale = (CONFIG.locale || 'en-us').toLowerCase();
    tmhDynamicLocale
       .set(locale)
-      .then(() => {
-         amMoment.changeLocale(locale);
-      })
       .catch(() => {
          Noty.add(Noty.ERROR, 'Failed loading locale', `Could not find corresponding file for locale "${locale}" in the /locales/ directory.`);
+      })
+      .then(() => {
+         amMoment.changeLocale(locale);
       });
 
    if (CONFIG.groupsAlign === GROUP_ALIGNS.GRID && [CUSTOM_THEMES.MOBILE, CUSTOM_THEMES.WINPHONE].includes(CONFIG.customTheme)) {
