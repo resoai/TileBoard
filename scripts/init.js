@@ -32,7 +32,7 @@ window.initApp = function () {
          authToken: window.CONFIG.authToken,
       });
 
-      tmhDynamicLocaleProvider.localeLocationPattern('./locales/angular-locale_{{locale}}.js');
+      tmhDynamicLocaleProvider.localeLocationPattern('./locales/{{locale}}.js');
 
       const clock24 = window.CONFIG.timeFormat === 24;
 

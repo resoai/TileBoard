@@ -1,6 +1,8 @@
 import angular from 'angular';
 import moment from 'moment';
 
+export { moment };
+
 export const mergeObjects = angular.merge;
 
 export const leadZero = function (num) {
