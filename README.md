@@ -25,6 +25,7 @@ The project structure has changed in the first versioned (v1.0.0) release. Inste
 * Make sure that you have Home Assistant 0.77 or greater installed as only new authentication system is supported from now on
 * Download the latest release zip file (`Tileboard.zip`) from https://github.com/resoai/TileBoard/releases and unpack to a directory of your choice
 * In chosen directory rename `config.example.js` to `config.js` and adjust it for your needs
+* Optionally create an empty `styles/custom.css` file. Everything will work without it but there will be a network request error logged in the console which can be annoying to some.
 * Create a directory called `tileboard` inside `www` directory in HA's config path and copy all unpacked files there.
 * TileBoard will be available at `http://HASS_IP:8123/local/tileboard/index.html` and will prompt you for your login credentials after restarting Home Assistant.
 
