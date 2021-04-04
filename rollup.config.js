@@ -28,10 +28,6 @@ if (isProduction) {
    outputJsName = 'app.js';
    outputCssName = 'styles[extname]';
    appPlugins.push(
-      copy([
-         // Copy over empty custom.css but don't overwrite in case user has customized it.
-         { files: './styles/custom.css', dest: `./${outDir}/styles/`, options: { overwrite: false } },
-      ]),
       serve({
          contentBase: outDir,
          port: 8080,
