@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/resoai/TileBoard/compare/v2.2.0...v2.3.0) (2021-04-05)
+
+
+### Features
+
+* support sensors which are timestamps (like uptime sensor) ([#677](https://github.com/resoai/TileBoard/issues/677)) ([b417812](https://github.com/resoai/TileBoard/commit/b417812ef8ddf7640965581f0c7a892e532561eb)), closes [#671](https://github.com/resoai/TileBoard/issues/671)
+* **WEATHER:** localized number values and support "pressure" key ([#666](https://github.com/resoai/TileBoard/issues/666)) ([3a1b206](https://github.com/resoai/TileBoard/commit/3a1b2066c860a4e2e0fde0175eac6280ef92e1cd))
+* GRID groupAlignment option ([#662](https://github.com/resoai/TileBoard/issues/662)) ([719d424](https://github.com/resoai/TileBoard/commit/719d424287382dfd2acb76051a7bc7480194a212))
+
+
+### Bug Fixes
+
+* **deps:** update dependency hls.js to v1 ([#683](https://github.com/resoai/TileBoard/issues/683)) ([570f5ce](https://github.com/resoai/TileBoard/commit/570f5ce46db0e8f6f401c7eb9d05c3d2f507c6cd))
+* don't include custom.css in the release ([#686](https://github.com/resoai/TileBoard/issues/686)) ([438bc8b](https://github.com/resoai/TileBoard/commit/438bc8b650a72cc18f9074b4ede01fd66685f59d))
+* **locales:** make moment follow the locale set in the config ([#680](https://github.com/resoai/TileBoard/issues/680)) ([4126d1a](https://github.com/resoai/TileBoard/commit/4126d1a0e1dee9da5477a6ee03be9fd81bdae7e1)), closes [#678](https://github.com/resoai/TileBoard/issues/678)
+* **WEATHER, WEATHER_LIST:** replace darksky with openweathermap in examples ([#676](https://github.com/resoai/TileBoard/issues/676)) ([1f5f541](https://github.com/resoai/TileBoard/commit/1f5f54177b3b2752b5ca1b0b0eb4f61d4dd79889)), closes [#558](https://github.com/resoai/TileBoard/issues/558)
+
 ## [2.2.0](https://github.com/resoai/TileBoard/compare/v2.1.3...v2.2.0) (2021-03-03)
 
 
