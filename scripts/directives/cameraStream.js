@@ -40,8 +40,8 @@ export default function (Api, $timeout) {
                current.pause();
                suspendPromise = $timeout(() => {
                   if (hls) {
-                     hls.stopLoad();
-                     hls.detachMedia();
+                     hls.destroy();
+                     hls = null;
                   }
                }, SUSPEND_TIMEOUT_MS);
             }
@@ -51,9 +51,10 @@ export default function (Api, $timeout) {
             $timeout.cancel(suspendPromise);
             if (current.paused) {
                if (hls) {
-                  hls.attachMedia(current);
+                  Promise.resolve(current.play()).catch(() => {});
+               } else {
+                  requestStream();
                }
-               Promise.resolve(current.play()).catch(() => {});
             }
          }
 
@@ -76,18 +77,20 @@ export default function (Api, $timeout) {
                   hls.destroy();
                }
                hls = new Hls(config);
-               hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+               hls.on(Hls.Events.MEDIA_ATTACHED, function (a, b) {
                   hls.loadSource(url);
                });
-               hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                  el.play();
+               hls.on(Hls.Events.MEDIA_DETACHED, function (a, b) {
+               });
+               hls.on(Hls.Events.MANIFEST_PARSED, function (a, b) {
+                  Promise.resolve(el.play()).catch(() => {});
                });
                hls.attachMedia(el);
             } else {
                el.src = url;
                el.setAttribute('playsinline', 'playsinline');
                el.addEventListener('loadedmetadata', function () {
-                  el.play();
+                  Promise.resolve(el.play()).catch(() => {});
                });
             }
 
@@ -104,16 +107,18 @@ export default function (Api, $timeout) {
                return;
             }
 
-            Api.send({
-               type: 'camera/stream',
-               entity_id: $scope.entity.entity_id,
-            },
-            function (res) {
-               if (!res.result) {
-                  return;
-               }
-               appendVideo(toAbsoluteServerURL(res.result.url));
-            });
+            Api.send(
+               {
+                  type: 'camera/stream',
+                  entity_id: $scope.entity.entity_id,
+               },
+               function (res) {
+                  if (!res.result) {
+                     return;
+                  }
+                  appendVideo(toAbsoluteServerURL(res.result.url));
+               },
+            );
          };
 
          $scope.$watch('entity', requestStream);
