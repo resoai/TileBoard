@@ -9,6 +9,13 @@ All notable changes to this project will be documented in this file. See [standa
 
 * **CAMERA_STREAM:** stream fails to resume after being suspended ([#692](https://github.com/resoai/TileBoard/issues/692)) ([bed202a](https://github.com/resoai/TileBoard/commit/bed202a3463f03a36513dfe3fed7afddcf2149a0)), closes [#688](https://github.com/resoai/TileBoard/issues/688)
 
+### [2.3.1](https://github.com/resoai/TileBoard/compare/v2.3.0...v2.3.1) (2021-04-07)
+
+
+### Bug Fixes
+
+* **CAMERA_STREAM:** stream fails to resume after being suspended ([#692](https://github.com/resoai/TileBoard/issues/692)) ([bed202a](https://github.com/resoai/TileBoard/commit/bed202a3463f03a36513dfe3fed7afddcf2149a0)), closes [#688](https://github.com/resoai/TileBoard/issues/688)
+
 ## [2.3.0](https://github.com/resoai/TileBoard/compare/v2.2.0...v2.3.0) (2021-04-05)
 
 
