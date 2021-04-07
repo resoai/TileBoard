@@ -80,8 +80,6 @@ export default function (Api, $timeout) {
                hls.on(Hls.Events.MEDIA_ATTACHED, function () {
                   hls.loadSource(url);
                });
-               hls.on(Hls.Events.MEDIA_DETACHED, function () {
-               });
                hls.on(Hls.Events.MANIFEST_PARSED, function () {
                   Promise.resolve(el.play()).catch(() => {});
                });
