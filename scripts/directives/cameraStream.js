@@ -77,12 +77,12 @@ export default function (Api, $timeout) {
                   hls.destroy();
                }
                hls = new Hls(config);
-               hls.on(Hls.Events.MEDIA_ATTACHED, function (a, b) {
+               hls.on(Hls.Events.MEDIA_ATTACHED, function () {
                   hls.loadSource(url);
                });
-               hls.on(Hls.Events.MEDIA_DETACHED, function (a, b) {
+               hls.on(Hls.Events.MEDIA_DETACHED, function () {
                });
-               hls.on(Hls.Events.MANIFEST_PARSED, function (a, b) {
+               hls.on(Hls.Events.MANIFEST_PARSED, function () {
                   Promise.resolve(el.play()).catch(() => {});
                });
                hls.attachMedia(el);
