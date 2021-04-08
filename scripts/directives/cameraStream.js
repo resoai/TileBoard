@@ -26,22 +26,22 @@ export default function (Api, $timeout) {
          let hls = null;
 
          $scope.$watch('frozen', frozen => {
-            if (current) {
-               if (frozen) {
-                  onFreezed();
-               } else {
-                  onUnfreezed();
-               }
+            if (frozen) {
+               onFreezed();
+            } else {
+               onUnfreezed();
             }
          });
 
          function onFreezed () {
-            if (!current.paused) {
+            if (current && !current.paused) {
                current.pause();
                suspendPromise = $timeout(() => {
                   if (hls) {
                      hls.destroy();
                      hls = null;
+                     current.remove();
+                     current = null;
                   }
                }, SUSPEND_TIMEOUT_MS);
             }
@@ -49,12 +49,10 @@ export default function (Api, $timeout) {
 
          function onUnfreezed () {
             $timeout.cancel(suspendPromise);
-            if (current.paused) {
-               if (hls) {
-                  Promise.resolve(current.play()).catch(() => {});
-               } else {
-                  requestStream();
-               }
+            if (hls) {
+               Promise.resolve(current.play()).catch(() => {});
+            } else {
+               requestStream();
             }
          }
 
@@ -101,7 +99,7 @@ export default function (Api, $timeout) {
          };
 
          const requestStream = function () {
-            if ($scope.entity.state === 'off') {
+            if ($scope.entity.state === 'off' || $scope.frozen) {
                return;
             }
 
