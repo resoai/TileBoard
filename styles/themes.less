@@ -187,6 +187,33 @@
   .noty {
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
   }
+
+  @sliderBorderRadius: 3px;
+  @sliderColor: #ddd;
+  @sliderThumbColor: #808080;
+
+  .slider-inner {
+    .range-holder {
+       & input[type="range"] { 
+          border-radius: @sliderBorderRadius;
+
+          &::-webkit-slider-thumb {
+             background: @sliderColor;
+             border-bottom: 1em solid @sliderColor;
+             border-left: 1.2em solid @sliderColor;
+             border-right: 1.2em solid @sliderColor;
+             border-top: 1em solid @sliderColor;
+             box-shadow: -350px 0 0 350px @sliderColor, inset 0 0 0 80px @sliderThumbColor;
+          }
+       }
+    }
+    .-horizontal.range-holder input[type="range"] {
+       &::-webkit-slider-thumb {
+          border-left: 0.9em solid @sliderColor;
+          border-right: 0.9em solid @sliderColor;
+       }
+    }
+  }
 }
 
 .-theme-transparent {
@@ -456,48 +483,6 @@
   @TILE_COLOR_OFF: rgb(84, 77, 75);
   @TILE_BACKGROUND_OFF: linear-gradient(to right bottom, rgba(253, 251, 249, 0.95), rgba(245, 245, 245, 0.8));
 
-  @sliderValueColor: #555;
-  @sliderTrackBg: #555;
-  @sliderColor: #aaa;
-  @sliderThumbColor: #777;
-
-  .slidervertical-inner {
-    &-value {
-      color: @sliderValueColor;
-      font-weight: 400;
-    }
-  }
-
-  .range-holder input[type="range"] {
-
-    &::-webkit-slider-runnable-track {
-      background-color: @sliderTrackBg;
-    }
-
-    &::-moz-range-track {
-      background-color: @sliderTrackBg;
-    }
-
-    &::-webkit-slider-thumb {
-      background: @sliderColor;
-      border-bottom: 20px solid @sliderColor;
-      border-left: 10px solid @sliderColor;
-      border-right: 10px solid @sliderColor;
-      border-top: 20px solid @sliderColor;
-      box-shadow: -350px 0 0 350px @sliderColor, inset 0 0 0 80px @sliderThumbColor;
-    }
-
-    &::-moz-range-thumb {
-      background: @sliderColor;
-      border-bottom: 20px solid @sliderColor;
-      border-left: 12px solid @sliderColor;
-      border-right: 12px solid @sliderColor;
-      border-top: 20px solid @sliderColor;
-      box-shadow: -350px 0 0 350px @sliderColor, inset 0 0 0 80px @sliderThumbColor;
-    }
-
-  }
-
   .item {
     color: #363636;
     border-radius: 8px;
@@ -650,6 +635,16 @@
     }
   }
 
+  @sliderBorderRadius: 8px;
+
+  .slider-inner {
+    .range-holder {
+       & input[type="range"] { 
+          border-radius: @sliderBorderRadius;
+       }
+    }
+  }
+
   &.-theme-mobile {
     .item {
       &-state {
@@ -658,7 +653,6 @@
     }
   }
 }
-
 
 .-theme-fresh-air {
    background: rgb(21, 89, 208);

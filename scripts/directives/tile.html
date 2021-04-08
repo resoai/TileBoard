@@ -326,26 +326,33 @@
                 step="{{ _c.step }}" min="{{ _c.min }}" max="{{ _c.max }}">
       </div>
 
-      <!-- new -->
+      <!-- vertical/horizontal -->
 
-      <div ng-if="!item.legacy && (_c_styles = sliderStyles(page, item))" class="slidervertical-inner">
-         <div class="slidervertical-inner-icon" ng-if="item.icon">
+      <div ng-if="!item.legacy && (_c_styles = sliderStyles(page, item))" 
+           class="slider-inner"
+           ng-class="{'slider-inner-direction-column': item.vertical || (!item.vertical && !item.alignRow),'slider-inner-direction-row': !item.vertical && item.alignRow}">
+
+         <div class="slider-inner-icon" ng-if="item.icon">
             <span class="item-entity--icon mdi" ng-class="entityIcon(item, entity)"></span>
          </div>
-         <h4 class="slidervertical-inner-value">
+
+         <div class="slider-inner-value" ng-style="{'order': !item.vertical && item.alignRow ? 1 : 0}">
             <span ng-bind="getSliderValue(item, entity, _c)"></span>
             <span ng-if="(_unit = entityUnit(item, entity))" ng-bind="_unit"></span>
-         </h4>
-         <div class="range-holder" ng-style="{height: _c_styles.width, width: _c_styles.height }">
+         </div>
+
+         <div class="range-holder" 
+              ng-class="{'-vertical': item.vertical,'-horizontal': !item.vertical}"
+              ng-style="item.vertical ? {height: _c_styles.width, width: _c_styles.height}:{height: _c_styles.height, width: _c_styles.width}">
             <input type="range"
-                   ng-model="_c.getSetValue"
-                   ng-model-options="{ getterSetter: true }"
-                   ng-change="sliderChanged(item, entity, _c)"
-                   ng-on-touchstart="$event.stopPropagation()"
-                   ng-on-touchmove="$event.stopPropagation()"
-                   ng-on-pointerdown="$event.stopPropagation()"
-                   step="{{ _c.step }}" min="{{ _c.min }}" max="{{ _c.max }}"
-                   ng-style="_c_styles">
+                  ng-model="_c.getSetValue"
+                  ng-model-options="{ getterSetter: true }"
+                  ng-change="sliderChanged(item, entity, _c)"
+                  ng-on-touchstart="$event.stopPropagation()"
+                  ng-on-touchmove="$event.stopPropagation()"
+                  ng-on-pointerdown="$event.stopPropagation()"
+                  step="{{ _c.step }}" min="{{ _c.min }}" max="{{ _c.max }}"
+                  ng-style="item.vertical && _c_styles">
          </div>
       </div>
    </div>

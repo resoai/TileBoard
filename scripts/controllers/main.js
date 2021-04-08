@@ -428,33 +428,37 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
 
    $scope.sliderStyles = function (page, item) {
       return cacheInItem(item, '_v_slider', function () {
-         const width = item.width || 1;
-         const height = item.height || 1;
-         const tileSize = page.tileSize || CONFIG.tileSize;
-         const tileMargin = page.tileMargin || CONFIG.tileMargin;
+         const styles = {};
 
-         const itemWidth = tileSize * width + tileMargin * (width - 1);
-         const itemHeight = tileSize * height + tileMargin * (height - 1);
+         if (item.vertical) {
+            const width = item.width || 1;
+            const height = item.height || 1;
+            const tileSize = page.tileSize || CONFIG.tileSize;
+            const tileMargin = page.tileMargin || CONFIG.tileMargin;
 
-         // defines free space used by icon
-         const iconSpacer = item.icon ? 0 : 35;
+            const itemWidth = tileSize * width + tileMargin * (width - 1);
+            const itemHeight = tileSize * height + tileMargin * (height - 1);
 
-         // if `item.slider.sliderHeight` is defined - set SIZE to custom value
-         // if `item.slider.sliderHeight` is not defined: make calculation and compare if it greater than (0/20).
-         // This prevents:
-         //    to show very small sliders
-         //    negative values, which can break alignment
-         // If user would like to override automatic calculation appropriate option has to be defined
-         const sliderWidth = item.slider.sliderWidth || (x => x > 0 ? x : 0)(itemWidth - 30);
-         const sliderHeight = item.slider.sliderHeight || (x => x > 20 ? x : 0)(itemHeight - 100 + iconSpacer);
+            // defines free space used by icon
+            const iconSpacer = item.icon ? 0 : 35;
 
-         const styles = {
-            width: sliderHeight + 'px',
-            height: sliderWidth + 'px',
-            top: sliderHeight / 2 - sliderWidth / 2 + 'px',
-            right: sliderWidth / 2 - sliderHeight / 2 + 'px',
-         };
+            // if `item.slider.sliderHeight` is defined - set SIZE to custom value
+            // if `item.slider.sliderHeight` is not defined: make calculation and compare if it greater than (0/20).
+            // This prevents:
+            //    to show very small sliders
+            //    negative values, which can break alignment
+            // If user would like to override automatic calculation appropriate option has to be defined
+            const sliderWidth = item.slider.sliderWidth || (x => x > 0 ? x : 0)(itemWidth - 30);
+            const sliderHeight = item.slider.sliderHeight || (x => x > 20 ? x : 0)(itemHeight - 100 + iconSpacer);
 
+            styles.width = sliderHeight + 'px';
+            styles.height = sliderWidth + 'px';
+            styles.top = sliderHeight / 2 - sliderWidth / 2 + 'px';
+            styles.right = sliderWidth / 2 - sliderHeight / 2 + 'px';
+         } else {
+            styles.width = item.slider.sliderWidth ? item.slider.sliderWidth + 'px' : '88%';
+            styles.height = item.slider.sliderHeight ? item.slider.sliderHeight + 'px' : '2rem';
+         }
          return styles;
       });
    };
