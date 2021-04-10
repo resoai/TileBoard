@@ -452,7 +452,7 @@
             </tr>
             <tr ng-repeat="line in item.list track by $index">
                <td class="weather-list-date">
-                  <div ng-bind="weatherListField('date', line, item, entity)"></div>
+                  <div ng-bind="weatherListField('date', line, item, entity) | date: item.dateFormat"></div>
                </td>
                <td class="weather-list-icon-container">
                   <div class="weather-list-icon"

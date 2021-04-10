@@ -718,6 +718,7 @@ The example below is for the OpenWeatherMap provider. The configuration can vary
    },
    hideHeader: false,
    secondaryTitle: 'Wind',
+   // dateFormat: 'MMM d',  // default value
    list: [1,2,3,4,5].map(function (id) {
       var ENTITY_ID = 'weather.openweathermap'
       return {
