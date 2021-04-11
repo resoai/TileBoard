@@ -28,8 +28,8 @@ window.initApp = function () {
       }
 
       ApiProvider.setInitOptions({
-         wsUrl: window.CONFIG.wsUrl,
-         authToken: window.CONFIG.authToken,
+         wsUrl: window.WS_URL_OVERRIDE || window.CONFIG.wsUrl,
+         authToken: window.AUTH_TOKEN_OVERRIDE || window.CONFIG.authToken,
       });
 
       tmhDynamicLocaleProvider.localeLocationPattern('./locales/{{locale}}.js');
