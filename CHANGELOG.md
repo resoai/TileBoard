@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com/resoai/TileBoard/compare/v2.3.1...v2.4.0) (2021-04-11)
+
+
+### Features
+
+* **addon:** define window variables for overriding server and API URLs ([a52ac5b](https://github.com/resoai/TileBoard/commit/a52ac5be70d0ff5ac6867feff60b38c67d1fcbcd))
+
+
+### Bug Fixes
+
+* **CAMERA_STREAM:** fix frozen streams playing on load ([#694](https://github.com/resoai/TileBoard/issues/694)) ([d3c51fe](https://github.com/resoai/TileBoard/commit/d3c51feb419b5096b3f24dab19696ecf9130a3c9))
+* **WEATHER_LIST:** format date column using date filter ([#696](https://github.com/resoai/TileBoard/issues/696)) ([c19f4b6](https://github.com/resoai/TileBoard/commit/c19f4b69dc105c2bbb1e0878e9ba82b96719c3de))
+
 ### [2.3.1](https://github.com/resoai/TileBoard/compare/v2.3.0...v2.3.1) (2021-04-07)
 
 
