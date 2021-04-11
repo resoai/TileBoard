@@ -466,4 +466,7 @@ export const TILE_DEFAULTS = {
          return this.$scope.toggleVacuum(item, entity);
       },
    },
+   [TYPES.WEATHER_LIST]: {
+      dateFormat: 'MMM d',
+   },
 };

@@ -405,6 +405,9 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
     * Full documentation on fields is below
     */
    fields: {},
+   /** type: WEATHER_LIST **/
+   /** defines the date format used in the date column */
+   dateFormat: 'MMM d',  // See https://docs.angularjs.org/api/ng/filter/date for info on formatting syntax.
    /** type: HISTORY **/
    entity: 'sensor.temperatur_innen_gefiltert', // Entity ID (or an array of IDs) to render history for. Default: entity `id` of the tile itself
    offset: 24*3600*1000*5, // Start point of the history counting from now(). Default: one day
