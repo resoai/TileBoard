@@ -19,7 +19,7 @@ The project structure has changed in the first versioned (v1.0.0) release. Inste
 ![screen](./images/screenshots/default.png)
 ![screen](./images/screenshots/transparent.png)
 ![screen](./images/screenshots/homekit.jpg)
-![screen](./images/screenshots/octopus_energy.jpg)
+![screen](./images/screenshots/octopus_energy.png)
 
 ## How to use
 
