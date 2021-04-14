@@ -196,6 +196,7 @@
     .range-holder {
        & input[type="range"] { 
           border-radius: @sliderBorderRadius;
+          border: 1px solid @sliderThumbColor;
 
           &::-webkit-slider-thumb {
              background: @sliderColor;
@@ -635,12 +636,14 @@
     }
   }
 
-  @sliderBorderRadius: 8px;
+  @sliderBorderRadius: 6px;
+  @sliderThumbColor: #808080;
 
   .slider-inner {
     .range-holder {
        & input[type="range"] { 
           border-radius: @sliderBorderRadius;
+          border: 1px solid @sliderThumbColor;
        }
     }
   }
@@ -652,6 +655,7 @@
       }
     }
   }
+
 }
 
 .-theme-fresh-air {

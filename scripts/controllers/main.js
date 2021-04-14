@@ -456,8 +456,8 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
             styles.top = sliderHeight / 2 - sliderWidth / 2 + 'px';
             styles.right = sliderWidth / 2 - sliderHeight / 2 + 'px';
          } else {
-            styles.width = item.slider.sliderWidth ? item.slider.sliderWidth + 'px' : '88%';
-            styles.height = item.slider.sliderHeight ? item.slider.sliderHeight + 'px' : '2rem';
+            styles.width = item.slider.sliderWidth ? item.slider.sliderWidth + 'px' : '80%';
+            styles.height = item.slider.sliderHeight ? item.slider.sliderHeight + 'px' : '1rem';
          }
          return styles;
       });
