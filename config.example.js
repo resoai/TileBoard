@@ -161,7 +161,7 @@ var CONFIG = {
                      position: [0, 1], // [x, y]
                      width: 1,
                      type: TYPES.SENSOR,
-                     id: 'updater.updater',
+                     id: 'binary_sensor.updater',
                      state: '@attributes.release_notes' // https://github.com/resoai/TileBoard/wiki/Templates
                   }
                ]
@@ -178,7 +178,7 @@ var CONFIG = {
                      width: 1,
                      type: TYPES.SLIDER,
                      //id: "input_number.volume",
-                     id: {state: 50}, // replace it with real string id
+                     id: {state: 50, attributes: {}}, // replace it with real string id
                      state: false,
                      title: 'Custom slider',
                      subtitle: 'Example of subtitle',
