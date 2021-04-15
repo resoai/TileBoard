@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.4.1](https://github.com/resoai/TileBoard/compare/v2.4.0...v2.4.1) (2021-04-15)
+
+
+### Bug Fixes
+
+* allow overriding REST API domain for ingress ([5987c16](https://github.com/resoai/TileBoard/commit/5987c16fd776219f24ce24f5226777837488a604))
+* some issues in default example that triggered console errors ([f95b918](https://github.com/resoai/TileBoard/commit/f95b9184e657066d073e7a17b5cae1c3a15e6293))
+
 ## [2.4.0](https://github.com/resoai/TileBoard/compare/v2.3.1...v2.4.0) (2021-04-11)
 
 
