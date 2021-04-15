@@ -147,7 +147,7 @@ App.provider('Api', function () {
 
       $Api.prototype.rest = function (requestStub) {
          const request = angular.copy(requestStub);
-         request.url = toAbsoluteServerURL(request.url);
+         request.url = toAbsoluteServerURL(request.url, window.REST_URL_OVERRIDE);
          request.headers = request.headers || {};
          request.headers.Authorization = 'Bearer ' + this._token;
          return $http(request)
