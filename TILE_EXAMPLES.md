@@ -506,25 +506,24 @@ Similar to sensor, but with an icon.<br>
 
 #### SLIDER
 ![SLIDER](images/tile-screenshots/SLIDER.png)
-![SLIDER](images/tile-screenshots/SLIDER_VERTICAL.png)
 ```js
 {
     position: [0, 0],
-    height: 2,    // Best works with height > 1. In case height=1, better use custom sliderHeight to achieve your needs
     id: 'light.entity',
-    type: TYPES.SLIDER_VERTICAL,
+    type: TYPES.SLIDER,
     unit: '%',
-    title: 'Slider',
-    icon: 'mdi-lightbulb', // Can be defined or omited. Slider height will be calculated automatically
-    // legacy: true,  // old-style slider that only works in horizontal mode (defaults to `false`)
-    // bottom: true, // puts slider on the bottom (defaults to `true`)
-    // vertical: true,  // show vertical slider (defaults to `false` - horizontal)
+    title: 'Kitchen light',
+    icon: 'mdi-lightbulb',  // Optional. Slider size will be adjusted automatically.
+    // vertical: true,  // Show vertical slider (default: false - horizontal).
+    // singleLine: true,  // Makes the optional icon, the slider and the icon be shown on single line (default: false, only works with horizontal slider).
+    // legacy: true,  // Old-style slider that only works in horizontal mode (default: false).
+    // bottom: true, // puts slider on the bottom (default: false, only work with the legacy slider).
     state: false,
+    // For light entities a filter function can be used to convert the value from 0-255 to 0-100% range.
     filter: function (value) {
        var num = parseFloat(value) / 2.55;
        return num && !isNaN(num) ? num.toFixed() : 0;
     },
-    value: '@attributes.brightness',
     slider: {
        max: 255,
        min: 0,

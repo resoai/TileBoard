@@ -1558,6 +1558,7 @@ camera_stream {
       -webkit-appearance: none;
    }
 
+   // Used in light tile.
    &-container {
       margin: 10px 5px 0;
 
@@ -1566,6 +1567,7 @@ camera_stream {
       }
    }
 
+   // Used in light tile.
    &-title {
       text-align: left;
       font-size: 0.9em;
@@ -1583,7 +1585,7 @@ camera_stream {
       box-sizing: border-box;
       margin: 0;
       cursor: pointer;
-    }   
+    }
  }
 
 .item-entity-sliders {
@@ -2248,11 +2250,6 @@ input[type=range]::-moz-range-thumb {
 @sliderTrackColor: #808080;
 @sliderThumbColor: #DDD;
 @sliderTrackBg: #808080;
-@sliderValueColor: #000101;
-
-.item.-slider .item-title {
-   height: 20px;
-}
 
 .slider-inner {
    align-items: center;
@@ -2260,81 +2257,24 @@ input[type=range]::-moz-range-thumb {
    height: 100%;
    width: 100%;
 
-   &-direction-row {
-      flex-direction: row;
-      justify-content: space-between;
-
-      .slider-inner-icon {
-         .item-entity--icon {
-            font-size: 1.5rem;
-            line-height: 25px;
-         }
-      }
-
-      .slider-inner-value {
-         font-size: 1rem;
-         margin-left: 10px;
-         margin-right: 10px;
-         padding-bottom: 5px;
-      }
-
-      .range-holder {
-         margin-left: 5px;
-         margin-top: -12px;
-         width: 100%;
-      }
-   }
-
-   &-direction-column {
-      flex-direction: column;
-      justify-content: center;
-
-      .slider-inner-value {
-         font-size: 1rem;
-         padding-top: 7px;
-      }
-
-      .slider-inner-icon {
-         .item-entity--icon {
-            font-size: 1.7rem;
-            line-height: 30px;
-         }
-      }
-
-      .-horizontal.range-holder {
-         padding-bottom: 5px;
-      }
-   }
-
    &-icon {
-      display: block;
       height: 35px;
       margin-top: -10px;
-      padding-top: 0px;
       text-align: center;
       width: 35px;
    }
 
    &-value {
-      color: @sliderValueColor;
-      display: block;
       font-weight: 300;
       margin-bottom: 5px;
       margin-top: -10px;
-      text-align: center;
-      text-transform: capitalize;
-
-      & span:first-child {
-         margin-right: -2px;
-      }
    }
 
    .range-holder {
-      display: block;
       margin-bottom: 8px;
       position: relative;
-      
-      & input[type="range"] {
+
+      input[type="range"] {
          -webkit-appearance: none;
          background-color: @sliderTrackColor;
          border: 0;
@@ -2392,22 +2332,68 @@ input[type=range]::-moz-range-thumb {
             width: 3px;
          }
       }
-   }
 
-   .-vertical.range-holder input[type="range"] {
-      position: absolute;
-      transform: rotate(270deg);
-   
-      &::-webkit-slider-thumb {
-         width: 25px;
+      &.-vertical input[type="range"] {
+         position: absolute;
+         transform: rotate(270deg);
+
+         &::-webkit-slider-thumb {
+            width: 25px;
+         }
+      }
+
+      &.-horizontal input[type="range"] {
+         &::-webkit-slider-thumb {
+            border-left: 0.9em solid @sliderColor;
+            border-right: 0.9em solid @sliderColor;
+            cursor: ew-resize;
+         }
       }
    }
 
-   .-horizontal.range-holder input[type="range"] {
-      &::-webkit-slider-thumb {
-         border-left: 0.9em solid @sliderColor;
-         border-right: 0.9em solid @sliderColor;
-         cursor: ew-resize;
+   &-direction-row {
+      flex-direction: row;
+      justify-content: space-between;
+
+      .slider-inner-icon {
+         .item-entity--icon {
+            font-size: 1.5rem;
+            line-height: 25px;
+         }
+      }
+
+      .slider-inner-value {
+         font-size: 1rem;
+         margin-left: 10px;
+         margin-right: 10px;
+         padding-bottom: 5px;
+      }
+
+      .range-holder {
+         margin-left: 5px;
+         margin-top: -12px;
+         width: 100%;
+      }
+   }
+
+   &-direction-column {
+      flex-direction: column;
+      justify-content: center;
+
+      .slider-inner-value {
+         font-size: 1rem;
+         padding-top: 7px;
+      }
+
+      .slider-inner-icon {
+         .item-entity--icon {
+            font-size: 1.7rem;
+            line-height: 30px;
+         }
+      }
+
+      .range-holder.-horizontal {
+         padding-bottom: 5px;
       }
    }
 }

@@ -427,7 +427,7 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
    };
 
    $scope.sliderStyles = function (page, item) {
-      return cacheInItem(item, '_v_slider', function () {
+      return cacheInItem(item, '_c_slider_styles', function () {
          const styles = {};
 
          if (item.vertical) {
@@ -445,11 +445,15 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
             // if `item.slider.sliderHeight` is defined - set SIZE to custom value
             // if `item.slider.sliderHeight` is not defined: make calculation and compare if it greater than (0/20).
             // This prevents:
-            //    to show very small sliders
-            //    negative values, which can break alignment
-            // If user would like to override automatic calculation appropriate option has to be defined
-            const sliderWidth = item.slider.sliderWidth || (x => x > 0 ? x : 0)(itemWidth - 30);
-            const sliderHeight = item.slider.sliderHeight || (x => x > 20 ? x : 0)(itemHeight - 100 + iconSpacer);
+            //  - to show very small sliders
+            //  - negative values, which can break alignment
+            // If the user would like to override automatic calculation, an appropriate option has to be defined.
+            const sliderWidth = item.slider.sliderWidth || (itemWidth - 30);
+            const sliderHeight = item.slider.sliderHeight || (itemHeight - 100 + iconSpacer);
+
+            if (sliderWidth <= 0 || sliderHeight <= 22) {
+               styles.display = 'none';
+            }
 
             styles.width = sliderHeight + 'px';
             styles.height = sliderWidth + 'px';
