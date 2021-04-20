@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/resoai/TileBoard/compare/v2.4.1...v2.5.0) (2021-04-20)
+
+
+### Features
+
+* **SLIDER:** add vertical slider option and improve design ([#672](https://github.com/resoai/TileBoard/issues/672)) ([e713089](https://github.com/resoai/TileBoard/commit/e7130896519a4ea610140960f86ec94c4c4c30cf))
+
 ### [2.4.1](https://github.com/resoai/TileBoard/compare/v2.4.0...v2.4.1) (2021-04-15)
 
 
