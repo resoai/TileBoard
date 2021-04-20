@@ -448,12 +448,8 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
             //  - to show very small sliders
             //  - negative values, which can break alignment
             // If the user would like to override automatic calculation, an appropriate option has to be defined.
-            const sliderWidth = item.slider.sliderWidth || (itemWidth - 30);
-            const sliderHeight = item.slider.sliderHeight || (itemHeight - 100 + iconSpacer);
-
-            if (sliderWidth <= 0 || sliderHeight <= 22) {
-               styles.display = 'none';
-            }
+            const sliderWidth = item.slider.sliderWidth || Math.max(0, itemWidth - 30);
+            const sliderHeight = item.slider.sliderHeight || (x => x > 22 ? x : 0)(itemHeight - 100 + iconSpacer);
 
             styles.width = sliderHeight + 'px';
             styles.height = sliderWidth + 'px';
