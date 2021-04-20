@@ -508,23 +508,36 @@ Similar to sensor, but with an icon.<br>
 ![SLIDER](images/tile-screenshots/SLIDER.png)
 ```js
 {
-   position: [6, 1],
-   id: 'input_number.casatunes_volume_6',
-   type: TYPES.SLIDER,
-   unit: '%',
-   state: false,
-   //bottom: true, // puts slider on bottom
-   slider: {
-      //max: 100,
-      //min: 0,
-      //step: 2,
-      request: {
-         type: "call_service",
-         domain: "input_number",
-         service: "set_value",
-         field: "value"
-      }
-   }
+    position: [0, 0],
+    id: 'light.entity',
+    type: TYPES.SLIDER,
+    unit: '%',
+    title: 'Kitchen light',
+    icon: 'mdi-lightbulb',  // Optional. Slider size will be adjusted automatically.
+    // vertical: true,  // Show vertical slider (default: false - horizontal).
+    // singleLine: true,  // Makes the optional icon, the slider and the icon be shown on single line (default: false, only works with horizontal slider).
+    // legacy: true,  // Old-style slider that only works in horizontal mode (default: false).
+    // bottom: true, // puts slider on the bottom (default: false, only work with the legacy slider).
+    state: false,
+    // For light entities a filter function can be used to convert the value from 0-255 to 0-100% range.
+    filter: function (value) {
+       var num = parseFloat(value) / 2.55;
+       return num && !isNaN(num) ? num.toFixed() : 0;
+    },
+    slider: {
+       max: 255,
+       min: 0,
+       step: 5,
+       field: 'brightness',
+       // sliderWidth: '60',     // Custom slider width
+       // sliderHeight: '270',   // Custom slider height
+       request: {
+          type: "call_service",
+          domain: "light",
+          service: "turn_on",
+          field: "brightness"
+       },
+    },
 }
 ```
 

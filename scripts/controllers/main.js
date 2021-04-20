@@ -431,6 +431,43 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
       };
    };
 
+   $scope.sliderStyles = function (page, item) {
+      return cacheInItem(item, '_c_slider_styles', function () {
+         const styles = {};
+
+         if (item.vertical) {
+            const width = item.width || 1;
+            const height = item.height || 1;
+            const tileSize = page.tileSize || CONFIG.tileSize;
+            const tileMargin = page.tileMargin || CONFIG.tileMargin;
+
+            const itemWidth = tileSize * width + tileMargin * (width - 1);
+            const itemHeight = tileSize * height + tileMargin * (height - 1);
+
+            // defines free space used by icon
+            const iconSpacer = item.icon ? 0 : 35;
+
+            // if `item.slider.sliderHeight` is defined - set SIZE to custom value
+            // if `item.slider.sliderHeight` is not defined: make calculation and compare if it greater than (0/20).
+            // This prevents:
+            //  - to show very small sliders
+            //  - negative values, which can break alignment
+            // If the user would like to override automatic calculation, an appropriate option has to be defined.
+            const sliderWidth = item.slider.sliderWidth || Math.max(0, itemWidth - 30);
+            const sliderHeight = item.slider.sliderHeight || (x => x > 22 ? x : 0)(itemHeight - 100 + iconSpacer);
+
+            styles.width = sliderHeight + 'px';
+            styles.height = sliderWidth + 'px';
+            styles.top = sliderHeight / 2 - sliderWidth / 2 + 'px';
+            styles.right = sliderWidth / 2 - sliderHeight / 2 + 'px';
+         } else {
+            styles.width = item.slider.sliderWidth ? item.slider.sliderWidth + 'px' : '80%';
+            styles.height = item.slider.sliderHeight ? item.slider.sliderHeight + 'px' : '1rem';
+         }
+         return styles;
+      });
+   };
+
    $scope.itemStyles = function (page, item, entity) {
       const prevSize = item._prevTileSize || page.tileSize || CONFIG.tileSize;
       const currentSize = page.tileSize || CONFIG.tileSize;
