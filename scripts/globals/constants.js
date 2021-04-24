@@ -178,7 +178,7 @@ export const DEFAULT_HEADER = {
          styles: {
             margin: '0 0 0'
          },
-         icon: '&sensor.dark_sky_icon.state',
+         icon: '&weather.openweathermap.state',
          icons: {
             'clear-day': 'clear',
             'clear-night': 'nt-clear',
