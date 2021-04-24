@@ -448,6 +448,14 @@ export const TILE_DEFAULTS = {
          return this.$scope.callScript(item, entity);
       },
    },
+   [TYPES.SENSOR]: {
+      filter (value, item, entity) {
+         if (entity?.attributes?.device_class === 'timestamp') {
+            return timeAgo(value, false);
+         }
+         return value;
+      },
+   },
    [TYPES.SWITCH]: {
       action (item, entity) {
          return this.$scope.toggleSwitch(item, entity);
@@ -457,5 +465,8 @@ export const TILE_DEFAULTS = {
       action (item, entity) {
          return this.$scope.toggleVacuum(item, entity);
       },
+   },
+   [TYPES.WEATHER_LIST]: {
+      dateFormat: 'MMM d',
    },
 };

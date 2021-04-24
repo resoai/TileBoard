@@ -1,5 +1,6 @@
 import packageJson from './package.json';
 import progress from 'rollup-plugin-progress';
+import mergeCopy from 'rollup-plugin-copy-merge';
 import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import copy from 'rollup-plugin-cpy';
@@ -27,10 +28,6 @@ if (isProduction) {
    outputJsName = 'app.js';
    outputCssName = 'styles[extname]';
    appPlugins.push(
-      copy([
-         // Copy over empty custom.css but don't overwrite in case user has customized it.
-         { files: './styles/custom.css', dest: `./${outDir}/styles/`, options: { overwrite: false } },
-      ]),
       serve({
          contentBase: outDir,
          port: 8080,
@@ -99,8 +96,18 @@ const config = {
          { files: './favicon.png', dest: `./${outDir}/` },
          { files: './manifest.webmanifest', dest: `./${outDir}/` },
          { files: './images/*.*', dest: `./${outDir}/images/` },
-         { files: `./node_modules/angular-i18n/angular-locale_(${BUNDLED_LOCALES.join('|')}).js`, dest: `./${outDir}/locales/` },
       ]),
+      mergeCopy({
+         targets: BUNDLED_LOCALES.map(locale => {
+            return {
+               src: [
+                  `./node_modules/angular-i18n/angular-locale_${locale}.js`,
+                  `./node_modules/moment/locale/${locale}.js`,
+               ],
+               file: `./${outDir}/locales/${locale}.js`,
+            };
+         }),
+      }),
       ...appPlugins,
    ],
 };

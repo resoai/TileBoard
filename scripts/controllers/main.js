@@ -6,7 +6,7 @@ import { TYPES, FEATURES, HEADER_ITEMS, MENU_POSITIONS, CUSTOM_THEMES, GROUP_ALI
 import { debounce, leadZero, supportsFeature, toAbsoluteServerURL } from '../globals/utils';
 import Noty from '../models/noty';
 
-App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLocale, $filter) {
+App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLocale, $filter, amMoment) {
    if (!window.CONFIG) {
       return;
    }
@@ -14,9 +14,14 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
    const CONFIG = window.CONFIG;
 
    const locale = (CONFIG.locale || 'en-us').toLowerCase();
-   tmhDynamicLocale.set(locale).catch(() => {
-      Noty.add(Noty.ERROR, 'Failed loading locale', `Could not find corresponding file for locale "${locale}" in the /locales/ directory.`);
-   });
+   tmhDynamicLocale
+      .set(locale)
+      .catch(() => {
+         Noty.add(Noty.ERROR, 'Failed loading locale', `Could not find corresponding file for locale "${locale}" in the /locales/ directory.`);
+      })
+      .then(() => {
+         amMoment.changeLocale(locale);
+      });
 
    if (CONFIG.groupsAlign === GROUP_ALIGNS.GRID && [CUSTOM_THEMES.MOBILE, CUSTOM_THEMES.WINPHONE].includes(CONFIG.customTheme)) {
       CONFIG.groupsAlign = GROUP_ALIGNS.HORIZONTALLY;
@@ -424,6 +429,43 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
          height: (item.height || 1) * tileSize,
          width: (item.width || 1) * tileSize,
       };
+   };
+
+   $scope.sliderStyles = function (page, item) {
+      return cacheInItem(item, '_c_slider_styles', function () {
+         const styles = {};
+
+         if (item.vertical) {
+            const width = item.width || 1;
+            const height = item.height || 1;
+            const tileSize = page.tileSize || CONFIG.tileSize;
+            const tileMargin = page.tileMargin || CONFIG.tileMargin;
+
+            const itemWidth = tileSize * width + tileMargin * (width - 1);
+            const itemHeight = tileSize * height + tileMargin * (height - 1);
+
+            // defines free space used by icon
+            const iconSpacer = item.icon ? 0 : 35;
+
+            // if `item.slider.sliderHeight` is defined - set SIZE to custom value
+            // if `item.slider.sliderHeight` is not defined: make calculation and compare if it greater than (0/20).
+            // This prevents:
+            //  - to show very small sliders
+            //  - negative values, which can break alignment
+            // If the user would like to override automatic calculation, an appropriate option has to be defined.
+            const sliderWidth = item.slider.sliderWidth || Math.max(0, itemWidth - 30);
+            const sliderHeight = item.slider.sliderHeight || (x => x > 22 ? x : 0)(itemHeight - 100 + iconSpacer);
+
+            styles.width = sliderHeight + 'px';
+            styles.height = sliderWidth + 'px';
+            styles.top = sliderHeight / 2 - sliderWidth / 2 + 'px';
+            styles.right = sliderWidth / 2 - sliderHeight / 2 + 'px';
+         } else {
+            styles.width = item.slider.sliderWidth ? item.slider.sliderWidth + 'px' : '80%';
+            styles.height = item.slider.sliderHeight ? item.slider.sliderHeight + 'px' : '1rem';
+         }
+         return styles;
+      });
    };
 
    $scope.itemStyles = function (page, item, entity) {

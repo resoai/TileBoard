@@ -30,6 +30,13 @@
    <% stylesheets.forEach(stylesheet => { %><link rel="stylesheet" href="<%= stylesheet %>"><% }) %>
    <link rel="stylesheet" href="./styles/custom.css">
 
+   <script>
+      window.AUTH_TOKEN_OVERRIDE = null;
+      window.SERVER_URL_OVERRIDE = null;
+      window.REST_URL_OVERRIDE = null;
+      window.WS_URL_OVERRIDE = null;
+   </script>
+
    <% javascripts.forEach(javascript => { %><script src="./<%= javascript %>"></script><% }) %>
 </head>
 

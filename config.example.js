@@ -46,21 +46,22 @@ var CONFIG = {
             icon: '&weather.mycity.state',
             state: '&weather.mycity.state',
             icons: {
+               'clear-day': 'clear',
                'clear-night': 'nt-clear',
                'cloudy': 'cloudy',
-               'exceptional': 'fog',
+               'exceptional': 'unknown',
                'fog': 'fog',
                'hail': 'sleet',
                'lightning': 'chancestorms',
                'lightning-rainy': 'tstorms',
-               'partlycloudy': 'partlycloudy',
+               'partly-cloudy-day': 'partlycloudy',
+               'partly-cloudy-night': 'nt-partlycloudy',
                'pouring': 'rain',
-               'rainy': 'chancerain',
                'snowy': 'snow',
                'snowy-rainy': 'sleet',
-               'sunny': 'sunny',
-               'windy': 'hazy',
-               'windy-variant': 'flurries'
+               'wind': 'unknown',
+               'windy': 'unknown',
+               'windy-variant': 'unknown'
             },
             states: {
                'clear-night': 'Clear, night',
@@ -160,7 +161,7 @@ var CONFIG = {
                      position: [0, 1], // [x, y]
                      width: 1,
                      type: TYPES.SENSOR,
-                     id: 'updater.updater',
+                     id: 'binary_sensor.updater',
                      state: '@attributes.release_notes' // https://github.com/resoai/TileBoard/wiki/Templates
                   },
                   {
@@ -193,7 +194,7 @@ var CONFIG = {
                      width: 1,
                      type: TYPES.SLIDER,
                      //id: "input_number.volume",
-                     id: {state: 50}, // replace it with real string id
+                     id: {state: 50, attributes: {}}, // replace it with real string id
                      state: false,
                      title: 'Custom slider',
                      subtitle: 'Example of subtitle',
@@ -267,38 +268,39 @@ var CONFIG = {
                      state: function () {return 'Clear, night'}, // https://github.com/resoai/TileBoard/wiki/Anonymous-functions
                      icon: 'clear-night',
                      icons: {
+                        'clear-day': 'clear',
                         'clear-night': 'nt-clear',
                         'cloudy': 'cloudy',
-                        'exceptional': 'sunny',
+                        'exceptional': 'unknown',
                         'fog': 'fog',
                         'hail': 'sleet',
                         'lightning': 'chancestorms',
                         'lightning-rainy': 'tstorms',
-                        'partlycloudy': 'partlycloudy',
+                        'partly-cloudy-day': 'partlycloudy',
+                        'partly-cloudy-night': 'nt-partlycloudy',
                         'pouring': 'rain',
-                        'rainy': 'chancerain',
-                        "snowy": 'snow',
+                        'snowy': 'snow',
                         'snowy-rainy': 'sleet',
-                        'sunny': 'sunny',
-                        'windy': 'hazy',
-                        'windy-variant': 'flurries'
+                        'wind': 'unknown',
+                        'windy': 'unknown',
+                        'windy-variant': 'unknown'
                      },
                      states: {
-                        "clear-night": "Clear, night",
-                        "cloudy": "Cloudy",
-                        "exceptional": "Exceptional",
-                        "fog": "Fog",
-                        "hail": "Hail",
-                        "lightning": "Lightning",
-                        "lightning-rainy": "Lightning, rainy",
-                        "partlycloudy": "Partly cloudy",
-                        "pouring": "Pouring",
-                        "rainy": "Rainy",
-                        "snowy": "Snowy",
-                        "snowy-rainy": "Snowy, rainy",
-                        "sunny": "Sunny",
-                        "windy": "Windy",
-                        "windy-variant": "Windy"
+                        'clear-night': 'Clear, night',
+                        'cloudy': 'Cloudy',
+                        'exceptional': 'Exceptional',
+                        'fog': 'Fog',
+                        'hail': 'Hail',
+                        'lightning': 'Lightning',
+                        'lightning-rainy': 'Lightning, rainy',
+                        'partlycloudy': 'Partly cloudy',
+                        'pouring': 'Pouring',
+                        'rainy': 'Rainy',
+                        'snowy': 'Snowy',
+                        'snowy-rainy': 'Snowy, rainy',
+                        'sunny': 'Sunny',
+                        'windy': 'Windy',
+                        'windy-variant': 'Windy'
                      },
                      fields: {
                         temperature: '18',
@@ -310,15 +312,11 @@ var CONFIG = {
                         pressure: '650',
                         pressureUnit: 'hPa',
                         list: [
-                           'Feels like 16 °C'
+                           'Feels like 16 °C',
                            /*
-                           'Feels like '
-                              + '&sensor.dark_sky_apparent_temperature.state'
-                              + '&sensor.dark_sky_apparent_temperature.attributes.unit_of_measurement',
-
-                           '&sensor.dark_sky_precip_probability.state'
-                              + '&sensor.dark_sky_precip_probability.attributes.unit_of_measurement'
-                              + ' chance of rain'
+                           'Cloud coverage '
+                              + '&sensor.openweathermap_cloud_coverage.state'
+                              + '&sensor.openweathermap_cloud_coverage.attributes.unit_of_measurement',
                            */
                         ]
                      }

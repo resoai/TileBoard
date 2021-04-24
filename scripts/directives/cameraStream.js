@@ -26,22 +26,22 @@ export default function (Api, $timeout) {
          let hls = null;
 
          $scope.$watch('frozen', frozen => {
-            if (current) {
-               if (frozen) {
-                  onFreezed();
-               } else {
-                  onUnfreezed();
-               }
+            if (frozen) {
+               onFreezed();
+            } else {
+               onUnfreezed();
             }
          });
 
          function onFreezed () {
-            if (!current.paused) {
+            if (current && !current.paused) {
                current.pause();
                suspendPromise = $timeout(() => {
                   if (hls) {
-                     hls.stopLoad();
-                     hls.detachMedia();
+                     hls.destroy();
+                     hls = null;
+                     current.remove();
+                     current = null;
                   }
                }, SUSPEND_TIMEOUT_MS);
             }
@@ -49,11 +49,10 @@ export default function (Api, $timeout) {
 
          function onUnfreezed () {
             $timeout.cancel(suspendPromise);
-            if (current.paused) {
-               if (hls) {
-                  hls.attachMedia(current);
-               }
+            if (hls) {
                Promise.resolve(current.play()).catch(() => {});
+            } else {
+               requestStream();
             }
          }
 
@@ -80,14 +79,14 @@ export default function (Api, $timeout) {
                   hls.loadSource(url);
                });
                hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                  el.play();
+                  Promise.resolve(el.play()).catch(() => {});
                });
                hls.attachMedia(el);
             } else {
                el.src = url;
                el.setAttribute('playsinline', 'playsinline');
                el.addEventListener('loadedmetadata', function () {
-                  el.play();
+                  Promise.resolve(el.play()).catch(() => {});
                });
             }
 
@@ -100,20 +99,22 @@ export default function (Api, $timeout) {
          };
 
          const requestStream = function () {
-            if ($scope.entity.state === 'off') {
+            if ($scope.entity.state === 'off' || $scope.frozen) {
                return;
             }
 
-            Api.send({
-               type: 'camera/stream',
-               entity_id: $scope.entity.entity_id,
-            },
-            function (res) {
-               if (!res.result) {
-                  return;
-               }
-               appendVideo(toAbsoluteServerURL(res.result.url));
-            });
+            Api.send(
+               {
+                  type: 'camera/stream',
+                  entity_id: $scope.entity.entity_id,
+               },
+               function (res) {
+                  if (!res.result) {
+                     return;
+                  }
+                  appendVideo(toAbsoluteServerURL(res.result.url));
+               },
+            );
          };
 
          $scope.$watch('entity', requestStream);

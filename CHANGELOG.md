@@ -2,6 +2,65 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/resoai/TileBoard/compare/v2.4.1...v2.5.0) (2021-04-20)
+
+
+### Features
+
+* **SLIDER:** add vertical slider option and improve design ([#672](https://github.com/resoai/TileBoard/issues/672)) ([e713089](https://github.com/resoai/TileBoard/commit/e7130896519a4ea610140960f86ec94c4c4c30cf))
+
+### [2.4.1](https://github.com/resoai/TileBoard/compare/v2.4.0...v2.4.1) (2021-04-15)
+
+
+### Bug Fixes
+
+* allow overriding REST API domain for ingress ([5987c16](https://github.com/resoai/TileBoard/commit/5987c16fd776219f24ce24f5226777837488a604))
+* some issues in default example that triggered console errors ([f95b918](https://github.com/resoai/TileBoard/commit/f95b9184e657066d073e7a17b5cae1c3a15e6293))
+
+## [2.4.0](https://github.com/resoai/TileBoard/compare/v2.3.1...v2.4.0) (2021-04-11)
+
+
+### Features
+
+* **addon:** define window variables for overriding server and API URLs ([a52ac5b](https://github.com/resoai/TileBoard/commit/a52ac5be70d0ff5ac6867feff60b38c67d1fcbcd))
+
+
+### Bug Fixes
+
+* **CAMERA_STREAM:** fix frozen streams playing on load ([#694](https://github.com/resoai/TileBoard/issues/694)) ([d3c51fe](https://github.com/resoai/TileBoard/commit/d3c51feb419b5096b3f24dab19696ecf9130a3c9))
+* **WEATHER_LIST:** format date column using date filter ([#696](https://github.com/resoai/TileBoard/issues/696)) ([c19f4b6](https://github.com/resoai/TileBoard/commit/c19f4b69dc105c2bbb1e0878e9ba82b96719c3de))
+
+### [2.3.1](https://github.com/resoai/TileBoard/compare/v2.3.0...v2.3.1) (2021-04-07)
+
+
+### Bug Fixes
+
+* **CAMERA_STREAM:** stream fails to resume after being suspended ([#692](https://github.com/resoai/TileBoard/issues/692)) ([bed202a](https://github.com/resoai/TileBoard/commit/bed202a3463f03a36513dfe3fed7afddcf2149a0)), closes [#688](https://github.com/resoai/TileBoard/issues/688)
+
+### [2.3.1](https://github.com/resoai/TileBoard/compare/v2.3.0...v2.3.1) (2021-04-07)
+
+
+### Bug Fixes
+
+* **CAMERA_STREAM:** stream fails to resume after being suspended ([#692](https://github.com/resoai/TileBoard/issues/692)) ([bed202a](https://github.com/resoai/TileBoard/commit/bed202a3463f03a36513dfe3fed7afddcf2149a0)), closes [#688](https://github.com/resoai/TileBoard/issues/688)
+
+## [2.3.0](https://github.com/resoai/TileBoard/compare/v2.2.0...v2.3.0) (2021-04-05)
+
+
+### Features
+
+* support sensors which are timestamps (like uptime sensor) ([#677](https://github.com/resoai/TileBoard/issues/677)) ([b417812](https://github.com/resoai/TileBoard/commit/b417812ef8ddf7640965581f0c7a892e532561eb)), closes [#671](https://github.com/resoai/TileBoard/issues/671)
+* **WEATHER:** localized number values and support "pressure" key ([#666](https://github.com/resoai/TileBoard/issues/666)) ([3a1b206](https://github.com/resoai/TileBoard/commit/3a1b2066c860a4e2e0fde0175eac6280ef92e1cd))
+* GRID groupAlignment option ([#662](https://github.com/resoai/TileBoard/issues/662)) ([719d424](https://github.com/resoai/TileBoard/commit/719d424287382dfd2acb76051a7bc7480194a212))
+
+
+### Bug Fixes
+
+* **deps:** update dependency hls.js to v1 ([#683](https://github.com/resoai/TileBoard/issues/683)) ([570f5ce](https://github.com/resoai/TileBoard/commit/570f5ce46db0e8f6f401c7eb9d05c3d2f507c6cd))
+* don't include custom.css in the release ([#686](https://github.com/resoai/TileBoard/issues/686)) ([438bc8b](https://github.com/resoai/TileBoard/commit/438bc8b650a72cc18f9074b4ede01fd66685f59d))
+* **locales:** make moment follow the locale set in the config ([#680](https://github.com/resoai/TileBoard/issues/680)) ([4126d1a](https://github.com/resoai/TileBoard/commit/4126d1a0e1dee9da5477a6ee03be9fd81bdae7e1)), closes [#678](https://github.com/resoai/TileBoard/issues/678)
+* **WEATHER, WEATHER_LIST:** replace darksky with openweathermap in examples ([#676](https://github.com/resoai/TileBoard/issues/676)) ([1f5f541](https://github.com/resoai/TileBoard/commit/1f5f54177b3b2752b5ca1b0b0eb4f61d4dd79889)), closes [#558](https://github.com/resoai/TileBoard/issues/558)
+
 ## [2.2.0](https://github.com/resoai/TileBoard/compare/v2.1.3...v2.2.0) (2021-03-03)
 
 

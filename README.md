@@ -19,12 +19,14 @@ The project structure has changed in the first versioned (v1.0.0) release. Inste
 ![screen](./images/screenshots/default.png)
 ![screen](./images/screenshots/transparent.png)
 ![screen](./images/screenshots/homekit.jpg)
+![screen](./images/screenshots/octopus_energy.png)
 
 ## How to use
 
 * Make sure that you have Home Assistant 0.77 or greater installed as only new authentication system is supported from now on
 * Download the latest release zip file (`Tileboard.zip`) from https://github.com/resoai/TileBoard/releases and unpack to a directory of your choice
 * In chosen directory rename `config.example.js` to `config.js` and adjust it for your needs
+* Optionally create an empty `styles/custom.css` file. Everything will work without it but there will be a network request error logged in the console which can be annoying to some.
 * Create a directory called `tileboard` inside `www` directory in HA's config path and copy all unpacked files there.
 * TileBoard will be available at `http://HASS_IP:8123/local/tileboard/index.html` and will prompt you for your login credentials after restarting Home Assistant.
 
@@ -76,7 +78,8 @@ var CONFIG = {
    pingConnection: true,
    /* locale: locale used for date and number formats - available locales: it, de, es, fr, pt, ru, nl, pl, en-gb, en-us (default).
     * The system uses localization files from the package angular-i18n. 
-    * You can add your own locale, if it is not included already, by adding the corresponding file from the angular-i18n package into the 'locales' folder.
+    * You can add your own locale, if it is not included already, by adding the corresponding file from the angular-i18n
+    * package into the 'locales' folder (rename the file so that the file name has format locale_code.js).
     */
    locale: 'en-us',
    /* debug: Toggle for extra debugging information.
@@ -328,8 +331,11 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
   value: '&sensor.bathroom_temp.state',
   /* unit: Override default unit of measurement */
   unit: 'kWh',
-  /* filter: Function for filtering/formatting the entity value */
-  filter: function (value) {return value},
+  /* filter: Function for filtering/formatting the entity value
+   * Is used by default to format a timestamp as time ago, e.g., for the uptime sensor.
+   */
+  filter: function (value, item, entity) {return Math.round(value);},
+  filter: function (value, item, entity) {return timeAgo(value, true);}, // true = exclude the word 'ago'
   /** type: DEVICE_TRACKER **/
   /* slidesDelay: Delay before slide animation starts (optional) */
   slidesDelay: 2,
@@ -404,6 +410,9 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
     * Full documentation on fields is below
     */
    fields: {},
+   /** type: WEATHER_LIST **/
+   /** defines the date format used in the date column */
+   dateFormat: 'MMM d',  // See https://docs.angularjs.org/api/ng/filter/date for info on formatting syntax.
    /** type: HISTORY **/
    entity: 'sensor.temperatur_innen_gefiltert', // Entity ID (or an array of IDs) to render history for. Default: entity `id` of the tile itself
    offset: 24*3600*1000*5, // Start point of the history counting from now(). Default: one day
