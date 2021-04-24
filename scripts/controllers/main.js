@@ -1333,16 +1333,16 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
 
    function initializeClimateOptions (item, entity) {
       if (typeof item.climateOptions === 'undefined') {
-         const _options = item.useHvacMode ? entity.attributes.hvac_modes : entity.attributes.preset_modes;
-         const options = {};
-         for (const option of _options) {
+         const options = item.useHvacMode ? entity.attributes.hvac_modes : entity.attributes.preset_modes;
+         const resolvedOption = {};
+         for (const option of options) {
             if (item.states !== null && typeof item.states === 'object') {
-               options[option] = item.states[option] || option;
+               resolvedOption[option] = item.states[option] || option;
             } else {
-               options[option] = option;
+               resolvedOption[option] = option;
             }
          }
-         item.climateOptions = options;
+         item.climateOptions = resolvedOption;
       }
    }
 
@@ -1362,14 +1362,14 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
 
       let service;
       const serviceData = {};
-      const _option = $scope.reverseLookupClimateOption(item, entity, option);
+      const resolvedOption = $scope.reverseLookupClimateOption(item, entity, option);
 
       if (item.useHvacMode) {
          service = 'set_hvac_mode';
-         serviceData.hvac_mode = _option;
+         serviceData.hvac_mode = resolvedOption;
       } else {
          service = 'set_preset_mode';
-         serviceData.preset_mode = _option;
+         serviceData.preset_mode = resolvedOption;
       }
 
       callService(item, 'climate', service, serviceData);
