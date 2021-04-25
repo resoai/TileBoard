@@ -15,7 +15,7 @@
    <div ng-if="item.type === HEADER_ITEMS.WEATHER">
       <div class="header-weather--icon-container">
          <div class="header-weather--icon" ng-if="(_icon = getWeatherIcon(item, {}))">
-            <div class="wu " ng-class="'wu-' + _icon"></div>
+            <div class="wu" ng-class="'wu-' + _icon"></div>
          </div>
          <div class="header-weather--icon-image" ng-if="(_imgStyles = getWeatherImageStyles(item, {}))">
             <div ng-style="_imgStyles"></div>
@@ -23,14 +23,14 @@
       </div>
 
       <div class="header-weather--temperature" ng-if="item.fields.temperature">
-         <span ng-bind="(getWeatherField('temperature', item, {}) | number:1)"></span><!--
-         --><span ng-bind="getWeatherField('temperatureUnit', item, {})"></span>
+         <span ng-bind="(getWeatherField('temperature', item, {}) | number:1)"></span
+         ><span ng-bind="getWeatherField('temperatureUnit', item, {})"></span>
       </div>
 
       <div class="header-weather--summary" ng-if="item.fields.summary">
          <span ng-bind="getWeatherField('summary', item, {})"></span>
       </div>
-      <div class="header-weather--state"  ng-if="!item.fields.summary && (_state = entityState(item, {}))">
+      <div class="header-weather--state" ng-if="!item.fields.summary && (_state = entityState(item, {}))">
          <span ng-bind="_state"></span>
       </div>
    </div>

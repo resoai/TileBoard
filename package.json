@@ -6,8 +6,8 @@
     "dev": "rollup --config --watch",
     "build": "rollup --config --environment PRODUCTION",
     "build:watch": "rollup --config --environment PRODUCTION --watch",
-    "lint": "eslint rollup.config.js scripts",
-    "fix": "eslint --fix rollup.config.js scripts",
+    "lint": "eslint rollup.config.js scripts && prettier --check '**/*.html'",
+    "fix": "eslint --fix rollup.config.js scripts && prettier --write '**/*.html'",
     "release": "standard-version"
   },
   "standard-version": {
@@ -25,6 +25,7 @@
   "lint-staged": {
     "*.js": [
       "eslint --cache --fix",
+      "prettier --write '**/*.html'",
       "yarn lint"
     ]
   },
@@ -56,6 +57,7 @@
     "husky": "^4.3.8",
     "less": "^4.1.1",
     "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1",
     "print-message": "^3.0.1",
     "rollup": "^2.39.0",
     "rollup-plugin-copy-merge": "^0.2.0",
