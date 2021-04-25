@@ -67,6 +67,16 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
    let activePage = null;
    let cameraList = null;
 
+   for (const page of $scope.pages) {
+      for (const group of page.groups) {
+         if (group.onLayout) {
+            $scope.$watchCollection(
+               () => group.items,
+               () => group.onLayout(page, group));
+         }
+      }
+   }
+
    const ghostCoordinates = [];
    document.addEventListener('click', preventGhostClick, true);
 
