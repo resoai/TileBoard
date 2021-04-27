@@ -518,7 +518,13 @@
       </div>
    </div>
 
-   <div ng-if="item.type === TYPES.CLIMATE" class="item-entity-container" tile-climate item="item" entity="entity"></div>
+   <div
+      ng-if="item.type === TYPES.CLIMATE"
+      class="item-entity-container"
+      tile-climate
+      item="item"
+      entity="entity"
+   ></div>
 
    <div ng-if="item.type === TYPES.MEDIA_PLAYER" class="item-entity-container">
       <div class="media-player-table" ng-class="{'-has-state': _state, '-has-subtitle': _subtitle}">

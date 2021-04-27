@@ -17,7 +17,9 @@
 <div class="item-climate">
    <div class="item-climate--target">
       <span>{{ ctrl.climateTarget() }}</span>
-      <span ng-if="(_unit = ctrl.rootCtrl.entityUnit(ctrl.item, ctrl.entity))" class="item-climate--target--unit">{{ _unit }}</span>
+      <span ng-if="(_unit = ctrl.rootCtrl.entityUnit(ctrl.item, ctrl.entity))" class="item-climate--target--unit"
+         >{{ _unit }}</span
+      >
       <i class="item-climate--icon mdi" ng-class="ctrl.rootCtrl.entityIcon(ctrl.item, ctrl.entity)"></i>
    </div>
    <div
@@ -28,7 +30,11 @@
       <span>{{ ctrl.getClimateCurrentOption() }}</span>
    </div>
 </div>
-<div ng-if="ctrl.rootCtrl.selectOpened(ctrl.item)" class="item-select" ng-style="ctrl.rootCtrl.itemSelectStyles(ctrl.entity, Object.keys(_options))">
+<div
+   ng-if="ctrl.rootCtrl.selectOpened(ctrl.item)"
+   class="item-select"
+   ng-style="ctrl.rootCtrl.itemSelectStyles(ctrl.entity, Object.keys(_options))"
+>
    <div
       class="item-select--option"
       ng-repeat="option in _options track by $index"
