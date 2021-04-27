@@ -68,10 +68,14 @@ const config = {
          exclude: [
             'node_modules/**',
             'scripts/directives/*.html',
+            'scripts/tiles/*.html',
          ],
       }),
       html({
-         include: 'scripts/directives/*.html',
+         include: [
+            'scripts/directives/*.html',
+            'scripts/tiles/*.html',
+         ],
       }),
       styles({
          // Extract CSS into separate file (path specified through output.assetFileNames).

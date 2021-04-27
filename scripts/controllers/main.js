@@ -1313,121 +1313,6 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
       return false;
    };
 
-   $scope.climateTarget = function (item, entity) {
-      const value = entity.attributes.temperature || [
-         entity.attributes.target_temp_low,
-         entity.attributes.target_temp_high,
-      ].join(' - ');
-
-      if (item.filter) {
-         return item.filter(value);
-      }
-
-      return value;
-   };
-
-   $scope.reverseLookupClimateOption = function (item, entity, option) {
-      initializeClimateOptions(item, entity);
-      for (const [key, value] of Object.entries(item.climateOptions)) {
-         if (value === option) {
-            return key;
-         }
-      }
-      return option;
-   };
-
-   $scope.lookupClimateOption = function (item, entity, option) {
-      initializeClimateOptions(item, entity);
-      return item.climateOptions[option] || option;
-   };
-
-   function initializeClimateOptions (item, entity) {
-      if (typeof item.climateOptions === 'undefined') {
-         const options = item.useHvacMode ? entity.attributes.hvac_modes : entity.attributes.preset_modes;
-         const resolvedOption = {};
-         for (const option of options) {
-            if (item.states !== null && typeof item.states === 'object') {
-               resolvedOption[option] = item.states[option] || option;
-            } else {
-               resolvedOption[option] = option;
-            }
-         }
-         item.climateOptions = resolvedOption;
-      }
-   }
-
-   $scope.getClimateOptions = function (item, entity) {
-      initializeClimateOptions(item, entity);
-      return item.climateOptions;
-   };
-
-   $scope.getClimateCurrentOption = function (item, entity) {
-      const option = item.useHvacMode ? entity.state : entity.attributes.preset_mode;
-      return $scope.lookupClimateOption(item, entity, option);
-   };
-
-   $scope.setClimateOption = function ($event, item, entity, option) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      let service;
-      const serviceData = {};
-      const resolvedOption = $scope.reverseLookupClimateOption(item, entity, option);
-
-      if (item.useHvacMode) {
-         service = 'set_hvac_mode';
-         serviceData.hvac_mode = resolvedOption;
-      } else {
-         service = 'set_preset_mode';
-         serviceData.preset_mode = resolvedOption;
-      }
-
-      callService(item, 'climate', service, serviceData);
-
-      $scope.closeActiveSelect();
-
-      return false;
-   };
-
-
-   $scope.increaseClimateTemp = function ($event, item, entity) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      let value = parseFloat(entity.attributes.temperature);
-
-      value += (entity.attributes.target_temp_step || 1);
-
-      if (entity.attributes.max_temp) {
-         value = Math.min(value, entity.attributes.max_temp);
-      }
-
-      $scope.setClimateTemp(item, value);
-
-      return false;
-   };
-
-   $scope.decreaseClimateTemp = function ($event, item, entity) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      let value = parseFloat(entity.attributes.temperature);
-
-      value -= (entity.attributes.target_temp_step || 1);
-
-      if (entity.attributes.min_temp) {
-         value = Math.max(value, entity.attributes.min_temp);
-      }
-
-      $scope.setClimateTemp(item, value);
-
-      return false;
-   };
-
-   $scope.setClimateTemp = function (item, value) {
-      callService(item, 'climate', 'set_temperature', { temperature: value });
-   };
-
    $scope.sendCover = function (service, item, entity) {
       callService(item, 'cover', service, {});
    };
@@ -2500,4 +2385,13 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
          pingConnection();
       });
    }
+
+   // Temporary transitioning APIs to be able to access shared APIs from directives.
+
+   this.callService = callService;
+   this.closeActiveSelect = $scope.closeActiveSelect;
+   this.entityIcon = $scope.entityIcon;
+   this.itemSelectStyles = $scope.itemSelectStyles;
+   this.openSelect = $scope.openSelect;
+   this.selectOpened = $scope.selectOpened;
 });
