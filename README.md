@@ -214,6 +214,11 @@ We divide tiles (cells) into groups on every page. Group object can have the fol
    * (optional)
    */
   groupMarginCss: '20px 40px',
+  /* custom function called on initial layout and when the items are added or removed dynamically.
+   * Can be used to adjust items size/position if implementing some dynamic layouts, for example.
+   * (optional)
+   */
+  onLayout: function(page, group) {},
   
   /* hidden: hide group (optional)
    * can be boolean or function that return boolean
