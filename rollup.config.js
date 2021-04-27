@@ -67,14 +67,12 @@ const config = {
          babelHelpers: 'bundled',
          exclude: [
             'node_modules/**',
-            'scripts/directives/*.html',
-            'scripts/tiles/*.html',
+            'scripts/directives/**/*.html',
          ],
       }),
       html({
          include: [
-            'scripts/directives/*.html',
-            'scripts/tiles/*.html',
+            'scripts/directives/**/*.html',
          ],
       }),
       styles({
