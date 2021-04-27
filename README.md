@@ -34,7 +34,7 @@ Alternatively you can checkout the repo and build the app manually. Check [CONTR
 
 ## WARNING
 
-Files served from the www folder (/local/ url), aren’t protected by the Home Assistant authentication. Files stored in this folder, if the URL is known, can be accessed by anybody without authentication. Please make sure that your HA instance is not exposed via inetrnet or at least that long-lived token is not hardcoded in the config. 
+Files served from the www folder (/local/ url), aren’t protected by the Home Assistant authentication. Files stored in this folder, if the URL is known, can be accessed by anybody without authentication. Please make sure that your HA instance is not exposed via inetrnet or at least that long-lived token is not hardcoded in the config.
 
 ## Configure
 
@@ -67,7 +67,7 @@ var CONFIG = {
     * If HomeAssistant is behind SSL, replace ws:// with wss://
     */
    wsUrl: 'ws://hassio.local:8123/api/websocket',
-   
+
    /* authToken: Optional Long live token that you can create in your HomeAssistant. You should never add this if HA is exposed via internet.
     */
    authToken: null,
@@ -77,7 +77,7 @@ var CONFIG = {
     */
    pingConnection: true,
    /* locale: locale used for date and number formats - available locales: it, de, es, fr, pt, ru, nl, pl, en-gb, en-us (default).
-    * The system uses localization files from the package angular-i18n. 
+    * The system uses localization files from the package angular-i18n.
     * You can add your own locale, if it is not included already, by adding the corresponding file from the angular-i18n
     * package into the 'locales' folder (rename the file so that the file name has format locale_code.js).
     */
@@ -88,7 +88,7 @@ var CONFIG = {
    debug: Boolean,
    /* timeFormat: 12 for AM/PM marker, 24 for 24 hour time (default) */
    timeFormat: Number,
-   
+
    /* googleApiKey: Google API key is required if you are using device tracker tiles along with Google Maps.
     * More info here: https://developers.google.com/maps/documentation/maps-static/usage-and-billing
     */
@@ -106,12 +106,12 @@ var CONFIG = {
    menuPosition: MENU_POSITIONS.LEFT,
    /* hideScrollbar: Hiding horizontal scrollbar */
    hideScrollbar: false,
-   
+
    /* groupsAlign: Align groups HORIZONTALLY (default) VERTICALLY or GRID
-    * The GRID alignment allows you to divide the groups on several lines; in this case it is necessary 
+    * The GRID alignment allows you to divide the groups on several lines; in this case it is necessary
     * to specify the row index on which you want to place the group. Each row will contain all the groups
-    * with the corresponding index for which the maximum width of the screen will be that of the widest row. 
-    * With this alignment you will be able to use the screen space to the maximum without having 
+    * with the corresponding index for which the maximum width of the screen will be that of the widest row.
+    * With this alignment you will be able to use the screen space to the maximum without having
     * to define groups with a very large height. Group 'row' setting is ignored for HORIZONTALLY and VERTICALLY alignments
     * GRID alignment is not available for MOBILE and WINPHONE themes; if selected fallback to HORIZONTALLY alignment */
    groupsAlign: GROUP_ALIGNS.HORIZONTALLY,
@@ -125,7 +125,7 @@ var CONFIG = {
    pages: [],
    /* events: A list of events. See documentation on Events below */
    events: [],
-   /* screensaver: A digital picture frame with a clock. Appears when    
+   /* screensaver: A digital picture frame with a clock. Appears when
     * the dashboard has been idle
     * https://github.com/resoai/TileBoard/wiki/Screensaver-configuration
     * (optional)
@@ -135,9 +135,9 @@ var CONFIG = {
      timeout: 300,
      /* slidesTimeout: Amount of time (in seconds) to show each slide */
      slidesTimeout: 10,
-     
+
      styles: { fontSize: '40px' },
-     
+
      /* read more in wiki */
      leftBottom: [{ type: SCREENSAVER_ITEMS.DATETIME }],
      /* slides: Array of paths to pictures. */
@@ -147,7 +147,7 @@ var CONFIG = {
        {bg: 'images/bg3.jpg'}
      ]
    },
-   
+
    /* header: object of header. Will be applied globally
     * https://github.com/resoai/TileBoard/wiki/Header-configuration
     * (optional)
@@ -180,7 +180,6 @@ Page object can have the following fields:
    * (optional)
    */
   groupMarginCss: '20px 40px',
-  
   /* hidden: hide page (optional)
    * can be boolean or function that return boolean
    */
@@ -219,7 +218,6 @@ We divide tiles (cells) into groups on every page. Group object can have the fol
    * (optional)
    */
   onLayout: function(page, group) {},
-  
   /* hidden: hide group (optional)
    * can be boolean or function that return boolean
    */
@@ -304,7 +302,7 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
    * (optional)
    */
   slides: [{}, {bg: 'images/slide.jpg'}],
-  
+
   /* action: Define a custom action on click
    * You can override the default action for any tile type.
    * This function will be evaluated, when the user clicks the tile.
@@ -348,15 +346,15 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
    * Valid options: 'google', 'mapbox', 'yandex'
    */
   map: 'google',
-  
+
   /* zoomLevels: zoom levels of map in slides
    * left only one if you what one slide (e.g. [9])
    * (optional)
    */
-  zoomLevels: [9, 13], 
-  
+  zoomLevels: [9, 13],
+
   /* hideEntityPicture: hide entity picture if you want only maps */
-  hideEntityPicture: false, 
+  hideEntityPicture: false,
   /** type: TEXT_LIST **/
   /* list: List of objects with a title, icon, and value */
   list: [{title: 'Kitchen temp', icon: 'mdi-home', value: '&sensor.kitchen_temp.state'}],
@@ -365,7 +363,7 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
    * Value options: true, false
    */
   hideSource: false,
-  /* textSource: localized/customized text for 'Source' 
+  /* textSource: localized/customized text for 'Source'
    * (optional)
    */
   textSource: 'Audio Input',
@@ -460,9 +458,9 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
     */
    classes: ['-compact'],
    classes: {'-compact': true},
-   
+
    /* customStyles: Additional styles. Enables tile customisation based on state.
-    * Can be used both as a object `{ 'background-color': '#FF0000' }` or, 
+    * Can be used both as a object `{ 'background-color': '#FF0000' }` or,
     * as a function function (item, entity) { return { 'background-color': '#FF0000' } }
     * (optional)
     */
@@ -480,7 +478,7 @@ Tile Object. [Click here for some real-life examples](TILE_EXAMPLES.md)
 }
 ```
 
-Every anonymous function will call with context 
+Every anonymous function will call with context
 ```js
 {
    states: {}, // list of current states
@@ -566,7 +564,7 @@ Supported weather fields
    humidityUnit: '&sensor.dark_sky_humidity.attributes.unit_of_measurement',
    pressure: '&sensor.dark_sky_pressure.state',
    pressureUnit: '&sensor.dark_sky_pressure.attributes.unit_of_measurement',
-    
+
    list: [ // array of strings
       // custom line
       'Feels like '
@@ -583,7 +581,7 @@ Supported weather fields
 ### @/& Prefixes
 As you may notice that we use @/& prefixes to get a value inside objects (entities).
 @ is relative to the current entity (@attributes.friendly_name) and & is for global (&sensor.kitchen_temp.state). This may not work everywhere, but you may give it a go.
-Read more in our [wiki article](https://github.com/resoai/TileBoard/wiki/Templates). 
+Read more in our [wiki article](https://github.com/resoai/TileBoard/wiki/Templates).
 
 ### Events
 
@@ -698,8 +696,8 @@ This example will fire a persistent red notification on TileBoard when a specifi
 Several classes are added to each tile depending on the type of tile and state. Custom CSS styles can be applied by creating a `custom.css` file in the `styles` directory.
 
 ## Tablet and mobile configuration
-For the tablet configuration use `COMPACT` custom theme and reduce padding. 
-For the mobiles check out [wiki article](https://github.com/resoai/TileBoard/wiki/Mobile-configuration). 
+For the tablet configuration use `COMPACT` custom theme and reduce padding.
+For the mobiles check out [wiki article](https://github.com/resoai/TileBoard/wiki/Mobile-configuration).
 
 ## License
 MIT License
