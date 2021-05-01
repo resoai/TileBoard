@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.6.0](https://github.com/resoai/TileBoard/compare/v2.5.0...v2.6.0) (2021-05-01)
+
+
+### Features
+
+* onLayout hook triggered on items being added/remove ([#703](https://github.com/resoai/TileBoard/issues/703)) ([94a1846](https://github.com/resoai/TileBoard/commit/94a184604d6f2659a4a6ed1b82f626b7e6affdd9))
+
+
+### Bug Fixes
+
+* **CLIMATE:** localized/customized lookup for climate options ([f420183](https://github.com/resoai/TileBoard/commit/f420183b2e372f8dc9bc98a07b3363a6434a9079))
+* **LIGHT:** show brightness control only when on ([#707](https://github.com/resoai/TileBoard/issues/707)) ([17a5a63](https://github.com/resoai/TileBoard/commit/17a5a6362077673ab89545394d60b9c8735fe8d9))
+* **MEDIA_PLAYER:** localized translation for mediaplayer "Source" label ([af9b961](https://github.com/resoai/TileBoard/commit/af9b9618ea5407c27d42e6e14ff6d3cd29eac1ab))
+
 ## [2.5.0](https://github.com/resoai/TileBoard/compare/v2.4.1...v2.5.0) (2021-04-20)
 
 
