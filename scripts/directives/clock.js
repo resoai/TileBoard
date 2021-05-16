@@ -8,10 +8,10 @@ export default function ($filter) {
    return {
       restrict: 'E',
       template: `
-         <div class="clock--h">{{ hour }}</div
+         <div class="clock--h"></div
          ><div class="clock--colon">:</div
-         ><div class="clock--m">{{ minute }}</div
-         ><div class="clock--postfix">{{ postfix }}</div>
+         ><div class="clock--m"></div
+         ><div class="clock--postfix"></div>
       `,
       link ($scope, $el, attrs) {
          const hourEl = $el[0].querySelector('.clock--h');
@@ -25,7 +25,7 @@ export default function ($filter) {
 
             hourEl.textContent = hour;
             minuteEl.textContent = minute;
-            postfixEl.textContent = postfix;
+            postfixEl.textContent = postfix || '';
          };
 
          updateTime();
