@@ -233,7 +233,7 @@ export const MINIMAL_CHART_OPTIONS = {
    tooltips: {
       callbacks: {
          title: function (tooltipItem, data) {
-            return timeAgo(tooltipItem[0].label);
+            return timeAgo(data.datasets[tooltipItem[0].datasetIndex].data[tooltipItem[0].index].x);
          },
          label: function (tooltipItem, data) {
             return tooltipItem.value;
