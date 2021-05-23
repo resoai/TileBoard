@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.1](https://github.com/resoai/TileBoard/compare/v2.6.0...v2.6.1) (2021-05-23)
+
+
+### Bug Fixes
+
+* **deps:** update dependency node-sass to v6 ([#716](https://github.com/resoai/TileBoard/issues/716)) ([a239003](https://github.com/resoai/TileBoard/commit/a239003475192a4baed3f3e85588d24d7c281896))
+* **HISTORY:** fix tooltip time for some locales ([#724](https://github.com/resoai/TileBoard/issues/724)) ([e2c5639](https://github.com/resoai/TileBoard/commit/e2c5639be74647fab2e0e7d539a76415ea42d81b))
+* suppress undefined postfix ([#722](https://github.com/resoai/TileBoard/issues/722)) ([d7132ee](https://github.com/resoai/TileBoard/commit/d7132ee257ccf428b1008fdd62aef7a7314c185f))
+
 ## [2.6.0](https://github.com/resoai/TileBoard/compare/v2.5.0...v2.6.0) (2021-05-01)
 
 
