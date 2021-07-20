@@ -815,3 +815,26 @@ A QR code can be generated to easily share your WiFi with guests, using a genera
    url: '../qrcode.png'
 }
 ```
+
+
+#### VACUUM
+![IMAGE](images/tile-screenshots/VACUUM.png)<br>
+```js
+{
+   position: [0, 0],
+   type: TYPES.VACUUM,
+   id: 'vacuum.myvacuum',
+   title: 'Vacuum',
+   subtitle: 'Livingroom',
+   icon: "mdi-robot-vacuum-variant",
+   states: {
+      cleaning: "Cleaning",
+      paused: "Paused",
+      returning: "Returning",
+      unavailable: "Unavailable",
+      docked: "Docked",
+      idle: "Idle"
+   },
+}
+```
+
