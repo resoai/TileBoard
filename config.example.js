@@ -56,6 +56,7 @@ var CONFIG = {
                'lightning-rainy': 'tstorms',
                'partly-cloudy-day': 'partlycloudy',
                'partly-cloudy-night': 'nt-partlycloudy',
+               'partlycloudy': 'partlycloudy',
                'pouring': 'rain',
                'snowy': 'snow',
                'snowy-rainy': 'sleet',
