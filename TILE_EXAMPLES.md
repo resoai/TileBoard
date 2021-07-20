@@ -726,3 +726,26 @@ This is a custom tile which can be used for displaying values from different sen
    url: '../qrcode.png'
 }
 ```
+
+
+#### VACUUM
+![IMAGE](images/tile-screenshots/VACUUM.png)<br>
+```js
+{
+   position: [0, 0],
+   type: TYPES.VACUUM,
+   id: 'vacuum.myvacuum',
+   title: 'Vacuum',
+   subtitle: 'Livingroom',
+   icon: "mdi-robot-vacuum-variant",
+   states: {
+      cleaning: "Cleaning",
+      paused: "Paused",
+      returning: "Returning",
+      unavailable: "Unavailable",
+      docked: "Docked",
+      idle: "Idle"
+   },
+}
+```
+
