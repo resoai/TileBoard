@@ -95,6 +95,32 @@ export const FEATURES = {
       COLOR: 16,
       TRANSITION: 32,
       WHITE_VALUE: 128,
+      COLOR_MODES_BRIGHTNESS: ['brightness', 'color_temp', 'hs', 'xy', 'rgb', 'rgbw', 'rgbww', 'white'],
+      supportsBrightness (entity) {
+         const { attributes } = entity;
+         let { supported_color_modes: supportedColorModes } = attributes;
+         const { supported_features: supportedFeatures } = attributes;
+
+         if (supportedColorModes === undefined) {
+            // Backwards compatibility for supported_color_modes added in 2021.4
+            supportedColorModes = [];
+
+            if (supportedFeatures & FEATURES.LIGHT.COLOR_TEMP) {
+               supportedColorModes.push('color_temp');
+            }
+            if (supportedFeatures & FEATURES.LIGHT.COLOR) {
+               supportedColorModes.push('hs');
+            }
+            if (supportedFeatures & FEATURES.LIGHT.WHITE_VALUE) {
+               supportedColorModes.push('rgbw');
+            }
+            if (supportedFeatures & FEATURES.LIGHT.BRIGHTNESS && supportedColorModes.length === 0) {
+               supportedColorModes = ['brightness'];
+            }
+         }
+
+         return supportedColorModes.some(mode => FEATURES.LIGHT.COLOR_MODES_BRIGHTNESS.includes(mode));
+      },
    },
    MEDIA_PLAYER: {
       PAUSE: 1,
