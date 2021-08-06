@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.3](https://github.com/resoai/TileBoard/compare/v2.6.2...v2.6.3) (2021-08-06)
+
+
+### Bug Fixes
+
+* **light:** fix light brightness adjustment buttons after HA update ([#746](https://github.com/resoai/TileBoard/issues/746)) ([dd9510f](https://github.com/resoai/TileBoard/commit/dd9510f1e4c484b8d2b3abcb059d70c7006c7718)), closes [#743](https://github.com/resoai/TileBoard/issues/743)
+
 ### [2.6.2](https://github.com/resoai/TileBoard/compare/v2.6.1...v2.6.2) (2021-07-21)
 
 ### [2.6.1](https://github.com/resoai/TileBoard/compare/v2.6.0...v2.6.1) (2021-05-23)
