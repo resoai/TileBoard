@@ -518,11 +518,25 @@
         color: @TILE_COLOR_ON;
       }
     }
-
+ 
     .item-entity--icon {
       color: rgb(144, 142, 150);
     }
 
+    &-slider-container{
+      margin: 5px 5px 0;
+    }
+
+    &-entity--back-button{
+      left: 0px;
+      bottom: 0px;
+    }
+
+    &-entity-sliders {
+      border-radius: 8px;
+      background: @TILE_BACKGROUND_ON;
+    }
+    
     &.-on, &.-armed, &.-locked {
       background: @TILE_BACKGROUND_ON;
     }
