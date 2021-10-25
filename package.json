@@ -53,7 +53,7 @@
     "angular-i18n": "^1.8.2",
     "babel-plugin-angularjs-annotate": "^0.10.0",
     "core-js": "3",
-    "eslint": "^7.20.0",
+    "eslint": "^8.0.0",
     "husky": "^4.3.8",
     "less": "^4.1.1",
     "lint-staged": "^11.0.0",
