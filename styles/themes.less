@@ -67,6 +67,16 @@
 
     &-entity {
       color: rgb(95, 92, 83);
+
+      &-sliders {
+        background-color: #fff;
+      }
+
+      &-colorpicker input {
+        width: 25px;
+        border-radius: 15px;
+        border-color: transparent;
+      }
     }
 
     &-clickable {
@@ -220,6 +230,10 @@
       }
     }
 
+    &-entity-sliders {
+      background: rgb(93, 113, 119);
+    }
+
     &.-device_tracker,
     &.-camera,
     &.-camera_thumbnail {
@@ -250,6 +264,7 @@
     box-shadow: 1px 1px 0 #000, -1px -1px 0 rgba(245, 245, 245, 1);
     border-radius: 1px;
 
+    &-entity-sliders,
     &-select {
       background: rgb(225, 223, 223);
     }
@@ -425,6 +440,10 @@
     &-state {
       background: rgba(0, 0, 0, 0.15);
     }
+
+    &-entity-sliders {
+      background: #11293e !important;
+    }
   }
 
   .pages-menu.-bottom {
@@ -480,6 +499,22 @@
 
     &-entity {
       color: rgb(98, 95, 86);
+
+      &--icon {
+        color: rgb(144, 142, 150);
+      }
+
+      &-sliders {
+        border-radius: 8px;
+        background: @TILE_BACKGROUND_ON;
+      }
+
+      &-colorpicker input {
+        border-color: transparent;
+        border-radius: 18px;
+        height: 18px;
+        width: 18px;
+      }
     }
 
     &-clickable {
@@ -517,10 +552,6 @@
       .item-title, .item-state {
         color: @TILE_COLOR_ON;
       }
-    }
-
-    .item-entity--icon {
-      color: rgb(144, 142, 150);
     }
 
     &.-on, &.-armed, &.-locked {
