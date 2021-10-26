@@ -22,7 +22,7 @@
 
   color: @textColor;
   background: rgb(248, 248, 248) !important;
-
+   
   .header {
     color: #fff;
     background: rgb(54, 100, 216);
@@ -30,6 +30,16 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     padding-bottom: 10px;
   }
+
+  .item-entity-sliders{
+    background-color: #fff;
+  }
+ 
+  .item-entity-colorpicker input{
+    width: 25px;
+    border-radius: 15px;
+    border-color: transparent;
+}
 
   .group-title {
     color: @textColor;
@@ -220,6 +230,10 @@
       }
     }
 
+    &-entity-sliders {      
+        background:rgb(93 113 119);
+    }
+
     &.-device_tracker,
     &.-camera,
     &.-camera_thumbnail {
@@ -249,7 +263,10 @@
     margin: -1px;
     box-shadow: 1px 1px 0 #000, -1px -1px 0 rgba(245, 245, 245, 1);
     border-radius: 1px;
-
+    
+    &-entity-sliders{
+      background: rgb(225, 223, 223);
+    }
     &-select {
       background: rgb(225, 223, 223);
     }
@@ -293,7 +310,7 @@
     &-entity {
       &.-select .item-entity--value {
         font-size: 21px * 0.8;
-      }
+      }     
     }
   }
 
@@ -425,6 +442,10 @@
     &-state {
       background: rgba(0, 0, 0, 0.15);
     }
+
+    &-entity-sliders{
+      background: #11293e !important;
+    }
   }
 
   .pages-menu.-bottom {
@@ -523,29 +544,16 @@
       color: rgb(144, 142, 150);
     }
 
-    &-slider-container{
-      margin: 5px 5px 0;
-    }
-
-    &-entity--back-button{
-      left: 0px;
-      bottom: 0px;
-    }
-
     &-entity-sliders {
       border-radius: 8px;
       background: @TILE_BACKGROUND_ON;
     }
-    
-    &-entity-colorpicker
-    {
-      margin: 5px 5px 0;      
-    }
-
+   
     &-entity-colorpicker input{
         width: 18px;
         height: 18px;
         border-radius: 18px;
+        border-color: transparent;
     }
 
     &.-on, &.-armed, &.-locked {
