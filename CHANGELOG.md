@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.4](https://github.com/resoai/TileBoard/compare/v2.6.3...v2.6.4) (2021-10-26)
+
+
+### Bug Fixes
+
+* **LIGHT:** better styling for the view triggered on long press ([#780](https://github.com/resoai/TileBoard/issues/780)) ([8193f33](https://github.com/resoai/TileBoard/commit/8193f33d532321edbe449532eff469af30aa903f))
+
 ### [2.6.3](https://github.com/resoai/TileBoard/compare/v2.6.2...v2.6.3) (2021-08-06)
 
 
