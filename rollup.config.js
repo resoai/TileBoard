@@ -3,7 +3,7 @@ import progress from 'rollup-plugin-progress';
 import mergeCopy from 'rollup-plugin-copy-merge';
 import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
-import copy from 'rollup-plugin-cpy';
+import copy from 'rollup-plugin-copy-glob';
 import del from 'rollup-plugin-delete';
 import emitEJS from 'rollup-plugin-emit-ejs';
 import html from 'rollup-plugin-html';
