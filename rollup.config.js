@@ -61,7 +61,7 @@ const config = {
          ],
       }),
       progress(),
-      commonjs(),
+      commonjs({ ignoreTryCatch: false }),
       resolve(),
       babel({
          babelHelpers: 'bundled',
