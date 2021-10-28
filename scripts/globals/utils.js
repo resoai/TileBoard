@@ -84,9 +84,13 @@ export const debounce = function (func, wait, immediate) {
 export const toAbsoluteServerURL = function (path, serverUrlOverride = false) {
    const startsWithProtocol = path.indexOf('http') === 0;
    const url = startsWithProtocol ? path : (serverUrlOverride || window.SERVER_URL_OVERRIDE || window.CONFIG.serverUrl) + '/' + path;
+   return normalizeUrlSlashes(url);
+};
+
+export function normalizeUrlSlashes (url) {
    // Replace extra forward slashes but not in protocol.
    return url.replace(/([^:])\/+/g, '$1/');
-};
+}
 
 export function supportsFeature (feature, entity) {
    return 'supported_features' in entity.attributes

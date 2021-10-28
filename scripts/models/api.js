@@ -1,7 +1,7 @@
 import angular from 'angular';
 import { App } from '../app';
 import { TOKEN_CACHE_KEY } from '../globals/constants';
-import { toAbsoluteServerURL } from '../globals/utils';
+import { toAbsoluteServerURL, normalizeUrlSlashes } from '../globals/utils';
 import Noty from '../models/noty';
 
 App.provider('Api', function () {
@@ -9,7 +9,7 @@ App.provider('Api', function () {
    let authToken;
 
    this.setInitOptions = function (options) {
-      wsUrl = options.wsUrl;
+      wsUrl = normalizeUrlSlashes(options.wsUrl);
       authToken = options.authToken;
    };
 
