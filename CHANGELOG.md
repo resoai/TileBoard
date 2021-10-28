@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.6.5](https://github.com/resoai/TileBoard/compare/v2.6.4...v2.6.5) (2021-10-28)
+
+
+### Bug Fixes
+
+* charts not working ([#783](https://github.com/resoai/TileBoard/issues/783)) ([8a62b98](https://github.com/resoai/TileBoard/commit/8a62b988be5ffc8c12fa086ac3bbc53ad34a202d))
+* handle web socket API URL that have extra double slashes ([#782](https://github.com/resoai/TileBoard/issues/782)) ([71d0633](https://github.com/resoai/TileBoard/commit/71d063399a3131c1f5e4ba795192e1df291f5358))
+
 ### [2.6.4](https://github.com/resoai/TileBoard/compare/v2.6.3...v2.6.4) (2021-10-26)
 
 
