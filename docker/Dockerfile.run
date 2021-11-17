@@ -1,0 +1,7 @@
+# Runtime image
+FROM nginx:alpine AS runtime
+
+COPY ./docker/00-check-config.sh /docker-entrypoint.d/
+COPY ./build /usr/share/nginx/html
+
+RUN touch /usr/share/nginx/html/styles/custom.css

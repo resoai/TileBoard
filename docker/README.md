@@ -31,3 +31,17 @@ file to `config.js` and edit it.
 ```sh
 docker build -t chetan/tileboard -f docker/Dockerfile .
 ```
+
+Multi-platform:
+
+```sh
+rm -rf ./build/
+docker buildx build -t chetan/tileboard:build -f docker/Dockerfile.build --output build .
+docker buildx build \
+  --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6 \
+  --pull \
+  -t chetan/tileboard:latest \
+  -f docker/Dockerfile.run \
+  --push \
+  .
+```
