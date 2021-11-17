@@ -17,3 +17,5 @@ FROM nginx:alpine
 
 COPY ./docker/00-check-config.sh /docker-entrypoint.d/
 COPY --from=builder /build/build /usr/share/nginx/html
+
+RUN touch /usr/share/nginx/html/styles/custom.css
