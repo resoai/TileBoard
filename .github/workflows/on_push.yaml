@@ -39,7 +39,7 @@ jobs:
           docker buildx build \
             --platform linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7 \
             --pull \
-            -t tileboard/tileboard:latest \
+            -t tileboard/tileboard:master \
             -f docker/Dockerfile.run \
             --push \
             .
