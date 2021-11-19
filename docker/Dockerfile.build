@@ -1,4 +1,4 @@
-FROM node:latest AS builder
+FROM node:16 AS builder
 
 RUN mkdir -p /build
 WORKDIR /build
