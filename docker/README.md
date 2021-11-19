@@ -17,7 +17,7 @@ file to `config.js` and edit it.
      tileboard:
        image: tileboard/tileboard:latest
        restart: unless-stopped
-       port:
+       ports:
          - 9000:80
        volumes:
          - ./config.js:/usr/share/nginx/html/config.js
