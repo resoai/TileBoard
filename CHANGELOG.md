@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.7.0](https://github.com/resoai/TileBoard/compare/v2.6.5...v2.7.0) (2021-11-22)
+
+
+### Features
+
+* create docker images for standalone use ([#793](https://github.com/resoai/TileBoard/issues/793)) ([73a854e](https://github.com/resoai/TileBoard/commit/73a854e9d121a22b040ff88a126ba00bd30e0f30))
+
 ### [2.6.5](https://github.com/resoai/TileBoard/compare/v2.6.4...v2.6.5) (2021-10-28)
 
 
