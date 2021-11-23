@@ -6,7 +6,7 @@ Runs in a minimal nginx server, serving the content on port 9000 by default.
 
 ## Running with Docker
 
-1. Download the [sample config](https://raw.githubusercontent.com/resoai/TileBoard/master/config.example.js) file as `config.js` and configure it (see [configure] for more info).
+1. Download the [sample config](https://raw.githubusercontent.com/resoai/TileBoard/master/config.example.js) file as `config.js` and configure it (see [configure](https://github.com/resoai/TileBoard/blob/master/README.md#configure) for more info).
 
    ```sh
    wget -O config.js https://raw.githubusercontent.com/resoai/TileBoard/master/config.example.js
