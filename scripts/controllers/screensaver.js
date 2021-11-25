@@ -33,6 +33,14 @@ App.controller('Screensaver', function ($scope) {
 
       slide._classes.length = 0;
 
+      let slideClasses = slide.classes;
+      if (slideClasses) {
+         if (!Array.isArray(slideClasses)) {
+            slideClasses = [slideClasses];
+         }
+         slide._classes.push(...slideClasses);
+      }
+
       if (activeSlide === index) {
          slide._classes.push('-active');
       }
