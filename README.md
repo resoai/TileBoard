@@ -152,8 +152,8 @@ var CONFIG = {
      /* slides: Array of paths to pictures and, optionally, associated CSS classes. */
      slides: [
        {bg: 'images/bg1.jpeg', classes:['-slide1']},
-       {bg: 'images/bg2.png, classes:['-slide2']'},
-       {bg: 'images/bg3.jpg, classes:['-slide3']'}
+       {bg: 'images/bg2.png', classes:['-slide2']},
+       {bg: 'images/bg3.jpg', classes:['-slide3']}
      ]
    },
 
