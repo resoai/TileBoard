@@ -149,11 +149,11 @@ var CONFIG = {
 
      /* read more in wiki */
      leftBottom: [{ type: SCREENSAVER_ITEMS.DATETIME }],
-     /* slides: Array of paths to pictures. */
+     /* slides: Array of paths to pictures and, optionally, associated CSS classes. */
      slides: [
-       {bg: 'images/bg1.jpeg'},
-       {bg: 'images/bg2.png'},
-       {bg: 'images/bg3.jpg'}
+       {bg: 'images/bg1.jpeg', classes:['-slide1']},
+       {bg: 'images/bg2.png', classes:['-slide2']},
+       {bg: 'images/bg3.jpg', classes:['-slide3']}
      ]
    },
 
