@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.8.0](https://github.com/resoai/TileBoard/compare/v2.7.0...v2.8.0) (2021-12-04)
+
+
+### Features
+
+* allow custom classes on screensaver slides ([#796](https://github.com/resoai/TileBoard/issues/796)) ([514abba](https://github.com/resoai/TileBoard/commit/514abba9f82819d1d6686b18bbb11b8e5df0bb06))
+
 ## [2.7.0](https://github.com/resoai/TileBoard/compare/v2.6.5...v2.7.0) (2021-11-22)
 
 
