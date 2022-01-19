@@ -272,6 +272,9 @@
             <div ng-bind="group.title" class="group-title"></div>
             <div tile ng-repeat="item in group.items track by $index"></div>
          </div>
+
+         <div class="footer" ng-if="footer = getFooter(page)"
+              ng-include="'footer.html'"></div>
       </div>
    </div>
 
