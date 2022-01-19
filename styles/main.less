@@ -4,8 +4,7 @@
 @pageMenuIconSize: 70px;
 @pageMenuIconVerticalMargin: 5px;
 @groupMargin: 35px 50px 35px 15px;
-@pageBottomPadding: 2 * @pageMenuVerticalPadding + @pageMenuIconSize
-      + 2 * @pageMenuIconVerticalMargin;
+@pageBottomPadding: 2 * @pageMenuVerticalPadding + @pageMenuIconSize + 2 * @pageMenuIconVerticalMargin;
 
 @tileSize: 155px;
 @entitySize: 80px;
@@ -25,8 +24,8 @@
 @WEATHER: rgb(65, 84, 115);
 @WEATHER_LIST: @WEATHER;
 @MEDIA_PLAYER: rgb(52, 156, 20);
-@COVER: rgb(21,101,192);
-@COVER_TOGGLE: rgb(21,101,192);
+@COVER: rgb(21, 101, 192);
+@COVER_TOGGLE: rgb(21, 101, 192);
 @DEVICE_TRACKER: rgb(124, 129, 206);
 @SCRIPT: rgb(37, 158, 176);
 @SCRIPT_L: rgb(16, 206, 228);
@@ -43,14 +42,14 @@
 @FAN_L: rgb(164, 84, 160);
 @FAN_ON: rgb(190, 68, 117);
 @GAUGE: rgb(21, 153, 127);
-@LOCK: rgb(0,121,107);
-@LOCK_L: rgb(0,120,123);
-@LOCK_LOCKED: rgb(0,137,123);
+@LOCK: rgb(0, 121, 107);
+@LOCK_L: rgb(0, 120, 123);
+@LOCK_LOCKED: rgb(0, 137, 123);
 @INPUT_BOOLEAN: rgb(40, 155, 97);
 @INPUT_BOOLEAN_L: rgb(18, 176, 77);
 @LIGHT: rgb(145, 62, 101);
 @LIGHT_L: rgb(178, 68, 120);
-@LIGHT_ON:  rgb(221, 76, 73);
+@LIGHT_ON: rgb(221, 76, 73);
 @TEXT_LIST: rgb(42, 126, 159);
 @INPUT_NUMBER: rgb(5, 164, 140);
 @INPUT_SELECT: rgb(242, 135, 71);
@@ -73,60 +72,160 @@
 @HISTORY: @popupTitleBackground;
 
 .item {
-   &.-th-transparent {background-color: @TRANSPARENT;}
-   &.-th-weather {background-color: @WEATHER;}
-   &.-th-weather_list {background-color: @WEATHER_LIST;}
-   &.-th-media_player {background-color: @MEDIA_PLAYER;}
-   &.-th-cover {background-color: @COVER;}
-   &.-th-cover_toggle {background-color: @COVER_TOGGLE;}
-   &.-th-device_tracker {background-color: @DEVICE_TRACKER;}
-   &.-th-door_entry {background-color: @DOOR_ENTRY;}
-   &.-th-script {background-color: @SCRIPT;}
-   &.-th-script.-loading {background-color: @SCRIPT_L;}
-   &.-th-script.-on {background-color: @SCRIPT_ON;}
-   &.-th-automation {background-color: @AUTOMATION;}
-   &.-th-automation.-loading {background-color: @AUTOMATION_L;}
-   &.-th-sensor {background-color: @SENSOR;}
-   &.-th-sensor_icon {background-color: @SENSOR_ICON;}
-   &.-th-switch {background-color: @SWITCH;}
-   &.-th-switch.-loading {background-color: @SWITCH_L;}
-   &.-th-switch.-on {background-color: @SWITCH_ON;}
-   &.-th-fan {background-color: @FAN;}
-   &.-th-fan.-loading {background-color: @FAN_L;}
-   &.-th-fan.-on {background-color: @FAN_ON;}
-   &.-th-gauge {background-color: @GAUGE;}
-   &.-th-lock {background-color: @LOCK;}
-   &.-th-lock.-loading {background-color: @LOCK_L;}
-   &.-th-lock.-locked {background-color: @LOCK_LOCKED;}
-   &.-th-input_boolean {background-color: @INPUT_BOOLEAN;}
-   &.-th-input_boolean.-loading {background-color: @INPUT_BOOLEAN_L;}
-   &.-th-light {background-color: @LIGHT;}
-   &.-th-light.-loading {background-color: @LIGHT_L;}
-   &.-th-light.-on {background-color: @LIGHT_ON;}
-   &.-th-text_list {background-color: @TEXT_LIST;}
-   &.-th-input_number {background-color: @INPUT_NUMBER;}
-   &.-th-climate {background-color: @CLIMATE;}
-   &.-th-input_select {background-color: @INPUT_SELECT;}
-   &.-th-input_datetime {background-color: @INPUT_DATETIME;}
-   &.-th-camera {background-color: @CAMERA;}
-   &.-th-camera_stream {background-color: @CAMERA_STREAM;}
-   &.-th-scene {background-color: @SCENE;}
-   &.-th-scene.-loading {background-color: @SCENE_L;}
-   &.-th-slider {background-color: @SLIDER;}
-   &.-th-iframe {background-color: @IFRAME;}
-   &.-th-alarm {background-color: @ALARM;}
-   &.-th-alarm.-armed {background-color: @ALARM;}
-   &.-th-custom {background-color: @CUSTOM;}
-   &.-th-vacuum {background-color: @VACUUM;}
-   &.-th-popup_iframe {background-color: @POPUP_IFRAME;}
-   &.-th-popup {background-color: @POPUP;}
-   &.-th-dimmer_switch {background-color: @DIMMER_SWITCH;}
-   &.-th-image {background-color: @IMAGE;}
-   &.-th-history {background-color: @HISTORY;}
+   &.-th-transparent {
+      background-color: @TRANSPARENT;
+   }
+   &.-th-weather {
+      background-color: @WEATHER;
+   }
+   &.-th-weather_list {
+      background-color: @WEATHER_LIST;
+   }
+   &.-th-media_player {
+      background-color: @MEDIA_PLAYER;
+   }
+   &.-th-cover {
+      background-color: @COVER;
+   }
+   &.-th-cover_toggle {
+      background-color: @COVER_TOGGLE;
+   }
+   &.-th-device_tracker {
+      background-color: @DEVICE_TRACKER;
+   }
+   &.-th-door_entry {
+      background-color: @DOOR_ENTRY;
+   }
+   &.-th-script {
+      background-color: @SCRIPT;
+   }
+   &.-th-script.-loading {
+      background-color: @SCRIPT_L;
+   }
+   &.-th-script.-on {
+      background-color: @SCRIPT_ON;
+   }
+   &.-th-automation {
+      background-color: @AUTOMATION;
+   }
+   &.-th-automation.-loading {
+      background-color: @AUTOMATION_L;
+   }
+   &.-th-sensor {
+      background-color: @SENSOR;
+   }
+   &.-th-sensor_icon {
+      background-color: @SENSOR_ICON;
+   }
+   &.-th-switch {
+      background-color: @SWITCH;
+   }
+   &.-th-switch.-loading {
+      background-color: @SWITCH_L;
+   }
+   &.-th-switch.-on {
+      background-color: @SWITCH_ON;
+   }
+   &.-th-fan {
+      background-color: @FAN;
+   }
+   &.-th-fan.-loading {
+      background-color: @FAN_L;
+   }
+   &.-th-fan.-on {
+      background-color: @FAN_ON;
+   }
+   &.-th-gauge {
+      background-color: @GAUGE;
+   }
+   &.-th-lock {
+      background-color: @LOCK;
+   }
+   &.-th-lock.-loading {
+      background-color: @LOCK_L;
+   }
+   &.-th-lock.-locked {
+      background-color: @LOCK_LOCKED;
+   }
+   &.-th-input_boolean {
+      background-color: @INPUT_BOOLEAN;
+   }
+   &.-th-input_boolean.-loading {
+      background-color: @INPUT_BOOLEAN_L;
+   }
+   &.-th-light {
+      background-color: @LIGHT;
+   }
+   &.-th-light.-loading {
+      background-color: @LIGHT_L;
+   }
+   &.-th-light.-on {
+      background-color: @LIGHT_ON;
+   }
+   &.-th-text_list {
+      background-color: @TEXT_LIST;
+   }
+   &.-th-input_number {
+      background-color: @INPUT_NUMBER;
+   }
+   &.-th-climate {
+      background-color: @CLIMATE;
+   }
+   &.-th-input_select {
+      background-color: @INPUT_SELECT;
+   }
+   &.-th-input_datetime {
+      background-color: @INPUT_DATETIME;
+   }
+   &.-th-camera {
+      background-color: @CAMERA;
+   }
+   &.-th-camera_stream {
+      background-color: @CAMERA_STREAM;
+   }
+   &.-th-scene {
+      background-color: @SCENE;
+   }
+   &.-th-scene.-loading {
+      background-color: @SCENE_L;
+   }
+   &.-th-slider {
+      background-color: @SLIDER;
+   }
+   &.-th-iframe {
+      background-color: @IFRAME;
+   }
+   &.-th-alarm {
+      background-color: @ALARM;
+   }
+   &.-th-alarm.-armed {
+      background-color: @ALARM;
+   }
+   &.-th-custom {
+      background-color: @CUSTOM;
+   }
+   &.-th-vacuum {
+      background-color: @VACUUM;
+   }
+   &.-th-popup_iframe {
+      background-color: @POPUP_IFRAME;
+   }
+   &.-th-popup {
+      background-color: @POPUP;
+   }
+   &.-th-dimmer_switch {
+      background-color: @DIMMER_SWITCH;
+   }
+   &.-th-image {
+      background-color: @IMAGE;
+   }
+   &.-th-history {
+      background-color: @HISTORY;
+   }
 }
 
-
-html, body {
+html,
+body {
    font-size: 14px;
    height: 100%;
    min-height: 100%;
@@ -151,7 +250,7 @@ body {
 .errors-container {
    position: fixed;
    bottom: 30px;
-   left: 30px
+   left: 30px;
 }
 
 .alert {
@@ -210,9 +309,10 @@ body {
 .-hide-scrollbar {
    .page {
       scrollbar-width: none; /* Firefox */
-      -ms-overflow-style: none;  /* Internet Explorer 10+ */
+      -ms-overflow-style: none; /* Internet Explorer 10+ */
 
-      &::-webkit-scrollbar { /* WebKit */
+      &::-webkit-scrollbar {
+         /* WebKit */
          width: 0;
          height: 0;
       }
@@ -243,7 +343,6 @@ body {
    }
 }
 
-
 .header {
    position: absolute;
    z-index: 2;
@@ -262,7 +361,6 @@ body {
          display: table;
          clear: both;
       }
-
    }
 
    &--left {
@@ -279,7 +377,8 @@ body {
 
    &-weather {
       &--icon {
-         &, &-image {
+         &,
+         &-image {
             > div {
                width: 2em;
                height: 2em;
@@ -311,7 +410,6 @@ body {
       &--summary {
          margin-top: 0.1em;
          font-size: 1em;
-
       }
    }
 }
@@ -349,7 +447,6 @@ body {
       right: 10px;
    }
 }
-
 
 .-groups-align-vertically {
    .page {
@@ -390,7 +487,7 @@ body {
       top: 0;
 
       .pages-menu--scroll-indicator {
-         box-shadow: 1px 0 5px rgba(0, 0, 0, .5);
+         box-shadow: 1px 0 5px rgba(0, 0, 0, 0.5);
       }
    }
 
@@ -401,7 +498,7 @@ body {
       padding: @pageMenuVerticalPadding 0;
 
       .pages-menu--scroll-indicator {
-         box-shadow: 0 1px 5px rgba(0, 0, 0, .5);
+         box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
       }
 
       .pages-menu--item {
@@ -414,13 +511,13 @@ body {
    }
 
    &--scroll-indicator {
-      background-color: rgba(0, 0, 0, .1);
+      background-color: rgba(0, 0, 0, 0.1);
       height: 100%;
       left: 0;
       opacity: 0;
       position: absolute;
       top: 0;
-      transition: opacity .3s;
+      transition: opacity 0.3s;
       width: 100%;
    }
 
@@ -457,12 +554,12 @@ body {
       }*/
 
       &:active {
-         background-color: rgba(0,0,0,.3);
+         background-color: rgba(0, 0, 0, 0.3);
          opacity: 0.9;
       }
 
       &.-active {
-         background-color: rgba(0,0,0,.1);
+         background-color: rgba(0, 0, 0, 0.1);
          opacity: 1;
       }
    }
@@ -540,7 +637,8 @@ body {
    &.-switch {
       transition: 0.2s ease background-color;
 
-      &.-loading, &.-on {
+      &.-loading,
+      &.-on {
          transition: none;
       }
    }
@@ -548,12 +646,15 @@ body {
    &.-lock {
       transition: 0.2s ease background-color;
 
-      &.-loading, &.-locked {
+      &.-loading,
+      &.-locked {
          transition: none;
       }
    }
 
-   &.-script, &.-automation, &.-scene {
+   &.-script,
+   &.-automation,
+   &.-scene {
       transition: 0.5s ease background-color;
       transition-delay: 0.2s;
 
@@ -565,7 +666,8 @@ body {
    &.-light {
       transition: 0.2s ease background-color;
 
-      &.-loading, &.-on {
+      &.-loading,
+      &.-on {
          transition: none;
       }
    }
@@ -574,9 +676,9 @@ body {
       overflow: hidden;
    }
 
-
-
-   &.-off, &.-disarmed, &.-unlocked {
+   &.-off,
+   &.-disarmed,
+   &.-unlocked {
       &.-switch,
       &.-input_boolean,
       &.-light,
@@ -591,16 +693,14 @@ body {
       }
    }
 
-
-
    &-clickable {
       display: none;
       left: 5px;
       top: 5px;
       height: 6px;
       width: 6px;
-      border-left: 2px solid rgba(255,255,255,.8);
-      border-top: 2px solid rgba(255,255,255,.8);
+      border-left: 2px solid rgba(255, 255, 255, 0.8);
+      border-top: 2px solid rgba(255, 255, 255, 0.8);
       opacity: 0.5;
       position: absolute;
       z-index: 2;
@@ -616,7 +716,7 @@ body {
       &:active {
          margin-top: -2px;
          margin-left: -2px;
-         border: 2px solid rgba(200,200,200,.9);
+         border: 2px solid rgba(200, 200, 200, 0.9);
       }
 
       .item-clickable {
@@ -628,14 +728,13 @@ body {
       overflow: hidden;
    }
 
-
    &.-device_tracker,
    &.-camera,
    &.-camera_thumbnail,
    &.-camera_stream {
       .item-title {
-         text-shadow: 1px 1px 0 rgba(0,0,0,.2);
-         background: rgba(0,0,0,0.15);
+         text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+         background: rgba(0, 0, 0, 0.15);
          right: auto;
          max-width: calc(100% - 6px - 12px);
          line-height: 22px;
@@ -672,7 +771,7 @@ body {
 
       &:active {
          opacity: 1;
-         background: rgba(0,0,0,.1);
+         background: rgba(0, 0, 0, 0.1);
       }
    }
 
@@ -690,10 +789,9 @@ body {
    }
 
    &--icon {
-      float:right
+      float: right;
    }
 }
-
 
 .item-fan {
    text-align: left;
@@ -712,11 +810,10 @@ body {
 
       &:active {
          opacity: 1;
-         background: rgba(0,0,0,.1);
+         background: rgba(0, 0, 0, 0.1);
       }
    }
 }
-
 
 .item-button {
    position: absolute;
@@ -731,14 +828,29 @@ body {
    }*/
 
    &:active {
-      background: rgba(0,0,0,.4);
+      background: rgba(0, 0, 0, 0.4);
    }
 
-   &.-top-left {top: 0;left: 0;}
-   &.-center-left {top: 38px;left: 0;}
-   &.-center-right {bottom: 38px;right: 0;}
-   &.-bottom-right {bottom: 0;right: 0;}
-   &.-bottom-center {bottom: 0;right: 38px;}
+   &.-top-left {
+      top: 0;
+      left: 0;
+   }
+   &.-center-left {
+      top: 38px;
+      left: 0;
+   }
+   &.-center-right {
+      bottom: 38px;
+      right: 0;
+   }
+   &.-bottom-right {
+      bottom: 0;
+      right: 0;
+   }
+   &.-bottom-center {
+      bottom: 0;
+      right: 38px;
+   }
 }
 
 .item-title {
@@ -750,7 +862,7 @@ body {
    right: 0;
    height: 24px;
    font-weight: 500;
-   text-shadow: 1px 1px 0 rgba(0,0,0,.01);
+   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.01);
    z-index: 2;
    overflow: hidden;
    text-overflow: ellipsis;
@@ -777,10 +889,10 @@ body {
    font-weight: 400;
    top: 0;
    right: 6px;
-   background: rgba(0,0,0,.2);
+   background: rgba(0, 0, 0, 0.2);
    padding: 1px 6px 2px;
-   font-size: .9em;
-   color: rgba(255,255,255,1);
+   font-size: 0.9em;
+   color: rgba(255, 255, 255, 1);
    border-radius: 1px;
    z-index: 2;
    max-width: @tileSize - 24px;
@@ -794,7 +906,7 @@ body {
    height: @entitySize;
    line-height: @entitySize;
    //top: (@tileSize - @entitySize) / 2 - 5px;
-   top: ~'calc(50% - @{entityTop})';
+   top: ~"calc(50% - @{entityTop})";
    left: 0;
    right: 0;
    z-index: 2;
@@ -863,7 +975,6 @@ body {
    }
 }
 
-
 .-small-entity {
    @smallEntitySize: 60px;
    @smallEntityTop: (@smallEntitySize / 2) + 5px;
@@ -872,7 +983,7 @@ body {
       position: absolute;
       height: @smallEntitySize;
       line-height: @smallEntitySize;
-      top: ~'calc(50% - @{smallEntityTop})';
+      top: ~"calc(50% - @{smallEntityTop})";
 
       &--icon {
          font-size: @entityIconSize * 0.8;
@@ -934,7 +1045,7 @@ body {
    }
 
    .item-cover {
-      top: ~'calc(50% - @{smallEntityTop})';
+      top: ~"calc(50% - @{smallEntityTop})";
 
       &--button {
          font-size: 24px;
@@ -947,7 +1058,6 @@ body {
          }
       }
    }
-
 }
 
 .-micro-entity {
@@ -958,7 +1068,7 @@ body {
       position: absolute;
       height: @smallEntitySize;
       line-height: @smallEntitySize;
-      top: ~'calc(50% - @{smallEntityTop})';
+      top: ~"calc(50% - @{smallEntityTop})";
 
       &--icon {
          font-size: @entityIconSize * 0.6;
@@ -975,8 +1085,6 @@ body {
    }
 }
 
-
-
 .item-triangle {
    position: absolute;
    z-index: 2;
@@ -987,7 +1095,6 @@ body {
    border-right: 3px solid #fff;
    border-bottom: 3px solid #fff;
 }
-
 
 .item-slides {
    position: absolute;
@@ -1014,7 +1121,6 @@ body {
       animation: slides3 45s ease-out infinite;
    }
 
-
    .item-slide {
       z-index: 1;
       width: 100%;
@@ -1022,9 +1128,7 @@ body {
       background-size: cover;
       background-position: center;
    }
-
 }
-
 
 .item-background {
    position: absolute;
@@ -1035,7 +1139,6 @@ body {
    background-size: cover;
    background-position: center;
 }
-
 
 .item-list {
    text-align: left;
@@ -1080,7 +1183,6 @@ body {
    }
 }
 
-
 .item-select {
    position: absolute;
    z-index: 7;
@@ -1103,14 +1205,15 @@ body {
          background: #444;
       }*/
 
-      &:active, &.-active {
+      &:active,
+      &.-active {
          background: #666;
-
       }
    }
 }
 
-.item-camera, .item-image {
+.item-camera,
+.item-image {
    width: 100%;
    height: 100%;
    background-size: cover;
@@ -1157,7 +1260,8 @@ body {
    }
 }
 
-.clock, clock {
+.clock,
+clock {
    div {
       display: inline-block;
       vertical-align: middle;
@@ -1220,7 +1324,7 @@ camera_stream {
 
    &-title {
       background: @popupTitleBackground;
-      color: rgba(255,255,255,.6);
+      color: rgba(255, 255, 255, 0.6);
       font-size: 20px;
       height: @popupTitleHeight;
       line-height: @popupTitleHeight;
@@ -1233,7 +1337,7 @@ camera_stream {
    &-close {
       float: left;
       text-align: center;
-      color: rgba(255,255,255,.6);
+      color: rgba(255, 255, 255, 0.6);
       width: @popupTitleHeight;
       height: @popupTitleHeight;
       line-height: @popupTitleHeight;
@@ -1242,8 +1346,8 @@ camera_stream {
       cursor: pointer;
 
       &:active {
-         color: rgba(255,255,255,.8);
-         background: rgba(0,0,0,0.3);
+         color: rgba(255, 255, 255, 0.8);
+         background: rgba(0, 0, 0, 0.3);
       }
    }
 }
@@ -1281,7 +1385,7 @@ camera_stream {
    }
 
    &--camera {
-      width: ~'calc(100% - 220px)';
+      width: ~"calc(100% - 220px)";
       height: 100%;
       display: inline-block;
       vertical-align: top;
@@ -1316,11 +1420,11 @@ camera_stream {
       box-sizing: border-box;
       margin: @popupPadding;
       /* max-width, if container hits max-width */
-      max-width: calc(100% - 2*@popupPadding);
+      max-width: calc(100% - 2 * @popupPadding);
       /* min-width, if container is sized by title */
-      min-width: calc(100% - 2*@popupPadding);
+      min-width: calc(100% - 2 * @popupPadding);
       /* absolute max-height */
-      max-height: calc(100*var(--vh, 1vh) - @popupTitleHeight - 2*@popupMargin - 2*@popupPadding);
+      max-height: calc(100 * var(--vh, 1vh) - @popupTitleHeight - 2 * @popupMargin - 2 * @popupPadding);
       /* default size to fill screen */
       height: 100vh;
       width: 100vw;
@@ -1371,7 +1475,8 @@ camera_stream {
 
 @alarmHeight: 423px;
 @alarmWidth: 280px;
-.alarm-popup, .datetime-popup {
+.alarm-popup,
+.datetime-popup {
    position: fixed;
    top: 0;
    left: 0;
@@ -1429,7 +1534,7 @@ camera_stream {
       line-height: 40px;
       margin: 5px 0 0;
       border: 1px solid #444;
-      background: rgba(100,100,100,.1);
+      background: rgba(100, 100, 100, 0.1);
       border-radius: 3px;
 
       &-code {
@@ -1448,7 +1553,8 @@ camera_stream {
          opacity: 0.3;
       }
 
-      &--filled, &--placeholder {
+      &--filled,
+      &--placeholder {
          font-family: monospace;
       }
    }
@@ -1498,34 +1604,47 @@ camera_stream {
 
       &.-warning {
          background: rgb(126, 46, 16);
-         &:active {background: rgb(99, 36, 13);}
+         &:active {
+            background: rgb(99, 36, 13);
+         }
       }
 
       &.-home {
          background: rgb(108, 39, 56);
-         &:active {background: rgb(63, 16, 27);}
+         &:active {
+            background: rgb(63, 16, 27);
+         }
       }
 
       &.-away {
          background: rgb(108, 39, 56);
-         &:active {background: rgb(63, 16, 27);}
+         &:active {
+            background: rgb(63, 16, 27);
+         }
       }
 
-      &.-disarm, &.-success {
+      &.-disarm,
+      &.-success {
          background: rgb(18, 78, 42);
-         &:active {background: rgb(15, 52, 26);}
+         &:active {
+            background: rgb(15, 52, 26);
+         }
       }
 
       &.-night {
          background: rgb(108, 39, 56);
-         &:active {background: rgb(63, 16, 27);}
+         &:active {
+            background: rgb(63, 16, 27);
+         }
       }
 
       &.-disabled {
          background: #444;
          color: #aaa;
          cursor: not-allowed;
-         &:active {background: #444;}
+         &:active {
+            background: #444;
+         }
       }
    }
 
@@ -1534,7 +1653,7 @@ camera_stream {
       text-align: center;
       right: 5px;
       top: 5px;
-      color: rgba(255,255,255,.7);
+      color: rgba(255, 255, 255, 0.7);
       width: 40px;
       height: 40px;
       line-height: 40px;
@@ -1543,8 +1662,8 @@ camera_stream {
       cursor: pointer;
 
       &:active {
-         color: rgba(255,255,255,.8);
-         background: rgba(0,0,0,0.3);
+         color: rgba(255, 255, 255, 0.8);
+         background: rgba(0, 0, 0, 0.3);
       }
    }
 }
@@ -1589,8 +1708,8 @@ camera_stream {
       box-sizing: border-box;
       margin: 0;
       cursor: pointer;
-    }
- }
+   }
+}
 
 .item-entity-sliders {
    position: absolute;
@@ -1609,7 +1728,7 @@ camera_stream {
    cursor: pointer;
 
    &:active {
-      background: rgba(0,0,0,0.3);
+      background: rgba(0, 0, 0, 0.3);
    }
 }
 
@@ -1637,7 +1756,8 @@ camera_stream {
    padding: 3px 7px;
 
    &-icon {
-      &, &-image {
+      &,
+      &-image {
          display: inline-block;
          margin: 20px auto 5px;
 
@@ -1703,11 +1823,13 @@ camera_stream {
          font-weight: normal;
       }
 
-      th:last-of-type, td:last-of-type {
+      th:last-of-type,
+      td:last-of-type {
          padding-right: 7px;
       }
 
-      th:first-of-type, td:first-of-type {
+      th:first-of-type,
+      td:first-of-type {
          padding-left: 7px;
       }
 
@@ -1716,7 +1838,8 @@ camera_stream {
       }
    }
 
-   &-icon, &-icon-image {
+   &-icon,
+   &-icon-image {
       text-align: center;
       font-size: 0;
 
@@ -1745,7 +1868,6 @@ camera_stream {
          text-align: right;
       }
    }
-
 }
 
 .-compact {
@@ -1754,7 +1876,8 @@ camera_stream {
       text-align: left;
 
       &-icon {
-         &, &-image {
+         &,
+         &-image {
             display: inline-block;
             margin: 15px 0 0;
 
@@ -1784,7 +1907,6 @@ camera_stream {
    }
 }
 
-
 .media-player {
    //padding: 15px 7px;
 
@@ -1803,7 +1925,7 @@ camera_stream {
          cursor: pointer;
 
          &:active {
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.3);
          }
       }
    }
@@ -1815,7 +1937,6 @@ camera_stream {
       //width: (@tileSize * 2) - 70px;
       //white-space: normal;
       //text-align: right;
-
    }
 
    &--button {
@@ -1830,7 +1951,7 @@ camera_stream {
       cursor: pointer;
 
       &:active {
-         background: rgba(0,0,0,0.3);
+         background: rgba(0, 0, 0, 0.3);
       }
    }
 
@@ -1846,7 +1967,7 @@ camera_stream {
       //top: 68px;
 
       &:active {
-         background: rgba(0,0,0,0.3);
+         background: rgba(0, 0, 0, 0.3);
       }
    }
 
@@ -1860,7 +1981,8 @@ camera_stream {
          border-collapse: separate !important;
          border-spacing: 0;
 
-         th,td {
+         th,
+         td {
             padding: 0;
             border: 0;
          }
@@ -1991,7 +2113,6 @@ camera_stream {
    }
 }
 
-
 @notyWidth: 290px;
 @notyIconSize: 33px;
 
@@ -2006,7 +2127,7 @@ camera_stream {
    z-index: 100;
 
    &.-left {
-      left: 40px
+      left: 40px;
    }
 
    &.-right {
@@ -2018,11 +2139,11 @@ camera_stream {
       padding: 10px;
       box-sizing: border-box;
       text-align: center;
-      color: rgba(255,255,255,.9);
-      border: 1px solid rgba(255,255,255,.5);
+      color: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.5);
       font-size: 1.1em;
       margin: 15px 0;
-      background: rgba(30,30,30,.2);
+      background: rgba(30, 30, 30, 0.2);
       cursor: pointer;
    }
 }
@@ -2048,7 +2169,7 @@ camera_stream {
 
    &-header {
       padding: 10px;
-      background: rgba(0,0,0,.11);
+      background: rgba(0, 0, 0, 0.11);
       height: 19px;
    }
 
@@ -2096,7 +2217,7 @@ camera_stream {
       text-align: center;
       right: -7px;
       top: -6px;
-      color: rgba(255,255,255,.8);
+      color: rgba(255, 255, 255, 0.8);
       width: 50px;
       height: 50px;
       line-height: 50px;
@@ -2105,7 +2226,7 @@ camera_stream {
       cursor: pointer;
 
       &:active {
-         color: rgba(255,255,255,1);
+         color: rgba(255, 255, 255, 1);
       }
    }
 
@@ -2135,7 +2256,7 @@ camera_stream {
    z-index: 50;
    background: #1a4957;
    color: #fff;
-   text-shadow: 2px 2px 0 rgba(0,0,0,0.4);
+   text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4);
 
    &-slides {
       z-index: 51;
@@ -2183,12 +2304,23 @@ camera_stream {
          position: absolute;
       }
 
-      &--right-bottom {right: 40px; bottom: 40px}
-      &--right-top {right: 40px; top: 40px}
-      &--left-bottom {left: 40px; bottom: 40px}
-      &--left-top {left: 40px; top: 40px}
+      &--right-bottom {
+         right: 40px;
+         bottom: 40px;
+      }
+      &--right-top {
+         right: 40px;
+         top: 40px;
+      }
+      &--left-bottom {
+         left: 40px;
+         bottom: 40px;
+      }
+      &--left-top {
+         left: 40px;
+         top: 40px;
+      }
    }
-
 
    clock {
       font-size: 1.5em;
@@ -2198,26 +2330,26 @@ camera_stream {
 @rangeBg: rgba(195, 214, 217, 0.3);
 @rangeHeight: 4px;
 
-input[type=range] {
+input[type="range"] {
    -webkit-appearance: none;
    width: 100%;
    margin: 3px 0;
    height: 18px;
    background: transparent;
 }
-input[type=range]:focus {
+input[type="range"]:focus {
    outline: none;
 }
-input[type=range]::-webkit-slider-runnable-track {
+input[type="range"]::-webkit-slider-runnable-track {
    width: 100%;
    height: @rangeHeight;
    border-radius: 0px;
    cursor: pointer;
-   box-shadow: 0px 0px 1px rgba(0,0,0,0.3);
+   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
    background: @rangeBg;
    border: 0px solid #000101;
 }
-input[type=range]::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb {
    height: 16px;
    width: 16px;
    border-radius: 1px;
@@ -2225,23 +2357,23 @@ input[type=range]::-webkit-slider-thumb {
    cursor: pointer;
    -webkit-appearance: none;
    border: 0;
-   box-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+   box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
    margin-top: -6px;
 }
-input[type=range]:focus::-webkit-slider-runnable-track {
+input[type="range"]:focus::-webkit-slider-runnable-track {
    background: @rangeBg;
 }
-input[type=range]::-moz-range-track {
+input[type="range"]::-moz-range-track {
    width: 100%;
    height: @rangeHeight;
    cursor: pointer;
-   box-shadow:  0px 0px 1px rgba(0,0,0,0.5);
+   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
    border-radius: 0px;
    background: @rangeBg;
 }
-input[type=range]::-moz-range-thumb {
+input[type="range"]::-moz-range-thumb {
    border: 0;
-   box-shadow: 1px 1px 0px rgba(0,0,0,0.3);
+   box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3);
    height: 16px;
    width: 16px;
    border-radius: 1px;
@@ -2250,9 +2382,9 @@ input[type=range]::-moz-range-thumb {
 }
 
 @sliderBorderRadius: 2px;
-@sliderColor: #FFF;
+@sliderColor: #fff;
 @sliderTrackColor: #808080;
-@sliderThumbColor: #DDD;
+@sliderThumbColor: #ddd;
 @sliderTrackBg: #808080;
 
 .slider-inner {
@@ -2403,31 +2535,64 @@ input[type=range]::-moz-range-thumb {
 }
 
 @keyframes slides2 {
-   0%   { transform: translate(0, 0); }
-   49%   { transform: translate(0, 0); }
-   50%  { transform: translate(0, -100%); }
-   99%   { transform: translate(0, -100%); }
-   100% { transform: translate(0, 0); }
+   0% {
+      transform: translate(0, 0);
+   }
+   49% {
+      transform: translate(0, 0);
+   }
+   50% {
+      transform: translate(0, -100%);
+   }
+   99% {
+      transform: translate(0, -100%);
+   }
+   100% {
+      transform: translate(0, 0);
+   }
 }
 
 @keyframes slides3 {
-   0%   { transform: translate(0, 0); }
-   32.3%   { transform: translate(0, 0); }
-   33%  { transform: translate(0, -100%); }
-   65.3%   { transform: translate(0, -100%); }
-   66%  { transform: translate(0, -200%); }
-   99.3%   { transform: translate(0, -200%); }
-   100%  { transform: translate(0, 0); }
+   0% {
+      transform: translate(0, 0);
+   }
+   32.3% {
+      transform: translate(0, 0);
+   }
+   33% {
+      transform: translate(0, -100%);
+   }
+   65.3% {
+      transform: translate(0, -100%);
+   }
+   66% {
+      transform: translate(0, -200%);
+   }
+   99.3% {
+      transform: translate(0, -200%);
+   }
+   100% {
+      transform: translate(0, 0);
+   }
 }
 
 @keyframes blink {
-   0%   { opacity: 0; }
-   50%   { opacity: 1; }
-   100%   { opacity: 0; }
+   0% {
+      opacity: 0;
+   }
+   50% {
+      opacity: 1;
+   }
+   100% {
+      opacity: 0;
+   }
 }
 
 @keyframes notyLifetime {
-   0%   { width: 100%; }
-   100%   { width: 0; }
+   0% {
+      width: 100%;
+   }
+   100% {
+      width: 0;
+   }
 }
-//*/ы
