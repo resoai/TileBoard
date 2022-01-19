@@ -274,6 +274,9 @@
          </div>
       </div>
    </div>
+
+   <div class="footer" ng-if="footer = getFooter()"
+        ng-include="'footer.html'"></div>
 </div>
 
 <div class="screensaver" ng-click="hideScreensaver()"
@@ -364,6 +367,17 @@
       </div>
       <div class="header--right">
          <div header-item ng-repeat="item in header.right track by $index"></div>
+      </div>
+   </div>
+</script>
+
+<script type="text/ng-template" id="footer.html">
+   <div class="footer-content" ng-style="footer.styles">
+      <div class="footer--left">
+         <div header-item ng-repeat="item in footer.left track by $index"></div>
+      </div>
+      <div class="footer--right">
+         <div header-item ng-repeat="item in footer.right track by $index"></div>
       </div>
    </div>
 </script>
