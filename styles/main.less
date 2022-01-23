@@ -420,8 +420,15 @@ body {
    top: auto;
 }
 
-.-menu-bottom .footer {
-   bottom: 62px;
+.-menu-bottom {
+   .footer {
+      bottom: @pageBottomPaddingSmall;
+   }
+   @media (min-width: 500px) {
+      .footer {
+         bottom: @pageBottomPaddingBig;
+      }
+   }
 }
 
 .-menu-left {
