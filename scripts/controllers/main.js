@@ -876,6 +876,14 @@ App.controller('Main', function ($scope, $timeout, $location, Api, tmhDynamicLoc
       return page.header;
    };
 
+   $scope.getFooter = function (page) {
+      if (!page) {
+         return CONFIG.footer;
+      }
+
+      return page.footer;
+   };
+
    function toSafeNumber (value) {
       return !isNaN(+value) ? +value : null;
    }

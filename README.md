@@ -162,6 +162,12 @@ var CONFIG = {
     * (optional)
     */
    header: DEFAULT_HEADER,
+
+   /* footer: Matching functionality of header, but at the bottom instead of the top
+    * https://github.com/resoai/TileBoard/wiki/Header-configuration
+    * (optional)
+    */
+   footer: DEFAULT_HEADER,
 }
 ```
 

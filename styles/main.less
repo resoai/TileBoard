@@ -343,7 +343,8 @@ body {
    }
 }
 
-.header {
+.header,
+.footer {
    position: absolute;
    z-index: 2;
    left: 0;
@@ -410,6 +411,22 @@ body {
       &--summary {
          margin-top: 0.1em;
          font-size: 1em;
+      }
+   }
+}
+
+.footer {
+   bottom: 0px;
+   top: auto;
+}
+
+.-menu-bottom {
+   .footer {
+      bottom: @pageBottomPaddingSmall;
+   }
+   @media (min-width: 500px) {
+      .footer {
+         bottom: @pageBottomPaddingBig;
       }
    }
 }
