@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.9.0](https://github.com/resoai/TileBoard/compare/v2.8.0...v2.9.0) (2022-02-03)
+
+
+### Features
+
+* add optional footer, matching functionality of header ([#813](https://github.com/resoai/TileBoard/issues/813)) ([6979fcd](https://github.com/resoai/TileBoard/commit/6979fcddec08f696ec60b65e6d00aebf4f212c8f))
+* update dependency @mdi/font to v6 ([#766](https://github.com/resoai/TileBoard/issues/766)) ([384b49d](https://github.com/resoai/TileBoard/commit/384b49dd946b9f78a97e6a5e2e3b40a3b5d53191))
+
 ## [2.8.0](https://github.com/resoai/TileBoard/compare/v2.7.0...v2.8.0) (2021-12-04)
 
 
