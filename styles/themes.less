@@ -461,11 +461,17 @@
     .page {
       padding-bottom: @pageBottomPaddingSmall + 2 * @winphonePageMenuIconBorderSize;
     }
+    .footer {
+      bottom: @pageBottomPaddingSmall + 2 * @winphonePageMenuIconBorderSize;
+    }
 
     @media (min-width: 500px) {
       .page {
         padding-bottom: @pageBottomPaddingBig + 2 * @winphonePageMenuIconBorderSize;
       }
+      .footer {
+         bottom: @pageBottomPaddingBig + 2 * @winphonePageMenuIconBorderSize;
+       }
     }
   }
 }
@@ -646,6 +652,9 @@
   &.-menu-bottom {
     .page {
       padding-bottom: @pageBottomPadding;
+    }
+    .footer {
+      bottom: @pageBottomPadding;
     }
   }
 
