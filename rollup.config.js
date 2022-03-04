@@ -94,6 +94,8 @@ const config = {
       }),
       copy([
          { files: './favicon.png', dest: `./${outDir}/` },
+         { files: './unregister.html', dest: `./${outDir}/` },
+         { files: './ServiceWorker.js', dest: `./${outDir}/` },
          { files: './manifest.webmanifest', dest: `./${outDir}/` },
          { files: './images/*.*', dest: `./${outDir}/images/` },
       ]),

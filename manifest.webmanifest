@@ -1,8 +1,9 @@
 {
   "name": "TileBoard",
+  "start_url": "index.html",
   "icons": [{
     "src": "favicon.png",
-    "sizes": "16x16 24x24 32x32 48x48 64x64 192x192",
+    "sizes": "16x16 24x24 32x32 48x48 64x64 192x192 512x512",
     "type": "image/png"
   }],
   "display": "fullscreen"

@@ -13,7 +13,7 @@
    <title>TileBoard</title>
 
    <!-- WebApp configuration -->
-   <link rel="manifest" href="manifest.webmanifest?v=<%= VERSION %>" crossorigin="use-credentials">
+   <link rel="manifest" href="manifest.webmanifest?v=jur<%= VERSION %>" crossorigin="use-credentials">
    <!-- legacy tags -->
    <meta name="mobile-web-app-capable" content="yes">
    <!-- iOS Settings -->
@@ -38,6 +38,23 @@
    </script>
 
    <% javascripts.forEach(javascript => { %><script src="./<%= javascript %>"></script><% }) %>
+
+   <script type="text/javascript">
+      if ('serviceWorker' in navigator) {
+         window.addEventListener('load', function() {
+            navigator.serviceWorker.register('./ServiceWorker.js?dfjh').then(function(registration) {
+               // Registration was successful
+               alert('ServiceWorker registration successful with scope: ', registration.scope);
+            }, function(err) {
+               // registration failed :(
+               alert('ServiceWorker registration failed: ', err);
+            });
+         });
+      }
+   </script>
+
+
+
 </head>
 
 <body ng-controller="Main" ng-class="getBodyClass()">
