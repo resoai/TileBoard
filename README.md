@@ -709,7 +709,7 @@ This example will fire a persistent red notification on TileBoard when a specifi
 
 ## Custom CSS Styles
 Several classes are added to each tile depending on the type of tile and state. Custom CSS styles can be applied by creating a `custom.css` file in the `styles` directory.
-* Tip: If no style is applied after adding the file, make sure to disable cache in the browser as it may cache the previous empty `custom.css` file for a while.
+*Tip: If no style is applied after adding the file, make sure to disable cache in the browser as it may cache the previous empty `custom.css` file for a while.*
 
 ## Tablet and mobile configuration
 For the tablet configuration use `COMPACT` custom theme and reduce padding.
