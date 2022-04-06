@@ -43,7 +43,7 @@
       // License: https://www.apache.org/licenses/LICENSE-2.0
       if (!window.IN_INGRESS && 'serviceWorker' in navigator) {
          window.addEventListener('load', function() {
-            navigator.serviceWorker.register('./scripts/ServiceWorker.js')
+            navigator.serviceWorker.register('./ServiceWorker.js', )
                .catch(function(err) {
                   // Registration failed
                   console.log('ServiceWorker registration failed: ', err);
