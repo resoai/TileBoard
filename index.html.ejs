@@ -31,25 +31,23 @@
    <link rel="stylesheet" href="./styles/custom.css">
 
    <script>
-      window.IN_INGRESS = null;
+      window.IN_INGRESS = false;
       window.AUTH_TOKEN_OVERRIDE = null;
       window.SERVER_URL_OVERRIDE = null;
       window.REST_URL_OVERRIDE = null;
       window.WS_URL_OVERRIDE = null;
    </script>
 
-   <script type="text/javascript">
+   <script>
       // Source: https://developers.google.com/web/fundamentals/primers/service-workers
       // License: https://www.apache.org/licenses/LICENSE-2.0
       if (!window.IN_INGRESS && 'serviceWorker' in navigator) {
          window.addEventListener('load', function() {
-            navigator.serviceWorker.register('./ServiceWorker.js').then(function(registration) {
-               // Registration was successful
-               console.log('ServiceWorker registration successful with scope: ', registration.scope);
-            }, function(err) {
-               // Registration failed
-               console.log('ServiceWorker registration failed: ', err);
-            });
+            navigator.serviceWorker.register('./scripts/ServiceWorker.js')
+               .catch(function(err) {
+                  // Registration failed
+                  console.log('ServiceWorker registration failed: ', err);
+               });
          });
       }
    </script>
