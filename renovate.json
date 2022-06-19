@@ -2,8 +2,9 @@
   "extends": [
     "config:base",
     "group:allNonMajor",
-    ":preserveSemverRanges"
+    ":prHourlyLimit4"
   ],
+  "rangeStrategy": "bump",
   "lockFileMaintenance": {
     "enabled": true
   }
