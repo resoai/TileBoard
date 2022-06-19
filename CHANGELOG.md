@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.10.0](https://github.com/resoai/TileBoard/compare/v2.9.0...v2.10.0) (2022-06-19)
+
+
+### Features
+
+* make tileboard installable as web apk ([#822](https://github.com/resoai/TileBoard/issues/822)) ([a1dd248](https://github.com/resoai/TileBoard/commit/a1dd248cea665ab760b254cacbcfb82dfd7a4cf8))
+
 ## [2.9.0](https://github.com/resoai/TileBoard/compare/v2.8.0...v2.9.0) (2022-02-03)
 
 
