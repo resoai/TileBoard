@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.10.1](https://github.com/resoai/TileBoard/compare/v2.10.0...v2.10.1) (2022-06-20)
+
+
+### Bug Fixes
+
+* **webmanifest:** add start_url ([#838](https://github.com/resoai/TileBoard/issues/838)) ([eef5368](https://github.com/resoai/TileBoard/commit/eef536801a4d5a8ba3df54fc97e920b313faf0bb))
+
 ## [2.10.0](https://github.com/resoai/TileBoard/compare/v2.9.0...v2.10.0) (2022-06-19)
 
 
