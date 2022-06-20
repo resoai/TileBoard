@@ -1,5 +1,6 @@
 {
   "name": "TileBoard",
+  "start_url": "./index.html",
   "icons": [
     {
       "src": "favicon.svg",
