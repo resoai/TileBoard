@@ -68,11 +68,11 @@ export function mergeTileDefaults (tile) {
             mergeTileListDefaults(mergedTile.layout.tiles);
          }
          break;
-      case TYPES.POPUP:
-         if (mergedTile.popup?.items) {
-            mergeTileListDefaults(mergedTile.popup.items);
-         }
-         break;
+   }
+   // "popup" property is only officially supported in POPUP types but in the wild it can be added to any
+   // tile and then passed programmatically when calling "openPopup".
+   if (mergedTile.popup?.items) {
+      mergeTileListDefaults(mergedTile.popup.items);
    }
    mergedTile[MERGED_DEFAULTS_KEY] = true;
    return mergedTile;
