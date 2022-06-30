@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.10.2](https://github.com/resoai/TileBoard/compare/v2.10.1...v2.10.2) (2022-06-30)
+
+
+### Bug Fixes
+
+* programmatic openPopup can end up with dead tiles ([#843](https://github.com/resoai/TileBoard/issues/843)) ([1a11c5a](https://github.com/resoai/TileBoard/commit/1a11c5a24bdad48f9ee04aae6eb7bf30de6f27cc))
+
 ### [2.10.1](https://github.com/resoai/TileBoard/compare/v2.10.0...v2.10.1) (2022-06-20)
 
 
