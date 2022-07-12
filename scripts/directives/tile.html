@@ -510,49 +510,13 @@
       </div>
    </div>
 
-   <div ng-if="item.type === TYPES.CLIMATE" class="item-entity-container">
-      <div>
-         <div
-            class="item-button -center-right"
-            ng-if="entity.attributes.temperature && entity.state !== 'off'"
-            ng-click="increaseClimateTemp($event, item, entity)"
-         >
-            <i class="mdi mdi-plus"></i>
-         </div>
-         <div
-            class="item-button -bottom-right"
-            ng-if="entity.attributes.temperature && entity.state !== 'off'"
-            ng-click="decreaseClimateTemp($event, item, entity)"
-         >
-            <i class="mdi mdi-minus"></i>
-         </div>
-      </div>
-
-      <div class="item-climate">
-         <div class="item-climate--target">
-            <span ng-bind="climateTarget(item, entity)"></span>
-            <span ng-if="(_unit = entityUnit(item, entity))" class="item-climate--target--unit" ng-bind="_unit"></span>
-            <i class="item-climate--icon mdi" ng-class="entityIcon(item, entity)"></i>
-         </div>
-         <div
-            class="item-climate--mode"
-            ng-if="(_options = getClimateOptions(item, entity))"
-            ng-click="openSelect(item)"
-         >
-            <span ng-bind="getClimateCurrentOption(item, entity)"></span>
-         </div>
-      </div>
-      <div ng-if="selectOpened(item)" class="item-select" ng-style="itemSelectStyles(entity, Object.keys(_options))">
-         <div
-            class="item-select--option"
-            ng-repeat="option in _options track by $index"
-            ng-class="{'-active': option === lookupClimateOption(item, entity, entity.state)}"
-            ng-click="setClimateOption($event, item, entity, option)"
-         >
-            <span ng-bind="option"></span>
-         </div>
-      </div>
-   </div>
+   <div
+      ng-if="item.type === TYPES.CLIMATE"
+      class="item-entity-container"
+      tile-climate
+      item="item"
+      entity="entity"
+   ></div>
 
    <div ng-if="item.type === TYPES.MEDIA_PLAYER" class="item-entity-container">
       <div class="media-player-table" ng-class="{'-has-state': _state, '-has-subtitle': _subtitle}">

@@ -67,11 +67,13 @@ const config = {
          babelHelpers: 'bundled',
          exclude: [
             'node_modules/**',
-            'scripts/directives/*.html',
+            'scripts/directives/**/*.html',
          ],
       }),
       html({
-         include: 'scripts/directives/*.html',
+         include: [
+            'scripts/directives/**/*.html',
+         ],
       }),
       styles({
          // Extract CSS into separate file (path specified through output.assetFileNames).

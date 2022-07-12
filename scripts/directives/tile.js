@@ -9,7 +9,7 @@ export default function () {
    return {
       restrict: 'AE',
       replace: false,
-      scope: true,
+      scope: false,
       template,
    };
 }

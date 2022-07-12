@@ -9,6 +9,8 @@ import ngMax from './directives/ngMax';
 import ngMin from './directives/ngMin';
 import onScroll from './directives/onScroll';
 import tile from './directives/tile';
+// Register tile directives.
+import './directives/tiles';
 
 App.directive('camera', camera);
 App.directive('cameraStream', cameraStream);
