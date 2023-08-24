@@ -80,11 +80,11 @@
     "angular-hammer": "^2.2.0",
     "angular-moment": "^1.3.0",
     "angularjs-gauge": "^2.2.0",
-    "chart.js": "^2.9.4",
+    "chart.js": "^4.4.0",
     "hls.js": "^1.1.5",
     "lodash.mergewith": "^4.6.2"
   },
   "resolutions": {
-    "chart.js": "2.9.4"
+    "chart.js": "^4.4.0"
   }
 }
