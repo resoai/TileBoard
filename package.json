@@ -59,7 +59,7 @@
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "print-message": "^3.0.1",
-    "rollup": "^2.75.7",
+    "rollup": "^3.29.4",
     "rollup-plugin-copy-glob": "^0.3.2",
     "rollup-plugin-copy-merge": "^0.3.2",
     "rollup-plugin-delete": "^2.0.0",
