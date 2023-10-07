@@ -73,7 +73,7 @@
     "standard-version": "^9.1.1"
   },
   "dependencies": {
-    "@mdi/font": "^6.9.96",
+    "@mdi/font": "^7.3.67",
     "angular": "^1.8.3",
     "angular-chart.js": "^1.1.1",
     "angular-dynamic-locale": "^0.1.38",
